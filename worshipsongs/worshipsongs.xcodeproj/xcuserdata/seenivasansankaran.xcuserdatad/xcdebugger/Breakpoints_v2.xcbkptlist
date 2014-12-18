@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "worshipsongs/ListViewController.swift"
+            timestampString = "440486054.827193"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "ListViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "worshipsongs/ListViewController.swift"
+            timestampString = "440486316.865041"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "ListViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "worshipsongs/SearchViewController.swift"
+            timestampString = "440500807.971093"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "makePlaces(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "worshipsongs/ViewController.swift"
+            timestampString = "440564294.818262"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "worshipsongs.ViewController.otherView.getter : ObjectiveC.UIView"
+                  moduleName = "worshipsongs"
+                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/ViewController.swift"
+                  timestampString = "440557323.195664"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "worshipsongs.ViewController.init (worshipsongs.ViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;ObjectiveC.NSBundle&gt;) -&gt; worshipsongs.ViewController"
+                  moduleName = "worshipsongs"
+                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/ViewController.swift"
+                  timestampString = "440557323.196789"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "123">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "worshipsongs.ViewController.init (worshipsongs.ViewController.Type)() -&gt; worshipsongs.ViewController"
+                  moduleName = "worshipsongs"
+                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/ViewController.swift"
+                  timestampString = "440557323.197041"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "worshipsongs.ViewController.init (worshipsongs.ViewController.Type)(coder : ObjectiveC.NSCoder) -&gt; worshipsongs.ViewController"
+                  moduleName = "worshipsongs"
+                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/ViewController.swift"
+                  timestampString = "440557323.197157"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "worshipsongs/ViewController.swift"
+            timestampString = "440560193.992043"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "worshipsongs.ViewController.items.getter : Swift.Array&lt;Swift.Int&gt;"
+                  moduleName = "worshipsongs"
+                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/ViewController.swift"
+                  timestampString = "440560193.994433"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "worshipsongs.ViewController.items.setter : Swift.Array&lt;Swift.Int&gt;"
+                  moduleName = "worshipsongs"
+                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/ViewController.swift"
+                  timestampString = "440560193.994581"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "worshipsongs.ViewController.items.materializeForSet : Swift.Array&lt;Swift.Int&gt;"
+                  moduleName = "worshipsongs"
+                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/ViewController.swift"
+                  timestampString = "440560193.994701"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "worshipsongs.ViewController.init (worshipsongs.ViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;ObjectiveC.NSBundle&gt;) -&gt; worshipsongs.ViewController"
+                  moduleName = "worshipsongs"
+                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/ViewController.swift"
+                  timestampString = "440560193.994802"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "47">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "worshipsongs.ViewController.init (worshipsongs.ViewController.Type)() -&gt; worshipsongs.ViewController"
+                  moduleName = "worshipsongs"
+                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/ViewController.swift"
+                  timestampString = "440560193.994896"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "45">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "worshipsongs.ViewController.init (worshipsongs.ViewController.Type)(coder : ObjectiveC.NSCoder) -&gt; worshipsongs.ViewController"
+                  moduleName = "worshipsongs"
+                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/ViewController.swift"
+                  timestampString = "440560193.994994"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "worshipsongs/ViewController.swift"
+            timestampString = "440564981.89998"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "worshipsongs/ViewController.swift"
+            timestampString = "440564981.89998"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

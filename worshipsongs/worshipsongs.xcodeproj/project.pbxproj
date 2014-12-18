@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A88F88E1A402C6700193E53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88D1A402C6700193E53 /* AppDelegate.swift */; };
+		3A0430981A425BB600F4F833 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0430971A425BB600F4F833 /* ViewController.swift */; };
+		3A0516621A410B2400451F4F /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0516611A410B2400451F4F /* DataModel.swift */; };
+		3A0516671A413D1D00451F4F /* Candy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0516661A413D1D00451F4F /* Candy.swift */; };
+		3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A05166C1A414D6100451F4F /* MasterViewController.swift */; };
+		3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0516701A414D9D00451F4F /* AppDelegate.swift */; };
 		3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */; };
-		3A88F8931A402C6700193E53 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F8921A402C6700193E53 /* MasterViewController.swift */; };
-		3A88F8951A402C6700193E53 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F8941A402C6700193E53 /* DetailViewController.swift */; };
-		3A88F8981A402C6700193E53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A88F8961A402C6700193E53 /* Main.storyboard */; };
 		3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A88F8991A402C6700193E53 /* Images.xcassets */; };
-		3A88F89D1A402C6700193E53 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A88F89B1A402C6700193E53 /* LaunchScreen.xib */; };
 		3A88F8A91A402C6700193E53 /* worshipsongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F8A81A402C6700193E53 /* worshipsongsTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,15 +28,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A0430971A425BB600F4F833 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3A0516611A410B2400451F4F /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		3A0516651A41350400451F4F /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		3A0516661A413D1D00451F4F /* Candy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Candy.swift; path = ../../../../../../Downloads/CandySearch/CandySearch/Candy.swift; sourceTree = "<group>"; };
+		3A05166C1A414D6100451F4F /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		3A0516701A414D9D00451F4F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A88F8881A402C6700193E53 /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A88F88C1A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A88F88D1A402C6700193E53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A88F8901A402C6700193E53 /* worshipsongs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = worshipsongs.xcdatamodel; sourceTree = "<group>"; };
-		3A88F8921A402C6700193E53 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		3A88F8941A402C6700193E53 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		3A88F8971A402C6700193E53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A88F8991A402C6700193E53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3A88F89C1A402C6700193E53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3A88F8A21A402C6700193E53 /* worshipsongsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A88F8A71A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A88F8A81A402C6700193E53 /* worshipsongsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = worshipsongsTests.swift; sourceTree = "<group>"; };
@@ -60,6 +61,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A05165D1A41085300451F4F /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				3A0516631A41337B00451F4F /* PlayGround */,
+				3A0516601A4108CA00451F4F /* Model */,
+				3A05165F1A4108A200451F4F /* Controllers */,
+				3A05165E1A41087100451F4F /* AppDelegate */,
+			);
+			name = classes;
+			sourceTree = "<group>";
+		};
+		3A05165E1A41087100451F4F /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				3A0516701A414D9D00451F4F /* AppDelegate.swift */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		3A05165F1A4108A200451F4F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A05166C1A414D6100451F4F /* MasterViewController.swift */,
+				3A0430971A425BB600F4F833 /* ViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		3A0516601A4108CA00451F4F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A0516661A413D1D00451F4F /* Candy.swift */,
+				3A0516611A410B2400451F4F /* DataModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3A0516631A41337B00451F4F /* PlayGround */ = {
+			isa = PBXGroup;
+			children = (
+				3A0516651A41350400451F4F /* MyPlayground.playground */,
+			);
+			name = PlayGround;
+			sourceTree = "<group>";
+		};
 		3A88F87F1A402C6700193E53 = {
 			isa = PBXGroup;
 			children = (
@@ -81,12 +127,8 @@
 		3A88F88A1A402C6700193E53 /* worshipsongs */ = {
 			isa = PBXGroup;
 			children = (
-				3A88F88D1A402C6700193E53 /* AppDelegate.swift */,
-				3A88F8921A402C6700193E53 /* MasterViewController.swift */,
-				3A88F8941A402C6700193E53 /* DetailViewController.swift */,
-				3A88F8961A402C6700193E53 /* Main.storyboard */,
+				3A05165D1A41085300451F4F /* classes */,
 				3A88F8991A402C6700193E53 /* Images.xcassets */,
-				3A88F89B1A402C6700193E53 /* LaunchScreen.xib */,
 				3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */,
 				3A88F88B1A402C6700193E53 /* Supporting Files */,
 			);
@@ -198,8 +240,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A88F8981A402C6700193E53 /* Main.storyboard in Resources */,
-				3A88F89D1A402C6700193E53 /* LaunchScreen.xib in Resources */,
 				3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,10 +258,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A88F88E1A402C6700193E53 /* AppDelegate.swift in Sources */,
+				3A0430981A425BB600F4F833 /* ViewController.swift in Sources */,
+				3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */,
+				3A0516621A410B2400451F4F /* DataModel.swift in Sources */,
+				3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */,
+				3A0516671A413D1D00451F4F /* Candy.swift in Sources */,
 				3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */,
-				3A88F8931A402C6700193E53 /* MasterViewController.swift in Sources */,
-				3A88F8951A402C6700193E53 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,25 +284,6 @@
 			targetProxy = 3A88F8A31A402C6700193E53 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		3A88F8961A402C6700193E53 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A88F8971A402C6700193E53 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3A88F89B1A402C6700193E53 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A88F89C1A402C6700193E53 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3A88F8AA1A402C6700193E53 /* Debug */ = {
@@ -349,6 +372,7 @@
 				INFOPLIST_FILE = worshipsongs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -359,6 +383,7 @@
 				INFOPLIST_FILE = worshipsongs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -415,6 +440,7 @@
 				3A88F8AE1A402C6700193E53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3A88F8AF1A402C6700193E53 /* Build configuration list for PBXNativeTarget "worshipsongsTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +449,7 @@
 				3A88F8B11A402C6700193E53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
