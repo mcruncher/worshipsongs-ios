@@ -12,8 +12,8 @@ import UIKit
 
 class MasterViewController: UITableViewController, UITableViewDataSource, UISearchBarDelegate  {
     
-    var candies = [Candy]()
-    var filteredCandies = [Candy]()
+    var candies = [DataModel]()
+    var filteredCandies = [DataModel]()
     
     var dataCell: UITableViewCell?
     
@@ -22,15 +22,15 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
             
     override func viewDidLoad() {
         // Sample Data for candyArray
-        self.candies = [Candy(category:"Chocolate", name:"chocolate Bar"),
-            Candy(category:"Chocolate", name:"chocolate Chip"),
-            Candy(category:"Chocolate", name:"dark chocolate"),
-            Candy(category:"Hard", name:"lollipop"),
-            Candy(category:"Hard", name:"candy cane"),
-            Candy(category:"Hard", name:"jaw breaker"),
-            Candy(category:"Other", name:"caramel"),
-            Candy(category:"Other", name:"sour chew"),
-            Candy(category:"Other", name:"gummi bear")]
+        self.candies = [DataModel(category:"Chocolate", name:"chocolate Bar"),
+            DataModel(category:"Chocolate", name:"chocolate Chip"),
+            DataModel(category:"Chocolate", name:"dark chocolate"),
+            DataModel(category:"Hard", name:"lollipop"),
+            DataModel(category:"Hard", name:"candy cane"),
+            DataModel(category:"Hard", name:"jaw breaker"),
+            DataModel(category:"Other", name:"caramel"),
+            DataModel(category:"Other", name:"sour chew"),
+            DataModel(category:"Other", name:"gummi bear")]
         
         self.navigationItem.title = "Worship songs"
         
@@ -76,7 +76,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         }
         //let candy = self.candies[indexPath.row]
         //let candy = self.candies[indexPath.row]
-        var candy : Candy
+        var candy : DataModel
         // Check to see whether the normal table or search results table is being displayed and set the Candy object from the appropriate array
         if tableView == self.tableView && filteredCandies.count > 0 {
             candy = filteredCandies[indexPath.row]
@@ -109,7 +109,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         // Filter the array using the filter method
         var searchText = searchBar.text
         NSLog("Search bar text: \(searchText).")
-        self.filteredCandies = self.candies.filter({( candy: Candy) -> Bool in
+        self.filteredCandies = self.candies.filter({( candy: DataModel) -> Bool in
             let stringMatch = candy.name.rangeOfString(searchText)
             return (stringMatch != nil)
         })
