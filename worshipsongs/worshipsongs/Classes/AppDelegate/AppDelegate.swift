@@ -18,9 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //let tableViewController = TableViewController(style: UITableViewStyle.Grouped)
-        let tableViewController = MasterViewController(style:UITableViewStyle.Grouped)
-        let navController = UINavigationController(rootViewController: tableViewController)
-        
+        let masterViewController = MasterViewController(style:UITableViewStyle.Grouped)
+        let navController = UINavigationController(rootViewController: masterViewController)
+        Util.copyFile("songs.sqlite")
+                
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.rootViewController = navController
         self.window?.makeKeyAndVisible()
