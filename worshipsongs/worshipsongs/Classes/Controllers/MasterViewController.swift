@@ -13,18 +13,22 @@ import UIKit
 class MasterViewController: UITableViewController, UITableViewDataSource, UISearchBarDelegate  {
     
     var songTitles : NSMutableArray = []
-    var songList = [SongModel]()
-    var filteredSongList = [SongModel]()
+    var songs = [String]()
+    var filteredSong = [String]()
     var dataCell: UITableViewCell?
     var mySearchBar: UISearchBar!
     
     override func viewDidLoad() {
         self.navigationItem.title = "Worship songs"
-        
         self.songTitles = DatabaseHelper.instance.getTitles()
+        
+        var songModel = SongModel(title: "", lyrics: "")
+        
         for var index = 0; index < songTitles.count; index++ {
-            self.songList.append(SongModel(title: songTitles[index] as String, lyrics: songTitles[index] as String))
+            songModel.title = songTitles[index] as String
+            self.songs.append(songModel.title)
         }
+        
         
         var myFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y,
             self.view.bounds.size.width, 44);
@@ -48,10 +52,10 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView && filteredSongList.count > 0{
-            return self.filteredSongList.count
+        if tableView == self.tableView && filteredSong.count > 0{
+            return self.filteredSong.count
         } else {
-            return self.songList.count
+            return self.songs.count
         }
     }
     
@@ -62,14 +66,14 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         {
             dataCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "CELL_ID")
         }
-        var song : SongModel
+        var song : String
         // Check to see whether the normal table or search results table is being displayed and set the Candy object from the appropriate array
-        if tableView == self.tableView && filteredSongList.count > 0 {
-            song = filteredSongList[indexPath.row]
+        if tableView == self.tableView && filteredSong.count > 0 {
+            song = filteredSong[indexPath.row]
         } else {
-            song = songList[indexPath.row]
+            song = songs[indexPath.row]
         }
-        dataCell!.textLabel!.text = song.title
+        dataCell!.textLabel!.text = song
         return dataCell!
     }
     
@@ -93,13 +97,17 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     func filterContentForSearchText(searchBar: UISearchBar) {
         // Filter the array using the filter method
         var searchText = searchBar.text
-            self.filteredSongList = self.songList.filter({( song: SongModel) -> Bool in
-            let stringMatch = song.title.rangeOfString(searchText)
+            self.filteredSong = self.songs.filter({( song: String) -> Bool in
+            let stringMatch = song.rangeOfString(searchText)
             return (stringMatch != nil)
         })
     }
     
      override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+       
+        var lyrics = DatabaseHelper.instance.getLyrics(songs[indexPath.row])
+        println("path : \(lyrics)")
+        
 //        var welcomeMessage: String
 //        let viewController = ViewController()
 //        viewController.candies = candies

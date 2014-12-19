@@ -31,4 +31,18 @@ func searchTeamName(searchText: String){
 searchTeamName("Ir")
 
 
+struct SongModel {
+    var title : String
+    var lyrics : String
+}
 
+var songModel = SongModel(title: "", lyrics: "")
+
+songModel.title = "Helo"
+println(songModel.title)
+
+
+var fromPath: String? = NSBundle.mainBundle().resourcePath?.stringByAppendingPathComponent("songs.sqlite")
+
+
+var searchLyricsQuery = "SELECT lyrics FROM songs where title = 'sample'"

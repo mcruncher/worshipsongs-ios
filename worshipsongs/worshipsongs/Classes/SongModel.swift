@@ -10,6 +10,6 @@ import Foundation
 
 
 struct SongModel {
-    let title : String
-    let lyrics : String
+    var title : String
+    var lyrics : String
 }

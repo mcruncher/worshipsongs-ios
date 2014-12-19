@@ -24,24 +24,45 @@ class DatabaseHelper: NSObject {
     }
     
     func getTitles() -> NSMutableArray {
-        initSongsResultSet()
-        var resultSet1: FMResultSet? = sharedInstance.database!.executeQuery("SELECT * FROM songs", withArgumentsInArray: nil)
+        initSetup()
+        var resultSet1: FMResultSet? = sharedInstance.database!.executeQuery("SELECT title FROM songs", withArgumentsInArray: nil)
         //let (result, error) =
         var titles: String = "title"
-        var arrayOfArray : NSMutableArray = []
+        var titleList : NSMutableArray = []
         if (resultSet1 != nil)
         {
             while resultSet1!.next() {
-                arrayOfArray.addObject(resultSet1!.stringForColumn(titles))
+                titleList.addObject(resultSet1!.stringForColumn(titles))
             }
         }
-        return arrayOfArray
+        return titleList
     }
     
-    func initSongsResultSet()
+    func getLyrics(title : String) -> String {
+//        let querySQL = "SELECT address, phone FROM CONTACTS WHERE name = '\(name.text)'"
+//        
+//        let results:FMResultSet? = contactDB.executeQuery(querySQL,
+//            withArgumentsInArray: nil)
+        
+        initSetup()
+        var searchLyricsQuery = "SELECT lyrics FROM songs where title = '\(title)'"
+        var resultSet1: FMResultSet? = sharedInstance.database!.executeQuery(searchLyricsQuery, withArgumentsInArray: nil)
+        //let (result, error) =
+        var lyrics: String = "lyrics"
+        var titleList : String = ""
+        if (resultSet1 != nil)
+        {
+            while resultSet1!.next() {
+                //titleList.addObject(resultSet1!.stringForColumn(lyrics))
+                titleList = resultSet1!.stringForColumn(lyrics)
+            }
+        }
+        return titleList
+    }
+    
+    func initSetup()
     {
         sharedInstance.database!.open()
-        resultSet = sharedInstance.database!.executeQuery("SELECT * FROM songs", withArgumentsInArray: nil)
     }
     
 }
