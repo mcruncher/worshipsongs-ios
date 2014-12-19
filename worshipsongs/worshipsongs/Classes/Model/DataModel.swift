@@ -12,4 +12,5 @@ import Foundation
 struct DataModel {
     let category : String
     let name : String
+   
 }

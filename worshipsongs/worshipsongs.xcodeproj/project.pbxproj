@@ -14,6 +14,8 @@
 		3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F901A43D2BB002231BD /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A024F961A43D2BB002231BD /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A024F911A43D2BB002231BD /* fmdb.txt */; };
 		3A024F971A43D2BB002231BD /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F931A43D2BB002231BD /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3A024F991A43D7B4002231BD /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F981A43D7B4002231BD /* DatabaseHelper.swift */; };
+		3A024F9D1A43FDF4002231BD /* SongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F9C1A43FDF4002231BD /* SongModel.swift */; };
 		3A0430981A425BB600F4F833 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0430971A425BB600F4F833 /* ViewController.swift */; };
 		3A0516621A410B2400451F4F /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0516611A410B2400451F4F /* DataModel.swift */; };
 		3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A05166C1A414D6100451F4F /* MasterViewController.swift */; };
@@ -44,6 +46,8 @@
 		3A024F911A43D2BB002231BD /* fmdb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fmdb.txt; sourceTree = "<group>"; };
 		3A024F921A43D2BB002231BD /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		3A024F931A43D2BB002231BD /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		3A024F981A43D7B4002231BD /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = SOURCE_ROOT; };
+		3A024F9C1A43FDF4002231BD /* SongModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongModel.swift; sourceTree = "<group>"; };
 		3A0430971A425BB600F4F833 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; };
 		3A04309E1A42AE6700F4F833 /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 		3A0516611A410B2400451F4F /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataModel.swift; path = Model/DataModel.swift; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 		3A024F5D1A43C5CC002231BD /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				3A024F981A43D7B4002231BD /* DatabaseHelper.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				3A0516611A410B2400451F4F /* DataModel.swift */,
+				3A024F9C1A43FDF4002231BD /* SongModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -351,7 +357,9 @@
 				3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */,
 				3A024F941A43D2BB002231BD /* FMDatabase.m in Sources */,
 				3A0516621A410B2400451F4F /* DataModel.swift in Sources */,
+				3A024F9D1A43FDF4002231BD /* SongModel.swift in Sources */,
 				3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */,
+				3A024F991A43D7B4002231BD /* DatabaseHelper.swift in Sources */,
 				3A024F971A43D2BB002231BD /* FMResultSet.m in Sources */,
 				3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */,
 				3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */,
