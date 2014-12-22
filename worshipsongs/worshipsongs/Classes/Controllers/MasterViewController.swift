@@ -111,18 +111,25 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
      override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
         var lyrics = String()
+        var songName = String()
         if filteredSong.count > 0{
+            songName = filteredSong[indexPath.row];
             lyrics = DatabaseHelper.instance.getLyrics(filteredSong[indexPath.row])
         }
         else{
+            songName = songs[indexPath.row];
             lyrics = DatabaseHelper.instance.getLyrics(songs[indexPath.row])
         }
         
-        var welcomeMessage: String
+    
         let viewController = ViewController()
         viewController.songLyrics = lyrics
-
-        self.navigationController?.presentViewController(viewController, animated: true, completion: nil)
+        viewController.songName = songName
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.navigationBar.barTintColor = UIColor.blackColor()
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navController.navigationBar.titleTextAttributes = titleDict
+        self.navigationController?.presentViewController(navController, animated: true, completion: nil)
     }
 
     

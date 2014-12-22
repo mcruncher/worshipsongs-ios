@@ -19,16 +19,21 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     var eName: String = String()
     var lyricsContent = [String]()
     var postLink: String = String()
+    var textView: UITextView!
+    var songName: String = String()
+    
     
     @IBOutlet var label: UILabel!
     
     override func viewDidLoad()  {
         super.viewDidLoad()
+        self.navigationItem.title = songName;
         var lyrics: NSData = songLyrics.dataUsingEncoding(NSUTF8StringEncoding)!
         parser = NSXMLParser(data: lyrics)
         parser.delegate = self
         parser.parse()
         tableView.dataSource = self
+        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
         // Reload the table
         self.tableView.reloadData()
 
@@ -58,9 +63,15 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         // get the items in this section
         var dataText = NSString()
         dataText = self.lyricsContent[indexPath.section]
+        dataCell!.textLabel!.numberOfLines = 0
+        dataCell!.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping;
         dataCell!.textLabel!.text = dataText
         return dataCell!
     }
+    
+    
+    
+    
     
     // MARK: - NSXMLParserDelegate methods
     
@@ -94,5 +105,7 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
 }
 
