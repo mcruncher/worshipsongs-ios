@@ -8,36 +8,32 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UITableViewDataSource {
+let FONT_SIZE = 14.0
+let CELL_CONTENT_WIDTH = 320.0
+let CELL_CONTENT_MARGIN = 10.0
+
+class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserDelegate {
     
-    var candies = [DataModel]()
-    var filteredCandies = [DataModel]()
-    var dataValue = [DataModel]()
+    var songLyrics = NSString()
+    var parser: NSXMLParser = NSXMLParser()
+    var eName: String = String()
+    var lyricsContent = [String]()
+    var postLink: String = String()
     
-    
+    @IBOutlet var label: UILabel!
     
     override func viewDidLoad()  {
         super.viewDidLoad()
-        dataValue = candies
-//        tableView = UITableView(frame: self.view.frame, style:UITableViewStyle.Grouped)
-//        tableView.backgroundView = nil
-//        tableView.sectionIndexBackgroundColor = UIColor.clearColor()
-//        
-//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        var lyrics: NSData = songLyrics.dataUsingEncoding(NSUTF8StringEncoding)!
+        parser = NSXMLParser(data: lyrics)
+        parser.delegate = self
+        parser.parse()
         tableView.dataSource = self
         // Reload the table
         self.tableView.reloadData()
 
     }
     
-    override func tableView(tableView: UITableView,heightForHeaderInSection section: Int) -> CGFloat
-    {
-        if (section == 0){
-        return 1.0;
-        }
-        return 32.0;
-    }
-        
     override func tableView(tableView: UITableView,
         heightForFooterInSection section: Int) -> CGFloat
     {
@@ -45,8 +41,7 @@ class ViewController: UITableViewController, UITableViewDataSource {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        NSLog("Candies value: \(self.candies.count).")
-        return self.candies.count
+        return self.lyricsContent.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,20 +56,43 @@ class ViewController: UITableViewController, UITableViewDataSource {
             dataCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "CELL_ID")
         }
         // get the items in this section
-        let sectionItems = self.candies[indexPath.section]
-        NSLog("sectionItems value: \(sectionItems.name).")
-       
-
-        
-        //let candy = self.candies[indexPath.row]
-        dataCell!.textLabel!.text = sectionItems.name
-        
+        var dataText = NSString()
+        dataText = self.lyricsContent[indexPath.section]
+        dataCell!.textLabel!.text = dataText
         return dataCell!
     }
     
+    // MARK: - NSXMLParserDelegate methods
+    
+    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!) {
+        eName = elementName
+        if elementName == "verse" {
+            let rel = attributeDict["type"] as? String
+            println("Attributes: : \(rel)")
+        }
+    }
+    
+    func parser(parser: NSXMLParser!, foundCharacters string: String!) {
+        let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        if (!data.isEmpty) {
+            if eName == "verse" {
+                lyricsContent.append(data);
+            }
+        }
+    }
+    
+    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+        if elementName == "lyrics" {
+            let verseData: VerseModel = VerseModel()
+            verseData.data = lyricsContent
+            println("Verse Data : \(lyricsContent)")
+        }
+    }
     
     
-    
-    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 }
 

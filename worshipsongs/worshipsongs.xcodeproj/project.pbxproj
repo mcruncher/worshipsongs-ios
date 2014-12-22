@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A019F721A47AD8A003455AC /* CellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A019F711A47AD8A003455AC /* CellAnimator.swift */; };
+		3A019F761A47B660003455AC /* VerseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A019F751A47B660003455AC /* VerseModel.swift */; };
 		3A024F441A43B91F002231BD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A024F431A43B91F002231BD /* libsqlite3.0.dylib */; };
 		3A024F481A43B97A002231BD /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F471A43B97A002231BD /* Util.swift */; };
 		3A024F631A43CB46002231BD /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A04309E1A42AE6700F4F833 /* songs.sqlite */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A019F711A47AD8A003455AC /* CellAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellAnimator.swift; sourceTree = "<group>"; };
+		3A019F751A47B660003455AC /* VerseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseModel.swift; sourceTree = "<group>"; };
 		3A024F431A43B91F002231BD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		3A024F471A43B97A002231BD /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Service/Util.swift; sourceTree = "<group>"; };
 		3A024F5C1A43C071002231BD /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Header.h; path = Header/Header.h; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				3A024F471A43B97A002231BD /* Util.swift */,
+				3A019F711A47AD8A003455AC /* CellAnimator.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 			children = (
 				3A0516611A410B2400451F4F /* DataModel.swift */,
 				3A024F9C1A43FDF4002231BD /* SongModel.swift */,
+				3A019F751A47B660003455AC /* VerseModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -356,12 +362,14 @@
 				3A024F481A43B97A002231BD /* Util.swift in Sources */,
 				3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */,
 				3A024F941A43D2BB002231BD /* FMDatabase.m in Sources */,
+				3A019F721A47AD8A003455AC /* CellAnimator.swift in Sources */,
 				3A0516621A410B2400451F4F /* DataModel.swift in Sources */,
 				3A024F9D1A43FDF4002231BD /* SongModel.swift in Sources */,
 				3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */,
 				3A024F991A43D7B4002231BD /* DatabaseHelper.swift in Sources */,
 				3A024F971A43D2BB002231BD /* FMResultSet.m in Sources */,
 				3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */,
+				3A019F761A47B660003455AC /* VerseModel.swift in Sources */,
 				3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

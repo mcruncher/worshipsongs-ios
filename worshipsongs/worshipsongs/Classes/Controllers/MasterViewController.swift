@@ -77,7 +77,12 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         return dataCell!
     }
     
-    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        CellAnimator.animate(cell)
+    }
+
+
     // MARK: UISearchBarDelegate
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -105,14 +110,19 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
      override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
-        var lyrics = DatabaseHelper.instance.getLyrics(songs[indexPath.row])
-        println("path : \(lyrics)")
+        var lyrics = String()
+        if filteredSong.count > 0{
+            lyrics = DatabaseHelper.instance.getLyrics(filteredSong[indexPath.row])
+        }
+        else{
+            lyrics = DatabaseHelper.instance.getLyrics(songs[indexPath.row])
+        }
         
-//        var welcomeMessage: String
-//        let viewController = ViewController()
-//        viewController.candies = candies
-//       // viewController.candies = candies
-//        self.navigationController?.presentViewController(viewController, animated: true, completion: nil)
+        var welcomeMessage: String
+        let viewController = ViewController()
+        viewController.songLyrics = lyrics
+
+        self.navigationController?.presentViewController(viewController, animated: true, completion: nil)
     }
 
     
