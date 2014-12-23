@@ -68,7 +68,8 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         dataText = self.lyricsContent[indexPath.section]
         dataCell!.textLabel!.numberOfLines = 0
         dataCell!.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping;
-        dataCell!.textLabel!.text = dataText
+        //dataCell!.textLabel!.text = dataText
+        dataCell!.textLabel!.attributedText = CustomTextSettingService.getAttributedString(dataText);
         return dataCell!
     }
     

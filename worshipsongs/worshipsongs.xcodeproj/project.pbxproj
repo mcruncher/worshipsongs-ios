@@ -10,6 +10,8 @@
 		3A019F721A47AD8A003455AC /* CellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A019F711A47AD8A003455AC /* CellAnimator.swift */; };
 		3A019F761A47B660003455AC /* VerseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A019F751A47B660003455AC /* VerseModel.swift */; };
 		3A0220321A48FE6B00B433F5 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A0220311A48FE6B00B433F5 /* settings.png */; };
+		3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */; };
+		3A0220361A49194100B433F5 /* RegexMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220351A49194100B433F5 /* RegexMatcher.swift */; };
 		3A024F441A43B91F002231BD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A024F431A43B91F002231BD /* libsqlite3.0.dylib */; };
 		3A024F481A43B97A002231BD /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F471A43B97A002231BD /* Util.swift */; };
 		3A024F631A43CB46002231BD /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A04309E1A42AE6700F4F833 /* songs.sqlite */; };
@@ -42,6 +44,8 @@
 		3A019F711A47AD8A003455AC /* CellAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellAnimator.swift; sourceTree = "<group>"; };
 		3A019F751A47B660003455AC /* VerseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerseModel.swift; path = Model/VerseModel.swift; sourceTree = "<group>"; };
 		3A0220311A48FE6B00B433F5 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextSettingService.swift; sourceTree = "<group>"; };
+		3A0220351A49194100B433F5 /* RegexMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexMatcher.swift; sourceTree = "<group>"; };
 		3A024F431A43B91F002231BD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		3A024F471A43B97A002231BD /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Service/Util.swift; sourceTree = "<group>"; };
 		3A024F5C1A43C071002231BD /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Header.h; path = Header/Header.h; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 			children = (
 				3A024F471A43B97A002231BD /* Util.swift */,
 				3A019F711A47AD8A003455AC /* CellAnimator.swift */,
+				3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */,
+				3A0220351A49194100B433F5 /* RegexMatcher.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -382,7 +388,9 @@
 				3A024F971A43D2BB002231BD /* FMResultSet.m in Sources */,
 				3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */,
 				3A019F761A47B660003455AC /* VerseModel.swift in Sources */,
+				3A0220361A49194100B433F5 /* RegexMatcher.swift in Sources */,
 				3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */,
+				3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
