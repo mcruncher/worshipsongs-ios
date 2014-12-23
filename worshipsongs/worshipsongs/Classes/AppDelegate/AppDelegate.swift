@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //let tableViewController = TableViewController(style: UITableViewStyle.Grouped)
         let masterViewController = MasterViewController(style:UITableViewStyle.Grouped)
         let navController = UINavigationController(rootViewController: masterViewController)
-        navController.navigationBar.barTintColor = UIColor.blackColor()
+        navController.navigationBar.barTintColor = UIColor.grayColor()
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navController.navigationBar.titleTextAttributes = titleDict
         Util.copyFile("songs.sqlite")

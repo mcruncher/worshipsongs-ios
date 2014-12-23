@@ -125,11 +125,8 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         let viewController = ViewController()
         viewController.songLyrics = lyrics
         viewController.songName = songName
-        let navController = UINavigationController(rootViewController: viewController)
-        navController.navigationBar.barTintColor = UIColor.blackColor()
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navController.navigationBar.titleTextAttributes = titleDict
-        self.navigationController?.presentViewController(navController, animated: true, completion: nil)
+        
+        self.navigationController?.pushViewController(viewController, animated: true);
     }
 
     

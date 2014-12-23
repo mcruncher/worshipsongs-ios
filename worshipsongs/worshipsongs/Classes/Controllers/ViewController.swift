@@ -28,12 +28,15 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     override func viewDidLoad()  {
         super.viewDidLoad()
         self.navigationItem.title = songName;
+        self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         var lyrics: NSData = songLyrics.dataUsingEncoding(NSUTF8StringEncoding)!
         parser = NSXMLParser(data: lyrics)
         parser.delegate = self
         parser.parse()
         tableView.dataSource = self
-        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+        self.addSettingsButton()
         // Reload the table
         self.tableView.reloadData()
 
@@ -69,10 +72,6 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         return dataCell!
     }
     
-    
-    
-    
-    
     // MARK: - NSXMLParserDelegate methods
     
     func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!) {
@@ -107,5 +106,20 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     }
     
     
+    func addSettingsButton ()
+    {
+        var settingsButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        settingsButton.addTarget(self, action: "popToRoot:", forControlEvents: UIControlEvents.TouchUpInside)
+        settingsButton.setTitle("Settings", forState: UIControlState.Normal)
+        settingsButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        settingsButton.sizeToFit()
+        var settingsBarButton:UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
+        self.navigationItem.setRightBarButtonItem(settingsBarButton, animated: true)
+    }
+    
+    func popToRoot(sender:UIBarButtonItem){
+
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
 }
 
