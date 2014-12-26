@@ -11,6 +11,8 @@ import UIKit
 
 class FontSettingsViewController: UITableViewController, UIPickerViewDelegate,UIPickerViewDataSource, UITextFieldDelegate, UIActionSheetDelegate {
     
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let settingDataManager:SettingsDataManager = SettingsDataManager()
     var pickerView:UIPickerView = UIPickerView()
     
     var fontNameCell: UITableViewCell = UITableViewCell()
@@ -20,7 +22,7 @@ class FontSettingsViewController: UITableViewController, UIPickerViewDelegate,UI
     var fontNameTextfield: UITextField = UITextField()
     var fontSizeSlider: UISlider = UISlider()
     var fontSizeLabel: UILabel = UILabel()
-     var elements:Array<String>?
+     var fontNames: Array<String> = Array()
     
     override func loadView() {
         super.loadView()
@@ -28,12 +30,21 @@ class FontSettingsViewController: UITableViewController, UIPickerViewDelegate,UI
         // set the title
         self.title = "Font Settings"
         
-        elements = ["One","Two","Three","Five","Six","Seven","Eight","Nine","Ten"]
+       // fontNames = ["AlNile-Bold","AmericanTypewriter-Bold","Three","Five","Six","Seven","Eight","Nine","Ten"]
+        
+       // var colorPalette: Array<String> = Array()
+        
+        let path = NSBundle.mainBundle().pathForResource("fontsList", ofType: "plist")
+        let pListArray = NSArray(contentsOfFile: path!)
+        if let colorPalettePlistFile = pListArray {
+            fontNames = colorPalettePlistFile as [String]
+        }
        
         
         // construct font setting cell, section 0, row 0
         self.fontNameCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.fontNameTextfield = UITextField(frame: CGRectInset(self.fontNameCell.contentView.bounds, 15, 0))
+        self.fontNameTextfield.text = settingDataManager.getFontName
         self.fontNameTextfield.placeholder = "Select font"
         self.fontNameTextfield.font = getFont()
         self.fontNameTextfield.inputView = pickerView
@@ -49,7 +60,10 @@ class FontSettingsViewController: UITableViewController, UIPickerViewDelegate,UI
         self.fontSizeSlider.continuous = true;
         self.fontSizeSlider.addTarget(self, action: "sliderChanged:", forControlEvents: UIControlEvents.ValueChanged)
         self.fontSizeLabel = UILabel(frame: CGRectInset(self.fontSizeSliderCell.contentView.bounds, 20, 0))
-        self.fontSizeLabel.text="15"
+        let fontSize = CGFloat(settingDataManager.getFontSize)
+        let strFontSize = String(format: "%.0f", Double(fontSize))
+        self.fontSizeSlider.setValue(Float(fontSize), animated: true)
+        self.fontSizeLabel.text = strFontSize
         self.fontSizeSliderCell.addSubview(fontSizeLabel)
         self.fontSizeSliderCell.addSubview(self.fontSizeSlider)
         
@@ -107,6 +121,7 @@ class FontSettingsViewController: UITableViewController, UIPickerViewDelegate,UI
     
     func sliderChanged(sender:UISlider){
         fontSizeLabel.text = String(format: "%.0f", fontSizeSlider.value)
+        SettingsDataManager.sharedInstance.saveData(fontSizeSlider.value, key: "fontSize")
     }
     
     func getFont() -> UIFont{
@@ -122,17 +137,18 @@ class FontSettingsViewController: UITableViewController, UIPickerViewDelegate,UI
     
     // returns the # of rows in each component..
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return elements!.count
+        return fontNames.count
     }
     
     func pickerView(pickerView: UIPickerView!, titleForRow row: Int, forComponent component: Int) -> String
     {
-        return elements![row]
+        return fontNames[row]
     }
     
     func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int)
     {
-        fontNameTextfield.text = elements![row]
+        fontNameTextfield.text = fontNames[row]
+        SettingsDataManager.sharedInstance.saveData(fontNames[row], key: "fontName")
         pickerView.hidden = true
     }
     

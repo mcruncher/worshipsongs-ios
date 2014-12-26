@@ -27,6 +27,8 @@
 		3A0516621A410B2400451F4F /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0516611A410B2400451F4F /* DataModel.swift */; };
 		3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A05166C1A414D6100451F4F /* MasterViewController.swift */; };
 		3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0516701A414D9D00451F4F /* AppDelegate.swift */; };
+		3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
+		3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A084D5D1A4D42F20097ADA1 /* fontsList.plist */; };
 		3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */; };
 		3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A88F8991A402C6700193E53 /* Images.xcassets */; };
 		3A88F8A91A402C6700193E53 /* worshipsongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F8A81A402C6700193E53 /* worshipsongsTests.swift */; };
@@ -71,6 +73,8 @@
 		3A0516651A41350400451F4F /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = PlayGround/MyPlayground.playground; sourceTree = "<group>"; };
 		3A05166C1A414D6100451F4F /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = Controllers/MasterViewController.swift; sourceTree = "<group>"; };
 		3A0516701A414D9D00451F4F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = AppDelegate/AppDelegate.swift; sourceTree = "<group>"; };
+		3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDataManager.swift; sourceTree = "<group>"; };
+		3A084D5D1A4D42F20097ADA1 /* fontsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fontsList.plist; path = "Third Party/fontsList.plist"; sourceTree = SOURCE_ROOT; };
 		3A88F8881A402C6700193E53 /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A88F88C1A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A88F8901A402C6700193E53 /* worshipsongs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = worshipsongs.xcdatamodel; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 			children = (
 				3AFED0691A4A72E9005C9032 /* colorPalette.plist */,
 				3A024F8C1A43D259002231BD /* FMDB */,
+				3A084D5D1A4D42F20097ADA1 /* fontsList.plist */,
 			);
 			name = "Third Party";
 			path = "Third party";
@@ -212,6 +217,7 @@
 				3A0516611A410B2400451F4F /* DataModel.swift */,
 				3A024F9C1A43FDF4002231BD /* SongModel.swift */,
 				3A019F751A47B660003455AC /* VerseModel.swift */,
+				3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -373,6 +379,7 @@
 				3A0220321A48FE6B00B433F5 /* settings.png in Resources */,
 				3A024F631A43CB46002231BD /* songs.sqlite in Resources */,
 				3A024F961A43D2BB002231BD /* fmdb.txt in Resources */,
+				3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */,
 				3AFED06A1A4A72E9005C9032 /* colorPalette.plist in Resources */,
 				3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */,
 			);
@@ -410,6 +417,7 @@
 				3A0220361A49194100B433F5 /* RegexMatcher.swift in Sources */,
 				3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */,
 				3AFED05A1A4A51E4005C9032 /* ColorPaletteView.swift in Sources */,
+				3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */,
 				3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,14 +15,14 @@ class ColorSettingsViewController: UITableViewController {
     
     var primaryLanguageColorCell: UITableViewCell = UITableViewCell()
     var secondaryLanguageColorCell: UITableViewCell = UITableViewCell()
-    
+    //let settingDataManager:SettingsDataManager = SettingsDataManager()
     
     var primaryLanguageLabel: UILabel = UILabel()
     var primaryLanguageColorLabel: UILabel = UILabel()
     var secondaryLanguageLabel: UILabel = UILabel()
     var secondaryLanguageColorLabel: UILabel = UILabel()
     
-    var primaryLanguageColor: UIColor = UIColor()
+    var languageColor: UIColor = UIColor()
     
     var colorView: UIViewController = UIViewController()
    
@@ -44,7 +44,8 @@ class ColorSettingsViewController: UITableViewController {
         self.primaryLanguageColorCell.addSubview(self.primaryLanguageLabel)
         
         primaryLanguageColorLabel = UILabel(frame: CGRectMake(260, 15, 10, 10))
-        primaryLanguageColorLabel.backgroundColor = UIColor.redColor()
+        let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("primaryFontColor") as? NSData
+        primaryLanguageColorLabel.backgroundColor = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedPrimaryColorData!) as? UIColor
         self.primaryLanguageColorCell.addSubview(primaryLanguageColorLabel)
         
         // construct color setting cell, section 0, row 1
@@ -56,7 +57,8 @@ class ColorSettingsViewController: UITableViewController {
         
 
         secondaryLanguageColorLabel = UILabel(frame: CGRectMake(260, 15, 10, 10))
-        secondaryLanguageColorLabel.backgroundColor = UIColor.redColor()
+        let userSelectedSecondaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("secondaryFontColor") as? NSData
+        secondaryLanguageColorLabel.backgroundColor = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedSecondaryColorData!) as? UIColor
         self.secondaryLanguageColorCell.addSubview(secondaryLanguageColorLabel)
         
     }
@@ -104,6 +106,7 @@ class ColorSettingsViewController: UITableViewController {
     
     // Configure the row selection code for any cells that you want to customize the row selection
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+       
         if(indexPath.section == 0 && indexPath.row == 0) {
             self.colorView.view.hidden = false
             makeColorView(1)
@@ -157,15 +160,21 @@ class ColorSettingsViewController: UITableViewController {
             if color.getRed(&r, green: &g, blue: &b, alpha: &a){
                 var colorText = NSString(format: "HSB: %4.2f,%4.2f,%4.2f RGB: %4.2f,%4.2f,%4.2f",
                     Float(h),Float(s),Float(b),Float(r),Float(g),Float(b))
-                primaryLanguageColor = UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
+                languageColor = UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
                 let tagValue = sender.tag
+                let data = NSKeyedArchiver.archivedDataWithRootObject(languageColor)
                 if(tagValue == 1)
                 {
-                    primaryLanguageColorLabel.backgroundColor = primaryLanguageColor
+                    
+                    SettingsDataManager.sharedInstance.saveData(data, key: "primaryFontColor")
+                    let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("primaryFontColor") as? NSData
+                    primaryLanguageColorLabel.backgroundColor = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedPrimaryColorData!) as? UIColor
                 }
                 else
                 {
-                    secondaryLanguageColorLabel.backgroundColor = primaryLanguageColor
+                    SettingsDataManager.sharedInstance.saveData(data, key: "secondaryFontColor")
+                    let userSelectedSecondaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("secondaryFontColor") as? NSData
+                    secondaryLanguageColorLabel.backgroundColor = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedSecondaryColorData!) as? UIColor
                 }
                 self.colorView.view.hidden = true
                 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>AmericanTypewriter-Bold</string>
+	<string>AlNile-Bold</string>
+	<string>ArialMT</string>
+	<string>ArialHebrew</string>
+	<string>ArialHebrew-Bold</string>
+	<string>Avenir-Black</string>
+	<string>BanglaSangamMN-Bold</string>
+	<string>Baskerville-SemiBoldItalic</string>
+	<string>ChalkboardSE-Bold</string>
+	<string>DamascusBold</string>
+	<string>Futura-CondensedExtraBold</string>
+	<string>Georgia-Bold</string>
+	<string>HoeflerText-BlackItalic</string>
+</array>
+</plist>

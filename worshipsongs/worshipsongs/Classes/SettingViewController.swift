@@ -11,7 +11,8 @@ import UIKit
 
 class SettingViewController: UITableViewController {
     
-    
+    var fontName: String = SettingsDataManager.sharedInstance.getFontName
+    let settingDataManager:SettingsDataManager = SettingsDataManager()
     var fontSettingsCell: UITableViewCell = UITableViewCell()
     var colorSettingsCell: UITableViewCell = UITableViewCell()
     var keepAwakeCell: UITableViewCell = UITableViewCell()
@@ -30,6 +31,7 @@ class SettingViewController: UITableViewController {
         
         // set the title
         self.title = "Settings"
+        //println("fontName : \(fontName)")
         
         // construct font setting cell, section 0, row 0
         self.fontSettingsCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
@@ -51,11 +53,11 @@ class SettingViewController: UITableViewController {
         self.keepAwakeCell.textLabel?.text = "To keep awake on screen"
         self.keepAwakeCell.textLabel?.font=getFont()
         self.keepAwakeCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        self.keepAwakeCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        setKeepAwakeStatus()
         
         // construct color setting cell, section 2, row 0
         self.restoreSettingCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        self.restoreSettingButton = UIButton(frame: CGRectInset(self.restoreSettingCell.contentView.bounds, 15, 0))
+        self.restoreSettingButton = UIButton(frame: CGRectMake(0, 5, 10, 10))
         self.restoreSettingButton.addTarget(self, action: "sliderChanged:", forControlEvents: UIControlEvents.TouchUpInside)
         self.restoreSettingButton.setTitle("Restore default values", forState: UIControlState.Normal)
         self.restoreSettingButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
@@ -148,20 +150,37 @@ class SettingViewController: UITableViewController {
             // toggle check mark
             if(self.keepAwakeCell.accessoryType == UITableViewCellAccessoryType.None) {
                 self.keepAwakeCell.accessoryType = UITableViewCellAccessoryType.Checkmark;
+                SettingsDataManager.sharedInstance.saveData(true, key: "keepAwake")
             } else {
                 self.keepAwakeCell.accessoryType = UITableViewCellAccessoryType.None;
+                SettingsDataManager.sharedInstance.saveData(false, key: "keepAwake")
             }
+        }
+        
+        if(indexPath.section == 2 && indexPath.row == 0) {
+            SettingsDataManager.sharedInstance.reset()
         }
     }
     
     func sliderChanged(sender:UISlider){
-        println("fontSizeSlider value : \(fontSizeSlider.value)")
+        println("Setting value reset")
+        SettingsDataManager.sharedInstance.reset()
+        setKeepAwakeStatus()
     }
     
     func getFont() -> UIFont{
         return UIFont(name: "HelveticaNeue", size: CGFloat(12))!
     }
     
-    
+    func setKeepAwakeStatus()
+    {
+        var keepAwakeStatus: Bool = settingDataManager.getKeepAwake
+        if(keepAwakeStatus == true){
+            self.keepAwakeCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        }
+        else{
+            self.keepAwakeCell.accessoryType = UITableViewCellAccessoryType.None
+        }
+    }
     
 }
