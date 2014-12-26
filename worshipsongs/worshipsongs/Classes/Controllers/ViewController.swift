@@ -119,8 +119,9 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     }
     
     func popToRoot(sender:UIBarButtonItem){
-
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        let settingViewController = SettingViewController(style:UITableViewStyle.Grouped)
+        self.navigationController?.pushViewController(settingViewController, animated: true);
+        //self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }
 

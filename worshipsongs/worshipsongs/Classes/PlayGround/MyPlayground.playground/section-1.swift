@@ -46,3 +46,8 @@ var fromPath: String? = NSBundle.mainBundle().resourcePath?.stringByAppendingPat
 
 
 var searchLyricsQuery = "SELECT lyrics FROM songs where title = 'sample'"
+
+
+var str1 = "Hello, playground"
+let rangeOfHello = Range(start: str1.startIndex,end: advance(str1.startIndex, 5))
+let helloStr = str1.substringWithRange(rangeOfHello)
