@@ -39,12 +39,19 @@ class SettingsDataManager {
         return fontSize
     }
     
-    var getPrimaryFontColor: NSData {
-        return primaryFontColor
+    var getPrimaryFontColor: UIColor {
+        let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("primaryFontColor") as? NSData
+        var colorValue: UIColor = UIColor()
+        colorValue = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedPrimaryColorData!) as UIColor
+        return colorValue
     }
     
-    var getSecondaryFontColor: NSData {
-        return secondaryFontColor
+    var getSecondaryFontColor: UIColor {
+        
+        let userSelectedSecondaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("secondaryFontColor") as? NSData
+        var colorValue: UIColor = UIColor()
+        colorValue = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedSecondaryColorData!) as UIColor
+        return colorValue
     }
     
     var getKeepAwake: Bool {

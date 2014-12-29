@@ -14,6 +14,7 @@ let CELL_CONTENT_MARGIN = 10.0
 
 class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserDelegate {
     
+    let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     var songLyrics = NSString()
     var parser: NSXMLParser = NSXMLParser()
     var eName: String = String()
@@ -21,7 +22,7 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     var postLink: String = String()
     var textView: UITextView!
     var songName: String = String()
-    
+    //var dataCell : UITableViewCell?
     
     @IBOutlet var label: UILabel!
     
@@ -39,6 +40,7 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         self.addSettingsButton()
         // Reload the table
         self.tableView.reloadData()
+        
 
     }
     
@@ -57,6 +59,11 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        println("view Will appear....")
+        self.tableView.reloadData()
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var dataCell : UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("CELL_ID") as? UITableViewCell
         if(dataCell == nil)
@@ -69,7 +76,7 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         dataCell!.textLabel!.numberOfLines = 0
         dataCell!.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping;
         //dataCell!.textLabel!.text = dataText
-        dataCell!.textLabel!.attributedText = CustomTextSettingService.getAttributedString(dataText);
+        dataCell!.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText);
         return dataCell!
     }
     
@@ -79,7 +86,7 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         eName = elementName
         if elementName == "verse" {
             let rel = attributeDict["type"] as? String
-            println("Attributes: : \(rel)")
+            //println("Attributes: : \(rel)")
         }
     }
     
@@ -96,7 +103,7 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         if elementName == "lyrics" {
             let verseData: VerseModel = VerseModel()
             verseData.data = lyricsContent
-            println("Verse Data : \(lyricsContent)")
+           // println("Verse Data : \(lyricsContent)")
         }
     }
     

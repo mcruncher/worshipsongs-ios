@@ -131,13 +131,13 @@ class SettingViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if(indexPath.section == 0 && indexPath.row == 0) {
-            let settingViewController = FontSettingsViewController(style:UITableViewStyle.Grouped)
-            self.navigationController?.pushViewController(settingViewController, animated: true);
+            let fontSettingViewController = FontSettingsViewController(style:UITableViewStyle.Grouped)
+            self.navigationController?.pushViewController(fontSettingViewController, animated: true);
         }
         
         if(indexPath.section == 0 && indexPath.row == 1) {
-            let settingViewController = ColorSettingsViewController(style:UITableViewStyle.Grouped)
-            self.navigationController?.pushViewController(settingViewController, animated: true);
+            let colorSettingViewController = ColorSettingsViewController(style:UITableViewStyle.Grouped)
+            self.navigationController?.pushViewController(colorSettingViewController, animated: true);
         }
         
         

@@ -10,20 +10,30 @@ import UIKit
 
 
 
-class CustomTextSettingService: NSObject{
+class CustomTextSettingService{
     
-    
+    func getAttributedString(cellText : NSString) -> NSMutableAttributedString {
+        let settingDataManager:SettingsDataManager = SettingsDataManager()
         
-    class func getAttributedString(cellText : NSString) -> NSMutableAttributedString {
-        let attributedString = NSMutableAttributedString()
-       // attributedString.appendAttributedString(getMatchedStrings(cellText))
-        let fontAttributedString = NSAttributedString(string: cellText, attributes:getFont())
-        attributedString.appendAttributedString(fontAttributedString)
+        var array = getCustomTagRanges(cellText)
+        let attributedString = NSMutableAttributedString(string: cellText, attributes: getFont())
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getPrimaryFontColor, range: NSRange(location: 0, length: cellText.length))
+        for var index=0; index < array.count; index++ {
+            var rangeValue:NSRange
+            rangeValue = array.objectAtIndex(index).rangeValue
+            let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("secondaryFontColor") as? NSData
+            var colorValue: UIColor = UIColor()
+            colorValue = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedPrimaryColorData!) as UIColor
+            attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getSecondaryFontColor, range: rangeValue)
+        }
+        
         return attributedString;
     }
     
-    class func getFont() -> NSDictionary {
+    func getFont() -> NSDictionary {
         let settingDataManager:SettingsDataManager = SettingsDataManager()
+        println("settingDataManager.getFontName : \(settingDataManager.getFontName)")
+        println("settingDataManager.getFontSize : \(settingDataManager.getFontSize)")
         let fontName = settingDataManager.getFontName
         let font = UIFont(name: settingDataManager.getFontName, size: settingDataManager.getFontSize) ?? UIFont.systemFontOfSize(18.0)
         let textFont = [NSFontAttributeName:font]
@@ -31,45 +41,11 @@ class CustomTextSettingService: NSObject{
     }
     
     
-//    class func applyTagColor(cellText : NSString) -> NSMutableAttributedString{
-//        return ""
-//    }
-    
-    class func getMatchedStrings(cellText : NSString) -> NSMutableAttributedString{
-       
+    func getCustomTagRanges(cellText : NSString) -> NSMutableArray{
         let startPattern = "\\{\\w\\}.*\\{/\\w\\}"
         let colorAttributedString = NSMutableAttributedString()
-//        for m in cellText {
-//            if m as String != null
-//            {
-//                println("start matched pattern: \(m)")
-//                var attrString: NSMutableAttributedString = NSMutableAttributedString(string: m as String,attributes : [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
-//                attrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(0, attrString.length))
-//                colorAttributedString.appendAttributedString(attrString)
-//            }
-//            else {
-//                println("start matched pattern: \(m)")
-//                var attrString: NSMutableAttributedString = NSMutableAttributedString(string: m as String,attributes : [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
-//                attrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.blueColor(), range: NSMakeRange(0, attrString.length))
-//                colorAttributedString.appendAttributedString(attrString)
-//            }
-//            
-//        }
-        
-        
-        for m in cellText =~ startPattern {
-            println("start matched pattern: \(m)")
-//            var attrString: NSMutableAttributedString = NSMutableAttributedString(string: m as String,attributes : [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
-//            attrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(0, attrString.length))
-//            colorAttributedString.appendAttributedString(attrString)
-        }
-        
-        return colorAttributedString
-        
-        
-        
+        var array: NSMutableArray = NSMutableArray()
+        array = getRange(cellText,startPattern)
+        return array
     }
-    
-    
-    
 }
