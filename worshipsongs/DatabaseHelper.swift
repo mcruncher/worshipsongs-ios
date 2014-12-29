@@ -23,41 +23,24 @@ class DatabaseHelper: NSObject {
         return sharedInstance
     }
     
-    func getTitles() -> NSMutableArray {
+    func getSongModel() -> [(Songs)] {
         initSetup()
-        var resultSet1: FMResultSet? = sharedInstance.database!.executeQuery("SELECT title FROM songs", withArgumentsInArray: nil)
-        //let (result, error) =
+        var songModel = [Songs]()
+        var resultSet1: FMResultSet? = sharedInstance.database!.executeQuery("SELECT * FROM songs", withArgumentsInArray: nil)
         var titles: String = "title"
-        var titleList : NSMutableArray = []
-        if (resultSet1 != nil)
-        {
-            while resultSet1!.next() {
-                titleList.addObject(resultSet1!.stringForColumn(titles))
-            }
-        }
-        return titleList
-    }
-    
-    func getLyrics(title : String) -> String {
-//        let querySQL = "SELECT address, phone FROM CONTACTS WHERE name = '\(name.text)'"
-//        
-//        let results:FMResultSet? = contactDB.executeQuery(querySQL,
-//            withArgumentsInArray: nil)
-        
-        initSetup()
-        var searchLyricsQuery = "SELECT lyrics FROM songs where title = '\(title)'"
-        var resultSet1: FMResultSet? = sharedInstance.database!.executeQuery(searchLyricsQuery, withArgumentsInArray: nil)
-        //let (result, error) =
         var lyrics: String = "lyrics"
-        var titleList : String = ""
+        var verseOrder: String = "verse_order"
+        var titleList : NSMutableArray = []
+        var lyricsList : NSMutableArray = []
+        var verseOrderList : NSMutableArray = []
+        var songArray : NSMutableArray = []
         if (resultSet1 != nil)
         {
             while resultSet1!.next() {
-                //titleList.addObject(resultSet1!.stringForColumn(lyrics))
-                titleList = resultSet1!.stringForColumn(lyrics)
+                songModel.append(Songs(title: resultSet1!.stringForColumn(titles), lyrics: resultSet1!.stringForColumn(lyrics),verse_order: resultSet1!.stringForColumn(verseOrder)))
             }
         }
-        return titleList
+        return songModel
     }
     
     func initSetup()

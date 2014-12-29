@@ -15,14 +15,20 @@ let CELL_CONTENT_MARGIN = 10.0
 class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserDelegate {
     
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
-    var songLyrics = NSString()
     var parser: NSXMLParser = NSXMLParser()
-    var eName: String = String()
-    var lyricsContent = [String]()
-    var postLink: String = String()
-    var textView: UITextView!
+    
     var songName: String = String()
-    //var dataCell : UITableViewCell?
+    var songLyrics = NSString()
+    var lyricsData = [String]()
+    var verseOrderList: NSMutableArray = NSMutableArray()
+    
+    var element: String = String()
+    
+    
+    var verseOrder : NSMutableArray = NSMutableArray()
+    var attribues : NSDictionary = NSDictionary()
+    
+    var listDataDictionary : NSMutableDictionary = NSMutableDictionary()
     
     @IBOutlet var label: UILabel!
     
@@ -51,7 +57,7 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.lyricsContent.count
+        return self.verseOrderList.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,7 +66,6 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     }
     
     override func viewWillAppear(animated: Bool) {
-        println("view Will appear....")
         self.tableView.reloadData()
     }
     
@@ -70,43 +75,38 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         {
             dataCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "CELL_ID")
         }
-        // get the items in this section
-        var dataText = NSString()
-        dataText = self.lyricsContent[indexPath.section]
+        var key: String = verseOrderList[indexPath.section] as String
+        let dataText: NSString? = listDataDictionary[key] as? NSString;
         dataCell!.textLabel!.numberOfLines = 0
         dataCell!.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping;
-        //dataCell!.textLabel!.text = dataText
-        dataCell!.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText);
+        
+        dataCell!.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
         return dataCell!
     }
     
     // MARK: - NSXMLParserDelegate methods
     
     func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!) {
-        eName = elementName
-        if elementName == "verse" {
-            let rel = attributeDict["type"] as? String
-            //println("Attributes: : \(rel)")
-        }
+        element = elementName
+        attribues = attributeDict
+       
     }
     
     func parser(parser: NSXMLParser!, foundCharacters string: String!) {
         let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         if (!data.isEmpty) {
-            if eName == "verse" {
-                lyricsContent.append(data);
+            if element == "verse" {
+                var verseType = attribues.objectForKey("type") as String
+                var verseLabel = attribues.objectForKey("label") as String
+                lyricsData.append(data);
+                
+                listDataDictionary.setObject(data as String, forKey: verseType + verseLabel)
+                if(verseOrderList.count < 1){
+                    verseOrderList.addObject(verseType + verseLabel)
+                }
             }
         }
     }
-    
-    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
-        if elementName == "lyrics" {
-            let verseData: VerseModel = VerseModel()
-            verseData.data = lyricsContent
-           // println("Verse Data : \(lyricsContent)")
-        }
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -128,7 +128,6 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     func popToRoot(sender:UIBarButtonItem){
         let settingViewController = SettingViewController(style:UITableViewStyle.Grouped)
         self.navigationController?.pushViewController(settingViewController, animated: true);
-        //self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }
 

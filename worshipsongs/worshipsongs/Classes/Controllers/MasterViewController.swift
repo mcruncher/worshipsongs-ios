@@ -14,22 +14,14 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     var songTitles : NSMutableArray = []
     var songs = [String]()
-    var filteredSong = [String]()
     var dataCell: UITableViewCell?
     var mySearchBar: UISearchBar!
+    var songData = [(Songs)]()
+    var filteredData = [(Songs)]()
     
     override func viewDidLoad() {
         self.navigationItem.title = "Worship songs"
-        self.songTitles = DatabaseHelper.instance.getTitles()
-        
-        var songModel = SongModel(title: "", lyrics: "")
-        
-        for var index = 0; index < songTitles.count; index++ {
-            songModel.title = songTitles[index] as String
-            self.songs.append(songModel.title)
-        }
-        
-        
+        self.songData = DatabaseHelper.instance.getSongModel()
         var myFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y,
             self.view.bounds.size.width, 44);
         mySearchBar = UISearchBar(frame: myFrame)
@@ -52,10 +44,10 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView && filteredSong.count > 0{
-            return self.filteredSong.count
+        if tableView == self.tableView && filteredData.count > 0 {
+            return self.filteredData.count
         } else {
-            return self.songs.count
+            return self.songData.count
         }
     }
     
@@ -66,14 +58,14 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         {
             dataCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "CELL_ID")
         }
-        var song : String
+        var song : Songs
         // Check to see whether the normal table or search results table is being displayed and set the Candy object from the appropriate array
-        if tableView == self.tableView && filteredSong.count > 0 {
-            song = filteredSong[indexPath.row]
+        if tableView == self.tableView && filteredData.count > 0 {
+            song = filteredData[indexPath.row]
         } else {
-            song = songs[indexPath.row]
+            song = songData[indexPath.row]
         }
-        dataCell!.textLabel!.text = song
+        dataCell!.textLabel!.text = song.title
         return dataCell!
     }
     
@@ -102,32 +94,49 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     func filterContentForSearchText(searchBar: UISearchBar) {
         // Filter the array using the filter method
         var searchText = searchBar.text
-            self.filteredSong = self.songs.filter({( song: String) -> Bool in
-            let stringMatch = song.rangeOfString(searchText)
+            self.filteredData = self.songData.filter({( song: Songs) -> Bool in
+            var stringMatch = song.title.rangeOfString(searchText)
             return (stringMatch != nil)
         })
     }
+    
     
      override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
         var lyrics = String()
         var songName = String()
-        if filteredSong.count > 0{
-            songName = filteredSong[indexPath.row];
-            lyrics = DatabaseHelper.instance.getLyrics(filteredSong[indexPath.row])
+        var verseOrder = String()
+        var verseList: NSArray = NSArray()
+        if filteredData.count > 0{
+            songName = filteredData[indexPath.row].title;
+            lyrics = filteredData[indexPath.row].lyrics;
+            verseOrder = filteredData[indexPath.row].verse_order;
         }
         else{
-            songName = songs[indexPath.row];
-            lyrics = DatabaseHelper.instance.getLyrics(songs[indexPath.row])
+            songName = songData[indexPath.row].title;
+            lyrics = songData[indexPath.row].lyrics;
+            verseOrder = songData[indexPath.row].verse_order;
         }
         
+        if !verseOrder.isEmpty {
+            println("verseOrder : \(verseOrder)")
+            verseList = splitVerseOrder(verseOrder)
+           println("verseList : \(verseList)")
+        }
+        
+        var verseOrderList = NSMutableArray(array: verseList)
     
         let viewController = ViewController()
         viewController.songLyrics = lyrics
         viewController.songName = songName
+        viewController.verseOrderList = verseOrderList
         
         self.navigationController?.pushViewController(viewController, animated: true);
     }
 
+    func splitVerseOrder(verseOrder: String) -> NSArray
+    {
+        return verseOrder.componentsSeparatedByString(" ")
+    }
     
 }

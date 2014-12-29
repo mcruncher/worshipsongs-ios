@@ -20,7 +20,6 @@ func getRange (value : String, pattern : String) -> NSMutableArray {
     re!.enumerateMatchesInString(value, options: moptions, range: all) {
         (result : NSTextCheckingResult!, flags : NSMatchingFlags, ptr : UnsafeMutablePointer<ObjCBool>) in
         let string = nsstr.substringWithRange(result.range)
-        println("Range: \(result.range)")
         array.addObject(result.range)
     }
     return array

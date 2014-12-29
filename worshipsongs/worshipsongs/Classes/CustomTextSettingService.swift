@@ -32,8 +32,6 @@ class CustomTextSettingService{
     
     func getFont() -> NSDictionary {
         let settingDataManager:SettingsDataManager = SettingsDataManager()
-        println("settingDataManager.getFontName : \(settingDataManager.getFontName)")
-        println("settingDataManager.getFontSize : \(settingDataManager.getFontSize)")
         let fontName = settingDataManager.getFontName
         let font = UIFont(name: settingDataManager.getFontName, size: settingDataManager.getFontSize) ?? UIFont.systemFontOfSize(18.0)
         let textFont = [NSFontAttributeName:font]

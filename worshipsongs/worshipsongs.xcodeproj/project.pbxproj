@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A019F721A47AD8A003455AC /* CellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A019F711A47AD8A003455AC /* CellAnimator.swift */; };
-		3A019F761A47B660003455AC /* VerseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A019F751A47B660003455AC /* VerseModel.swift */; };
 		3A0220321A48FE6B00B433F5 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A0220311A48FE6B00B433F5 /* settings.png */; };
 		3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */; };
 		3A0220361A49194100B433F5 /* RegexMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220351A49194100B433F5 /* RegexMatcher.swift */; };
@@ -22,9 +21,8 @@
 		3A024F961A43D2BB002231BD /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A024F911A43D2BB002231BD /* fmdb.txt */; };
 		3A024F971A43D2BB002231BD /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F931A43D2BB002231BD /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A024F991A43D7B4002231BD /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F981A43D7B4002231BD /* DatabaseHelper.swift */; };
-		3A024F9D1A43FDF4002231BD /* SongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F9C1A43FDF4002231BD /* SongModel.swift */; };
 		3A0430981A425BB600F4F833 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0430971A425BB600F4F833 /* ViewController.swift */; };
-		3A0516621A410B2400451F4F /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0516611A410B2400451F4F /* DataModel.swift */; };
+		3A043D541A50E44C0099FE53 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A043D531A50E44C0099FE53 /* Songs.swift */; };
 		3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A05166C1A414D6100451F4F /* MasterViewController.swift */; };
 		3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0516701A414D9D00451F4F /* AppDelegate.swift */; };
 		3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
@@ -49,7 +47,6 @@
 
 /* Begin PBXFileReference section */
 		3A019F711A47AD8A003455AC /* CellAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellAnimator.swift; sourceTree = "<group>"; };
-		3A019F751A47B660003455AC /* VerseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerseModel.swift; path = Model/VerseModel.swift; sourceTree = "<group>"; };
 		3A0220311A48FE6B00B433F5 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextSettingService.swift; sourceTree = "<group>"; };
 		3A0220351A49194100B433F5 /* RegexMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexMatcher.swift; sourceTree = "<group>"; };
@@ -66,10 +63,9 @@
 		3A024F921A43D2BB002231BD /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		3A024F931A43D2BB002231BD /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		3A024F981A43D7B4002231BD /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = SOURCE_ROOT; };
-		3A024F9C1A43FDF4002231BD /* SongModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongModel.swift; path = Model/SongModel.swift; sourceTree = "<group>"; };
 		3A0430971A425BB600F4F833 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; };
 		3A04309E1A42AE6700F4F833 /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
-		3A0516611A410B2400451F4F /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataModel.swift; path = Model/DataModel.swift; sourceTree = "<group>"; };
+		3A043D531A50E44C0099FE53 /* Songs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Songs.swift; sourceTree = "<group>"; };
 		3A0516651A41350400451F4F /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = PlayGround/MyPlayground.playground; sourceTree = "<group>"; };
 		3A05166C1A414D6100451F4F /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = Controllers/MasterViewController.swift; sourceTree = "<group>"; };
 		3A0516701A414D9D00451F4F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = AppDelegate/AppDelegate.swift; sourceTree = "<group>"; };
@@ -214,10 +210,8 @@
 		3A0516601A4108CA00451F4F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3A0516611A410B2400451F4F /* DataModel.swift */,
-				3A024F9C1A43FDF4002231BD /* SongModel.swift */,
-				3A019F751A47B660003455AC /* VerseModel.swift */,
 				3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */,
+				3A043D531A50E44C0099FE53 /* Songs.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -402,18 +396,16 @@
 				3A0430981A425BB600F4F833 /* ViewController.swift in Sources */,
 				3A024F481A43B97A002231BD /* Util.swift in Sources */,
 				3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */,
+				3A043D541A50E44C0099FE53 /* Songs.swift in Sources */,
 				3A0220381A4944B000B433F5 /* SettingViewController.swift in Sources */,
 				3A024F941A43D2BB002231BD /* FMDatabase.m in Sources */,
 				3A019F721A47AD8A003455AC /* CellAnimator.swift in Sources */,
-				3A0516621A410B2400451F4F /* DataModel.swift in Sources */,
-				3A024F9D1A43FDF4002231BD /* SongModel.swift in Sources */,
 				3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */,
 				3AFED06E1A4A9D74005C9032 /* ColorSettingsViewController.swift in Sources */,
 				3A024F991A43D7B4002231BD /* DatabaseHelper.swift in Sources */,
 				3A02203A1A495C6000B433F5 /* FontSettingsViewController.swift in Sources */,
 				3A024F971A43D2BB002231BD /* FMResultSet.m in Sources */,
 				3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */,
-				3A019F761A47B660003455AC /* VerseModel.swift in Sources */,
 				3A0220361A49194100B433F5 /* RegexMatcher.swift in Sources */,
 				3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */,
 				3AFED05A1A4A51E4005C9032 /* ColorPaletteView.swift in Sources */,
