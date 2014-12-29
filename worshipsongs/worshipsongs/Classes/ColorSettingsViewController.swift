@@ -107,6 +107,7 @@ class ColorSettingsViewController: UITableViewController {
     // Configure the row selection code for any cells that you want to customize the row selection
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
+        self.title = "Choose color"
         if(indexPath.section == 0 && indexPath.row == 0) {
             self.colorView.view.hidden = false
             makeColorView(1)
