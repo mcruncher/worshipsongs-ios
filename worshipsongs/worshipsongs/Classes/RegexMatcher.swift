@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import UIKit
+
+
 
 func getRange (value : String, pattern : String) -> NSMutableArray {
     var err : NSError?
@@ -24,5 +27,32 @@ func getRange (value : String, pattern : String) -> NSMutableArray {
     }
     return array
 }
+
+func getPatternTextLength (value : String, pattern : String) -> Int {
+    var newCellText: Int = Int()
+    var err : NSError?
+    let nsstr = value as NSString // we use this to access the NSString methods like .length and .substringWithRange(NSRange)
+    let options = NSRegularExpressionOptions(0)
+    let re = NSRegularExpression(pattern: pattern, options: options, error: &err)
+    let all = NSRange(location: 0, length: nsstr.length)
+    let moptions = NSMatchingOptions(0)
+    var matches : Array<String> = []
+    var array: NSMutableArray = NSMutableArray()
+    re!.enumerateMatchesInString(value, options: moptions, range: all) {
+        (result : NSTextCheckingResult!, flags : NSMatchingFlags, ptr : UnsafeMutablePointer<ObjCBool>) in
+        let string = nsstr.substringWithRange(result.range)
+        newCellText = result.range.length
+    }
+    return newCellText
+}
+
+
+func removePatternText(text: NSString, pattern: NSString) -> NSString
+{
+    var internalExpression: NSRegularExpression
+    internalExpression = NSRegularExpression(pattern: pattern, options: .CaseInsensitive, error: nil)!
+    return internalExpression.stringByReplacingMatchesInString(text, options: nil, range: NSMakeRange(0, text.length), withTemplate: "")
+}
+
 
 

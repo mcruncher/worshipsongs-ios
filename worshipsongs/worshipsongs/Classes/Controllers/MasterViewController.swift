@@ -119,9 +119,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         }
         
         if !verseOrder.isEmpty {
-            println("verseOrder : \(verseOrder)")
             verseList = splitVerseOrder(verseOrder)
-           println("verseList : \(verseList)")
         }
         
         var verseOrderList = NSMutableArray(array: verseList)

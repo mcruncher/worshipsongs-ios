@@ -376,57 +376,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "worshipsongs/Classes/Controllers/MasterViewController.swift"
-            timestampString = "441531241.291649"
+            timestampString = "441599623.761411"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "worshipsongs.MasterViewController.tableView (worshipsongs.MasterViewController)(ObjectiveC.UITableView, didSelectRowAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ()"
-                  moduleName = "worshipsongs"
-                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/Classes/Controllers/MasterViewController.swift"
-                  timestampString = "440928862.394517"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
-                  offsetFromSymbolStart = "2916">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "reabstraction thunk helper from @callee_owned (@in ()) -&gt; (@out ()) to @callee_owned () -&gt; (@unowned ())"
-                  moduleName = "worshipsongs"
-                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/Classes/Controllers/MasterViewController.swift"
-                  timestampString = "440928862.394719"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
-                  offsetFromSymbolStart = "8">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "reabstraction thunk helper from @callee_owned () -&gt; (@unowned ()) to @callee_unowned @objc_block () -&gt; (@unowned ())"
-                  moduleName = "worshipsongs"
-                  urlString = "file:///Users/seenivasansankaran/projects/opensource/crunchersaspire/worshipsongs-ios/worshipsongs/worshipsongs/Classes/Controllers/MasterViewController.swift"
-                  timestampString = "440928862.394841"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
-                  offsetFromSymbolStart = "4">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -507,6 +463,38 @@
             endingLineNumber = "151"
             landmarkName = "pickerView(_:didSelectRow:inComponent:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "worshipsongs/Classes/CustomTextSettingService.swift"
+            timestampString = "441618665.254454"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "getAttributedString(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "worshipsongs/Classes/RegexMatcher.swift"
+            timestampString = "441601736.005462"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "getPatternTextLength(_:_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
