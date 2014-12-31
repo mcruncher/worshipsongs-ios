@@ -119,13 +119,23 @@ class ColorSettingsViewController: UITableViewController {
     }
     
     func makeColorView(var colorTag:Int){
-        var buttonFrame = CGRect(x: 12, y: 100, width: 25, height: 25)
-        var i:CGFloat = 1.0
-        while i > 0{
-            makeRainbowButtons(buttonFrame, sat: i ,bright: 1.0, colorTag: colorTag)
-            i = i - 0.1
+        var buttonFrame = CGRect(x: 12, y: 100, width: 30, height: 25)
+        var colorPalette: Array<String> = Array()
+        colorPalette = getColorPalette()
+       
+        var initialColorValue:Int = (colorPalette.count)/10
+        var colorCount:Int = 0
+        var defauktButtonOrgin = buttonFrame.origin.x
+        for index in 0..<initialColorValue{
+            for k in 0..<10{
+                makeButton(buttonFrame, backGroundColor: hexStringToUIColor(colorPalette[colorCount]), colorTag: colorTag)
+                colorCount = colorCount+1
+                buttonFrame.origin.x = buttonFrame.size.width + buttonFrame.origin.x
+            }
+            buttonFrame.origin.x = defauktButtonOrgin
             buttonFrame.origin.y = buttonFrame.origin.y + buttonFrame.size.height
         }
+        
         self.addChildViewController(colorView)
         self.colorView.view.alpha = 0;
         self.colorView.view.opaque = true;
@@ -137,19 +147,15 @@ class ColorSettingsViewController: UITableViewController {
             }, completion: nil)
     }
     
-    func makeRainbowButtons(buttonFrame:CGRect, sat:CGFloat, bright:CGFloat, colorTag:Int){
+    func makeButton(buttonFrame:CGRect, backGroundColor:UIColor,colorTag:Int){
         var myButtonFrame = buttonFrame
-        //populate an array of buttons
-        for i in 0..<12{
-            let hue:CGFloat = CGFloat(i) / 12.0
-            let color = UIColor(hue: hue, saturation: sat, brightness: bright, alpha: 1.0)
-            let aButton = UIButton(frame: myButtonFrame)
-            myButtonFrame.origin.x = myButtonFrame.size.width + myButtonFrame.origin.x
-            aButton.backgroundColor = color
-            aButton.tag = colorTag
-            colorView.view.addSubview(aButton)
-            aButton.addTarget(self, action: "displayColor:", forControlEvents: UIControlEvents.TouchUpInside)
-        }
+        var color = backGroundColor
+        let aButton = UIButton(frame: myButtonFrame)
+        aButton.backgroundColor = color
+        aButton.tag = colorTag
+        colorView.view.addSubview(aButton)
+        aButton.addTarget(self, action: "displayColor:", forControlEvents: UIControlEvents.TouchUpInside)
+
     }
     
     func displayColor(sender:UIButton){

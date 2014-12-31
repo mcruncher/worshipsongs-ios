@@ -55,3 +55,10 @@ let helloStr = str1.substringWithRange(rangeOfHello)
 //let regexOptions = NSRegularExpressionOptions.CaseInsensitive | NSRegularExpressionOptions.DotMatchesLineSeparators
 //let startPattern = "\\{\\w\\}.*\\{/\\w\\}"
 //let regex = NSRegularExpression.re(startPattern, options: regexOptions, error: nil)
+
+for i in 0..<1{
+    for j in 0..<2{
+        println(i)
+        
+    }
+}
