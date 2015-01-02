@@ -13,10 +13,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
+    var progressView: UIView!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+        Util.downloadFile()
+        sleep(10)
+       // progressView.animateProgressView()
         //let tableViewController = TableViewController(style: UITableViewStyle.Grouped)
         let masterViewController = MasterViewController(style:UITableViewStyle.Grouped)
         let navController = UINavigationController(rootViewController: masterViewController)
@@ -32,4 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
+
 }

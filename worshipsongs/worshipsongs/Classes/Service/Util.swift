@@ -20,8 +20,6 @@ class Util: NSObject {
         if !fileManager.fileExistsAtPath(dbPath) {
             var fromPath: String? = NSBundle.mainBundle().resourcePath?.stringByAppendingPathComponent(fileName)
             fileManager.copyItemAtPath(fromPath!, toPath: dbPath, error: nil)
-            //            var fromPath: NSString = NSBundle.mainBundle().resourcePath.stringByAppendingPathComponent(fileName)
-            //            fileManager.copyItemAtPath(fromPath, toPath: dbPath, error: nil)
         }
     }
     
@@ -34,4 +32,18 @@ class Util: NSObject {
         alert.show()
     }
     
+    class func downloadFile()
+    {
+        println("Download Startted")
+        var writeError: NSError?
+        let filemanager = NSFileManager.defaultManager()
+        let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
+        let destinationPath:NSString = documentsPath.stringByAppendingString("/songs.sqlite")
+        let url = "https://github.com/crunchersaspire/worshipsongs-db/blob/master/songs.sqlite?raw=true"
+        let data = NSData(contentsOfFile: url, options: nil, error: nil)
+        data?.writeToFile(destinationPath, options: NSDataWritingOptions.DataWritingAtomic, error: &writeError)
+        if((writeError) != nil){
+            NSLog("Error occured while downloading:", writeError!)
+        }
+    }
 }

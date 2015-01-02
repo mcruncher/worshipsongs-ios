@@ -20,7 +20,8 @@ class CustomTextSettingService{
     func getAttributedString(cellText : NSString) -> NSMutableAttributedString {
         let settingDataManager:SettingsDataManager = SettingsDataManager()
         var array = getCustomTagRanges(cellText)
-        
+        println("cellText : \(cellText)")
+        println("array : \(array)")
         if(array.count > 0)
         {
             findRanges(cellText, ranges: array)

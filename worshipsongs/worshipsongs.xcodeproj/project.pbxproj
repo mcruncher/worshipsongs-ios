@@ -15,12 +15,23 @@
 		3A02203A1A495C6000B433F5 /* FontSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220391A495C6000B433F5 /* FontSettingsViewController.swift */; };
 		3A024F441A43B91F002231BD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A024F431A43B91F002231BD /* libsqlite3.0.dylib */; };
 		3A024F481A43B97A002231BD /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F471A43B97A002231BD /* Util.swift */; };
-		3A024F631A43CB46002231BD /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A04309E1A42AE6700F4F833 /* songs.sqlite */; };
 		3A024F941A43D2BB002231BD /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F8E1A43D2BB002231BD /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F901A43D2BB002231BD /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A024F961A43D2BB002231BD /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A024F911A43D2BB002231BD /* fmdb.txt */; };
 		3A024F971A43D2BB002231BD /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F931A43D2BB002231BD /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A024F991A43D7B4002231BD /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F981A43D7B4002231BD /* DatabaseHelper.swift */; };
+		3A038E1C1A563A7E009D4308 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E111A563A7E009D4308 /* Default-568h@2x.png */; };
+		3A038E1D1A563A7E009D4308 /* Default-Landscape-768h in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E121A563A7E009D4308 /* Default-Landscape-768h */; };
+		3A038E1E1A563A7E009D4308 /* Default-Landscape-1536h in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E131A563A7E009D4308 /* Default-Landscape-1536h */; };
+		3A038E1F1A563A7E009D4308 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E141A563A7E009D4308 /* Default-Landscape.png */; };
+		3A038E201A563A7E009D4308 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E151A563A7E009D4308 /* Default-Landscape@2x.png */; };
+		3A038E211A563A7E009D4308 /* Default-Portrait-1024h in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E161A563A7E009D4308 /* Default-Portrait-1024h */; };
+		3A038E221A563A7E009D4308 /* Default-Portrait-2048h in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E171A563A7E009D4308 /* Default-Portrait-2048h */; };
+		3A038E231A563A7E009D4308 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E181A563A7E009D4308 /* Default-Portrait.png */; };
+		3A038E241A563A7E009D4308 /* Default-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E191A563A7E009D4308 /* Default-Portrait@2x.png */; };
+		3A038E251A563A7E009D4308 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E1A1A563A7E009D4308 /* Default.png */; };
+		3A038E261A563A7E009D4308 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E1B1A563A7E009D4308 /* Default@2x.png */; };
+		3A038E2A1A5643AE009D4308 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A038E291A5643AE009D4308 /* ProgressView.swift */; };
 		3A0430981A425BB600F4F833 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0430971A425BB600F4F833 /* ViewController.swift */; };
 		3A043D541A50E44C0099FE53 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A043D531A50E44C0099FE53 /* Songs.swift */; };
 		3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A05166C1A414D6100451F4F /* MasterViewController.swift */; };
@@ -63,8 +74,19 @@
 		3A024F921A43D2BB002231BD /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		3A024F931A43D2BB002231BD /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		3A024F981A43D7B4002231BD /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatabaseHelper.swift; path = worshipsongs/classes/Service/DatabaseHelper.swift; sourceTree = SOURCE_ROOT; };
+		3A038E111A563A7E009D4308 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		3A038E121A563A7E009D4308 /* Default-Landscape-768h */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Landscape-768h"; sourceTree = "<group>"; };
+		3A038E131A563A7E009D4308 /* Default-Landscape-1536h */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Landscape-1536h"; sourceTree = "<group>"; };
+		3A038E141A563A7E009D4308 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
+		3A038E151A563A7E009D4308 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x.png"; sourceTree = "<group>"; };
+		3A038E161A563A7E009D4308 /* Default-Portrait-1024h */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait-1024h"; sourceTree = "<group>"; };
+		3A038E171A563A7E009D4308 /* Default-Portrait-2048h */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait-2048h"; sourceTree = "<group>"; };
+		3A038E181A563A7E009D4308 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		3A038E191A563A7E009D4308 /* Default-Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x.png"; sourceTree = "<group>"; };
+		3A038E1A1A563A7E009D4308 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		3A038E1B1A563A7E009D4308 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		3A038E291A5643AE009D4308 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		3A0430971A425BB600F4F833 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; };
-		3A04309E1A42AE6700F4F833 /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 		3A043D531A50E44C0099FE53 /* Songs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Songs.swift; path = Model/Songs.swift; sourceTree = "<group>"; };
 		3A0516651A41350400451F4F /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = PlayGround/MyPlayground.playground; sourceTree = "<group>"; };
 		3A05166C1A414D6100451F4F /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = Controllers/MasterViewController.swift; sourceTree = "<group>"; };
@@ -79,7 +101,7 @@
 		3A88F8A21A402C6700193E53 /* worshipsongsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A88F8A71A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A88F8A81A402C6700193E53 /* worshipsongsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = worshipsongsTests.swift; sourceTree = "<group>"; };
-		3AFED0691A4A72E9005C9032 /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = colorPalette.plist; sourceTree = "<group>"; };
+		3AFED0691A4A72E9005C9032 /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = colorPalette.plist; path = "../Third party/colorPalette.plist"; sourceTree = "<group>"; };
 		3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorSettingsViewController.swift; path = Controllers/ColorSettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +135,7 @@
 		3A024F461A43B964002231BD /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				3A038E291A5643AE009D4308 /* ProgressView.swift */,
 				3A024F981A43D7B4002231BD /* DatabaseHelper.swift */,
 				3A024F471A43B97A002231BD /* Util.swift */,
 				3A019F711A47AD8A003455AC /* CellAnimator.swift */,
@@ -134,9 +157,7 @@
 		3A024F4D1A43BC2B002231BD /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				3AFED0691A4A72E9005C9032 /* colorPalette.plist */,
 				3A024F8C1A43D259002231BD /* FMDB */,
-				3A084D5D1A4D42F20097ADA1 /* fontsList.plist */,
 			);
 			name = "Third Party";
 			path = "Third party";
@@ -160,7 +181,6 @@
 		3A04309D1A42AE2000F4F833 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3A04309E1A42AE6700F4F833 /* songs.sqlite */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -251,6 +271,8 @@
 		3A88F88B1A402C6700193E53 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3A084D5D1A4D42F20097ADA1 /* fontsList.plist */,
+				3AFED0691A4A72E9005C9032 /* colorPalette.plist */,
 				3A88F88C1A402C6700193E53 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -276,6 +298,17 @@
 		3AC876C01A48128A002D1BFF /* asset */ = {
 			isa = PBXGroup;
 			children = (
+				3A038E111A563A7E009D4308 /* Default-568h@2x.png */,
+				3A038E121A563A7E009D4308 /* Default-Landscape-768h */,
+				3A038E131A563A7E009D4308 /* Default-Landscape-1536h */,
+				3A038E141A563A7E009D4308 /* Default-Landscape.png */,
+				3A038E151A563A7E009D4308 /* Default-Landscape@2x.png */,
+				3A038E161A563A7E009D4308 /* Default-Portrait-1024h */,
+				3A038E171A563A7E009D4308 /* Default-Portrait-2048h */,
+				3A038E181A563A7E009D4308 /* Default-Portrait.png */,
+				3A038E191A563A7E009D4308 /* Default-Portrait@2x.png */,
+				3A038E1A1A563A7E009D4308 /* Default.png */,
+				3A038E1B1A563A7E009D4308 /* Default@2x.png */,
 				3A0220311A48FE6B00B433F5 /* settings.png */,
 			);
 			path = asset;
@@ -362,11 +395,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A0220321A48FE6B00B433F5 /* settings.png in Resources */,
-				3A024F631A43CB46002231BD /* songs.sqlite in Resources */,
 				3A024F961A43D2BB002231BD /* fmdb.txt in Resources */,
+				3A038E251A563A7E009D4308 /* Default.png in Resources */,
+				3A038E1F1A563A7E009D4308 /* Default-Landscape.png in Resources */,
 				3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */,
+				3A038E211A563A7E009D4308 /* Default-Portrait-1024h in Resources */,
+				3A038E231A563A7E009D4308 /* Default-Portrait.png in Resources */,
 				3AFED06A1A4A72E9005C9032 /* colorPalette.plist in Resources */,
+				3A038E261A563A7E009D4308 /* Default@2x.png in Resources */,
+				3A038E1D1A563A7E009D4308 /* Default-Landscape-768h in Resources */,
+				3A038E1C1A563A7E009D4308 /* Default-568h@2x.png in Resources */,
 				3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */,
+				3A038E1E1A563A7E009D4308 /* Default-Landscape-1536h in Resources */,
+				3A038E241A563A7E009D4308 /* Default-Portrait@2x.png in Resources */,
+				3A038E221A563A7E009D4308 /* Default-Portrait-2048h in Resources */,
+				3A038E201A563A7E009D4308 /* Default-Landscape@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +443,7 @@
 				3A0220361A49194100B433F5 /* RegexMatcher.swift in Sources */,
 				3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */,
 				3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */,
+				3A038E2A1A5643AE009D4308 /* ProgressView.swift in Sources */,
 				3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */,
 				3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */,
 			);
@@ -507,7 +551,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = worshipsongs/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -524,7 +570,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = worshipsongs/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

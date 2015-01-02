@@ -14,7 +14,7 @@ import UIKit
 func getRange (value : String, pattern : String) -> NSMutableArray {
     var err : NSError?
     let nsstr = value as NSString // we use this to access the NSString methods like .length and .substringWithRange(NSRange)
-    let options = NSRegularExpressionOptions(0)
+    let options = NSRegularExpressionOptions.AnchorsMatchLines
     let re = NSRegularExpression(pattern: pattern, options: options, error: &err)
     let all = NSRange(location: 0, length: nsstr.length)
     let moptions = NSMatchingOptions(0)
