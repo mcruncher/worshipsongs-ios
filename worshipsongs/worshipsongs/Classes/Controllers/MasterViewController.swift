@@ -32,10 +32,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         mySearchBar.showsCancelButton = true;
         mySearchBar.tintColor = UIColor.grayColor()
         tableView.dataSource = self
-        self.tableView.tableHeaderView?.hidden=true
-        self.tableView.tableFooterView?.hidden=true
-       // self.tableView.tableHeaderView = mySearchBar;
-        //self.navigationItem.titleView = mySearchBar;
+        self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
         self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
         self.navigationController?.navigationBarHidden=false
         // Reload the table
