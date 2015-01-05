@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 class MasterViewController: UITableViewController, UITableViewDataSource, UISearchBarDelegate  {
-    
+    let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     var songTitles : NSMutableArray = []
     var songs = [String]()
     var dataCell: UITableViewCell?
@@ -32,8 +32,11 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         mySearchBar.showsCancelButton = false;
         mySearchBar.tintColor = UIColor.grayColor()
         tableView.dataSource = self
-        self.tableView.tableHeaderView = mySearchBar;
-        
+        self.tableView.tableHeaderView?.hidden=true
+        self.tableView.tableFooterView?.hidden=true
+        //self.tableView.tableHeaderView = mySearchBar;
+        self.navigationItem.titleView = mySearchBar;
+        self.navigationController?.navigationBarHidden=false
         // Reload the table
         self.tableView.reloadData()
     }
@@ -66,6 +69,8 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
             song = songData[indexPath.row]
         }
         dataCell!.textLabel!.text = song.title
+        dataCell!.textLabel?.font = customTextSettingService.getDefaultFont()
+        
         return dataCell!
     }
     
@@ -78,6 +83,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     // MARK: UISearchBarDelegate
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        self.navigationController?.navigationBarHidden=true
         filterContentForSearchText(mySearchBar)
         searchBar.resignFirstResponder()
     }

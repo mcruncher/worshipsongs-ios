@@ -13,6 +13,7 @@ import UIKit
 
 class ColorSettingsViewController: UITableViewController {
     
+    let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     var primaryLanguageColorCell: UITableViewCell = UITableViewCell()
     var secondaryLanguageColorCell: UITableViewCell = UITableViewCell()
     //let settingDataManager:SettingsDataManager = SettingsDataManager()
@@ -40,7 +41,7 @@ class ColorSettingsViewController: UITableViewController {
         self.primaryLanguageColorCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.primaryLanguageLabel = UILabel(frame: CGRectMake(10, 10, 250, 25))
         self.primaryLanguageLabel.text = "Choose primary font color"
-        self.primaryLanguageLabel.font = getFont()
+        self.primaryLanguageLabel.font = customTextSettingService.getDefaultFont()
         self.primaryLanguageColorCell.addSubview(self.primaryLanguageLabel)
         
         primaryLanguageColorLabel = UILabel(frame: CGRectMake(260, 15, 10, 10))
@@ -52,7 +53,7 @@ class ColorSettingsViewController: UITableViewController {
         self.secondaryLanguageColorCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.secondaryLanguageLabel = UILabel(frame: CGRectMake(10, 10, 250, 25))
         self.secondaryLanguageLabel.text = "Choose secondary font color"
-        self.secondaryLanguageLabel.font = getFont()
+        self.secondaryLanguageLabel.font = customTextSettingService.getDefaultFont()
         self.secondaryLanguageColorCell.addSubview(self.secondaryLanguageLabel)
         
 
@@ -190,7 +191,5 @@ class ColorSettingsViewController: UITableViewController {
         
     }
     
-    func getFont() -> UIFont{
-        return UIFont(name: "HelveticaNeue", size: CGFloat(12))!
-    }
+    
 }

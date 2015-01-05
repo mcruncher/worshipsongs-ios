@@ -93,4 +93,8 @@ class CustomTextSettingService{
         let endPattern = "\\{/\\w\\}"
         return getPatternTextLength(text, startPattern) + getPatternTextLength(text, endPattern)
     }
+    
+    func getDefaultFont() -> UIFont{
+        return UIFont(name: "HelveticaNeue", size: CGFloat(12))!
+    }
 }

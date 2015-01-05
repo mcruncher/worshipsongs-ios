@@ -17,6 +17,7 @@ class SettingsDataManager {
     var primaryFontColor: NSData = NSData()
     var secondaryFontColor: NSData = NSData()
     var keepAwake: Bool = Bool()
+    var latestChangeSet: NSString = NSString()
     
     struct Static {
         static var onceToken : dispatch_once_t = 0
@@ -58,12 +59,18 @@ class SettingsDataManager {
         return keepAwake
     }
     
+    var getLatestChangeSet: NSString{
+        latestChangeSet = NSUserDefaults.standardUserDefaults().objectForKey("latestChangeSet") as NSString!
+        return latestChangeSet;
+    }
+    
     init() {
         setFontNameDefault()
         setFontSizeDefault()
         setPrimaryFontColorDefault()
         setSecondaryFontColorDefault()
         setkeepAwakeDefault()
+        setLatestChangeSet()
     }
     
     func setFontNameDefault()
@@ -119,6 +126,16 @@ class SettingsDataManager {
         } else {
             // add default data
             keepAwake = true
+        }
+    }
+    
+    func setLatestChangeSet()
+    {
+        if var latestChangeSetValue = userDefaults.valueForKey("latestChangeSet") as? NSString {
+            latestChangeSet = latestChangeSetValue
+        } else {
+            // add default data
+            latestChangeSet = ""
         }
     }
     
