@@ -14,9 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var progressView: UIView!
+    let utilClass:Util = Util()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        Util.downloadFile()
+        utilClass.downloadFile()
+       // Util.parseJson()
         sleep(10)
        // progressView.animateProgressView()
         //let tableViewController = TableViewController(style: UITableViewStyle.Grouped)
@@ -25,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.navigationBar.barTintColor = UIColor.grayColor()
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navController.navigationBar.titleTextAttributes = titleDict
-        Util.copyFile("songs.sqlite")
+       // Util.copyFile("songs.sqlite")
                 
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.rootViewController = navController

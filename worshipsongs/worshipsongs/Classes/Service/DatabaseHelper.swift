@@ -14,10 +14,12 @@ class DatabaseHelper: NSObject {
     
     var database: FMDatabase? = nil
     var resultSet: FMResultSet? = nil
-
+   
+    
     class var instance: DatabaseHelper {
-        sharedInstance.database = FMDatabase(path: Util.getPath("songs.sqlite"))
-        var path = Util.getPath("songs.sqlite")
+         let utilClass:Util = Util()
+        sharedInstance.database = FMDatabase(path: utilClass.getPath("songs.sqlite"))
+        var path = utilClass.getPath("songs.sqlite")
         //54D70B97-F386-4746-9A69-692E339668B8
         println("path : \(path)")
         return sharedInstance
