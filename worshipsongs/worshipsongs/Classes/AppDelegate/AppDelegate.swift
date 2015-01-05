@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        sleep(10)
+        sleep(1)
         let masterViewController = MasterViewController(style:UITableViewStyle.Grouped)
         let navController = UINavigationController(rootViewController: masterViewController)
         navController.navigationBar.barTintColor = UIColor.grayColor()

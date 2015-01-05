@@ -21,21 +21,22 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     override func viewDidLoad() {
         self.navigationItem.title = "Worship songs"
+         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
         self.songData = DatabaseHelper.instance.getSongModel()
         var myFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y,
             self.view.bounds.size.width, 44);
         mySearchBar = UISearchBar(frame: myFrame)
-    
         mySearchBar.delegate = self;
         mySearchBar.placeholder = "Search Songs"
         //display the cancel button next to the search bar
-        mySearchBar.showsCancelButton = false;
+        mySearchBar.showsCancelButton = true;
         mySearchBar.tintColor = UIColor.grayColor()
         tableView.dataSource = self
         self.tableView.tableHeaderView?.hidden=true
         self.tableView.tableFooterView?.hidden=true
-        //self.tableView.tableHeaderView = mySearchBar;
-        self.navigationItem.titleView = mySearchBar;
+       // self.tableView.tableHeaderView = mySearchBar;
+        //self.navigationItem.titleView = mySearchBar;
+        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
         self.navigationController?.navigationBarHidden=false
         // Reload the table
         self.tableView.reloadData()
@@ -85,11 +86,12 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         self.navigationController?.navigationBarHidden=true
         filterContentForSearchText(mySearchBar)
-        searchBar.resignFirstResponder()
+       // searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        self.navigationItem.titleView = nil;
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -143,4 +145,8 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         return verseOrder.componentsSeparatedByString(" ")
     }
     
+    func searchButtonItemClicked(sender:UIBarButtonItem){
+       self.navigationItem.titleView = mySearchBar;
+        mySearchBar.becomeFirstResponder()
+    }
 }
