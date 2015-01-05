@@ -39,6 +39,7 @@
 		3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745041A53898400BE6356 /* ColorPaletteService.swift */; };
 		3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
 		3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A084D5D1A4D42F20097ADA1 /* fontsList.plist */; };
+		3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
 		3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */; };
 		3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A88F8991A402C6700193E53 /* Images.xcassets */; };
 		3A88F8A91A402C6700193E53 /* worshipsongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F8A81A402C6700193E53 /* worshipsongsTests.swift */; };
@@ -94,6 +95,7 @@
 		3A0745041A53898400BE6356 /* ColorPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPaletteService.swift; path = Service/ColorPaletteService.swift; sourceTree = "<group>"; };
 		3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsDataManager.swift; path = Model/SettingsDataManager.swift; sourceTree = "<group>"; };
 		3A084D5D1A4D42F20097ADA1 /* fontsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fontsList.plist; path = "Third Party/fontsList.plist"; sourceTree = SOURCE_ROOT; };
+		3A2911C81A5A5A7100F1993E /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionService.swift; path = Service/ConnectionService.swift; sourceTree = "<group>"; };
 		3A88F8881A402C6700193E53 /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A88F88C1A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A88F8901A402C6700193E53 /* worshipsongs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = worshipsongs.xcdatamodel; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */,
 				3A0220351A49194100B433F5 /* RegexMatcher.swift */,
 				3A0745041A53898400BE6356 /* ColorPaletteService.swift */,
+				3A2911C81A5A5A7100F1993E /* ConnectionService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				3A0220381A4944B000B433F5 /* SettingViewController.swift in Sources */,
 				3A024F941A43D2BB002231BD /* FMDatabase.m in Sources */,
 				3A019F721A47AD8A003455AC /* CellAnimator.swift in Sources */,
+				3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */,
 				3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */,
 				3AFED06E1A4A9D74005C9032 /* ColorSettingsViewController.swift in Sources */,
 				3A024F991A43D7B4002231BD /* DatabaseHelper.swift in Sources */,

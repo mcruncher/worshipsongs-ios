@@ -17,8 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let utilClass:Util = Util()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        utilClass.downloadFile()
-       // Util.parseJson()
+        
+        if(ConnectionService.isConnectedToNetwork()){
+            let statusType = ConnectionService.isConnectedToNetworkOfType()
+            switch statusType{
+            case .WWAN:
+               utilClass.downloadFile()
+            case .WiFi:
+                utilClass.downloadFile()
+            case .NotConnected:
+                println("Connection Type: Not connected to the Internet")
+            }
+        }
+        else
+        {
+            println("Internet Connection: Unavailable")
+        }
+        // Util.parseJson()
         sleep(10)
        // progressView.animateProgressView()
         //let tableViewController = TableViewController(style: UITableViewStyle.Grouped)
