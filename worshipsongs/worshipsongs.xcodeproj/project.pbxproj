@@ -40,6 +40,7 @@
 		3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
 		3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A084D5D1A4D42F20097ADA1 /* fontsList.plist */; };
 		3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
+		3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
 		3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */; };
 		3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A88F8991A402C6700193E53 /* Images.xcassets */; };
 		3A88F8A91A402C6700193E53 /* worshipsongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F8A81A402C6700193E53 /* worshipsongsTests.swift */; };
@@ -96,6 +97,7 @@
 		3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsDataManager.swift; path = Model/SettingsDataManager.swift; sourceTree = "<group>"; };
 		3A084D5D1A4D42F20097ADA1 /* fontsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fontsList.plist; path = "Third Party/fontsList.plist"; sourceTree = SOURCE_ROOT; };
 		3A2911C81A5A5A7100F1993E /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionService.swift; path = Service/ConnectionService.swift; sourceTree = "<group>"; };
+		3A2911CA1A5A628A00F1993E /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 		3A88F8881A402C6700193E53 /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A88F88C1A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A88F8901A402C6700193E53 /* worshipsongs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = worshipsongs.xcdatamodel; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		3A04309D1A42AE2000F4F833 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3A2911CA1A5A628A00F1993E /* songs.sqlite */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */,
 				3A038E1E1A563A7E009D4308 /* Default-Landscape-1536h in Resources */,
 				3A038E241A563A7E009D4308 /* Default-Portrait@2x.png in Resources */,
+				3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */,
 				3A038E221A563A7E009D4308 /* Default-Portrait-2048h in Resources */,
 				3A038E201A563A7E009D4308 /* Default-Landscape@2x.png in Resources */,
 			);

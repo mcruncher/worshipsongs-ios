@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let utilClass:Util = Util()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+    
         if(ConnectionService.isConnectedToNetwork()){
             let statusType = ConnectionService.isConnectedToNetworkOfType()
             switch statusType{
@@ -32,17 +32,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else
         {
             println("Internet Connection: Unavailable")
+            let latestChangeSetInUserDefults  = NSUserDefaults.standardUserDefaults().objectForKey("latestChangeSet") as NSString!
+            if (latestChangeSetInUserDefults == nil)
+            {
+                utilClass.copyFile("songs.sqlite")
+            }
         }
-        // Util.parseJson()
+        
         sleep(10)
-       // progressView.animateProgressView()
-        //let tableViewController = TableViewController(style: UITableViewStyle.Grouped)
         let masterViewController = MasterViewController(style:UITableViewStyle.Grouped)
         let navController = UINavigationController(rootViewController: masterViewController)
         navController.navigationBar.barTintColor = UIColor.grayColor()
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navController.navigationBar.titleTextAttributes = titleDict
-       // Util.copyFile("songs.sqlite")
                 
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.rootViewController = navController
