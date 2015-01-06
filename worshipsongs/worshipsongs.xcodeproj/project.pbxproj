@@ -39,6 +39,7 @@
 		3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745041A53898400BE6356 /* ColorPaletteService.swift */; };
 		3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
 		3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A084D5D1A4D42F20097ADA1 /* fontsList.plist */; };
+		3A0B838E1A5B893300306744 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B838D1A5B893300306744 /* .gitignore */; };
 		3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
 		3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
 		3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */; };
@@ -96,6 +97,7 @@
 		3A0745041A53898400BE6356 /* ColorPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPaletteService.swift; path = Service/ColorPaletteService.swift; sourceTree = "<group>"; };
 		3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsDataManager.swift; path = Model/SettingsDataManager.swift; sourceTree = "<group>"; };
 		3A084D5D1A4D42F20097ADA1 /* fontsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fontsList.plist; path = "Third Party/fontsList.plist"; sourceTree = SOURCE_ROOT; };
+		3A0B838D1A5B893300306744 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3A2911C81A5A5A7100F1993E /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionService.swift; path = Service/ConnectionService.swift; sourceTree = "<group>"; };
 		3A2911CA1A5A628A00F1993E /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 		3A88F8881A402C6700193E53 /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,6 +246,7 @@
 		3A88F87F1A402C6700193E53 = {
 			isa = PBXGroup;
 			children = (
+				3A0B838D1A5B893300306744 /* .gitignore */,
 				3A024F4D1A43BC2B002231BD /* Third Party */,
 				3A024F421A43B90D002231BD /* Framework */,
 				3A04309D1A42AE2000F4F833 /* Resources */,
@@ -416,6 +419,7 @@
 				3A038E241A563A7E009D4308 /* Default-Portrait@2x.png in Resources */,
 				3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */,
 				3A038E221A563A7E009D4308 /* Default-Portrait-2048h in Resources */,
+				3A0B838E1A5B893300306744 /* .gitignore in Resources */,
 				3A038E201A563A7E009D4308 /* Default-Landscape@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
