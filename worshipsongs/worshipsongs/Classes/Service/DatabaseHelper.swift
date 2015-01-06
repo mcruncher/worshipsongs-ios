@@ -28,7 +28,7 @@ class DatabaseHelper: NSObject {
     func getSongModel() -> [(Songs)] {
         initSetup()
         var songModel = [Songs]()
-        var resultSet1: FMResultSet? = sharedInstance.database!.executeQuery("SELECT * FROM songs", withArgumentsInArray: nil)
+        var resultSet1: FMResultSet? = sharedInstance.database!.executeQuery("SELECT * FROM songs ORDER BY title", withArgumentsInArray: nil)
         var titles: String = "title"
         var lyrics: String = "lyrics"
         var verseOrder: String = "verse_order"

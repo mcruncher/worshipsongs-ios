@@ -81,7 +81,6 @@ class CustomTextSettingService{
                 customTagRangeArray.addObject(customRange)
             }
         }
-        println("array3 : \(customTagRangeArray)")
         return customTagRangeArray
     }
     
