@@ -12,6 +12,7 @@ import UIKit
 
 class MasterViewController: UITableViewController, UITableViewDataSource, UISearchBarDelegate  {
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
+    let settingDataManager:SettingsDataManager = SettingsDataManager()
     var songTitles : NSMutableArray = []
     var songs = [String]()
     var dataCell: UITableViewCell?
@@ -21,10 +22,11 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     override func viewDidLoad() {
         self.navigationItem.title = "Worship songs"
-         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
+        self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
+        self.navigationController?.navigationBar.titleTextAttributes = customTextSettingService.getDefaultTextAttributes()
         self.songData = DatabaseHelper.instance.getSongModel()
         var myFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y,
-            self.view.bounds.size.width, 44);
+        self.view.bounds.size.width, 44);
         mySearchBar = UISearchBar(frame: myFrame)
         mySearchBar.delegate = self;
         mySearchBar.placeholder = "Search Songs"
@@ -89,6 +91,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         self.navigationItem.titleView = nil;
+        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -100,8 +103,8 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         // Filter the array using the filter method
         var searchText = searchBar.text
             self.filteredData = self.songData.filter({( song: Songs) -> Bool in
-            var stringMatch = song.title.rangeOfString(searchText)
-            return (stringMatch != nil)
+            var stringMatch = (song.title as NSString).localizedCaseInsensitiveContainsString(searchText)
+            return (stringMatch.boolValue)
         })
     }
     
@@ -144,6 +147,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     func searchButtonItemClicked(sender:UIBarButtonItem){
        self.navigationItem.titleView = mySearchBar;
-        mySearchBar.becomeFirstResponder()
+        self.navigationItem.rightBarButtonItem = nil
+       mySearchBar.becomeFirstResponder()
     }
 }

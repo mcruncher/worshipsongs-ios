@@ -20,8 +20,6 @@ class CustomTextSettingService{
     func getAttributedString(cellText : NSString) -> NSMutableAttributedString {
         let settingDataManager:SettingsDataManager = SettingsDataManager()
         var array = getCustomTagRanges(cellText)
-        println("cellText : \(cellText)")
-        println("array : \(array)")
         if(array.count > 0)
         {
             findRanges(cellText, ranges: array)
@@ -35,6 +33,10 @@ class CustomTextSettingService{
         
         let attributedString = NSMutableAttributedString(string: customCellText, attributes: getFont())
         attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getPrimaryFontColor, range: NSRange(location: 0, length: customCellText.length))
+        println("customTagTextRange : \(customTagTextRange)")
+        println("customTagTextRange count: \(customTagTextRange.count)")
+        println("attributedString.length: \(attributedString.length)")
+        
         for var index=0; index < customTagTextRange.count; index++ {
             var rangeValue:NSRange
             rangeValue = customTagTextRange.objectAtIndex(index).rangeValue
@@ -68,21 +70,26 @@ class CustomTextSettingService{
     func findRanges(cellText : NSString, ranges: NSMutableArray) {
         var startIndex: Int = 0
         
-        for var index=1; index <= ranges.count; index++ {
+        for var index=0; index < ranges.count; index++ {
             var rangeValue:NSRange
-            rangeValue = ranges.objectAtIndex(index-1).rangeValue
+            rangeValue = ranges.objectAtIndex(index).rangeValue
         
             var totalPatternLength: Int = 0
             totalPatternLength = totalPatternLengthValue(cellText)
+           
             if(rangeValue.location > 0){
-               customTagTextRange.addObject(NSMakeRange(rangeValue.location - startIndex, rangeValue.length - 6))
+               customTagTextRange.addObject(NSMakeRange(rangeValue.location - startIndex, rangeValue.length - totalPatternLength))
                startIndex = startIndex + totalPatternLength
+                println("customTagTextRange : \(customTagTextRange)")
             }
             else{
                 startIndex = startIndex + totalPatternLength
                 customTagTextRange.removeAllObjects()
                 customTagTextRange.addObject(NSMakeRange(rangeValue.location, (rangeValue.length - startIndex)))
+                println("customTagTextRangeval : \(customTagTextRange)")
             }
+           
+            
             customCellText = removePatternText(cellText, startPattern)
             customCellText = removePatternText(customCellText, endPattern)
         }
@@ -95,6 +102,14 @@ class CustomTextSettingService{
     }
     
     func getDefaultFont() -> UIFont{
-        return UIFont(name: "HelveticaNeue", size: CGFloat(12))!
+        return UIFont(name: "HelveticaNeue", size: CGFloat(14))!
+    }
+    
+    func getDefaultTextAttributes() -> NSDictionary{
+        let textFontAttributes = [
+            NSFontAttributeName: getDefaultFont(),
+            NSForegroundColorAttributeName: UIColor.whiteColor()
+        ]
+        return textFontAttributes
     }
 }

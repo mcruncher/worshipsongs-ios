@@ -21,7 +21,7 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     var songLyrics = NSString()
     var lyricsData = [String]()
     var verseOrderList: NSMutableArray = NSMutableArray()
-    
+    var parsedVerseOrderList: NSMutableArray = NSMutableArray()
     var element: String = String()
     
     
@@ -34,15 +34,21 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     
     override func viewDidLoad()  {
         super.viewDidLoad()
+        println("verseOrderList.count: \(verseOrderList.count)")
+        println("verseOrderList: \(verseOrderList)")
         self.navigationItem.title = songName;
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.titleTextAttributes = customTextSettingService.getDefaultTextAttributes()
         var lyrics: NSData = songLyrics.dataUsingEncoding(NSUTF8StringEncoding)!
         parser = NSXMLParser(data: lyrics)
         parser.delegate = self
         parser.parse()
+        if(verseOrderList.count < 1){
+            verseOrderList = parsedVerseOrderList
+        }
         tableView.dataSource = self
         self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+        self.tableView.allowsSelection = false
         self.addSettingsButton()
         // Reload the table
         self.tableView.reloadData()
@@ -75,7 +81,10 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         {
             dataCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "CELL_ID")
         }
-        var key: String = verseOrderList[indexPath.section] as String
+        
+        //println("listDataDictionary: \(listDataDictionary)")
+        
+        var key: String = (verseOrderList[indexPath.section] as String).lowercaseString
         let dataText: NSString? = listDataDictionary[key] as? NSString;
         dataCell!.textLabel!.numberOfLines = 0
         dataCell!.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping;
@@ -96,13 +105,12 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         if (!data.isEmpty) {
             if element == "verse" {
-                var verseType = attribues.objectForKey("type") as String
+                var verseType = (attribues.objectForKey("type") as String).lowercaseString
                 var verseLabel = attribues.objectForKey("label") as String
                 lyricsData.append(data);
-                
                 listDataDictionary.setObject(data as String, forKey: verseType + verseLabel)
                 if(verseOrderList.count < 1){
-                    verseOrderList.addObject(verseType + verseLabel)
+                    parsedVerseOrderList.addObject(verseType + verseLabel)
                 }
             }
         }
