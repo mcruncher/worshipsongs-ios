@@ -34,8 +34,6 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     
     override func viewDidLoad()  {
         super.viewDidLoad()
-        println("verseOrderList.count: \(verseOrderList.count)")
-        println("verseOrderList: \(verseOrderList)")
         self.navigationItem.title = songName;
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
         self.navigationController?.navigationBar.titleTextAttributes = customTextSettingService.getDefaultTextAttributes()

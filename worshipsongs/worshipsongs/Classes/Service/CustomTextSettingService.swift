@@ -33,11 +33,7 @@ class CustomTextSettingService{
         
         let attributedString = NSMutableAttributedString(string: customCellText, attributes: getFont())
         attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getPrimaryFontColor, range: NSRange(location: 0, length: customCellText.length))
-        println("customTagTextRange : \(customTagTextRange)")
-        println("customTagTextRange count: \(customTagTextRange.count)")
-        println("attributedString.length: \(attributedString.length)")
-        
-        for var index=0; index < customTagTextRange.count; index++ {
+                for var index=0; index < customTagTextRange.count; index++ {
             var rangeValue:NSRange
             rangeValue = customTagTextRange.objectAtIndex(index).rangeValue
             let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("secondaryFontColor") as? NSData
@@ -58,12 +54,35 @@ class CustomTextSettingService{
     }
     
     
-    func getCustomTagRanges(cellText : NSString) -> NSMutableArray{
-        let startPattern = "\\{\\w\\}.*\\{/\\w\\}"
-        let colorAttributedString = NSMutableAttributedString()
+    func getCustomTagRangesByRegex(cellText : NSString) -> NSMutableArray{
+        let customTagRegexPattern = "\\{\\w\\}.*\\{/\\w\\}"
         var array: NSMutableArray = NSMutableArray()
-        array = getRange(cellText,startPattern)
+        array = getRange(cellText,customTagRegexPattern)
         return array
+    }
+    
+    
+    func getCustomTagRanges(cellText : NSString) -> NSMutableArray{
+        
+        var startTagArray: NSMutableArray = NSMutableArray()
+        var endTagArray: NSMutableArray = NSMutableArray()
+        var customTagRangeArray: NSMutableArray = NSMutableArray()
+       
+        startTagArray = getRange(cellText,startPattern)
+        endTagArray = getRange(cellText,endPattern)
+        if(startTagArray.count == endTagArray.count){
+            for var index=0; index < startTagArray.count; index++ {
+                var startRangeValue:NSRange
+                var endRangeValue:NSRange
+                var customRange:NSRange
+                startRangeValue = startTagArray.objectAtIndex(index).rangeValue
+                endRangeValue = endTagArray.objectAtIndex(index).rangeValue
+                customRange = NSMakeRange(startRangeValue.location, (endRangeValue.location + endRangeValue.length) - startRangeValue.location)
+                customTagRangeArray.addObject(customRange)
+            }
+        }
+        println("array3 : \(customTagRangeArray)")
+        return customTagRangeArray
     }
     
     
@@ -80,13 +99,11 @@ class CustomTextSettingService{
             if(rangeValue.location > 0){
                customTagTextRange.addObject(NSMakeRange(rangeValue.location - startIndex, rangeValue.length - totalPatternLength))
                startIndex = startIndex + totalPatternLength
-                println("customTagTextRange : \(customTagTextRange)")
             }
             else{
                 startIndex = startIndex + totalPatternLength
                 customTagTextRange.removeAllObjects()
                 customTagTextRange.addObject(NSMakeRange(rangeValue.location, (rangeValue.length - startIndex)))
-                println("customTagTextRangeval : \(customTagTextRange)")
             }
            
             
