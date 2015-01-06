@@ -42,6 +42,7 @@ class DatabaseHelper: NSObject {
                 songModel.append(Songs(title: resultSet1!.stringForColumn(titles), lyrics: resultSet1!.stringForColumn(lyrics),verse_order: resultSet1!.stringForColumn(verseOrder)))
             }
         }
+        println("songModel count : \(songModel.count)")
         return songModel
     }
     

@@ -74,9 +74,12 @@ class Util: NSObject {
         let filemanager = NSFileManager.defaultManager()
         let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]
         let destinationPath:NSString = documentsPath.stringByAppendingString("/songs.sqlite")
-        let url = "https://github.com/crunchersaspire/worshipsongs-db/blob/master/songs.sqlite?raw=true"
-        let data = NSData(contentsOfFile: url, options: nil, error: nil)
-        data?.writeToFile(destinationPath, options: NSDataWritingOptions.DataWritingAtomic, error: &writeError)
+        let myURLstring = "https://github.com/crunchersaspire/worshipsongs-db/blob/master/songs.sqlite?raw=true"
+        let myFilePathString = "/Volumes/HD/Staff Pictures/Bob-VEHS.jpg"
+        let url = NSURL(string: myURLstring)
+        let dataFromURL = NSData(contentsOfURL: url!)
+        let fileManager = NSFileManager.defaultManager()
+        fileManager.createFileAtPath(destinationPath, contents: dataFromURL, attributes: nil)
         SettingsDataManager.sharedInstance.saveData(latestChangeSet, key: "latestChangeSet")
         println("After save latestChangeSet : \(settingDataManager.getLatestChangeSet)")
         

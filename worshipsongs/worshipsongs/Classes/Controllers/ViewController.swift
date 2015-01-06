@@ -33,6 +33,9 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     @IBOutlet var label: UILabel!
     
     override func viewDidLoad()  {
+        
+        
+        
         super.viewDidLoad()
         self.navigationItem.title = songName;
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
@@ -122,7 +125,9 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
     
     func addSettingsButton ()
     {
+        
         var settingsButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        settingsButton.frame = CGRectMake(0, 0, 20, 20)
         settingsButton.addTarget(self, action: "popToRoot:", forControlEvents: UIControlEvents.TouchUpInside)
         settingsButton.setTitle("Settings", forState: UIControlState.Normal)
         settingsButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)

@@ -150,7 +150,16 @@ class SettingsDataManager {
         userDefaults.removeObjectForKey("primaryFontColor")
         userDefaults.removeObjectForKey("secondaryFontColor")
         userDefaults.removeObjectForKey("keepAwake")
+        setAllValues()
     }
 
+    func setAllValues(){
+         println("Set all default values...")
+        setFontNameDefault()
+        setFontSizeDefault()
+        setPrimaryFontColorDefault()
+        setSecondaryFontColorDefault()
+        setkeepAwakeDefault()
+    }
     
 }

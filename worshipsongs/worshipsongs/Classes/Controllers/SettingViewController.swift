@@ -156,16 +156,17 @@ class SettingViewController: UITableViewController {
                 SettingsDataManager.sharedInstance.saveData(false, key: "keepAwake")
             }
         }
-        
-        if(indexPath.section == 2 && indexPath.row == 0) {
-            SettingsDataManager.sharedInstance.reset()
-        }
     }
     
     func sliderChanged(sender:UISlider){
-        println("Setting value reset")
-        SettingsDataManager.sharedInstance.reset()
-        setKeepAwakeStatus()
+        let alertView = UIAlertController(title: "Alert!", message: "Reset all default settings", preferredStyle: .Alert)
+        alertView.addAction(UIAlertAction(title: "Done", style: .Default, handler: { (alertAction) -> Void in
+            SettingsDataManager.sharedInstance.reset()
+            self.setKeepAwakeStatus()
+        }))
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        presentViewController(alertView, animated: true, completion: nil)
+        
     }
     
     func getFont() -> UIFont{
