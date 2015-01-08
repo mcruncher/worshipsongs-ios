@@ -29,7 +29,7 @@ func getRange (value : String, pattern : String) -> NSMutableArray {
 }
 
 func getPatternTextLength (value : String, pattern : String) -> Int {
-    var newCellText: Int = Int()
+    var length: Int = Int()
     var err : NSError?
     let nsstr = value as NSString // we use this to access the NSString methods like .length and .substringWithRange(NSRange)
     let options = NSRegularExpressionOptions(0)
@@ -41,9 +41,9 @@ func getPatternTextLength (value : String, pattern : String) -> Int {
     re!.enumerateMatchesInString(value, options: moptions, range: all) {
         (result : NSTextCheckingResult!, flags : NSMatchingFlags, ptr : UnsafeMutablePointer<ObjCBool>) in
         let string = nsstr.substringWithRange(result.range)
-        newCellText = result.range.length
+        length = result.range.length
     }
-    return newCellText
+    return length
 }
 
 
