@@ -15,11 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var progressView: UIView!
     let utilClass:Util = Util()
+    let connectionService:ConnectionService = ConnectionService()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
-        if(ConnectionService.isConnectedToNetwork()){
-            let statusType = ConnectionService.isConnectedToNetworkOfType()
+        if(connectionService.isConnectedToNetwork()){
+            let statusType = connectionService.isConnectedToNetworkOfType()
             switch statusType{
             case .WWAN:
                utilClass.downloadFile()
