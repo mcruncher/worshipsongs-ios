@@ -37,8 +37,18 @@
 		3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A05166C1A414D6100451F4F /* MasterViewController.swift */; };
 		3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0516701A414D9D00451F4F /* AppDelegate.swift */; };
 		3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745041A53898400BE6356 /* ColorPaletteService.swift */; };
+		3A0834981A5E09400056293D /* UtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834971A5E09400056293D /* UtilTest.swift */; };
+		3A08349A1A5E0F4C0056293D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834991A5E0F4C0056293D /* AboutViewController.swift */; };
+		3A08349F1A5E140F0056293D /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A08349E1A5E140F0056293D /* about.html */; };
 		3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
 		3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A084D5D1A4D42F20097ADA1 /* fontsList.plist */; };
+		3A08E85A1A5CE0F200964978 /* Settings1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A08E8591A5CE0F200964978 /* Settings1.png */; };
+		3A08E85C1A5CE3E200964978 /* Settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A08E85B1A5CE3E200964978 /* Settings@2x.png */; };
+		3A08E85E1A5D084800964978 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A08E85D1A5D084800964978 /* SampleViewController.swift */; };
+		3A08E87B1A5D303800964978 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F901A43D2BB002231BD /* FMDatabaseAdditions.m */; };
+		3A08E87C1A5D303B00964978 /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A024F911A43D2BB002231BD /* fmdb.txt */; };
+		3A08E87E1A5D305B00964978 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A024F431A43B91F002231BD /* libsqlite3.0.dylib */; };
+		3A08E87F1A5D305E00964978 /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
 		3A0B838E1A5B893300306744 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B838D1A5B893300306744 /* .gitignore */; };
 		3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
 		3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
@@ -95,8 +105,14 @@
 		3A05166C1A414D6100451F4F /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = Controllers/MasterViewController.swift; sourceTree = "<group>"; };
 		3A0516701A414D9D00451F4F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = AppDelegate/AppDelegate.swift; sourceTree = "<group>"; };
 		3A0745041A53898400BE6356 /* ColorPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPaletteService.swift; path = Service/ColorPaletteService.swift; sourceTree = "<group>"; };
+		3A0834971A5E09400056293D /* UtilTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilTest.swift; sourceTree = "<group>"; };
+		3A0834991A5E0F4C0056293D /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		3A08349E1A5E140F0056293D /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = about.html; path = html/about.html; sourceTree = "<group>"; };
 		3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsDataManager.swift; path = Model/SettingsDataManager.swift; sourceTree = "<group>"; };
 		3A084D5D1A4D42F20097ADA1 /* fontsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fontsList.plist; path = "Third Party/fontsList.plist"; sourceTree = SOURCE_ROOT; };
+		3A08E8591A5CE0F200964978 /* Settings1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings1.png; sourceTree = "<group>"; };
+		3A08E85B1A5CE3E200964978 /* Settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings@2x.png"; sourceTree = "<group>"; };
+		3A08E85D1A5D084800964978 /* SampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		3A0B838D1A5B893300306744 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3A2911C81A5A5A7100F1993E /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionService.swift; path = Service/ConnectionService.swift; sourceTree = "<group>"; };
 		3A2911CA1A5A628A00F1993E /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
@@ -124,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A08E87E1A5D305B00964978 /* libsqlite3.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +239,8 @@
 				3A0220371A4944B000B433F5 /* SettingViewController.swift */,
 				3A0220391A495C6000B433F5 /* FontSettingsViewController.swift */,
 				3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */,
+				3A08E85D1A5D084800964978 /* SampleViewController.swift */,
+				3A0834991A5E0F4C0056293D /* AboutViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -241,6 +260,43 @@
 				3A0516651A41350400451F4F /* MyPlayground.playground */,
 			);
 			name = PlayGround;
+			sourceTree = "<group>";
+		};
+		3A0834961A5E08BE0056293D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				3A0834971A5E09400056293D /* UtilTest.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		3A08349C1A5E10890056293D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				3A038E1A1A563A7E009D4308 /* Default.png */,
+				3A038E191A563A7E009D4308 /* Default-Portrait@2x.png */,
+				3A038E181A563A7E009D4308 /* Default-Portrait.png */,
+				3A038E171A563A7E009D4308 /* Default-Portrait-2048h */,
+				3A038E161A563A7E009D4308 /* Default-Portrait-1024h */,
+				3A038E151A563A7E009D4308 /* Default-Landscape@2x.png */,
+				3A038E141A563A7E009D4308 /* Default-Landscape.png */,
+				3A038E131A563A7E009D4308 /* Default-Landscape-1536h */,
+				3A038E121A563A7E009D4308 /* Default-Landscape-768h */,
+				3A038E111A563A7E009D4308 /* Default-568h@2x.png */,
+				3A08E8591A5CE0F200964978 /* Settings1.png */,
+				3A08E85B1A5CE3E200964978 /* Settings@2x.png */,
+				3A038E1B1A563A7E009D4308 /* Default@2x.png */,
+				3A0220311A48FE6B00B433F5 /* settings.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		3A08349D1A5E10AF0056293D /* html */ = {
+			isa = PBXGroup;
+			children = (
+				3A08349E1A5E140F0056293D /* about.html */,
+			);
+			name = html;
 			sourceTree = "<group>";
 		};
 		3A88F87F1A402C6700193E53 = {
@@ -290,6 +346,7 @@
 		3A88F8A51A402C6700193E53 /* worshipsongsTests */ = {
 			isa = PBXGroup;
 			children = (
+				3A0834961A5E08BE0056293D /* Service */,
 				3A88F8A81A402C6700193E53 /* worshipsongsTests.swift */,
 				3A88F8A61A402C6700193E53 /* Supporting Files */,
 			);
@@ -307,18 +364,8 @@
 		3AC876C01A48128A002D1BFF /* asset */ = {
 			isa = PBXGroup;
 			children = (
-				3A038E111A563A7E009D4308 /* Default-568h@2x.png */,
-				3A038E121A563A7E009D4308 /* Default-Landscape-768h */,
-				3A038E131A563A7E009D4308 /* Default-Landscape-1536h */,
-				3A038E141A563A7E009D4308 /* Default-Landscape.png */,
-				3A038E151A563A7E009D4308 /* Default-Landscape@2x.png */,
-				3A038E161A563A7E009D4308 /* Default-Portrait-1024h */,
-				3A038E171A563A7E009D4308 /* Default-Portrait-2048h */,
-				3A038E181A563A7E009D4308 /* Default-Portrait.png */,
-				3A038E191A563A7E009D4308 /* Default-Portrait@2x.png */,
-				3A038E1A1A563A7E009D4308 /* Default.png */,
-				3A038E1B1A563A7E009D4308 /* Default@2x.png */,
-				3A0220311A48FE6B00B433F5 /* settings.png */,
+				3A08349D1A5E10AF0056293D /* html */,
+				3A08349C1A5E10890056293D /* images */,
 			);
 			path = asset;
 			sourceTree = "<group>";
@@ -408,6 +455,7 @@
 				3A038E251A563A7E009D4308 /* Default.png in Resources */,
 				3A038E1F1A563A7E009D4308 /* Default-Landscape.png in Resources */,
 				3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */,
+				3A08E85A1A5CE0F200964978 /* Settings1.png in Resources */,
 				3A038E211A563A7E009D4308 /* Default-Portrait-1024h in Resources */,
 				3A038E231A563A7E009D4308 /* Default-Portrait.png in Resources */,
 				3AFED06A1A4A72E9005C9032 /* colorPalette.plist in Resources */,
@@ -419,6 +467,8 @@
 				3A038E241A563A7E009D4308 /* Default-Portrait@2x.png in Resources */,
 				3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */,
 				3A038E221A563A7E009D4308 /* Default-Portrait-2048h in Resources */,
+				3A08E85C1A5CE3E200964978 /* Settings@2x.png in Resources */,
+				3A08349F1A5E140F0056293D /* about.html in Resources */,
 				3A0B838E1A5B893300306744 /* .gitignore in Resources */,
 				3A038E201A563A7E009D4308 /* Default-Landscape@2x.png in Resources */,
 			);
@@ -428,6 +478,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A08E87F1A5D305E00964978 /* songs.sqlite in Resources */,
+				3A08E87C1A5D303B00964978 /* fmdb.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +492,7 @@
 			files = (
 				3A0430981A425BB600F4F833 /* ViewController.swift in Sources */,
 				3A024F481A43B97A002231BD /* Util.swift in Sources */,
+				3A08349A1A5E0F4C0056293D /* AboutViewController.swift in Sources */,
 				3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */,
 				3A043D541A50E44C0099FE53 /* Songs.swift in Sources */,
 				3A0220381A4944B000B433F5 /* SettingViewController.swift in Sources */,
@@ -458,6 +511,7 @@
 				3A038E2A1A5643AE009D4308 /* ProgressView.swift in Sources */,
 				3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */,
 				3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */,
+				3A08E85E1A5D084800964978 /* SampleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +520,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A88F8A91A402C6700193E53 /* worshipsongsTests.swift in Sources */,
+				3A08E87B1A5D303800964978 /* FMDatabaseAdditions.m in Sources */,
+				3A0834981A5E09400056293D /* UtilTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

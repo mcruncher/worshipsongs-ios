@@ -37,6 +37,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
         self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
         self.navigationController?.navigationBarHidden=false
+        self.addSettingsButton()
         // Reload the table
         self.tableView.reloadData()
     }
@@ -76,7 +77,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
-        CellAnimator.animate(cell)
+       // CellAnimator.animate(cell)
     }
 
 
@@ -89,7 +90,6 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
         self.navigationItem.titleView = nil;
         self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
     }
@@ -149,5 +149,24 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
        self.navigationItem.titleView = mySearchBar;
         self.navigationItem.rightBarButtonItem = nil
        mySearchBar.becomeFirstResponder()
+    }
+    
+    func addSettingsButton ()
+    {
+        let image = UIImage(named: "Settings@2x.png") as UIImage!
+        var settingsButton:UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+       // settingsButton.frame = CGRectMake(0, 0, 20, 20)
+        settingsButton.addTarget(self, action: "popToRoot:", forControlEvents: UIControlEvents.TouchUpInside)
+        settingsButton.setImage(image, forState: .Normal)
+        // settingsButton.setTitle("Settings", forState: UIControlState.Normal)
+        settingsButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        settingsButton.sizeToFit()
+        var settingsBarButton:UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
+        self.navigationItem.setLeftBarButtonItem(settingsBarButton, animated: true)
+    }
+    
+    func popToRoot(sender:UIBarButtonItem){
+        let settingViewController = SettingViewController(style:UITableViewStyle.Grouped)
+        self.navigationController?.pushViewController(settingViewController, animated: true);
     }
 }

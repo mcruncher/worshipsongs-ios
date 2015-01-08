@@ -16,7 +16,7 @@ class DatabaseHelper: NSObject {
     var resultSet: FMResultSet? = nil
    
     
-    class var instance: DatabaseHelper {
+     class var instance: DatabaseHelper {
          let utilClass:Util = Util()
         sharedInstance.database = FMDatabase(path: utilClass.getPath("songs.sqlite"))
         var path = utilClass.getPath("songs.sqlite")
