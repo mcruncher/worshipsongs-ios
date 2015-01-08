@@ -48,6 +48,8 @@
 		3A0834A71A5E35E20056293D /* TextAttributeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834A61A5E35E20056293D /* TextAttributeService.swift */; };
 		3A0834A81A5E395C0056293D /* TextAttributeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834A61A5E35E20056293D /* TextAttributeService.swift */; };
 		3A0834AA1A5E4BFF0056293D /* RegexMatcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834A91A5E4BFF0056293D /* RegexMatcherTest.swift */; };
+		3A0834AC1A5E57130056293D /* ColorPaletteServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834AB1A5E57130056293D /* ColorPaletteServiceTest.swift */; };
+		3A0834AD1A5E584A0056293D /* ColorPaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745041A53898400BE6356 /* ColorPaletteService.swift */; };
 		3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
 		3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A084D5D1A4D42F20097ADA1 /* fontsList.plist */; };
 		3A08E85A1A5CE0F200964978 /* Settings1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A08E8591A5CE0F200964978 /* Settings1.png */; };
@@ -119,6 +121,7 @@
 		3A0834A21A5E26B20056293D /* CustomTextSettingServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextSettingServiceTest.swift; sourceTree = "<group>"; };
 		3A0834A61A5E35E20056293D /* TextAttributeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributeService.swift; sourceTree = "<group>"; };
 		3A0834A91A5E4BFF0056293D /* RegexMatcherTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexMatcherTest.swift; sourceTree = "<group>"; };
+		3A0834AB1A5E57130056293D /* ColorPaletteServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPaletteServiceTest.swift; sourceTree = "<group>"; };
 		3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsDataManager.swift; path = Model/SettingsDataManager.swift; sourceTree = "<group>"; };
 		3A084D5D1A4D42F20097ADA1 /* fontsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fontsList.plist; path = "Third Party/fontsList.plist"; sourceTree = SOURCE_ROOT; };
 		3A08E8591A5CE0F200964978 /* Settings1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings1.png; sourceTree = "<group>"; };
@@ -280,6 +283,7 @@
 				3A0834971A5E09400056293D /* UtilTest.swift */,
 				3A0834A21A5E26B20056293D /* CustomTextSettingServiceTest.swift */,
 				3A0834A91A5E4BFF0056293D /* RegexMatcherTest.swift */,
+				3A0834AB1A5E57130056293D /* ColorPaletteServiceTest.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -543,7 +547,9 @@
 				3A0834A51A5E27E30056293D /* RegexMatcher.swift in Sources */,
 				3A0834A11A5E24FE0056293D /* SettingsDataManager.swift in Sources */,
 				3A0834A01A5E24420056293D /* Util.swift in Sources */,
+				3A0834AC1A5E57130056293D /* ColorPaletteServiceTest.swift in Sources */,
 				3A0834A41A5E279B0056293D /* CustomTextSettingService.swift in Sources */,
+				3A0834AD1A5E584A0056293D /* ColorPaletteService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

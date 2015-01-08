@@ -85,7 +85,6 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         self.navigationController?.navigationBarHidden=true
         filterContentForSearchText(mySearchBar)
-       // searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
@@ -154,17 +153,15 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     {
         let image = UIImage(named: "Settings@2x.png") as UIImage!
         var settingsButton:UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
-       // settingsButton.frame = CGRectMake(0, 0, 20, 20)
-        settingsButton.addTarget(self, action: "popToRoot:", forControlEvents: UIControlEvents.TouchUpInside)
+        settingsButton.addTarget(self, action: "switchToSettingsViewController:", forControlEvents: UIControlEvents.TouchUpInside)
         settingsButton.setImage(image, forState: .Normal)
-        // settingsButton.setTitle("Settings", forState: UIControlState.Normal)
         settingsButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         settingsButton.sizeToFit()
         var settingsBarButton:UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
         self.navigationItem.setLeftBarButtonItem(settingsBarButton, animated: true)
     }
     
-    func popToRoot(sender:UIBarButtonItem){
+    func switchToSettingsViewController(sender:UIBarButtonItem){
         let settingViewController = SettingViewController(style:UITableViewStyle.Grouped)
         self.navigationController?.pushViewController(settingViewController, animated: true);
     }
