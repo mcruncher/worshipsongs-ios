@@ -61,12 +61,10 @@
 		3A08E87C1A5D303B00964978 /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A024F911A43D2BB002231BD /* fmdb.txt */; };
 		3A08E87E1A5D305B00964978 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A024F431A43B91F002231BD /* libsqlite3.0.dylib */; };
 		3A08E87F1A5D305E00964978 /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
-		3A0B838E1A5B893300306744 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B838D1A5B893300306744 /* .gitignore */; };
 		3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
 		3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
 		3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */; };
 		3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A88F8991A402C6700193E53 /* Images.xcassets */; };
-		3A88F8A91A402C6700193E53 /* worshipsongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F8A81A402C6700193E53 /* worshipsongsTests.swift */; };
 		3AFED06A1A4A72E9005C9032 /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AFED0691A4A72E9005C9032 /* colorPalette.plist */; };
 		3AFED06E1A4A9D74005C9032 /* ColorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -130,7 +128,6 @@
 		3A08E8591A5CE0F200964978 /* Settings1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings1.png; sourceTree = "<group>"; };
 		3A08E85B1A5CE3E200964978 /* Settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings@2x.png"; sourceTree = "<group>"; };
 		3A08E85D1A5D084800964978 /* SampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
-		3A0B838D1A5B893300306744 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3A2911C81A5A5A7100F1993E /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionService.swift; path = Service/ConnectionService.swift; sourceTree = "<group>"; };
 		3A2911CA1A5A628A00F1993E /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 		3A88F8881A402C6700193E53 /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,7 +136,6 @@
 		3A88F8991A402C6700193E53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3A88F8A21A402C6700193E53 /* worshipsongsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A88F8A71A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A88F8A81A402C6700193E53 /* worshipsongsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = worshipsongsTests.swift; sourceTree = "<group>"; };
 		3AFED0691A4A72E9005C9032 /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = colorPalette.plist; path = "../Third party/colorPalette.plist"; sourceTree = "<group>"; };
 		3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorSettingsViewController.swift; path = Controllers/ColorSettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -324,7 +320,6 @@
 		3A88F87F1A402C6700193E53 = {
 			isa = PBXGroup;
 			children = (
-				3A0B838D1A5B893300306744 /* .gitignore */,
 				3A024F4D1A43BC2B002231BD /* Third Party */,
 				3A024F421A43B90D002231BD /* Framework */,
 				3A04309D1A42AE2000F4F833 /* Resources */,
@@ -369,7 +364,6 @@
 			isa = PBXGroup;
 			children = (
 				3A0834961A5E08BE0056293D /* Service */,
-				3A88F8A81A402C6700193E53 /* worshipsongsTests.swift */,
 				3A88F8A61A402C6700193E53 /* Supporting Files */,
 			);
 			path = worshipsongsTests;
@@ -491,7 +485,6 @@
 				3A038E221A563A7E009D4308 /* Default-Portrait-2048h in Resources */,
 				3A08E85C1A5CE3E200964978 /* Settings@2x.png in Resources */,
 				3A08349F1A5E140F0056293D /* about.html in Resources */,
-				3A0B838E1A5B893300306744 /* .gitignore in Resources */,
 				3A038E201A563A7E009D4308 /* Default-Landscape@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,7 +536,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A0834A31A5E26B20056293D /* CustomTextSettingServiceTest.swift in Sources */,
-				3A88F8A91A402C6700193E53 /* worshipsongsTests.swift in Sources */,
 				3A08E87B1A5D303800964978 /* FMDatabaseAdditions.m in Sources */,
 				3A0834981A5E09400056293D /* UtilTest.swift in Sources */,
 				3A0834AA1A5E4BFF0056293D /* RegexMatcherTest.swift in Sources */,
