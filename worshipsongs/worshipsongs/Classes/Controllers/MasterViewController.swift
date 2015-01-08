@@ -7,11 +7,10 @@
 //
 
 import Foundation
-
 import UIKit
 
 class MasterViewController: UITableViewController, UITableViewDataSource, UISearchBarDelegate  {
-    let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
+    let textAttributeService:TextAttributeService = TextAttributeService()
     let settingDataManager:SettingsDataManager = SettingsDataManager()
     var songTitles : NSMutableArray = []
     var songs = [String]()
@@ -23,7 +22,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     override func viewDidLoad() {
         self.navigationItem.title = "Worship songs"
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
-        self.navigationController?.navigationBar.titleTextAttributes = customTextSettingService.getDefaultTextAttributes()
+        self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultTextAttributes()
         self.songData = DatabaseHelper.instance.getSongModel()
         var myFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y,
         self.view.bounds.size.width, 44);
@@ -70,7 +69,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
             song = songData[indexPath.row]
         }
         dataCell!.textLabel!.text = song.title
-        dataCell!.textLabel?.font = customTextSettingService.getDefaultFont()
+        dataCell!.textLabel?.font = textAttributeService.getDefaultFont()
         
         return dataCell!
     }

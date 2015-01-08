@@ -7,33 +7,34 @@
 //
 
 import UIKit
+import Foundation
 
 
-
-class CustomTextSettingService{
+class CustomTextSettingService {
     
+    let settingDataManager:SettingsDataManager = SettingsDataManager()
+    let textAttributeService:TextAttributeService = TextAttributeService()
+    let regexMatcher: RegexMatcher = RegexMatcher()
     var customTagTextRange: NSMutableArray = NSMutableArray()
     var customCellText: NSString = NSString()
     let startPattern = "\\{\\w\\}"
     let endPattern = "\\{/\\w\\}"
     
     func getAttributedString(cellText : NSString) -> NSMutableAttributedString {
-        let settingDataManager:SettingsDataManager = SettingsDataManager()
-        var array = getCustomTagRanges(cellText)
-        if(array.count > 0)
+        var customTagRangeArray = getCustomTagRanges(cellText)
+        if(customTagRangeArray.count > 0)
         {
-            findRanges(cellText, ranges: array)
+            customTagTextRange = findRangesToApplyColor(cellText, customTagRangeArray: customTagRangeArray)
+            customCellText = removePattern(cellText)
         }
         else
         {
             customCellText = cellText
-            customTagTextRange = array
+            customTagTextRange = customTagRangeArray
         }
-        
-        
-        let attributedString = NSMutableAttributedString(string: customCellText, attributes: getFont())
+        let attributedString = NSMutableAttributedString(string: customCellText, attributes: textAttributeService.getUserDefaultFont())
         attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getPrimaryFontColor, range: NSRange(location: 0, length: customCellText.length))
-                for var index=0; index < customTagTextRange.count; index++ {
+        for var index=0; index < customTagTextRange.count; index++ {
             var rangeValue:NSRange
             rangeValue = customTagTextRange.objectAtIndex(index).rangeValue
             let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("secondaryFontColor") as? NSData
@@ -41,35 +42,17 @@ class CustomTextSettingService{
             colorValue = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedPrimaryColorData!) as UIColor
             attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getSecondaryFontColor, range: rangeValue)
         }
-        
         return attributedString;
     }
-    
-    func getFont() -> NSDictionary {
-        let settingDataManager:SettingsDataManager = SettingsDataManager()
-        let fontName = settingDataManager.getFontName
-        let font = UIFont(name: settingDataManager.getFontName, size: settingDataManager.getFontSize) ?? UIFont.systemFontOfSize(18.0)
-        let textFont = [NSFontAttributeName:font]
-        return textFont
-    }
-    
-    
-    func getCustomTagRangesByRegex(cellText : NSString) -> NSMutableArray{
-        let customTagRegexPattern = "\\{\\w\\}.*\\{/\\w\\}"
-        var array: NSMutableArray = NSMutableArray()
-        array = getRange(cellText,customTagRegexPattern)
-        return array
-    }
-    
     
     func getCustomTagRanges(cellText : NSString) -> NSMutableArray{
         
         var startTagArray: NSMutableArray = NSMutableArray()
         var endTagArray: NSMutableArray = NSMutableArray()
-        var customTagRangeArray: NSMutableArray = NSMutableArray()
-       
-        startTagArray = getRange(cellText,startPattern)
-        endTagArray = getRange(cellText,endPattern)
+        var tagRange: NSMutableArray = NSMutableArray()
+        
+        startTagArray = regexMatcher.getRange(cellText,pattern: startPattern)
+        endTagArray = regexMatcher.getRange(cellText,pattern: endPattern)
         if(startTagArray.count == endTagArray.count){
             for var index=0; index < startTagArray.count; index++ {
                 var startRangeValue:NSRange
@@ -78,54 +61,51 @@ class CustomTextSettingService{
                 startRangeValue = startTagArray.objectAtIndex(index).rangeValue
                 endRangeValue = endTagArray.objectAtIndex(index).rangeValue
                 customRange = NSMakeRange(startRangeValue.location, (endRangeValue.location + endRangeValue.length) - startRangeValue.location)
-                customTagRangeArray.addObject(customRange)
+                tagRange.addObject(customRange)
             }
         }
-        return customTagRangeArray
+        return tagRange
     }
     
-    
-    func findRanges(cellText : NSString, ranges: NSMutableArray) {
+    func findRangesToApplyColor(cellText : NSString, customTagRangeArray: NSMutableArray) -> NSMutableArray{
         var startIndex: Int = 0
-        
-        for var index=0; index < ranges.count; index++ {
+        var tagTextRange: NSMutableArray = NSMutableArray()
+        for var index=0; index < customTagRangeArray.count; index++ {
             var rangeValue:NSRange
-            rangeValue = ranges.objectAtIndex(index).rangeValue
-        
+            rangeValue = customTagRangeArray.objectAtIndex(index).rangeValue
             var totalPatternLength: Int = 0
             totalPatternLength = totalPatternLengthValue(cellText)
-           
+            
             if(rangeValue.location > 0){
-               customTagTextRange.addObject(NSMakeRange(rangeValue.location - startIndex, rangeValue.length - totalPatternLength))
-               startIndex = startIndex + totalPatternLength
+                tagTextRange.addObject(NSMakeRange(rangeValue.location - startIndex, rangeValue.length - totalPatternLength))
+                startIndex = startIndex + totalPatternLength
             }
             else{
                 startIndex = startIndex + totalPatternLength
-                customTagTextRange.removeAllObjects()
-                customTagTextRange.addObject(NSMakeRange(rangeValue.location, (rangeValue.length - startIndex)))
+                tagTextRange.removeAllObjects()
+                tagTextRange.addObject(NSMakeRange(rangeValue.location, (rangeValue.length - startIndex)))
             }
-           
-            
-            customCellText = removePatternText(cellText, startPattern)
-            customCellText = removePatternText(customCellText, endPattern)
         }
+        return tagTextRange
+    }
+    
+    func removePattern(cellText : NSString) -> NSString{
+        var patternRemovedText: NSString = NSString()
+        patternRemovedText = regexMatcher.removePatternText(cellText, pattern: startPattern)
+        patternRemovedText = regexMatcher.removePatternText(patternRemovedText, pattern: endPattern)
+        return patternRemovedText
+    }
+    
+    func getCustomTagRangesByRegex(cellText : NSString) -> NSMutableArray{
+        let customTagRegexPattern = "\\{\\w\\}.*\\{/\\w\\}"
+        var array: NSMutableArray = NSMutableArray()
+        array = regexMatcher.getRange(cellText,pattern: customTagRegexPattern)
+        return array
     }
     
     func totalPatternLengthValue(text: NSString) -> Int{
         let startPattern = "\\{\\w\\}"
         let endPattern = "\\{/\\w\\}"
-        return getPatternTextLength(text, startPattern) + getPatternTextLength(text, endPattern)
-    }
-    
-    func getDefaultFont() -> UIFont{
-        return UIFont(name: "HelveticaNeue", size: CGFloat(14))!
-    }
-    
-    func getDefaultTextAttributes() -> NSDictionary{
-        let textFontAttributes = [
-            NSFontAttributeName: getDefaultFont(),
-            NSForegroundColorAttributeName: UIColor.whiteColor()
-        ]
-        return textFontAttributes
+        return regexMatcher.getPatternTextLength(text, pattern: startPattern) + regexMatcher.getPatternTextLength(text, pattern: endPattern)
     }
 }

@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+class ColorPaletteService{
+    
+
 func hexStringToUIColor (hex:String) -> UIColor {
     var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
     
@@ -39,4 +42,6 @@ func getColorPalette() -> Array<String>{
         colorPalette = colorPalettePlistFile as [String]
     }
     return colorPalette
+}
+
 }

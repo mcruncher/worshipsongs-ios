@@ -12,6 +12,7 @@ import UIKit
 class SettingViewController: UITableViewController {
     
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
+    let textAttributeService:TextAttributeService = TextAttributeService()
     let settingDataManager:SettingsDataManager = SettingsDataManager()
     
     var fontSettingsCell: UITableViewCell = UITableViewCell()
@@ -38,7 +39,7 @@ class SettingViewController: UITableViewController {
         self.fontSettingsCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.fontSettingsLabel = UILabel(frame: CGRectInset(self.fontSettingsCell.contentView.bounds, 15, 0))
         self.fontSettingsLabel.text = "Font settings"
-        self.fontSettingsLabel.font = customTextSettingService.getDefaultFont()
+        self.fontSettingsLabel.font = textAttributeService.getDefaultFont()
         self.fontSettingsCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         self.fontSettingsCell.addSubview(self.fontSettingsLabel)
         
@@ -46,13 +47,13 @@ class SettingViewController: UITableViewController {
         self.colorSettingsCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.colorSettingsLabel = UILabel(frame: CGRectInset(self.colorSettingsCell.contentView.bounds, 15, 0))
         self.colorSettingsLabel.text = "Color settings"
-        self.colorSettingsLabel.font = customTextSettingService.getDefaultFont()
+        self.colorSettingsLabel.font = textAttributeService.getDefaultFont()
         self.colorSettingsCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         self.colorSettingsCell.addSubview(self.colorSettingsLabel)
         
         // construct share cell, section 1, row 0
         self.keepAwakeCell.textLabel?.text = "To keep awake on screen"
-        self.keepAwakeCell.textLabel?.font = customTextSettingService.getDefaultFont()
+        self.keepAwakeCell.textLabel?.font = textAttributeService.getDefaultFont()
         self.keepAwakeCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         setKeepAwakeStatus()
         
@@ -63,7 +64,7 @@ class SettingViewController: UITableViewController {
         self.restoreSettingButton.setTitle("Restore default values", forState: UIControlState.Normal)
         self.restoreSettingButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.restoreSettingButton.sizeToFit()
-        self.restoreSettingButton.titleLabel?.font = customTextSettingService.getDefaultFont()
+        self.restoreSettingButton.titleLabel?.font = textAttributeService.getDefaultFont()
         self.restoreSettingCell.addSubview(self.restoreSettingButton)
         
         
@@ -74,7 +75,7 @@ class SettingViewController: UITableViewController {
         self.aboutSettingButton.setTitle("About", forState: UIControlState.Normal)
         self.aboutSettingButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.aboutSettingButton.sizeToFit()
-        self.aboutSettingButton.titleLabel?.font = customTextSettingService.getDefaultFont()
+        self.aboutSettingButton.titleLabel?.font = textAttributeService.getDefaultFont()
         self.aboutSettingCell.addSubview(self.aboutSettingButton)
         
         

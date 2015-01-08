@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-
+class RegexMatcher{
 
 func getRange (value : String, pattern : String) -> NSMutableArray {
     var err : NSError?
@@ -54,5 +54,5 @@ func removePatternText(text: NSString, pattern: NSString) -> NSString
     return internalExpression.stringByReplacingMatchesInString(text, options: nil, range: NSMakeRange(0, text.length), withTemplate: "")
 }
 
-
+}
 

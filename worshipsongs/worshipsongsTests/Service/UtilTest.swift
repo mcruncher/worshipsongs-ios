@@ -10,6 +10,7 @@ import UIKit
 import XCTest
 
 class UtilTest: XCTestCase {
+    let util:Util = Util()
 
     override func setUp() {
         super.setUp()
@@ -21,16 +22,17 @@ class UtilTest: XCTestCase {
         super.tearDown()
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+    func testGetPath(){
+        println("--testGetPath--")
+        var expectedPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0].stringByAppendingPathComponent("songs.sqlite")
+        var path = util.getPath("songs.sqlite")
+        XCTAssertNotNil(path, "Path value not nil")
+        XCTAssertEqual(path, expectedPath, "Values are equal")
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testParseJson(){
+        println("--testParseJson--")
+        var latestChangeSet = util.parseJson()
+        XCTAssertNotNil(latestChangeSet, "latestChangeSet value not nil")
     }
-
 }

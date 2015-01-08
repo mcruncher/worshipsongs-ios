@@ -15,6 +15,7 @@ let CELL_CONTENT_MARGIN = 10.0
 class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserDelegate {
     
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
+    let textAttributeService:TextAttributeService = TextAttributeService()
     var parser: NSXMLParser = NSXMLParser()
     
     var songName: String = String()
@@ -36,7 +37,7 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         super.viewDidLoad()
         self.navigationItem.title = songName;
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
-        self.navigationController?.navigationBar.titleTextAttributes = customTextSettingService.getDefaultTextAttributes()
+        self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultTextAttributes()
         var lyrics: NSData = songLyrics.dataUsingEncoding(NSUTF8StringEncoding)!
         parser = NSXMLParser(data: lyrics)
         parser.delegate = self

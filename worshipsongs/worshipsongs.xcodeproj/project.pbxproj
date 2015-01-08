@@ -40,6 +40,13 @@
 		3A0834981A5E09400056293D /* UtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834971A5E09400056293D /* UtilTest.swift */; };
 		3A08349A1A5E0F4C0056293D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834991A5E0F4C0056293D /* AboutViewController.swift */; };
 		3A08349F1A5E140F0056293D /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A08349E1A5E140F0056293D /* about.html */; };
+		3A0834A01A5E24420056293D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F471A43B97A002231BD /* Util.swift */; };
+		3A0834A11A5E24FE0056293D /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
+		3A0834A31A5E26B20056293D /* CustomTextSettingServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834A21A5E26B20056293D /* CustomTextSettingServiceTest.swift */; };
+		3A0834A41A5E279B0056293D /* CustomTextSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */; };
+		3A0834A51A5E27E30056293D /* RegexMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220351A49194100B433F5 /* RegexMatcher.swift */; };
+		3A0834A71A5E35E20056293D /* TextAttributeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834A61A5E35E20056293D /* TextAttributeService.swift */; };
+		3A0834A81A5E395C0056293D /* TextAttributeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834A61A5E35E20056293D /* TextAttributeService.swift */; };
 		3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
 		3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A084D5D1A4D42F20097ADA1 /* fontsList.plist */; };
 		3A08E85A1A5CE0F200964978 /* Settings1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A08E8591A5CE0F200964978 /* Settings1.png */; };
@@ -108,6 +115,8 @@
 		3A0834971A5E09400056293D /* UtilTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilTest.swift; sourceTree = "<group>"; };
 		3A0834991A5E0F4C0056293D /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3A08349E1A5E140F0056293D /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = about.html; path = html/about.html; sourceTree = "<group>"; };
+		3A0834A21A5E26B20056293D /* CustomTextSettingServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextSettingServiceTest.swift; sourceTree = "<group>"; };
+		3A0834A61A5E35E20056293D /* TextAttributeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributeService.swift; sourceTree = "<group>"; };
 		3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsDataManager.swift; path = Model/SettingsDataManager.swift; sourceTree = "<group>"; };
 		3A084D5D1A4D42F20097ADA1 /* fontsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fontsList.plist; path = "Third Party/fontsList.plist"; sourceTree = SOURCE_ROOT; };
 		3A08E8591A5CE0F200964978 /* Settings1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings1.png; sourceTree = "<group>"; };
@@ -166,6 +175,7 @@
 				3A0220351A49194100B433F5 /* RegexMatcher.swift */,
 				3A0745041A53898400BE6356 /* ColorPaletteService.swift */,
 				3A2911C81A5A5A7100F1993E /* ConnectionService.swift */,
+				3A0834A61A5E35E20056293D /* TextAttributeService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -266,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				3A0834971A5E09400056293D /* UtilTest.swift */,
+				3A0834A21A5E26B20056293D /* CustomTextSettingServiceTest.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -512,6 +523,7 @@
 				3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */,
 				3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */,
 				3A08E85E1A5D084800964978 /* SampleViewController.swift in Sources */,
+				3A0834A71A5E35E20056293D /* TextAttributeService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,9 +531,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A0834A31A5E26B20056293D /* CustomTextSettingServiceTest.swift in Sources */,
 				3A88F8A91A402C6700193E53 /* worshipsongsTests.swift in Sources */,
 				3A08E87B1A5D303800964978 /* FMDatabaseAdditions.m in Sources */,
 				3A0834981A5E09400056293D /* UtilTest.swift in Sources */,
+				3A0834A81A5E395C0056293D /* TextAttributeService.swift in Sources */,
+				3A0834A51A5E27E30056293D /* RegexMatcher.swift in Sources */,
+				3A0834A11A5E24FE0056293D /* SettingsDataManager.swift in Sources */,
+				3A0834A01A5E24420056293D /* Util.swift in Sources */,
+				3A0834A41A5E279B0056293D /* CustomTextSettingService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
