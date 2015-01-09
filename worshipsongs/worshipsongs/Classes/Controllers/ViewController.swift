@@ -69,12 +69,12 @@ class ViewController: UIViewController, UITableViewDataSource, NSXMLParserDelega
         toolbar.frame = CGRectMake(0, self.tableView.frame.size.height - 46, self.tableView.frame.size.width, 46)
         toolbar.sizeToFit()
         toolbar.setItems(toolbarButtons, animated: true)
-        self.tableView.addSubview(toolbar)
+       
         
         // Reload the table
         self.tableView.reloadData()
         self.view.addSubview(tableView)
-        self.view.addSubview(toolbar)
+        //self.view.addSubview(toolbar)
         
 
     }
