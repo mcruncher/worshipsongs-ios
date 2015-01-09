@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A000AD91A5F7E940065DBC2 /* slider-thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A000AD81A5F7E940065DBC2 /* slider-thumb.png */; };
+		3A000ADB1A5F7EA20065DBC2 /* slider-track.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A000ADA1A5F7EA20065DBC2 /* slider-track.png */; };
+		3A000ADD1A5F86820065DBC2 /* slider_other_thumb1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A000ADC1A5F86820065DBC2 /* slider_other_thumb1.png */; };
 		3A019F721A47AD8A003455AC /* CellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A019F711A47AD8A003455AC /* CellAnimator.swift */; };
-		3A0220321A48FE6B00B433F5 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A0220311A48FE6B00B433F5 /* settings.png */; };
 		3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */; };
 		3A0220361A49194100B433F5 /* RegexMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220351A49194100B433F5 /* RegexMatcher.swift */; };
 		3A0220381A4944B000B433F5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220371A4944B000B433F5 /* SettingViewController.swift */; };
@@ -52,15 +54,18 @@
 		3A0834AD1A5E584A0056293D /* ColorPaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745041A53898400BE6356 /* ColorPaletteService.swift */; };
 		3A0834AF1A5E5BE20056293D /* ConnectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834AE1A5E5BE20056293D /* ConnectionServiceTest.swift */; };
 		3A0834B01A5E5CC20056293D /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
+		3A0834B31A5E63F10056293D /* MasterViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834B21A5E63F10056293D /* MasterViewControllerTest.swift */; };
 		3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
 		3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A084D5D1A4D42F20097ADA1 /* fontsList.plist */; };
-		3A08E85A1A5CE0F200964978 /* Settings1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A08E8591A5CE0F200964978 /* Settings1.png */; };
 		3A08E85C1A5CE3E200964978 /* Settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A08E85B1A5CE3E200964978 /* Settings@2x.png */; };
-		3A08E85E1A5D084800964978 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A08E85D1A5D084800964978 /* SampleViewController.swift */; };
 		3A08E87B1A5D303800964978 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F901A43D2BB002231BD /* FMDatabaseAdditions.m */; };
 		3A08E87C1A5D303B00964978 /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A024F911A43D2BB002231BD /* fmdb.txt */; };
 		3A08E87E1A5D305B00964978 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A024F431A43B91F002231BD /* libsqlite3.0.dylib */; };
 		3A08E87F1A5D305E00964978 /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
+		3A25DF581A5FA1640065FB5F /* format_font_size_less.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF561A5FA1640065FB5F /* format_font_size_less.png */; };
+		3A25DF591A5FA1640065FB5F /* format_font_size_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF571A5FA1640065FB5F /* format_font_size_more.png */; };
+		3A25DF651A5FB4A30065FB5F /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF641A5FB4A30065FB5F /* color.png */; };
+		3A25DF671A5FBCC80065FB5F /* Font-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF661A5FBCC80065FB5F /* Font-icon.png */; };
 		3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
 		3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
 		3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */; };
@@ -80,8 +85,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A000AD81A5F7E940065DBC2 /* slider-thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider-thumb.png"; sourceTree = "<group>"; };
+		3A000ADA1A5F7EA20065DBC2 /* slider-track.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider-track.png"; sourceTree = "<group>"; };
+		3A000ADC1A5F86820065DBC2 /* slider_other_thumb1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider_other_thumb1.png; sourceTree = "<group>"; };
 		3A019F711A47AD8A003455AC /* CellAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellAnimator.swift; path = Service/CellAnimator.swift; sourceTree = "<group>"; };
-		3A0220311A48FE6B00B433F5 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomTextSettingService.swift; path = Service/CustomTextSettingService.swift; sourceTree = "<group>"; };
 		3A0220351A49194100B433F5 /* RegexMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegexMatcher.swift; path = Service/RegexMatcher.swift; sourceTree = "<group>"; };
 		3A0220371A4944B000B433F5 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = Controllers/SettingViewController.swift; sourceTree = "<group>"; };
@@ -123,11 +130,14 @@
 		3A0834A91A5E4BFF0056293D /* RegexMatcherTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexMatcherTest.swift; sourceTree = "<group>"; };
 		3A0834AB1A5E57130056293D /* ColorPaletteServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPaletteServiceTest.swift; sourceTree = "<group>"; };
 		3A0834AE1A5E5BE20056293D /* ConnectionServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionServiceTest.swift; sourceTree = "<group>"; };
+		3A0834B21A5E63F10056293D /* MasterViewControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewControllerTest.swift; sourceTree = "<group>"; };
 		3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsDataManager.swift; path = Model/SettingsDataManager.swift; sourceTree = "<group>"; };
 		3A084D5D1A4D42F20097ADA1 /* fontsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fontsList.plist; path = "Third Party/fontsList.plist"; sourceTree = SOURCE_ROOT; };
-		3A08E8591A5CE0F200964978 /* Settings1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings1.png; sourceTree = "<group>"; };
 		3A08E85B1A5CE3E200964978 /* Settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings@2x.png"; sourceTree = "<group>"; };
-		3A08E85D1A5D084800964978 /* SampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
+		3A25DF561A5FA1640065FB5F /* format_font_size_less.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = format_font_size_less.png; sourceTree = "<group>"; };
+		3A25DF571A5FA1640065FB5F /* format_font_size_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = format_font_size_more.png; sourceTree = "<group>"; };
+		3A25DF641A5FB4A30065FB5F /* color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color.png; sourceTree = "<group>"; };
+		3A25DF661A5FBCC80065FB5F /* Font-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Font-icon.png"; sourceTree = "<group>"; };
 		3A2911C81A5A5A7100F1993E /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionService.swift; path = Service/ConnectionService.swift; sourceTree = "<group>"; };
 		3A2911CA1A5A628A00F1993E /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 		3A88F8881A402C6700193E53 /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -253,7 +263,6 @@
 				3A0220371A4944B000B433F5 /* SettingViewController.swift */,
 				3A0220391A495C6000B433F5 /* FontSettingsViewController.swift */,
 				3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */,
-				3A08E85D1A5D084800964978 /* SampleViewController.swift */,
 				3A0834991A5E0F4C0056293D /* AboutViewController.swift */,
 			);
 			name = Controllers;
@@ -291,6 +300,13 @@
 		3A08349C1A5E10890056293D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3A25DF661A5FBCC80065FB5F /* Font-icon.png */,
+				3A25DF641A5FB4A30065FB5F /* color.png */,
+				3A25DF561A5FA1640065FB5F /* format_font_size_less.png */,
+				3A25DF571A5FA1640065FB5F /* format_font_size_more.png */,
+				3A000ADC1A5F86820065DBC2 /* slider_other_thumb1.png */,
+				3A000ADA1A5F7EA20065DBC2 /* slider-track.png */,
+				3A000AD81A5F7E940065DBC2 /* slider-thumb.png */,
 				3A038E1A1A563A7E009D4308 /* Default.png */,
 				3A038E191A563A7E009D4308 /* Default-Portrait@2x.png */,
 				3A038E181A563A7E009D4308 /* Default-Portrait.png */,
@@ -301,10 +317,8 @@
 				3A038E131A563A7E009D4308 /* Default-Landscape-1536h */,
 				3A038E121A563A7E009D4308 /* Default-Landscape-768h */,
 				3A038E111A563A7E009D4308 /* Default-568h@2x.png */,
-				3A08E8591A5CE0F200964978 /* Settings1.png */,
 				3A08E85B1A5CE3E200964978 /* Settings@2x.png */,
 				3A038E1B1A563A7E009D4308 /* Default@2x.png */,
-				3A0220311A48FE6B00B433F5 /* settings.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -315,6 +329,14 @@
 				3A08349E1A5E140F0056293D /* about.html */,
 			);
 			name = html;
+			sourceTree = "<group>";
+		};
+		3A0834B11A5E63360056293D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3A0834B21A5E63F10056293D /* MasterViewControllerTest.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		3A88F87F1A402C6700193E53 = {
@@ -363,6 +385,7 @@
 		3A88F8A51A402C6700193E53 /* worshipsongsTests */ = {
 			isa = PBXGroup;
 			children = (
+				3A0834B11A5E63360056293D /* Controller */,
 				3A0834961A5E08BE0056293D /* Service */,
 				3A88F8A61A402C6700193E53 /* Supporting Files */,
 			);
@@ -466,12 +489,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A0220321A48FE6B00B433F5 /* settings.png in Resources */,
+				3A000ADB1A5F7EA20065DBC2 /* slider-track.png in Resources */,
 				3A024F961A43D2BB002231BD /* fmdb.txt in Resources */,
+				3A25DF581A5FA1640065FB5F /* format_font_size_less.png in Resources */,
 				3A038E251A563A7E009D4308 /* Default.png in Resources */,
+				3A25DF651A5FB4A30065FB5F /* color.png in Resources */,
 				3A038E1F1A563A7E009D4308 /* Default-Landscape.png in Resources */,
 				3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */,
-				3A08E85A1A5CE0F200964978 /* Settings1.png in Resources */,
 				3A038E211A563A7E009D4308 /* Default-Portrait-1024h in Resources */,
 				3A038E231A563A7E009D4308 /* Default-Portrait.png in Resources */,
 				3AFED06A1A4A72E9005C9032 /* colorPalette.plist in Resources */,
@@ -483,9 +507,13 @@
 				3A038E241A563A7E009D4308 /* Default-Portrait@2x.png in Resources */,
 				3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */,
 				3A038E221A563A7E009D4308 /* Default-Portrait-2048h in Resources */,
+				3A000ADD1A5F86820065DBC2 /* slider_other_thumb1.png in Resources */,
+				3A25DF591A5FA1640065FB5F /* format_font_size_more.png in Resources */,
 				3A08E85C1A5CE3E200964978 /* Settings@2x.png in Resources */,
 				3A08349F1A5E140F0056293D /* about.html in Resources */,
+				3A25DF671A5FBCC80065FB5F /* Font-icon.png in Resources */,
 				3A038E201A563A7E009D4308 /* Default-Landscape@2x.png in Resources */,
+				3A000AD91A5F7E940065DBC2 /* slider-thumb.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,7 +554,6 @@
 				3A038E2A1A5643AE009D4308 /* ProgressView.swift in Sources */,
 				3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */,
 				3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */,
-				3A08E85E1A5D084800964978 /* SampleViewController.swift in Sources */,
 				3A0834A71A5E35E20056293D /* TextAttributeService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,6 +572,7 @@
 				3A0834A11A5E24FE0056293D /* SettingsDataManager.swift in Sources */,
 				3A0834AF1A5E5BE20056293D /* ConnectionServiceTest.swift in Sources */,
 				3A0834A01A5E24420056293D /* Util.swift in Sources */,
+				3A0834B31A5E63F10056293D /* MasterViewControllerTest.swift in Sources */,
 				3A0834AC1A5E57130056293D /* ColorPaletteServiceTest.swift in Sources */,
 				3A0834A41A5E279B0056293D /* CustomTextSettingService.swift in Sources */,
 				3A0834AD1A5E584A0056293D /* ColorPaletteService.swift in Sources */,

@@ -9,6 +9,8 @@
 import UIKit
 import XCTest
 
+
+
 class UtilTest: XCTestCase {
     let util:Util = Util()
 
@@ -34,5 +36,11 @@ class UtilTest: XCTestCase {
         println("--testParseJson--")
         var latestChangeSet = util.parseJson()
         XCTAssertNotNil(latestChangeSet, "latestChangeSet value not nil")
+    }
+    
+    func testGetVersionNumber(){
+        println("--testGetVersionNumber--")
+         var versionNumber = util.getVersionNumber()
+        XCTAssertNotNil(versionNumber,"versionNumber value not nil")
     }
 }

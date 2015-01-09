@@ -88,6 +88,11 @@ class Util: NSObject {
         }
     }
     
+    func getVersionNumber() -> String{
+        let text = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
+        return text!
+    }
+    
 }
 
 

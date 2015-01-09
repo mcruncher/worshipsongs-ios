@@ -14,18 +14,22 @@ class SettingViewController: UITableViewController {
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     let textAttributeService:TextAttributeService = TextAttributeService()
     let settingDataManager:SettingsDataManager = SettingsDataManager()
+    let util:Util = Util()
     
     var fontSettingsCell: UITableViewCell = UITableViewCell()
     var colorSettingsCell: UITableViewCell = UITableViewCell()
     var keepAwakeCell: UITableViewCell = UITableViewCell()
     var restoreSettingCell: UITableViewCell = UITableViewCell()
     var aboutSettingCell: UITableViewCell = UITableViewCell()
+    var versionSettingCell: UITableViewCell = UITableViewCell()
     
     
     var fontSettingsLabel: UILabel = UILabel()
     var colorSettingsLabel: UILabel = UILabel()
     var restoreSettingButton: UIButton = UIButton()
     var aboutSettingButton: UIButton = UIButton()
+    var versionLabel: UILabel = UILabel()
+    var versionValueLabel: UILabel = UILabel()
     
     
     override func loadView() {
@@ -34,21 +38,28 @@ class SettingViewController: UITableViewController {
         // set the title
         self.title = "Settings"
         //println("fontName : \(fontName)")
-        
+        var fontImageView = UIImageView(frame: CGRectMake(5,13, 20, 20));
         // construct font setting cell, section 0, row 0
         self.fontSettingsCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        self.fontSettingsLabel = UILabel(frame: CGRectInset(self.fontSettingsCell.contentView.bounds, 15, 0))
+        self.fontSettingsLabel = UILabel(frame: CGRectInset(self.fontSettingsCell.contentView.bounds, 30, 0))
         self.fontSettingsLabel.text = "Font settings"
         self.fontSettingsLabel.font = textAttributeService.getDefaultFont()
         self.fontSettingsCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        var fontImage = UIImage(named: "Font-icon.png");
+        fontImageView.image = fontImage;
+        self.fontSettingsCell.addSubview(fontImageView)
         self.fontSettingsCell.addSubview(self.fontSettingsLabel)
         
         // construct color setting cell, section 0, row 1
+         var colorImageView = UIImageView(frame: CGRectMake(5,13, 20, 20));
         self.colorSettingsCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        self.colorSettingsLabel = UILabel(frame: CGRectInset(self.colorSettingsCell.contentView.bounds, 15, 0))
+        self.colorSettingsLabel = UILabel(frame: CGRectInset(self.colorSettingsCell.contentView.bounds, 30, 0))
         self.colorSettingsLabel.text = "Color settings"
         self.colorSettingsLabel.font = textAttributeService.getDefaultFont()
         self.colorSettingsCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        var colorImage = UIImage(named: "color.png");
+        colorImageView.image = colorImage;
+        self.colorSettingsCell.addSubview(colorImageView)
         self.colorSettingsCell.addSubview(self.colorSettingsLabel)
         
         // construct share cell, section 1, row 0
@@ -68,7 +79,27 @@ class SettingViewController: UITableViewController {
         self.restoreSettingCell.addSubview(self.restoreSettingButton)
         
         
-        // construct color setting cell, section 2, row 0
+        // construct color setting cell, section 3, row 0
+        self.versionSettingCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+        self.versionLabel = UILabel(frame: CGRectMake(5, 10, 70, 20))
+        self.versionLabel.text = "Version"
+        self.versionLabel.textAlignment = NSTextAlignment.Left;
+        self.versionLabel.font = textAttributeService.getDefaultFont()
+        
+        self.versionValueLabel = UILabel(frame: CGRectMake(0, 5, 10, 10))
+        self.versionValueLabel.text = "version"
+        self.versionLabel.textAlignment = NSTextAlignment.Right;
+        self.versionValueLabel.textColor = UIColor.grayColor()
+        
+       // self.versionValueLabel.lineBreakMode = ;
+        self.versionValueLabel.numberOfLines = 0;
+        self.versionValueLabel.font = textAttributeService.getDefaultFont()
+         self.versionValueLabel.textAlignment = NSTextAlignment.Right;
+        //self.versionSettingCell.addSubview(self.versionLabel)
+       // self.versionSettingCell.addSubview(self.versionValueLabel)
+        self.versionSettingCell.contentView.addSubview(self.versionLabel)
+        self.versionSettingCell.contentView.addSubview(self.versionValueLabel)
+        
         self.aboutSettingCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.aboutSettingButton = UIButton(frame: CGRectMake(10, 5, 10, 10))
         self.aboutSettingButton.addTarget(self, action: "goAbout:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -93,7 +124,7 @@ class SettingViewController: UITableViewController {
         case 0: return 2    // section 0 has 2 rows
         case 1: return 1    // section 1 has 1 row
         case 2: return 1    // section 2 has 1 row
-        case 3: return 1
+        case 3: return 2
         default: fatalError("Unknown number of sections")
         }
     }
@@ -120,6 +151,19 @@ class SettingViewController: UITableViewController {
         case 3:
             switch(indexPath.row) {
             case 0: return self.aboutSettingCell // section 2, row 0 is the restoreSettingCell option
+            case 1:
+                var dataCell : UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("CELL_ID") as? UITableViewCell
+                if(dataCell == nil)
+                {
+                    dataCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL_ID")
+                }
+                dataCell?.textLabel?.text="Version"
+                dataCell?.detailTextLabel?.text = util.getVersionNumber()
+                dataCell?.detailTextLabel?.numberOfLines=0
+                dataCell!.textLabel?.font = textAttributeService.getDefaultFont()
+                dataCell!.detailTextLabel?.font = textAttributeService.getDefaultFont()
+                dataCell?.selectionStyle = UITableViewCellSelectionStyle.None;
+                return dataCell! // section 2, row 0 is the restoreSettingCell option
             default: fatalError("Unknown row in section 0")
             }
             
@@ -201,4 +245,17 @@ class SettingViewController: UITableViewController {
         self.navigationController?.pushViewController(aboutViewController, animated: true);
     }
     
+    func resizeImage(image : UIImage, pixelValue: Int) -> UIImage
+    {
+        var newSize:CGSize = CGSize(width: pixelValue,height: pixelValue)
+        let rect = CGRectMake(0,0, newSize.width, newSize.height)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        
+        // image is a variable of type UIImage
+        image.drawInRect(rect)
+        
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return resizedImage
+    }
 }

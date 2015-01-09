@@ -114,6 +114,7 @@ class FontSettingsViewController: UITableViewController, UIPickerViewDelegate,UI
         }
     }
     
+  
     // Configure the row selection code for any cells that you want to customize the row selection
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -159,5 +160,21 @@ class FontSettingsViewController: UITableViewController, UIPickerViewDelegate,UI
         return true
     }
     
+    func resizeImage(image : UIImage) -> UIImage
+    {
+            var newSize:CGSize = CGSize(width: 24,height: 24)
+            let rect = CGRectMake(0,0, newSize.width, newSize.height)
+            UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+            
+            // image is a variable of type UIImage
+            image.drawInRect(rect)
+            
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return resizedImage
+    }
+        
+    
+
     
 }

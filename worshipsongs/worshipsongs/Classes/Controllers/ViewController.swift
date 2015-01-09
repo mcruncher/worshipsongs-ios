@@ -12,10 +12,11 @@ let FONT_SIZE = 14.0
 let CELL_CONTENT_WIDTH = 320.0
 let CELL_CONTENT_MARGIN = 10.0
 
-class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserDelegate {
+class ViewController: UIViewController, UITableViewDataSource, NSXMLParserDelegate {
     
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     let textAttributeService:TextAttributeService = TextAttributeService()
+    var tableView:UITableView!
     var parser: NSXMLParser = NSXMLParser()
     
     var songName: String = String()
@@ -38,6 +39,10 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         self.navigationItem.title = songName;
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
         self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultTextAttributes()
+        var myFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y,
+            self.view.bounds.size.width, self.view.bounds.size.height);
+        self.view.frame = myFrame
+        
         var lyrics: NSData = songLyrics.dataUsingEncoding(NSUTF8StringEncoding)!
         parser = NSXMLParser(data: lyrics)
         parser.delegate = self
@@ -45,27 +50,42 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         if(verseOrderList.count < 1){
             verseOrderList = parsedVerseOrderList
         }
-        tableView.dataSource = self
+        self.tableView = UITableView(frame:self.view!.frame)
+        self.tableView.dataSource = self
         self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
         self.tableView.allowsSelection = false
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CELL_ID")
+        
+        let plusButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: nil, action: nil)
+        var toolbarButtons = [plusButton];
+        
+        let toolbar = UIToolbar()
+        toolbar.barStyle = UIBarStyle.Default // UIBarStyleBlackTranslucent was deprecated in iOS 3
+        toolbar.translucent = true;
+        toolbar.frame = CGRectMake(0, self.tableView.frame.size.height - 46, self.tableView.frame.size.width, 46)
+        toolbar.sizeToFit()
+        toolbar.setItems(toolbarButtons, animated: true)
+        self.tableView.addSubview(toolbar)
         
         // Reload the table
         self.tableView.reloadData()
+        self.view.addSubview(tableView)
+        self.view.addSubview(toolbar)
         
 
     }
     
-    override func tableView(tableView: UITableView,
+    func tableView(tableView: UITableView,
         heightForFooterInSection section: Int) -> CGFloat
     {
         return 0.25;
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.verseOrderList.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return 1
         
     }
@@ -74,7 +94,7 @@ class ViewController: UITableViewController, UITableViewDataSource, NSXMLParserD
         self.tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var dataCell : UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("CELL_ID") as? UITableViewCell
         if(dataCell == nil)
         {

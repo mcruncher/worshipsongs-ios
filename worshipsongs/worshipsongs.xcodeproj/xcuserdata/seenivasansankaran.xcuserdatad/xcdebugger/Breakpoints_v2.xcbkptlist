@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "worshipsongs/classes/Controllers/ViewController.swift"
-            timestampString = "442382687.523983"
+            timestampString = "442460065.97167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "worshipsongs/classes/Controllers/ViewController.swift"
-            timestampString = "442382687.523983"
+            timestampString = "442458917.059791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "worshipsongs/classes/Controllers/ViewController.swift"
-            timestampString = "442382687.523983"
+            timestampString = "442460065.97167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "tableView(_:heightForFooterInSection:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -360,13 +360,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "worshipsongs/classes/Controllers/ViewController.swift"
-            timestampString = "442382687.523983"
+            timestampString = "442460065.97167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "parser(_:foundCharacters:)"
-            landmarkType = "5">
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "ViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -456,11 +456,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "worshipsongs/classes/Controllers/FontSettingsViewController.swift"
-            timestampString = "441688003.733166"
+            timestampString = "442480359.514061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "pickerView(_:didSelectRow:inComponent:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -488,11 +488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "worshipsongs/classes/Service/Util.swift"
-            timestampString = "442227350.517453"
+            timestampString = "442457860.667886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "Util"
             landmarkType = "3">
          </BreakpointContent>
