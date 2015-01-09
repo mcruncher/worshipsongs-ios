@@ -66,6 +66,9 @@
 		3A25DF691A5FCC080065FB5F /* RegexPatternMatcherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF681A5FCC080065FB5F /* RegexPatternMatcherService.swift */; };
 		3A25DF6B1A5FCC550065FB5F /* RegexPatternMatcherServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF6A1A5FCC550065FB5F /* RegexPatternMatcherServiceTest.swift */; };
 		3A25DF6C1A5FCCC50065FB5F /* RegexPatternMatcherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF681A5FCC080065FB5F /* RegexPatternMatcherService.swift */; };
+		3A25DF6E1A5FCED70065FB5F /* CommonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF6D1A5FCED70065FB5F /* CommonService.swift */; };
+		3A25DF701A5FCF530065FB5F /* CommonServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF6F1A5FCF530065FB5F /* CommonServiceTest.swift */; };
+		3A25DF711A5FCF820065FB5F /* CommonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF6D1A5FCED70065FB5F /* CommonService.swift */; };
 		3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
 		3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
 		3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */; };
@@ -138,6 +141,8 @@
 		3A25DF661A5FBCC80065FB5F /* Font-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Font-icon.png"; sourceTree = "<group>"; };
 		3A25DF681A5FCC080065FB5F /* RegexPatternMatcherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexPatternMatcherService.swift; sourceTree = "<group>"; };
 		3A25DF6A1A5FCC550065FB5F /* RegexPatternMatcherServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexPatternMatcherServiceTest.swift; sourceTree = "<group>"; };
+		3A25DF6D1A5FCED70065FB5F /* CommonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonService.swift; sourceTree = "<group>"; };
+		3A25DF6F1A5FCF530065FB5F /* CommonServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonServiceTest.swift; sourceTree = "<group>"; };
 		3A2911C81A5A5A7100F1993E /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionService.swift; path = Service/ConnectionService.swift; sourceTree = "<group>"; };
 		3A2911CA1A5A628A00F1993E /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 		3A88F8881A402C6700193E53 /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +195,7 @@
 				3A2911C81A5A5A7100F1993E /* ConnectionService.swift */,
 				3A0834A61A5E35E20056293D /* TextAttributeService.swift */,
 				3A25DF681A5FCC080065FB5F /* RegexPatternMatcherService.swift */,
+				3A25DF6D1A5FCED70065FB5F /* CommonService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -293,6 +299,7 @@
 				3A0834AB1A5E57130056293D /* ColorPaletteServiceTest.swift */,
 				3A0834AE1A5E5BE20056293D /* ConnectionServiceTest.swift */,
 				3A25DF6A1A5FCC550065FB5F /* RegexPatternMatcherServiceTest.swift */,
+				3A25DF6F1A5FCF530065FB5F /* CommonServiceTest.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -551,6 +558,7 @@
 				3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */,
 				3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */,
 				3A038E2A1A5643AE009D4308 /* ProgressView.swift in Sources */,
+				3A25DF6E1A5FCED70065FB5F /* CommonService.swift in Sources */,
 				3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */,
 				3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */,
 				3A25DF691A5FCC080065FB5F /* RegexPatternMatcherService.swift in Sources */,
@@ -568,7 +576,9 @@
 				3A0834981A5E09400056293D /* UtilTest.swift in Sources */,
 				3A0834A81A5E395C0056293D /* TextAttributeService.swift in Sources */,
 				3A25DF6B1A5FCC550065FB5F /* RegexPatternMatcherServiceTest.swift in Sources */,
+				3A25DF701A5FCF530065FB5F /* CommonServiceTest.swift in Sources */,
 				3A0834B01A5E5CC20056293D /* ConnectionService.swift in Sources */,
+				3A25DF711A5FCF820065FB5F /* CommonService.swift in Sources */,
 				3A0834A11A5E24FE0056293D /* SettingsDataManager.swift in Sources */,
 				3A0834AF1A5E5BE20056293D /* ConnectionServiceTest.swift in Sources */,
 				3A0834A01A5E24420056293D /* Util.swift in Sources */,

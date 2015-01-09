@@ -14,7 +14,7 @@ class SettingViewController: UITableViewController {
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     let textAttributeService:TextAttributeService = TextAttributeService()
     let settingDataManager:SettingsDataManager = SettingsDataManager()
-    let util:Util = Util()
+    let commonService:CommonService = CommonService()
     
     var fontSettingsCell: UITableViewCell = UITableViewCell()
     var colorSettingsCell: UITableViewCell = UITableViewCell()
@@ -158,7 +158,7 @@ class SettingViewController: UITableViewController {
                     dataCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL_ID")
                 }
                 dataCell?.textLabel?.text="Version"
-                dataCell?.detailTextLabel?.text = util.getVersionNumber()
+                dataCell?.detailTextLabel?.text = commonService.getVersionNumber()
                 dataCell?.detailTextLabel?.numberOfLines=0
                 dataCell!.textLabel?.font = textAttributeService.getDefaultFont()
                 dataCell!.detailTextLabel?.font = textAttributeService.getDefaultFont()

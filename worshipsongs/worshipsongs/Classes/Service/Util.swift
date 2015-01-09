@@ -12,14 +12,10 @@ import SystemConfiguration
 class Util: NSObject {
     
     let settingDataManager:SettingsDataManager = SettingsDataManager()
+    let commonService:CommonService = CommonService()
 
-    
-    func getPath(fileName: String) -> String {
-        return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0].stringByAppendingPathComponent(fileName)
-    }
-    
     func copyFile(fileName: NSString) {
-        var dbPath: String = getPath(fileName)
+        var dbPath: String = commonService.getDocumentDirectoryPath(fileName)
         var fileManager = NSFileManager.defaultManager()
         if !fileManager.fileExistsAtPath(dbPath) {
             var fromPath: String? = NSBundle.mainBundle().resourcePath?.stringByAppendingPathComponent(fileName)
@@ -88,10 +84,7 @@ class Util: NSObject {
         }
     }
     
-    func getVersionNumber() -> String{
-        let text = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
-        return text!
-    }
+    
     
     func keepAwakeScreenDisplayStatus() -> Bool {
         let settingDataManager:SettingsDataManager = SettingsDataManager()

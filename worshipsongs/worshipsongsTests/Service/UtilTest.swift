@@ -24,13 +24,7 @@ class UtilTest: XCTestCase {
         super.tearDown()
     }
 
-    func testGetPath(){
-        println("--testGetPath--")
-        var expectedPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0].stringByAppendingPathComponent("songs.sqlite")
-        var path = util.getPath("songs.sqlite")
-        XCTAssertNotNil(path, "Path value not nil")
-        XCTAssertEqual(path, expectedPath, "Values are equal")
-    }
+    
     
     func testParseJson(){
         println("--testParseJson--")
@@ -38,9 +32,5 @@ class UtilTest: XCTestCase {
         XCTAssertNotNil(latestChangeSet, "latestChangeSet value not nil")
     }
     
-    func testGetVersionNumber(){
-        println("--testGetVersionNumber--")
-         var versionNumber = util.getVersionNumber()
-        XCTAssertNotNil(versionNumber,"versionNumber value not nil")
-    }
+   
 }
