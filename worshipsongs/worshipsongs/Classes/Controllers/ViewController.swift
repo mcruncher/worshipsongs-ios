@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource, NSXMLParserDelega
     
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     let textAttributeService:TextAttributeService = TextAttributeService()
-    let util:Util = Util()
+    let userDefaultsSettingsProviderService:UserDefaultsSettingsProviderService = UserDefaultsSettingsProviderService()
     var tableView:UITableView!
     var parser: NSXMLParser = NSXMLParser()
     
@@ -37,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, NSXMLParserDelega
     
     override func viewDidLoad()  {
         super.viewDidLoad()
-        if(util.keepAwakeScreenDisplayStatus()){
+        if(userDefaultsSettingsProviderService.keepAwakeScreenDisplayStatus()){
             UIApplication.sharedApplication().idleTimerDisabled = true
         }
         self.navigationItem.title = songName;

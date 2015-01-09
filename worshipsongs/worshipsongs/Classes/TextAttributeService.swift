@@ -11,14 +11,6 @@ import UIKit
 
 class TextAttributeService{
 
-    func getUserDefaultFont() -> NSDictionary {
-        let settingDataManager:SettingsDataManager = SettingsDataManager()
-        let fontName = settingDataManager.getFontName
-        let font = UIFont(name: settingDataManager.getFontName, size: settingDataManager.getFontSize) ?? UIFont.systemFontOfSize(18.0)
-        let textFont = [NSFontAttributeName:font]
-        return textFont
-    }
-
     func getDefaultFont() -> UIFont{
         return UIFont(name: "HelveticaNeue", size: CGFloat(14))!
     }

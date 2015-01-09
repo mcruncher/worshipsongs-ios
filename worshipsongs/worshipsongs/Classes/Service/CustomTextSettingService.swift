@@ -14,6 +14,7 @@ class CustomTextSettingService {
     
     let settingDataManager:SettingsDataManager = SettingsDataManager()
     let textAttributeService:TextAttributeService = TextAttributeService()
+    let userDefaultsSettingsProviderService:UserDefaultsSettingsProviderService = UserDefaultsSettingsProviderService()
     let regexPatternMatcherService:RegexPatternMatcherService = RegexPatternMatcherService()
     var customTagTextRange: NSMutableArray = NSMutableArray()
     var customCellText: NSString = NSString()
@@ -32,7 +33,7 @@ class CustomTextSettingService {
             customCellText = cellText
             customTagTextRange = customTagRangeArray
         }
-        let attributedString = NSMutableAttributedString(string: customCellText, attributes: textAttributeService.getUserDefaultFont())
+        let attributedString = NSMutableAttributedString(string: customCellText, attributes: userDefaultsSettingsProviderService.getUserDefaultFont())
         attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getPrimaryFontColor, range: NSRange(location: 0, length: customCellText.length))
         for var index=0; index < customTagTextRange.count; index++ {
             var rangeValue:NSRange

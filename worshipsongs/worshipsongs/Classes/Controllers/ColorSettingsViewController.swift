@@ -15,6 +15,7 @@ class ColorSettingsViewController: UITableViewController {
     
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     let colorPaletteService: ColorPaletteService = ColorPaletteService()
+    let userDefaultsSettingsProviderService:UserDefaultsSettingsProviderService = UserDefaultsSettingsProviderService()
     
     let textAttributeService:TextAttributeService = TextAttributeService()
     var primaryLanguageColorCell: UITableViewCell = UITableViewCell()
@@ -178,14 +179,12 @@ class ColorSettingsViewController: UITableViewController {
                 {
                     
                     SettingsDataManager.sharedInstance.saveData(data, key: "primaryFontColor")
-                    let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("primaryFontColor") as? NSData
-                    primaryLanguageColorLabel.backgroundColor = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedPrimaryColorData!) as? UIColor
+                    primaryLanguageColorLabel.backgroundColor = userDefaultsSettingsProviderService.getUserDefaultsColor("primaryFontColor")
                 }
                 else
                 {
                     SettingsDataManager.sharedInstance.saveData(data, key: "secondaryFontColor")
-                    let userSelectedSecondaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("secondaryFontColor") as? NSData
-                    secondaryLanguageColorLabel.backgroundColor = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedSecondaryColorData!) as? UIColor
+                    secondaryLanguageColorLabel.backgroundColor = userDefaultsSettingsProviderService.getUserDefaultsColor("secondaryFontColor")
                 }
                 self.colorView.view.hidden = true
                 

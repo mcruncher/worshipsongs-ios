@@ -85,12 +85,7 @@ class Util: NSObject {
     }
     
     
-    
-    func keepAwakeScreenDisplayStatus() -> Bool {
-        let settingDataManager:SettingsDataManager = SettingsDataManager()
-        let keepAwakeStatus = settingDataManager.getKeepAwake
-        return keepAwakeStatus
-    }
+   
     
 }
 
