@@ -1,5 +1,5 @@
 //
-//  RegexMatcherTest.swift
+//  RegexPatternMatcherServiceTest.swift
 //  worshipsongs
 //
 //  Created by Seenivasan Sankaran on 1/8/15.
@@ -9,14 +9,14 @@
 
 import XCTest
 
-class RegexMatcherTest: XCTestCase {
+class RegexPatternMatcherServiceTest: XCTestCase {
     
-    let regexMatcher:RegexMatcher = RegexMatcher()
+    let regexMatcher:RegexPatternMatcherService = RegexPatternMatcherService()
     var textRange: NSMutableArray = NSMutableArray()
     var string: NSString!
     let startPattern = "\\{\\w\\}"
     let endPattern = "\\{/\\w\\}"
-
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -32,7 +32,7 @@ class RegexMatcherTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
+    
     func testGetRange (){
         println("--testGetRange--")
         var expectedStartTagRange: NSMutableArray = NSMutableArray()
@@ -70,5 +70,5 @@ class RegexMatcherTest: XCTestCase {
         XCTAssertTrue(expectedEndPatternLength == endPatternLength, "")
         
     }
-
+    
 }

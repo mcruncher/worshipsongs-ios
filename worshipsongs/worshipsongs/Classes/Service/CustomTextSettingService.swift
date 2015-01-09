@@ -14,7 +14,7 @@ class CustomTextSettingService {
     
     let settingDataManager:SettingsDataManager = SettingsDataManager()
     let textAttributeService:TextAttributeService = TextAttributeService()
-    let regexMatcher: RegexMatcher = RegexMatcher()
+    let regexPatternMatcherService:RegexPatternMatcherService = RegexPatternMatcherService()
     var customTagTextRange: NSMutableArray = NSMutableArray()
     var customCellText: NSString = NSString()
     let startPattern = "\\{\\w\\}"
@@ -51,8 +51,8 @@ class CustomTextSettingService {
         var endTagArray: NSMutableArray = NSMutableArray()
         var tagRange: NSMutableArray = NSMutableArray()
         
-        startTagArray = regexMatcher.getRange(cellText,pattern: startPattern)
-        endTagArray = regexMatcher.getRange(cellText,pattern: endPattern)
+        startTagArray = regexPatternMatcherService.getRange(cellText,pattern: startPattern)
+        endTagArray = regexPatternMatcherService.getRange(cellText,pattern: endPattern)
         if(startTagArray.count == endTagArray.count){
             for var index=0; index < startTagArray.count; index++ {
                 var startRangeValue:NSRange
@@ -91,21 +91,21 @@ class CustomTextSettingService {
     
     func removePattern(cellText : NSString) -> NSString{
         var patternRemovedText: NSString = NSString()
-        patternRemovedText = regexMatcher.removePatternText(cellText, pattern: startPattern)
-        patternRemovedText = regexMatcher.removePatternText(patternRemovedText, pattern: endPattern)
+        patternRemovedText = regexPatternMatcherService.removePatternText(cellText, pattern: startPattern)
+        patternRemovedText = regexPatternMatcherService.removePatternText(patternRemovedText, pattern: endPattern)
         return patternRemovedText
     }
     
     func getCustomTagRangesByRegex(cellText : NSString) -> NSMutableArray{
         let customTagRegexPattern = "\\{\\w\\}.*\\{/\\w\\}"
         var array: NSMutableArray = NSMutableArray()
-        array = regexMatcher.getRange(cellText,pattern: customTagRegexPattern)
+        array = regexPatternMatcherService.getRange(cellText,pattern: customTagRegexPattern)
         return array
     }
     
     func totalPatternLengthValue(text: NSString) -> Int{
         let startPattern = "\\{\\w\\}"
         let endPattern = "\\{/\\w\\}"
-        return regexMatcher.getPatternTextLength(text, pattern: startPattern) + regexMatcher.getPatternTextLength(text, pattern: endPattern)
+        return regexPatternMatcherService.getPatternTextLength(text, pattern: startPattern) + regexPatternMatcherService.getPatternTextLength(text, pattern: endPattern)
     }
 }
