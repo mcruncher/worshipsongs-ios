@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource, NSXMLParserDelega
     
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     let textAttributeService:TextAttributeService = TextAttributeService()
+    let util:Util = Util()
     var tableView:UITableView!
     var parser: NSXMLParser = NSXMLParser()
     
@@ -36,6 +37,9 @@ class ViewController: UIViewController, UITableViewDataSource, NSXMLParserDelega
     
     override func viewDidLoad()  {
         super.viewDidLoad()
+        if(util.keepAwakeScreenDisplayStatus()){
+            UIApplication.sharedApplication().idleTimerDisabled = true
+        }
         self.navigationItem.title = songName;
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
         self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultTextAttributes()
