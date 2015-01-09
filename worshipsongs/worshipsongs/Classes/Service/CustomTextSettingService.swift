@@ -24,7 +24,7 @@ class CustomTextSettingService {
         var customTagRangeArray = getCustomTagRanges(cellText)
         if(customTagRangeArray.count > 0)
         {
-            customTagTextRange = findRangesToApplyColor(cellText, customTagRangeArray: customTagRangeArray)
+            customTagTextRange = findCustomTagTextRange(cellText, customTagRangeArray: customTagRangeArray)
             customCellText = removePattern(cellText)
         }
         else
@@ -67,7 +67,7 @@ class CustomTextSettingService {
         return tagRange
     }
     
-    func findRangesToApplyColor(cellText : NSString, customTagRangeArray: NSMutableArray) -> NSMutableArray{
+    func findCustomTagTextRange(cellText : NSString, customTagRangeArray: NSMutableArray) -> NSMutableArray{
         var startIndex: Int = 0
         var tagTextRange: NSMutableArray = NSMutableArray()
         for var index=0; index < customTagRangeArray.count; index++ {
@@ -95,6 +95,7 @@ class CustomTextSettingService {
         patternRemovedText = regexPatternMatcherService.removePatternText(patternRemovedText, pattern: endPattern)
         return patternRemovedText
     }
+    
     
     func getCustomTagRangesByRegex(cellText : NSString) -> NSMutableArray{
         let customTagRegexPattern = "\\{\\w\\}.*\\{/\\w\\}"

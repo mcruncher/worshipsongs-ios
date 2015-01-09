@@ -49,7 +49,7 @@ class CustomTextSettingServiceTest: XCTestCase {
     
     func testFindRange(){
         println("--testFindRange--")
-        var tagRange:NSMutableArray = customTextSettingService.findRangesToApplyColor(string, customTagRangeArray: textRange)
+        var tagRange:NSMutableArray = customTextSettingService.findCustomTagTextRange(string, customTagRangeArray: textRange)
         var modifiedRange: NSMutableArray = NSMutableArray()
         var range1:NSRange = NSMakeRange(0,47)
         var range2:NSRange = NSMakeRange(100,22)
