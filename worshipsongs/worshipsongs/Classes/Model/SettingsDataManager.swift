@@ -112,7 +112,7 @@ class SettingsDataManager {
             secondaryFontColor = secondaryFontColorInfo
         } else {
             // add default data
-            var colorToSetAsDefault : UIColor = UIColor.blackColor()
+            var colorToSetAsDefault : UIColor = UIColor.redColor()
             var data : NSData = NSKeyedArchiver.archivedDataWithRootObject(colorToSetAsDefault)
             userDefaults.setObject(data, forKey: "secondaryFontColor")
             userDefaults.synchronize()
