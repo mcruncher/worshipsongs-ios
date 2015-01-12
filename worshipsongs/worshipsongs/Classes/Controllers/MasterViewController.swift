@@ -20,7 +20,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     var filteredData = [(Songs)]()
     
     override func viewDidLoad() {
-        self.navigationItem.title = "Worship songs"
+        self.navigationItem.title = "Worship Songs"
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
         self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultTextAttributes()
         self.songData = DatabaseHelper.instance.getSongModel()
