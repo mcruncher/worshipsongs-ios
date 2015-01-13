@@ -16,7 +16,7 @@ class TextAttributeService{
     }
 
     func getDefaultTextAttributes() -> NSDictionary{
-        let textFontAttributes = [ NSFontAttributeName: getDefaultFont(),NSForegroundColorAttributeName: UIColor.whiteColor()]
+        let textFontAttributes = [ NSFontAttributeName: getDefaultFont(),NSForegroundColorAttributeName: UIColor.blackColor()]
         return textFontAttributes
     }
 
