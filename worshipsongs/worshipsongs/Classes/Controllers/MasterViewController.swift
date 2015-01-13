@@ -23,7 +23,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         self.navigationItem.title = "Worship Songs"
         self.navigationItem.titleView = nil;
         //self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
-        self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultTextAttributes()
+        //self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultTextAttributes()
         self.songData = DatabaseHelper.instance.getSongModel()
         var myFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y,
         self.view.bounds.size.width, 44);
