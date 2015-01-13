@@ -43,6 +43,8 @@ class ViewController: UIViewController, UITableViewDataSource, NSXMLParserDelega
         self.navigationItem.title = songName;
         //self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
         //self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultTextAttributes()
+        let titleForeGroundColor: NSDictionary = [NSForegroundColorAttributeName: UIColor.blackColor()]
+        self.navigationController.navigationBar.titleTextAttributes = titleForeGroundColor
         var myFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y,
             self.view.bounds.size.width, self.view.bounds.size.height);
         self.view.frame = myFrame
