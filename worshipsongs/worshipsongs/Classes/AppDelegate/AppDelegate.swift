@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sleep(1)
         let masterViewController = MasterViewController(style:UITableViewStyle.Grouped)
         let navController = UINavigationController(rootViewController: masterViewController)
-        navController.navigationBar.barTintColor = UIColor.grayColor()
+       // navController.navigationBar.barTintColor = UIColor.grayColor()
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navController.navigationBar.titleTextAttributes = titleDict
                 
