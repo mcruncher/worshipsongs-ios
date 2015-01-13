@@ -21,6 +21,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     override func viewDidLoad() {
         self.navigationItem.title = "Worship Songs"
+        self.navigationItem.titleView = nil;
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
         self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultTextAttributes()
         self.songData = DatabaseHelper.instance.getSongModel()
@@ -108,7 +109,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     
      override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       
+        self.navigationItem.titleView = nil;
         var lyrics = String()
         var songName = String()
         var verseOrder = String()
