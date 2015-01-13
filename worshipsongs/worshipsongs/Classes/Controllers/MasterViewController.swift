@@ -21,7 +21,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     override func viewDidLoad() {
         self.navigationItem.title = "Worship Songs"
-        self.navigationItem.titleView = nil;
+        //self.navigationItem.titleView = nil;
         //self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
         self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultNavigatioItemFontColor()
         self.songData = DatabaseHelper.instance.getSongModel()
@@ -35,11 +35,16 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         mySearchBar.tintColor = UIColor.grayColor()
         tableView.dataSource = self
         self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
-        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
-        self.navigationController?.navigationBarHidden=false
+        
+        self.addSearchBarButton()
         self.addSettingsButton()
         // Reload the table
         self.tableView.reloadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationItem.titleView = nil;
+        self.addSearchBarButton()
     }
     
     // Return the number of sections
@@ -109,7 +114,6 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     
      override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.navigationItem.titleView = nil;
         var lyrics = String()
         var songName = String()
         var verseOrder = String()
@@ -146,7 +150,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     func searchButtonItemClicked(sender:UIBarButtonItem){
        self.navigationItem.titleView = mySearchBar;
-        self.navigationItem.rightBarButtonItem = nil
+      self.navigationItem.rightBarButtonItem=nil
        mySearchBar.becomeFirstResponder()
     }
     
@@ -160,6 +164,10 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         settingsButton.sizeToFit()
         var settingsBarButton:UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
         self.navigationItem.setLeftBarButtonItem(settingsBarButton, animated: true)
+    }
+    
+    func addSearchBarButton(){
+        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
     }
     
     func switchToSettingsViewController(sender:UIBarButtonItem){

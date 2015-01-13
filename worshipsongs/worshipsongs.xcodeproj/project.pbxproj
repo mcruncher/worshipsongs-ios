@@ -469,6 +469,7 @@
 				TargetAttributes = {
 					3A88F8871A402C6700193E53 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = A73GS82MB2;
 					};
 					3A88F8A11A402C6700193E53 = {
 						CreatedOnToolsVersion = 6.2;
@@ -690,6 +691,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = worshipsongs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -699,6 +702,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9dac0608-3e9a-44b1-bf4c-eba7bb351522";
 				SWIFT_OBJC_BRIDGING_HEADER = worshipsongs/classes/Header/Header.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -709,6 +713,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = worshipsongs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -718,6 +724,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9dac0608-3e9a-44b1-bf4c-eba7bb351522";
 				SWIFT_OBJC_BRIDGING_HEADER = worshipsongs/classes/Header/Header.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
