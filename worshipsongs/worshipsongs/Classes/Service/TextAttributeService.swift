@@ -19,5 +19,10 @@ class TextAttributeService{
         let textFontAttributes = [ NSFontAttributeName: getDefaultFont(),NSForegroundColorAttributeName: UIColor.blackColor()]
         return textFontAttributes
     }
+    
+     func getDefaultNavigatioItemFontColor() -> NSDictionary{
+        let titleForeGroundColor: NSDictionary = [NSForegroundColorAttributeName: UIColor.blackColor()]
+        return titleForeGroundColor
+    }
 
 }
