@@ -55,7 +55,11 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView && filteredData.count > 0 {
             return self.filteredData.count
-        } else {
+        }
+        else if filteredData.count == 0 && !mySearchBar.text.isEmpty {
+            return 1
+        }
+        else {
             return self.songData.count
         }
     }
@@ -71,11 +75,20 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         // Check to see whether the normal table or search results table is being displayed and set the Candy object from the appropriate array
         if tableView == self.tableView && filteredData.count > 0 {
             song = filteredData[indexPath.row]
-        } else {
-            song = songData[indexPath.row]
+            dataCell!.textLabel!.text = song.title
+            dataCell!.textLabel?.font = textAttributeService.getDefaultFont()
         }
-        dataCell!.textLabel!.text = song.title
-        dataCell!.textLabel?.font = textAttributeService.getDefaultFont()
+        else if filteredData.count == 0 && !mySearchBar.text.isEmpty {
+            dataCell!.textLabel!.text = "No results found !..."
+//            dataCell!.textLabel!.textColor = UIColor.grayColor()
+//            dataCell!.textLabel!.textAlignment = NSTextAlignment.Center
+        }
+        else {
+            song = songData[indexPath.row]
+            dataCell!.textLabel!.text = song.title
+            dataCell!.textLabel?.font = textAttributeService.getDefaultFont()
+        }
+        
         
         return dataCell!
     }
@@ -95,7 +108,9 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.navigationItem.titleView = nil;
+        self.mySearchBar.text = ""
         self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
+        self.tableView.reloadData()
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -105,11 +120,17 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     func filterContentForSearchText(searchBar: UISearchBar) {
         // Filter the array using the filter method
-        var searchText = searchBar.text
-            self.filteredData = self.songData.filter({( song: Songs) -> Bool in
+            var searchText = searchBar.text
+            var data = [(Songs)]()
+            data = self.songData.filter({( song: Songs) -> Bool in
             var stringMatch = (song.title as NSString).localizedCaseInsensitiveContainsString(searchText)
             return (stringMatch.boolValue)
+                
         })
+        
+        if data.count != songData.count{
+            self.filteredData = data
+        }
     }
     
     
