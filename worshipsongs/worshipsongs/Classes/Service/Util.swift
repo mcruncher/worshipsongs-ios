@@ -54,11 +54,14 @@ class Util: NSObject {
         let jsonData=NSData(contentsOfURL:url!)
         var err: NSError?
         var latestChangeSetValue: NSString?
-        var dict: NSDictionary=NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers, error:nil) as NSDictionary
-        for (key,value) in dict {
-            if(key as NSString == "sha"){
-                latestChangeSetValue = value as? NSString;
-               // SettingsDataManager.sharedInstance.saveData(latestChangeSetValue, key: "latestChangeSet")
+        if(jsonData != nil)
+        {
+            var dict: NSDictionary=NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers, error:nil) as NSDictionary
+            for (key,value) in dict {
+                if(key as NSString == "sha"){
+                    latestChangeSetValue = value as? NSString;
+                    // SettingsDataManager.sharedInstance.saveData(latestChangeSetValue, key: "latestChangeSet")
+                }
             }
         }
         return latestChangeSetValue!
@@ -78,7 +81,6 @@ class Util: NSObject {
         fileManager.createFileAtPath(destinationPath, contents: dataFromURL, attributes: nil)
         SettingsDataManager.sharedInstance.saveData(latestChangeSet, key: "latestChangeSet")
         println("After save latestChangeSet : \(settingDataManager.getLatestChangeSet)")
-        
         if((writeError) != nil){
             NSLog("Error occured while downloading:", writeError!)
         }
