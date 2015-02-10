@@ -54,6 +54,7 @@ class Util: NSObject {
         let jsonData=NSData(contentsOfURL:url!)
         var err: NSError?
         var latestChangeSetValue: NSString?
+        latestChangeSetValue = ""
         if(jsonData != nil)
         {
             var dict: NSDictionary=NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers, error:nil) as NSDictionary
@@ -68,7 +69,7 @@ class Util: NSObject {
     }
     
     func startDownload(latestChangeSet:NSString){
-        println("Download Startted")
+        println("Download Started")
         var writeError: NSError?
         let filemanager = NSFileManager.defaultManager()
         let documentsPath : AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask,true)[0]

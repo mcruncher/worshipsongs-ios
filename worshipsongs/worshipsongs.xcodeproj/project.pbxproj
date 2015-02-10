@@ -706,7 +706,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9dac0608-3e9a-44b1-bf4c-eba7bb351522";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = worshipsongs/classes/Header/Header.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -728,7 +728,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9dac0608-3e9a-44b1-bf4c-eba7bb351522";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = worshipsongs/classes/Header/Header.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

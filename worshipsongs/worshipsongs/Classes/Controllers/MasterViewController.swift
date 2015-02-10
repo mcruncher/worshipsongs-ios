@@ -23,20 +23,25 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     var container: UIView = UIView()
     var loadingView: UIView = UIView()
     var loadingActivityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var loadingLabel:UILabel=UILabel()
+    var isParentView:Bool = false
+    
     
     override func viewDidAppear(animated: Bool) {
-        downloadService.checkConnectionAndDownloadFile()
-        loadingActivityIndicator.stopAnimating()
-        loadingView.removeFromSuperview()
-        container.removeFromSuperview()
-        //self.navigationItem.titleView = nil;
-        //self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
-        self.songData = DatabaseHelper.instance.getSongModel()
-        tableView.dataSource = self
-        // Reload the table
-        self.tableView.reloadData()
-        println("viewDidAppear finished")
-        
+        if isParentView{
+            downloadService.checkConnectionAndDownloadFile()
+            loadingActivityIndicator.stopAnimating()
+            loadingView.removeFromSuperview()
+            container.removeFromSuperview()
+            //self.navigationItem.titleView = nil;
+            //self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
+            self.songData = DatabaseHelper.instance.getSongModel()
+            tableView.dataSource = self
+            // Reload the table
+            self.tableView.reloadData()
+            isParentView = false
+            println("viewDidAppear finished")
+        }
     }
     
 
@@ -228,7 +233,8 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
         
-        var loadingLabel:UILabel=UILabel(frame: CGRectMake(10, 45, 100, 100))
+
+        loadingLabel = UILabel(frame: CGRectMake(10, 45, 100, 100))
         //loadingLabel.center = CGPointMake(160, 284)
         loadingLabel.textAlignment = NSTextAlignment.Center
         loadingLabel.textColor = UIColor.whiteColor()
@@ -248,5 +254,9 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         container.addSubview(loadingView)
         uiView.addSubview(container)
         loadingActivityIndicator.startAnimating()
+    }
+    
+    override func willMoveToParentViewController(parent: UIViewController?) {
+        isParentView = true
     }
 }
