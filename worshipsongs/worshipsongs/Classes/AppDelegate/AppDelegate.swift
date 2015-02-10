@@ -17,29 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let utilClass:Util = Util()
     let connectionService:ConnectionService = ConnectionService()
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    
-        if(connectionService.isConnectedToNetwork()){
-            let statusType = connectionService.isConnectedToNetworkOfType()
-            switch statusType{
-            case .WWAN:
-               utilClass.downloadFile()
-            case .WiFi:
-                utilClass.downloadFile()
-            case .NotConnected:
-                println("Connection Type: Not connected to the Internet")
-            }
-        }
-        else
-        {
-            println("Internet Connection: Unavailable")
-            let latestChangeSetInUserDefults  = NSUserDefaults.standardUserDefaults().objectForKey("latestChangeSet") as NSString!
-            if (latestChangeSetInUserDefults == nil)
-            {
-                utilClass.copyFile("songs.sqlite")
-            }
-        }
-        
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
         sleep(1)
         let masterViewController = MasterViewController(style:UITableViewStyle.Grouped)
         let navController = UINavigationController(rootViewController: masterViewController)
@@ -53,7 +31,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
-    
-
 }

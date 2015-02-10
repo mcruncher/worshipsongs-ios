@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class MasterViewController: UITableViewController, UITableViewDataSource, UISearchBarDelegate  {
+    let downloadService:DownloadService = DownloadService()
     let textAttributeService:TextAttributeService = TextAttributeService()
     let settingDataManager:SettingsDataManager = SettingsDataManager()
     var songTitles : NSMutableArray = []
@@ -18,28 +19,43 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     var mySearchBar: UISearchBar!
     var songData = [(Songs)]()
     var filteredData = [(Songs)]()
+    var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var container: UIView = UIView()
+    var loadingView: UIView = UIView()
+    var loadingActivityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    override func viewDidLoad() {
-        self.navigationItem.title = "Worship Songs"
+    override func viewDidAppear(animated: Bool) {
+        downloadService.checkConnectionAndDownloadFile()
+        loadingActivityIndicator.stopAnimating()
+        loadingView.removeFromSuperview()
+        container.removeFromSuperview()
         //self.navigationItem.titleView = nil;
         //self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
-        self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultNavigatioItemFontColor()
         self.songData = DatabaseHelper.instance.getSongModel()
+        tableView.dataSource = self
+        // Reload the table
+        self.tableView.reloadData()
+        println("viewDidAppear finished")
+        
+    }
+    
+
+    override func viewDidLoad() {
+        self.navigationItem.title = "Worship Songs"
+        self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultNavigatioItemFontColor()
+        showActivityIndicatory(self.tableView)
         var myFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y,
-        self.view.bounds.size.width, 44);
+            self.view.bounds.size.width, 44);
         mySearchBar = UISearchBar(frame: myFrame)
         mySearchBar.delegate = self;
         mySearchBar.placeholder = "Search Songs"
         //display the cancel button next to the search bar
         mySearchBar.showsCancelButton = true;
         mySearchBar.tintColor = UIColor.grayColor()
-        tableView.dataSource = self
-        self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
-        
+         self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
         self.addSearchBarButton()
         self.addSettingsButton()
-        // Reload the table
-        self.tableView.reloadData()
+        self.view.addSubview(loadingIndicator)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -59,9 +75,13 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
         else if filteredData.count == 0 && !mySearchBar.text.isEmpty {
             return 1
         }
-        else {
+        else if songData.count > 0{
             return self.songData.count
         }
+        else{
+            return 10
+        }
+        
     }
     
      override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -79,17 +99,16 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
             dataCell!.textLabel?.font = textAttributeService.getDefaultFont()
         }
         else if filteredData.count == 0 && !mySearchBar.text.isEmpty {
-            dataCell!.textLabel!.text = "No results found !..."
-//            dataCell!.textLabel!.textColor = UIColor.grayColor()
-//            dataCell!.textLabel!.textAlignment = NSTextAlignment.Center
+            dataCell!.textLabel!.text = "No Results found!..."
         }
-        else {
+        else if songData.count > 0 {
             song = songData[indexPath.row]
             dataCell!.textLabel!.text = song.title
             dataCell!.textLabel?.font = textAttributeService.getDefaultFont()
         }
-        
-        
+        else{
+            dataCell!.textLabel!.text = ""
+        }
         return dataCell!
     }
     
@@ -194,5 +213,40 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     func switchToSettingsViewController(sender:UIBarButtonItem){
         let settingViewController = SettingViewController(style:UITableViewStyle.Grouped)
         self.navigationController?.pushViewController(settingViewController, animated: true);
+    }
+    
+    func showActivityIndicatory(uiView: UIView) {
+        
+        container.frame = uiView.frame
+        container.center = uiView.center
+        container.backgroundColor = UIColor.whiteColor()
+        
+        
+        loadingView.frame = CGRectMake(0, 0, 120, 120)
+        loadingView.center = uiView.center
+        loadingView.backgroundColor = UIColor.grayColor()
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        var loadingLabel:UILabel=UILabel(frame: CGRectMake(10, 45, 100, 100))
+        //loadingLabel.center = CGPointMake(160, 284)
+        loadingLabel.textAlignment = NSTextAlignment.Center
+        loadingLabel.textColor = UIColor.whiteColor()
+        loadingLabel.font = UIFont(name: "HelveticaNeue",size: 10.0)
+        loadingLabel.lineBreakMode = .ByWordWrapping
+        loadingLabel.numberOfLines = 0
+        loadingLabel.text = "Checking update for songs database"
+        self.loadingView.addSubview(loadingLabel)
+        
+        
+        loadingActivityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+        loadingActivityIndicator.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.WhiteLarge
+        loadingActivityIndicator.center = CGPointMake(loadingView.frame.size.width / 2,
+            loadingView.frame.size.height / 2);
+        loadingView.addSubview(loadingActivityIndicator)
+        container.addSubview(loadingView)
+        uiView.addSubview(container)
+        loadingActivityIndicator.startAnimating()
     }
 }

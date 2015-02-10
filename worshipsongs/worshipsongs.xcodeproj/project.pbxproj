@@ -77,6 +77,7 @@
 		3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A88F8991A402C6700193E53 /* Images.xcassets */; };
 		3AFED06A1A4A72E9005C9032 /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AFED0691A4A72E9005C9032 /* colorPalette.plist */; };
 		3AFED06E1A4A9D74005C9032 /* ColorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */; };
+		9FC45A841A88384E0024EE5F /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC45A831A88384E0024EE5F /* DownloadService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +157,7 @@
 		3A88F8A71A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AFED0691A4A72E9005C9032 /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = colorPalette.plist; path = "../Third party/colorPalette.plist"; sourceTree = "<group>"; };
 		3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorSettingsViewController.swift; path = Controllers/ColorSettingsViewController.swift; sourceTree = "<group>"; };
+		9FC45A831A88384E0024EE5F /* DownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadService.swift; path = worshipsongs/Classes/DownloadService.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 				3A25DF681A5FCC080065FB5F /* RegexPatternMatcherService.swift */,
 				3A25DF6D1A5FCED70065FB5F /* CommonService.swift */,
 				3A25DF721A5FD1010065FB5F /* UserDefaultsSettingsProviderService.swift */,
+				9FC45A831A88384E0024EE5F /* DownloadService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */,
 				3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */,
 				3A25DF731A5FD1010065FB5F /* UserDefaultsSettingsProviderService.swift in Sources */,
+				9FC45A841A88384E0024EE5F /* DownloadService.swift in Sources */,
 				3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */,
 				3A25DF6E1A5FCED70065FB5F /* CommonService.swift in Sources */,
 				3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */,
