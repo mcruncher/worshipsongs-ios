@@ -89,7 +89,7 @@ class SettingsDataManager {
             fontSize = fontSizeInfo
         } else {
             // add default data
-            fontSize = CGFloat(12)
+            fontSize = CGFloat(16)
         }
     }
     
