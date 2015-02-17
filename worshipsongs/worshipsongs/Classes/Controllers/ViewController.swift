@@ -54,6 +54,7 @@ class ViewController: UIViewController, UITableViewDataSource, NSXMLParserDelega
         parser.delegate = self
         parser.parse()
         if(verseOrderList.count < 1){
+            println("parsedVerseOrderList:\(parsedVerseOrderList)")
             verseOrderList = parsedVerseOrderList
         }
         self.tableView = UITableView(frame:self.view!.frame)
@@ -122,17 +123,21 @@ class ViewController: UIViewController, UITableViewDataSource, NSXMLParserDelega
     
     func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!) {
         element = elementName
+        println("element:\(element)")
         attribues = attributeDict
+        println("attribues:\(attribues)")
        
     }
     
     func parser(parser: NSXMLParser!, foundCharacters string: String!) {
+        println("string:\(string)")
         let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+         println("data:\(data)")
         if (!data.isEmpty) {
             if element == "verse" {
                 var verseType = (attribues.objectForKey("type") as String).lowercaseString
                 var verseLabel = attribues.objectForKey("label") as String
-                lyricsData.append(data);
+                //lyricsData.append(data);
                 listDataDictionary.setObject(data as String, forKey: verseType + verseLabel)
                 if(verseOrderList.count < 1){
                     parsedVerseOrderList.addObject(verseType + verseLabel)

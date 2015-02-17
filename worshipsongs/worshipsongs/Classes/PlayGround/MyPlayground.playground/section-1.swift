@@ -62,3 +62,5 @@ for i in 0..<1{
         
     }
 }
+
+var companies:NSDictionary = ["AAPL" : "Apple Inc", "GOOG" : "Google Inc", "AMZN" : "Amazon.com, Inc", "FB" : "Facebook Inc"]

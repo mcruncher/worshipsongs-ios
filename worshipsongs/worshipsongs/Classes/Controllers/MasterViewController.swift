@@ -133,6 +133,7 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.navigationItem.titleView = nil;
         self.mySearchBar.text = ""
+        self.filteredData = [(Songs)]()
         self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
         self.tableView.reloadData()
     }

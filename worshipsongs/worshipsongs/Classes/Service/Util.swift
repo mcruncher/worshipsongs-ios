@@ -13,6 +13,8 @@ class Util: NSObject {
     
     let settingDataManager:SettingsDataManager = SettingsDataManager()
     let commonService:CommonService = CommonService()
+    
+    
 
     func copyFile(fileName: NSString) {
         var dbPath: String = commonService.getDocumentDirectoryPath(fileName)
@@ -51,13 +53,16 @@ class Util: NSObject {
     
     func parseJson() -> NSString{
         let url=NSURL(string:"https://api.github.com/repos/crunchersaspire/worshipsongs-db/commits/master")
+        
         let jsonData=NSData(contentsOfURL:url!)
+       // println("data:\(jsonData)")
         var err: NSError?
         var latestChangeSetValue: NSString?
         latestChangeSetValue = ""
         if(jsonData != nil)
         {
             var dict: NSDictionary=NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers, error:nil) as NSDictionary
+            println(":\(dict)")
             for (key,value) in dict {
                 if(key as NSString == "sha"){
                     latestChangeSetValue = value as? NSString;
