@@ -159,7 +159,7 @@
 		3AFED0691A4A72E9005C9032 /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = colorPalette.plist; path = "../Third party/colorPalette.plist"; sourceTree = "<group>"; };
 		3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorSettingsViewController.swift; path = Controllers/ColorSettingsViewController.swift; sourceTree = "<group>"; };
 		9FC45A831A88384E0024EE5F /* DownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadService.swift; path = worshipsongs/Classes/DownloadService.swift; sourceTree = SOURCE_ROOT; };
-		9FCE9E681AC936CF00CB3DE9 /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = songs.sqlite; path = ../../../../../../../../Downloads/songs.sqlite; sourceTree = "<group>"; };
+		9FCE9E681AC936CF00CB3DE9 /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
