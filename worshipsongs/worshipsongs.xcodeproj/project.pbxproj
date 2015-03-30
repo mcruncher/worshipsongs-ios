@@ -78,6 +78,7 @@
 		3AFED06A1A4A72E9005C9032 /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AFED0691A4A72E9005C9032 /* colorPalette.plist */; };
 		3AFED06E1A4A9D74005C9032 /* ColorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */; };
 		9FC45A841A88384E0024EE5F /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC45A831A88384E0024EE5F /* DownloadService.swift */; };
+		9FCE9E691AC936CF00CB3DE9 /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 9FCE9E681AC936CF00CB3DE9 /* songs.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +159,7 @@
 		3AFED0691A4A72E9005C9032 /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = colorPalette.plist; path = "../Third party/colorPalette.plist"; sourceTree = "<group>"; };
 		3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorSettingsViewController.swift; path = Controllers/ColorSettingsViewController.swift; sourceTree = "<group>"; };
 		9FC45A831A88384E0024EE5F /* DownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadService.swift; path = worshipsongs/Classes/DownloadService.swift; sourceTree = SOURCE_ROOT; };
+		9FCE9E681AC936CF00CB3DE9 /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = songs.sqlite; path = ../../../../../../../../Downloads/songs.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,10 +419,19 @@
 		3AC876C01A48128A002D1BFF /* asset */ = {
 			isa = PBXGroup;
 			children = (
+				9FCE9E671AC9360F00CB3DE9 /* database */,
 				3A08349D1A5E10AF0056293D /* html */,
 				3A08349C1A5E10890056293D /* images */,
 			);
 			path = asset;
+			sourceTree = "<group>";
+		};
+		9FCE9E671AC9360F00CB3DE9 /* database */ = {
+			isa = PBXGroup;
+			children = (
+				9FCE9E681AC936CF00CB3DE9 /* songs.sqlite */,
+			);
+			path = database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -526,6 +537,7 @@
 				3A25DF591A5FA1640065FB5F /* format_font_size_more.png in Resources */,
 				3A08E85C1A5CE3E200964978 /* Settings@2x.png in Resources */,
 				3A08349F1A5E140F0056293D /* about.html in Resources */,
+				9FCE9E691AC936CF00CB3DE9 /* songs.sqlite in Resources */,
 				3A25DF671A5FBCC80065FB5F /* Font-icon.png in Resources */,
 				3A038E201A563A7E009D4308 /* Default-Landscape@2x.png in Resources */,
 				3A000AD91A5F7E940065DBC2 /* slider-thumb.png in Resources */,

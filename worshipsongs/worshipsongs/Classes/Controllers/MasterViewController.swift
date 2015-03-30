@@ -28,27 +28,27 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
     
     
     override func viewDidAppear(animated: Bool) {
-        if isParentView{
-            downloadService.checkConnectionAndDownloadFile()
-            loadingActivityIndicator.stopAnimating()
-            loadingView.removeFromSuperview()
-            container.removeFromSuperview()
-            //self.navigationItem.titleView = nil;
-            //self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
-            self.songData = DatabaseHelper.instance.getSongModel()
-            tableView.dataSource = self
-            // Reload the table
-            self.tableView.reloadData()
-            isParentView = false
-            println("viewDidAppear finished")
-        }
+//        if isParentView{
+//            downloadService.checkConnectionAndDownloadFile()
+//            loadingActivityIndicator.stopAnimating()
+//            loadingView.removeFromSuperview()
+//            container.removeFromSuperview()
+//            //self.navigationItem.titleView = nil;
+//            //self.navigationController?.navigationBar.tintColor = UIColor.blackColor();
+//            self.songData = DatabaseHelper.instance.getSongModel()
+//            tableView.dataSource = self
+//            // Reload the table
+//            self.tableView.reloadData()
+//            isParentView = false
+//            println("viewDidAppear finished")
+//        }
     }
     
 
     override func viewDidLoad() {
         self.navigationItem.title = "Worship Songs"
         self.navigationController?.navigationBar.titleTextAttributes = textAttributeService.getDefaultNavigatioItemFontColor()
-        showActivityIndicatory(self.tableView)
+       // showActivityIndicatory(self.tableView)
         var myFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y,
             self.view.bounds.size.width, 44);
         mySearchBar = UISearchBar(frame: myFrame)
@@ -60,7 +60,11 @@ class MasterViewController: UITableViewController, UITableViewDataSource, UISear
          self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
         self.addSearchBarButton()
         self.addSettingsButton()
-        self.view.addSubview(loadingIndicator)
+        
+        self.songData = DatabaseHelper.instance.getSongModel()
+        tableView.dataSource = self
+        // Reload the table
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {

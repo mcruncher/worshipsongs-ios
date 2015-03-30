@@ -18,10 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let connectionService:ConnectionService = ConnectionService()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
-        sleep(1)
+        //Copy Database
+        utilClass.copyFile("songs.sqlite")
         let masterViewController = MasterViewController(style:UITableViewStyle.Grouped)
         let navController = UINavigationController(rootViewController: masterViewController)
-       // navController.navigationBar.barTintColor = UIColor.grayColor()
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navController.navigationBar.titleTextAttributes = titleDict
                 

@@ -17,12 +17,15 @@ class Util: NSObject {
     
 
     func copyFile(fileName: NSString) {
+        println("File copy started")
         var dbPath: String = commonService.getDocumentDirectoryPath(fileName)
+        
         var fileManager = NSFileManager.defaultManager()
         if !fileManager.fileExistsAtPath(dbPath) {
             var fromPath: String? = NSBundle.mainBundle().resourcePath?.stringByAppendingPathComponent(fileName)
             fileManager.copyItemAtPath(fromPath!, toPath: dbPath, error: nil)
         }
+        println("File copied successfully in \(dbPath)")
     }
     
     func invokeAlertMethod(strTitle: NSString, strBody: NSString, delegate: AnyObject?) {
