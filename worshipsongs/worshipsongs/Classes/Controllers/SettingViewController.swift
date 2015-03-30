@@ -72,7 +72,7 @@ class SettingViewController: UITableViewController {
         self.restoreSettingCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.restoreSettingButton = UIButton(frame: CGRectMake(0, 5, 10, 10))
         self.restoreSettingButton.addTarget(self, action: "resetValue:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.restoreSettingButton.setTitle("Restore default values", forState: UIControlState.Normal)
+        self.restoreSettingButton.setTitle("Reset to default", forState: UIControlState.Normal)
         self.restoreSettingButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.restoreSettingButton.sizeToFit()
         self.restoreSettingButton.titleLabel?.font = textAttributeService.getDefaultFont()
@@ -220,12 +220,12 @@ class SettingViewController: UITableViewController {
     }
     
     func resetValue(sender:UIButton){
-        let alertView = UIAlertController(title: "Alert!", message: "Reset all default settings", preferredStyle: .Alert)
-        alertView.addAction(UIAlertAction(title: "Done", style: .Default, handler: { (alertAction) -> Void in
+        let alertView = UIAlertController(title: "Reset all settings to their defaults?", message: "", preferredStyle: .Alert)
+        alertView.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (alertAction) -> Void in
             SettingsDataManager.sharedInstance.reset()
             self.setKeepAwakeStatus()
         }))
-        alertView.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alertView.addAction(UIAlertAction(title: "No", style: .Cancel, handler: nil))
         presentViewController(alertView, animated: true, completion: nil)
     }
     
