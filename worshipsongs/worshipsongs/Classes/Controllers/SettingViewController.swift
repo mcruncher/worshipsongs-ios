@@ -78,25 +78,19 @@ class SettingViewController: UITableViewController {
         self.restoreSettingButton.titleLabel?.font = textAttributeService.getDefaultFont()
         self.restoreSettingCell.addSubview(self.restoreSettingButton)
         
-        
         // construct color setting cell, section 3, row 0
         self.versionSettingCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.versionLabel = UILabel(frame: CGRectMake(5, 10, 70, 20))
         self.versionLabel.text = "Version"
         self.versionLabel.textAlignment = NSTextAlignment.Left;
         self.versionLabel.font = textAttributeService.getDefaultFont()
-        
         self.versionValueLabel = UILabel(frame: CGRectMake(0, 5, 10, 10))
         self.versionValueLabel.text = "version"
         self.versionLabel.textAlignment = NSTextAlignment.Right;
         self.versionValueLabel.textColor = UIColor.grayColor()
-        
-       // self.versionValueLabel.lineBreakMode = ;
         self.versionValueLabel.numberOfLines = 0;
         self.versionValueLabel.font = textAttributeService.getDefaultFont()
-         self.versionValueLabel.textAlignment = NSTextAlignment.Right;
-        //self.versionSettingCell.addSubview(self.versionLabel)
-       // self.versionSettingCell.addSubview(self.versionValueLabel)
+        self.versionValueLabel.textAlignment = NSTextAlignment.Right;
         self.versionSettingCell.contentView.addSubview(self.versionLabel)
         self.versionSettingCell.contentView.addSubview(self.versionValueLabel)
         
