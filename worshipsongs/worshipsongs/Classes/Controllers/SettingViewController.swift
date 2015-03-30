@@ -63,7 +63,7 @@ class SettingViewController: UITableViewController {
         self.colorSettingsCell.addSubview(self.colorSettingsLabel)
         
         // construct share cell, section 1, row 0
-        self.keepAwakeCell.textLabel?.text = "To keep awake on screen"
+        self.keepAwakeCell.textLabel?.text = "Keep the screen awake"
         self.keepAwakeCell.textLabel?.font = textAttributeService.getDefaultFont()
         self.keepAwakeCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         setKeepAwakeStatus()
