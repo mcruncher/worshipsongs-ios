@@ -18,8 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let connectionService:ConnectionService = ConnectionService()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
-        //Copy Database
-        utilClass.copyFile("songs.sqlite")
+        var documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        var databasePath = documentDirectoryPath.stringByAppendingPathComponent("songs.sqlite")
+        var checkValidation = NSFileManager.defaultManager()
+        if (checkValidation.fileExistsAtPath(databasePath)){
+            println("database Already copied");
+        }
+        else{
+             utilClass.copyFile("songs.sqlite")
+        }
         let masterViewController = MasterViewController(style:UITableViewStyle.Grouped)
         let navController = UINavigationController(rootViewController: masterViewController)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
