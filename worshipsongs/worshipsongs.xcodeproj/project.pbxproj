@@ -57,7 +57,6 @@
 		3A08E87B1A5D303800964978 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F901A43D2BB002231BD /* FMDatabaseAdditions.m */; };
 		3A08E87C1A5D303B00964978 /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A024F911A43D2BB002231BD /* fmdb.txt */; };
 		3A08E87E1A5D305B00964978 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A024F431A43B91F002231BD /* libsqlite3.0.dylib */; };
-		3A08E87F1A5D305E00964978 /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
 		3A25DF581A5FA1640065FB5F /* format_font_size_less.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF561A5FA1640065FB5F /* format_font_size_less.png */; };
 		3A25DF591A5FA1640065FB5F /* format_font_size_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF571A5FA1640065FB5F /* format_font_size_more.png */; };
 		3A25DF651A5FB4A30065FB5F /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF641A5FB4A30065FB5F /* color.png */; };
@@ -72,7 +71,6 @@
 		3A25DF741A5FD1B70065FB5F /* UserDefaultsSettingsProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF721A5FD1010065FB5F /* UserDefaultsSettingsProviderService.swift */; };
 		3A25DF761A5FD3A40065FB5F /* UserDefaultsSettingsProviderServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF751A5FD3A40065FB5F /* UserDefaultsSettingsProviderServiceTest.swift */; };
 		3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
-		3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911CA1A5A628A00F1993E /* songs.sqlite */; };
 		3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */; };
 		3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A88F8991A402C6700193E53 /* Images.xcassets */; };
 		3AFED06A1A4A72E9005C9032 /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AFED0691A4A72E9005C9032 /* colorPalette.plist */; };
@@ -149,7 +147,6 @@
 		3A25DF721A5FD1010065FB5F /* UserDefaultsSettingsProviderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsSettingsProviderService.swift; path = Service/UserDefaultsSettingsProviderService.swift; sourceTree = "<group>"; };
 		3A25DF751A5FD3A40065FB5F /* UserDefaultsSettingsProviderServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsSettingsProviderServiceTest.swift; sourceTree = "<group>"; };
 		3A2911C81A5A5A7100F1993E /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionService.swift; path = Service/ConnectionService.swift; sourceTree = "<group>"; };
-		3A2911CA1A5A628A00F1993E /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 		3A88F8881A402C6700193E53 /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A88F88C1A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A88F8901A402C6700193E53 /* worshipsongs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = worshipsongs.xcdatamodel; sourceTree = "<group>"; };
@@ -238,14 +235,6 @@
 			);
 			name = FMDB;
 			path = "../Third Party/FMDB";
-			sourceTree = "<group>";
-		};
-		3A04309D1A42AE2000F4F833 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				3A2911CA1A5A628A00F1993E /* songs.sqlite */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		3A05165D1A41085300451F4F /* classes */ = {
@@ -360,7 +349,6 @@
 			children = (
 				3A024F4D1A43BC2B002231BD /* Third Party */,
 				3A024F421A43B90D002231BD /* Framework */,
-				3A04309D1A42AE2000F4F833 /* Resources */,
 				3A88F88A1A402C6700193E53 /* worshipsongs */,
 				3A88F8A51A402C6700193E53 /* worshipsongsTests */,
 				3A88F8891A402C6700193E53 /* Products */,
@@ -531,7 +519,6 @@
 				3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */,
 				3A038E1E1A563A7E009D4308 /* Default-Landscape-1536h in Resources */,
 				3A038E241A563A7E009D4308 /* Default-Portrait@2x.png in Resources */,
-				3A2911CB1A5A628A00F1993E /* songs.sqlite in Resources */,
 				3A038E221A563A7E009D4308 /* Default-Portrait-2048h in Resources */,
 				3A000ADD1A5F86820065DBC2 /* slider_other_thumb1.png in Resources */,
 				3A25DF591A5FA1640065FB5F /* format_font_size_more.png in Resources */,
@@ -548,7 +535,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A08E87F1A5D305E00964978 /* songs.sqlite in Resources */,
 				3A08E87C1A5D303B00964978 /* fmdb.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

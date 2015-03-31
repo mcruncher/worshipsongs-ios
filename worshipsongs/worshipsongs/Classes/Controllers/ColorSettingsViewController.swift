@@ -30,6 +30,7 @@ class ColorSettingsViewController: UITableViewController {
     var languageColor: UIColor = UIColor()
     
     var colorView: UIViewController = UIViewController()
+    var NUMBER_OF_ROWS = 2
    
     
     override func loadView() {
@@ -38,10 +39,6 @@ class ColorSettingsViewController: UITableViewController {
         // set the title
         self.title = "Color"
         
-        //CGRect Label1Frame = CGRectMake(10, 10, 290, 25);
-        //CGRect Label2Frame = CGRectMake(10, 33, 290, 25);
-        
-        // construct font setting cell, section 0, row 0
         self.primaryLanguageColorCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.primaryLanguageLabel = UILabel(frame: CGRectMake(10, 10, 250, 25))
         self.primaryLanguageLabel.text = "Tamil"
@@ -76,7 +73,7 @@ class ColorSettingsViewController: UITableViewController {
     // Return the number of rows for each section in your static table
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch(section) {
-        case 0: return 2    // section 0 has 2 rows
+        case 0: return NUMBER_OF_ROWS   // section 0 has 2 rows
         default: fatalError("Unknown number of sections")
         }
     }
