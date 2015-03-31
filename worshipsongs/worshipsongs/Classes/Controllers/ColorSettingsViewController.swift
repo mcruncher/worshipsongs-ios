@@ -70,14 +70,13 @@ class ColorSettingsViewController: UITableViewController {
     
     // Return the number of sections
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     // Return the number of rows for each section in your static table
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch(section) {
-        case 0: return 1    // section 0 has 2 rows
-        case 1: return 1    // section 1 has 1 row
+        case 0: return 2    // section 0 has 2 rows
         default: fatalError("Unknown number of sections")
         }
     }
@@ -87,15 +86,10 @@ class ColorSettingsViewController: UITableViewController {
         switch(indexPath.section) {
         case 0:
             switch(indexPath.row) {
-            case 0: return self.primaryLanguageColorCell    // section 0, row 0 is the fontSettingsCell
-            default: fatalError("Unknown row in section 0")
+                case 0: return self.primaryLanguageColorCell
+                case 1: return self.secondaryLanguageColorCell
+                default: fatalError("Unknown row in section 0")
             }
-        case 1:
-            switch(indexPath.row) {
-            case 0: return self.secondaryLanguageColorCell // section 1, row 0 is the keepAwakeCell option
-            default: fatalError("Unknown row in section 1")
-            }
-            
         default: fatalError("Unknown section")
         }
     }
@@ -113,7 +107,7 @@ class ColorSettingsViewController: UITableViewController {
             self.colorView.view.hidden = false
             makeColorView(1)
         }
-        if(indexPath.section == 1 && indexPath.row == 0) {
+        if(indexPath.section == 0 && indexPath.row == 1) {
             self.colorView.view.hidden = false
             makeColorView(2)
         }
