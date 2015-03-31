@@ -36,7 +36,7 @@ class ColorSettingsViewController: UITableViewController {
         super.loadView()
         
         // set the title
-        self.title = "Color Settings"
+        self.title = "Color"
         
         //CGRect Label1Frame = CGRectMake(10, 10, 290, 25);
         //CGRect Label2Frame = CGRectMake(10, 33, 290, 25);
