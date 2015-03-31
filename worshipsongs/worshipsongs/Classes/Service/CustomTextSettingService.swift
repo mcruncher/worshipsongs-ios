@@ -34,14 +34,14 @@ class CustomTextSettingService {
             customTagTextRange = customTagRangeArray
         }
         let attributedString = NSMutableAttributedString(string: customCellText, attributes: userDefaultsSettingsProviderService.getUserDefaultFont())
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getPrimaryFontColor, range: NSRange(location: 0, length: customCellText.length))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getEnglishFontColor, range: NSRange(location: 0, length: customCellText.length))
         for var index=0; index < customTagTextRange.count; index++ {
             var rangeValue:NSRange
             rangeValue = customTagTextRange.objectAtIndex(index).rangeValue
-            let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("secondaryFontColor") as? NSData
+            let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("tamilFontColor") as? NSData
             var colorValue: UIColor = UIColor()
             colorValue = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedPrimaryColorData!) as UIColor
-            attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getSecondaryFontColor, range: rangeValue)
+            attributedString.addAttribute(NSForegroundColorAttributeName, value: settingDataManager.getTamilFontColor, range: rangeValue)
         }
         return attributedString;
     }

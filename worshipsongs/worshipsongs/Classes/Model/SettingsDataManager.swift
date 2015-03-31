@@ -40,16 +40,16 @@ class SettingsDataManager {
         return fontSize
     }
     
-    var getPrimaryFontColor: UIColor {
-        let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("primaryFontColor") as? NSData
+    var getTamilFontColor: UIColor {
+        let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("tamilFontColor") as? NSData
         var colorValue: UIColor = UIColor()
         colorValue = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedPrimaryColorData!) as UIColor
         return colorValue
     }
     
-    var getSecondaryFontColor: UIColor {
+    var getEnglishFontColor: UIColor {
         
-        let userSelectedSecondaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("secondaryFontColor") as? NSData
+        let userSelectedSecondaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("englishFontColor") as? NSData
         var colorValue: UIColor = UIColor()
         colorValue = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedSecondaryColorData!) as UIColor
         return colorValue
@@ -67,8 +67,8 @@ class SettingsDataManager {
     init() {
         setFontNameDefault()
         setFontSizeDefault()
-        setPrimaryFontColorDefault()
-        setSecondaryFontColorDefault()
+        setTamilFontColorDefault()
+        setEnglishFontColorDefault()
         setkeepAwakeDefault()
         setLatestChangeSet()
     }
@@ -93,28 +93,28 @@ class SettingsDataManager {
         }
     }
     
-    func setPrimaryFontColorDefault()
+    func setTamilFontColorDefault()
     {
-        if let primaryFontColorInfo = userDefaults.valueForKey("primaryFontColor") as? NSData {
+        if let primaryFontColorInfo = userDefaults.valueForKey("tamilFontColor") as? NSData {
             primaryFontColor = primaryFontColorInfo
-        } else {
-            // add default data
-            var colorToSetAsDefault : UIColor = UIColor.blackColor()
-            var data : NSData = NSKeyedArchiver.archivedDataWithRootObject(colorToSetAsDefault)
-            userDefaults.setObject(data, forKey: "primaryFontColor")
-            userDefaults.synchronize()
-        }
-    }
-    
-    func setSecondaryFontColorDefault()
-    {
-        if let secondaryFontColorInfo = userDefaults.valueForKey("secondaryFontColor") as? NSData {
-            secondaryFontColor = secondaryFontColorInfo
         } else {
             // add default data
             var colorToSetAsDefault : UIColor = UIColor.redColor()
             var data : NSData = NSKeyedArchiver.archivedDataWithRootObject(colorToSetAsDefault)
-            userDefaults.setObject(data, forKey: "secondaryFontColor")
+            userDefaults.setObject(data, forKey: "tamilFontColor")
+            userDefaults.synchronize()
+        }
+    }
+    
+    func setEnglishFontColorDefault()
+    {
+        if let secondaryFontColorInfo = userDefaults.valueForKey("englishFontColor") as? NSData {
+            secondaryFontColor = secondaryFontColorInfo
+        } else {
+            // add default data
+            var colorToSetAsDefault : UIColor = UIColor.blackColor()
+            var data : NSData = NSKeyedArchiver.archivedDataWithRootObject(colorToSetAsDefault)
+            userDefaults.setObject(data, forKey: "englishFontColor")
             userDefaults.synchronize()
         }
     }
@@ -147,8 +147,8 @@ class SettingsDataManager {
     func reset() {
         userDefaults.removeObjectForKey("fontName")
         userDefaults.removeObjectForKey("fontSize")
-        userDefaults.removeObjectForKey("primaryFontColor")
-        userDefaults.removeObjectForKey("secondaryFontColor")
+        userDefaults.removeObjectForKey("tamilFontColor")
+        userDefaults.removeObjectForKey("englishFontColor")
         userDefaults.removeObjectForKey("keepAwake")
         setAllValues()
     }
@@ -157,8 +157,8 @@ class SettingsDataManager {
          println("Set all default values...")
         setFontNameDefault()
         setFontSizeDefault()
-        setPrimaryFontColorDefault()
-        setSecondaryFontColorDefault()
+        setTamilFontColorDefault()
+        setEnglishFontColorDefault()
         setkeepAwakeDefault()
     }
     

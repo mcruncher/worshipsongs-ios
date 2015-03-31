@@ -44,25 +44,25 @@ class ColorSettingsViewController: UITableViewController {
         // construct font setting cell, section 0, row 0
         self.primaryLanguageColorCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.primaryLanguageLabel = UILabel(frame: CGRectMake(10, 10, 250, 25))
-        self.primaryLanguageLabel.text = "Choose primary font color"
+        self.primaryLanguageLabel.text = "Tamil"
         self.primaryLanguageLabel.font = textAttributeService.getDefaultFont()
         self.primaryLanguageColorCell.addSubview(self.primaryLanguageLabel)
         
         primaryLanguageColorLabel = UILabel(frame: CGRectMake(260, 15, 10, 10))
-        let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("primaryFontColor") as? NSData
+        let userSelectedPrimaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("tamilFontColor") as? NSData
         primaryLanguageColorLabel.backgroundColor = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedPrimaryColorData!) as? UIColor
         self.primaryLanguageColorCell.addSubview(primaryLanguageColorLabel)
         
         // construct color setting cell, section 0, row 1
         self.secondaryLanguageColorCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         self.secondaryLanguageLabel = UILabel(frame: CGRectMake(10, 10, 250, 25))
-        self.secondaryLanguageLabel.text = "Choose secondary font color"
+        self.secondaryLanguageLabel.text = "English"
         self.secondaryLanguageLabel.font = textAttributeService.getDefaultFont()
         self.secondaryLanguageColorCell.addSubview(self.secondaryLanguageLabel)
         
 
         secondaryLanguageColorLabel = UILabel(frame: CGRectMake(260, 15, 10, 10))
-        let userSelectedSecondaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("secondaryFontColor") as? NSData
+        let userSelectedSecondaryColorData  =  NSUserDefaults.standardUserDefaults().objectForKey("englishFontColor") as? NSData
         secondaryLanguageColorLabel.backgroundColor = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedSecondaryColorData!) as? UIColor
         self.secondaryLanguageColorCell.addSubview(secondaryLanguageColorLabel)
         
@@ -103,8 +103,8 @@ class ColorSettingsViewController: UITableViewController {
     // Customize the section headings for each section
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
-        case 0: return "Primary Language Color"
-        case 1: return "Secondary Language Color"
+        case 0: return "Tamil"
+        case 1: return "English"
         default: fatalError("Unknown section")
         }
     }
@@ -178,13 +178,13 @@ class ColorSettingsViewController: UITableViewController {
                 if(tagValue == 1)
                 {
                     
-                    SettingsDataManager.sharedInstance.saveData(data, key: "primaryFontColor")
-                    primaryLanguageColorLabel.backgroundColor = userDefaultsSettingsProviderService.getUserDefaultsColor("primaryFontColor")
+                    SettingsDataManager.sharedInstance.saveData(data, key: "tamilFontColor")
+                    primaryLanguageColorLabel.backgroundColor = userDefaultsSettingsProviderService.getUserDefaultsColor("tamilFontColor")
                 }
                 else
                 {
-                    SettingsDataManager.sharedInstance.saveData(data, key: "secondaryFontColor")
-                    secondaryLanguageColorLabel.backgroundColor = userDefaultsSettingsProviderService.getUserDefaultsColor("secondaryFontColor")
+                    SettingsDataManager.sharedInstance.saveData(data, key: "englishFontColor")
+                    secondaryLanguageColorLabel.backgroundColor = userDefaultsSettingsProviderService.getUserDefaultsColor("englishFontColor")
                 }
                 self.colorView.view.hidden = true
                 
