@@ -28,7 +28,7 @@ class FontSettingsViewController: UITableViewController, UIPickerViewDelegate,UI
         super.loadView()
         
         // set the title
-        self.title = "Font Settings"
+        self.title = "Font"
         
        // fontNames = ["AlNile-Bold","AmericanTypewriter-Bold","Three","Five","Six","Seven","Eight","Nine","Ten"]
         
