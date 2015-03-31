@@ -102,11 +102,7 @@ class ColorSettingsViewController: UITableViewController {
     
     // Customize the section headings for each section
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch(section) {
-        case 0: return "Tamil"
-        case 1: return "English"
-        default: fatalError("Unknown section")
-        }
+        return "";
     }
     
     // Configure the row selection code for any cells that you want to customize the row selection
