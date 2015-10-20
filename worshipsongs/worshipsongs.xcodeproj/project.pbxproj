@@ -7,431 +7,266 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A000AD91A5F7E940065DBC2 /* slider-thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A000AD81A5F7E940065DBC2 /* slider-thumb.png */; };
-		3A000ADB1A5F7EA20065DBC2 /* slider-track.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A000ADA1A5F7EA20065DBC2 /* slider-track.png */; };
-		3A000ADD1A5F86820065DBC2 /* slider_other_thumb1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A000ADC1A5F86820065DBC2 /* slider_other_thumb1.png */; };
-		3A019F721A47AD8A003455AC /* CellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A019F711A47AD8A003455AC /* CellAnimator.swift */; };
-		3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */; };
-		3A0220381A4944B000B433F5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220371A4944B000B433F5 /* SettingViewController.swift */; };
-		3A02203A1A495C6000B433F5 /* FontSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220391A495C6000B433F5 /* FontSettingsViewController.swift */; };
-		3A024F441A43B91F002231BD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A024F431A43B91F002231BD /* libsqlite3.0.dylib */; };
-		3A024F481A43B97A002231BD /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F471A43B97A002231BD /* Util.swift */; };
-		3A024F941A43D2BB002231BD /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F8E1A43D2BB002231BD /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F901A43D2BB002231BD /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		3A024F961A43D2BB002231BD /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A024F911A43D2BB002231BD /* fmdb.txt */; };
-		3A024F971A43D2BB002231BD /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F931A43D2BB002231BD /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		3A024F991A43D7B4002231BD /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F981A43D7B4002231BD /* DatabaseHelper.swift */; };
-		3A038E1C1A563A7E009D4308 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E111A563A7E009D4308 /* Default-568h@2x.png */; };
-		3A038E1D1A563A7E009D4308 /* Default-Landscape-768h in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E121A563A7E009D4308 /* Default-Landscape-768h */; };
-		3A038E1E1A563A7E009D4308 /* Default-Landscape-1536h in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E131A563A7E009D4308 /* Default-Landscape-1536h */; };
-		3A038E1F1A563A7E009D4308 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E141A563A7E009D4308 /* Default-Landscape.png */; };
-		3A038E201A563A7E009D4308 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E151A563A7E009D4308 /* Default-Landscape@2x.png */; };
-		3A038E211A563A7E009D4308 /* Default-Portrait-1024h in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E161A563A7E009D4308 /* Default-Portrait-1024h */; };
-		3A038E221A563A7E009D4308 /* Default-Portrait-2048h in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E171A563A7E009D4308 /* Default-Portrait-2048h */; };
-		3A038E231A563A7E009D4308 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E181A563A7E009D4308 /* Default-Portrait.png */; };
-		3A038E241A563A7E009D4308 /* Default-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E191A563A7E009D4308 /* Default-Portrait@2x.png */; };
-		3A038E251A563A7E009D4308 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E1A1A563A7E009D4308 /* Default.png */; };
-		3A038E261A563A7E009D4308 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A038E1B1A563A7E009D4308 /* Default@2x.png */; };
-		3A0430981A425BB600F4F833 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0430971A425BB600F4F833 /* ViewController.swift */; };
-		3A043D541A50E44C0099FE53 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A043D531A50E44C0099FE53 /* Songs.swift */; };
-		3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A05166C1A414D6100451F4F /* MasterViewController.swift */; };
-		3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0516701A414D9D00451F4F /* AppDelegate.swift */; };
-		3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745041A53898400BE6356 /* ColorPaletteService.swift */; };
-		3A0834981A5E09400056293D /* UtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834971A5E09400056293D /* UtilTest.swift */; };
-		3A08349A1A5E0F4C0056293D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834991A5E0F4C0056293D /* AboutViewController.swift */; };
-		3A08349F1A5E140F0056293D /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A08349E1A5E140F0056293D /* about.html */; };
-		3A0834A01A5E24420056293D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F471A43B97A002231BD /* Util.swift */; };
-		3A0834A11A5E24FE0056293D /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
-		3A0834A31A5E26B20056293D /* CustomTextSettingServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834A21A5E26B20056293D /* CustomTextSettingServiceTest.swift */; };
-		3A0834A41A5E279B0056293D /* CustomTextSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */; };
-		3A0834A71A5E35E20056293D /* TextAttributeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834A61A5E35E20056293D /* TextAttributeService.swift */; };
-		3A0834A81A5E395C0056293D /* TextAttributeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834A61A5E35E20056293D /* TextAttributeService.swift */; };
-		3A0834AC1A5E57130056293D /* ColorPaletteServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834AB1A5E57130056293D /* ColorPaletteServiceTest.swift */; };
-		3A0834AD1A5E584A0056293D /* ColorPaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745041A53898400BE6356 /* ColorPaletteService.swift */; };
-		3A0834AF1A5E5BE20056293D /* ConnectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834AE1A5E5BE20056293D /* ConnectionServiceTest.swift */; };
-		3A0834B01A5E5CC20056293D /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
-		3A0834B31A5E63F10056293D /* MasterViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0834B21A5E63F10056293D /* MasterViewControllerTest.swift */; };
-		3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */; };
-		3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A084D5D1A4D42F20097ADA1 /* fontsList.plist */; };
-		3A08E85C1A5CE3E200964978 /* Settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A08E85B1A5CE3E200964978 /* Settings@2x.png */; };
-		3A08E87B1A5D303800964978 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A024F901A43D2BB002231BD /* FMDatabaseAdditions.m */; };
-		3A08E87C1A5D303B00964978 /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A024F911A43D2BB002231BD /* fmdb.txt */; };
-		3A08E87E1A5D305B00964978 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A024F431A43B91F002231BD /* libsqlite3.0.dylib */; };
-		3A25DF581A5FA1640065FB5F /* format_font_size_less.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF561A5FA1640065FB5F /* format_font_size_less.png */; };
-		3A25DF591A5FA1640065FB5F /* format_font_size_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF571A5FA1640065FB5F /* format_font_size_more.png */; };
-		3A25DF651A5FB4A30065FB5F /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF641A5FB4A30065FB5F /* color.png */; };
-		3A25DF671A5FBCC80065FB5F /* Font-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A25DF661A5FBCC80065FB5F /* Font-icon.png */; };
-		3A25DF691A5FCC080065FB5F /* RegexPatternMatcherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF681A5FCC080065FB5F /* RegexPatternMatcherService.swift */; };
-		3A25DF6B1A5FCC550065FB5F /* RegexPatternMatcherServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF6A1A5FCC550065FB5F /* RegexPatternMatcherServiceTest.swift */; };
-		3A25DF6C1A5FCCC50065FB5F /* RegexPatternMatcherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF681A5FCC080065FB5F /* RegexPatternMatcherService.swift */; };
-		3A25DF6E1A5FCED70065FB5F /* CommonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF6D1A5FCED70065FB5F /* CommonService.swift */; };
-		3A25DF701A5FCF530065FB5F /* CommonServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF6F1A5FCF530065FB5F /* CommonServiceTest.swift */; };
-		3A25DF711A5FCF820065FB5F /* CommonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF6D1A5FCED70065FB5F /* CommonService.swift */; };
-		3A25DF731A5FD1010065FB5F /* UserDefaultsSettingsProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF721A5FD1010065FB5F /* UserDefaultsSettingsProviderService.swift */; };
-		3A25DF741A5FD1B70065FB5F /* UserDefaultsSettingsProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF721A5FD1010065FB5F /* UserDefaultsSettingsProviderService.swift */; };
-		3A25DF761A5FD3A40065FB5F /* UserDefaultsSettingsProviderServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25DF751A5FD3A40065FB5F /* UserDefaultsSettingsProviderServiceTest.swift */; };
-		3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911C81A5A5A7100F1993E /* ConnectionService.swift */; };
-		3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */; };
-		3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A88F8991A402C6700193E53 /* Images.xcassets */; };
-		3AFED06A1A4A72E9005C9032 /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AFED0691A4A72E9005C9032 /* colorPalette.plist */; };
-		3AFED06E1A4A9D74005C9032 /* ColorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */; };
-		9FC45A841A88384E0024EE5F /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC45A831A88384E0024EE5F /* DownloadService.swift */; };
-		9FCE9E691AC936CF00CB3DE9 /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 9FCE9E681AC936CF00CB3DE9 /* songs.sqlite */; };
+		2F56417D1BCB3A9700064269 /* SongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */; };
+		2F5D3D201BC788F8001C4B6F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D1F1BC788F8001C4B6F /* FirstViewController.swift */; };
+		2F5D3D221BC788F8001C4B6F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D211BC788F8001C4B6F /* SecondViewController.swift */; };
+		2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D231BC788F8001C4B6F /* Main.storyboard */; };
+		2F5D3D271BC788F8001C4B6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D261BC788F8001C4B6F /* Assets.xcassets */; };
+		2F5D3D2A1BC788F8001C4B6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D281BC788F8001C4B6F /* LaunchScreen.storyboard */; };
+		2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */; };
+		2F5D3D401BC788F8001C4B6F /* worshipsongsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D3F1BC788F8001C4B6F /* worshipsongsUITests.swift */; };
+		2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D551BC78D51001C4B6F /* Songs.swift */; settings = {ASSET_TAGS = (); }; };
+		2F5D3D5A1BC78DB8001C4B6F /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D591BC78DB8001C4B6F /* DatabaseHelper.swift */; settings = {ASSET_TAGS = (); }; };
+		2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D5B1BC7A216001C4B6F /* CommonService.swift */; settings = {ASSET_TAGS = (); }; };
+		2F5D3D601BC7A74E001C4B6F /* TitlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D5F1BC7A74E001C4B6F /* TitlesTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2F5D3D631BC7AD5E001C4B6F /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; settings = {ASSET_TAGS = (); }; };
+		2F5D3D681BC7BB46001C4B6F /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D671BC7BB46001C4B6F /* songs.sqlite */; settings = {ASSET_TAGS = (); }; };
+		F82993D3C5D2BE8915338A11 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4C40CA181D8D34E6A5C6D9 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3A88F8A31A402C6700193E53 /* PBXContainerItemProxy */ = {
+		2F5D3D311BC788F8001C4B6F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3A88F8801A402C6700193E53 /* Project object */;
+			containerPortal = 2F5D3D121BC788F8001C4B6F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3A88F8871A402C6700193E53;
+			remoteGlobalIDString = 2F5D3D191BC788F8001C4B6F;
+			remoteInfo = worshipsongs;
+		};
+		2F5D3D3C1BC788F8001C4B6F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F5D3D121BC788F8001C4B6F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F5D3D191BC788F8001C4B6F;
 			remoteInfo = worshipsongs;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3A000AD81A5F7E940065DBC2 /* slider-thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider-thumb.png"; sourceTree = "<group>"; };
-		3A000ADA1A5F7EA20065DBC2 /* slider-track.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider-track.png"; sourceTree = "<group>"; };
-		3A000ADC1A5F86820065DBC2 /* slider_other_thumb1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider_other_thumb1.png; sourceTree = "<group>"; };
-		3A019F711A47AD8A003455AC /* CellAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellAnimator.swift; path = Service/CellAnimator.swift; sourceTree = "<group>"; };
-		3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomTextSettingService.swift; path = Service/CustomTextSettingService.swift; sourceTree = "<group>"; };
-		3A0220371A4944B000B433F5 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = Controllers/SettingViewController.swift; sourceTree = "<group>"; };
-		3A0220391A495C6000B433F5 /* FontSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontSettingsViewController.swift; path = Controllers/FontSettingsViewController.swift; sourceTree = "<group>"; };
-		3A024F431A43B91F002231BD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		3A024F471A43B97A002231BD /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Service/Util.swift; sourceTree = "<group>"; };
-		3A024F5C1A43C071002231BD /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Header.h; path = Header/Header.h; sourceTree = "<group>"; };
-		3A024F8D1A43D2BB002231BD /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		3A024F8E1A43D2BB002231BD /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		3A024F8F1A43D2BB002231BD /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		3A024F901A43D2BB002231BD /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		3A024F911A43D2BB002231BD /* fmdb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fmdb.txt; sourceTree = "<group>"; };
-		3A024F921A43D2BB002231BD /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		3A024F931A43D2BB002231BD /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		3A024F981A43D7B4002231BD /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatabaseHelper.swift; path = worshipsongs/classes/Service/DatabaseHelper.swift; sourceTree = SOURCE_ROOT; };
-		3A038E111A563A7E009D4308 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		3A038E121A563A7E009D4308 /* Default-Landscape-768h */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Landscape-768h"; sourceTree = "<group>"; };
-		3A038E131A563A7E009D4308 /* Default-Landscape-1536h */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Landscape-1536h"; sourceTree = "<group>"; };
-		3A038E141A563A7E009D4308 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
-		3A038E151A563A7E009D4308 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x.png"; sourceTree = "<group>"; };
-		3A038E161A563A7E009D4308 /* Default-Portrait-1024h */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait-1024h"; sourceTree = "<group>"; };
-		3A038E171A563A7E009D4308 /* Default-Portrait-2048h */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait-2048h"; sourceTree = "<group>"; };
-		3A038E181A563A7E009D4308 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
-		3A038E191A563A7E009D4308 /* Default-Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x.png"; sourceTree = "<group>"; };
-		3A038E1A1A563A7E009D4308 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		3A038E1B1A563A7E009D4308 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		3A0430971A425BB600F4F833 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; };
-		3A043D531A50E44C0099FE53 /* Songs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Songs.swift; path = Model/Songs.swift; sourceTree = "<group>"; };
-		3A0516651A41350400451F4F /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = PlayGround/MyPlayground.playground; sourceTree = "<group>"; };
-		3A05166C1A414D6100451F4F /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = Controllers/MasterViewController.swift; sourceTree = "<group>"; };
-		3A0516701A414D9D00451F4F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = AppDelegate/AppDelegate.swift; sourceTree = "<group>"; };
-		3A0745041A53898400BE6356 /* ColorPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPaletteService.swift; path = Service/ColorPaletteService.swift; sourceTree = "<group>"; };
-		3A0834971A5E09400056293D /* UtilTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilTest.swift; sourceTree = "<group>"; };
-		3A0834991A5E0F4C0056293D /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = Controllers/AboutViewController.swift; sourceTree = "<group>"; };
-		3A08349E1A5E140F0056293D /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = about.html; path = html/about.html; sourceTree = "<group>"; };
-		3A0834A21A5E26B20056293D /* CustomTextSettingServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextSettingServiceTest.swift; sourceTree = "<group>"; };
-		3A0834A61A5E35E20056293D /* TextAttributeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextAttributeService.swift; path = Service/TextAttributeService.swift; sourceTree = "<group>"; };
-		3A0834AB1A5E57130056293D /* ColorPaletteServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPaletteServiceTest.swift; sourceTree = "<group>"; };
-		3A0834AE1A5E5BE20056293D /* ConnectionServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionServiceTest.swift; sourceTree = "<group>"; };
-		3A0834B21A5E63F10056293D /* MasterViewControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewControllerTest.swift; sourceTree = "<group>"; };
-		3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsDataManager.swift; path = Model/SettingsDataManager.swift; sourceTree = "<group>"; };
-		3A084D5D1A4D42F20097ADA1 /* fontsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fontsList.plist; path = "Third Party/fontsList.plist"; sourceTree = SOURCE_ROOT; };
-		3A08E85B1A5CE3E200964978 /* Settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings@2x.png"; sourceTree = "<group>"; };
-		3A25DF561A5FA1640065FB5F /* format_font_size_less.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = format_font_size_less.png; sourceTree = "<group>"; };
-		3A25DF571A5FA1640065FB5F /* format_font_size_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = format_font_size_more.png; sourceTree = "<group>"; };
-		3A25DF641A5FB4A30065FB5F /* color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color.png; sourceTree = "<group>"; };
-		3A25DF661A5FBCC80065FB5F /* Font-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Font-icon.png"; sourceTree = "<group>"; };
-		3A25DF681A5FCC080065FB5F /* RegexPatternMatcherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegexPatternMatcherService.swift; path = Service/RegexPatternMatcherService.swift; sourceTree = "<group>"; };
-		3A25DF6A1A5FCC550065FB5F /* RegexPatternMatcherServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexPatternMatcherServiceTest.swift; sourceTree = "<group>"; };
-		3A25DF6D1A5FCED70065FB5F /* CommonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommonService.swift; path = Service/CommonService.swift; sourceTree = "<group>"; };
-		3A25DF6F1A5FCF530065FB5F /* CommonServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonServiceTest.swift; sourceTree = "<group>"; };
-		3A25DF721A5FD1010065FB5F /* UserDefaultsSettingsProviderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsSettingsProviderService.swift; path = Service/UserDefaultsSettingsProviderService.swift; sourceTree = "<group>"; };
-		3A25DF751A5FD3A40065FB5F /* UserDefaultsSettingsProviderServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsSettingsProviderServiceTest.swift; sourceTree = "<group>"; };
-		3A2911C81A5A5A7100F1993E /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionService.swift; path = Service/ConnectionService.swift; sourceTree = "<group>"; };
-		3A88F8881A402C6700193E53 /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A88F88C1A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A88F8901A402C6700193E53 /* worshipsongs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = worshipsongs.xcdatamodel; sourceTree = "<group>"; };
-		3A88F8991A402C6700193E53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3A88F8A21A402C6700193E53 /* worshipsongsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A88F8A71A402C6700193E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3AFED0691A4A72E9005C9032 /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = colorPalette.plist; path = "../Third party/colorPalette.plist"; sourceTree = "<group>"; };
-		3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorSettingsViewController.swift; path = Controllers/ColorSettingsViewController.swift; sourceTree = "<group>"; };
-		9FC45A831A88384E0024EE5F /* DownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadService.swift; path = worshipsongs/Classes/DownloadService.swift; sourceTree = SOURCE_ROOT; };
-		9FCE9E681AC936CF00CB3DE9 /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
+		1B3FE375BDA28ADC79F4DB12 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsTableViewController.swift; sourceTree = "<group>"; };
+		2F5D3D1A1BC788F8001C4B6F /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2F5D3D1F1BC788F8001C4B6F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		2F5D3D211BC788F8001C4B6F /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		2F5D3D241BC788F8001C4B6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2F5D3D261BC788F8001C4B6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2F5D3D291BC788F8001C4B6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2F5D3D2B1BC788F8001C4B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F5D3D301BC788F8001C4B6F /* worshipsongsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = worshipsongsTests.swift; sourceTree = "<group>"; };
+		2F5D3D361BC788F8001C4B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F5D3D3B1BC788F8001C4B6F /* worshipsongsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F5D3D3F1BC788F8001C4B6F /* worshipsongsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = worshipsongsUITests.swift; sourceTree = "<group>"; };
+		2F5D3D411BC788F8001C4B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F5D3D551BC78D51001C4B6F /* Songs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Songs.swift; sourceTree = "<group>"; };
+		2F5D3D591BC78DB8001C4B6F /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
+		2F5D3D5B1BC7A216001C4B6F /* CommonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonService.swift; sourceTree = "<group>"; };
+		2F5D3D5E1BC7A5B3001C4B6F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		2F5D3D5F1BC7A74E001C4B6F /* TitlesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitlesTableViewController.swift; sourceTree = "<group>"; };
+		2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		2F5D3D671BC7BB46001C4B6F /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
+		420E0C06CD0ED4C60E730528 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		DA4C40CA181D8D34E6A5C6D9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3A88F8851A402C6700193E53 /* Frameworks */ = {
+		2F5D3D171BC788F8001C4B6F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A024F441A43B91F002231BD /* libsqlite3.0.dylib in Frameworks */,
+				F82993D3C5D2BE8915338A11 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A88F89F1A402C6700193E53 /* Frameworks */ = {
+		2F5D3D2D1BC788F8001C4B6F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A08E87E1A5D305B00964978 /* libsqlite3.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F5D3D381BC788F8001C4B6F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3A024F421A43B90D002231BD /* Framework */ = {
+		1611C2B2A4FA5A6BE0CC88B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3A024F431A43B91F002231BD /* libsqlite3.0.dylib */,
+				DA4C40CA181D8D34E6A5C6D9 /* libPods.a */,
 			);
-			name = Framework;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3A024F461A43B964002231BD /* Service */ = {
+		16679D9973839E94A08B6AE9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3A024F981A43D7B4002231BD /* DatabaseHelper.swift */,
-				3A024F471A43B97A002231BD /* Util.swift */,
-				3A019F711A47AD8A003455AC /* CellAnimator.swift */,
-				3A0220331A490CAB00B433F5 /* CustomTextSettingService.swift */,
-				3A0745041A53898400BE6356 /* ColorPaletteService.swift */,
-				3A2911C81A5A5A7100F1993E /* ConnectionService.swift */,
-				3A0834A61A5E35E20056293D /* TextAttributeService.swift */,
-				3A25DF681A5FCC080065FB5F /* RegexPatternMatcherService.swift */,
-				3A25DF6D1A5FCED70065FB5F /* CommonService.swift */,
-				3A25DF721A5FD1010065FB5F /* UserDefaultsSettingsProviderService.swift */,
-				9FC45A831A88384E0024EE5F /* DownloadService.swift */,
+				420E0C06CD0ED4C60E730528 /* Pods.debug.xcconfig */,
+				1B3FE375BDA28ADC79F4DB12 /* Pods.release.xcconfig */,
 			);
-			name = Service;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		3A024F491A43BAF8002231BD /* Header */ = {
+		2F5D3D111BC788F8001C4B6F = {
 			isa = PBXGroup;
 			children = (
-				3A024F5C1A43C071002231BD /* Header.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
-		3A024F4D1A43BC2B002231BD /* Third Party */ = {
-			isa = PBXGroup;
-			children = (
-				3A024F8C1A43D259002231BD /* FMDB */,
-			);
-			name = "Third Party";
-			path = "Third party";
-			sourceTree = "<group>";
-		};
-		3A024F8C1A43D259002231BD /* FMDB */ = {
-			isa = PBXGroup;
-			children = (
-				3A024F8D1A43D2BB002231BD /* FMDatabase.h */,
-				3A024F8E1A43D2BB002231BD /* FMDatabase.m */,
-				3A024F8F1A43D2BB002231BD /* FMDatabaseAdditions.h */,
-				3A024F901A43D2BB002231BD /* FMDatabaseAdditions.m */,
-				3A024F911A43D2BB002231BD /* fmdb.txt */,
-				3A024F921A43D2BB002231BD /* FMResultSet.h */,
-				3A024F931A43D2BB002231BD /* FMResultSet.m */,
-			);
-			name = FMDB;
-			path = "../Third Party/FMDB";
-			sourceTree = "<group>";
-		};
-		3A05165D1A41085300451F4F /* classes */ = {
-			isa = PBXGroup;
-			children = (
-				3A024F491A43BAF8002231BD /* Header */,
-				3A024F461A43B964002231BD /* Service */,
-				3A0516631A41337B00451F4F /* PlayGround */,
-				3A0516601A4108CA00451F4F /* Model */,
-				3A05165F1A4108A200451F4F /* Controllers */,
-				3A05165E1A41087100451F4F /* AppDelegate */,
-			);
-			path = classes;
-			sourceTree = "<group>";
-		};
-		3A05165E1A41087100451F4F /* AppDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				3A0516701A414D9D00451F4F /* AppDelegate.swift */,
-			);
-			name = AppDelegate;
-			sourceTree = "<group>";
-		};
-		3A05165F1A4108A200451F4F /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3A05166C1A414D6100451F4F /* MasterViewController.swift */,
-				3A0430971A425BB600F4F833 /* ViewController.swift */,
-				3A0220371A4944B000B433F5 /* SettingViewController.swift */,
-				3A0220391A495C6000B433F5 /* FontSettingsViewController.swift */,
-				3AFED06D1A4A9D74005C9032 /* ColorSettingsViewController.swift */,
-				3A0834991A5E0F4C0056293D /* AboutViewController.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		3A0516601A4108CA00451F4F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				3A084D5B1A4D05080097ADA1 /* SettingsDataManager.swift */,
-				3A043D531A50E44C0099FE53 /* Songs.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		3A0516631A41337B00451F4F /* PlayGround */ = {
-			isa = PBXGroup;
-			children = (
-				3A0516651A41350400451F4F /* MyPlayground.playground */,
-			);
-			name = PlayGround;
-			sourceTree = "<group>";
-		};
-		3A0834961A5E08BE0056293D /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				3A0834971A5E09400056293D /* UtilTest.swift */,
-				3A0834A21A5E26B20056293D /* CustomTextSettingServiceTest.swift */,
-				3A0834AB1A5E57130056293D /* ColorPaletteServiceTest.swift */,
-				3A0834AE1A5E5BE20056293D /* ConnectionServiceTest.swift */,
-				3A25DF6A1A5FCC550065FB5F /* RegexPatternMatcherServiceTest.swift */,
-				3A25DF6F1A5FCF530065FB5F /* CommonServiceTest.swift */,
-				3A25DF751A5FD3A40065FB5F /* UserDefaultsSettingsProviderServiceTest.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		3A08349C1A5E10890056293D /* images */ = {
-			isa = PBXGroup;
-			children = (
-				3A25DF661A5FBCC80065FB5F /* Font-icon.png */,
-				3A25DF641A5FB4A30065FB5F /* color.png */,
-				3A25DF561A5FA1640065FB5F /* format_font_size_less.png */,
-				3A25DF571A5FA1640065FB5F /* format_font_size_more.png */,
-				3A000ADC1A5F86820065DBC2 /* slider_other_thumb1.png */,
-				3A000ADA1A5F7EA20065DBC2 /* slider-track.png */,
-				3A000AD81A5F7E940065DBC2 /* slider-thumb.png */,
-				3A038E1A1A563A7E009D4308 /* Default.png */,
-				3A038E191A563A7E009D4308 /* Default-Portrait@2x.png */,
-				3A038E181A563A7E009D4308 /* Default-Portrait.png */,
-				3A038E171A563A7E009D4308 /* Default-Portrait-2048h */,
-				3A038E161A563A7E009D4308 /* Default-Portrait-1024h */,
-				3A038E151A563A7E009D4308 /* Default-Landscape@2x.png */,
-				3A038E141A563A7E009D4308 /* Default-Landscape.png */,
-				3A038E131A563A7E009D4308 /* Default-Landscape-1536h */,
-				3A038E121A563A7E009D4308 /* Default-Landscape-768h */,
-				3A038E111A563A7E009D4308 /* Default-568h@2x.png */,
-				3A08E85B1A5CE3E200964978 /* Settings@2x.png */,
-				3A038E1B1A563A7E009D4308 /* Default@2x.png */,
-			);
-			path = images;
-			sourceTree = "<group>";
-		};
-		3A08349D1A5E10AF0056293D /* html */ = {
-			isa = PBXGroup;
-			children = (
-				3A08349E1A5E140F0056293D /* about.html */,
-			);
-			name = html;
-			sourceTree = "<group>";
-		};
-		3A0834B11A5E63360056293D /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				3A0834B21A5E63F10056293D /* MasterViewControllerTest.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		3A88F87F1A402C6700193E53 = {
-			isa = PBXGroup;
-			children = (
-				3A024F4D1A43BC2B002231BD /* Third Party */,
-				3A024F421A43B90D002231BD /* Framework */,
-				3A88F88A1A402C6700193E53 /* worshipsongs */,
-				3A88F8A51A402C6700193E53 /* worshipsongsTests */,
-				3A88F8891A402C6700193E53 /* Products */,
+				2F5D3D1C1BC788F8001C4B6F /* worshipsongs */,
+				2F5D3D331BC788F8001C4B6F /* worshipsongsTests */,
+				2F5D3D3E1BC788F8001C4B6F /* worshipsongsUITests */,
+				2F5D3D1B1BC788F8001C4B6F /* Products */,
+				16679D9973839E94A08B6AE9 /* Pods */,
+				1611C2B2A4FA5A6BE0CC88B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		3A88F8891A402C6700193E53 /* Products */ = {
+		2F5D3D1B1BC788F8001C4B6F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A88F8881A402C6700193E53 /* worshipsongs.app */,
-				3A88F8A21A402C6700193E53 /* worshipsongsTests.xctest */,
+				2F5D3D1A1BC788F8001C4B6F /* worshipsongs.app */,
+				2F5D3D301BC788F8001C4B6F /* worshipsongsTests.xctest */,
+				2F5D3D3B1BC788F8001C4B6F /* worshipsongsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3A88F88A1A402C6700193E53 /* worshipsongs */ = {
+		2F5D3D1C1BC788F8001C4B6F /* worshipsongs */ = {
 			isa = PBXGroup;
 			children = (
-				3AC876C01A48128A002D1BFF /* asset */,
-				3A05165D1A41085300451F4F /* classes */,
-				3A88F8991A402C6700193E53 /* Images.xcassets */,
-				3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */,
-				3A88F88B1A402C6700193E53 /* Supporting Files */,
+				2F5D3D5D1BC7A572001C4B6F /* vender */,
+				2F5D3D571BC78D85001C4B6F /* Library */,
+				2F5D3D541BC78D2B001C4B6F /* Model */,
+				2F5D3D511BC78CCE001C4B6F /* Database */,
+				2F5D3D501BC789E5001C4B6F /* Controllers */,
+				2F5D3D4F1BC789A3001C4B6F /* Supporting Files */,
+				2F5D3D4E1BC7896B001C4B6F /* Resources */,
+				2F5D3D4D1BC78946001C4B6F /* Application */,
 			);
 			path = worshipsongs;
 			sourceTree = "<group>";
 		};
-		3A88F88B1A402C6700193E53 /* Supporting Files */ = {
+		2F5D3D331BC788F8001C4B6F /* worshipsongsTests */ = {
 			isa = PBXGroup;
 			children = (
-				3A084D5D1A4D42F20097ADA1 /* fontsList.plist */,
-				3AFED0691A4A72E9005C9032 /* colorPalette.plist */,
-				3A88F88C1A402C6700193E53 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3A88F8A51A402C6700193E53 /* worshipsongsTests */ = {
-			isa = PBXGroup;
-			children = (
-				3A0834B11A5E63360056293D /* Controller */,
-				3A0834961A5E08BE0056293D /* Service */,
-				3A88F8A61A402C6700193E53 /* Supporting Files */,
+				2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */,
+				2F5D3D361BC788F8001C4B6F /* Info.plist */,
 			);
 			path = worshipsongsTests;
 			sourceTree = "<group>";
 		};
-		3A88F8A61A402C6700193E53 /* Supporting Files */ = {
+		2F5D3D3E1BC788F8001C4B6F /* worshipsongsUITests */ = {
 			isa = PBXGroup;
 			children = (
-				3A88F8A71A402C6700193E53 /* Info.plist */,
+				2F5D3D3F1BC788F8001C4B6F /* worshipsongsUITests.swift */,
+				2F5D3D411BC788F8001C4B6F /* Info.plist */,
+			);
+			path = worshipsongsUITests;
+			sourceTree = "<group>";
+		};
+		2F5D3D4D1BC78946001C4B6F /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D3D281BC788F8001C4B6F /* LaunchScreen.storyboard */,
+				2F5D3D231BC788F8001C4B6F /* Main.storyboard */,
+				2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		2F5D3D4E1BC7896B001C4B6F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D3D261BC788F8001C4B6F /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		2F5D3D4F1BC789A3001C4B6F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D3D2B1BC788F8001C4B6F /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3AC876C01A48128A002D1BFF /* asset */ = {
+		2F5D3D501BC789E5001C4B6F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9FCE9E671AC9360F00CB3DE9 /* database */,
-				3A08349D1A5E10AF0056293D /* html */,
-				3A08349C1A5E10890056293D /* images */,
+				2F5D3D1F1BC788F8001C4B6F /* FirstViewController.swift */,
+				2F5D3D211BC788F8001C4B6F /* SecondViewController.swift */,
+				2F5D3D5F1BC7A74E001C4B6F /* TitlesTableViewController.swift */,
+				2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */,
 			);
-			path = asset;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
-		9FCE9E671AC9360F00CB3DE9 /* database */ = {
+		2F5D3D511BC78CCE001C4B6F /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				9FCE9E681AC936CF00CB3DE9 /* songs.sqlite */,
+				2F5D3D671BC7BB46001C4B6F /* songs.sqlite */,
 			);
-			path = database;
+			name = Database;
+			sourceTree = "<group>";
+		};
+		2F5D3D541BC78D2B001C4B6F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D3D551BC78D51001C4B6F /* Songs.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		2F5D3D571BC78D85001C4B6F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D3D611BC7AD30001C4B6F /* Utilities */,
+				2F5D3D581BC78D97001C4B6F /* Service */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		2F5D3D581BC78D97001C4B6F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D3D591BC78DB8001C4B6F /* DatabaseHelper.swift */,
+				2F5D3D5B1BC7A216001C4B6F /* CommonService.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		2F5D3D5D1BC7A572001C4B6F /* vender */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D3D5E1BC7A5B3001C4B6F /* Bridging-Header.h */,
+			);
+			name = vender;
+			sourceTree = "<group>";
+		};
+		2F5D3D611BC7AD30001C4B6F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3A88F8871A402C6700193E53 /* worshipsongs */ = {
+		2F5D3D191BC788F8001C4B6F /* worshipsongs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A88F8AC1A402C6700193E53 /* Build configuration list for PBXNativeTarget "worshipsongs" */;
+			buildConfigurationList = 2F5D3D441BC788F8001C4B6F /* Build configuration list for PBXNativeTarget "worshipsongs" */;
 			buildPhases = (
-				3A88F8841A402C6700193E53 /* Sources */,
-				3A88F8851A402C6700193E53 /* Frameworks */,
-				3A88F8861A402C6700193E53 /* Resources */,
+				0BADE0C5DAD28B4B694CE611 /* Check Pods Manifest.lock */,
+				2F5D3D161BC788F8001C4B6F /* Sources */,
+				2F5D3D171BC788F8001C4B6F /* Frameworks */,
+				2F5D3D181BC788F8001C4B6F /* Resources */,
+				27FC7FB5A64171AA3B7B1598 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -439,47 +274,68 @@
 			);
 			name = worshipsongs;
 			productName = worshipsongs;
-			productReference = 3A88F8881A402C6700193E53 /* worshipsongs.app */;
+			productReference = 2F5D3D1A1BC788F8001C4B6F /* worshipsongs.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3A88F8A11A402C6700193E53 /* worshipsongsTests */ = {
+		2F5D3D2F1BC788F8001C4B6F /* worshipsongsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A88F8AF1A402C6700193E53 /* Build configuration list for PBXNativeTarget "worshipsongsTests" */;
+			buildConfigurationList = 2F5D3D471BC788F8001C4B6F /* Build configuration list for PBXNativeTarget "worshipsongsTests" */;
 			buildPhases = (
-				3A88F89E1A402C6700193E53 /* Sources */,
-				3A88F89F1A402C6700193E53 /* Frameworks */,
-				3A88F8A01A402C6700193E53 /* Resources */,
+				2F5D3D2C1BC788F8001C4B6F /* Sources */,
+				2F5D3D2D1BC788F8001C4B6F /* Frameworks */,
+				2F5D3D2E1BC788F8001C4B6F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3A88F8A41A402C6700193E53 /* PBXTargetDependency */,
+				2F5D3D321BC788F8001C4B6F /* PBXTargetDependency */,
 			);
 			name = worshipsongsTests;
 			productName = worshipsongsTests;
-			productReference = 3A88F8A21A402C6700193E53 /* worshipsongsTests.xctest */;
+			productReference = 2F5D3D301BC788F8001C4B6F /* worshipsongsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2F5D3D3A1BC788F8001C4B6F /* worshipsongsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F5D3D4A1BC788F8001C4B6F /* Build configuration list for PBXNativeTarget "worshipsongsUITests" */;
+			buildPhases = (
+				2F5D3D371BC788F8001C4B6F /* Sources */,
+				2F5D3D381BC788F8001C4B6F /* Frameworks */,
+				2F5D3D391BC788F8001C4B6F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F5D3D3D1BC788F8001C4B6F /* PBXTargetDependency */,
+			);
+			name = worshipsongsUITests;
+			productName = worshipsongsUITests;
+			productReference = 2F5D3D3B1BC788F8001C4B6F /* worshipsongsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3A88F8801A402C6700193E53 /* Project object */ = {
+		2F5D3D121BC788F8001C4B6F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
-				ORGANIZATIONNAME = "Seenivasan Sankaran";
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Vignesh Palanisamy";
 				TargetAttributes = {
-					3A88F8871A402C6700193E53 = {
-						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = A73GS82MB2;
+					2F5D3D191BC788F8001C4B6F = {
+						CreatedOnToolsVersion = 7.0.1;
 					};
-					3A88F8A11A402C6700193E53 = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 3A88F8871A402C6700193E53;
+					2F5D3D2F1BC788F8001C4B6F = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = 2F5D3D191BC788F8001C4B6F;
+					};
+					2F5D3D3A1BC788F8001C4B6F = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = 2F5D3D191BC788F8001C4B6F;
 					};
 				};
 			};
-			buildConfigurationList = 3A88F8831A402C6700193E53 /* Build configuration list for PBXProject "worshipsongs" */;
+			buildConfigurationList = 2F5D3D151BC788F8001C4B6F /* Build configuration list for PBXProject "worshipsongs" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -487,129 +343,148 @@
 				en,
 				Base,
 			);
-			mainGroup = 3A88F87F1A402C6700193E53;
-			productRefGroup = 3A88F8891A402C6700193E53 /* Products */;
+			mainGroup = 2F5D3D111BC788F8001C4B6F;
+			productRefGroup = 2F5D3D1B1BC788F8001C4B6F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3A88F8871A402C6700193E53 /* worshipsongs */,
-				3A88F8A11A402C6700193E53 /* worshipsongsTests */,
+				2F5D3D191BC788F8001C4B6F /* worshipsongs */,
+				2F5D3D2F1BC788F8001C4B6F /* worshipsongsTests */,
+				2F5D3D3A1BC788F8001C4B6F /* worshipsongsUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3A88F8861A402C6700193E53 /* Resources */ = {
+		2F5D3D181BC788F8001C4B6F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A000ADB1A5F7EA20065DBC2 /* slider-track.png in Resources */,
-				3A024F961A43D2BB002231BD /* fmdb.txt in Resources */,
-				3A25DF581A5FA1640065FB5F /* format_font_size_less.png in Resources */,
-				3A038E251A563A7E009D4308 /* Default.png in Resources */,
-				3A25DF651A5FB4A30065FB5F /* color.png in Resources */,
-				3A038E1F1A563A7E009D4308 /* Default-Landscape.png in Resources */,
-				3A084D5E1A4D42F20097ADA1 /* fontsList.plist in Resources */,
-				3A038E211A563A7E009D4308 /* Default-Portrait-1024h in Resources */,
-				3A038E231A563A7E009D4308 /* Default-Portrait.png in Resources */,
-				3AFED06A1A4A72E9005C9032 /* colorPalette.plist in Resources */,
-				3A038E261A563A7E009D4308 /* Default@2x.png in Resources */,
-				3A038E1D1A563A7E009D4308 /* Default-Landscape-768h in Resources */,
-				3A038E1C1A563A7E009D4308 /* Default-568h@2x.png in Resources */,
-				3A88F89A1A402C6700193E53 /* Images.xcassets in Resources */,
-				3A038E1E1A563A7E009D4308 /* Default-Landscape-1536h in Resources */,
-				3A038E241A563A7E009D4308 /* Default-Portrait@2x.png in Resources */,
-				3A038E221A563A7E009D4308 /* Default-Portrait-2048h in Resources */,
-				3A000ADD1A5F86820065DBC2 /* slider_other_thumb1.png in Resources */,
-				3A25DF591A5FA1640065FB5F /* format_font_size_more.png in Resources */,
-				3A08E85C1A5CE3E200964978 /* Settings@2x.png in Resources */,
-				3A08349F1A5E140F0056293D /* about.html in Resources */,
-				9FCE9E691AC936CF00CB3DE9 /* songs.sqlite in Resources */,
-				3A25DF671A5FBCC80065FB5F /* Font-icon.png in Resources */,
-				3A038E201A563A7E009D4308 /* Default-Landscape@2x.png in Resources */,
-				3A000AD91A5F7E940065DBC2 /* slider-thumb.png in Resources */,
+				2F5D3D2A1BC788F8001C4B6F /* LaunchScreen.storyboard in Resources */,
+				2F5D3D271BC788F8001C4B6F /* Assets.xcassets in Resources */,
+				2F5D3D681BC7BB46001C4B6F /* songs.sqlite in Resources */,
+				2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A88F8A01A402C6700193E53 /* Resources */ = {
+		2F5D3D2E1BC788F8001C4B6F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A08E87C1A5D303B00964978 /* fmdb.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F5D3D391BC788F8001C4B6F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0BADE0C5DAD28B4B694CE611 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		27FC7FB5A64171AA3B7B1598 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		3A88F8841A402C6700193E53 /* Sources */ = {
+		2F5D3D161BC788F8001C4B6F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A0430981A425BB600F4F833 /* ViewController.swift in Sources */,
-				3A024F481A43B97A002231BD /* Util.swift in Sources */,
-				3A08349A1A5E0F4C0056293D /* AboutViewController.swift in Sources */,
-				3A05166D1A414D6100451F4F /* MasterViewController.swift in Sources */,
-				3A043D541A50E44C0099FE53 /* Songs.swift in Sources */,
-				3A0220381A4944B000B433F5 /* SettingViewController.swift in Sources */,
-				3A024F941A43D2BB002231BD /* FMDatabase.m in Sources */,
-				3A019F721A47AD8A003455AC /* CellAnimator.swift in Sources */,
-				3A2911C91A5A5A7100F1993E /* ConnectionService.swift in Sources */,
-				3A0516711A414D9D00451F4F /* AppDelegate.swift in Sources */,
-				3AFED06E1A4A9D74005C9032 /* ColorSettingsViewController.swift in Sources */,
-				3A024F991A43D7B4002231BD /* DatabaseHelper.swift in Sources */,
-				3A02203A1A495C6000B433F5 /* FontSettingsViewController.swift in Sources */,
-				3A024F971A43D2BB002231BD /* FMResultSet.m in Sources */,
-				3A88F8911A402C6700193E53 /* worshipsongs.xcdatamodeld in Sources */,
-				3A024F951A43D2BB002231BD /* FMDatabaseAdditions.m in Sources */,
-				3A25DF731A5FD1010065FB5F /* UserDefaultsSettingsProviderService.swift in Sources */,
-				9FC45A841A88384E0024EE5F /* DownloadService.swift in Sources */,
-				3A084D5C1A4D05080097ADA1 /* SettingsDataManager.swift in Sources */,
-				3A25DF6E1A5FCED70065FB5F /* CommonService.swift in Sources */,
-				3A0745051A53898400BE6356 /* ColorPaletteService.swift in Sources */,
-				3A0220341A490CAB00B433F5 /* CustomTextSettingService.swift in Sources */,
-				3A25DF691A5FCC080065FB5F /* RegexPatternMatcherService.swift in Sources */,
-				3A0834A71A5E35E20056293D /* TextAttributeService.swift in Sources */,
+				2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */,
+				2F5D3D5A1BC78DB8001C4B6F /* DatabaseHelper.swift in Sources */,
+				2F5D3D601BC7A74E001C4B6F /* TitlesTableViewController.swift in Sources */,
+				2F56417D1BCB3A9700064269 /* SongsTableViewController.swift in Sources */,
+				2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */,
+				2F5D3D631BC7AD5E001C4B6F /* StringUtils.swift in Sources */,
+				2F5D3D221BC788F8001C4B6F /* SecondViewController.swift in Sources */,
+				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
+				2F5D3D201BC788F8001C4B6F /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A88F89E1A402C6700193E53 /* Sources */ = {
+		2F5D3D2C1BC788F8001C4B6F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A0834A31A5E26B20056293D /* CustomTextSettingServiceTest.swift in Sources */,
-				3A08E87B1A5D303800964978 /* FMDatabaseAdditions.m in Sources */,
-				3A25DF6C1A5FCCC50065FB5F /* RegexPatternMatcherService.swift in Sources */,
-				3A0834981A5E09400056293D /* UtilTest.swift in Sources */,
-				3A25DF741A5FD1B70065FB5F /* UserDefaultsSettingsProviderService.swift in Sources */,
-				3A0834A81A5E395C0056293D /* TextAttributeService.swift in Sources */,
-				3A25DF6B1A5FCC550065FB5F /* RegexPatternMatcherServiceTest.swift in Sources */,
-				3A25DF701A5FCF530065FB5F /* CommonServiceTest.swift in Sources */,
-				3A25DF761A5FD3A40065FB5F /* UserDefaultsSettingsProviderServiceTest.swift in Sources */,
-				3A0834B01A5E5CC20056293D /* ConnectionService.swift in Sources */,
-				3A25DF711A5FCF820065FB5F /* CommonService.swift in Sources */,
-				3A0834A11A5E24FE0056293D /* SettingsDataManager.swift in Sources */,
-				3A0834AF1A5E5BE20056293D /* ConnectionServiceTest.swift in Sources */,
-				3A0834A01A5E24420056293D /* Util.swift in Sources */,
-				3A0834B31A5E63F10056293D /* MasterViewControllerTest.swift in Sources */,
-				3A0834AC1A5E57130056293D /* ColorPaletteServiceTest.swift in Sources */,
-				3A0834A41A5E279B0056293D /* CustomTextSettingService.swift in Sources */,
-				3A0834AD1A5E584A0056293D /* ColorPaletteService.swift in Sources */,
+				2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F5D3D371BC788F8001C4B6F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F5D3D401BC788F8001C4B6F /* worshipsongsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3A88F8A41A402C6700193E53 /* PBXTargetDependency */ = {
+		2F5D3D321BC788F8001C4B6F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3A88F8871A402C6700193E53 /* worshipsongs */;
-			targetProxy = 3A88F8A31A402C6700193E53 /* PBXContainerItemProxy */;
+			target = 2F5D3D191BC788F8001C4B6F /* worshipsongs */;
+			targetProxy = 2F5D3D311BC788F8001C4B6F /* PBXContainerItemProxy */;
+		};
+		2F5D3D3D1BC788F8001C4B6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F5D3D191BC788F8001C4B6F /* worshipsongs */;
+			targetProxy = 2F5D3D3C1BC788F8001C4B6F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		2F5D3D231BC788F8001C4B6F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F5D3D241BC788F8001C4B6F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2F5D3D281BC788F8001C4B6F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F5D3D291BC788F8001C4B6F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
-		3A88F8AA1A402C6700193E53 /* Debug */ = {
+		2F5D3D421BC788F8001C4B6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -628,31 +503,34 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "worshipsongs/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		3A88F8AB1A402C6700193E53 /* Release */ = {
+		2F5D3D431BC788F8001C4B6F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -670,146 +548,139 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "worshipsongs/Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		3A88F8AD1A402C6700193E53 /* Debug */ = {
+		2F5D3D451BC788F8001C4B6F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 420E0C06CD0ED4C60E730528 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = worshipsongs/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				New_Setting = "";
+				PRODUCT_BUNDLE_IDENTIFIER = crunchersaspire.worshipsongs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = worshipsongs/classes/Header/Header.h;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		3A88F8AE1A402C6700193E53 /* Release */ = {
+		2F5D3D461BC788F8001C4B6F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B3FE375BDA28ADC79F4DB12 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = worshipsongs/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				New_Setting = "";
+				PRODUCT_BUNDLE_IDENTIFIER = crunchersaspire.worshipsongs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = worshipsongs/classes/Header/Header.h;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		3A88F8B01A402C6700193E53 /* Debug */ = {
+		2F5D3D481BC788F8001C4B6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = worshipsongsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = crunchersaspire.worshipsongsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/worshipsongs.app/worshipsongs";
 			};
 			name = Debug;
 		};
-		3A88F8B11A402C6700193E53 /* Release */ = {
+		2F5D3D491BC788F8001C4B6F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = worshipsongsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = crunchersaspire.worshipsongsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/worshipsongs.app/worshipsongs";
+			};
+			name = Release;
+		};
+		2F5D3D4B1BC788F8001C4B6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = worshipsongsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = crunchersaspire.worshipsongsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = worshipsongs;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		2F5D3D4C1BC788F8001C4B6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = worshipsongsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = crunchersaspire.worshipsongsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = worshipsongs;
+				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3A88F8831A402C6700193E53 /* Build configuration list for PBXProject "worshipsongs" */ = {
+		2F5D3D151BC788F8001C4B6F /* Build configuration list for PBXProject "worshipsongs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3A88F8AA1A402C6700193E53 /* Debug */,
-				3A88F8AB1A402C6700193E53 /* Release */,
+				2F5D3D421BC788F8001C4B6F /* Debug */,
+				2F5D3D431BC788F8001C4B6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A88F8AC1A402C6700193E53 /* Build configuration list for PBXNativeTarget "worshipsongs" */ = {
+		2F5D3D441BC788F8001C4B6F /* Build configuration list for PBXNativeTarget "worshipsongs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3A88F8AD1A402C6700193E53 /* Debug */,
-				3A88F8AE1A402C6700193E53 /* Release */,
+				2F5D3D451BC788F8001C4B6F /* Debug */,
+				2F5D3D461BC788F8001C4B6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A88F8AF1A402C6700193E53 /* Build configuration list for PBXNativeTarget "worshipsongsTests" */ = {
+		2F5D3D471BC788F8001C4B6F /* Build configuration list for PBXNativeTarget "worshipsongsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3A88F8B01A402C6700193E53 /* Debug */,
-				3A88F8B11A402C6700193E53 /* Release */,
+				2F5D3D481BC788F8001C4B6F /* Debug */,
+				2F5D3D491BC788F8001C4B6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F5D3D4A1BC788F8001C4B6F /* Build configuration list for PBXNativeTarget "worshipsongsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F5D3D4B1BC788F8001C4B6F /* Debug */,
+				2F5D3D4C1BC788F8001C4B6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		3A88F88F1A402C6700193E53 /* worshipsongs.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3A88F8901A402C6700193E53 /* worshipsongs.xcdatamodel */,
-			);
-			currentVersion = 3A88F8901A402C6700193E53 /* worshipsongs.xcdatamodel */;
-			path = worshipsongs.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
-	rootObject = 3A88F8801A402C6700193E53 /* Project object */;
+	rootObject = 2F5D3D121BC788F8001C4B6F /* Project object */;
 }
