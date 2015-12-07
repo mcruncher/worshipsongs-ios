@@ -8,20 +8,36 @@
 
 import UIKit
 
-class SongsTableViewController: UITableViewController{
+class SongsTableViewController: UITableViewController, NSXMLParserDelegate{
+    
+    let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     
     var songName: String = ""
     var songLyrics: NSString = NSString()
     var verseOrder: NSArray = NSArray()
+    var element:String!
+    var attribues : NSDictionary = NSDictionary()
+    var listDataDictionary : NSMutableDictionary = NSMutableDictionary()
+    var parsedVerseOrderList: NSMutableArray = NSMutableArray()
+    var verseOrderList: NSMutableArray = NSMutableArray()
+    var text: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        let lyrics: NSData = songLyrics.dataUsingEncoding(NSUTF8StringEncoding)!
+        let parser = NSXMLParser(data: lyrics)
+        parser.delegate = self
+        parser.parse()
+        if(verseOrderList.count < 1){
+            print("parsedVerseOrderList:\(parsedVerseOrderList)")
+            verseOrderList = parsedVerseOrderList
+        }
+        self.tableView.estimatedRowHeight = 88.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,65 +49,56 @@ class SongsTableViewController: UITableViewController{
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        print("row\(self.verseOrderList.count)")
+        return self.verseOrderList.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return verseOrder.count
+        
+        return 1
     }
 
    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = songLyrics as String
-
+       // cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
+        let key: String = (verseOrderList[indexPath.section] as! String).lowercaseString
+        print("key\(key)")
+        let dataText: NSString? = listDataDictionary[key] as? NSString
+        cell.textLabel!.numberOfLines = 0
+        cell.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
+        print("cell\(cell.textLabel!.attributedText )")
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        element = elementName
+        print("element:\(element)")
+        attribues = attributeDict
+        print("attribues:\(attribues)")
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    
+    func parser(parser: NSXMLParser, foundCharacters string: String) {
+        text = string
+        print("string:\(string)")
+        let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        print("data:\(data)")
+        if (!data.isEmpty) {
+            if element == "verse" {
+                let verseType = (attribues.objectForKey("type") as! String).lowercaseString
+                let verseLabel = attribues.objectForKey("label")as! String
+                //lyricsData.append(data);
+                listDataDictionary.setObject(data as String, forKey: verseType + verseLabel)
+                if(verseOrderList.count < 1){
+                    parsedVerseOrderList.addObject(verseType + verseLabel)
+                    print("parsedVerseOrder:\(parsedVerseOrderList)")
+                }
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

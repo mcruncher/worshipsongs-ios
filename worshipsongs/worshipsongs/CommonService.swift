@@ -16,17 +16,9 @@ class CommonService: NSObject {
     
     func getDocumentDirectoryPath(fileName: String) -> String {
     
-        let dirPaths =
-        NSSearchPathForDirectoriesInDomains(.DocumentDirectory,
-            .UserDomainMask, true)
-        
-        let docsDir = dirPaths[0] 
-        
-        let databasePath = docsDir.stringByAppendingPathComponent(
-            fileName)
-        
-//        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0].stringByAppendingPathComponent(fileName)
-//        print("Path : \(path)")
+        let dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let docsDir = dirPaths[0]
+        let databasePath = docsDir.stringByAppendingPathComponent(fileName)
         return databasePath
     }
     

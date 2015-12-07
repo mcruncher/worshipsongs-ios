@@ -8,9 +8,10 @@
 
 import UIKit
 
-class TitlesTableViewController: UITableViewController {
+class TitlesTableViewController: AbstractViewController {
     
     var songModel = [Songs]()
+    var filteredSongModel = [Songs]()
     var databaseHelper = DatabaseHelper()
     var verseList: NSArray = NSArray()
     var songLyrics: NSString = NSString()
@@ -19,12 +20,7 @@ class TitlesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         songModel = databaseHelper.getSongModel()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        filteredSongModel = songModel
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,25 +37,26 @@ class TitlesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return songModel.count
+        return filteredSongModel.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = songModel[indexPath.row].title
+        cell.textLabel?.text = filteredSongModel[indexPath.row].title
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         verseList = NSArray()
-        songLyrics = songModel[indexPath.row].lyrics
-        songName = songModel[indexPath.row].title
-        let verseOrder = songModel[indexPath.row].verse_order
+        songLyrics = filteredSongModel[indexPath.row].lyrics
+        songName = filteredSongModel[indexPath.row].title
+        let verseOrder = filteredSongModel[indexPath.row].verse_order
         if !verseOrder.isEmpty {
             verseList = splitVerseOrder(verseOrder)
         }
+        hideSearchBar()
         performSegueWithIdentifier("songs", sender: self)
         
     }
@@ -77,50 +74,34 @@ class TitlesTableViewController: UITableViewController {
             songsTableViewController.songName = songName
         }
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContentForSearchText(self.searchBar)
+        self.tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func filterContentForSearchText(searchBar: UISearchBar) {
+        // Filter the array using the filter method
+        let searchText = searchBar.text
+        var data = [(Songs)]()
+        data = self.songModel.filter({( song: Songs) -> Bool in
+            let stringMatch = (song.title as NSString).localizedCaseInsensitiveContainsString(searchText!)
+            return (stringMatch.boolValue)
+            
+        })
+        self.filteredSongModel = data
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    
+    override func searchBarSearchButtonClicked(searchBar: UISearchBar)
+    {
+        super.searchBarSearchButtonClicked(searchBar)
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    override func searchBarCancelButtonClicked(searchBar: UISearchBar)
+    {
+        super.searchBarCancelButtonClicked(searchBar)
+        filteredSongModel = songModel
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
