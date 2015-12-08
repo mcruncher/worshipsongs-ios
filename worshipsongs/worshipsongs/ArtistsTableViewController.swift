@@ -1,67 +1,60 @@
 //
-//  TitlesTableViewController.swift
+//  ArtistsTableViewController.swift
 //  worshipsongs
 //
-//  Created by Vignesh Palanisamy on 10/9/15.
+//  Created by Vignesh Palanisamy on 08/12/2015.
 //  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
 //
 
 import UIKit
 
-class TitlesTableViewController: AbstractViewController {
+class ArtistsTableViewController: AbstractViewController {
     
-    var songModel = [Songs]()
-    var filteredSongModel = [Songs]()
+    var authorModel = [Author]()
+    var artistName: String = ""
+    var filteredAuthorModel = [Author]()
     var databaseHelper = DatabaseHelper()
+    var songsModel = [Songs]()
     var verseList: NSArray = NSArray()
     var songLyrics: NSString = NSString()
     var songName: String = ""
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateModel()
+        authorModel = databaseHelper.getArtistModel()
+        filteredAuthorModel = authorModel
     }
     
-    func updateModel() {
-        songModel = databaseHelper.getSongModel()
-        filteredSongModel = songModel
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return filteredSongModel.count
+        return filteredAuthorModel.count
     }
-
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = filteredSongModel[indexPath.row].title
+        cell.textLabel?.text = filteredAuthorModel[indexPath.row].displayName
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        verseList = NSArray()
-        songLyrics = filteredSongModel[indexPath.row].lyrics
-        songName = filteredSongModel[indexPath.row].title
-        let verseOrder = filteredSongModel[indexPath.row].verse_order
-        if !verseOrder.isEmpty {
-            verseList = splitVerseOrder(verseOrder)
-        }
         hideSearchBar()
-        performSegueWithIdentifier("songs", sender: self)
+        artistName = filteredAuthorModel[indexPath.row].displayName
+        songsModel = databaseHelper.getArtistSongsModel(filteredAuthorModel[indexPath.row].id)
+        performSegueWithIdentifier("artistTitle", sender: self)
         
     }
     
@@ -69,13 +62,12 @@ class TitlesTableViewController: AbstractViewController {
     {
         return verseOrder.componentsSeparatedByString(" ") as NSArray
     }
-   
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "songs") {
-            let songsTableViewController = segue.destinationViewController as! SongsTableViewController;
-            songsTableViewController.verseOrder = verseList
-            songsTableViewController.songLyrics = songLyrics
-            songsTableViewController.songName = songName
+        if (segue.identifier == "artistTitle") {
+            let titleTableViewController = segue.destinationViewController as! ArtistSongsTitleTableViewController
+            titleTableViewController.artistName = artistName
+            titleTableViewController.songModel = songsModel
         }
     }
     
@@ -87,13 +79,13 @@ class TitlesTableViewController: AbstractViewController {
     func filterContentForSearchText(searchBar: UISearchBar) {
         // Filter the array using the filter method
         let searchText = searchBar.text
-        var data = [(Songs)]()
-        data = self.songModel.filter({( song: Songs) -> Bool in
-            let stringMatch = (song.title as NSString).localizedCaseInsensitiveContainsString(searchText!)
+        var data = [(Author)]()
+        data = self.authorModel.filter({( song: Author) -> Bool in
+            let stringMatch = (song.displayName as NSString).localizedCaseInsensitiveContainsString(searchText!)
             return (stringMatch.boolValue)
             
         })
-        self.filteredSongModel = data
+        self.filteredAuthorModel = data
     }
     
     override func searchBarSearchButtonClicked(searchBar: UISearchBar)
@@ -105,13 +97,13 @@ class TitlesTableViewController: AbstractViewController {
     override func searchBarCancelButtonClicked(searchBar: UISearchBar)
     {
         super.searchBarCancelButtonClicked(searchBar)
-        filteredSongModel = songModel
+        filteredAuthorModel = authorModel
         tableView.reloadData()
     }
     
     override func refresh(sender:AnyObject)
     {
-        filteredSongModel = songModel
+        filteredAuthorModel = authorModel
         self.tableView.reloadData()
         self.refresh.endRefreshing()
     }

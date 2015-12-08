@@ -10,18 +10,29 @@ import UIKit
 
 class AbstractViewController: UITableViewController, UISearchBarDelegate  {
     
-     var searchBar: UISearchBar!
+    var searchBar: UISearchBar!
+    var refresh = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         createSearchBar()
+        //refresh control
+        refresh = UIRefreshControl()
+        refresh.attributedTitle = NSAttributedString(string: "Refresh")
+        refresh.addTarget(self, action: "refresh:", forControlEvents:UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refresh)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    func refresh(sender:AnyObject)
+    {
+        self.tableView.reloadData()
+        self.refresh.endRefreshing()
+    }
 
     func createSearchBar()
     {

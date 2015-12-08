@@ -24,6 +24,7 @@ class SongsTableViewController: UITableViewController, NSXMLParserDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = songName
         let lyrics: NSData = songLyrics.dataUsingEncoding(NSUTF8StringEncoding)!
         let parser = NSXMLParser(data: lyrics)
         parser.delegate = self
