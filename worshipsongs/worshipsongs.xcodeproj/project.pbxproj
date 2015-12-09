@@ -342,6 +342,7 @@
 				TargetAttributes = {
 					2F5D3D191BC788F8001C4B6F = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 7W474V4EGY;
 					};
 					2F5D3D2F1BC788F8001C4B6F = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -614,9 +615,10 @@
 			baseConfigurationReference = 420E0C06CD0ED4C60E730528 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = worshipsongs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = crunchersaspire.worshipsongs;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcruncher.worshipsongs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -626,9 +628,10 @@
 			baseConfigurationReference = 1B3FE375BDA28ADC79F4DB12 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = worshipsongs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = crunchersaspire.worshipsongs;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcruncher.worshipsongs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
