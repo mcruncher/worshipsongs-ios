@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArtistsTableViewController: AbstractViewController {
+class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
     
     var authorModel = [Author]()
     var artistName: String = ""
@@ -19,10 +19,22 @@ class ArtistsTableViewController: AbstractViewController {
     var songLyrics: NSString = NSString()
     var songName: String = ""
     
+    var searchBar: UISearchBar!
+    var refresh = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         authorModel = databaseHelper.getArtistModel()
         filteredAuthorModel = authorModel
+        //refresh control
+        refresh = UIRefreshControl()
+        refresh.attributedTitle = NSAttributedString(string: "Refresh")
+        refresh.addTarget(self, action: "refresh:", forControlEvents:UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refresh)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        createSearchBar()
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,7 +83,7 @@ class ArtistsTableViewController: AbstractViewController {
         }
     }
     
-    override func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         filterContentForSearchText(self.searchBar)
         self.tableView.reloadData()
     }
@@ -88,23 +100,54 @@ class ArtistsTableViewController: AbstractViewController {
         self.filteredAuthorModel = data
     }
     
-    override func searchBarSearchButtonClicked(searchBar: UISearchBar)
+    func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
-        super.searchBarSearchButtonClicked(searchBar)
+        hideSearchBar()
         tableView.reloadData()
     }
     
-    override func searchBarCancelButtonClicked(searchBar: UISearchBar)
+    func searchBarCancelButtonClicked(searchBar: UISearchBar)
     {
-        super.searchBarCancelButtonClicked(searchBar)
+        hideSearchBar()
         filteredAuthorModel = authorModel
         tableView.reloadData()
     }
     
-    override func refresh(sender:AnyObject)
+    func refresh(sender:AnyObject)
     {
         filteredAuthorModel = authorModel
         self.tableView.reloadData()
         self.refresh.endRefreshing()
+    }
+  
+    func createSearchBar()
+    {
+        // Search bar
+        let searchBarFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, 44);
+        searchBar = UISearchBar(frame: searchBarFrame)
+        searchBar.delegate = self;
+        searchBar.showsCancelButton = true;
+        searchBar.tintColor = UIColor.grayColor()
+        self.addSearchBarButton()
+    }
+    
+    func addSearchBarButton(){
+        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
+    }
+    
+    
+    func searchButtonItemClicked(sender:UIBarButtonItem){
+        self.tabBarController?.navigationItem.titleView = searchBar;
+        self.tabBarController?.navigationItem.leftBarButtonItem?.enabled = false
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        searchBar.becomeFirstResponder()
+    }
+    
+    
+    func hideSearchBar() {
+        self.tabBarController?.navigationItem.titleView = nil
+        self.tabBarController?.navigationItem.leftBarButtonItem?.enabled = true
+        self.searchBar.text = ""
+        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
     }
 }

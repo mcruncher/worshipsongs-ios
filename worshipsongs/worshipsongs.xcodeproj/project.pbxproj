@@ -9,10 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F56417D1BCB3A9700064269 /* SongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */; };
 		2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */; };
-		2F5A6A821C157B69001E8B93 /* AbstractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A6A801C15680D001E8B93 /* AbstractViewController.swift */; };
 		2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */; };
-		2F5D3D201BC788F8001C4B6F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D1F1BC788F8001C4B6F /* FirstViewController.swift */; };
-		2F5D3D221BC788F8001C4B6F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D211BC788F8001C4B6F /* SecondViewController.swift */; };
 		2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D231BC788F8001C4B6F /* Main.storyboard */; };
 		2F5D3D271BC788F8001C4B6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D261BC788F8001C4B6F /* Assets.xcassets */; };
 		2F5D3D2A1BC788F8001C4B6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D281BC788F8001C4B6F /* LaunchScreen.storyboard */; };
@@ -56,11 +53,8 @@
 		1B3FE375BDA28ADC79F4DB12 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsTableViewController.swift; sourceTree = "<group>"; };
 		2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsTabBarViewController.swift; sourceTree = "<group>"; };
-		2F5A6A801C15680D001E8B93 /* AbstractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; };
 		2F5D3D1A1BC788F8001C4B6F /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2F5D3D1F1BC788F8001C4B6F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		2F5D3D211BC788F8001C4B6F /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		2F5D3D241BC788F8001C4B6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F5D3D261BC788F8001C4B6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F5D3D291BC788F8001C4B6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -215,12 +209,9 @@
 		2F5D3D501BC789E5001C4B6F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2F5D3D1F1BC788F8001C4B6F /* FirstViewController.swift */,
-				2F5D3D211BC788F8001C4B6F /* SecondViewController.swift */,
 				2F5D3D5F1BC7A74E001C4B6F /* TitlesTableViewController.swift */,
 				2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */,
 				2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */,
-				2F5A6A801C15680D001E8B93 /* AbstractViewController.swift */,
 				2FD589921C165FC300668951 /* ArtistsTableViewController.swift */,
 				2FD589981C16775C00668951 /* ArtistSongsTitleTableViewController.swift */,
 			);
@@ -468,14 +459,11 @@
 				2F56417D1BCB3A9700064269 /* SongsTableViewController.swift in Sources */,
 				625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */,
-				2F5A6A821C157B69001E8B93 /* AbstractViewController.swift in Sources */,
 				2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */,
 				2F5D3D631BC7AD5E001C4B6F /* StringUtils.swift in Sources */,
 				2FD5899A1C167CD300668951 /* TitlesTableViewController.swift in Sources */,
-				2F5D3D221BC788F8001C4B6F /* SecondViewController.swift in Sources */,
 				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
 				2FD589951C1660A300668951 /* Author.swift in Sources */,
-				2F5D3D201BC788F8001C4B6F /* FirstViewController.swift in Sources */,
 				2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */,
 				2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */,
 				2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */,
