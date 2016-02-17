@@ -1,0 +1,11 @@
+This app brings you most of the Praise & Worship lyrics used by Tamil churches all over the world. Now, you can worship anytime, anywhere with all the lyrics you need in an elegantly designed app.
+
+Why develop another app when there are tons of similar apps?
+Worship Songs was developed as we couldn't find an app with latest Praise & Worship songs with both Tamil and Romanised text.
+So, Worship Songs is the world's first mobile app that offers Romanised text for Tamil Christian lyrics.
+
+Many Tamil congregations also sing English songs. Worship Songs provides many popular English songs as well so you need not look for another app.
+
+And finally, the songs database grows rapidly. New songs are added often, so you will never miss your favourite song.
+
+Did we mention that Worship Songs is open source? Yes, you can be a part of this project. Isn't that great?
