@@ -37,7 +37,13 @@ xcuserdata
 *.ipa
 
 profile
-xcshareddata
+#xcshareddata
 # Pods - for those of you who use CocoaPods
 Pods/
 Podfile.lock
+
+**/AppStore_com.mcruncher.worshipsongs.mobileprovision
+**/*.cer
+**/worshipsongs/fastlane/README.md
+**/worshipsongs/fastlane/report.xml
+**/worshipsongs/worshipsongs.app.dSYM.zip
