@@ -34,7 +34,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         //refresh control
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
-        refresh.addTarget(self, action: "refresh:", forControlEvents:UIControlEvents.ValueChanged)
+        refresh.addTarget(self, action: #selector(ArtistSongsTitleTableViewController.refresh(_:)), forControlEvents:UIControlEvents.ValueChanged)
         self.tableView.addSubview(refresh)
         self.navigationItem.title = artistName
         filteredSongModel = songModel
@@ -131,7 +131,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
 
     func addSearchBarButton(){
-        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
+        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(ArtistSongsTitleTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
     func searchButtonItemClicked(sender:UIBarButtonItem){
@@ -146,7 +146,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         self.navigationItem.titleView = nil
         self.navigationItem.leftBarButtonItem?.enabled = true
         self.searchBar.text = ""
-        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
+        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(ArtistSongsTitleTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
     func createSearchBar()

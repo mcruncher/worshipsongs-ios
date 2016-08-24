@@ -32,7 +32,7 @@ class CustomTextSettingService {
             customTagTextRange = customTagRangeArray
         }
         let attributedString = NSMutableAttributedString(string: customCellText as String)
-        for var index=0; index < customTagTextRange.count; index++ {
+        for index in 0 ..< customTagTextRange.count {
             var rangeValue:NSRange
             rangeValue = customTagTextRange.objectAtIndex(index).rangeValue
             attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: rangeValue)
@@ -50,7 +50,7 @@ class CustomTextSettingService {
         startTagArray = regexPatternMatcherService.getRange(cellText as String, pattern: startPattern)
         endTagArray = regexPatternMatcherService.getRange(cellText as String, pattern: endPattern)
         if(startTagArray.count == endTagArray.count){
-            for var index=0; index < startTagArray.count; index++ {
+            for index in 0 ..< startTagArray.count {
                 var startRangeValue:NSRange
                 var endRangeValue:NSRange
                 var customRange:NSRange
@@ -66,7 +66,7 @@ class CustomTextSettingService {
     func findCustomTagTextRange(cellText : NSString, customTagRangeArray: NSMutableArray) -> NSMutableArray{
         var startIndex: Int = 0
         let tagTextRange: NSMutableArray = NSMutableArray()
-        for var index=0; index < customTagRangeArray.count; index++ {
+        for index in 0 ..< customTagRangeArray.count {
             var rangeValue:NSRange
             rangeValue = customTagRangeArray.objectAtIndex(index).rangeValue
             var totalPatternLength: Int = 0
