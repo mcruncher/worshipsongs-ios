@@ -11,7 +11,6 @@
 		2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */; };
 		2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */; };
 		2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D231BC788F8001C4B6F /* Main.storyboard */; };
-		2F5D3D271BC788F8001C4B6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D261BC788F8001C4B6F /* Assets.xcassets */; };
 		2F5D3D2A1BC788F8001C4B6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D281BC788F8001C4B6F /* LaunchScreen.storyboard */; };
 		2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */; };
 		2F5D3D401BC788F8001C4B6F /* worshipsongsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D3F1BC788F8001C4B6F /* worshipsongsUITests.swift */; };
@@ -20,6 +19,7 @@
 		2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D5B1BC7A216001C4B6F /* CommonService.swift */; };
 		2F5D3D631BC7AD5E001C4B6F /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
 		2F5D3D681BC7BB46001C4B6F /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D671BC7BB46001C4B6F /* songs.sqlite */; };
+		2FCEFC901D6C42CD008A2180 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D261BC788F8001C4B6F /* Assets.xcassets */; };
 		2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD589921C165FC300668951 /* ArtistsTableViewController.swift */; };
 		2FD589951C1660A300668951 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD589941C1660A300668951 /* Author.swift */; };
 		2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD589981C16775C00668951 /* ArtistSongsTitleTableViewController.swift */; };
@@ -379,8 +379,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F5D3D2A1BC788F8001C4B6F /* LaunchScreen.storyboard in Resources */,
-				2F5D3D271BC788F8001C4B6F /* Assets.xcassets in Resources */,
 				2F5D3D681BC7BB46001C4B6F /* songs.sqlite in Resources */,
+				2FCEFC901D6C42CD008A2180 /* Assets.xcassets in Resources */,
 				2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

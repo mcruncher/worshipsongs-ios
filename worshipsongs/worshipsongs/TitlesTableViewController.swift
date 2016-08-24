@@ -27,13 +27,14 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewWillAppear(animated: Bool) {
         createSearchBar()
+        tableView.reloadData()
     }
         
     func updateModel() {
         //refresh control
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
-        refresh.addTarget(self, action: "refresh:", forControlEvents:UIControlEvents.ValueChanged)
+        refresh.addTarget(self, action: #selector(TitlesTableViewController.refresh(_:)), forControlEvents:UIControlEvents.ValueChanged)
         self.tableView.addSubview(refresh)
         songModel = databaseHelper.getSongModel()
         filteredSongModel = songModel
@@ -140,7 +141,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func addSearchBarButton(){
-        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
+        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
     func searchButtonItemClicked(sender:UIBarButtonItem){
@@ -154,6 +155,6 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate {
         self.tabBarController?.navigationItem.titleView = nil
         self.tabBarController?.navigationItem.leftBarButtonItem?.enabled = true
         self.searchBar.text = ""
-        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
+        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
 }
