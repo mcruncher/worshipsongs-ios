@@ -29,12 +29,13 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
         //refresh control
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
-        refresh.addTarget(self, action: "refresh:", forControlEvents:UIControlEvents.ValueChanged)
+        refresh.addTarget(self, action: #selector(ArtistsTableViewController.refresh(_:)), forControlEvents:UIControlEvents.ValueChanged)
         self.tableView.addSubview(refresh)
     }
     
     override func viewWillAppear(animated: Bool) {
         createSearchBar()
+        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -132,7 +133,7 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
     }
     
     func addSearchBarButton(){
-        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
+        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(ArtistsTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
     
@@ -148,6 +149,6 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
         self.tabBarController?.navigationItem.titleView = nil
         self.tabBarController?.navigationItem.leftBarButtonItem?.enabled = true
         self.searchBar.text = ""
-        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
+        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(ArtistsTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
 }
