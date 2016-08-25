@@ -59,4 +59,8 @@ extension String {
         
         return nsSt.stringByAppendingPathExtension(ext)
     }
+    
+    func equalsIgnoreCase(string: String) -> Bool {
+        return self.caseInsensitiveCompare(string) == NSComparisonResult.OrderedSame
+    }
 }
