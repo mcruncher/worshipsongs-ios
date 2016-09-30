@@ -25,15 +25,16 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate {
         updateModel()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         createSearchBar()
+        tableView.reloadData()
     }
         
     func updateModel() {
         //refresh control
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
-        refresh.addTarget(self, action: "refresh:", forControlEvents:UIControlEvents.ValueChanged)
+        refresh.addTarget(self, action: #selector(TitlesTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
         songModel = databaseHelper.getSongModel()
         filteredSongModel = songModel
@@ -46,82 +47,82 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return filteredSongModel.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = filteredSongModel[indexPath.row].title
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = filteredSongModel[(indexPath as NSIndexPath).row].title
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         verseList = NSArray()
-        songLyrics = filteredSongModel[indexPath.row].lyrics
-        songName = filteredSongModel[indexPath.row].title
-        let verseOrder = filteredSongModel[indexPath.row].verse_order
+        songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
+        songName = filteredSongModel[(indexPath as NSIndexPath).row].title
+        let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
         if !verseOrder.isEmpty {
             verseList = splitVerseOrder(verseOrder)
         }
         hideSearchBar()
-        performSegueWithIdentifier("songs", sender: self)
+        performSegue(withIdentifier: "songs", sender: self)
         
     }
     
-    func splitVerseOrder(verseOrder: String) -> NSArray
+    func splitVerseOrder(_ verseOrder: String) -> NSArray
     {
-        return verseOrder.componentsSeparatedByString(" ") as NSArray
+        return verseOrder.components(separatedBy: " ") as NSArray
     }
    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if (segue.identifier == "songs") {
-            let songsTableViewController = segue.destinationViewController as! SongsTableViewController;
+            let songsTableViewController = segue.destination as! SongsTableViewController;
             songsTableViewController.verseOrder = verseList
             songsTableViewController.songLyrics = songLyrics
             songsTableViewController.songName = songName
         }
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filterContentForSearchText(searchBar)
         self.tableView.reloadData()
     }
     
-    func filterContentForSearchText(searchBar: UISearchBar) {
+    func filterContentForSearchText(_ searchBar: UISearchBar) {
         // Filter the array using the filter method
         let searchText = searchBar.text
         var data = [(Songs)]()
         data = self.songModel.filter({( song: Songs) -> Bool in
-            let stringMatch = (song.title as NSString).localizedCaseInsensitiveContainsString(searchText!)
-            return (stringMatch.boolValue)
+            let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!)
+            return (stringMatch)
             
         })
         self.filteredSongModel = data
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar)
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
         hideSearchBar()
         tableView.reloadData()
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar)
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
     {
         hideSearchBar()
         filteredSongModel = songModel
         tableView.reloadData()
     }
     
-    func refresh(sender:AnyObject)
+    func refresh(_ sender:AnyObject)
     {
         filteredSongModel = songModel
         self.tableView.reloadData()
@@ -131,29 +132,29 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate {
     func createSearchBar()
     {
         // Search bar
-        let searchBarFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, 44);
+        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
         searchBar = UISearchBar(frame: searchBarFrame)
         searchBar.delegate = self;
         searchBar.showsCancelButton = true;
-        searchBar.tintColor = UIColor.grayColor()
+        searchBar.tintColor = UIColor.gray
         self.addSearchBarButton()
     }
     
     func addSearchBarButton(){
-        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
+        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
-    func searchButtonItemClicked(sender:UIBarButtonItem){
+    func searchButtonItemClicked(_ sender:UIBarButtonItem){
         self.tabBarController?.navigationItem.titleView = searchBar;
-        self.tabBarController?.navigationItem.leftBarButtonItem?.enabled = false
+        self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
         searchBar.becomeFirstResponder()
     }
     
     func hideSearchBar() {
         self.tabBarController?.navigationItem.titleView = nil
-        self.tabBarController?.navigationItem.leftBarButtonItem?.enabled = true
+        self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
         self.searchBar.text = ""
-        self.tabBarController?.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searchButtonItemClicked:"), animated: true)
+        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
 }
