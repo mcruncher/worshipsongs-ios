@@ -14,12 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var progressView: UIView!
     let commonService = CommonService()
-    private let preferences = NSUserDefaults.standardUserDefaults()
+    fileprivate let preferences = UserDefaults.standard
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool{
         let version = getVersion()
         if preferences.dictionaryRepresentation().keys.contains("version") {
-            if !(preferences.stringForKey("version")?.equalsIgnoreCase(version))! {
+            if !(preferences.string(forKey: "version")?.equalsIgnoreCase(version))! {
                 copyFile("songs.sqlite")
             } else {
                 print("Same version")
@@ -32,16 +32,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func copyFile(fileName: NSString) {
+    func copyFile(_ fileName: NSString) {
         print("File copy started")
         let dbPath: String = commonService.getDocumentDirectoryPath(fileName as String)
         do {
-            let fileManager = NSFileManager.defaultManager()
-            if fileManager.fileExistsAtPath(dbPath) {
-                try fileManager.removeItemAtPath(dbPath)
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: dbPath) {
+                try fileManager.removeItem(atPath: dbPath)
             }
-            let fromPath: String? = NSBundle.mainBundle().resourcePath?.stringByAppendingPathComponent(fileName as String)
-            try fileManager.copyItemAtPath(fromPath!, toPath: dbPath)
+            let fromPath: String? = Bundle.main.resourcePath?.stringByAppendingPathComponent(fileName as String)
+            try fileManager.copyItem(atPath: fromPath!, toPath: dbPath)
             print("File copied successfully in \(dbPath)")
         } catch let error as NSError {
             print("Error occurred while copy \(dbPath): \(error)")
@@ -50,8 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func getVersion() -> String {
-        let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
-        let buildNumber = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         return version! + "." + buildNumber!
     }
 }
