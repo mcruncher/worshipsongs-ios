@@ -29,7 +29,7 @@
 		625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81771BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
-		D6AF1CF1D5F3237D4C7C47DF /* Pods_worshipsongs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89603984522B1AB61A32715 /* Pods_worshipsongs.framework */; };
+		8BE5E1BD4721210E637DD017 /* Pods_worshipsongs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,10 +78,10 @@
 		2FD589981C16775C00668951 /* ArtistSongsTitleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistSongsTitleTableViewController.swift; sourceTree = "<group>"; };
 		2FD78E4B1C103A5D00A171B7 /* CustomTextSettingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextSettingService.swift; sourceTree = "<group>"; };
 		2FD78E4D1C103C1A00A171B7 /* RegexPatternMatcherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexPatternMatcherService.swift; sourceTree = "<group>"; };
+		3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		625E81741BD664D000BE80B8 /* XmlParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserService.swift; sourceTree = "<group>"; };
-		65AD99C220BDF6CA3406273C /* Pods-worshipsongs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.release.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.release.xcconfig"; sourceTree = "<group>"; };
-		92A94828ADAE25C3519ED806 /* Pods-worshipsongs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.debug.xcconfig"; sourceTree = "<group>"; };
-		D89603984522B1AB61A32715 /* Pods_worshipsongs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.debug.xcconfig"; sourceTree = "<group>"; };
+		C527E03A25B5DD4563B2FAAC /* Pods-worshipsongs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.release.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6AF1CF1D5F3237D4C7C47DF /* Pods_worshipsongs.framework in Frameworks */,
+				8BE5E1BD4721210E637DD017 /* Pods_worshipsongs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +115,7 @@
 			children = (
 				2F0BCA0B1D9D114B00B8C16B /* FMDB.framework */,
 				2F0BCA091D9D0E0000B8C16B /* libPods.a */,
-				D89603984522B1AB61A32715 /* Pods_worshipsongs.framework */,
+				3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -128,7 +128,7 @@
 				2F5D3D3E1BC788F8001C4B6F /* worshipsongsUITests */,
 				2F5D3D1B1BC788F8001C4B6F /* Products */,
 				1611C2B2A4FA5A6BE0CC88B1 /* Frameworks */,
-				ADE538838D71943655C3ED0C /* Pods */,
+				C71AB278B042CB5172BCC9B6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -267,11 +267,11 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
-		ADE538838D71943655C3ED0C /* Pods */ = {
+		C71AB278B042CB5172BCC9B6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				92A94828ADAE25C3519ED806 /* Pods-worshipsongs.debug.xcconfig */,
-				65AD99C220BDF6CA3406273C /* Pods-worshipsongs.release.xcconfig */,
+				7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */,
+				C527E03A25B5DD4563B2FAAC /* Pods-worshipsongs.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -283,12 +283,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F5D3D441BC788F8001C4B6F /* Build configuration list for PBXNativeTarget "worshipsongs" */;
 			buildPhases = (
-				1D11EAAC9B79A31ECC168C88 /* [CP] Check Pods Manifest.lock */,
+				1EADD1CFE41EF7EA53618455 /* [CP] Check Pods Manifest.lock */,
 				2F5D3D161BC788F8001C4B6F /* Sources */,
 				2F5D3D171BC788F8001C4B6F /* Frameworks */,
 				2F5D3D181BC788F8001C4B6F /* Resources */,
-				81CF56AB11D609CB2DAB0E79 /* [CP] Embed Pods Frameworks */,
-				6B15BFCE208CA0CCB7FAA0F8 /* [CP] Copy Pods Resources */,
+				3A1DC313FDF058F399C8BA3C /* [CP] Embed Pods Frameworks */,
+				051A516C0FBA352ED138936B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -410,22 +410,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1D11EAAC9B79A31ECC168C88 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		6B15BFCE208CA0CCB7FAA0F8 /* [CP] Copy Pods Resources */ = {
+		051A516C0FBA352ED138936B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -440,7 +425,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		81CF56AB11D609CB2DAB0E79 /* [CP] Embed Pods Frameworks */ = {
+		1EADD1CFE41EF7EA53618455 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3A1DC313FDF058F399C8BA3C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -630,7 +630,7 @@
 		};
 		2F5D3D451BC788F8001C4B6F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92A94828ADAE25C3519ED806 /* Pods-worshipsongs.debug.xcconfig */;
+			baseConfigurationReference = 7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -649,7 +649,7 @@
 		};
 		2F5D3D461BC788F8001C4B6F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65AD99C220BDF6CA3406273C /* Pods-worshipsongs.release.xcconfig */;
+			baseConfigurationReference = C527E03A25B5DD4563B2FAAC /* Pods-worshipsongs.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
