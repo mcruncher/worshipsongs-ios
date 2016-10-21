@@ -24,6 +24,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addShareBarButton()
         self.navigationItem.title = songName
         let lyrics: Data = songLyrics.data(using: String.Encoding.utf8.rawValue)!
         let parser = XMLParser(data: lyrics)
@@ -80,6 +81,26 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         attribues = attributeDict as NSDictionary
         print("attribues:\(attribues)")
         
+    }
+    
+    fileprivate func addShareBarButton() {
+        self.navigationController!.navigationBar.tintColor = UIColor.black
+        let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(SongsTableViewController.share))
+        navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    func share() {
+        var objectsToShare = [songName, " ", " "]
+        var i = 0
+        while (i < verseOrderList.count) {
+            let key: String = (verseOrderList[i] as! String).lowercased()
+            let dataText: NSString? = listDataDictionary[key] as? NSString
+            objectsToShare.append(customTextSettingService.getAttributedString(dataText!).string)
+            i = i + 1
+        }
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.airDrop, UIActivityType.assignToContact, UIActivityType.addToReadingList,UIActivityType.copyToPasteboard,UIActivityType.saveToCameraRoll,UIActivityType.print]
+        self.present(activityVC, animated: true, completion: nil)
     }
     
     

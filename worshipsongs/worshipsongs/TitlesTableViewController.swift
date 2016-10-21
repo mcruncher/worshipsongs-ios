@@ -75,7 +75,6 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate {
         }
         hideSearchBar()
         performSegue(withIdentifier: "songs", sender: self)
-        
     }
     
     func splitVerseOrder(_ verseOrder: String) -> NSArray
