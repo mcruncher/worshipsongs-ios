@@ -90,17 +90,41 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     }
     
     func share() {
-        var objectsToShare = [songName, " ", " "]
-        var i = 0
-        while (i < verseOrderList.count) {
-            let key: String = (verseOrderList[i] as! String).lowercased()
-            let dataText: NSString? = listDataDictionary[key] as? NSString
-            objectsToShare.append(customTextSettingService.getAttributedString(dataText!).string)
-            i = i + 1
+        
+        let textToShare = getObjectToShare()
+        if let myWebsite = URL(string: "https://itunes.apple.com/us/app/tamil-christian-worship-songs/id1066174826?mt=8") {
+            let objectsToShare = [textToShare.string, myWebsite] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
+            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.message, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders"), UIActivityType.postToFacebook, UIActivityType.postToTwitter]
+            self.present(activityVC, animated: true, completion: nil)
         }
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.airDrop, UIActivityType.assignToContact, UIActivityType.addToReadingList,UIActivityType.copyToPasteboard,UIActivityType.saveToCameraRoll,UIActivityType.print]
-        self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    func getObjectToShare() -> NSMutableAttributedString {
+        let objectString: NSMutableAttributedString = NSMutableAttributedString()
+        objectString.append(NSAttributedString(string: "<html><body>"))
+        objectString.append(NSAttributedString(string: "<h1><a href=\"https://itunes.apple.com/us/app/tamil-christian-worship-songs/id1066174826?mt=8\">Tamil Christian Worship Songs</a></h1>"))
+        objectString.append(NSAttributedString(string: "<h2>\(songName)</h2>"))
+        for verseOrder in verseOrderList {
+            let key: String = (verseOrder as! String).lowercased()
+            let dataText: String? = listDataDictionary[key] as? String
+            let texts = parseString(text: dataText!)
+            print("verseOrder \(verseOrder)")
+            for text in texts {
+                objectString.append(NSAttributedString(string: text))
+                objectString.append(NSAttributedString(string: "<br/>"))
+            }
+        }
+        objectString.append(NSAttributedString(string: "</body></html>"))
+        return objectString
+    }
+    
+    func parseString(text: String) -> [String] {
+        var parsedText = text.replacingOccurrences(of: "{/y}", with: "{y} ")
+        print(parsedText)
+        parsedText.append("{y}")
+        return parsedText.components(separatedBy: "{y}")
     }
     
     
@@ -124,3 +148,4 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     }
 
 }
+

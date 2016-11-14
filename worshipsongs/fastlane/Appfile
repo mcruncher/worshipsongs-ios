@@ -4,4 +4,4 @@ apple_id "technical@mcruncher.com" # Your Apple email address
 team_id "7W474V4EGY"  # Developer Portal Team ID
 
 # you can even provide different app identifiers, Apple IDs and team names per lane:
-# More information: https://github.com/fastlane/fastlane/blob/master/docs/Appfile.md
+# More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md
