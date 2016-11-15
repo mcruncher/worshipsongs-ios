@@ -24,6 +24,7 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         authorModel = databaseHelper.getArtistModel()
         filteredAuthorModel = authorModel
         //refresh control
