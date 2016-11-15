@@ -24,6 +24,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addShareBarButton()
         self.navigationItem.title = songName
         let lyrics: Data = songLyrics.data(using: String.Encoding.utf8.rawValue)!
         let parser = XMLParser(data: lyrics)
@@ -82,6 +83,50 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         
     }
     
+    fileprivate func addShareBarButton() {
+        self.navigationController!.navigationBar.tintColor = UIColor.black
+        let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(SongsTableViewController.share))
+        navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    func share() {
+        
+        let textToShare = getObjectToShare()
+        if let myWebsite = URL(string: "https://itunes.apple.com/us/app/tamil-christian-worship-songs/id1066174826?mt=8") {
+            let objectsToShare = [textToShare.string, myWebsite] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
+            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.message, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders"), UIActivityType.postToFacebook, UIActivityType.postToTwitter]
+            self.present(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+    func getObjectToShare() -> NSMutableAttributedString {
+        let objectString: NSMutableAttributedString = NSMutableAttributedString()
+        objectString.append(NSAttributedString(string: "<html><body>"))
+        objectString.append(NSAttributedString(string: "<h1><a href=\"https://itunes.apple.com/us/app/tamil-christian-worship-songs/id1066174826?mt=8\">Tamil Christian Worship Songs</a></h1>"))
+        objectString.append(NSAttributedString(string: "<h2>\(songName)</h2>"))
+        for verseOrder in verseOrderList {
+            let key: String = (verseOrder as! String).lowercased()
+            let dataText: String? = listDataDictionary[key] as? String
+            let texts = parseString(text: dataText!)
+            print("verseOrder \(verseOrder)")
+            for text in texts {
+                objectString.append(NSAttributedString(string: text))
+                objectString.append(NSAttributedString(string: "<br/>"))
+            }
+        }
+        objectString.append(NSAttributedString(string: "</body></html>"))
+        return objectString
+    }
+    
+    func parseString(text: String) -> [String] {
+        var parsedText = text.replacingOccurrences(of: "{/y}", with: "{y} ")
+        print(parsedText)
+        parsedText.append("{y}")
+        return parsedText.components(separatedBy: "{y}")
+    }
+    
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         text = string
@@ -103,3 +148,4 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     }
 
 }
+
