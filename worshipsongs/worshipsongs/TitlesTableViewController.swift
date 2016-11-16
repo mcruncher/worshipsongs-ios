@@ -59,17 +59,17 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     }
     
     fileprivate func getConfirmationAlertController(_ indexPath: IndexPath) -> UIAlertController {
-        let confirmationAlertController = self.getDeleteController(indexPath)
-        confirmationAlertController.addAction(self.getDeleteAction(indexPath))
+        let confirmationAlertController = self.getMoveController(indexPath)
+        confirmationAlertController.addAction(self.getMoveAction(indexPath))
         confirmationAlertController.addAction(self.getCancelAction(indexPath))
         return confirmationAlertController
     }
     
-    fileprivate func getDeleteController(_ indexPath: IndexPath) -> UIAlertController {
+    fileprivate func getMoveController(_ indexPath: IndexPath) -> UIAlertController {
         return UIAlertController(title: "Favorite", message: "Do you want to add this song to Favorite list?", preferredStyle: UIAlertControllerStyle.alert)
     }
     
-    fileprivate func getDeleteAction(_ indexPath: IndexPath) -> UIAlertAction {
+    fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction {
         return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
             let song = self.filteredSongModel[indexPath.row]
             var favSong = [String]()

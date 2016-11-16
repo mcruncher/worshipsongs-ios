@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDelegate  {
+class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDelegate, UIGestureRecognizerDelegate  {
     
     var artistName: String = ""
+    fileprivate let preferences = UserDefaults.standard
     var songModel = [Songs]()
     var filteredSongModel = [Songs]()
     var databaseHelper = DatabaseHelper()
@@ -24,6 +25,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     override func viewDidLoad() {
         super.viewDidLoad()
         updateModel()
+        addLongPressGestureRecognizer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +40,51 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         self.tableView.addSubview(refresh)
         self.navigationItem.title = artistName
         filteredSongModel = songModel
+    }
+    
+    fileprivate func addLongPressGestureRecognizer() {
+        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TitlesTableViewController.onCellViewLongPress(_:)))
+        longPressGesture.minimumPressDuration = 0.5
+        longPressGesture.delegate = self
+        self.tableView.addGestureRecognizer(longPressGesture)
+    }
+    
+    internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
+        let pressingPoint = longPressGesture.location(in: self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
+        if longPressGesture.state == UIGestureRecognizerState.began {
+            self.present(self.getConfirmationAlertController(indexPath!), animated: true, completion: nil)
+        }
+    }
+    
+    fileprivate func getConfirmationAlertController(_ indexPath: IndexPath) -> UIAlertController {
+        let confirmationAlertController = self.getMoveController(indexPath)
+        confirmationAlertController.addAction(self.getMoveAction(indexPath))
+        confirmationAlertController.addAction(self.getCancelAction(indexPath))
+        return confirmationAlertController
+    }
+    
+    fileprivate func getMoveController(_ indexPath: IndexPath) -> UIAlertController {
+        return UIAlertController(title: "Favorite", message: "Do you want to add this song to Favorite list?", preferredStyle: UIAlertControllerStyle.alert)
+    }
+    
+    fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction {
+        return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
+            let song = self.filteredSongModel[indexPath.row]
+            var favSong = [String]()
+            if self.preferences.array(forKey: "favorite") != nil {
+                favSong = self.preferences.array(forKey: "favorite") as! [String]
+            }
+            favSong.append(song.title)
+            self.preferences.setValue(favSong, forKey: "favorite")
+            self.preferences.synchronize()
+        })
+    }
+    
+    fileprivate func getCancelAction(_ indexPath: IndexPath) -> UIAlertAction {
+        return UIAlertAction(title: "No", style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
+            self.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: UITableViewRowAnimation.automatic)
+        })
     }
     
     override func didReceiveMemoryWarning() {

@@ -23,7 +23,19 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
+        self.tableView.tableFooterView = getTableFooterView()
         updateModel()
+    }
+    
+    func getTableFooterView() -> UIView {
+        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 25))
+        footerview.backgroundColor = UIColor.groupTableViewBackground
+        let label = UILabel(frame: CGRect(x: 10, y: 5, width: tableView.frame.size.width, height: 15))
+        label.text = "Long press a song in Titles tab to mark it as favorites"
+        label.font = UIFont.systemFont(ofSize: 10.0)
+        label.textColor = UIColor.gray
+        footerview.addSubview(label)
+        return footerview
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +55,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
