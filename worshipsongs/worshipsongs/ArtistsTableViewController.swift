@@ -24,6 +24,7 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarItem.title = "artists".localized
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         authorModel = databaseHelper.getArtistModel()
         filteredAuthorModel = authorModel
@@ -35,6 +36,8 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let songTabBarController = tabBarController as! SongsTabBarViewController
+        songTabBarController.navigationItem.title = "artists".localized
         createSearchBar()
         tableView.reloadData()
     }

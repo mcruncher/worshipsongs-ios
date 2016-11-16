@@ -22,6 +22,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarItem.title = "favorites".localized
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         self.tableView.tableFooterView = getTableFooterView()
         updateModel()
@@ -31,7 +32,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 25))
         footerview.backgroundColor = UIColor.groupTableViewBackground
         let label = UILabel(frame: CGRect(x: 10, y: 5, width: tableView.frame.size.width, height: 15))
-        label.text = "Long press a song in Titles tab to mark it as favorites"
+        label.text = "message.favorite".localized
         label.font = UIFont.systemFont(ofSize: 10.0)
         label.textColor = UIColor.gray
         footerview.addSubview(label)
@@ -39,6 +40,8 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let songTabBarController = tabBarController as! SongsTabBarViewController
+        songTabBarController.navigationItem.title = "favorites".localized
         createSearchBar()
         refresh(self)
     }
@@ -123,7 +126,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     fileprivate func getDeleteController(_ indexPath: IndexPath) -> UIAlertController {
-        return UIAlertController(title: "Remove", message: "Do you want remove this song from favorites?", preferredStyle: UIAlertControllerStyle.alert)
+        return UIAlertController(title: "remove".localized, message: "message.remove".localized, preferredStyle: UIAlertControllerStyle.alert)
     }
     
     fileprivate func getDeleteAction(_ indexPath: IndexPath) -> UIAlertAction {

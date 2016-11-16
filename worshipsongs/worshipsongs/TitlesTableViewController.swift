@@ -23,12 +23,15 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarItem.title = "songs".localized
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         updateModel()
         addLongPressGestureRecognizer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let songTabBarController = tabBarController as! SongsTabBarViewController
+        songTabBarController.navigationItem.title = "songs".localized
         createSearchBar()
         tableView.reloadData()
     }
@@ -66,7 +69,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     }
     
     fileprivate func getMoveController(_ indexPath: IndexPath) -> UIAlertController {
-        return UIAlertController(title: "Favorite", message: "Do you want to add this song to Favorite list?", preferredStyle: UIAlertControllerStyle.alert)
+        return UIAlertController(title: "favorite".localized, message: "message.add".localized, preferredStyle: UIAlertControllerStyle.alert)
     }
     
     fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction {
