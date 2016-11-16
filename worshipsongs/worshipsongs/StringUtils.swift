@@ -63,4 +63,8 @@ extension String {
     func equalsIgnoreCase(_ string: String) -> Bool {
         return self.caseInsensitiveCompare(string) == ComparisonResult.orderedSame
     }
+    
+    var localized: String {
+        return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
+    }
 }

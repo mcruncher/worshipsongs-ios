@@ -27,6 +27,7 @@
 		2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD78E4D1C103C1A00A171B7 /* RegexPatternMatcherService.swift */; };
 		2FE840EF1DDBE7FB002B3379 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */; };
 		2FE840F01DDBEAA1002B3379 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D591BC78DB8001C4B6F /* DatabaseHelper.swift */; };
+		2FE840F51DDC33A6002B3379 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FE840F71DDC33A6002B3379 /* Localizable.strings */; };
 		625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81771BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
@@ -80,6 +81,9 @@
 		2FD78E4B1C103A5D00A171B7 /* CustomTextSettingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextSettingService.swift; sourceTree = "<group>"; };
 		2FD78E4D1C103C1A00A171B7 /* RegexPatternMatcherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexPatternMatcherService.swift; sourceTree = "<group>"; };
 		2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
+		2FE840F61DDC33A6002B3379 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2FE840F81DDC33BF002B3379 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		2FE840F91DDC33CA002B3379 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		625E81741BD664D000BE80B8 /* XmlParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserService.swift; sourceTree = "<group>"; };
 		7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.debug.xcconfig"; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				2F5D3D261BC788F8001C4B6F /* Assets.xcassets */,
+				2FE840F71DDC33A6002B3379 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"en-GB",
 			);
 			mainGroup = 2F5D3D111BC788F8001C4B6F;
 			productRefGroup = 2F5D3D1B1BC788F8001C4B6F /* Products */;
@@ -390,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FE840F51DDC33A6002B3379 /* Localizable.strings in Resources */,
 				2F5D3D2A1BC788F8001C4B6F /* LaunchScreen.storyboard in Resources */,
 				2F5D3D681BC7BB46001C4B6F /* songs.sqlite in Resources */,
 				2FCEFC901D6C42CD008A2180 /* Assets.xcassets in Resources */,
@@ -534,6 +541,16 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		2FE840F71DDC33A6002B3379 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2FE840F61DDC33A6002B3379 /* Base */,
+				2FE840F81DDC33BF002B3379 /* en-GB */,
+				2FE840F91DDC33CA002B3379 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -541,6 +558,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -592,6 +610,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

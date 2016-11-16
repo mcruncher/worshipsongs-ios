@@ -65,7 +65,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     fileprivate func getMoveController(_ indexPath: IndexPath) -> UIAlertController {
-        return UIAlertController(title: "Favorite", message: "Do you want to add this song to Favorite list?", preferredStyle: UIAlertControllerStyle.alert)
+        return UIAlertController(title: "favorite".localized, message: "message.add".localized, preferredStyle: UIAlertControllerStyle.alert)
     }
     
     fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction {
