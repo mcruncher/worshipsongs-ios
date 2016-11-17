@@ -25,6 +25,7 @@
 		2FD5899A1C167CD300668951 /* TitlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D5F1BC7A74E001C4B6F /* TitlesTableViewController.swift */; };
 		2FD78E4C1C103A5D00A171B7 /* CustomTextSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD78E4B1C103A5D00A171B7 /* CustomTextSettingService.swift */; };
 		2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD78E4D1C103C1A00A171B7 /* RegexPatternMatcherService.swift */; };
+		2FE42CF41DDD32E60098F287 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */; };
 		2FE840EF1DDBE7FB002B3379 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */; };
 		2FE840F01DDBEAA1002B3379 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D591BC78DB8001C4B6F /* DatabaseHelper.swift */; };
 		2FE840F51DDC33A6002B3379 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FE840F71DDC33A6002B3379 /* Localizable.strings */; };
@@ -84,6 +85,7 @@
 		2FE840F61DDC33A6002B3379 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2FE840F81DDC33BF002B3379 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2FE840F91DDC33CA002B3379 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		625E81741BD664D000BE80B8 /* XmlParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserService.swift; sourceTree = "<group>"; };
 		7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.debug.xcconfig"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				2FD589921C165FC300668951 /* ArtistsTableViewController.swift */,
 				2FD589981C16775C00668951 /* ArtistSongsTitleTableViewController.swift */,
 				2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */,
+				2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				2FD5899A1C167CD300668951 /* TitlesTableViewController.swift in Sources */,
 				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
 				2FD589951C1660A300668951 /* Author.swift in Sources */,
+				2FE42CF41DDD32E60098F287 /* FullScreenViewController.swift in Sources */,
 				2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */,
 				2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */,
 				2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */,
