@@ -97,6 +97,9 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
             activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.message, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders"), UIActivityType.postToFacebook, UIActivityType.postToTwitter]
+            
+            activityVC.popoverPresentationController?.sourceView = self.view
+            activityVC.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
             self.present(activityVC, animated: true, completion: nil)
         }
     }
