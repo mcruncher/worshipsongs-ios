@@ -98,6 +98,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         if (segue.identifier == "fullScreen") {
             let fullScreenController = segue.destination as! FullScreenViewController
             fullScreenController.cells = getAllCells()
+            fullScreenController.songName = songName
         }
     }
     

@@ -11,9 +11,12 @@ import UIKit
 class FullScreenViewController: UIViewController {
     
     var cells = [UITableViewCell]()
+    var songName: String = ""
     var i = 0
 
     @IBOutlet weak var cellLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,7 @@ class FullScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.onChangeOrientation(orientation: UIDevice.current.orientation)
+        titleLabel.text = songName
         cellLabel.attributedText = cells[i].textLabel?.attributedText
     }
 
@@ -40,16 +44,30 @@ class FullScreenViewController: UIViewController {
     
     func swipeLeft() {
         if i < cells.count - 1 {
-           i = i + 1
-           cellLabel.attributedText = cells[i].textLabel?.attributedText
+            let labelOrginx = self.cellLabel.frame.origin.x
+            self.cellLabel.attributedText = NSAttributedString(string: "")
+            self.cellLabel.frame.origin.x = self.cellLabel.frame.width
+            UIView.transition(with: self.cellLabel, duration: 0.1, options: .curveLinear, animations: {
+                self.i = self.i + 1
+                self.cellLabel.attributedText = self.cells[self.i].textLabel?.attributedText
+                self.cellLabel.frame.origin.x = labelOrginx
+            }, completion: { _ in
+            })
         }
         
     }
 
     func swipeRight() {
         if i > 0 {
-            i = i - 1
-            cellLabel.attributedText = cells[i].textLabel?.attributedText
+            let labelOrginx = self.cellLabel.frame.origin.x
+            self.cellLabel.attributedText = NSAttributedString(string: "")
+            self.cellLabel.frame.origin.x = -self.cellLabel.frame.width
+            UIView.transition(with: self.cellLabel, duration: 0.1, options: .curveLinear, animations: {
+                self.i = self.i - 1
+                self.cellLabel.attributedText = self.cells[self.i].textLabel?.attributedText
+                self.cellLabel.frame.origin.x = labelOrginx
+            }, completion: { _ in
+            })
         }
     }
     
