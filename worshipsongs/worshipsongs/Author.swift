@@ -1,9 +1,6 @@
 //
-//  Author.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 08/12/2015.
-//  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
+// @author: Vignesh palanisamy
+// @version: 1.0.0
 //
 
 import Foundation

@@ -1,1 +1,4 @@
-pod 'FMDB'
+use_frameworks!
+target "worshipsongs" do
+ pod 'FMDB'
+end

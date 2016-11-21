@@ -11,42 +11,42 @@ import UIKit
 
 class RegexPatternMatcherService{
     
-    func getRange (value : String, pattern : String) -> NSMutableArray {
+    func getRange (_ value : String, pattern : String) -> NSMutableArray {
         let nsstr = value as NSString // we use this to access the NSString methods like .length and .substringWithRange(NSRange)
-        let options = NSRegularExpressionOptions.AnchorsMatchLines
+        let options = NSRegularExpression.Options.anchorsMatchLines
         let re = try! NSRegularExpression(pattern: pattern, options: options)
         
         let all = NSRange(location: 0, length: nsstr.length)
-        let moptions = NSMatchingOptions(rawValue: 0)
+        let moptions = NSRegularExpression.MatchingOptions(rawValue: 0)
         let array: NSMutableArray = NSMutableArray()
-        re.enumerateMatchesInString(value, options: moptions, range: all) { (result, flags, ptr) -> Void in
-            nsstr.substringWithRange(result!.range)
-            array.addObject(result!.range)
+        re.enumerateMatches(in: value, options: moptions, range: all) { (result, flags, ptr) -> Void in
+            nsstr.substring(with: result!.range)
+            array.add(result!.range)
         }
         return array
     }
     
-    func getPatternTextLength (value : String, pattern : String) -> Int {
+    func getPatternTextLength (_ value : String, pattern : String) -> Int {
         var length: Int = Int()
         let nsstr = value as NSString // we use this to access the NSString methods like .length and .substringWithRange(NSRange)
-        let options = NSRegularExpressionOptions(rawValue: 0)
+        let options = NSRegularExpression.Options(rawValue: 0)
         let re = try! NSRegularExpression(pattern: pattern, options: options)
         let all = NSRange(location: 0, length: nsstr.length)
-        let moptions = NSMatchingOptions(rawValue: 0)
-        re.enumerateMatchesInString(value, options: moptions, range: all) { (result, flags, ptr) -> Void in
-            nsstr.substringWithRange(result!.range)
+        let moptions = NSRegularExpression.MatchingOptions(rawValue: 0)
+        re.enumerateMatches(in: value, options: moptions, range: all) { (result, flags, ptr) -> Void in
+            nsstr.substring(with: result!.range)
             length = result!.range.length
         }
         return length
     }
     
     
-    func removePatternText(text: NSString, pattern: NSString) -> NSString
+    func removePatternText(_ text: NSString, pattern: NSString) -> NSString
     {
         var internalExpression: NSRegularExpression
-        let options = NSMatchingOptions(rawValue: 0)
-        internalExpression = try! NSRegularExpression(pattern: pattern as String, options: .CaseInsensitive)
-        return internalExpression.stringByReplacingMatchesInString(text as String, options: options, range: NSMakeRange(0, text.length), withTemplate: "")
+        let options = NSRegularExpression.MatchingOptions(rawValue: 0)
+        internalExpression = try! NSRegularExpression(pattern: pattern as String, options: .caseInsensitive)
+        return internalExpression.stringByReplacingMatches(in: text as String, options: options, range: NSMakeRange(0, text.length), withTemplate: "") as NSString
     }
     
 }

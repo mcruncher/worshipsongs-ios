@@ -14,16 +14,16 @@ import SystemConfiguration
 class CommonService: NSObject {
     
     
-    func getDocumentDirectoryPath(fileName: String) -> String {
+    func getDocumentDirectoryPath(_ fileName: String) -> String {
     
-        let dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let docsDir = dirPaths[0]
         let databasePath = docsDir.stringByAppendingPathComponent(fileName)
         return databasePath
     }
     
     func getVersionNumber() -> String{
-        let text = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
+        let text = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         return text!
     }
 }

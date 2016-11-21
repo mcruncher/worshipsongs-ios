@@ -8,7 +8,7 @@
 
 import UIKit
 
-private class ParserDelegate:NSObject, NSXMLParserDelegate{
+private class ParserDelegate:NSObject, XMLParserDelegate{
     
     init(element:String){
        // self.element=element
@@ -23,26 +23,26 @@ private class ParserDelegate:NSObject, NSXMLParserDelegate{
     
 
     
-    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!) {
+    @nonobjc func parser(_ parser: XMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [AnyHashable: Any]!) {
         element = elementName
         print("element:\(element)")
-        attribues = attributeDict
+        attribues = attributeDict as NSDictionary
         print("attribues:\(attribues)")
         
     }
     
-    func parser(parser: NSXMLParser!, foundCharacters string: String!) {
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
         print("string:\(string)")
-        let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let data = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         print("data:\(data)")
         if (!data.isEmpty) {
             if element == "verse" {
-                let verseType = (attribues.objectForKey("type") as! String).lowercaseString
-                let verseLabel = attribues.objectForKey("label")as! String
+                let verseType = (attribues.object(forKey: "type") as! String).lowercased()
+                let verseLabel = attribues.object(forKey: "label")as! String
                 //lyricsData.append(data);
-                listDataDictionary.setObject(data as String, forKey: verseType + verseLabel)
+                listDataDictionary.setObject(data as String, forKey: verseType.appending(verseLabel) as NSCopying)
                 if(verseOrderList.count < 1){
-                    parsedVerseOrderList.addObject(verseType + verseLabel)
+                    parsedVerseOrderList.add(verseType + verseLabel)
                 }
             }
         }
@@ -58,15 +58,15 @@ class XMLParserService{
         print("init")
     }
     
-    private var xmlString: NSString
+    fileprivate var xmlString: NSString
   //  var returnValue:String?
     var verseOrderList: NSMutableArray = NSMutableArray()
-    private var parserDelegate:ParserDelegate
+    fileprivate var parserDelegate:ParserDelegate
     
     func parse()->Bool{
         print("parse")
-        let lyrics: NSData = xmlString.dataUsingEncoding(NSUTF8StringEncoding)!
-        let parser = NSXMLParser(data: lyrics)
+        let lyrics: Data = xmlString.data(using: String.Encoding.utf8.rawValue)!
+        let parser = XMLParser(data: lyrics)
         parser.delegate = parserDelegate
         if parser.parse() {
             print("parse true")

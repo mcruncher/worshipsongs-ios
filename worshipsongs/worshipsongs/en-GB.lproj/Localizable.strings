@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  worshipsongs
+
+  Created by Vignesh Palanisamy on 16/11/2016.
+  Copyright © 2016 Vignesh Palanisamy. All rights reserved.
+*/
+
+"songs" = "Songs";
+"artists" = "Artists";
+"favorites" = "Favourites";
+
+"message.favorite" = "Long press on a song title to mark it as Favourite";
+"remove" = "Remove";
+"message.remove" = "Do you want to remove this song from Favourites?";
+"favorite" = "Favourite";
+"message.add" = "Do you want to add this song to your Favourites?";

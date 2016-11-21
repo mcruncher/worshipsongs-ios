@@ -1,96 +1,59 @@
 //
-//  TitlesTableViewController.swift
+//  FavoritesTableViewController.swift
 //  worshipsongs
 //
-//  Created by Vignesh Palanisamy on 10/9/15.
-//  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
+//  Created by Vignesh Palanisamy on 16/11/2016.
+//  Copyright © 2016 Vignesh Palanisamy. All rights reserved.
 //
 
 import UIKit
 
-class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
-    
+class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
+
     var songModel = [Songs]()
-    fileprivate let preferences = UserDefaults.standard
-    var filteredSongModel = [Songs]()
+    var songTitles = [String]()
     var databaseHelper = DatabaseHelper()
+    var refresh = UIRefreshControl()
     var verseList: NSArray = NSArray()
     var songLyrics: NSString = NSString()
     var songName: String = ""
-    
+    fileprivate let preferences = UserDefaults.standard
     var searchBar: UISearchBar!
-    var refresh = UIRefreshControl()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarItem.title = "songs".localized
+        self.tabBarItem.title = "favorites".localized
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
+        self.tableView.tableFooterView = getTableFooterView()
         updateModel()
-        addLongPressGestureRecognizer()
+    }
+    
+    func getTableFooterView() -> UIView {
+        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 25))
+        footerview.backgroundColor = UIColor.groupTableViewBackground
+        let label = UILabel(frame: CGRect(x: 10, y: 5, width: tableView.frame.size.width, height: 15))
+        label.text = "message.favorite".localized
+        label.font = UIFont.systemFont(ofSize: 10.0)
+        label.textColor = UIColor.gray
+        footerview.addSubview(label)
+        return footerview
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let songTabBarController = tabBarController as! SongsTabBarViewController
-        songTabBarController.navigationItem.title = "songs".localized
+        songTabBarController.navigationItem.title = "favorites".localized
         createSearchBar()
-        tableView.reloadData()
+        refresh(self)
     }
-        
+    
     func updateModel() {
-        //refresh control
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
-        refresh.addTarget(self, action: #selector(TitlesTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
+        refresh.addTarget(self, action: #selector(FavoritesTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
-        songModel = databaseHelper.getSongModel()
-        filteredSongModel = songModel
+        refresh(self)
     }
-    
-    fileprivate func addLongPressGestureRecognizer() {
-        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TitlesTableViewController.onCellViewLongPress(_:)))
-        longPressGesture.minimumPressDuration = 0.5
-        longPressGesture.delegate = self
-        self.tableView.addGestureRecognizer(longPressGesture)
-    }
-    
-    internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
-        let pressingPoint = longPressGesture.location(in: self.tableView)
-        let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
-        if longPressGesture.state == UIGestureRecognizerState.began {
-            self.present(self.getConfirmationAlertController(indexPath!), animated: true, completion: nil)
-        }
-    }
-    
-    fileprivate func getConfirmationAlertController(_ indexPath: IndexPath) -> UIAlertController {
-        let confirmationAlertController = self.getMoveController(indexPath)
-        confirmationAlertController.addAction(self.getMoveAction(indexPath))
-        confirmationAlertController.addAction(self.getCancelAction(indexPath))
-        return confirmationAlertController
-    }
-    
-    fileprivate func getMoveController(_ indexPath: IndexPath) -> UIAlertController {
-        return UIAlertController(title: "favorite".localized, message: "message.add".localized, preferredStyle: UIAlertControllerStyle.alert)
-    }
-    
-    fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction {
-        return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
-            let song = self.filteredSongModel[indexPath.row]
-            var favSong = [String]()
-            if self.preferences.array(forKey: "favorite") != nil {
-                favSong = self.preferences.array(forKey: "favorite") as! [String]
-            }
-            favSong.append(song.title)
-            self.preferences.setValue(favSong, forKey: "favorite")
-            self.preferences.synchronize()
-        })
-    }
-    
-    fileprivate func getCancelAction(_ indexPath: IndexPath) -> UIAlertAction {
-        return UIAlertAction(title: "No", style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
-            self.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: UITableViewRowAnimation.automatic)
-        })
-    }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -102,25 +65,25 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return filteredSongModel.count
+        return songModel.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        cell.textLabel?.text = songModel[(indexPath as NSIndexPath).row].title
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         verseList = NSArray()
-        songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
-        songName = filteredSongModel[(indexPath as NSIndexPath).row].title
-        let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
+        songLyrics = songModel[(indexPath as NSIndexPath).row].lyrics as NSString
+        songName = songModel[(indexPath as NSIndexPath).row].title
+        let verseOrder = songModel[(indexPath as NSIndexPath).row].verse_order
         if !verseOrder.isEmpty {
             verseList = splitVerseOrder(verseOrder)
         }
@@ -132,7 +95,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     {
         return verseOrder.components(separatedBy: " ") as NSArray
     }
-   
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if (segue.identifier == "songs") {
             let songsTableViewController = segue.destination as! SongsTableViewController;
@@ -140,6 +103,59 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
             songsTableViewController.songLyrics = songLyrics
             songsTableViewController.songName = songName
         }
+    }
+    
+    @objc(tableView:editActionsForRowAtIndexPath:) override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = getTableViewRowAction(indexPath)
+        deleteAction.backgroundColor = UIColor.red
+        return [deleteAction]
+    }
+    
+    fileprivate func getTableViewRowAction(_ indexPath: IndexPath) -> UITableViewRowAction {
+        return UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Remove") { (action, indexPath) -> Void in
+            self.isEditing = false
+            self.present(self.getConfirmationAlertController(indexPath), animated: true, completion: nil)
+        }
+    }
+    
+    fileprivate func getConfirmationAlertController(_ indexPath: IndexPath) -> UIAlertController {
+        let confirmationAlertController = self.getDeleteController(indexPath)
+        confirmationAlertController.addAction(self.getDeleteAction(indexPath))
+        confirmationAlertController.addAction(self.getCancelAction(indexPath))
+        return confirmationAlertController
+    }
+    
+    fileprivate func getDeleteController(_ indexPath: IndexPath) -> UIAlertController {
+        return UIAlertController(title: "remove".localized, message: "message.remove".localized, preferredStyle: UIAlertControllerStyle.alert)
+    }
+    
+    fileprivate func getDeleteAction(_ indexPath: IndexPath) -> UIAlertAction {
+        return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
+            var favSong = self.preferences.array(forKey: "favorite") as! [String]
+            let index = favSong.index(of: self.songModel[(indexPath as NSIndexPath).row].title)
+            favSong.remove(at: index!)
+            self.preferences.setValue(favSong, forKey: "favorite")
+            self.preferences.synchronize()
+            self.refresh(self)
+        })
+    }
+    
+    fileprivate func getCancelAction(_ indexPath: IndexPath) -> UIAlertAction {
+        return UIAlertAction(title: "No", style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
+            self.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: UITableViewRowAnimation.automatic)
+        })
+    }
+
+    
+    
+    func refresh(_ sender:AnyObject)
+    {
+        if self.preferences.array(forKey: "favorite") != nil {
+            songTitles = self.preferences.array(forKey: "favorite") as! [String]
+            songModel = databaseHelper.getSongsModelTitles(songTitles)
+        }
+        self.tableView.reloadData()
+        self.refresh.endRefreshing()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -156,7 +172,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
             return (stringMatch)
             
         })
-        self.filteredSongModel = data
+        self.songModel = data
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
@@ -168,15 +184,8 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
     {
         hideSearchBar()
-        filteredSongModel = songModel
+        refresh(self)
         tableView.reloadData()
-    }
-    
-    func refresh(_ sender:AnyObject)
-    {
-        filteredSongModel = songModel
-        self.tableView.reloadData()
-        self.refresh.endRefreshing()
     }
     
     func createSearchBar()
@@ -207,4 +216,5 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         self.searchBar.text = ""
         self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
+
 }
