@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -60,7 +61,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e4Z-E7-tT8" id="5Yv-OP-KoW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -205,10 +206,61 @@
                             <outlet property="delegate" destination="afv-Ok-gWi" id="ypb-Ov-ysZ"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="2Ri-4v-CKh" kind="show" identifier="fullScreen" id="QoY-qT-YFF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28P-B5-jI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2061" y="-190"/>
+        </scene>
+        <!--Full Screen View Controller-->
+        <scene sceneID="xgM-Th-Xwj">
+            <objects>
+                <viewController id="2Ri-4v-CKh" customClass="FullScreenViewController" customModule="worshipsongs" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1bV-d8-UKw"/>
+                        <viewControllerLayoutGuide type="bottom" id="0cs-3S-RIs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Yd4-ry-rz5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zr-42-Urv">
+                                <rect key="frame" x="26" y="84" width="323" height="514"/>
+                                <gestureRecognizers/>
+                                <string key="text">LabeldbddkjfnkjndfgnkfjngfgfdgfdgfdgfdgjjjjjjjjjjjjjjlqeewetwrwtrutwrrerdfccdtdtdnvbjhcbcvdjjLabeldbddkjfnkjndfgnkfjngfgfdgfdgfdgfdgjjjjjjjjjjjjjjlqeewetwrwtrutwrrerdfccdtdtdnvbjhcbcvdjjLabeldbddkjfnkjndfgnkfjngfgfdgfdgfdgfdgjjjjjjjjjjjjjjlqeewetwrwtrutwrrerdfccdtdtdnvbjhcbcvdjjLabeldbddkjfnkjndfgnkfjngfgfdgfdgfdgfdgjjjjjjjjjjjjjjlqeewetwrwtrutwrrerdfccdtdtdnvbjhcbcvdjjLabeldbddkjfnkjndfgnkfjngfgfdgfdgfdgfdgjjjjjjjjjjjjjjlqeewetwrwtrutwrrerdfccdtdtdnvbjhcbcvdjj</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOk-9f-GA7">
+                                <rect key="frame" x="26" y="598.5" width="333" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2zr-42-Urv" firstAttribute="top" secondItem="1bV-d8-UKw" secondAttribute="bottom" constant="20" id="5fG-SF-fvN"/>
+                            <constraint firstItem="2zr-42-Urv" firstAttribute="centerX" secondItem="Yd4-ry-rz5" secondAttribute="centerX" id="KXq-Sl-wh5"/>
+                            <constraint firstItem="kOk-9f-GA7" firstAttribute="leading" secondItem="Yd4-ry-rz5" secondAttribute="leadingMargin" constant="10" id="Maa-Eh-NQZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kOk-9f-GA7" secondAttribute="trailing" id="Oi7-3V-25S"/>
+                            <constraint firstItem="0cs-3S-RIs" firstAttribute="top" secondItem="2zr-42-Urv" secondAttribute="bottom" constant="20" id="Pbv-bh-1th"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2zr-42-Urv" secondAttribute="trailing" constant="10" id="Uxz-Oa-muK"/>
+                            <constraint firstItem="0cs-3S-RIs" firstAttribute="top" secondItem="kOk-9f-GA7" secondAttribute="bottom" constant="5" id="lIi-GH-8yb"/>
+                            <constraint firstItem="2zr-42-Urv" firstAttribute="leading" secondItem="Yd4-ry-rz5" secondAttribute="leadingMargin" constant="10" id="zZi-P3-fHj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cellLabel" destination="2zr-42-Urv" id="wAc-Ty-Ynb"/>
+                        <outlet property="titleLabel" destination="kOk-9f-GA7" id="fyq-HZ-Wgz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L2G-LU-A74" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2789.5999999999999" y="-192.05397301349328"/>
         </scene>
     </scenes>
     <resources>

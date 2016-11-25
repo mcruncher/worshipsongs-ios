@@ -40,6 +40,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        self.onChangeOrientation(orientation: UIDevice.current.orientation)
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,6 +89,19 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(SongsTableViewController.share))
         navigationItem.rightBarButtonItem = doneButton
     }
+    
+    func fullScreen() {
+        performSegue(withIdentifier: "fullScreen", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if (segue.identifier == "fullScreen") {
+            let fullScreenController = segue.destination as! FullScreenViewController
+            fullScreenController.cells = getAllCells()
+            fullScreenController.songName = songName
+        }
+    }
+    
     
     func share() {
         
@@ -148,6 +162,43 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
                 }
             }
         }
+    }
+    
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        self.onChangeOrientation(orientation: UIDevice.current.orientation)
+    }
+    
+    func onChangeOrientation(orientation: UIDeviceOrientation) {
+        switch orientation {
+        case .portrait:
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        case .landscapeRight:
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            fullScreen()
+        case .landscapeLeft:
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            fullScreen()
+        default:
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+    
+    
+    func getAllCells() -> [UITableViewCell] {
+        
+        var cells = [UITableViewCell]()
+        // assuming tableView is your self.tableView defined somewhere
+        for i in 0...self.verseOrderList.count-1
+        {
+            let key: String = (verseOrderList[i] as! String).lowercased()
+            let dataText: NSString? = listDataDictionary[key] as? NSString
+            let cell = UITableViewCell()
+            cell.textLabel!.numberOfLines = 0
+            cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
+            cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
+            cells.append(cell)
+        }
+        return cells
     }
 
 }
