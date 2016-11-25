@@ -207,7 +207,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="2Ri-4v-CKh" kind="show" identifier="fullScreen" id="QoY-qT-YFF"/>
+                        <segue destination="2Ri-4v-CKh" kind="show" identifier="fullScreen" animates="NO" id="QoY-qT-YFF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28P-B5-jI7" userLabel="First Responder" sceneMemberID="firstResponder"/>

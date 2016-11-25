@@ -79,15 +79,24 @@ class FullScreenViewController: UIViewController {
         switch orientation {
         case .portrait:
             self.navigationController?.setNavigationBarHidden(false, animated: true)
-            _ = navigationController?.popViewController(animated: true)
+            back()
         case .landscapeRight:
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         case .landscapeLeft:
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         default:
             self.navigationController?.setNavigationBarHidden(false, animated: true)
-            _ = navigationController?.popViewController(animated: true)
+            back()
         }
+    }
+    
+    func back() {
+        let transition = CATransition()
+        transition.duration = 0.75
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionFade
+        self.navigationController!.view.layer.add(transition, forKey: nil)
+        _ = navigationController?.popViewController(animated: false)
     }
 
 }
