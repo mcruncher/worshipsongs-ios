@@ -96,12 +96,16 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if (segue.identifier == "fullScreen") {
+            let transition = CATransition()
+            transition.duration = 0.75
+            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.type = kCATransitionFade
+            self.navigationController!.view.layer.add(transition, forKey: nil)
             let fullScreenController = segue.destination as! FullScreenViewController
             fullScreenController.cells = getAllCells()
             fullScreenController.songName = songName
         }
     }
-    
     
     func share() {
         
