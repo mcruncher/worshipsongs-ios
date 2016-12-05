@@ -15,3 +15,17 @@
 "message.remove" = "Do you want to remove this song from Favourites?";
 "favorite" = "Favourite";
 "message.add" = "Do you want to add this song to your Favourites?";
+"black" = "Black";
+"darkGray" = "Dark Gray";
+"lightGray" = "Light Gray";
+"white" = "White";
+"gray" = "Gray";
+"red" = "Red";
+"green" = "Green";
+"blue" = "Blue";
+"cyan" = "Cyan";
+"yellow" = "Yellow";
+"magenta" = "Magenta";
+"orange" = "Orange";
+"purple" = "Purple";
+"brown" = "Brown";
