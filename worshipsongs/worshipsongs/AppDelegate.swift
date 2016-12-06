@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate let preferences = UserDefaults.standard
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool{
+        UINavigationBar.appearance().tintColor = UIColor.black
         let version = getVersion()
         if preferences.dictionaryRepresentation().keys.contains("version") {
             if !(preferences.string(forKey: "version")?.equalsIgnoreCase(version))! {
@@ -29,7 +30,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             preferences.setValue(version, forKey: "version")
             copyFile("songs.sqlite")
         }
+        updateDefaultSettings()
         return true
+    }
+    
+    func updateDefaultSettings() {
+        if !preferences.dictionaryRepresentation().keys.contains("fontSize") {
+            self.preferences.setValue(17, forKey: "fontSize")
+            self.preferences.synchronize()
+        }
+        if !preferences.dictionaryRepresentation().keys.contains("tamilFontColor") {
+            self.preferences.setValue(ColorUtils.Color.red.rawValue, forKey: "tamilFontColor")
+            self.preferences.synchronize()
+        }
+        if !preferences.dictionaryRepresentation().keys.contains("englishFontColor") {
+            self.preferences.setValue(ColorUtils.Color.darkGray.rawValue, forKey: "englishFontColor")
+            self.preferences.synchronize()
+        }
     }
     
     func copyFile(_ fileName: NSString) {
