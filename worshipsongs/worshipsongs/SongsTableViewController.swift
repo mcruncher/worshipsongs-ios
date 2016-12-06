@@ -89,7 +89,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     }
     
     fileprivate func addShareBarButton() {
-        self.navigationController!.navigationBar.tintColor = UIColor.black
+        self.navigationController!.navigationBar.tintColor = UIColor.gray
         let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(SongsTableViewController.share))
         navigationItem.rightBarButtonItem = doneButton
     }
