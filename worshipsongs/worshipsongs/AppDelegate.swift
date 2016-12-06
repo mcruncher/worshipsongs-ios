@@ -17,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate let preferences = UserDefaults.standard
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool{
-        UINavigationBar.appearance().tintColor = UIColor.black
+        UINavigationBar.appearance().tintColor = UIColor.gray
+        let notificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+        UIApplication.shared.registerUserNotificationSettings(notificationSettings)
         let version = getVersion()
         if preferences.dictionaryRepresentation().keys.contains("version") {
             if !(preferences.string(forKey: "version")?.equalsIgnoreCase(version))! {
@@ -31,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             copyFile("songs.sqlite")
         }
         updateDefaultSettings()
+        createScheduleLocalNotification()
         return true
     }
     
@@ -71,5 +74,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         return version! + "." + buildNumber!
     }
+    
+    func createScheduleLocalNotification() {
+        print("Preparing to create schedule notification...")
+        let notifications = UIApplication.shared.scheduledLocalNotifications
+        if (notifications?.count)! < 1 {
+            let uiLocalnotification = UILocalNotification()
+            uiLocalnotification.fireDate = "2016-12-25".toNSDate
+            uiLocalnotification.timeZone = TimeZone(abbreviation: "GMT")
+            uiLocalnotification.alertBody = "message.christmas".localized
+            uiLocalnotification.soundName = UILocalNotificationDefaultSoundName
+            uiLocalnotification.userInfo = ["id": 2016]
+            uiLocalnotification.repeatInterval = .year
+            UIApplication.shared.scheduleLocalNotification(uiLocalnotification)
+        }
+    }
+    
 }
 

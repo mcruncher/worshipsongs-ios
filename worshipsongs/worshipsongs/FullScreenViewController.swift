@@ -80,6 +80,7 @@ class FullScreenViewController: UIViewController {
         switch orientation {
         case .portrait:
             self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.navigationController?.navigationBar.tintColor = UIColor.gray
             back()
         case .landscapeRight:
             self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -87,6 +88,7 @@ class FullScreenViewController: UIViewController {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         default:
             self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.navigationController?.navigationBar.tintColor = UIColor.gray
             back()
         }
     }
