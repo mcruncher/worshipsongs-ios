@@ -69,7 +69,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     }
     
     fileprivate func getMoveController(_ indexPath: IndexPath) -> UIAlertController {
-        return UIAlertController(title: "favorite".localized, message: "message.add".localized, preferredStyle: UIAlertControllerStyle.alert)
+        return UIAlertController(title: filteredSongModel[(indexPath as NSIndexPath).row].title, message: "message.add".localized, preferredStyle: UIAlertControllerStyle.alert)
     }
     
     fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction {
