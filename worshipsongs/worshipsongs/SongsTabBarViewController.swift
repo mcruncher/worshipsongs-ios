@@ -18,6 +18,10 @@ class SongsTabBarViewController: UITabBarController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func GoToSettingView(_ sender: Any) {
+        performSegue(withIdentifier: "setting", sender: self)
+    }
 
     /*
     // MARK: - Navigation

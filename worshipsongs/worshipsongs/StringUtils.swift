@@ -67,4 +67,12 @@ extension String {
     var localized: String {
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
+    
+    var toNSDate: Date {
+        let dateStringFormatter = DateFormatter()
+        dateStringFormatter.dateFormat = "yyyy-MM-dd"
+        dateStringFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        let date = dateStringFormatter.date(from: self)!
+        return date
+    }
 }
