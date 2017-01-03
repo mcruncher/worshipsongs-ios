@@ -17,6 +17,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     var verseList: NSArray = NSArray()
     var songLyrics: NSString = NSString()
     var songName: String = ""
+    var comment = ""
     
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
@@ -32,6 +33,8 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     override func viewWillAppear(_ animated: Bool) {
         let songTabBarController = tabBarController as! SongsTabBarViewController
         songTabBarController.navigationItem.title = "songs".localized
+        songModel = databaseHelper.getSongModel()
+        filteredSongModel = songModel
         createSearchBar()
         tableView.reloadData()
     }
@@ -42,8 +45,6 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
         refresh.addTarget(self, action: #selector(TitlesTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
-        songModel = databaseHelper.getSongModel()
-        filteredSongModel = songModel
     }
     
     fileprivate func addLongPressGestureRecognizer() {
@@ -110,9 +111,14 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = filteredSongModel[(indexPath as NSIndexPath).row].title
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
+        cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].comment.contains("youtube") {
+            cell.playImage.isHidden = false
+        } else {
+            cell.playImage.isHidden = true
+        }
+        return cell 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -120,12 +126,17 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         verseList = NSArray()
         songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
         songName = filteredSongModel[(indexPath as NSIndexPath).row].title
+        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil {
+            comment = filteredSongModel[(indexPath as NSIndexPath).row].comment
+        } else {
+            comment = ""
+        }
         let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
         if !verseOrder.isEmpty {
             verseList = splitVerseOrder(verseOrder)
         }
         hideSearchBar()
-        performSegue(withIdentifier: "songs", sender: self)
+        performSegue(withIdentifier: "songsWithVideo", sender: self)
     }
     
     func splitVerseOrder(_ verseOrder: String) -> NSArray
@@ -134,11 +145,12 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     }
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if (segue.identifier == "songs") {
-            let songsTableViewController = segue.destination as! SongsTableViewController;
-            songsTableViewController.verseOrder = verseList
-            songsTableViewController.songLyrics = songLyrics
-            songsTableViewController.songName = songName
+        if (segue.identifier == "songsWithVideo") {
+            let songWithVideoViewController = segue.destination as! SongWithVideoViewController
+            songWithVideoViewController.verseOrder = verseList
+            songWithVideoViewController.songLyrics = songLyrics
+            songWithVideoViewController.songName = songName
+            songWithVideoViewController.comment = comment
         }
     }
     

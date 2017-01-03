@@ -26,8 +26,6 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
         super.viewDidLoad()
         self.tabBarItem.title = "artists".localized
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
-        authorModel = databaseHelper.getArtistModel()
-        filteredAuthorModel = authorModel
         //refresh control
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
@@ -38,6 +36,8 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
     override func viewWillAppear(_ animated: Bool) {
         let songTabBarController = tabBarController as! SongsTabBarViewController
         songTabBarController.navigationItem.title = "artists".localized
+        authorModel = databaseHelper.getArtistModel()
+        filteredAuthorModel = authorModel
         createSearchBar()
         tableView.reloadData()
     }

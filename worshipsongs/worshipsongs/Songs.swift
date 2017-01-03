@@ -11,4 +11,5 @@ struct Songs {
     var title : String
     var lyrics : String
     var verse_order : String
+    var comment : String!
 }

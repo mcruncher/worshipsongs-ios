@@ -18,6 +18,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     var verseList: NSArray = NSArray()
     var songLyrics: NSString = NSString()
     var songName: String = ""
+    var comment = ""
     
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
@@ -29,7 +30,9 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        filteredSongModel = songModel
         createSearchBar()
+        tableView.reloadData()
     }
     
     func updateModel() {
@@ -39,7 +42,6 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         refresh.addTarget(self, action: #selector(ArtistSongsTitleTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
         self.navigationItem.title = artistName
-        filteredSongModel = songModel
     }
     
     fileprivate func addLongPressGestureRecognizer() {
@@ -117,12 +119,17 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         verseList = NSArray()
         songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
         songName = filteredSongModel[(indexPath as NSIndexPath).row].title
+        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil {
+            comment = filteredSongModel[(indexPath as NSIndexPath).row].comment
+        } else {
+            comment = ""
+        }
         let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
         if !verseOrder.isEmpty {
             verseList = splitVerseOrder(verseOrder)
         }
         hideSearchBar()
-        performSegue(withIdentifier: "artistSongs", sender: self)
+        performSegue(withIdentifier: "video", sender: self)
         
     }
     
@@ -133,10 +140,18 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if (segue.identifier == "artistSongs") {
-            let songsTableViewController = segue.destination as! SongsTableViewController;
+            let songsTableViewController = segue.destination as! SongsTableViewController
             songsTableViewController.verseOrder = verseList
             songsTableViewController.songLyrics = songLyrics
             songsTableViewController.songName = songName
+        } else if (segue.identifier == "video") {
+            let songsTableViewController = segue.destination as! SongWithVideoViewController
+            songsTableViewController.verseOrder = verseList
+            songsTableViewController.songLyrics = songLyrics
+            songsTableViewController.songName = songName
+            if !comment.isEmpty {
+                songsTableViewController.comment = comment
+            }
         }
     }
     

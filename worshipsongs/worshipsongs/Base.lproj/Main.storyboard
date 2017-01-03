@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="E64-mL-ycW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="E64-mL-ycW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -281,11 +281,88 @@
                     </tableView>
                     <connections>
                         <segue destination="afv-Ok-gWi" kind="show" identifier="artistSongs" id="9tD-ke-AdK"/>
+                        <segue destination="8oe-vO-ZLj" kind="show" identifier="video" id="FRh-di-8Al"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYc-uV-IDq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1382" y="526"/>
+            <point key="canvasLocation" x="1404" y="552"/>
+        </scene>
+        <!--Song With Video View Controller-->
+        <scene sceneID="qu4-yj-fpd">
+            <objects>
+                <viewController id="8oe-vO-ZLj" customClass="SongWithVideoViewController" customModule="worshipsongs" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zmq-L7-I9u"/>
+                        <viewControllerLayoutGuide type="bottom" id="d8N-QM-9CL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ev9-Sy-Ty2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fDN-JI-X09">
+                                <rect key="frame" x="0.0" y="264" width="375" height="354"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Odf-6y-KQ8">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Odf-6y-KQ8" id="eOt-Lf-WGw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8oe-vO-ZLj" id="Ti8-qm-Zib"/>
+                                    <outlet property="delegate" destination="8oe-vO-ZLj" id="16W-fS-rkR"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayV-T5-6r6" customClass="YouTubePlayerView" customModule="YouTubePlayer">
+                                <rect key="frame" x="0.0" y="64" width="375" height="250"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="eny-X2-n5K"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8p-H3-xeg">
+                                <rect key="frame" x="318" y="555" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.58823529411764708" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="77D-X1-vBd"/>
+                                    <constraint firstAttribute="width" constant="50" id="eYs-8y-bUr"/>
+                                </constraints>
+                                <state key="normal" image="play"/>
+                                <connections>
+                                    <action selector="playOrStop:" destination="8oe-vO-ZLj" eventType="touchUpInside" id="XSQ-J7-qHO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d8N-QM-9CL" firstAttribute="top" secondItem="fDN-JI-X09" secondAttribute="bottom" id="OCQ-A9-rzc"/>
+                            <constraint firstItem="ayV-T5-6r6" firstAttribute="leading" secondItem="Ev9-Sy-Ty2" secondAttribute="leading" id="P8X-Am-YKv"/>
+                            <constraint firstItem="X8p-H3-xeg" firstAttribute="top" secondItem="Zmq-L7-I9u" secondAttribute="bottom" constant="491" id="auq-qU-Iwe"/>
+                            <constraint firstItem="fDN-JI-X09" firstAttribute="top" secondItem="ayV-T5-6r6" secondAttribute="bottom" constant="-50" id="eSP-T5-0W0"/>
+                            <constraint firstAttribute="trailing" secondItem="fDN-JI-X09" secondAttribute="trailing" id="nL1-td-e9z"/>
+                            <constraint firstItem="ayV-T5-6r6" firstAttribute="top" secondItem="Zmq-L7-I9u" secondAttribute="bottom" id="qD7-On-crl"/>
+                            <constraint firstAttribute="trailing" secondItem="ayV-T5-6r6" secondAttribute="trailing" id="qN9-Zi-Vij"/>
+                            <constraint firstItem="fDN-JI-X09" firstAttribute="leading" secondItem="Ev9-Sy-Ty2" secondAttribute="leading" id="qjk-9V-gep"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="X8p-H3-xeg" secondAttribute="trailing" constant="-9" id="qvd-1v-lz0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="actionButton" destination="X8p-H3-xeg" id="PCc-dU-nJ1"/>
+                        <outlet property="buttonTop" destination="auq-qU-Iwe" id="8nz-8b-fjQ"/>
+                        <outlet property="player" destination="ayV-T5-6r6" id="jby-bJ-BTb"/>
+                        <outlet property="playerHeight" destination="eny-X2-n5K" id="7KF-dl-W0y"/>
+                        <outlet property="tableView" destination="fDN-JI-X09" id="7i6-iX-7e2"/>
+                        <segue destination="2Ri-4v-CKh" kind="show" identifier="fullScreen" id="UON-Fr-mLJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NvC-wl-ChS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2321" y="552"/>
         </scene>
         <!--Songs-->
         <scene sceneID="tss-w5-Uf1">
@@ -296,13 +373,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="SrY-5s-r9P">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="SrY-5s-r9P" customClass="TitleTableViewCell" customModule="worshipsongs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SrY-5s-r9P" id="3gD-18-7VM">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-dark" translatesAutoresizingMaskIntoConstraints="NO" id="xDU-01-TsW">
+                                            <rect key="frame" x="347" y="12" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="Nxu-dh-Ixh"/>
+                                                <constraint firstAttribute="width" constant="20" id="POd-uZ-Fcj"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zh-3E-llJ">
+                                            <rect key="frame" x="18" y="12" width="324" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="xDU-01-TsW" firstAttribute="leading" secondItem="0zh-3E-llJ" secondAttribute="trailing" constant="5" id="JeF-jZ-bBC"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="xDU-01-TsW" secondAttribute="trailing" id="QH5-ed-3jw"/>
+                                        <constraint firstItem="0zh-3E-llJ" firstAttribute="leading" secondItem="3gD-18-7VM" secondAttribute="leadingMargin" constant="10" id="Sro-cl-Yvu"/>
+                                        <constraint firstItem="xDU-01-TsW" firstAttribute="centerY" secondItem="3gD-18-7VM" secondAttribute="centerY" id="T5T-4a-SZS"/>
+                                        <constraint firstItem="0zh-3E-llJ" firstAttribute="centerY" secondItem="3gD-18-7VM" secondAttribute="centerY" id="hR7-Ym-8rG"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="playImage" destination="xDU-01-TsW" id="u99-SG-m7z"/>
+                                    <outlet property="title" destination="0zh-3E-llJ" id="Ecd-Ky-js5"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -316,11 +419,12 @@
                     </tabBarItem>
                     <connections>
                         <segue destination="afv-Ok-gWi" kind="show" identifier="songs" id="uWS-3M-VV7"/>
+                        <segue destination="8oe-vO-ZLj" kind="show" identifier="songsWithVideo" id="Dam-Am-0MN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZL8-Cr-nTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="-214"/>
+            <point key="canvasLocation" x="996" y="-214.54272863568218"/>
         </scene>
         <!--Songs Table View Controller-->
         <scene sceneID="jsi-2N-Qqk">
@@ -404,10 +508,14 @@
     </scenes>
     <resources>
         <image name="author" width="24" height="17"/>
+        <image name="play" width="21" height="21"/>
+        <image name="play-dark" width="21" height="21"/>
         <image name="setting" width="18" height="18"/>
         <image name="title" width="20" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fzm-rw-f2D"/>
+        <segue reference="uWS-3M-VV7"/>
+        <segue reference="Dam-Am-0MN"/>
+        <segue reference="UON-Fr-mLJ"/>
     </inferredMetricsTieBreakers>
 </document>
