@@ -140,7 +140,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u8b-pN-fqQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1642.4000000000001" y="-0.44977511244377816"/>
+            <point key="canvasLocation" x="-578" y="570"/>
         </scene>
         <!--Songs book-->
         <scene sceneID="yl2-sM-qoP">
@@ -169,7 +169,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="210" y="-215"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Q2Y-16-lKV">
@@ -185,7 +185,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3h8-g2-boc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-820" y="0.0"/>
+            <point key="canvasLocation" x="-577" y="-215"/>
         </scene>
         <!--Favorites Table View Controller-->
         <scene sceneID="cs5-oh-ItR">
@@ -196,13 +196,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="e4Z-E7-tT8">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="e4Z-E7-tT8" customClass="TitleTableViewCell" customModule="worshipsongs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e4Z-E7-tT8" id="5Yv-OP-KoW">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-dark" translatesAutoresizingMaskIntoConstraints="NO" id="EmZ-Vg-Ait">
+                                            <rect key="frame" x="347" y="12" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="fMx-t2-wNh"/>
+                                                <constraint firstAttribute="width" constant="20" id="ziF-ug-BYa"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ho-Wb-Flu">
+                                            <rect key="frame" x="18" y="12" width="324" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="7Ho-Wb-Flu" firstAttribute="centerY" secondItem="5Yv-OP-KoW" secondAttribute="centerY" id="El5-29-BGC"/>
+                                        <constraint firstItem="EmZ-Vg-Ait" firstAttribute="leading" secondItem="7Ho-Wb-Flu" secondAttribute="trailing" constant="5" id="I4f-Da-Ofk"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="EmZ-Vg-Ait" secondAttribute="trailing" id="Tay-Bp-nH5"/>
+                                        <constraint firstItem="7Ho-Wb-Flu" firstAttribute="leading" secondItem="5Yv-OP-KoW" secondAttribute="leadingMargin" constant="10" id="gqb-qS-QkQ"/>
+                                        <constraint firstItem="EmZ-Vg-Ait" firstAttribute="centerY" secondItem="5Yv-OP-KoW" secondAttribute="centerY" id="obf-gg-rG6"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="playImage" destination="EmZ-Vg-Ait" id="xGB-PW-8tS"/>
+                                    <outlet property="title" destination="7Ho-Wb-Flu" id="2h1-M7-4bT"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -214,12 +240,12 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
                     </tabBarItem>
                     <connections>
-                        <segue destination="afv-Ok-gWi" kind="show" identifier="songs" id="Fzm-rw-f2D"/>
+                        <segue destination="8oe-vO-ZLj" kind="show" identifier="songsWithVideo" id="tsM-Oh-mlL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nxv-li-6lA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1" y="765"/>
+            <point key="canvasLocation" x="209" y="570"/>
         </scene>
         <!--Artists-->
         <scene sceneID="ThI-xx-cM1">
@@ -234,7 +260,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="icd-JP-IBV" id="4iV-96-sdc">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -254,7 +280,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MzQ-4z-Pnc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="684" y="526"/>
+            <point key="canvasLocation" x="1945" y="570"/>
         </scene>
         <!--Artist Songs Title Table View Controller-->
         <scene sceneID="Qc9-kq-ftb">
@@ -265,13 +291,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="suP-PQ-lrw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="suP-PQ-lrw" customClass="TitleTableViewCell" customModule="worshipsongs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="suP-PQ-lrw" id="TFQ-1g-GJe">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-dark" translatesAutoresizingMaskIntoConstraints="NO" id="jeM-jg-Xym">
+                                            <rect key="frame" x="347" y="12" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="JEH-Gn-LcN"/>
+                                                <constraint firstAttribute="width" constant="20" id="kOj-tz-Efi"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PV0-4n-Yb4">
+                                            <rect key="frame" x="18" y="13" width="324" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="jeM-jg-Xym" firstAttribute="centerY" secondItem="TFQ-1g-GJe" secondAttribute="centerY" id="AA1-GI-Rjg"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="jeM-jg-Xym" secondAttribute="trailing" id="H2J-Xh-2Di"/>
+                                        <constraint firstItem="jeM-jg-Xym" firstAttribute="leading" secondItem="PV0-4n-Yb4" secondAttribute="trailing" constant="5" id="KuH-hv-DQj"/>
+                                        <constraint firstItem="PV0-4n-Yb4" firstAttribute="centerY" secondItem="TFQ-1g-GJe" secondAttribute="centerY" id="LmG-gl-Meb"/>
+                                        <constraint firstItem="PV0-4n-Yb4" firstAttribute="leading" secondItem="TFQ-1g-GJe" secondAttribute="leadingMargin" constant="10" id="cxe-HJ-4L7"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="playImage" destination="jeM-jg-Xym" id="Zrp-SE-uWc"/>
+                                    <outlet property="title" destination="PV0-4n-Yb4" id="xTP-6W-B05"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -280,13 +332,12 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="afv-Ok-gWi" kind="show" identifier="artistSongs" id="9tD-ke-AdK"/>
-                        <segue destination="8oe-vO-ZLj" kind="show" identifier="video" id="FRh-di-8Al"/>
+                        <segue destination="8oe-vO-ZLj" kind="show" identifier="songsWithVideo" id="FRh-di-8Al"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYc-uV-IDq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1404" y="552"/>
+            <point key="canvasLocation" x="2850" y="570"/>
         </scene>
         <!--Song With Video View Controller-->
         <scene sceneID="qu4-yj-fpd">
@@ -327,7 +378,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8p-H3-xeg">
                                 <rect key="frame" x="318" y="555" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.0" green="0.58823529411764708" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="77D-X1-vBd"/>
                                     <constraint firstAttribute="width" constant="50" id="eYs-8y-bUr"/>
@@ -362,7 +413,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NvC-wl-ChS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2321" y="552"/>
+            <point key="canvasLocation" x="996" y="1330"/>
         </scene>
         <!--Songs-->
         <scene sceneID="tss-w5-Uf1">
@@ -388,8 +439,8 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zh-3E-llJ">
-                                            <rect key="frame" x="18" y="12" width="324" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="18" y="13" width="324" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -418,44 +469,12 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-5"/>
                     </tabBarItem>
                     <connections>
-                        <segue destination="afv-Ok-gWi" kind="show" identifier="songs" id="uWS-3M-VV7"/>
                         <segue destination="8oe-vO-ZLj" kind="show" identifier="songsWithVideo" id="Dam-Am-0MN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZL8-Cr-nTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="996" y="-214.54272863568218"/>
-        </scene>
-        <!--Songs Table View Controller-->
-        <scene sceneID="jsi-2N-Qqk">
-            <objects>
-                <tableViewController id="afv-Ok-gWi" customClass="SongsTableViewController" customModule="worshipsongs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="btB-cp-v7q">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="0hf-wI-zv2">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0hf-wI-zv2" id="LLN-j9-FMb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="afv-Ok-gWi" id="6Hd-vy-umW"/>
-                            <outlet property="delegate" destination="afv-Ok-gWi" id="ypb-Ov-ysZ"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="2Ri-4v-CKh" kind="show" identifier="fullScreen" animates="NO" id="QoY-qT-YFF"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="28P-B5-jI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2061" y="-190"/>
         </scene>
         <!--Full Screen View Controller-->
         <scene sceneID="xgM-Th-Xwj">
@@ -503,7 +522,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L2G-LU-A74" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2789.5999999999999" y="-192.05397301349328"/>
+            <point key="canvasLocation" x="1945" y="1330"/>
         </scene>
     </scenes>
     <resources>
@@ -514,8 +533,6 @@
         <image name="title" width="20" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uWS-3M-VV7"/>
-        <segue reference="Dam-Am-0MN"/>
-        <segue reference="UON-Fr-mLJ"/>
+        <segue reference="FRh-di-8Al"/>
     </inferredMetricsTieBreakers>
 </document>

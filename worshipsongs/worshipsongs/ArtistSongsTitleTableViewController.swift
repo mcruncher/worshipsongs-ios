@@ -109,8 +109,13 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
+        cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].comment.contains("youtube") {
+            cell.playImage.isHidden = false
+        } else {
+            cell.playImage.isHidden = true
+        }
         return cell
     }
     
@@ -129,7 +134,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
             verseList = splitVerseOrder(verseOrder)
         }
         hideSearchBar()
-        performSegue(withIdentifier: "video", sender: self)
+        performSegue(withIdentifier: "songsWithVideo", sender: self)
         
     }
     
@@ -139,19 +144,12 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if (segue.identifier == "artistSongs") {
-            let songsTableViewController = segue.destination as! SongsTableViewController
-            songsTableViewController.verseOrder = verseList
-            songsTableViewController.songLyrics = songLyrics
-            songsTableViewController.songName = songName
-        } else if (segue.identifier == "video") {
+        if (segue.identifier == "songsWithVideo") {
             let songsTableViewController = segue.destination as! SongWithVideoViewController
             songsTableViewController.verseOrder = verseList
             songsTableViewController.songLyrics = songLyrics
             songsTableViewController.songName = songName
-            if !comment.isEmpty {
-                songsTableViewController.comment = comment
-            }
+            songsTableViewController.comment = comment
         }
     }
     
