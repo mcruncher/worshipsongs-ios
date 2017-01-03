@@ -17,6 +17,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     var verseList: NSArray = NSArray()
     var songLyrics: NSString = NSString()
     var songName: String = ""
+    var comment = ""
     fileprivate let preferences = UserDefaults.standard
     var searchBar: UISearchBar!
     
@@ -73,8 +74,13 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = songModel[(indexPath as NSIndexPath).row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
+        cell.title.text = songModel[(indexPath as NSIndexPath).row].title
+        if songModel[(indexPath as NSIndexPath).row].comment != nil && songModel[(indexPath as NSIndexPath).row].comment.contains("youtube") {
+            cell.playImage.isHidden = false
+        } else {
+            cell.playImage.isHidden = true
+        }
         return cell
     }
     
@@ -87,8 +93,13 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         if !verseOrder.isEmpty {
             verseList = splitVerseOrder(verseOrder)
         }
+        if songModel[(indexPath as NSIndexPath).row].comment != nil {
+            comment = songModel[(indexPath as NSIndexPath).row].comment
+        } else {
+            comment = ""
+        }
         hideSearchBar()
-        performSegue(withIdentifier: "songs", sender: self)
+        performSegue(withIdentifier: "songsWithVideo", sender: self)
     }
     
     func splitVerseOrder(_ verseOrder: String) -> NSArray
@@ -97,11 +108,12 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if (segue.identifier == "songs") {
-            let songsTableViewController = segue.destination as! SongsTableViewController;
+        if (segue.identifier == "songsWithVideo") {
+            let songsTableViewController = segue.destination as! SongWithVideoViewController
             songsTableViewController.verseOrder = verseList
             songsTableViewController.songLyrics = songLyrics
             songsTableViewController.songName = songName
+            songsTableViewController.comment = comment
         }
     }
     

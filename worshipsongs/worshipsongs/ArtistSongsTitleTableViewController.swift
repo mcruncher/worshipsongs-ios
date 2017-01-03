@@ -18,6 +18,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     var verseList: NSArray = NSArray()
     var songLyrics: NSString = NSString()
     var songName: String = ""
+    var comment = ""
     
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
@@ -29,7 +30,9 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        filteredSongModel = songModel
         createSearchBar()
+        tableView.reloadData()
     }
     
     func updateModel() {
@@ -39,7 +42,6 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         refresh.addTarget(self, action: #selector(ArtistSongsTitleTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
         self.navigationItem.title = artistName
-        filteredSongModel = songModel
     }
     
     fileprivate func addLongPressGestureRecognizer() {
@@ -107,8 +109,13 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
+        cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].comment.contains("youtube") {
+            cell.playImage.isHidden = false
+        } else {
+            cell.playImage.isHidden = true
+        }
         return cell
     }
     
@@ -117,12 +124,17 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         verseList = NSArray()
         songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
         songName = filteredSongModel[(indexPath as NSIndexPath).row].title
+        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil {
+            comment = filteredSongModel[(indexPath as NSIndexPath).row].comment
+        } else {
+            comment = ""
+        }
         let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
         if !verseOrder.isEmpty {
             verseList = splitVerseOrder(verseOrder)
         }
         hideSearchBar()
-        performSegue(withIdentifier: "artistSongs", sender: self)
+        performSegue(withIdentifier: "songsWithVideo", sender: self)
         
     }
     
@@ -132,11 +144,12 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if (segue.identifier == "artistSongs") {
-            let songsTableViewController = segue.destination as! SongsTableViewController;
+        if (segue.identifier == "songsWithVideo") {
+            let songsTableViewController = segue.destination as! SongWithVideoViewController
             songsTableViewController.verseOrder = verseList
             songsTableViewController.songLyrics = songLyrics
             songsTableViewController.songName = songName
+            songsTableViewController.comment = comment
         }
     }
     

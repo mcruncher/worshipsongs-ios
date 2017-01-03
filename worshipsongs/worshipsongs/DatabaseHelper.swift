@@ -30,7 +30,7 @@ class DatabaseHelper: NSObject {
         if (resultSet1 != nil)
         {
             while resultSet1!.next() {
-                songModel.append(Songs(title: resultSet1!.string(forColumn: titles), lyrics: resultSet1!.string(forColumn: lyrics),verse_order: resultSet1!.string(forColumn: verseOrder)))
+                songModel.append(Songs(title: resultSet1!.string(forColumn: titles), lyrics: resultSet1!.string(forColumn: lyrics),verse_order: resultSet1!.string(forColumn: verseOrder), comment: resultSet1!.string(forColumn: "comments")))
             }
         }
         print("songModel count : \(songModel.count)")
@@ -89,7 +89,7 @@ class DatabaseHelper: NSObject {
         if (resultSet2 != nil)
         {
             while resultSet2!.next() {
-                songModel.append(Songs(title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder)))
+                songModel.append(Songs(title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
             }
         }
         return songModel
@@ -118,7 +118,7 @@ class DatabaseHelper: NSObject {
         if (resultSet2 != nil)
         {
             while resultSet2!.next() {
-                songModel.append(Songs(title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder)))
+                songModel.append(Songs(title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
             }
         }
         print("songModel count : \(songModel.count)")
