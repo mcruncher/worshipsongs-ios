@@ -105,8 +105,13 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func parseSongUrl() -> String {
-        
-        return comment.components(separatedBy: "Url=")[1]
+        let properties = comment.components(separatedBy: "\n")
+        for property in properties {
+            if property.contains("mediaUrl"){
+                return property.components(separatedBy: "Url=")[1]
+            }
+        }
+        return ""
     }
     
     func loadYoutube(url: String) {
