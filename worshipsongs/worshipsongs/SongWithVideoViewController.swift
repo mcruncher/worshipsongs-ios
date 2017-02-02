@@ -8,6 +8,7 @@
 
 import UIKit
 import YouTubePlayer
+import KCFloatingActionButton
 
 class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, XMLParserDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -15,6 +16,11 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var buttonTop: NSLayoutConstraint!
     @IBOutlet weak var playerHeight: NSLayoutConstraint!
+    var secondWindow: UIWindow?
+    var secondScreenView: UIView?
+    var externalLabel = UILabel()
+    var floatingbutton = KCFloatingActionButton()
+    var hadYoutubeLink = false
 
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     
@@ -27,17 +33,24 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     var parsedVerseOrderList: NSMutableArray = NSMutableArray()
     var verseOrderList: NSMutableArray = NSMutableArray()
     var text: String!
+    var presentationIndex = 0
     var comment: String = ""
     fileprivate let preferences = UserDefaults.standard
     var play = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addFloatButton()
         addShareBarButton()
-        if !comment.isEmpty {
+        if !comment.isEmpty && parseSongUrl() != "" {
             loadYoutube(url: parseSongUrl())
-        } else {
+            floatingbutton.isHidden = false
             actionButton.isHidden = true
+            hadYoutubeLink = true
+        } else {
+            floatingbutton.isHidden = true
+            actionButton.isHidden = false
+            hadYoutubeLink = false
         }
         player.isHidden = true
         playerHeight.constant = 0
@@ -57,6 +70,84 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         buttonTop.constant = screenHeight - 125
         actionButton.layer.cornerRadius = actionButton.layer.frame.height / 2
         actionButton.clipsToBounds = true
+        registerForScreenNotification()
+        setupScreen()
+    }
+    
+    func addFloatButton() {
+        let playItem = getKCFloatingActionButtonItem(title: "Play song".localized, icon: UIImage(named: "play")!)
+        playItem.handler = { item in
+            self.floatingbutton.close()
+            self.setAction()
+        }
+        floatingbutton.addItem(item: playItem)
+        let presentationItem = getKCFloatingActionButtonItem(title: "Present song".localized, icon: UIImage(named: "presentation")!)
+        presentationItem.handler = { item in
+            self.floatingbutton.close()
+            self.presentation()
+        }
+        floatingbutton.addItem(item: presentationItem)
+        floatingbutton.sticky = true
+        floatingbutton.buttonColor = UIColor.red
+        floatingbutton.plusColor = UIColor.white
+        floatingbutton.size = 50
+        self.view.addSubview(floatingbutton)
+    }
+    
+    func getKCFloatingActionButtonItem(title: String, icon: UIImage) -> KCFloatingActionButtonItem {
+        let item = KCFloatingActionButtonItem()
+        item.size = 43
+        item.buttonColor = UIColor.cruncherBlue()
+        item.title = title
+        item.titleColor = UIColor.black
+        item.titleLabel.backgroundColor = UIColor.white
+        item.titleLabel.layer.cornerRadius = 6
+        item.titleLabel.clipsToBounds = true
+        item.titleLabel.font = UIFont.systemFont(ofSize: 14)
+        item.titleLabel.frame.size.width = item.titleLabel.frame.size.width + 2
+        item.titleLabel.frame.size.height = item.titleLabel.frame.size.height + 2
+        item.titleLabel.textAlignment = NSTextAlignment.center
+        item.icon = icon
+        return item
+    }
+    
+    func registerForScreenNotification() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(SongWithVideoViewController.setupScreen), name: NSNotification.Name.UIScreenDidConnect, object: nil)
+    }
+    
+    func setupScreen() {
+        if UIScreen.screens.count > 1 {
+            let secondScreen = UIScreen.screens[1]
+            secondWindow = UIWindow(frame: secondScreen.bounds)
+            secondWindow?.screen = secondScreen
+            secondScreenView = UIView(frame: (secondWindow?.frame)!)
+            secondWindow?.addSubview(secondScreenView!)
+            secondWindow?.isHidden = false
+            secondScreenView?.backgroundColor = UIColor.white
+            if isPresentationStringNotEmpty() {
+                let externalLabel = UILabel()
+                externalLabel.textAlignment = NSTextAlignment.center
+                externalLabel.font = UIFont(name: "Helvetica", size: 50.0)
+                externalLabel.frame = (secondScreenView?.bounds)!
+                externalLabel.numberOfLines = 0
+                externalLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+                
+                let presentationText = self.preferences.string(forKey: "presentationString")
+                let customTextSettingService: CustomTextSettingService = CustomTextSettingService()
+                externalLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!))
+                secondScreenView?.addSubview(externalLabel)
+            } else {
+                let imageView = UIImageView(image: #imageLiteral(resourceName: "Default-Landscape"))
+                imageView.frame = (secondScreenView?.bounds)!
+                secondScreenView?.addSubview(imageView)
+            }
+            
+        }
+    }
+    
+    fileprivate func isPresentationStringNotEmpty() -> Bool {
+        return preferences.dictionaryRepresentation().keys.contains("presentationString") && self.preferences.string(forKey: "presentationString") != " "
     }
     
     func getTableFooterView() -> UIView {
@@ -67,6 +158,7 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        setupScreen()
         self.onChangeOrientation(orientation: UIDevice.current.orientation)
     }
     
@@ -89,7 +181,6 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         return 1
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let key: String = (verseOrderList[(indexPath as NSIndexPath).section] as! String).lowercased()
@@ -99,7 +190,7 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         let fontSize = self.preferences.integer(forKey: "fontSize")
         cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
-        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
+        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
         print("cell\(cell.textLabel!.attributedText )")
         return cell
     }
@@ -146,19 +237,30 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         setAction()
     }
     
+    func presentation() {
+        performSegue(withIdentifier: "presentation", sender: self)
+    }
+    
     func setAction() {
-        if play {
-            play = false
-            actionButton.setImage(UIImage(named: "play"), for: UIControlState())
-            player.isHidden = true
-            playerHeight.constant = 0
-            player.stop()
+        if hadYoutubeLink {
+            if play {
+                play = false
+                actionButton.isHidden = true
+                floatingbutton.isHidden = false
+                player.isHidden = true
+                playerHeight.constant = 0
+                player.stop()
+            } else {
+                play = true
+                actionButton.setImage(UIImage(named: "stop"), for: UIControlState())
+                floatingbutton.isHidden = true
+                actionButton.isHidden = false
+                player.isHidden = false
+                playerHeight.constant = 250
+                player.play()
+            }
         } else {
-            play = true
-            actionButton.setImage(UIImage(named: "stop"), for: UIControlState())
-            player.isHidden = false
-            playerHeight.constant = 250
-            player.play()
+            presentation()
         }
     }
     
@@ -172,6 +274,11 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
             let fullScreenController = segue.destination as! FullScreenViewController
             fullScreenController.cells = getAllCells()
             fullScreenController.songName = songName
+        } else if (segue.identifier == "presentation") {
+            let presentationViewController = segue.destination as! PresentationViewController
+            presentationViewController.verseOrder = verseOrder
+            presentationViewController.songLyrics = songLyrics
+            presentationViewController.songName = songName
         }
     }
     
