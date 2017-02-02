@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,6 +35,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         updateDefaultSettings()
         createScheduleLocalNotification()
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        }
+        catch let error as NSError {
+            print(error)
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+        }
+        catch let error as NSError {
+            print(error)  
+        }
         return true
     }
     
