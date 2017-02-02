@@ -27,7 +27,8 @@
 		2FD78E4C1C103A5D00A171B7 /* CustomTextSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD78E4B1C103A5D00A171B7 /* CustomTextSettingService.swift */; };
 		2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD78E4D1C103C1A00A171B7 /* RegexPatternMatcherService.swift */; };
 		2FDE48531DF140BD00948236 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE48521DF140BD00948236 /* SettingsController.swift */; };
-		2FDE48551DF149DB00948236 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE48541DF149DB00948236 /* ColorUtils.swift */; };
+		2FE636581E4190FF0092A696 /* PresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE636571E4190FF0092A696 /* PresentationViewController.swift */; };
+		2FE636591E41DED80092A696 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE48541DF149DB00948236 /* ColorUtils.swift */; };
 		2FE840EF1DDBE7FB002B3379 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */; };
 		2FE840F01DDBEAA1002B3379 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D591BC78DB8001C4B6F /* DatabaseHelper.swift */; };
 		2FE840F51DDC33A6002B3379 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FE840F71DDC33A6002B3379 /* Localizable.strings */; };
@@ -88,6 +89,7 @@
 		2FD78E4D1C103C1A00A171B7 /* RegexPatternMatcherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexPatternMatcherService.swift; sourceTree = "<group>"; };
 		2FDE48521DF140BD00948236 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		2FDE48541DF149DB00948236 /* ColorUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
+		2FE636571E4190FF0092A696 /* PresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationViewController.swift; sourceTree = "<group>"; };
 		2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		2FE840F61DDC33A6002B3379 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2FE840F81DDC33BF002B3379 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */,
 				2FF0BE851E0CD218004E2127 /* SongWithVideoViewController.swift */,
 				2FDE48521DF140BD00948236 /* SettingsController.swift */,
+				2FE636571E4190FF0092A696 /* PresentationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -507,14 +510,15 @@
 				625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */,
 				2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */,
-				2FDE48551DF149DB00948236 /* ColorUtils.swift in Sources */,
 				2FD5899A1C167CD300668951 /* TitlesTableViewController.swift in Sources */,
 				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
 				2FD589951C1660A300668951 /* Author.swift in Sources */,
 				2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */,
+				2FE636591E41DED80092A696 /* ColorUtils.swift in Sources */,
 				2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */,
 				2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */,
 				2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */,
+				2FE636581E4190FF0092A696 /* PresentationViewController.swift in Sources */,
 				2FD78E4C1C103A5D00A171B7 /* CustomTextSettingService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

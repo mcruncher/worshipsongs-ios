@@ -65,6 +65,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.setValue(ColorUtils.Color.darkGray.rawValue, forKey: "englishFontColor")
             self.preferences.synchronize()
         }
+        if preferences.dictionaryRepresentation().keys.contains("presentationString") {
+            self.preferences.setValue(" ", forKey: "presentationString")
+            self.preferences.synchronize()
+        }
     }
     
     func copyFile(_ fileName: NSString) {
