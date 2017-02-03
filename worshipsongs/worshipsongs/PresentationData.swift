@@ -31,7 +31,6 @@ class PresentationData {
             secondWindow?.isHidden = false
             secondScreenView.backgroundColor = UIColor.white
             if isPresentationStringNotEmpty() {
-                secondScreenView.songLabel.font = UIFont(name: "Helvetica", size: 50.0)
                 secondScreenView.songLabel.numberOfLines = 0
                 secondScreenView.songLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
                 let presentationText = self.preferences.string(forKey: "presentationLyrics")
@@ -54,7 +53,6 @@ class PresentationData {
     }
     
     func updateScreen() {
-        secondScreenView.songLabel.font = UIFont(name: "Helvetica", size: 50.0)
         secondScreenView.songLabel.numberOfLines = 0
         secondScreenView.songLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         let presentationText = self.preferences.string(forKey: "presentationLyrics")

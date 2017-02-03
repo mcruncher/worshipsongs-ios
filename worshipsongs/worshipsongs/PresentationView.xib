@@ -24,24 +24,24 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BtU-kt-qqQ">
                     <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6z-OW-9cD">
-                    <rect key="frame" x="647" y="325" width="0.0" height="0.0"/>
+                    <rect key="frame" x="647" y="345" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNa-CY-gwh">
-                    <rect key="frame" x="333" y="325" width="0.0" height="0.0"/>
+                    <rect key="frame" x="333" y="345" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7h-Y1-o8d">
-                    <rect key="frame" x="20" y="325" width="0.0" height="0.0"/>
+                    <rect key="frame" x="20" y="345" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -49,11 +49,11 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="s6z-OW-9cD" secondAttribute="bottom" constant="50" id="0IJ-5P-cQD"/>
+                <constraint firstAttribute="bottom" secondItem="s6z-OW-9cD" secondAttribute="bottom" constant="30" id="0IJ-5P-cQD"/>
                 <constraint firstItem="qNa-CY-gwh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1WL-aI-aOU"/>
-                <constraint firstAttribute="bottom" secondItem="h7h-Y1-o8d" secondAttribute="bottom" constant="50" id="6hy-WJ-Vha"/>
+                <constraint firstAttribute="bottom" secondItem="h7h-Y1-o8d" secondAttribute="bottom" constant="30" id="6hy-WJ-Vha"/>
                 <constraint firstAttribute="trailing" secondItem="BtU-kt-qqQ" secondAttribute="trailing" id="7l8-d2-1H1"/>
-                <constraint firstAttribute="bottom" secondItem="qNa-CY-gwh" secondAttribute="bottom" constant="50" id="AJs-U7-Kap"/>
+                <constraint firstAttribute="bottom" secondItem="qNa-CY-gwh" secondAttribute="bottom" constant="30" id="AJs-U7-Kap"/>
                 <constraint firstItem="h7h-Y1-o8d" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="CN1-qS-Vwu"/>
                 <constraint firstAttribute="bottom" secondItem="BtU-kt-qqQ" secondAttribute="bottom" id="D4w-wK-Udf"/>
                 <constraint firstItem="BtU-kt-qqQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iqi-s5-fi0"/>

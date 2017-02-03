@@ -234,6 +234,7 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
             let fullScreenController = segue.destination as! FullScreenViewController
             fullScreenController.cells = getAllCells()
             fullScreenController.songName = songName
+            fullScreenController.authorName = authorName
         } else if (segue.identifier == "presentation") {
             let presentationViewController = segue.destination as! PresentationViewController
             presentationViewController.verseOrder = verseOrder

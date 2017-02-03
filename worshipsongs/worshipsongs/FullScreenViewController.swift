@@ -12,10 +12,10 @@ class FullScreenViewController: UIViewController {
     
     var cells = [UITableViewCell]()
     var songName: String = ""
+    var authorName = ""
     var i = 0
 
-    @IBOutlet weak var cellLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var presentationView: PresentationView!
     
     
     override func viewDidLoad() {
@@ -33,9 +33,10 @@ class FullScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.onChangeOrientation(orientation: UIDevice.current.orientation)
-        titleLabel.text = songName
-        cellLabel.font = cells[i].textLabel?.font
-        cellLabel.attributedText = cells[i].textLabel?.attributedText
+        presentationView.songLabel.attributedText = cells[i].textLabel?.attributedText
+        presentationView.songNameLabel.text = songName
+        presentationView.authorLabel.text = "artist".localized + ": " + authorName
+        presentationView.slideNumberLabel.text = String(1) + " of " + String(self.cells.count)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,13 +46,14 @@ class FullScreenViewController: UIViewController {
     
     func swipeLeft() {
         if i < cells.count - 1 {
-            let labelOrginx = self.cellLabel.frame.origin.x
-            self.cellLabel.attributedText = NSAttributedString(string: "")
-            self.cellLabel.frame.origin.x = self.cellLabel.frame.width
-            UIView.transition(with: self.cellLabel, duration: 0.1, options: .curveLinear, animations: {
+            let labelOrginx = self.presentationView.songLabel.frame.origin.x
+            self.presentationView.songLabel.attributedText = NSAttributedString(string: "")
+            self.presentationView.songLabel.frame.origin.x = self.presentationView.songLabel.frame.width
+            UIView.transition(with: self.presentationView.songLabel, duration: 0.1, options: .curveLinear, animations: {
                 self.i = self.i + 1
-                self.cellLabel.attributedText = self.cells[self.i].textLabel?.attributedText
-                self.cellLabel.frame.origin.x = labelOrginx
+                self.presentationView.songLabel.attributedText = self.cells[self.i].textLabel?.attributedText
+                self.presentationView.slideNumberLabel.text = String(self.i + 1) + " of " + String(self.cells.count)
+                self.presentationView.songLabel.frame.origin.x = labelOrginx
             }, completion: { _ in
             })
         }
@@ -60,13 +62,14 @@ class FullScreenViewController: UIViewController {
 
     func swipeRight() {
         if i > 0 {
-            let labelOrginx = self.cellLabel.frame.origin.x
-            self.cellLabel.attributedText = NSAttributedString(string: "")
-            self.cellLabel.frame.origin.x = -self.cellLabel.frame.width
-            UIView.transition(with: self.cellLabel, duration: 0.1, options: .curveLinear, animations: {
+            let labelOrginx = self.presentationView.songLabel.frame.origin.x
+            self.presentationView.songLabel.attributedText = NSAttributedString(string: "")
+            self.presentationView.songLabel.frame.origin.x = -self.presentationView.songLabel.frame.width
+            UIView.transition(with: self.presentationView.songLabel, duration: 0.1, options: .curveLinear, animations: {
                 self.i = self.i - 1
-                self.cellLabel.attributedText = self.cells[self.i].textLabel?.attributedText
-                self.cellLabel.frame.origin.x = labelOrginx
+                self.presentationView.songLabel.attributedText = self.cells[self.i].textLabel?.attributedText
+                self.presentationView.slideNumberLabel.text = String(self.i + 1) + " of " + String(self.cells.count)
+                self.presentationView.songLabel.frame.origin.x = labelOrginx
             }, completion: { _ in
             })
         }

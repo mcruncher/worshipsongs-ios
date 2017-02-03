@@ -49,12 +49,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         catch let error as NSError {
             print(error)  
         }
+        let presentationData = PresentationData()
+        presentationData.registerForScreenNotification()
         return true
     }
     
     func updateDefaultSettings() {
         if !preferences.dictionaryRepresentation().keys.contains("fontSize") {
             self.preferences.setValue(17, forKey: "fontSize")
+            self.preferences.synchronize()
+        }
+        if !preferences.dictionaryRepresentation().keys.contains("presentationFontSize") {
+            self.preferences.setValue(30, forKey: "presentationFontSize")
             self.preferences.synchronize()
         }
         if !preferences.dictionaryRepresentation().keys.contains("tamilFontColor") {

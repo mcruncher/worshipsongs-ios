@@ -32,6 +32,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let songTabBarController = tabBarController as! SongsTabBarViewController
         songTabBarController.navigationItem.title = "songs".localized
         songModel = databaseHelper.getSongModel()

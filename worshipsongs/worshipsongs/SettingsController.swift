@@ -11,6 +11,7 @@ import UIKit
 class SettingsController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var fontSizeSlider: UISlider!
+    @IBOutlet weak var presentationFontSlider: UISlider!
     @IBOutlet weak var tamilFontColor: UITextField!
     @IBOutlet weak var englishFontColor: UITextField!
     fileprivate let preferences = UserDefaults.standard
@@ -24,6 +25,8 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
         super.viewDidLoad()
         let size = self.preferences.integer(forKey: "fontSize")
         fontSizeSlider.value = Float(size)
+        let presentationSize = self.preferences.integer(forKey: "presentationFontSize")
+        presentationFontSlider.value = Float(presentationSize)
         tamilFont = self.preferences.string(forKey: "tamilFontColor")!
         tamilFontColor.text = tamilFont.localized
         tamilFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!)
@@ -54,6 +57,11 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
     
     @IBAction func onChangeSize(_ sender: Any) {
         self.preferences.setValue(fontSizeSlider.value, forKey: "fontSize")
+        self.preferences.synchronize()
+    }
+    
+    @IBAction func onChangePresentationSize(_ sender: Any) {
+        self.preferences.setValue(presentationFontSlider.value, forKey: "presentationFontSize")
         self.preferences.synchronize()
     }
     

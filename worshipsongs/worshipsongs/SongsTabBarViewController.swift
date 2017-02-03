@@ -12,14 +12,14 @@ class SongsTabBarViewController: UITabBarController{
     
     var secondWindow: UIWindow?
     fileprivate let preferences = UserDefaults.standard
-    let presentationData = PresentationData()
+    var presentationData = PresentationData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presentationData.registerForScreenNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        presentationData = PresentationData()
         presentationData.setupScreen()
     }
     

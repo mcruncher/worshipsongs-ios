@@ -132,7 +132,7 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
         let key = (verseOrderList[(indexPath as NSIndexPath).section] as! String).lowercased()
         let dataText: NSString? = listDataDictionary[key] as? NSString
         self.preferences.setValue(dataText, forKey: "presentationLyrics")
-        let slideNumber = String(indexPath.section + 1) + " of " + String(self.verseOrder.count)
+        let slideNumber = String(indexPath.section + 1) + " of " + String(tableView.numberOfSections)
         self.preferences.setValue(slideNumber, forKeyPath: "presentationSlide")
         self.preferences.synchronize()
         self.presentationData.updateScreen()
