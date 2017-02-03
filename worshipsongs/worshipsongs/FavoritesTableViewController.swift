@@ -20,6 +20,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     var comment = ""
     fileprivate let preferences = UserDefaults.standard
     var searchBar: UISearchBar!
+    var authorName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +90,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         verseList = NSArray()
         songLyrics = songModel[(indexPath as NSIndexPath).row].lyrics as NSString
         songName = songModel[(indexPath as NSIndexPath).row].title
+        authorName = databaseHelper.getArtistName(songModel[(indexPath as NSIndexPath).row].id)
         let verseOrder = songModel[(indexPath as NSIndexPath).row].verse_order
         if !verseOrder.isEmpty {
             verseList = splitVerseOrder(verseOrder)
@@ -114,6 +116,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
             songsTableViewController.songLyrics = songLyrics
             songsTableViewController.songName = songName
             songsTableViewController.comment = comment
+            songsTableViewController.authorName = authorName
         }
     }
     

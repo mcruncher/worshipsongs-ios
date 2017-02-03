@@ -150,6 +150,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
             songsTableViewController.songLyrics = songLyrics
             songsTableViewController.songName = songName
             songsTableViewController.comment = comment
+            songsTableViewController.authorName = artistName
         }
     }
     

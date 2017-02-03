@@ -65,8 +65,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.setValue(ColorUtils.Color.darkGray.rawValue, forKey: "englishFontColor")
             self.preferences.synchronize()
         }
-        if preferences.dictionaryRepresentation().keys.contains("presentationString") {
-            self.preferences.setValue(" ", forKey: "presentationString")
+        if preferences.dictionaryRepresentation().keys.contains("presentationLyrics") {
+            self.preferences.setValue("", forKey: "presentationLyrics")
+            self.preferences.synchronize()
+        }
+        if preferences.dictionaryRepresentation().keys.contains("presentationSongName") {
+            self.preferences.setValue("", forKey: "presentationSongName")
+            self.preferences.synchronize()
+        }
+        if preferences.dictionaryRepresentation().keys.contains("presentationSlide") {
+            self.preferences.setValue("", forKey: "presentationSlide")
+            self.preferences.synchronize()
+        }
+        if preferences.dictionaryRepresentation().keys.contains("presentationAuthor") {
+            self.preferences.setValue("", forKey: "presentationAuthor")
             self.preferences.synchronize()
         }
     }
