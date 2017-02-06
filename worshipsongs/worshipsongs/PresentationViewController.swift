@@ -53,6 +53,13 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
         self.preferences.setValue(authorName, forKeyPath: "presentationAuthor")
         self.preferences.setValue(songName, forKeyPath: "presentationSongName")
         self.preferences.synchronize()
+        let backButton = UIBarButtonItem(title: "back".localized, style: .plain, target: self, action: #selector(PresentationViewController.goBackToSongsList))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func goBackToSongsList() {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
     }
     
     func getTableFooterView() -> UIView {
