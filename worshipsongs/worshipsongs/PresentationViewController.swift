@@ -13,12 +13,10 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     var secondWindow: UIWindow?
-    var secondScreenView: UIView?
-    var externalLabel = UILabel()
-    
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
-    
+    let presentationData = PresentationData()
     var songName: String = ""
+    var authorName = ""
     var songLyrics: NSString = NSString()
     var verseOrder: NSArray = NSArray()
     var element:String!
@@ -45,53 +43,16 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
         }
         self.tableView.estimatedRowHeight = 88.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        registerForScreenNotification()
-        setupScreen()
+        presentationData.setupScreen()
         previousButton.layer.cornerRadius = previousButton.layer.frame.height / 2
         previousButton.clipsToBounds = true
         previousButton.isHidden = true
         nextButton.layer.cornerRadius = previousButton.layer.frame.height / 2
         nextButton.clipsToBounds = true
         nextButton.isHidden = self.verseOrder.count <= 1
-    }
-    
-    func registerForScreenNotification() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(PresentationViewController.setupScreen), name: NSNotification.Name.UIScreenDidConnect, object: nil)
-    }
-    
-    func setupScreen() {
-        if UIScreen.screens.count > 1 {
-            let secondScreen = UIScreen.screens[1]
-            secondWindow = UIWindow(frame: secondScreen.bounds)
-            secondWindow?.screen = secondScreen
-            secondScreenView = UIView(frame: (secondWindow?.frame)!)
-            secondWindow?.addSubview(secondScreenView!)
-            secondWindow?.isHidden = false
-            secondScreenView?.backgroundColor = UIColor.white
-            if isPresentationStringNotEmpty() {
-                let externalLabel = UILabel()
-                externalLabel.textAlignment = NSTextAlignment.center
-                externalLabel.font = UIFont(name: "Helvetica", size: 50.0)
-                externalLabel.frame = (secondScreenView?.bounds)!
-                externalLabel.numberOfLines = 0
-                externalLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-                
-                let presentationText = self.preferences.string(forKey: "presentationString")
-                let customTextSettingService: CustomTextSettingService = CustomTextSettingService()
-                externalLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!))
-                secondScreenView?.addSubview(externalLabel)
-            } else {
-                let imageView = UIImageView(image: #imageLiteral(resourceName: "Default-Landscape"))
-                imageView.frame = (secondScreenView?.bounds)!
-                secondScreenView?.addSubview(imageView)
-            }
-            
-        }
-    }
-    
-    fileprivate func isPresentationStringNotEmpty() -> Bool {
-        return preferences.dictionaryRepresentation().keys.contains("presentationString") && self.preferences.string(forKey: "presentationString") != " "
+        self.preferences.setValue(authorName, forKeyPath: "presentationAuthor")
+        self.preferences.setValue(songName, forKeyPath: "presentationSongName")
+        self.preferences.synchronize()
     }
     
     func getTableFooterView() -> UIView {
@@ -170,13 +131,11 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
         let key = (verseOrderList[(indexPath as NSIndexPath).section] as! String).lowercased()
         let dataText: NSString? = listDataDictionary[key] as? NSString
-        self.preferences.setValue(dataText, forKey: "presentationString")
+        self.preferences.setValue(dataText, forKey: "presentationLyrics")
+        let slideNumber = String(indexPath.section + 1) + " of " + String(tableView.numberOfSections)
+        self.preferences.setValue(slideNumber, forKeyPath: "presentationSlide")
         self.preferences.synchronize()
-        let delay = 0.1 * Double(NSEC_PER_SEC)
-        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: time, execute: {
-            self.setupScreen()
-        })
+        self.presentationData.updateScreen()
         previousButton.isHidden = indexPath.section <= 0
         nextButton.isHidden = indexPath.section >= tableView.numberOfSections - 1
     }

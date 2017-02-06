@@ -49,12 +49,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         catch let error as NSError {
             print(error)  
         }
+        let presentationData = PresentationData()
+        presentationData.registerForScreenNotification()
         return true
     }
     
     func updateDefaultSettings() {
         if !preferences.dictionaryRepresentation().keys.contains("fontSize") {
             self.preferences.setValue(17, forKey: "fontSize")
+            self.preferences.synchronize()
+        }
+        if !preferences.dictionaryRepresentation().keys.contains("presentationFontSize") {
+            self.preferences.setValue(30, forKey: "presentationFontSize")
             self.preferences.synchronize()
         }
         if !preferences.dictionaryRepresentation().keys.contains("tamilFontColor") {
@@ -65,8 +71,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.setValue(ColorUtils.Color.darkGray.rawValue, forKey: "englishFontColor")
             self.preferences.synchronize()
         }
-        if preferences.dictionaryRepresentation().keys.contains("presentationString") {
-            self.preferences.setValue(" ", forKey: "presentationString")
+        if preferences.dictionaryRepresentation().keys.contains("presentationLyrics") {
+            self.preferences.setValue("", forKey: "presentationLyrics")
+            self.preferences.synchronize()
+        }
+        if preferences.dictionaryRepresentation().keys.contains("presentationSongName") {
+            self.preferences.setValue("", forKey: "presentationSongName")
+            self.preferences.synchronize()
+        }
+        if preferences.dictionaryRepresentation().keys.contains("presentationSlide") {
+            self.preferences.setValue("", forKey: "presentationSlide")
+            self.preferences.synchronize()
+        }
+        if preferences.dictionaryRepresentation().keys.contains("presentationAuthor") {
+            self.preferences.setValue("", forKey: "presentationAuthor")
             self.preferences.synchronize()
         }
     }

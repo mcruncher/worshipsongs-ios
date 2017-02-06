@@ -18,6 +18,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     var songLyrics: NSString = NSString()
     var songName: String = ""
     var comment = ""
+    var authorName = ""
     
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
@@ -31,6 +32,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let songTabBarController = tabBarController as! SongsTabBarViewController
         songTabBarController.navigationItem.title = "songs".localized
         songModel = databaseHelper.getSongModel()
@@ -126,6 +128,8 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         verseList = NSArray()
         songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
         songName = filteredSongModel[(indexPath as NSIndexPath).row].title
+        authorName = databaseHelper.getArtistName(filteredSongModel[(indexPath as NSIndexPath).row].id)
+        
         if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil {
             comment = filteredSongModel[(indexPath as NSIndexPath).row].comment
         } else {
@@ -151,6 +155,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
             songWithVideoViewController.songLyrics = songLyrics
             songWithVideoViewController.songName = songName
             songWithVideoViewController.comment = comment
+            songWithVideoViewController.authorName = authorName
         }
     }
     

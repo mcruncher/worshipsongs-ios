@@ -8,6 +8,7 @@ import Foundation
 
 
 struct Songs {
+    var id: String
     var title : String
     var lyrics : String
     var verse_order : String

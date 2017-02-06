@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PresentationView" customModule="worshipsongs" customModuleProvider="target">
+            <connections>
+                <outlet property="authorLabel" destination="h7h-Y1-o8d" id="cFM-Ff-2xD"/>
+                <outlet property="slideNumberLabel" destination="s6z-OW-9cD" id="uN1-de-7os"/>
+                <outlet property="songLabel" destination="BtU-kt-qqQ" id="inf-FA-2np"/>
+                <outlet property="songNameLabel" destination="qNa-CY-gwh" id="xiE-9V-025"/>
+                <outlet property="view" destination="iN0-l3-epB" id="18U-sH-9gx"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="PresentationView" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BtU-kt-qqQ">
+                    <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6z-OW-9cD">
+                    <rect key="frame" x="647" y="345" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNa-CY-gwh">
+                    <rect key="frame" x="333" y="345" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7h-Y1-o8d">
+                    <rect key="frame" x="20" y="345" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="s6z-OW-9cD" secondAttribute="bottom" constant="30" id="0IJ-5P-cQD"/>
+                <constraint firstItem="qNa-CY-gwh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1WL-aI-aOU"/>
+                <constraint firstAttribute="bottom" secondItem="h7h-Y1-o8d" secondAttribute="bottom" constant="30" id="6hy-WJ-Vha"/>
+                <constraint firstAttribute="trailing" secondItem="BtU-kt-qqQ" secondAttribute="trailing" id="7l8-d2-1H1"/>
+                <constraint firstAttribute="bottom" secondItem="qNa-CY-gwh" secondAttribute="bottom" constant="30" id="AJs-U7-Kap"/>
+                <constraint firstItem="h7h-Y1-o8d" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="CN1-qS-Vwu"/>
+                <constraint firstAttribute="bottom" secondItem="BtU-kt-qqQ" secondAttribute="bottom" id="D4w-wK-Udf"/>
+                <constraint firstItem="BtU-kt-qqQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iqi-s5-fi0"/>
+                <constraint firstItem="BtU-kt-qqQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="u8L-7v-3nR"/>
+                <constraint firstAttribute="trailing" secondItem="s6z-OW-9cD" secondAttribute="trailing" constant="20" id="xn9-GT-bnf"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+</document>

@@ -24,13 +24,14 @@ class DatabaseHelper: NSObject {
         database?.open()
         var songModel = [Songs]()
         let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM songs ORDER BY title", withArgumentsIn: nil)
+        let id = "id"
         let titles: String = "title"
         let lyrics: String = "lyrics"
         let verseOrder: String = "verse_order"
         if (resultSet1 != nil)
         {
             while resultSet1!.next() {
-                songModel.append(Songs(title: resultSet1!.string(forColumn: titles), lyrics: resultSet1!.string(forColumn: lyrics),verse_order: resultSet1!.string(forColumn: verseOrder), comment: resultSet1!.string(forColumn: "comments")))
+                songModel.append(Songs(id: resultSet1!.string(forColumn: id), title: resultSet1!.string(forColumn: titles), lyrics: resultSet1!.string(forColumn: lyrics),verse_order: resultSet1!.string(forColumn: verseOrder), comment: resultSet1!.string(forColumn: "comments")))
             }
         }
         print("songModel count : \(songModel.count)")
@@ -83,13 +84,14 @@ class DatabaseHelper: NSObject {
         }
         var songModel = [Songs]()
         let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN (\(args)) ORDER BY title", withArgumentsIn: songModelIds)
+        let id = "id"
         let titles: String = "title"
         let lyrics: String = "lyrics"
         let verseOrder: String = "verse_order"
         if (resultSet2 != nil)
         {
             while resultSet2!.next() {
-                songModel.append(Songs(title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
+                songModel.append(Songs(id: resultSet2!.string(forColumn: id), title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
             }
         }
         return songModel
@@ -115,14 +117,48 @@ class DatabaseHelper: NSObject {
         let titles: String = "title"
         let lyrics: String = "lyrics"
         let verseOrder: String = "verse_order"
+        let id = "id"
         if (resultSet2 != nil)
         {
             while resultSet2!.next() {
-                songModel.append(Songs(title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
+                songModel.append(Songs(id: resultSet2!.string(forColumn: id), title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
             }
         }
         print("songModel count : \(songModel.count)")
         return songModel
+    }
+    
+    func getArtistName(_ argument: String) -> String {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
+        //54D70B97-F386-4746-9A69-692E339668B8
+        print("path : \(path)")
+        database?.open()
+        var songModelIds = [AnyObject]()
+        var arguments = [AnyObject]()
+        var args:String = ""
+        arguments.append(argument as AnyObject)
+        let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM authors_songs where song_id = ?", withArgumentsIn: arguments)
+        if (resultSet1 != nil)
+        {
+            while resultSet1!.next() {
+                if(args != "")
+                {
+                    args="\(args),"
+                }
+                args="\(args)?"
+                songModelIds.append(resultSet1!.string(forColumn: "author_id") as AnyObject)
+            }
+        }
+        var authorName = " "
+        let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM authors where id IN (\(args)) ORDER BY display_name", withArgumentsIn: songModelIds)
+        if (resultSet2 != nil)
+        {
+            while resultSet2!.next() {
+                authorName = resultSet2!.string(forColumn: "display_name")
+            }
+        }
+        return authorName
     }
     
 }

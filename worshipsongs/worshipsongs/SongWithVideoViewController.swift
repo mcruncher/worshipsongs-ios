@@ -23,8 +23,9 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     var hadYoutubeLink = false
 
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
-    
+    let presentationData = PresentationData()
     var songName: String = ""
+    var authorName = ""
     var songLyrics: NSString = NSString()
     var verseOrder: NSArray = NSArray()
     var element:String!
@@ -70,18 +71,16 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         buttonTop.constant = screenHeight - 125
         actionButton.layer.cornerRadius = actionButton.layer.frame.height / 2
         actionButton.clipsToBounds = true
-        registerForScreenNotification()
-        setupScreen()
     }
     
     func addFloatButton() {
-        let playItem = getKCFloatingActionButtonItem(title: "Play song".localized, icon: UIImage(named: "play")!)
+        let playItem = getKCFloatingActionButtonItem(title: "playSong".localized, icon: UIImage(named: "play")!)
         playItem.handler = { item in
             self.floatingbutton.close()
             self.setAction()
         }
         floatingbutton.addItem(item: playItem)
-        let presentationItem = getKCFloatingActionButtonItem(title: "Present song".localized, icon: UIImage(named: "presentation")!)
+        let presentationItem = getKCFloatingActionButtonItem(title: "presentSong".localized, icon: UIImage(named: "presentation")!)
         presentationItem.handler = { item in
             self.floatingbutton.close()
             self.presentation()
@@ -111,45 +110,6 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         return item
     }
     
-    func registerForScreenNotification() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(SongWithVideoViewController.setupScreen), name: NSNotification.Name.UIScreenDidConnect, object: nil)
-    }
-    
-    func setupScreen() {
-        if UIScreen.screens.count > 1 {
-            let secondScreen = UIScreen.screens[1]
-            secondWindow = UIWindow(frame: secondScreen.bounds)
-            secondWindow?.screen = secondScreen
-            secondScreenView = UIView(frame: (secondWindow?.frame)!)
-            secondWindow?.addSubview(secondScreenView!)
-            secondWindow?.isHidden = false
-            secondScreenView?.backgroundColor = UIColor.white
-            if isPresentationStringNotEmpty() {
-                let externalLabel = UILabel()
-                externalLabel.textAlignment = NSTextAlignment.center
-                externalLabel.font = UIFont(name: "Helvetica", size: 50.0)
-                externalLabel.frame = (secondScreenView?.bounds)!
-                externalLabel.numberOfLines = 0
-                externalLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-                
-                let presentationText = self.preferences.string(forKey: "presentationString")
-                let customTextSettingService: CustomTextSettingService = CustomTextSettingService()
-                externalLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!))
-                secondScreenView?.addSubview(externalLabel)
-            } else {
-                let imageView = UIImageView(image: #imageLiteral(resourceName: "Default-Landscape"))
-                imageView.frame = (secondScreenView?.bounds)!
-                secondScreenView?.addSubview(imageView)
-            }
-            
-        }
-    }
-    
-    fileprivate func isPresentationStringNotEmpty() -> Bool {
-        return preferences.dictionaryRepresentation().keys.contains("presentationString") && self.preferences.string(forKey: "presentationString") != " "
-    }
-    
     func getTableFooterView() -> UIView {
         let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 0))
         footerview.backgroundColor = UIColor.groupTableViewBackground
@@ -158,7 +118,7 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
-        setupScreen()
+        presentationData.setupScreen()
         self.onChangeOrientation(orientation: UIDevice.current.orientation)
     }
     
@@ -274,11 +234,13 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
             let fullScreenController = segue.destination as! FullScreenViewController
             fullScreenController.cells = getAllCells()
             fullScreenController.songName = songName
+            fullScreenController.authorName = authorName
         } else if (segue.identifier == "presentation") {
             let presentationViewController = segue.destination as! PresentationViewController
             presentationViewController.verseOrder = verseOrder
             presentationViewController.songLyrics = songLyrics
             presentationViewController.songName = songName
+            presentationViewController.authorName = authorName
         }
     }
     
@@ -415,8 +377,6 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
             let cell = UITableViewCell()
             let fontSize = self.preferences.integer(forKey: "fontSize")
             cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize + 5))
-            //            let fontColor = self.preferences.string(forKey: "englishFontColor")!
-            //            cell.textLabel!.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: fontColor)!)
             cell.textLabel!.numberOfLines = 0
             cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
             cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
