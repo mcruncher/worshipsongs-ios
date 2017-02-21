@@ -10,7 +10,7 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
 
-    var songModel = [FavoritesSongsWithOrder]()
+    var songModel = [FavoritesSong]()
     var songOrder = [Int]()
     var songTitles = [String]()
     var databaseHelper = DatabaseHelper()
@@ -117,8 +117,8 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         var newSongOrder = [FavoritesSongsWithOrder]()
         for i in 0..<tableView.numberOfRows(inSection: 0) {
             let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! TitleTableViewCell
-            let song = cell.title.text!
-            let favSong = FavoritesSongsWithOrder(orderNo: i, songName: song, songListName: "favorite")
+            let id = cell.id.text
+            let favSong = FavoritesSongsWithOrder(orderNo: i, songId: id!, songListName: "favorite")
             newSongOrder.append(favSong)
         }
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: newSongOrder)
@@ -172,26 +172,30 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
-        cell.title.text = songModel[(indexPath as NSIndexPath).row].songName
-        cell.playImage.isHidden = true
+        cell.title.text = songModel[(indexPath as NSIndexPath).row].songs.title
+        cell.id.text = songModel[(indexPath as NSIndexPath).row].songs.id
+        if songModel[(indexPath as NSIndexPath).row].songs.comment != nil && songModel[(indexPath as NSIndexPath).row].songs.comment.contains("youtube") {
+            cell.playImage.isHidden = false
+        } else {
+            cell.playImage.isHidden = true
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         verseList = NSArray()
-        let songNames = [songModel[(indexPath as NSIndexPath).row].songName]
-        var songs = databaseHelper.getSongsModelTitles(songNames)
+        let songs = songModel[(indexPath as NSIndexPath).row].songs
         
-        songLyrics = songs[0].lyrics as NSString
-        songName = songs[0].title
-        authorName = databaseHelper.getArtistName(songs[0].id)
-        let verseOrder = songs[0].verse_order
+        songLyrics = songs.lyrics as NSString
+        songName = songs.title
+        authorName = databaseHelper.getArtistName(songs.id)
+        let verseOrder = songs.verse_order
         if !verseOrder.isEmpty {
             verseList = splitVerseOrder(verseOrder)
         }
-        if songs[0].comment != nil {
-            comment = songs[0].comment
+        if songs.comment != nil {
+            comment = songs.comment
         } else {
             comment = ""
         }
@@ -244,7 +248,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
             var newSongOrder = [FavoritesSongsWithOrder]()
             for i in 0..<self.tableView.numberOfRows(inSection: 0) {
                 if i != indexPath.row {
-                    let favSong = FavoritesSongsWithOrder(orderNo: i, songName: self.songModel[i].songName, songListName: self.songModel[i].songListName)
+                    let favSong = FavoritesSongsWithOrder(orderNo: i, songId: self.songModel[i].songs.id, songListName: self.songModel[i].favoritesSongsWithOrder.songListName)
                     newSongOrder.append(favSong)
                 }
             }
@@ -264,11 +268,18 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     func refresh(_ sender:AnyObject)
     {
         if self.preferences.data(forKey: "favorite") != nil {
-           // songTitles = self.preferences.array(forKey: "favorite") as! [String]
             let decoded  = self.preferences.object(forKey: "favorite") as! Data
-            songModel = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
+            let favoritesSongsWithOrders = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
+            var favoritesSongs = [FavoritesSong]()
+            for favoritesSongsWithOrder in favoritesSongsWithOrders {
+                let songs = databaseHelper.getSongsModelByIds([favoritesSongsWithOrder.songId])
+                if songs.count > 0 {
+                   favoritesSongs.append(FavoritesSong(songs: songs[0], favoritesSongsWithOrder: favoritesSongsWithOrder))
+                }
+            }
+            songModel = favoritesSongs
             songModel.sort(by: { (fav1, fav2) -> Bool in
-                fav1.orderNo < fav2.orderNo
+                fav1.favoritesSongsWithOrder.orderNo < fav2.favoritesSongsWithOrder.orderNo
             })
         }
         self.tableView.reloadData()
@@ -283,9 +294,9 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     func filterContentForSearchText(_ searchBar: UISearchBar) {
         // Filter the array using the filter method
         let searchText = searchBar.text
-        var data = [(FavoritesSongsWithOrder)]()
-        data = self.songModel.filter({( song: FavoritesSongsWithOrder) -> Bool in
-            let stringMatch = (song.songName as NSString).localizedCaseInsensitiveContains(searchText!)
+        var data = [(FavoritesSong)]()
+        data = self.songModel.filter({( song: FavoritesSong) -> Bool in
+            let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!)
             return (stringMatch)
             
         })

@@ -82,7 +82,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
                     favSongOrderNumber = (favSongs.last?.orderNo)! + 1
                 }
             }
-            let favSong = FavoritesSongsWithOrder(orderNo: favSongOrderNumber, songName: song.title, songListName: "favorite")
+            let favSong = FavoritesSongsWithOrder(orderNo: favSongOrderNumber, songId: song.id, songListName: "favorite")
             favSongs.append(favSong)
             let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favSongs)
             self.preferences.set(encodedData, forKey: "favorite")
