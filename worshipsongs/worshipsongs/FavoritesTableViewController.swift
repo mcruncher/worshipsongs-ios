@@ -10,7 +10,8 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
 
-    var songModel = [Songs]()
+    var songModel = [FavoritesSongsWithOrder]()
+    var songOrder = [Int]()
     var songTitles = [String]()
     var databaseHelper = DatabaseHelper()
     var refresh = UIRefreshControl()
@@ -28,6 +29,101 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         self.tableView.tableFooterView = getTableFooterView()
         updateModel()
+        let longpress = UILongPressGestureRecognizer(target: self, action: #selector(FavoritesTableViewController.longPressGestureRecognized))
+        tableView.addGestureRecognizer(longpress)
+    }
+    
+    func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
+        let longPress = gestureRecognizer as! UILongPressGestureRecognizer
+        let state = longPress.state
+        let locationInView = longPress.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: locationInView)
+        
+        struct My {
+            static var cellSnapshot : UIView? = nil
+        }
+        struct Path {
+            static var initialIndexPath : NSIndexPath? = nil
+        }
+        switch state {
+        case UIGestureRecognizerState.began:
+            if indexPath != nil {
+                Path.initialIndexPath = indexPath as NSIndexPath?
+                let cell = tableView.cellForRow(at: indexPath!) as UITableViewCell!
+                My.cellSnapshot  = snapshopOfCell(inputView: cell!)
+                var center = cell?.center
+                My.cellSnapshot!.center = center!
+                My.cellSnapshot!.alpha = 0.0
+                tableView.addSubview(My.cellSnapshot!)
+                
+                UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                    center?.y = locationInView.y
+                    My.cellSnapshot!.center = center!
+                    My.cellSnapshot!.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+                    My.cellSnapshot!.alpha = 0.98
+                    cell?.alpha = 0.0
+                    
+                }, completion: { (finished) -> Void in
+                    if finished {
+                        cell?.isHidden = true
+                    }
+                })
+            }
+            
+        case UIGestureRecognizerState.changed:
+            var center = My.cellSnapshot!.center
+            center.y = locationInView.y
+            My.cellSnapshot!.center = center
+            if ((indexPath != nil) && (indexPath != Path.initialIndexPath as? IndexPath)) {
+                tableView.moveRow(at: Path.initialIndexPath! as IndexPath, to: indexPath!)
+                Path.initialIndexPath = indexPath as NSIndexPath?
+            }
+            
+        default:
+            let cell = tableView.cellForRow(at: Path.initialIndexPath! as IndexPath) as UITableViewCell!
+            cell?.isHidden = false
+            cell?.alpha = 0.0
+            UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                My.cellSnapshot!.center = (cell?.center)!
+                My.cellSnapshot!.transform = CGAffineTransform.identity
+                My.cellSnapshot!.alpha = 0.0
+                cell?.alpha = 1.0
+            }, completion: { (finished) -> Void in
+                if finished {
+                    Path.initialIndexPath = nil
+                    My.cellSnapshot!.removeFromSuperview()
+                    My.cellSnapshot = nil
+                }
+            })
+            updateSongOrder()
+        }
+    }
+    
+    func snapshopOfCell(inputView: UIView) -> UIView {
+        UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0.0)
+        inputView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()! as UIImage
+        UIGraphicsEndImageContext()
+        let cellSnapshot : UIView = UIImageView(image: image)
+        cellSnapshot.layer.masksToBounds = false
+        cellSnapshot.layer.cornerRadius = 0.0
+        cellSnapshot.layer.shadowOffset = CGSize(width: -5.0, height: 0.0)
+        cellSnapshot.layer.shadowRadius = 5.0
+        cellSnapshot.layer.shadowOpacity = 0.4
+        return cellSnapshot
+    }
+    
+    func updateSongOrder() {
+        var newSongOrder = [FavoritesSongsWithOrder]()
+        for i in 0..<tableView.numberOfRows(inSection: 0) {
+            let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! TitleTableViewCell
+            let song = cell.title.text!
+            let favSong = FavoritesSongsWithOrder(orderNo: i, songName: song, songListName: "favorite")
+            newSongOrder.append(favSong)
+        }
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: newSongOrder)
+        self.preferences.set(encodedData, forKey: "favorite")
+        self.preferences.synchronize()
     }
     
     func getTableFooterView() -> UIView {
@@ -76,27 +172,26 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
-        cell.title.text = songModel[(indexPath as NSIndexPath).row].title
-        if songModel[(indexPath as NSIndexPath).row].comment != nil && songModel[(indexPath as NSIndexPath).row].comment.contains("youtube") {
-            cell.playImage.isHidden = false
-        } else {
-            cell.playImage.isHidden = true
-        }
+        cell.title.text = songModel[(indexPath as NSIndexPath).row].songName
+        cell.playImage.isHidden = true
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         verseList = NSArray()
-        songLyrics = songModel[(indexPath as NSIndexPath).row].lyrics as NSString
-        songName = songModel[(indexPath as NSIndexPath).row].title
-        authorName = databaseHelper.getArtistName(songModel[(indexPath as NSIndexPath).row].id)
-        let verseOrder = songModel[(indexPath as NSIndexPath).row].verse_order
+        let songNames = [songModel[(indexPath as NSIndexPath).row].songName]
+        var songs = databaseHelper.getSongsModelTitles(songNames)
+        
+        songLyrics = songs[0].lyrics as NSString
+        songName = songs[0].title
+        authorName = databaseHelper.getArtistName(songs[0].id)
+        let verseOrder = songs[0].verse_order
         if !verseOrder.isEmpty {
             verseList = splitVerseOrder(verseOrder)
         }
-        if songModel[(indexPath as NSIndexPath).row].comment != nil {
-            comment = songModel[(indexPath as NSIndexPath).row].comment
+        if songs[0].comment != nil {
+            comment = songs[0].comment
         } else {
             comment = ""
         }
@@ -146,10 +241,15 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     fileprivate func getDeleteAction(_ indexPath: IndexPath) -> UIAlertAction {
         return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
-            var favSong = self.preferences.array(forKey: "favorite") as! [String]
-            let index = favSong.index(of: self.songModel[(indexPath as NSIndexPath).row].title)
-            favSong.remove(at: index!)
-            self.preferences.setValue(favSong, forKey: "favorite")
+            var newSongOrder = [FavoritesSongsWithOrder]()
+            for i in 0..<self.tableView.numberOfRows(inSection: 0) {
+                if i != indexPath.row {
+                    let favSong = FavoritesSongsWithOrder(orderNo: i, songName: self.songModel[i].songName, songListName: self.songModel[i].songListName)
+                    newSongOrder.append(favSong)
+                }
+            }
+            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: newSongOrder)
+            self.preferences.set(encodedData, forKey: "favorite")
             self.preferences.synchronize()
             self.refresh(self)
         })
@@ -161,13 +261,15 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         })
     }
 
-    
-    
     func refresh(_ sender:AnyObject)
     {
-        if self.preferences.array(forKey: "favorite") != nil {
-            songTitles = self.preferences.array(forKey: "favorite") as! [String]
-            songModel = databaseHelper.getSongsModelTitles(songTitles)
+        if self.preferences.data(forKey: "favorite") != nil {
+           // songTitles = self.preferences.array(forKey: "favorite") as! [String]
+            let decoded  = self.preferences.object(forKey: "favorite") as! Data
+            songModel = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
+            songModel.sort(by: { (fav1, fav2) -> Bool in
+                fav1.orderNo < fav2.orderNo
+            })
         }
         self.tableView.reloadData()
         self.refresh.endRefreshing()
@@ -181,9 +283,9 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     func filterContentForSearchText(_ searchBar: UISearchBar) {
         // Filter the array using the filter method
         let searchText = searchBar.text
-        var data = [(Songs)]()
-        data = self.songModel.filter({( song: Songs) -> Bool in
-            let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!)
+        var data = [(FavoritesSongsWithOrder)]()
+        data = self.songModel.filter({( song: FavoritesSongsWithOrder) -> Bool in
+            let stringMatch = (song.songName as NSString).localizedCaseInsensitiveContains(searchText!)
             return (stringMatch)
             
         })

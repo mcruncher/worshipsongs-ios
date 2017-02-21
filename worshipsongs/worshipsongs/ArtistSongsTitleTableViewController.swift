@@ -73,12 +73,19 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction {
         return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
             let song = self.filteredSongModel[indexPath.row]
-            var favSong = [String]()
-            if self.preferences.array(forKey: "favorite") != nil {
-                favSong = self.preferences.array(forKey: "favorite") as! [String]
+            var favSongs = [FavoritesSongsWithOrder]()
+            var favSongOrderNumber = 0
+            if self.preferences.data(forKey: "favorite") != nil {
+                let decoded  = self.preferences.object(forKey: "favorite") as! Data
+                favSongs = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
+                if favSongs.count > 0 {
+                    favSongOrderNumber = (favSongs.last?.orderNo)! + 1
+                }
             }
-            favSong.append(song.title)
-            self.preferences.setValue(favSong, forKey: "favorite")
+            let favSong = FavoritesSongsWithOrder(orderNo: favSongOrderNumber, songName: song.title, songListName: "favorite")
+            favSongs.append(favSong)
+            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favSongs)
+            self.preferences.set(encodedData, forKey: "favorite")
             self.preferences.synchronize()
         })
     }
