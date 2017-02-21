@@ -33,3 +33,6 @@
 "playSong" = "Play song";
 "presentSong" = "Present song";
 "back" = "Back";
+"message.playSong" = "Couldn't play video. Make sure your device has an internet connection and try again";
+"message.presentSong" = "No screen detected";
+"ok" = "OK";

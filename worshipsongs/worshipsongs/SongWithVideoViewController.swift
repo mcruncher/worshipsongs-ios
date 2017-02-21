@@ -9,6 +9,7 @@
 import UIKit
 import YouTubePlayer
 import KCFloatingActionButton
+import SystemConfiguration
 
 class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, XMLParserDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -38,6 +39,7 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     var comment: String = ""
     fileprivate let preferences = UserDefaults.standard
     var play = false
+    var noInternet = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +79,18 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         let playItem = getKCFloatingActionButtonItem(title: "playSong".localized, icon: UIImage(named: "play")!)
         playItem.handler = { item in
             self.floatingbutton.close()
-            self.setAction()
+            if self.isInternetAvailable() {
+                if self.noInternet {
+                    self.loadYoutube(url: self.parseSongUrl())
+                    self.noInternet = false
+                }
+                self.setAction()
+            } else {
+                self.noInternet = true
+                let alertController = self.getAlertController(message: "message.playSong".localized)
+                alertController.addAction(self.getCancelAction())
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
         floatingbutton.addItem(item: playItem)
         let presentationItem = getKCFloatingActionButtonItem(title: "presentSong".localized, icon: UIImage(named: "presentation")!)
@@ -91,6 +104,40 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         floatingbutton.plusColor = UIColor.white
         floatingbutton.size = 50
         self.view.addSubview(floatingbutton)
+    }
+    
+    func isInternetAvailable() -> Bool {
+        
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress, {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                SCNetworkReachabilityCreateWithAddress(nil, $0)
+            }
+        }) else {
+            return false
+        }
+        
+        var flags: SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+            return false
+        }
+        
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        
+        return (isReachable && !needsConnection)
+    }
+    
+    fileprivate func getAlertController(message: String) -> UIAlertController {
+        return UIAlertController(title: message, message: "", preferredStyle: UIAlertControllerStyle.alert)
+    }
+    
+    fileprivate func getCancelAction() -> UIAlertAction {
+        return UIAlertAction(title: "ok".localized, style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
+        })
     }
     
     func getKCFloatingActionButtonItem(title: String, icon: UIImage) -> KCFloatingActionButtonItem {
@@ -173,6 +220,7 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
                              "autoplay" : 1 as AnyObject]
         let myVideoURL = URL(string: url)
         player.loadVideoURL(myVideoURL!)
+        
     }
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
@@ -198,7 +246,13 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func presentation() {
-        performSegue(withIdentifier: "presentation", sender: self)
+        if UIScreen.screens.count > 1 {
+            performSegue(withIdentifier: "presentation", sender: self)
+        } else {
+            let alertController = self.getAlertController(message: "message.presentSong".localized)
+            alertController.addAction(self.getCancelAction())
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func setAction() {

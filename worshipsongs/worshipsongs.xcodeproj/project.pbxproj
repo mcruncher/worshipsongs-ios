@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */; };
 		2F0A70F91E1B432D0025F156 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0A70F81E1B432D0025F156 /* TitleTableViewCell.swift */; };
+		2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */; };
+		2F1F2A0B1E5C09290046EFDA /* FavoritesSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F2A0A1E5C09290046EFDA /* FavoritesSong.swift */; };
 		2F4FAAA61DF6A14600B3C945 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
 		2F56417D1BCB3A9700064269 /* SongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */; };
 		2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */; };
@@ -64,6 +66,8 @@
 		2F0A70F81E1B432D0025F156 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		2F0BCA091D9D0E0000B8C16B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		2F0BCA0B1D9D114B00B8C16B /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = "../../../../Library/Developer/Xcode/DerivedData/worshipsongs-glciooqfhxjknigyiwgebruvadtn/Build/Products/Debug-iphonesimulator/FMDB/FMDB.framework"; sourceTree = "<group>"; };
+		2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesSongsWithOrder.swift; sourceTree = "<group>"; };
+		2F1F2A0A1E5C09290046EFDA /* FavoritesSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesSong.swift; sourceTree = "<group>"; };
 		2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsTableViewController.swift; sourceTree = "<group>"; };
 		2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsTabBarViewController.swift; sourceTree = "<group>"; };
 		2F5D3D1A1BC788F8001C4B6F /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,6 +272,8 @@
 			children = (
 				2F5D3D551BC78D51001C4B6F /* Songs.swift */,
 				2FD589941C1660A300668951 /* Author.swift */,
+				2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */,
+				2F1F2A0A1E5C09290046EFDA /* FavoritesSong.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -513,6 +519,7 @@
 				2F4FAAA61DF6A14600B3C945 /* StringUtils.swift in Sources */,
 				2FE250301E43134E007BA85D /* PresentationData.swift in Sources */,
 				2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */,
+				2F1F2A0B1E5C09290046EFDA /* FavoritesSong.swift in Sources */,
 				2FF0BE861E0CD218004E2127 /* SongWithVideoViewController.swift in Sources */,
 				2FE840F01DDBEAA1002B3379 /* DatabaseHelper.swift in Sources */,
 				2F56417D1BCB3A9700064269 /* SongsTableViewController.swift in Sources */,
@@ -522,6 +529,7 @@
 				2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */,
 				2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */,
 				2FD5899A1C167CD300668951 /* TitlesTableViewController.swift in Sources */,
+				2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */,
 				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
 				2FD589951C1660A300668951 /* Author.swift in Sources */,
 				2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */,
