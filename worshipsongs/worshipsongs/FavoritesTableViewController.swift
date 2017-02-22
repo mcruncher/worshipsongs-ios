@@ -19,6 +19,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     var songLyrics: NSString = NSString()
     var songName: String = ""
     var comment = ""
+    var hideDragAndDrop = false
     fileprivate let preferences = UserDefaults.standard
     var searchBar: UISearchBar!
     var authorName = ""
@@ -34,7 +35,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
-        if (self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled)! {
+        if (self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled)! && !hideDragAndDrop {
             let longPress = gestureRecognizer as! UILongPressGestureRecognizer
             let state = longPress.state
             let locationInView = longPress.location(in: tableView)
@@ -247,11 +248,13 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     fileprivate func getDeleteAction(_ indexPath: IndexPath) -> UIAlertAction {
         return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
+            let decoded  = self.preferences.object(forKey: "favorite") as! Data
             var newSongOrder = [FavoritesSongsWithOrder]()
-            for i in 0..<self.tableView.numberOfRows(inSection: 0) {
-                if i != indexPath.row {
-                    let favSong = FavoritesSongsWithOrder(orderNo: i, songId: self.songModel[i].songs.id, songListName: self.songModel[i].favoritesSongsWithOrder.songListName)
-                    newSongOrder.append(favSong)
+            let favoritesSongsWithOrders = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
+            let cell = self.tableView.cellForRow(at: indexPath) as! TitleTableViewCell
+            for favoritesSongsWithOrder in favoritesSongsWithOrders {
+                if favoritesSongsWithOrder.songId != cell.id.text {
+                    newSongOrder.append(favoritesSongsWithOrder)
                 }
             }
             let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: newSongOrder)
@@ -286,6 +289,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         }
         self.tableView.reloadData()
         self.refresh.endRefreshing()
+        hideDragAndDrop = false
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -309,6 +313,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     {
         hideSearchBar()
         tableView.reloadData()
+        hideDragAndDrop = true
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
