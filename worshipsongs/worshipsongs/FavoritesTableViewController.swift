@@ -34,68 +34,70 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
-        let longPress = gestureRecognizer as! UILongPressGestureRecognizer
-        let state = longPress.state
-        let locationInView = longPress.location(in: tableView)
-        let indexPath = tableView.indexPathForRow(at: locationInView)
+        if (self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled)! {
+            let longPress = gestureRecognizer as! UILongPressGestureRecognizer
+            let state = longPress.state
+            let locationInView = longPress.location(in: tableView)
+            let indexPath = tableView.indexPathForRow(at: locationInView)
         
-        struct My {
-            static var cellSnapshot : UIView? = nil
-        }
-        struct Path {
-            static var initialIndexPath : NSIndexPath? = nil
-        }
-        switch state {
-        case UIGestureRecognizerState.began:
-            if indexPath != nil {
-                Path.initialIndexPath = indexPath as NSIndexPath?
-                let cell = tableView.cellForRow(at: indexPath!) as UITableViewCell!
-                My.cellSnapshot  = snapshopOfCell(inputView: cell!)
-                var center = cell?.center
-                My.cellSnapshot!.center = center!
-                My.cellSnapshot!.alpha = 0.0
-                tableView.addSubview(My.cellSnapshot!)
-                
-                UIView.animate(withDuration: 0.25, animations: { () -> Void in
-                    center?.y = locationInView.y
+            struct My {
+                static var cellSnapshot : UIView? = nil
+            }
+            struct Path {
+                static var initialIndexPath : NSIndexPath? = nil
+            }
+            switch state {
+            case UIGestureRecognizerState.began:
+                if indexPath != nil {
+                    Path.initialIndexPath = indexPath as NSIndexPath?
+                    let cell = tableView.cellForRow(at: indexPath!) as UITableViewCell!
+                    My.cellSnapshot  = snapshopOfCell(inputView: cell!)
+                    var center = cell?.center
                     My.cellSnapshot!.center = center!
-                    My.cellSnapshot!.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-                    My.cellSnapshot!.alpha = 0.98
-                    cell?.alpha = 0.0
+                    My.cellSnapshot!.alpha = 0.0
+                    tableView.addSubview(My.cellSnapshot!)
+                
+                    UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                        center?.y = locationInView.y
+                        My.cellSnapshot!.center = center!
+                        My.cellSnapshot!.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+                        My.cellSnapshot!.alpha = 0.98
+                        cell?.alpha = 0.0
                     
+                    }, completion: { (finished) -> Void in
+                        if finished {
+                            cell?.isHidden = true
+                        }
+                    })
+                }
+            
+            case UIGestureRecognizerState.changed:
+                var center = My.cellSnapshot!.center
+                center.y = locationInView.y
+                My.cellSnapshot!.center = center
+                if ((indexPath != nil) && (indexPath != Path.initialIndexPath as? IndexPath)) {
+                    tableView.moveRow(at: Path.initialIndexPath! as IndexPath, to: indexPath!)
+                    Path.initialIndexPath = indexPath as NSIndexPath?
+                }
+            
+            default:
+                let cell = tableView.cellForRow(at: Path.initialIndexPath! as IndexPath) as UITableViewCell!
+                cell?.isHidden = false
+                cell?.alpha = 0.0
+                UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                    My.cellSnapshot!.center = (cell?.center)!
+                    My.cellSnapshot!.transform = CGAffineTransform.identity
+                    My.cellSnapshot!.alpha = 0.0
+                    cell?.alpha = 1.0
                 }, completion: { (finished) -> Void in
                     if finished {
-                        cell?.isHidden = true
+                        Path.initialIndexPath = nil
+                        My.cellSnapshot!.removeFromSuperview()
+                        My.cellSnapshot = nil
                     }
                 })
+                updateSongOrder()
             }
-            
-        case UIGestureRecognizerState.changed:
-            var center = My.cellSnapshot!.center
-            center.y = locationInView.y
-            My.cellSnapshot!.center = center
-            if ((indexPath != nil) && (indexPath != Path.initialIndexPath as? IndexPath)) {
-                tableView.moveRow(at: Path.initialIndexPath! as IndexPath, to: indexPath!)
-                Path.initialIndexPath = indexPath as NSIndexPath?
-            }
-            
-        default:
-            let cell = tableView.cellForRow(at: Path.initialIndexPath! as IndexPath) as UITableViewCell!
-            cell?.isHidden = false
-            cell?.alpha = 0.0
-            UIView.animate(withDuration: 0.25, animations: { () -> Void in
-                My.cellSnapshot!.center = (cell?.center)!
-                My.cellSnapshot!.transform = CGAffineTransform.identity
-                My.cellSnapshot!.alpha = 0.0
-                cell?.alpha = 1.0
-            }, completion: { (finished) -> Void in
-                if finished {
-                    Path.initialIndexPath = nil
-                    My.cellSnapshot!.removeFromSuperview()
-                    My.cellSnapshot = nil
-                }
-            })
-            updateSongOrder()
         }
     }
     
