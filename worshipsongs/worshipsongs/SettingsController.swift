@@ -13,13 +13,22 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
     @IBOutlet weak var fontSizeSlider: UISlider!
     @IBOutlet weak var presentationFontSlider: UISlider!
     @IBOutlet weak var tamilFontColor: UITextField!
+    @IBOutlet weak var presentationTamilFontColor: UITextField!
     @IBOutlet weak var englishFontColor: UITextField!
+    @IBOutlet weak var presentationEnglishFontColor: UITextField!
+    @IBOutlet weak var presentationBackgroundColor: UITextField!
     fileprivate let preferences = UserDefaults.standard
     fileprivate let ColorList = ColorUtils.Color.allValues
     var englishFont: String = ""
     var tamilFont: String = ""
+    var presentationEnglishFont: String = ""
+    var presentationTamilFont: String = ""
+    var presentationBackground: String = ""
     fileprivate let tamilFontColorPickerView = UIPickerView()
     fileprivate let englishFontColorPickerView = UIPickerView()
+    fileprivate let presentationBackgroundColorPickerView = UIPickerView()
+    fileprivate let presentationTamilFontColorPickerView = UIPickerView()
+    fileprivate let presentationEnglishFontColorPickerView = UIPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +50,27 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
         englishFontColorPickerView.delegate = self
         englishFontColor.inputView = englishFontColorPickerView
         englishFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: englishFont)!)!, inComponent: 0, animated: true)
+        presentationTamilFont = self.preferences.string(forKey: "presentationTamilFontColor")!
+        presentationTamilFontColor.text = presentationTamilFont.localized
+        presentationTamilFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationTamilFont)!)
+        presentationTamilFontColorPickerView.tag = 3
+        presentationTamilFontColorPickerView.delegate = self
+        presentationTamilFontColor.inputView = presentationTamilFontColorPickerView
+        presentationTamilFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: presentationTamilFont)!)!, inComponent: 0, animated: true)
+        presentationEnglishFont = self.preferences.string(forKey: "presentationEnglishFontColor")!
+        presentationEnglishFontColor.text = presentationEnglishFont.localized
+        presentationEnglishFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationEnglishFont)!)
+        presentationEnglishFontColorPickerView.tag = 4
+        presentationEnglishFontColorPickerView.delegate = self
+        presentationEnglishFontColor.inputView = presentationEnglishFontColorPickerView
+        presentationEnglishFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: presentationEnglishFont)!)!, inComponent: 0, animated: true)
+        presentationBackground = self.preferences.string(forKey: "presentationBackgroundColor")!
+        presentationBackgroundColor.text = presentationBackground.localized
+        presentationBackgroundColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationBackground)!)
+        presentationBackgroundColorPickerView.tag = 5
+        presentationBackgroundColorPickerView.delegate = self
+        presentationBackgroundColor.inputView = presentationBackgroundColorPickerView
+        presentationBackgroundColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: presentationBackground)!)!, inComponent: 0, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,7 +82,7 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
     
     @IBAction func onChangeSize(_ sender: Any) {
@@ -94,11 +124,29 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
             tamilFontColor.textColor = ColorUtils.getColor(color: ColorList[row])
             self.preferences.setValue(tamilFont, forKey: "tamilFontColor")
             self.preferences.synchronize()
-        } else {
+        } else if pickerView.tag == 2 {
             englishFont = ColorList[row].rawValue
             englishFontColor.text = englishFont.localized
             englishFontColor.textColor = ColorUtils.getColor(color: ColorList[row])
             self.preferences.setValue(englishFont, forKey: "englishFontColor")
+            self.preferences.synchronize()
+        } else if pickerView.tag == 3 {
+            presentationTamilFont = ColorList[row].rawValue
+            presentationTamilFontColor.text = presentationTamilFont.localized
+            presentationTamilFontColor.textColor = ColorUtils.getColor(color: ColorList[row])
+            self.preferences.setValue(presentationTamilFont, forKey: "presentationTamilFontColor")
+            self.preferences.synchronize()
+        } else if pickerView.tag == 4 {
+            presentationEnglishFont = ColorList[row].rawValue
+            presentationEnglishFontColor.text = presentationEnglishFont.localized
+            presentationEnglishFontColor.textColor = ColorUtils.getColor(color: ColorList[row])
+            self.preferences.setValue(presentationEnglishFont, forKey: "presentationEnglishFontColor")
+            self.preferences.synchronize()
+        } else {
+            presentationBackground = ColorList[row].rawValue
+            presentationBackgroundColor.text = presentationBackground.localized
+            presentationBackgroundColor.textColor = ColorUtils.getColor(color: ColorList[row])
+            self.preferences.setValue(presentationBackground, forKey: "presentationBackgroundColor")
             self.preferences.synchronize()
         }
     }

@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.synchronize()
         }
         if !preferences.dictionaryRepresentation().keys.contains("presentationFontSize") {
-            self.preferences.setValue(30, forKey: "presentationFontSize")
+            self.preferences.setValue(40, forKey: "presentationFontSize")
             self.preferences.synchronize()
         }
         if !preferences.dictionaryRepresentation().keys.contains("tamilFontColor") {
@@ -69,6 +69,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         if !preferences.dictionaryRepresentation().keys.contains("englishFontColor") {
             self.preferences.setValue(ColorUtils.Color.darkGray.rawValue, forKey: "englishFontColor")
+            self.preferences.synchronize()
+        }
+        if !preferences.dictionaryRepresentation().keys.contains("presentationTamilFontColor") {
+            self.preferences.setValue(ColorUtils.Color.red.rawValue, forKey: "presentationTamilFontColor")
+            self.preferences.synchronize()
+        }
+        if !preferences.dictionaryRepresentation().keys.contains("presentationEnglishFontColor") {
+            self.preferences.setValue(ColorUtils.Color.white.rawValue, forKey: "presentationEnglishFontColor")
+            self.preferences.synchronize()
+        }
+        if !preferences.dictionaryRepresentation().keys.contains("presentationBackgroundColor") {
+            self.preferences.setValue(ColorUtils.Color.black.rawValue, forKey: "presentationBackgroundColor")
             self.preferences.synchronize()
         }
         if preferences.dictionaryRepresentation().keys.contains("presentationLyrics") {
