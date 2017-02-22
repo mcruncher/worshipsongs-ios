@@ -26,11 +26,6 @@ class PresentationView: UIView {
         UINib(nibName: "PresentationView", bundle: nil).instantiate(withOwner: self, options: nil)
         addSubview(view)
         view.frame = self.frame
-        let fontSize = self.preferences.integer(forKey: "presentationFontSize")
-        songLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
-        slideNumberLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
-        songNameLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
-        authorLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
     }
     
     override init(frame: CGRect) {

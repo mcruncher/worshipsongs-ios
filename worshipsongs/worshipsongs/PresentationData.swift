@@ -29,13 +29,23 @@ class PresentationData {
             secondScreenView.frame = (secondWindow!.frame)
             secondWindow?.addSubview(secondScreenView)
             secondWindow?.isHidden = false
-            secondScreenView.backgroundColor = UIColor.white
+            let presentationBackgroundColor = self.preferences.string(forKey: "presentationBackgroundColor")
+            secondScreenView.view.backgroundColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationBackgroundColor!)!)
+            let fontSize = self.preferences.integer(forKey: "presentationFontSize")
+            let fontColor = self.preferences.string(forKey: "presentationEnglishFontColor")!
+            secondScreenView.songLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+            secondScreenView.slideNumberLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
+            secondScreenView.slideNumberLabel.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: fontColor)!)
+            secondScreenView.songNameLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
+            secondScreenView.songNameLabel.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: fontColor)!)
+            secondScreenView.authorLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
+            secondScreenView.authorLabel.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: fontColor)!)
             if isPresentationStringNotEmpty() {
                 secondScreenView.songLabel.numberOfLines = 0
                 secondScreenView.songLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
                 let presentationText = self.preferences.string(forKey: "presentationLyrics")
                 let customTextSettingService: CustomTextSettingService = CustomTextSettingService()
-                secondScreenView.songLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!))
+                secondScreenView.songLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!), secondScreen: true)
                 secondScreenView.authorLabel.text = "artist".localized + ": " + self.preferences.string(forKey: "presentationAuthor")!
                 secondScreenView.slideNumberLabel.text = self.preferences.string(forKey: "presentationSlide")
                 secondScreenView.songNameLabel.text = self.preferences.string(forKey: "presentationSongName")
@@ -57,7 +67,7 @@ class PresentationData {
         secondScreenView.songLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         let presentationText = self.preferences.string(forKey: "presentationLyrics")
         let customTextSettingService: CustomTextSettingService = CustomTextSettingService()
-        secondScreenView.songLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!))
+        secondScreenView.songLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!), secondScreen: true)
         secondScreenView.authorLabel.text = "artist".localized + ": " + self.preferences.string(forKey: "presentationAuthor")!
         secondScreenView.slideNumberLabel.text = self.preferences.string(forKey: "presentationSlide")
         secondScreenView.songNameLabel.text = self.preferences.string(forKey: "presentationSongName")

@@ -18,9 +18,13 @@ class CustomTextSettingService {
     let startPattern = "\\{\\w\\}"
     let endPattern = "\\{/\\w\\}"
     fileprivate let preferences = UserDefaults.standard
-
     
     func getAttributedString(_ cellText : NSString) -> NSMutableAttributedString {
+        return getAttributedString(cellText, secondScreen: false)
+    }
+
+    
+    func getAttributedString(_ cellText : NSString, secondScreen: Bool) -> NSMutableAttributedString {
         print("cell Text \(cellText)")
         let customTagRangeArray = getCustomTagRanges(cellText)
         if(customTagRangeArray.count > 0)
@@ -35,13 +39,17 @@ class CustomTextSettingService {
         }
         let attributedString = NSMutableAttributedString(string: customCellText as String)
         let textRange = NSMakeRange(0, customCellText.length)
-        let englishFont = self.preferences.string(forKey: "englishFontColor")!
+        var englishFont = self.preferences.string(forKey: "englishFontColor")!
+        var tamilFont = self.preferences.string(forKey: "tamilFontColor")!
+        if secondScreen {
+            englishFont = self.preferences.string(forKey: "presentationEnglishFontColor")!
+            tamilFont = self.preferences.string(forKey: "presentationTamilFontColor")!
+        }
         attributedString.addAttribute(NSForegroundColorAttributeName, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: englishFont)!), range: textRange)
         
         for index in 0 ..< customTagTextRange.count {
             var rangeValue:NSRange
             rangeValue = (customTagTextRange.object(at: index) as AnyObject).rangeValue
-            let tamilFont = self.preferences.string(forKey: "tamilFontColor")!
             attributedString.addAttribute(NSForegroundColorAttributeName, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!), range: rangeValue)
         }
         print("attributed String \(attributedString)")
