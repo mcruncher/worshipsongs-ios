@@ -9,7 +9,11 @@
 /* Begin PBXBuildFile section */
 		2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */; };
 		2F0A70F91E1B432D0025F156 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0A70F81E1B432D0025F156 /* TitleTableViewCell.swift */; };
+		2F10441E1E63F5BC00DBDD54 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10441D1E63F5BC00DBDD54 /* DatabaseService.swift */; };
+		2F1044201E6422E200DBDD54 /* DatabaseLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10441F1E6422E200DBDD54 /* DatabaseLoadingViewController.swift */; };
 		2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */; };
+		2F19EAFE1E5FBE4D00B989D8 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */; };
+		2F19EB001E6005A000B989D8 /* RemoteUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F19EAFF1E6005A000B989D8 /* RemoteUrlViewController.swift */; };
 		2F1F2A0B1E5C09290046EFDA /* FavoritesSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F2A0A1E5C09290046EFDA /* FavoritesSong.swift */; };
 		2F4FAAA61DF6A14600B3C945 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
 		2F56417D1BCB3A9700064269 /* SongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */; };
@@ -66,7 +70,11 @@
 		2F0A70F81E1B432D0025F156 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		2F0BCA091D9D0E0000B8C16B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		2F0BCA0B1D9D114B00B8C16B /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = "../../../../Library/Developer/Xcode/DerivedData/worshipsongs-glciooqfhxjknigyiwgebruvadtn/Build/Products/Debug-iphonesimulator/FMDB/FMDB.framework"; sourceTree = "<group>"; };
+		2F10441D1E63F5BC00DBDD54 /* DatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		2F10441F1E6422E200DBDD54 /* DatabaseLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseLoadingViewController.swift; sourceTree = "<group>"; };
 		2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesSongsWithOrder.swift; sourceTree = "<group>"; };
+		2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		2F19EAFF1E6005A000B989D8 /* RemoteUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteUrlViewController.swift; sourceTree = "<group>"; };
 		2F1F2A0A1E5C09290046EFDA /* FavoritesSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesSong.swift; sourceTree = "<group>"; };
 		2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsTableViewController.swift; sourceTree = "<group>"; };
 		2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsTabBarViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +114,7 @@
 		2FE840F91DDC33CA002B3379 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		2FF0BE851E0CD218004E2127 /* SongWithVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongWithVideoViewController.swift; sourceTree = "<group>"; };
+		2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = worshipsongs.entitlements; sourceTree = "<group>"; };
 		3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		625E81741BD664D000BE80B8 /* XmlParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserService.swift; sourceTree = "<group>"; };
 		7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.debug.xcconfig"; sourceTree = "<group>"; };
@@ -184,6 +193,7 @@
 		2F5D3D1C1BC788F8001C4B6F /* worshipsongs */ = {
 			isa = PBXGroup;
 			children = (
+				2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */,
 				2F0A70F71E1B43020025F156 /* Component */,
 				2F5D3D5D1BC7A572001C4B6F /* vender */,
 				2F5D3D571BC78D85001C4B6F /* Library */,
@@ -255,6 +265,8 @@
 				2FF0BE851E0CD218004E2127 /* SongWithVideoViewController.swift */,
 				2FDE48521DF140BD00948236 /* SettingsController.swift */,
 				2FE636571E4190FF0092A696 /* PresentationViewController.swift */,
+				2F19EAFF1E6005A000B989D8 /* RemoteUrlViewController.swift */,
+				2F10441F1E6422E200DBDD54 /* DatabaseLoadingViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -295,6 +307,7 @@
 				625E81741BD664D000BE80B8 /* XmlParserService.swift */,
 				2FD78E4B1C103A5D00A171B7 /* CustomTextSettingService.swift */,
 				2FD78E4D1C103C1A00A171B7 /* RegexPatternMatcherService.swift */,
+				2F10441D1E63F5BC00DBDD54 /* DatabaseService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -312,6 +325,7 @@
 			children = (
 				2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */,
 				2FDE48541DF149DB00948236 /* ColorUtils.swift */,
+				2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -398,6 +412,11 @@
 						DevelopmentTeam = 7W474V4EGY;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					2F5D3D2F1BC788F8001C4B6F = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -523,6 +542,7 @@
 				2FF0BE861E0CD218004E2127 /* SongWithVideoViewController.swift in Sources */,
 				2FE840F01DDBEAA1002B3379 /* DatabaseHelper.swift in Sources */,
 				2F56417D1BCB3A9700064269 /* SongsTableViewController.swift in Sources */,
+				2F19EAFE1E5FBE4D00B989D8 /* Downloader.swift in Sources */,
 				2FDE48531DF140BD00948236 /* SettingsController.swift in Sources */,
 				2FE840EF1DDBE7FB002B3379 /* FavoritesTableViewController.swift in Sources */,
 				625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */,
@@ -532,14 +552,17 @@
 				2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */,
 				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
 				2FD589951C1660A300668951 /* Author.swift in Sources */,
+				2F1044201E6422E200DBDD54 /* DatabaseLoadingViewController.swift in Sources */,
 				2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */,
 				2FE636591E41DED80092A696 /* ColorUtils.swift in Sources */,
 				2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */,
 				2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */,
+				2F10441E1E63F5BC00DBDD54 /* DatabaseService.swift in Sources */,
 				2FE2502E1E42FD7A007BA85D /* PresentationView.swift in Sources */,
 				2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */,
 				2FE636581E4190FF0092A696 /* PresentationViewController.swift in Sources */,
 				2FD78E4C1C103A5D00A171B7 /* CustomTextSettingService.swift in Sources */,
+				2F19EB001E6005A000B989D8 /* RemoteUrlViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,6 +732,7 @@
 			baseConfigurationReference = 7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = worshipsongs/worshipsongs.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7W474V4EGY;
@@ -720,6 +744,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mcruncher.worshipsongs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -729,6 +755,7 @@
 			baseConfigurationReference = C527E03A25B5DD4563B2FAAC /* Pods-worshipsongs.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = worshipsongs/worshipsongs.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7W474V4EGY;

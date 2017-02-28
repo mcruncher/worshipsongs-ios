@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import Foundation
+import FileBrowser
 
-class SettingsController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class SettingsController: UITableViewController {
 
+    @IBOutlet weak var importDatabaseButton: UIButton!
+    @IBOutlet weak var importDatabaseCell: UITableViewCell!
     @IBOutlet weak var fontSizeSlider: UISlider!
     @IBOutlet weak var presentationFontSlider: UISlider!
     @IBOutlet weak var tamilFontColor: UITextField!
@@ -17,6 +21,20 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
     @IBOutlet weak var englishFontColor: UITextField!
     @IBOutlet weak var presentationEnglishFontColor: UITextField!
     @IBOutlet weak var presentationBackgroundColor: UITextField!
+    @IBOutlet weak var restoreDatabaseButton: UIButton!
+    @IBOutlet weak var restoreDatabaseCell: UITableViewCell!
+    
+    @IBOutlet weak var primaryTextSizeLabel: UILabel!
+    @IBOutlet weak var primaryTamilColorLabel: UILabel!
+    @IBOutlet weak var primaryEnglishColorLabel: UILabel!
+    @IBOutlet weak var presentationTextSizeLabel: UILabel!
+    
+    @IBOutlet weak var presentationTamilColorLabel: UILabel!
+    
+    @IBOutlet weak var presentationEnglishColorLabel: UILabel!
+    
+    @IBOutlet weak var presentationBackgroundColorLabel: UILabel!
+    
     fileprivate let preferences = UserDefaults.standard
     fileprivate let ColorList = ColorUtils.Color.allValues
     var englishFont: String = ""
@@ -29,13 +47,48 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
     fileprivate let presentationBackgroundColorPickerView = UIPickerView()
     fileprivate let presentationTamilFontColorPickerView = UIPickerView()
     fileprivate let presentationEnglishFontColorPickerView = UIPickerView()
+    fileprivate let databaseService = DatabaseService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(SettingsController.revertDatabase(_:)), name: NSNotification.Name(rawValue: "revertDatabase"), object: nil)
+        self.setUp()
+        self.setPrimaryScreenFontSize()
+        self.setPresentationScreenFontSize()
+        self.setPrimaryScreenTamilFontColor()
+        self.setPrimaryScreenEnglishFontColor()
+        self.setPresentationScreenTamilFontColor()
+        self.setPresentationScreenEnglishFontColor()
+        self.setPresentationScreenBackgroundColor()
+        let backButton = UIBarButtonItem(title: "back".localized, style: .plain, target: self, action: #selector(SettingsController.goBackToSongsList))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func setUp() {
+        importDatabaseButton.setTitle("import.database".localized, for: .normal)
+        restoreDatabaseButton.setTitle("restore.database".localized, for: .normal)
+        primaryTextSizeLabel.text = "text.size".localized
+        primaryTamilColorLabel.text = "tamil.font.color".localized
+        primaryEnglishColorLabel.text = "english.font.color".localized
+        
+        presentationTextSizeLabel.text = "text.size".localized
+        presentationTamilColorLabel.text = "tamil.font.color".localized
+        presentationEnglishColorLabel.text = "english.font.color".localized
+        presentationBackgroundColorLabel.text = "background.color".localized
+        self.restoreDatabaseCell.isHidden = self.preferences.bool(forKey: "defaultDatabase")
+    }
+    
+    func setPrimaryScreenFontSize() {
         let size = self.preferences.integer(forKey: "fontSize")
         fontSizeSlider.value = Float(size)
+    }
+    
+    func setPresentationScreenFontSize() {
         let presentationSize = self.preferences.integer(forKey: "presentationFontSize")
         presentationFontSlider.value = Float(presentationSize)
+    }
+    
+    func setPrimaryScreenTamilFontColor() {
         tamilFont = self.preferences.string(forKey: "tamilFontColor")!
         tamilFontColor.text = tamilFont.localized
         tamilFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!)
@@ -43,6 +96,9 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
         tamilFontColorPickerView.delegate = self
         tamilFontColor.inputView = tamilFontColorPickerView
         tamilFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: tamilFont)!)!, inComponent: 0, animated: true)
+    }
+    
+    func setPrimaryScreenEnglishFontColor() {
         englishFont = self.preferences.string(forKey: "englishFontColor")!
         englishFontColor.text = englishFont.localized
         englishFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: englishFont)!)
@@ -50,6 +106,9 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
         englishFontColorPickerView.delegate = self
         englishFontColor.inputView = englishFontColorPickerView
         englishFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: englishFont)!)!, inComponent: 0, animated: true)
+    }
+    
+    func setPresentationScreenTamilFontColor() {
         presentationTamilFont = self.preferences.string(forKey: "presentationTamilFontColor")!
         presentationTamilFontColor.text = presentationTamilFont.localized
         presentationTamilFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationTamilFont)!)
@@ -57,6 +116,9 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
         presentationTamilFontColorPickerView.delegate = self
         presentationTamilFontColor.inputView = presentationTamilFontColorPickerView
         presentationTamilFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: presentationTamilFont)!)!, inComponent: 0, animated: true)
+    }
+    
+    func setPresentationScreenEnglishFontColor() {
         presentationEnglishFont = self.preferences.string(forKey: "presentationEnglishFontColor")!
         presentationEnglishFontColor.text = presentationEnglishFont.localized
         presentationEnglishFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationEnglishFont)!)
@@ -64,6 +126,9 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
         presentationEnglishFontColorPickerView.delegate = self
         presentationEnglishFontColor.inputView = presentationEnglishFontColorPickerView
         presentationEnglishFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: presentationEnglishFont)!)!, inComponent: 0, animated: true)
+    }
+    
+    func setPresentationScreenBackgroundColor() {
         presentationBackground = self.preferences.string(forKey: "presentationBackgroundColor")!
         presentationBackgroundColor.text = presentationBackground.localized
         presentationBackgroundColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationBackground)!)
@@ -72,17 +137,48 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
         presentationBackgroundColor.inputView = presentationBackgroundColorPickerView
         presentationBackgroundColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: presentationBackground)!)!, inComponent: 0, animated: true)
     }
-
+    
+    
+    func goBackToSongsList() {
+        self.navigationController!.popToRootViewController(animated: true)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "database".localized
+        case 1:
+            return "primary.screen".localized
+        case 2:
+            return "presentation.screen".localized
+        default:
+            return ""
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        importDatabaseButton.isEnabled = !self.preferences.bool(forKey: "database.lock")
+        if section == 0 && self.preferences.bool(forKey: "defaultDatabase") {
+            return 1
+        }
+        return super.tableView(tableView, numberOfRowsInSection: section)
+    }
+    
+    func revertDatabase(_ nsNotification: NSNotification) {
+        databaseService.revertImport()
     }
     
     @IBAction func onChangeSize(_ sender: Any) {
@@ -90,10 +186,69 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
         self.preferences.synchronize()
     }
     
+    @IBAction func restoreDatabase(_ sender: Any) {
+        let alert = getAlertController("restore.database".localized, message: "message.restore.database".localized)
+        alert.addAction(getYesAction("yes".localized))
+        alert.addAction(getNoAction())
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    fileprivate func getAlertController(_ title: String, message: String) -> UIAlertController {
+        return UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+    }
+    
+    fileprivate func getYesAction(_ title: String) -> UIAlertAction {
+        return UIAlertAction(title: title, style: .default, handler: {(alert: UIAlertAction!) -> Void in
+            self.databaseService.restoreDatabase()
+            self.restoreDatabaseCell.isHidden = true
+            self.tableView.reloadData()
+        })
+    }
+    
+    fileprivate func getNoAction() -> UIAlertAction {
+        return UIAlertAction(title: "no".localized, style: .default, handler: nil)
+    }
+    
+    @IBAction func importDatabase(_ sender: Any) {
+        let optionMenu = UIAlertController(title: nil, message: "import.database".localized, preferredStyle: .actionSheet)
+        optionMenu.addAction(getDatabaseFromiCloudAction())
+        optionMenu.addAction(getDatabaseFromRemoteUrlAction())
+        optionMenu.addAction(getDatabaseCancelAction())
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
+    func getDatabaseFromiCloudAction() -> UIAlertAction  {
+        return UIAlertAction(title: "import.iCloud".localized, style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            let documentPickerController = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+            documentPickerController.delegate = self
+            self.present(documentPickerController, animated: true, completion: nil)
+        })
+    }
+    
+    func getDatabaseFromRemoteUrlAction() -> UIAlertAction  {
+        return UIAlertAction(title: "import.remoteURL".localized, style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.performSegue(withIdentifier: "remoteUrl", sender: self)
+        })
+    }
+    
+    fileprivate func getDatabaseCancelAction() -> UIAlertAction {
+        return UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+    }
+    
     @IBAction func onChangePresentationSize(_ sender: Any) {
         self.preferences.setValue(presentationFontSlider.value, forKey: "presentationFontSize")
         self.preferences.synchronize()
     }
+    
+    
+
+}
+
+extension SettingsController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -150,5 +305,23 @@ class SettingsController: UITableViewController, UIPickerViewDataSource, UIPicke
             self.preferences.synchronize()
         }
     }
+}
 
+extension SettingsController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        if controller.documentPickerMode == UIDocumentPickerMode.import {
+            if url.pathExtension.equalsIgnoreCase("sqlite") {
+                importDatabaseButton.isEnabled = false
+                databaseService.importDriveDatabase(url: url)
+                self.navigationController!.popToRootViewController(animated: true)
+            } else {
+                let alert = UIAlertController(title: "invalid.file".localized, message: "", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "ok".localized, style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+    }
 }
