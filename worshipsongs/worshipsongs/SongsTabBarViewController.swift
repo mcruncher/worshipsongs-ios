@@ -16,6 +16,24 @@ class SongsTabBarViewController: UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onBeforeUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onBeforeUpdateDatabase"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onAfterUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onAfterUpdateDatabase"), object: nil)
+    }
+    
+    func onBeforeUpdateDatabase(_ nsNotification: NSNotification) {
+        if isDatabaseLock() {
+            let viewController = storyboard?.instantiateViewController(withIdentifier: "loading") as? DatabaseLoadingViewController
+            viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+            self.present(viewController!, animated: false, completion: nil)
+        }
+    }
+    
+    func isDatabaseLock() -> Bool {
+        return preferences.dictionaryRepresentation().keys.contains("database.lock") && preferences.bool(forKey:"database.lock")
+    }
+
+    func onAfterUpdateDatabase(_ nsNotification: NSNotification) {
+        self.selectedViewController?.viewWillAppear(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,7 +43,6 @@ class SongsTabBarViewController: UITabBarController{
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func GoToSettingView(_ sender: Any) {

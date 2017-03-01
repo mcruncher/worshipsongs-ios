@@ -55,6 +55,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func updateDefaultSettings() {
+        self.preferences.setValue("", forKey: "import.status")
+        self.preferences.synchronize()
+        
+        if !preferences.dictionaryRepresentation().keys.contains("database.lock") {
+            self.preferences.set(false, forKey: "database.lock")
+            self.preferences.synchronize()
+        } else {
+            if preferences.bool(forKey: "database.lock") {
+                let databaseService = DatabaseService()
+                databaseService.revertImport()
+                preferences.set(false, forKey: "database.lock")
+                preferences.synchronize()
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
+            }
+        }
+        if !preferences.dictionaryRepresentation().keys.contains("remote.url") {
+            self.preferences.setValue("https://github.com/crunchersaspire/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "remote.url")
+            self.preferences.synchronize()
+        }
+        if !preferences.dictionaryRepresentation().keys.contains("defaultDatabase") {
+            self.preferences.set(true, forKey: "defaultDatabase")
+            self.preferences.synchronize()
+        }
         if !preferences.dictionaryRepresentation().keys.contains("fontSize") {
             self.preferences.setValue(17, forKey: "fontSize")
             self.preferences.synchronize()
