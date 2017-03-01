@@ -179,6 +179,7 @@ class SettingsController: UITableViewController {
     
     func revertDatabase(_ nsNotification: NSNotification) {
         databaseService.revertImport()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
     }
     
     @IBAction func onChangeSize(_ sender: Any) {

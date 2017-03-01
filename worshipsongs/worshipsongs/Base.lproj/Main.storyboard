@@ -317,7 +317,7 @@
                                         <rect key="frame" x="0.0" y="640" width="375" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Yv-S4-Jdy" id="X2b-FN-Wx0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="58.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OMN-IK-qAE">
@@ -836,8 +836,11 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="vnA-Sh-Ao3">
                                 <rect key="frame" x="177" y="323" width="20" height="20"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading new database" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKJ-sK-k4f">
-                                <rect key="frame" x="104" y="281" width="168" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading new database" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="UKJ-sK-k4f">
+                                <rect key="frame" x="28" y="256" width="314" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="te2-K0-Usy"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -845,10 +848,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.64804159630000002" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="UKJ-sK-k4f" firstAttribute="centerX" secondItem="lxN-b1-jo7" secondAttribute="centerX" id="0uC-CL-l26"/>
                             <constraint firstItem="vnA-Sh-Ao3" firstAttribute="centerY" secondItem="lxN-b1-jo7" secondAttribute="centerY" id="eam-FO-pNt"/>
                             <constraint firstItem="vnA-Sh-Ao3" firstAttribute="top" secondItem="UKJ-sK-k4f" secondAttribute="bottom" constant="17" id="kKM-dM-Kq4"/>
                             <constraint firstItem="vnA-Sh-Ao3" firstAttribute="centerX" secondItem="lxN-b1-jo7" secondAttribute="centerX" id="kdQ-Jl-kDR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UKJ-sK-k4f" secondAttribute="trailing" constant="17" id="sG0-rN-viw"/>
+                            <constraint firstItem="UKJ-sK-k4f" firstAttribute="leading" secondItem="lxN-b1-jo7" secondAttribute="leadingMargin" constant="12" id="wPk-qF-RV0"/>
                         </constraints>
                     </view>
                     <connections>

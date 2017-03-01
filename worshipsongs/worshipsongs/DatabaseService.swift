@@ -45,7 +45,6 @@ class DatabaseService {
             self.preferences.set(true, forKey: "defaultDatabase")
             self.preferences.synchronize()
         }
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
     }
     
     func importDatabase(url: URL) {
@@ -93,6 +92,12 @@ class DatabaseService {
         preferences.set(false, forKey: "defaultDatabase")
         preferences.set(false, forKey: "database.lock")
         preferences.synchronize()
+    }
+    
+    func verifyDatabase() -> Bool {
+        let databaseHelper = DatabaseHelper()
+        let songModel = databaseHelper.getSongModel()
+        return songModel.count > 0
     }
     
 }

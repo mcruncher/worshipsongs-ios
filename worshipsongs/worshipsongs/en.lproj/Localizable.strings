@@ -53,8 +53,11 @@
 "importing.database" = "Importing Database";
 "error.importing" = "Error occured while importing";
 "error.copying" = "Error occured while copying";
+"verifying.database" = "Verifying Database";
+"updated.database" = "Database updated";
+"reverting.database" = "Invalid Database. Reverting to previous Database";
 "enterRemoteUrl" = "Enter Remote URL";
 "load" = "Load";
-"database" = "DataBase";
+"database" = "Database";
 "primary.screen" = "Primary Screen";
 "presentation.screen" = "Presentation Screen";
