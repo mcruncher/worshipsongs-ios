@@ -59,6 +59,7 @@
 "enterRemoteUrl" = "Enter Remote URL";
 "load" = "Load";
 "database" = "Database";
+"advanced" = "Advanced";
 "primary.screen" = "Primary Screen";
 "presentation.screen" = "Presentation Screen";
 "general" = "General";

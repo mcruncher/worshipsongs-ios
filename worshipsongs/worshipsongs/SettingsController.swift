@@ -13,7 +13,7 @@ import MessageUI
 
 class SettingsController: UITableViewController {
 
-    @IBOutlet weak var importDatabaseButton: UIButton!
+    @IBOutlet weak var importDatabaseLabel: UILabel!
     @IBOutlet weak var importDatabaseCell: UITableViewCell!
     @IBOutlet weak var fontSizeSlider: UISlider!
     @IBOutlet weak var presentationFontSlider: UISlider!
@@ -22,7 +22,7 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var englishFontColor: UITextField!
     @IBOutlet weak var presentationEnglishFontColor: UITextField!
     @IBOutlet weak var presentationBackgroundColor: UITextField!
-    @IBOutlet weak var restoreDatabaseButton: UIButton!
+    @IBOutlet weak var restoreDatabaseLabel: UILabel!
     @IBOutlet weak var restoreDatabaseCell: UITableViewCell!
     
     @IBOutlet weak var primaryTextSizeLabel: UILabel!
@@ -78,8 +78,8 @@ class SettingsController: UITableViewController {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             versionValueLabel.text = version
         }
-        importDatabaseButton.setTitle("import.database".localized, for: .normal)
-        restoreDatabaseButton.setTitle("restore.database".localized, for: .normal)
+        importDatabaseLabel.text = "import.database".localized
+        restoreDatabaseLabel.text = "restore.database".localized
         primaryTextSizeLabel.text = "text.size".localized
         primaryTamilColorLabel.text = "tamil.font.color".localized
         primaryEnglishColorLabel.text = "english.font.color".localized
@@ -172,11 +172,11 @@ class SettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "database".localized
-        case 1:
             return "primary.screen".localized
-        case 2:
+        case 1:
             return "presentation.screen".localized
+        case 2:
+            return "advanced".localized
         case 3:
             return "general".localized
         default:
@@ -185,29 +185,42 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        importDatabaseButton.isEnabled = !self.preferences.bool(forKey: "database.lock")
-        if section == 0 && self.preferences.bool(forKey: "defaultDatabase") {
+        importDatabaseLabel.isEnabled = !self.preferences.bool(forKey: "database.lock")
+        if section == 2 && self.preferences.bool(forKey: "defaultDatabase") {
             return 1
         }
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            switch indexPath.row {
+            case 0:
+                importDatabase()
+                break
+            case 1:
+                restoreDatabase()
+                break
+            default:
+                break
+            }
+        }
         if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
                 rateUs()
                 break
             case 1:
-                sendEmail()
+                shareThisApp()
                 break
             case 2:
-                shareThisApp()
+                sendEmail()
                 break
             default:
                 break
             }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func revertDatabase(_ nsNotification: NSNotification) {
@@ -220,7 +233,7 @@ class SettingsController: UITableViewController {
         self.preferences.synchronize()
     }
     
-    @IBAction func restoreDatabase(_ sender: Any) {
+    func restoreDatabase() {
         let alert = getAlertController("restore.database".localized, message: "message.restore.database".localized)
         alert.addAction(getYesAction("yes".localized))
         alert.addAction(getNoAction())
@@ -243,7 +256,7 @@ class SettingsController: UITableViewController {
         return UIAlertAction(title: "no".localized, style: .default, handler: nil)
     }
     
-    @IBAction func importDatabase(_ sender: Any) {
+    func importDatabase() {
         let optionMenu = UIAlertController(title: nil, message: "import.database".localized, preferredStyle: .actionSheet)
         optionMenu.addAction(getDatabaseFromiCloudAction())
         optionMenu.addAction(getDatabaseFromRemoteUrlAction())
@@ -376,7 +389,7 @@ extension SettingsController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         if controller.documentPickerMode == UIDocumentPickerMode.import {
             if url.pathExtension.equalsIgnoreCase("sqlite") {
-                importDatabaseButton.isEnabled = false
+                importDatabaseLabel.isEnabled = false
                 databaseService.importDriveDatabase(url: url)
                 self.navigationController!.popToRootViewController(animated: true)
             } else {
