@@ -248,6 +248,8 @@ class SettingsController: UITableViewController {
         optionMenu.addAction(getDatabaseFromiCloudAction())
         optionMenu.addAction(getDatabaseFromRemoteUrlAction())
         optionMenu.addAction(getDatabaseCancelAction())
+        optionMenu.popoverPresentationController?.sourceView = importDatabaseCell.contentView
+        optionMenu.popoverPresentationController?.sourceRect = importDatabaseCell.contentView.bounds
         self.present(optionMenu, animated: true, completion: nil)
     }
     
@@ -300,7 +302,9 @@ class SettingsController: UITableViewController {
         if let myWebsite = NSURL(string: "http://apple.co/2mJwePJ") {
             let objectsToShare = [myWebsite.absoluteString]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            activityVC.popoverPresentationController?.sourceView = self.view
+            let popUpView = self.tableView.cellForRow(at: tableView.indexPathForSelectedRow!)?.contentView
+            activityVC.popoverPresentationController?.sourceView = popUpView
+            activityVC.popoverPresentationController?.sourceRect = (popUpView?.bounds)!
             activityVC.setValue("Tamil Christian Worship Songs on the App Store - iTunes - Apple", forKey: "Subject")
             activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
             self.present(activityVC, animated: true, completion: nil)
