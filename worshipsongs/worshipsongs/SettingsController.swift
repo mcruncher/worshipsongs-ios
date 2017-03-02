@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import FileBrowser
+import MessageUI
 
 class SettingsController: UITableViewController {
 
@@ -34,6 +35,11 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var presentationEnglishColorLabel: UILabel!
     
     @IBOutlet weak var presentationBackgroundColorLabel: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var versionValueLabel: UILabel!
+    @IBOutlet weak var rateUsLabel: UILabel!
+    @IBOutlet weak var feedBackLabel: UILabel!
+    @IBOutlet weak var shareAppLabel: UILabel!
     
     fileprivate let preferences = UserDefaults.standard
     fileprivate let ColorList = ColorUtils.Color.allValues
@@ -65,6 +71,13 @@ class SettingsController: UITableViewController {
     }
     
     func setUp() {
+        rateUsLabel.text = "rateUs".localized
+        feedBackLabel.text = "feedback".localized
+        shareAppLabel.text = "shareApp".localized
+        versionLabel.text = "version".localized
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            versionValueLabel.text = version
+        }
         importDatabaseButton.setTitle("import.database".localized, for: .normal)
         restoreDatabaseButton.setTitle("restore.database".localized, for: .normal)
         primaryTextSizeLabel.text = "text.size".localized
@@ -153,7 +166,7 @@ class SettingsController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -164,6 +177,8 @@ class SettingsController: UITableViewController {
             return "primary.screen".localized
         case 2:
             return "presentation.screen".localized
+        case 3:
+            return "general".localized
         default:
             return ""
         }
@@ -175,6 +190,24 @@ class SettingsController: UITableViewController {
             return 1
         }
         return super.tableView(tableView, numberOfRowsInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 3 {
+            switch indexPath.row {
+            case 0:
+                rateUs()
+                break
+            case 1:
+                sendEmail()
+                break
+            case 2:
+                shareThisApp()
+                break
+            default:
+                break
+            }
+        }
     }
     
     func revertDatabase(_ nsNotification: NSNotification) {
@@ -215,6 +248,8 @@ class SettingsController: UITableViewController {
         optionMenu.addAction(getDatabaseFromiCloudAction())
         optionMenu.addAction(getDatabaseFromRemoteUrlAction())
         optionMenu.addAction(getDatabaseCancelAction())
+        optionMenu.popoverPresentationController?.sourceView = importDatabaseCell.contentView
+        optionMenu.popoverPresentationController?.sourceRect = importDatabaseCell.contentView.bounds
         self.present(optionMenu, animated: true, completion: nil)
     }
     
@@ -245,7 +280,36 @@ class SettingsController: UITableViewController {
         self.preferences.synchronize()
     }
     
+    func rateUs() {
+        rateApp(appId: "1066174826") { success in
+            print("RateApp \(success)")
+        }
+    }
     
+    func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
+        guard let url = URL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=" + appId) else {
+            completion(false)
+            return
+        }
+        guard #available(iOS 10, *) else {
+            completion(UIApplication.shared.openURL(url))
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: completion)
+    }
+    
+    func shareThisApp() {
+        if let myWebsite = NSURL(string: "http://apple.co/2mJwePJ") {
+            let objectsToShare = [myWebsite.absoluteString]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            let popUpView = self.tableView.cellForRow(at: tableView.indexPathForSelectedRow!)?.contentView
+            activityVC.popoverPresentationController?.sourceView = popUpView
+            activityVC.popoverPresentationController?.sourceRect = (popUpView?.bounds)!
+            activityVC.setValue("Tamil Christian Worship Songs on the App Store - iTunes - Apple", forKey: "Subject")
+            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
+            self.present(activityVC, animated: true, completion: nil)
+        }
+    }
 
 }
 
@@ -324,5 +388,38 @@ extension SettingsController: UIDocumentPickerDelegate {
     }
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+    }
+}
+
+extension SettingsController: MFMailComposeViewControllerDelegate {
+    
+    
+    func sendEmail() {
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
+    }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        mailComposerVC.setToRecipients(["technical@mcruncher.com"])
+        mailComposerVC.setSubject("Feedback")
+        mailComposerVC.setMessageBody("Write your feedback here:", isHTML: false)
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let alert = UIAlertController(title: "Could Not Send Email".localized, message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "ok".localized, style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate Method
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

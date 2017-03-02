@@ -62,3 +62,8 @@
 "database" = "Database";
 "primary.screen" = "Primary Screen";
 "presentation.screen" = "Presentation Screen";
+"general" = "General";
+"version" = "Version";
+"rateUs" = "Rate Us";
+"feedback" = "Send Feedback";
+"shareApp" = "Share This App";
