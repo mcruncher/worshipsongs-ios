@@ -39,8 +39,9 @@
 "cancel" = "Cancel";
 "yes" = "Yes";
 "no" = "No";
+"done" = "Done";
 "invalid.file" = "Invalid File";
-"import.database" = "Import Database";
+"import.database" = "Import OpenLP Database";
 "restore.database" = "Restore Default Database";
 "message.restore.database" = "Do you want to restore to the default database?";
 "text.size" = "Text Size";

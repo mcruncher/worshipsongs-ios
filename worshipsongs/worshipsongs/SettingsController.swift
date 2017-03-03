@@ -17,11 +17,11 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var importDatabaseCell: UITableViewCell!
     @IBOutlet weak var fontSizeSlider: UISlider!
     @IBOutlet weak var presentationFontSlider: UISlider!
-    @IBOutlet weak var tamilFontColor: UITextField!
-    @IBOutlet weak var presentationTamilFontColor: UITextField!
-    @IBOutlet weak var englishFontColor: UITextField!
-    @IBOutlet weak var presentationEnglishFontColor: UITextField!
-    @IBOutlet weak var presentationBackgroundColor: UITextField!
+    @IBOutlet weak var tamilFontColorTextField: UITextField!
+    @IBOutlet weak var presentationTamilFontColorTextField: UITextField!
+    @IBOutlet weak var englishFontColorTextField: UITextField!
+    @IBOutlet weak var presentationEnglishFontColorTextField: UITextField!
+    @IBOutlet weak var presentationBackgroundColorTextField: UITextField!
     @IBOutlet weak var restoreDatabaseLabel: UILabel!
     @IBOutlet weak var restoreDatabaseCell: UITableViewCell!
     
@@ -40,6 +40,12 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var rateUsLabel: UILabel!
     @IBOutlet weak var feedBackLabel: UILabel!
     @IBOutlet weak var shareAppLabel: UILabel!
+    @IBOutlet weak var primaryTamilColor: UITextField!
+    @IBOutlet weak var primaryEnglishColor: UITextField!
+    @IBOutlet weak var presentationTamilColor: UITextField!
+    @IBOutlet weak var presentationEnglishColor: UITextField!
+    @IBOutlet weak var presentationBackgroundColor: UITextField!
+    
     
     fileprivate let preferences = UserDefaults.standard
     fileprivate let ColorList = ColorUtils.Color.allValues
@@ -68,6 +74,7 @@ class SettingsController: UITableViewController {
         self.setPresentationScreenBackgroundColor()
         let backButton = UIBarButtonItem(title: "back".localized, style: .plain, target: self, action: #selector(SettingsController.goBackToSongsList))
         navigationItem.leftBarButtonItem = backButton
+        addTapGestureRecognizer()
     }
     
     func setUp() {
@@ -91,6 +98,20 @@ class SettingsController: UITableViewController {
         self.restoreDatabaseCell.isHidden = self.preferences.bool(forKey: "defaultDatabase")
     }
     
+    fileprivate func addTapGestureRecognizer() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SettingsController.dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    internal func dismissKeyboard() {
+        self.tamilFontColorTextField.resignFirstResponder()
+        self.englishFontColorTextField.resignFirstResponder()
+        self.presentationTamilFontColorTextField.resignFirstResponder()
+        self.presentationEnglishFontColorTextField.resignFirstResponder()
+        self.presentationBackgroundColorTextField.resignFirstResponder()
+    }
+    
     func setPrimaryScreenFontSize() {
         let size = self.preferences.integer(forKey: "fontSize")
         fontSizeSlider.value = Float(size)
@@ -103,52 +124,73 @@ class SettingsController: UITableViewController {
     
     func setPrimaryScreenTamilFontColor() {
         tamilFont = self.preferences.string(forKey: "tamilFontColor")!
-        tamilFontColor.text = tamilFont.localized
-        tamilFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!)
+        tamilFontColorTextField.text = tamilFont.localized
+        primaryTamilColor.backgroundColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!)
         tamilFontColorPickerView.tag = 1
         tamilFontColorPickerView.delegate = self
-        tamilFontColor.inputView = tamilFontColorPickerView
+        tamilFontColorTextField.inputView = tamilFontColorPickerView
+        tamilFontColorTextField.inputAccessoryView = getToolBar(currentField: tamilFontColorTextField)
         tamilFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: tamilFont)!)!, inComponent: 0, animated: true)
     }
     
     func setPrimaryScreenEnglishFontColor() {
         englishFont = self.preferences.string(forKey: "englishFontColor")!
-        englishFontColor.text = englishFont.localized
-        englishFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: englishFont)!)
+        englishFontColorTextField.text = englishFont.localized
+        primaryEnglishColor.backgroundColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: englishFont)!)
         englishFontColorPickerView.tag = 2
         englishFontColorPickerView.delegate = self
-        englishFontColor.inputView = englishFontColorPickerView
+        englishFontColorTextField.inputView = englishFontColorPickerView
+        englishFontColorTextField.inputAccessoryView = getToolBar(currentField: englishFontColorTextField)
         englishFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: englishFont)!)!, inComponent: 0, animated: true)
     }
     
     func setPresentationScreenTamilFontColor() {
         presentationTamilFont = self.preferences.string(forKey: "presentationTamilFontColor")!
-        presentationTamilFontColor.text = presentationTamilFont.localized
-        presentationTamilFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationTamilFont)!)
+        presentationTamilFontColorTextField.text = presentationTamilFont.localized
+        presentationTamilColor.backgroundColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationTamilFont)!)
         presentationTamilFontColorPickerView.tag = 3
         presentationTamilFontColorPickerView.delegate = self
-        presentationTamilFontColor.inputView = presentationTamilFontColorPickerView
+        presentationTamilFontColorTextField.inputView = presentationTamilFontColorPickerView
+        presentationTamilFontColorTextField.inputAccessoryView = getToolBar(currentField: presentationTamilFontColorTextField)
         presentationTamilFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: presentationTamilFont)!)!, inComponent: 0, animated: true)
     }
     
     func setPresentationScreenEnglishFontColor() {
         presentationEnglishFont = self.preferences.string(forKey: "presentationEnglishFontColor")!
-        presentationEnglishFontColor.text = presentationEnglishFont.localized
-        presentationEnglishFontColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationEnglishFont)!)
+        presentationEnglishFontColorTextField.text = presentationEnglishFont.localized
+        presentationEnglishColor.backgroundColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationEnglishFont)!)
         presentationEnglishFontColorPickerView.tag = 4
         presentationEnglishFontColorPickerView.delegate = self
-        presentationEnglishFontColor.inputView = presentationEnglishFontColorPickerView
+        presentationEnglishFontColorTextField.inputView = presentationEnglishFontColorPickerView
+        presentationEnglishFontColorTextField.inputAccessoryView = getToolBar(currentField: presentationEnglishFontColorTextField)
         presentationEnglishFontColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: presentationEnglishFont)!)!, inComponent: 0, animated: true)
     }
     
     func setPresentationScreenBackgroundColor() {
         presentationBackground = self.preferences.string(forKey: "presentationBackgroundColor")!
-        presentationBackgroundColor.text = presentationBackground.localized
-        presentationBackgroundColor.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationBackground)!)
+        presentationBackgroundColorTextField.text = presentationBackground.localized
+        presentationBackgroundColor.backgroundColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationBackground)!)
         presentationBackgroundColorPickerView.tag = 5
         presentationBackgroundColorPickerView.delegate = self
-        presentationBackgroundColor.inputView = presentationBackgroundColorPickerView
+        presentationBackgroundColorTextField.inputView = presentationBackgroundColorPickerView
+        presentationBackgroundColorTextField.inputAccessoryView = getToolBar(currentField: presentationBackgroundColorTextField)
         presentationBackgroundColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: presentationBackground)!)!, inComponent: 0, animated: true)
+    }
+    
+    func getToolBar(currentField: UITextField) -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.sizeToFit()
+        
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "done".localized, style: UIBarButtonItemStyle.plain, target: self, action: #selector(SettingsController.doneEditing))
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        return toolBar
+    }
+    
+    func doneEditing() {
+        dismissKeyboard()
     }
     
     
@@ -193,6 +235,33 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 1:
+                tamilFontColorTextField.becomeFirstResponder()
+                break
+            case 2:
+                englishFontColorTextField.becomeFirstResponder()
+                break
+            default:
+                break
+            }
+        }
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            case 1:
+                presentationTamilFontColorTextField.becomeFirstResponder()
+                break
+            case 2:
+                presentationEnglishFontColorTextField.becomeFirstResponder()
+                break
+            case 3:
+                presentationBackgroundColorTextField.becomeFirstResponder()
+                break
+            default:
+                break
+            }
+        }
         if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
@@ -334,10 +403,10 @@ extension SettingsController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1 {
-            tamilFontColor.text = tamilFont.localized
+            tamilFontColorTextField.text = tamilFont.localized
             return ColorList.count
         } else {
-            englishFontColor.text = englishFont.localized
+            englishFontColorTextField.text = englishFont.localized
             return ColorList.count
         }
     }
@@ -353,32 +422,32 @@ extension SettingsController: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1 {
             tamilFont = ColorList[row].rawValue
-            tamilFontColor.text = tamilFont.localized
-            tamilFontColor.textColor = ColorUtils.getColor(color: ColorList[row])
+            tamilFontColorTextField.text = tamilFont.localized
+            primaryTamilColor.backgroundColor = ColorUtils.getColor(color: ColorList[row])
             self.preferences.setValue(tamilFont, forKey: "tamilFontColor")
             self.preferences.synchronize()
         } else if pickerView.tag == 2 {
             englishFont = ColorList[row].rawValue
-            englishFontColor.text = englishFont.localized
-            englishFontColor.textColor = ColorUtils.getColor(color: ColorList[row])
+            englishFontColorTextField.text = englishFont.localized
+            primaryEnglishColor.backgroundColor = ColorUtils.getColor(color: ColorList[row])
             self.preferences.setValue(englishFont, forKey: "englishFontColor")
             self.preferences.synchronize()
         } else if pickerView.tag == 3 {
             presentationTamilFont = ColorList[row].rawValue
-            presentationTamilFontColor.text = presentationTamilFont.localized
-            presentationTamilFontColor.textColor = ColorUtils.getColor(color: ColorList[row])
+            presentationTamilFontColorTextField.text = presentationTamilFont.localized
+            presentationTamilColor.backgroundColor = ColorUtils.getColor(color: ColorList[row])
             self.preferences.setValue(presentationTamilFont, forKey: "presentationTamilFontColor")
             self.preferences.synchronize()
         } else if pickerView.tag == 4 {
             presentationEnglishFont = ColorList[row].rawValue
-            presentationEnglishFontColor.text = presentationEnglishFont.localized
-            presentationEnglishFontColor.textColor = ColorUtils.getColor(color: ColorList[row])
+            presentationEnglishFontColorTextField.text = presentationEnglishFont.localized
+            presentationEnglishColor.backgroundColor = ColorUtils.getColor(color: ColorList[row])
             self.preferences.setValue(presentationEnglishFont, forKey: "presentationEnglishFontColor")
             self.preferences.synchronize()
         } else {
             presentationBackground = ColorList[row].rawValue
-            presentationBackgroundColor.text = presentationBackground.localized
-            presentationBackgroundColor.textColor = ColorUtils.getColor(color: ColorList[row])
+            presentationBackgroundColorTextField.text = presentationBackground.localized
+            presentationBackgroundColor.backgroundColor = ColorUtils.getColor(color: ColorList[row])
             self.preferences.setValue(presentationBackground, forKey: "presentationBackgroundColor")
             self.preferences.synchronize()
         }
