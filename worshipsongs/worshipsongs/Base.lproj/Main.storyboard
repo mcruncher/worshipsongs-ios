@@ -74,18 +74,26 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="18" minValue="5" maxValue="40" translatesAutoresizingMaskIntoConstraints="NO" id="e8f-vb-PM3">
-                                                    <rect key="frame" x="224" y="14" width="135" height="31"/>
+                                                    <rect key="frame" x="255" y="14" width="104" height="31"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="131" id="4vp-sb-Qlo"/>
+                                                        <constraint firstAttribute="width" constant="100" id="4vp-sb-Qlo"/>
                                                     </constraints>
                                                     <connections>
                                                         <action selector="onChangeSize:" destination="zTk-j6-cLt" eventType="valueChanged" id="v1h-LZ-LYy"/>
                                                     </connections>
                                                 </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wnj-Pb-TTX">
+                                                    <rect key="frame" x="209.5" y="20" width="39.5" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="dIb-Tk-b9X" firstAttribute="centerY" secondItem="CdD-xm-VNw" secondAttribute="centerY" id="59a-25-zmA"/>
+                                                <constraint firstItem="e8f-vb-PM3" firstAttribute="leading" secondItem="Wnj-Pb-TTX" secondAttribute="trailing" constant="8" id="913-hY-T9X"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="e8f-vb-PM3" secondAttribute="trailing" constant="10" id="QTV-YE-xuQ"/>
+                                                <constraint firstItem="Wnj-Pb-TTX" firstAttribute="centerY" secondItem="CdD-xm-VNw" secondAttribute="centerY" id="jIq-qr-RfS"/>
                                                 <constraint firstItem="e8f-vb-PM3" firstAttribute="centerY" secondItem="CdD-xm-VNw" secondAttribute="centerY" id="lxV-d3-fmv"/>
                                                 <constraint firstItem="dIb-Tk-b9X" firstAttribute="leading" secondItem="CdD-xm-VNw" secondAttribute="leadingMargin" constant="10" id="wmN-l7-7mt"/>
                                             </constraints>
@@ -205,17 +213,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="40" minValue="25" maxValue="80" translatesAutoresizingMaskIntoConstraints="NO" id="Y7F-Rc-45v">
-                                                    <rect key="frame" x="224" y="14" width="135" height="31"/>
+                                                    <rect key="frame" x="255" y="14" width="104" height="31"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="131" id="cN6-8U-fMi"/>
+                                                        <constraint firstAttribute="width" constant="100" id="cN6-8U-fMi"/>
                                                     </constraints>
                                                     <connections>
                                                         <action selector="onChangePresentationSize:" destination="zTk-j6-cLt" eventType="valueChanged" id="aE5-PI-qGw"/>
                                                         <action selector="onChangeSize:" destination="zTk-j6-cLt" eventType="valueChanged" id="pY0-Ni-YJC"/>
                                                     </connections>
                                                 </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfE-w2-0Fh">
+                                                    <rect key="frame" x="207" y="19" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="jfE-w2-0Fh" firstAttribute="centerY" secondItem="Tt9-Ym-k2D" secondAttribute="centerY" id="AjO-4W-qY6"/>
+                                                <constraint firstItem="Y7F-Rc-45v" firstAttribute="leading" secondItem="jfE-w2-0Fh" secondAttribute="trailing" constant="8" id="Cyp-Tq-2ae"/>
                                                 <constraint firstItem="4pt-rf-TJd" firstAttribute="centerY" secondItem="Tt9-Ym-k2D" secondAttribute="centerY" id="Hyd-om-mmU"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Y7F-Rc-45v" secondAttribute="trailing" constant="10" id="gOT-Ob-ybG"/>
                                                 <constraint firstItem="4pt-rf-TJd" firstAttribute="leading" secondItem="Tt9-Ym-k2D" secondAttribute="leadingMargin" constant="10" id="tXE-YO-lcf"/>
@@ -504,6 +520,7 @@
                     <connections>
                         <outlet property="englishFontColorTextField" destination="b4G-g4-1zh" id="M7u-9M-5Ni"/>
                         <outlet property="feedBackLabel" destination="spX-mr-XnG" id="OrF-Bx-4ke"/>
+                        <outlet property="fontSIze" destination="Wnj-Pb-TTX" id="NdD-5I-tkB"/>
                         <outlet property="fontSizeSlider" destination="e8f-vb-PM3" id="Lby-aZ-O6b"/>
                         <outlet property="importDatabaseCell" destination="XBg-Fo-exG" id="8Gf-Ol-Bkl"/>
                         <outlet property="importDatabaseLabel" destination="w3M-pA-MCH" id="ixP-3v-dkY"/>
@@ -513,6 +530,7 @@
                         <outlet property="presentationEnglishColor" destination="6Qb-1F-Vxs" id="YCq-jg-Ogb"/>
                         <outlet property="presentationEnglishColorLabel" destination="otF-y4-XOj" id="cXk-Bj-wpM"/>
                         <outlet property="presentationEnglishFontColorTextField" destination="I5b-Xl-BQ4" id="ne8-xI-Jus"/>
+                        <outlet property="presentationFontSize" destination="jfE-w2-0Fh" id="5sB-3E-azQ"/>
                         <outlet property="presentationFontSlider" destination="Y7F-Rc-45v" id="7QL-l9-d8o"/>
                         <outlet property="presentationTamilColor" destination="N9u-Cc-hA6" id="lqm-I6-klQ"/>
                         <outlet property="presentationTamilColorLabel" destination="RbS-Cz-qSr" id="ib9-Wf-aXW"/>

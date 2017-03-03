@@ -25,6 +25,8 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var restoreDatabaseLabel: UILabel!
     @IBOutlet weak var restoreDatabaseCell: UITableViewCell!
     
+    @IBOutlet weak var presentationFontSize: UILabel!
+    @IBOutlet weak var fontSIze: UILabel!
     @IBOutlet weak var primaryTextSizeLabel: UILabel!
     @IBOutlet weak var primaryTamilColorLabel: UILabel!
     @IBOutlet weak var primaryEnglishColorLabel: UILabel!
@@ -90,7 +92,6 @@ class SettingsController: UITableViewController {
         primaryTextSizeLabel.text = "text.size".localized
         primaryTamilColorLabel.text = "tamil.font.color".localized
         primaryEnglishColorLabel.text = "english.font.color".localized
-        
         presentationTextSizeLabel.text = "text.size".localized
         presentationTamilColorLabel.text = "tamil.font.color".localized
         presentationEnglishColorLabel.text = "english.font.color".localized
@@ -115,11 +116,13 @@ class SettingsController: UITableViewController {
     func setPrimaryScreenFontSize() {
         let size = self.preferences.integer(forKey: "fontSize")
         fontSizeSlider.value = Float(size)
+        fontSIze.text = String(size)
     }
     
     func setPresentationScreenFontSize() {
         let presentationSize = self.preferences.integer(forKey: "presentationFontSize")
         presentationFontSlider.value = Float(presentationSize)
+        presentationFontSize.text = String(presentationSize)
     }
     
     func setPrimaryScreenTamilFontColor() {
@@ -300,6 +303,7 @@ class SettingsController: UITableViewController {
     @IBAction func onChangeSize(_ sender: Any) {
         self.preferences.setValue(fontSizeSlider.value, forKey: "fontSize")
         self.preferences.synchronize()
+        fontSIze.text = String(self.preferences.integer(forKey: "fontSize"))
     }
     
     func restoreDatabase() {
@@ -360,6 +364,7 @@ class SettingsController: UITableViewController {
     @IBAction func onChangePresentationSize(_ sender: Any) {
         self.preferences.setValue(presentationFontSlider.value, forKey: "presentationFontSize")
         self.preferences.synchronize()
+        presentationFontSize.text = String(self.preferences.integer(forKey: "presentationFontSize"))
     }
     
     func rateUs() {
