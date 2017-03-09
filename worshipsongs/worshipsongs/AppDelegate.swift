@@ -25,12 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if preferences.dictionaryRepresentation().keys.contains("version") {
             if !(preferences.string(forKey: "version")?.equalsIgnoreCase(version))! {
                 copyFile("songs.sqlite")
+                preferences.setValue(version, forKey: "version")
+                preferences.synchronize()
             } else {
                 print("Same version")
             }
             
         } else {
             preferences.setValue(version, forKey: "version")
+            preferences.synchronize()
             copyFile("songs.sqlite")
         }
         updateDefaultSettings()
