@@ -8,9 +8,9 @@ import Foundation
 
 
 struct Songs {
-    var id: String
-    var title : String
-    var lyrics : String
-    var verse_order : String
-    var comment : String!
+    var id = ""
+    var title = ""
+    var lyrics = ""
+    var verse_order = ""
+    var comment : String! 
 }

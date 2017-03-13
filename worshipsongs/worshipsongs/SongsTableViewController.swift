@@ -20,7 +20,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     var listDataDictionary : NSMutableDictionary = NSMutableDictionary()
     var parsedVerseOrderList: NSMutableArray = NSMutableArray()
     var verseOrderList: NSMutableArray = NSMutableArray()
-    var text: String!
+    //var text: String!
     fileprivate let preferences = UserDefaults.standard
 
     override func viewDidLoad() {
@@ -35,6 +35,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
             print("parsedVerseOrderList:\(parsedVerseOrderList)")
             verseOrderList = parsedVerseOrderList
         }
+        
         self.tableView.estimatedRowHeight = 88.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -195,7 +196,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        text = string
+        //text = string
         print("string:\(string)")
         let data = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         print("data:\(data)")

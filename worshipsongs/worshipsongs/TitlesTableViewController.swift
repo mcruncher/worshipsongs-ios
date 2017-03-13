@@ -132,6 +132,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        
         verseList = NSArray()
         songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
         songName = filteredSongModel[(indexPath as NSIndexPath).row].title
