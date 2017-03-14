@@ -302,27 +302,29 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     func share() {
         let emailMessage = getObjectToShare()
         let messagerMessage = getMessageToShare()
-        let firstActivityItem = CustomProvider(placeholderItem: "Default" as AnyObject, messagerMessage: messagerMessage.string, emailMessage: emailMessage.string)
-        if let myWebsite = URL(string: "https://itunes.apple.com/us/app/tamil-christian-worship-songs/id1066174826?mt=8") {
-            let objectsToShare = [firstActivityItem, myWebsite] as [Any]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
-            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.postToFacebook, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
-            
-            activityVC.popoverPresentationController?.sourceView = self.view
-            activityVC.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-            self.present(activityVC, animated: true, completion: nil)
-        }
+        let otherMessage = emailMessage
+        otherMessage.append(NSAttributedString(string: "http://apple.co/2mJwePJ"))
+        
+        let firstActivityItem = CustomProvider(placeholderItem: "Default" as AnyObject, messagerMessage: messagerMessage.string, emailMessage: emailMessage.string, otherMessage: otherMessage.string)
+        let objectsToShare = [firstActivityItem]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
+        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.postToFacebook, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
+        activityVC.popoverPresentationController?.sourceView = self.view
+        activityVC.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        self.present(activityVC, animated: true, completion: nil)
     }
     
     class CustomProvider : UIActivityItemProvider {
         var messagerMessage : String!
         var emailMessage : String!
+        var otherMessage : String!
         
-        init(placeholderItem: AnyObject, messagerMessage : String, emailMessage : String) {
+        init(placeholderItem: AnyObject, messagerMessage : String, emailMessage : String, otherMessage : String) {
             super.init(placeholderItem: placeholderItem)
             self.messagerMessage = messagerMessage
             self.emailMessage = emailMessage
+            self.otherMessage = otherMessage
         }
         
         override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
@@ -332,8 +334,8 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
                 return emailMessage as AnyObject?
             } else if activityType == UIActivityType.postToTwitter {
                 return NSLocalizedString(messagerMessage, comment: "comment")
-            }else {
-                return emailMessage as AnyObject?
+            } else {
+                return otherMessage
             }
         }
     }
@@ -491,20 +493,20 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
         messageString.append(NSAttributedString(string: "\n\n"))
         messageString.append(NSAttributedString(string: "  http://apple.co/2mJwePJ"))
         
-        let activityItem = CustomProvider(placeholderItem: "Default" as AnyObject, messagerMessage: messageString.string, emailMessage: objectString.string)
-        if let myWebsite = URL(string: "http://apple.co/2mJwePJ") {
-            let objectsToShare = [activityItem, myWebsite] as [Any]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            let popUpView = self.tableView.cellForRow(at: indexPath)?.contentView
-            activityVC.popoverPresentationController?.sourceView = popUpView
-            activityVC.popoverPresentationController?.sourceRect = (popUpView?.bounds)!
-            activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
-            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
-            self.present(activityVC, animated: true, completion: { () -> Void in
-                self.tableView.deselectRow(at: indexPath, animated: true)
-            })
-        }
+        let otherString = objectString
+        otherString.append(NSAttributedString(string: "http://apple.co/2mJwePJ"))
         
+        let activityItem = CustomProvider(placeholderItem: "Default" as AnyObject, messagerMessage: messageString.string, emailMessage: objectString.string, otherMessage: otherString.string)
+        let objectsToShare = [activityItem]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        let popUpView = self.tableView.cellForRow(at: indexPath)?.contentView
+        activityVC.popoverPresentationController?.sourceView = popUpView
+        activityVC.popoverPresentationController?.sourceRect = (popUpView?.bounds)!
+        activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
+        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.postToFacebook, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
+        self.present(activityVC, animated: true, completion: { () -> Void in
+                self.tableView.deselectRow(at: indexPath, animated: true)
+        })
     }
     
 }
