@@ -1,9 +1,6 @@
 //
-//  SongsTableViewController.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 10/12/15.
-//  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.0.0
 //
 
 import UIKit
@@ -256,4 +253,6 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     }
 
 }
+
+
 

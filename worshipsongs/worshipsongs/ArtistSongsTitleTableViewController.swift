@@ -128,21 +128,6 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        verseList = NSArray()
-//        songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
-//        songName = filteredSongModel[(indexPath as NSIndexPath).row].title
-//        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil {
-//            comment = filteredSongModel[(indexPath as NSIndexPath).row].comment
-//        } else {
-//            comment = ""
-//        }
-//        let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
-//        if !verseOrder.isEmpty {
-//            verseList = splitVerseOrder(verseOrder)
-//        }
-//        hideSearchBar()
-//        performSegue(withIdentifier: "songsWithVideo", sender: self)
         let selectedSong = filteredSongModel[indexPath.row]
         songTabBarController?.songdelegate?.songSelected(selectedSong)
         hideSearchBar()
@@ -175,12 +160,14 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     func filterContentForSearchText(_ searchBar: UISearchBar) {
         // Filter the array using the filter method
         let searchText = searchBar.text
-        var data = [(Songs)]()
-        data = self.songModel.filter({( song: Songs) -> Bool in
-            let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!)
-            return (stringMatch)
-            
-        })
+        var data = songModel
+        if (searchText?.characters.count)! > 0 {
+            data = self.songModel.filter({( song: Songs) -> Bool in
+                let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!)
+                return (stringMatch)
+                
+            })
+        }
         self.filteredSongModel = data
     }
     
@@ -203,7 +190,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         self.tableView.reloadData()
         self.refresh.endRefreshing()
     }
-
+    
     func addSearchBarButton(){
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistSongsTitleTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
@@ -214,7 +201,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         self.navigationItem.rightBarButtonItem = nil
         searchBar.becomeFirstResponder()
     }
-
+    
     
     func hideSearchBar() {
         self.navigationItem.titleView = nil
@@ -233,5 +220,5 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         searchBar.tintColor = UIColor.gray
         self.addSearchBarButton()
     }
-
+    
 }

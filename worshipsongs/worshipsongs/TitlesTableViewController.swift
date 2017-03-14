@@ -210,12 +210,13 @@ extension TitlesTableViewController: UISearchBarDelegate {
     fileprivate func filterContentForSearchText(_ searchBar: UISearchBar) {
         // Filter the array using the filter method
         let searchText = searchBar.text
-        var data = [(Songs)]()
-        data = self.songModel.filter({( song: Songs) -> Bool in
-            let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!)
-            return (stringMatch)
-            
-        })
+        var data = songModel
+        if (searchText?.characters.count)! > 0 {
+            data = self.songModel.filter({( song: Songs) -> Bool in
+                let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!)
+                return (stringMatch)
+            })
+        }
         self.filteredSongModel = data
     }
     

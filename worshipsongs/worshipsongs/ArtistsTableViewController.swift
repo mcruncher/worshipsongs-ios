@@ -1,14 +1,11 @@
 //
-//  ArtistsTableViewController.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 08/12/2015.
-//  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.0.0
 //
 
 import UIKit
 
-class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
+class ArtistsTableViewController: UITableViewController   {
     
     var authorModel = [Author]()
     var artistName: String = ""
@@ -91,35 +88,7 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
         }
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterContentForSearchText(self.searchBar)
-        self.tableView.reloadData()
-    }
     
-    func filterContentForSearchText(_ searchBar: UISearchBar) {
-        // Filter the array using the filter method
-        let searchText = searchBar.text
-        var data = [(Author)]()
-        data = self.authorModel.filter({( song: Author) -> Bool in
-            let stringMatch = (song.displayName as NSString).localizedCaseInsensitiveContains(searchText!)
-            return (stringMatch)
-            
-        })
-        self.filteredAuthorModel = data
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-    {
-        hideSearchBar()
-        tableView.reloadData()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
-    {
-        hideSearchBar()
-        filteredAuthorModel = authorModel
-        tableView.reloadData()
-    }
     
     func refresh(_ sender:AnyObject)
     {
@@ -127,7 +96,11 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
         self.tableView.reloadData()
         self.refresh.endRefreshing()
     }
-  
+    
+}
+
+extension ArtistsTableViewController: UISearchBarDelegate {
+    
     func createSearchBar()
     {
         // Search bar
@@ -143,7 +116,6 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
         self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistsTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
-    
     func searchButtonItemClicked(_ sender:UIBarButtonItem){
         self.tabBarController?.navigationItem.titleView = searchBar;
         self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
@@ -157,5 +129,36 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
         self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
         self.searchBar.text = ""
         self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistsTableViewController.searchButtonItemClicked(_:))), animated: true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContentForSearchText(self.searchBar)
+        self.tableView.reloadData()
+    }
+    
+    func filterContentForSearchText(_ searchBar: UISearchBar) {
+        // Filter the array using the filter method
+        let searchText = searchBar.text
+        var data = authorModel
+        if (searchText?.characters.count)! > 0 {
+            data = self.authorModel.filter({( song: Author) -> Bool in
+                let stringMatch = (song.displayName as NSString).localizedCaseInsensitiveContains(searchText!)
+                return (stringMatch)
+            })
+        }
+        self.filteredAuthorModel = data
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        hideSearchBar()
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
+    {
+        hideSearchBar()
+        filteredAuthorModel = authorModel
+        tableView.reloadData()
     }
 }

@@ -6,7 +6,8 @@
 import UIKit
 
 class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
-
+    
+    fileprivate var filteredSongModel = [FavoritesSong]()
     var songModel = [FavoritesSong]()
     var songOrder = [Int]()
     var songTitles = [String]()
@@ -40,7 +41,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
             let state = longPress.state
             let locationInView = longPress.location(in: tableView)
             let indexPath = tableView.indexPathForRow(at: locationInView)
-        
+            
             struct My {
                 static var cellSnapshot : UIView? = nil
             }
@@ -57,21 +58,21 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
                     My.cellSnapshot!.center = center!
                     My.cellSnapshot!.alpha = 0.0
                     tableView.addSubview(My.cellSnapshot!)
-                
+                    
                     UIView.animate(withDuration: 0.25, animations: { () -> Void in
                         center?.y = locationInView.y
                         My.cellSnapshot!.center = center!
                         My.cellSnapshot!.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
                         My.cellSnapshot!.alpha = 0.98
                         cell?.alpha = 0.0
-                    
+                        
                     }, completion: { (finished) -> Void in
                         if finished {
                             cell?.isHidden = true
                         }
                     })
                 }
-            
+                
             case UIGestureRecognizerState.changed:
                 var center = My.cellSnapshot!.center
                 center.y = locationInView.y
@@ -80,7 +81,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
                     tableView.moveRow(at: Path.initialIndexPath! as IndexPath, to: indexPath!)
                     Path.initialIndexPath = indexPath as NSIndexPath?
                 }
-            
+                
             default:
                 let cell = tableView.cellForRow(at: Path.initialIndexPath! as IndexPath) as UITableViewCell!
                 cell?.isHidden = false
@@ -163,14 +164,14 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         let indexPath = IndexPath(row: 0, section: 0)
         self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -178,15 +179,15 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return songModel.count
+        return filteredSongModel.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
-        cell.title.text = songModel[(indexPath as NSIndexPath).row].songs.title
-        cell.id.text = songModel[(indexPath as NSIndexPath).row].songs.id
-        if songModel[(indexPath as NSIndexPath).row].songs.comment != nil && songModel[(indexPath as NSIndexPath).row].songs.comment.contains("youtube") {
+        cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].songs.title
+        cell.id.text = filteredSongModel[(indexPath as NSIndexPath).row].songs.id
+        if filteredSongModel[(indexPath as NSIndexPath).row].songs.comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].songs.comment.contains("youtube") {
             cell.playImage.isHidden = false
         } else {
             cell.playImage.isHidden = true
@@ -196,37 +197,37 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        verseList = NSArray()
-//        let songs = songModel[(indexPath as NSIndexPath).row].songs
-//        
-//        songLyrics = songs.lyrics as NSString
-//        songName = songs.title
-//        authorName = databaseHelper.getArtistName(songs.id)
-//        let verseOrder = songs.verse_order
-//        if !verseOrder.isEmpty {
-//            verseList = splitVerseOrder(verseOrder)
-//        }
-//        if songs.comment != nil {
-//            comment = songs.comment
-//        } else {
-//            comment = ""
-//        }
-//        hideSearchBar()
-//        performSegue(withIdentifier: "songsWithVideo", sender: self)
-//        let selectedSong = songModel[indexPath.row].songs
-//        songTabBarController?.songdelegate?.songSelected(selectedSong)
-//        hideSearchBar()
-//        //performSegue(withIdentifier: "songsWithVideo", sender: self)
-//        
-//        if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
-//            
-//            splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
-//        }
+        //        verseList = NSArray()
+        //        let songs = songModel[(indexPath as NSIndexPath).row].songs
+        //
+        //        songLyrics = songs.lyrics as NSString
+        //        songName = songs.title
+        //        authorName = databaseHelper.getArtistName(songs.id)
+        //        let verseOrder = songs.verse_order
+        //        if !verseOrder.isEmpty {
+        //            verseList = splitVerseOrder(verseOrder)
+        //        }
+        //        if songs.comment != nil {
+        //            comment = songs.comment
+        //        } else {
+        //            comment = ""
+        //        }
+        //        hideSearchBar()
+        //        performSegue(withIdentifier: "songsWithVideo", sender: self)
+        //        let selectedSong = songModel[indexPath.row].songs
+        //        songTabBarController?.songdelegate?.songSelected(selectedSong)
+        //        hideSearchBar()
+        //        //performSegue(withIdentifier: "songsWithVideo", sender: self)
+        //
+        //        if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
+        //
+        //            splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
+        //        }
         onSelectSong(indexPath.row)
     }
     
     func onSelectSong(_ row: Int) {
-        let selectedSong = songModel[row].songs
+        let selectedSong = filteredSongModel[row].songs
         songTabBarController?.songdelegate?.songSelected(selectedSong)
         hideSearchBar()
         if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
@@ -297,7 +298,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
             self.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: UITableViewRowAnimation.automatic)
         })
     }
-
+    
     func refresh(_ sender:AnyObject)
     {
         if self.preferences.data(forKey: "favorite") != nil {
@@ -307,13 +308,14 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
             for favoritesSongsWithOrder in favoritesSongsWithOrders {
                 let songs = databaseHelper.getSongsModelByIds([favoritesSongsWithOrder.songId])
                 if songs.count > 0 {
-                   favoritesSongs.append(FavoritesSong(songs: songs[0], favoritesSongsWithOrder: favoritesSongsWithOrder))
+                    favoritesSongs.append(FavoritesSong(songs: songs[0], favoritesSongsWithOrder: favoritesSongsWithOrder))
                 }
             }
             songModel = favoritesSongs
             songModel.sort(by: { (fav1, fav2) -> Bool in
                 fav1.favoritesSongsWithOrder.orderNo < fav2.favoritesSongsWithOrder.orderNo
             })
+            filteredSongModel = songModel
         }
         self.tableView.reloadData()
         self.refresh.endRefreshing()
@@ -328,13 +330,15 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     func filterContentForSearchText(_ searchBar: UISearchBar) {
         // Filter the array using the filter method
         let searchText = searchBar.text
-        var data = [(FavoritesSong)]()
-        data = self.songModel.filter({( song: FavoritesSong) -> Bool in
-            let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!)
-            return (stringMatch)
-            
-        })
-        self.songModel = data
+        var data = songModel
+        if (searchText?.characters.count)! > 0 {
+            data = self.songModel.filter({( song: FavoritesSong) -> Bool in
+                let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!)
+                return (stringMatch)
+                
+            })
+        }
+        self.filteredSongModel = data
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
@@ -379,5 +383,5 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         self.searchBar.text = ""
         self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
-
+    
 }
