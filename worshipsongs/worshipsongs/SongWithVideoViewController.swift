@@ -45,7 +45,7 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
             self.refreshUI()
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addFloatButton()
@@ -63,14 +63,6 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         player.isHidden = true
         playerHeight.constant = 0
         self.navigationItem.title = songName
-        //        let lyrics: Data = songLyrics.data(using: String.Encoding.utf8.rawValue)!
-        //        let parser = XMLParser(data: lyrics)
-        //        parser.delegate = self
-        //        parser.parse()
-        //        if(verseOrderList.count < 1){
-        //            print("parsedVerseOrderList:\(parsedVerseOrderList)")
-        //            verseOrderList = parsedVerseOrderList
-        //        }
         if DeviceUtils.isIpad() {
             self.splitViewController!.preferredDisplayMode = .primaryOverlay
             self.splitViewController!.preferredDisplayMode = .allVisible
@@ -101,7 +93,7 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         }
         setXmlParser()
         if DeviceUtils.isIpad() {
-          hideOrShowComponents()
+            hideOrShowComponents()
         }
     }
     
@@ -234,9 +226,9 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         return footerview
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//       
-//    }
+    //    override func viewWillAppear(_ animated: Bool) {
+    //
+    //    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -484,7 +476,9 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        self.onChangeOrientation(orientation: UIDevice.current.orientation)
+        if !DeviceUtils.isIpad() {
+            self.onChangeOrientation(orientation: UIDevice.current.orientation)
+        }
     }
     
     func onChangeOrientation(orientation: UIDeviceOrientation) {
@@ -587,7 +581,7 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
         activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
         activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.postToFacebook, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
         self.present(activityVC, animated: true, completion: { () -> Void in
-                self.tableView.deselectRow(at: indexPath, animated: true)
+            self.tableView.deselectRow(at: indexPath, animated: true)
         })
     }
     
