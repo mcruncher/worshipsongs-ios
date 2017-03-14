@@ -536,6 +536,7 @@ extension SongWithVideoViewController: SongSelectionDelegate {
     {
         return verseOrder.components(separatedBy: " ") as NSArray
     }
+}
 
 extension SongWithVideoViewController: UIGestureRecognizerDelegate {
     
