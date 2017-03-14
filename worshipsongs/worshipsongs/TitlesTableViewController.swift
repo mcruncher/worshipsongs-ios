@@ -1,9 +1,6 @@
 //
-//  TitlesTableViewController.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 10/9/15.
-//  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.0.0
 //
 
 import UIKit
@@ -22,13 +19,31 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
-
+    
+    fileprivate var songTabBarController: SongsTabBarViewController?
+    
+    
+    //    required init?(coder aDecoder: NSCoder) {
+    //        super.init(coder: aDecoder)!
+    //       // updateModel()
+    //        //songModel = databaseHelper.getSongModel()
+    //        //refresh(self)
+    //    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        songTabBarController = self.tabBarController as? SongsTabBarViewController
         self.tabBarItem.title = "songs".localized
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
+        songModel = databaseHelper.getSongModel()
+        filteredSongModel = songModel
         updateModel()
+        createSearchBar()
         addLongPressGestureRecognizer()
+        if DeviceUtils.isIpad() && filteredSongModel.count > 0 {
+            setDefaultSelectedSong()
+            onSelectSong(0)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,8 +54,17 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         filteredSongModel = songModel
         createSearchBar()
         tableView.reloadData()
+        if DeviceUtils.isIpad() && filteredSongModel.count > 0 {
+            setDefaultSelectedSong()
+            onSelectSong(0)
+        }
     }
-        
+    
+    private func setDefaultSelectedSong() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+    }
+    
     func updateModel() {
         //refresh control
         refresh = UIRefreshControl()
@@ -107,17 +131,17 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return filteredSongModel.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
@@ -127,36 +151,52 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         } else {
             cell.playImage.isHidden = true
         }
-        return cell 
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        verseList = NSArray()
-        songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
-        songName = filteredSongModel[(indexPath as NSIndexPath).row].title
-        authorName = databaseHelper.getArtistName(filteredSongModel[(indexPath as NSIndexPath).row].id)
-        
-        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil {
-            comment = filteredSongModel[(indexPath as NSIndexPath).row].comment
-        } else {
-            comment = ""
-        }
-        let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
-        if !verseOrder.isEmpty {
-            verseList = splitVerseOrder(verseOrder)
-        }
+        //        verseList = NSArray()
+        //        songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
+        //        songName = filteredSongModel[(indexPath as NSIndexPath).row].title
+        //        authorName = databaseHelper.getArtistName(filteredSongModel[(indexPath as NSIndexPath).row].id)
+        //
+        //        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil {
+        //            comment = filteredSongModel[(indexPath as NSIndexPath).row].comment
+        //        } else {
+        //            comment = ""
+        //        }
+        //        let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
+        //        if !verseOrder.isEmpty {
+        //            verseList = splitVerseOrder(verseOrder)
+        //        }
+        //performSegue(withIdentifier: "songsWithVideo", sender: self)
+        //        let selectedSong = filteredSongModel[indexPath.row]
+        //        songTabBarController?.songdelegate?.songSelected(selectedSong)
+        //        hideSearchBar()
+        //        if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
+        //            splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
+        //        }
+        onSelectSong(indexPath.row)
+    }
+    
+    func onSelectSong(_ row: Int) {
+        let selectedSong = filteredSongModel[row]
+        songTabBarController?.songdelegate?.songSelected(selectedSong)
         hideSearchBar()
-        performSegue(withIdentifier: "songsWithVideo", sender: self)
+        if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
+            splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
+        }
     }
     
     func splitVerseOrder(_ verseOrder: String) -> NSArray
     {
         return verseOrder.components(separatedBy: " ") as NSArray
     }
-   
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        songTabBarController?.collapseDetailViewController = true
         if (segue.identifier == "songsWithVideo") {
             let songWithVideoViewController = segue.destination as! SongWithVideoViewController
             songWithVideoViewController.verseOrder = verseList

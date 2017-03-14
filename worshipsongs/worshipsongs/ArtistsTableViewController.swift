@@ -21,9 +21,11 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
     
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
+    fileprivate var songTabBarController: SongsTabBarViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        songTabBarController = self.tabBarController as? SongsTabBarViewController
         self.tabBarItem.title = "artists".localized
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         //refresh control
@@ -85,6 +87,7 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
             let titleTableViewController = segue.destination as! ArtistSongsTitleTableViewController
             titleTableViewController.artistName = artistName
             titleTableViewController.songModel = songsModel
+            titleTableViewController.songTabBarController = songTabBarController
         }
     }
     

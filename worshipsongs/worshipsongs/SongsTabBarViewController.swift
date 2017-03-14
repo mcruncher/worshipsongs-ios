@@ -2,22 +2,30 @@
 //  SongsTabBarViewController.swift
 //  worshipsongs
 //
-//  Created by Vignesh Palanisamy on 07/12/2015.
-//  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.0.0
 //
 
 import UIKit
 
+
+protocol SongSelectionDelegate: class {
+    func songSelected(_ song: Songs!)
+}
+
 class SongsTabBarViewController: UITabBarController{
     
-    var secondWindow: UIWindow?
     fileprivate let preferences = UserDefaults.standard
+    weak var songdelegate: SongSelectionDelegate?
+    var collapseDetailViewController = true
+    var secondWindow: UIWindow?
     var presentationData = PresentationData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onBeforeUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onBeforeUpdateDatabase"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onAfterUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onAfterUpdateDatabase"), object: nil)
+        splitViewController?.delegate = self
     }
     
     func onBeforeUpdateDatabase(_ nsNotification: NSNotification) {
@@ -31,7 +39,7 @@ class SongsTabBarViewController: UITabBarController{
     func isDatabaseLock() -> Bool {
         return preferences.dictionaryRepresentation().keys.contains("database.lock") && preferences.bool(forKey:"database.lock")
     }
-
+    
     func onAfterUpdateDatabase(_ nsNotification: NSNotification) {
         self.selectedViewController?.viewWillAppear(true)
     }
@@ -48,5 +56,11 @@ class SongsTabBarViewController: UITabBarController{
     @IBAction func GoToSettingView(_ sender: Any) {
         performSegue(withIdentifier: "setting", sender: self)
     }
+}
 
+extension SongsTabBarViewController: UISplitViewControllerDelegate {
+   
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        return collapseDetailViewController
+    }
 }

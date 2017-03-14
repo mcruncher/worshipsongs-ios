@@ -1,9 +1,6 @@
 //
-//  SongWithVideoViewController.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 23/12/2016.
-//  Copyright © 2016 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.0.0
 //
 
 import UIKit
@@ -22,7 +19,7 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     var externalLabel = UILabel()
     var floatingbutton = KCFloatingActionButton()
     var hadYoutubeLink = false
-
+    
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     let presentationData = PresentationData()
     var songName: String = ""
@@ -41,6 +38,14 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     var play = false
     var noInternet = false
     
+    //new var
+    var databaseHelper = DatabaseHelper()
+    var selectedSong: Songs! {
+        didSet (newSong) {
+            self.refreshUI()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addFloatButton()
@@ -58,6 +63,78 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         player.isHidden = true
         playerHeight.constant = 0
         self.navigationItem.title = songName
+        //        let lyrics: Data = songLyrics.data(using: String.Encoding.utf8.rawValue)!
+        //        let parser = XMLParser(data: lyrics)
+        //        parser.delegate = self
+        //        parser.parse()
+        //        if(verseOrderList.count < 1){
+        //            print("parsedVerseOrderList:\(parsedVerseOrderList)")
+        //            verseOrderList = parsedVerseOrderList
+        //        }
+        if DeviceUtils.isIpad() {
+            self.splitViewController!.preferredDisplayMode = .primaryOverlay
+            self.splitViewController!.preferredDisplayMode = .allVisible
+        }
+        setXmlParser()
+        self.tableView.estimatedRowHeight = 88.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        let screenSize = UIScreen.main.bounds
+        let screenHeight = screenSize.height
+        buttonTop.constant = screenHeight - 125
+        actionButton.layer.cornerRadius = actionButton.layer.frame.height / 2
+        actionButton.clipsToBounds = true
+    }
+    
+    func refreshUI() {
+        let verseOrderString = selectedSong.verse_order
+        if !verseOrderString.isEmpty {
+            self.verseOrder = splitVerseOrder(verseOrderString)
+        }
+        songLyrics = selectedSong.lyrics as NSString
+        self.songName = selectedSong.title
+        authorName = databaseHelper.getArtistName(selectedSong.id)
+        if selectedSong.comment != nil {
+            comment = selectedSong.comment
+        } else {
+            comment = ""
+        }
+        setXmlParser()
+        if DeviceUtils.isIpad() {
+          hideOrShowComponents()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !(DeviceUtils.isIpad()) {
+            hideOrShowComponents()
+        }
+        presentationData.setupScreen()
+        self.onChangeOrientation(orientation: UIDevice.current.orientation)
+    }
+    
+    func hideOrShowComponents() {
+        if !comment.isEmpty && parseSongUrl() != "" {
+            loadYoutube(url: parseSongUrl())
+            floatingbutton.isHidden = false
+            actionButton.isHidden = true
+            hadYoutubeLink = true
+        } else {
+            floatingbutton.isHidden = true
+            actionButton.isHidden = false
+            hadYoutubeLink = false
+        }
+        player.isHidden = true
+        playerHeight.constant = 0
+        self.navigationItem.title = songName
+        self.tableView.reloadData()
+    }
+    
+    func setXmlParser() {
+        element = ""
+        attribues = NSDictionary()
+        listDataDictionary = NSMutableDictionary()
+        parsedVerseOrderList = NSMutableArray()
+        verseOrderList = NSMutableArray()
         let lyrics: Data = songLyrics.data(using: String.Encoding.utf8.rawValue)!
         let parser = XMLParser(data: lyrics)
         parser.delegate = self
@@ -66,13 +143,6 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
             print("parsedVerseOrderList:\(parsedVerseOrderList)")
             verseOrderList = parsedVerseOrderList
         }
-        self.tableView.estimatedRowHeight = 88.0
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        let screenSize = UIScreen.main.bounds
-        let screenHeight = screenSize.height
-        buttonTop.constant = screenHeight - 125
-        actionButton.layer.cornerRadius = actionButton.layer.frame.height / 2
-        actionButton.clipsToBounds = true
     }
     
     func addFloatButton() {
@@ -163,11 +233,9 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         return footerview
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-        presentationData.setupScreen()
-        self.onChangeOrientation(orientation: UIDevice.current.orientation)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//       
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -439,5 +507,18 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         return cells
     }
     
+}
+
+extension SongWithVideoViewController: SongSelectionDelegate {
+    
+    internal func songSelected(_ newSong: Songs!) {
+        selectedSong = newSong
+        
+    }
+    
+    func splitVerseOrder(_ verseOrder: String) -> NSArray
+    {
+        return verseOrder.components(separatedBy: " ") as NSArray
+    }
 }
 

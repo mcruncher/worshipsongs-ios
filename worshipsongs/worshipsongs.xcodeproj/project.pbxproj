@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		285D5A5C1E762C6300C3F1EE /* StartUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A5B1E762C6300C3F1EE /* StartUpController.swift */; };
 		285D5A5E1E762CD500C3F1EE /* SongTabletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A5D1E762CD500C3F1EE /* SongTabletController.swift */; };
 		285D5A601E7635A400C3F1EE /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A5F1E7635A400C3F1EE /* TitleViewController.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		280B923D1E77830E00833EAA /* DeviceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtils.swift; sourceTree = "<group>"; };
 		285D5A5B1E762C6300C3F1EE /* StartUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartUpController.swift; sourceTree = "<group>"; };
 		285D5A5D1E762CD500C3F1EE /* SongTabletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTabletController.swift; sourceTree = "<group>"; };
 		285D5A5F1E7635A400C3F1EE /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */,
 				2FDE48541DF149DB00948236 /* ColorUtils.swift */,
 				2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */,
+				280B923D1E77830E00833EAA /* DeviceUtils.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				2FDE48531DF140BD00948236 /* SettingsController.swift in Sources */,
 				285D5A5C1E762C6300C3F1EE /* StartUpController.swift in Sources */,
 				2FE840EF1DDBE7FB002B3379 /* FavoritesTableViewController.swift in Sources */,
+				280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */,
 				625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */,
 				2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */,

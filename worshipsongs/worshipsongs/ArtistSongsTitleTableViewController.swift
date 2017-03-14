@@ -22,6 +22,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
+    var songTabBarController: SongsTabBarViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,21 +129,26 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        verseList = NSArray()
-        songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
-        songName = filteredSongModel[(indexPath as NSIndexPath).row].title
-        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil {
-            comment = filteredSongModel[(indexPath as NSIndexPath).row].comment
-        } else {
-            comment = ""
-        }
-        let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
-        if !verseOrder.isEmpty {
-            verseList = splitVerseOrder(verseOrder)
-        }
+//        verseList = NSArray()
+//        songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
+//        songName = filteredSongModel[(indexPath as NSIndexPath).row].title
+//        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil {
+//            comment = filteredSongModel[(indexPath as NSIndexPath).row].comment
+//        } else {
+//            comment = ""
+//        }
+//        let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
+//        if !verseOrder.isEmpty {
+//            verseList = splitVerseOrder(verseOrder)
+//        }
+//        hideSearchBar()
+//        performSegue(withIdentifier: "songsWithVideo", sender: self)
+        let selectedSong = filteredSongModel[indexPath.row]
+        songTabBarController?.songdelegate?.songSelected(selectedSong)
         hideSearchBar()
-        performSegue(withIdentifier: "songsWithVideo", sender: self)
-        
+        if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
+            splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
+        }
     }
     
     func splitVerseOrder(_ verseOrder: String) -> NSArray

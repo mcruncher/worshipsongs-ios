@@ -1,9 +1,6 @@
 //
-//  FavoritesTableViewController.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 16/11/2016.
-//  Copyright © 2016 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.0.0
 //
 
 import UIKit
@@ -24,8 +21,11 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     var searchBar: UISearchBar!
     var authorName = ""
     
+    fileprivate var songTabBarController: SongsTabBarViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        songTabBarController = self.tabBarController as? SongsTabBarViewController
         self.tabBarItem.title = "favorites".localized
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         self.tableView.tableFooterView = getTableFooterView()
@@ -145,6 +145,10 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         songTabBarController.navigationItem.title = "favorites".localized
         createSearchBar()
         refresh(self)
+        if DeviceUtils.isIpad() && songModel.count > 0 {
+            setDefaultSelectedSong()
+            onSelectSong(0)
+        }
     }
     
     func updateModel() {
@@ -153,6 +157,11 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         refresh.addTarget(self, action: #selector(FavoritesTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
         refresh(self)
+    }
+    
+    private func setDefaultSelectedSong() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
     }
 
     override func didReceiveMemoryWarning() {
@@ -187,23 +196,42 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        verseList = NSArray()
-        let songs = songModel[(indexPath as NSIndexPath).row].songs
-        
-        songLyrics = songs.lyrics as NSString
-        songName = songs.title
-        authorName = databaseHelper.getArtistName(songs.id)
-        let verseOrder = songs.verse_order
-        if !verseOrder.isEmpty {
-            verseList = splitVerseOrder(verseOrder)
-        }
-        if songs.comment != nil {
-            comment = songs.comment
-        } else {
-            comment = ""
-        }
+//        verseList = NSArray()
+//        let songs = songModel[(indexPath as NSIndexPath).row].songs
+//        
+//        songLyrics = songs.lyrics as NSString
+//        songName = songs.title
+//        authorName = databaseHelper.getArtistName(songs.id)
+//        let verseOrder = songs.verse_order
+//        if !verseOrder.isEmpty {
+//            verseList = splitVerseOrder(verseOrder)
+//        }
+//        if songs.comment != nil {
+//            comment = songs.comment
+//        } else {
+//            comment = ""
+//        }
+//        hideSearchBar()
+//        performSegue(withIdentifier: "songsWithVideo", sender: self)
+//        let selectedSong = songModel[indexPath.row].songs
+//        songTabBarController?.songdelegate?.songSelected(selectedSong)
+//        hideSearchBar()
+//        //performSegue(withIdentifier: "songsWithVideo", sender: self)
+//        
+//        if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
+//            
+//            splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
+//        }
+        onSelectSong(indexPath.row)
+    }
+    
+    func onSelectSong(_ row: Int) {
+        let selectedSong = songModel[row].songs
+        songTabBarController?.songdelegate?.songSelected(selectedSong)
         hideSearchBar()
-        performSegue(withIdentifier: "songsWithVideo", sender: self)
+        if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
+            splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
+        }
     }
     
     func splitVerseOrder(_ verseOrder: String) -> NSArray

@@ -54,7 +54,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         let presentationData = PresentationData()
         presentationData.registerForScreenNotification()
+        setSplitViewController()
         return true
+    }
+    
+    func setSplitViewController() {
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        
+        let leftNavController = splitViewController.viewControllers.first as! UINavigationController
+        let masterViewController = leftNavController.topViewController as! SongsTabBarViewController
+        
+        let rightNavController = splitViewController.viewControllers.last as! UINavigationController
+        let detailViewController = rightNavController.topViewController as! SongWithVideoViewController
+        
+        masterViewController.songdelegate = detailViewController
+        
+        detailViewController.navigationItem.leftItemsSupplementBackButton = true
+        detailViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
     }
     
     func updateDefaultSettings() {
