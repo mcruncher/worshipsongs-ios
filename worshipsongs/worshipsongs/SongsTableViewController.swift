@@ -191,7 +191,6 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         return objectString
     }
     
-    
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         //text = string
         print("string:\(string)")

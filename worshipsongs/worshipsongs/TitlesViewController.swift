@@ -5,7 +5,7 @@
 
 import UIKit
 
-class TitlesTableViewController: UITableViewController {
+class TitlesViewController: UITableViewController {
     
     fileprivate let preferences = UserDefaults.standard
     fileprivate var songModel = [Songs]()
@@ -35,7 +35,7 @@ class TitlesTableViewController: UITableViewController {
     {
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
-        refresh.addTarget(self, action: #selector(TitlesTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
+        refresh.addTarget(self, action: #selector(TitlesViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
     }
     
@@ -123,7 +123,7 @@ class TitlesTableViewController: UITableViewController {
 }
 
 // MARK: - Table view data source
-extension TitlesTableViewController {
+extension TitlesViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -147,7 +147,7 @@ extension TitlesTableViewController {
 }
 
 // MARK: - Table view delegate
-extension TitlesTableViewController {
+extension TitlesViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         onSelectSong(indexPath.row)
@@ -168,10 +168,10 @@ extension TitlesTableViewController {
     
 }
 
-extension TitlesTableViewController: UIGestureRecognizerDelegate {
+extension TitlesViewController: UIGestureRecognizerDelegate {
     
     fileprivate func addLongPressGestureRecognizer() {
-        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TitlesTableViewController.onCellViewLongPress(_:)))
+        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TitlesViewController.onCellViewLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         longPressGesture.delegate = self
         self.tableView.addGestureRecognizer(longPressGesture)
@@ -179,7 +179,7 @@ extension TitlesTableViewController: UIGestureRecognizerDelegate {
     
 }
 
-extension TitlesTableViewController: UISearchBarDelegate {
+extension TitlesViewController: UISearchBarDelegate {
     
     fileprivate func addSearchBar() {
         // Search bar
@@ -192,7 +192,7 @@ extension TitlesTableViewController: UISearchBarDelegate {
     }
     
     fileprivate func addSearchBarButton() {
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
+        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
     func searchButtonItemClicked(_ sender:UIBarButtonItem) {
@@ -235,7 +235,7 @@ extension TitlesTableViewController: UISearchBarDelegate {
         self.tabBarController?.navigationItem.titleView = nil
         self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
         self.searchBar.text = ""
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
+        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
 }

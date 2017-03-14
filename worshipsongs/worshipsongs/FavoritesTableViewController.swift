@@ -341,7 +341,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func addSearchBarButton(){
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
+        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
     func searchButtonItemClicked(_ sender:UIBarButtonItem){
@@ -355,7 +355,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         self.tabBarController?.navigationItem.titleView = nil
         self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
         self.searchBar.text = ""
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
+        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
 }
