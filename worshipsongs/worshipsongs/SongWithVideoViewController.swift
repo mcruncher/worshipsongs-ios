@@ -483,8 +483,8 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
     func shareLyrics(lyrics: NSMutableAttributedString, indexPath: IndexPath) {
         let objectString: NSMutableAttributedString = NSMutableAttributedString()
         objectString.append(NSAttributedString(string: "<html><body>"))
-        objectString.append(NSAttributedString(string: "<h1><a href=\"http://apple.co/2mJwePJ\">Tamil Christian Worship Songs</a></h1><br/>"))
-        objectString.append(getMessage(verseOrder: verseOrderList[indexPath.section] as! String))
+        objectString.append(NSAttributedString(string: "<h1><a href=\"http://apple.co/2mJwePJ\">Tamil Christian Worship Songs</a></h1>"))
+        objectString.append(getObject(verseOrder: verseOrderList[indexPath.section] as! String))
         objectString.append(NSAttributedString(string: "</body></html>"))
         
         let messageString = getMessage(verseOrder: verseOrderList[indexPath.section] as! String)
