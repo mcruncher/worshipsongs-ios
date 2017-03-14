@@ -1,9 +1,6 @@
 //
-//  SongsTableViewController.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 10/12/15.
-//  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.0.0
 //
 
 import UIKit
@@ -20,7 +17,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     var listDataDictionary : NSMutableDictionary = NSMutableDictionary()
     var parsedVerseOrderList: NSMutableArray = NSMutableArray()
     var verseOrderList: NSMutableArray = NSMutableArray()
-    var text: String!
+    //var text: String!
     fileprivate let preferences = UserDefaults.standard
 
     override func viewDidLoad() {
@@ -35,6 +32,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
             print("parsedVerseOrderList:\(parsedVerseOrderList)")
             verseOrderList = parsedVerseOrderList
         }
+        
         self.tableView.estimatedRowHeight = 88.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -195,7 +193,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        text = string
+        //text = string
         print("string:\(string)")
         let data = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         print("data:\(data)")
@@ -255,4 +253,6 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     }
 
 }
+
+
 
