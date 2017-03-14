@@ -197,32 +197,6 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //        verseList = NSArray()
-        //        let songs = songModel[(indexPath as NSIndexPath).row].songs
-        //
-        //        songLyrics = songs.lyrics as NSString
-        //        songName = songs.title
-        //        authorName = databaseHelper.getArtistName(songs.id)
-        //        let verseOrder = songs.verse_order
-        //        if !verseOrder.isEmpty {
-        //            verseList = splitVerseOrder(verseOrder)
-        //        }
-        //        if songs.comment != nil {
-        //            comment = songs.comment
-        //        } else {
-        //            comment = ""
-        //        }
-        //        hideSearchBar()
-        //        performSegue(withIdentifier: "songsWithVideo", sender: self)
-        //        let selectedSong = songModel[indexPath.row].songs
-        //        songTabBarController?.songdelegate?.songSelected(selectedSong)
-        //        hideSearchBar()
-        //        //performSegue(withIdentifier: "songsWithVideo", sender: self)
-        //
-        //        if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
-        //
-        //            splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
-        //        }
         onSelectSong(indexPath.row)
     }
     
