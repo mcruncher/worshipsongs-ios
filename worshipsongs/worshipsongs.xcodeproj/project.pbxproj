@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
+		283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		285D5A5C1E762C6300C3F1EE /* StartUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A5B1E762C6300C3F1EE /* StartUpController.swift */; };
 		285D5A5E1E762CD500C3F1EE /* SongTabletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A5D1E762CD500C3F1EE /* SongTabletController.swift */; };
 		285D5A601E7635A400C3F1EE /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A5F1E7635A400C3F1EE /* TitleViewController.swift */; };
@@ -595,6 +596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */,
+				283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */,
 				2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

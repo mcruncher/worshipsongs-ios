@@ -5,82 +5,49 @@
 
 import UIKit
 
-class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
+class TitlesTableViewController: UITableViewController {
     
-    var songModel = [Songs]()
     fileprivate let preferences = UserDefaults.standard
-    var filteredSongModel = [Songs]()
-    var databaseHelper = DatabaseHelper()
-    var verseList: NSArray = NSArray()
-    var songLyrics: NSString = NSString()
-    var songName: String = ""
-    var comment = ""
-    var authorName = ""
-    
-    var searchBar: UISearchBar!
-    var refresh = UIRefreshControl()
-    
+    fileprivate var songModel = [Songs]()
+    fileprivate var filteredSongModel = [Songs]()
+    fileprivate var databaseHelper = DatabaseHelper()
+    fileprivate var searchBar: UISearchBar!
+    fileprivate var refresh = UIRefreshControl()
     fileprivate var songTabBarController: SongsTabBarViewController?
     
-    
-    //    required init?(coder aDecoder: NSCoder) {
-    //        super.init(coder: aDecoder)!
-    //       // updateModel()
-    //        //songModel = databaseHelper.getSongModel()
-    //        //refresh(self)
-    //    }
-    
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        songTabBarController = self.tabBarController as? SongsTabBarViewController
-        self.tabBarItem.title = "songs".localized
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
-        songModel = databaseHelper.getSongModel()
-        filteredSongModel = songModel
-        updateModel()
-        createSearchBar()
+        addRefreshControl()
+        addSearchBar()
         addLongPressGestureRecognizer()
-        if DeviceUtils.isIpad() && filteredSongModel.count > 0 {
-            setDefaultSelectedSong()
-            onSelectSong(0)
-        }
+        initSetup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(animated)
-        let songTabBarController = tabBarController as! SongsTabBarViewController
-        songTabBarController.navigationItem.title = "songs".localized
-        songModel = databaseHelper.getSongModel()
-        filteredSongModel = songModel
-        createSearchBar()
-        tableView.reloadData()
-        if DeviceUtils.isIpad() && filteredSongModel.count > 0 {
-            setDefaultSelectedSong()
-            onSelectSong(0)
-        }
+        addSearchBar()
+        initSetup()
     }
     
-    private func setDefaultSelectedSong() {
-        let indexPath = IndexPath(row: 0, section: 0)
-        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
-    }
-    
-    func updateModel() {
-        //refresh control
+    func addRefreshControl()
+    {
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
         refresh.addTarget(self, action: #selector(TitlesTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
     }
     
-    fileprivate func addLongPressGestureRecognizer() {
-        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TitlesTableViewController.onCellViewLongPress(_:)))
-        longPressGesture.minimumPressDuration = 0.5
-        longPressGesture.delegate = self
-        self.tableView.addGestureRecognizer(longPressGesture)
+    func refresh(_ sender:AnyObject)
+    {
+        filteredSongModel = songModel
+        self.tableView.reloadData()
+        self.refresh.endRefreshing()
     }
     
-    internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
+    internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer)
+    {
         let pressingPoint = longPressGesture.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
         if longPressGesture.state == UIGestureRecognizerState.began {
@@ -88,18 +55,21 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         }
     }
     
-    fileprivate func getConfirmationAlertController(_ indexPath: IndexPath) -> UIAlertController {
+    fileprivate func getConfirmationAlertController(_ indexPath: IndexPath) -> UIAlertController
+    {
         let confirmationAlertController = self.getMoveController(indexPath)
         confirmationAlertController.addAction(self.getMoveAction(indexPath))
         confirmationAlertController.addAction(self.getCancelAction(indexPath))
         return confirmationAlertController
     }
     
-    fileprivate func getMoveController(_ indexPath: IndexPath) -> UIAlertController {
+    fileprivate func getMoveController(_ indexPath: IndexPath) -> UIAlertController
+    {
         return UIAlertController(title: filteredSongModel[(indexPath as NSIndexPath).row].title, message: "message.add".localized, preferredStyle: UIAlertControllerStyle.alert)
     }
     
-    fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction {
+    fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction
+    {
         return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
             let song = self.filteredSongModel[indexPath.row]
             var favSongs = [FavoritesSongsWithOrder]()
@@ -119,10 +89,30 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         })
     }
     
-    fileprivate func getCancelAction(_ indexPath: IndexPath) -> UIAlertAction {
+    fileprivate func getCancelAction(_ indexPath: IndexPath) -> UIAlertAction
+    {
         return UIAlertAction(title: "No", style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
             self.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: UITableViewRowAnimation.automatic)
         })
+    }
+    
+    private func initSetup()
+    {
+        songTabBarController = tabBarController as? SongsTabBarViewController
+        songTabBarController?.navigationItem.title = "songs".localized
+        songModel = databaseHelper.getSongModel()
+        filteredSongModel = songModel
+        tableView.reloadData()
+        if DeviceUtils.isIpad() && filteredSongModel.count > 0 {
+            setDefaultSelectedSong()
+            onSelectSong(0)
+        }
+    }
+    
+    private func setDefaultSelectedSong()
+    {
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
     }
     
     override func didReceiveMemoryWarning() {
@@ -130,18 +120,18 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
+}
+
+// MARK: - Table view data source
+extension TitlesTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return filteredSongModel.count
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
@@ -154,31 +144,17 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         return cell
     }
     
+}
+
+// MARK: - Table view delegate
+extension TitlesTableViewController {
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        //        verseList = NSArray()
-        //        songLyrics = filteredSongModel[(indexPath as NSIndexPath).row].lyrics as NSString
-        //        songName = filteredSongModel[(indexPath as NSIndexPath).row].title
-        //        authorName = databaseHelper.getArtistName(filteredSongModel[(indexPath as NSIndexPath).row].id)
-        //
-        //        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil {
-        //            comment = filteredSongModel[(indexPath as NSIndexPath).row].comment
-        //        } else {
-        //            comment = ""
-        //        }
-        //        let verseOrder = filteredSongModel[(indexPath as NSIndexPath).row].verse_order
-        //        if !verseOrder.isEmpty {
-        //            verseList = splitVerseOrder(verseOrder)
-        //        }
-        //performSegue(withIdentifier: "songsWithVideo", sender: self)
-        //        let selectedSong = filteredSongModel[indexPath.row]
-        //        songTabBarController?.songdelegate?.songSelected(selectedSong)
-        //        hideSearchBar()
-        //        if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
-        //            splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
-        //        }
         onSelectSong(indexPath.row)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1.0
     }
     
     func onSelectSong(_ row: Int) {
@@ -190,21 +166,40 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         }
     }
     
-    func splitVerseOrder(_ verseOrder: String) -> NSArray
-    {
-        return verseOrder.components(separatedBy: " ") as NSArray
+}
+
+extension TitlesTableViewController: UIGestureRecognizerDelegate {
+    
+    fileprivate func addLongPressGestureRecognizer() {
+        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TitlesTableViewController.onCellViewLongPress(_:)))
+        longPressGesture.minimumPressDuration = 0.5
+        longPressGesture.delegate = self
+        self.tableView.addGestureRecognizer(longPressGesture)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        songTabBarController?.collapseDetailViewController = true
-        if (segue.identifier == "songsWithVideo") {
-            let songWithVideoViewController = segue.destination as! SongWithVideoViewController
-            songWithVideoViewController.verseOrder = verseList
-            songWithVideoViewController.songLyrics = songLyrics
-            songWithVideoViewController.songName = songName
-            songWithVideoViewController.comment = comment
-            songWithVideoViewController.authorName = authorName
-        }
+}
+
+extension TitlesTableViewController: UISearchBarDelegate {
+    
+    fileprivate func addSearchBar() {
+        // Search bar
+        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
+        searchBar = UISearchBar(frame: searchBarFrame)
+        searchBar.delegate = self;
+        searchBar.showsCancelButton = true;
+        searchBar.tintColor = UIColor.gray
+        self.addSearchBarButton()
+    }
+    
+    fileprivate func addSearchBarButton() {
+        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
+    }
+    
+    func searchButtonItemClicked(_ sender:UIBarButtonItem) {
+        self.tabBarController?.navigationItem.titleView = searchBar;
+        self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        searchBar.becomeFirstResponder()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -212,7 +207,7 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         self.tableView.reloadData()
     }
     
-    func filterContentForSearchText(_ searchBar: UISearchBar) {
+    fileprivate func filterContentForSearchText(_ searchBar: UISearchBar) {
         // Filter the array using the filter method
         let searchText = searchBar.text
         var data = [(Songs)]()
@@ -224,52 +219,22 @@ class TitlesTableViewController: UITableViewController, UISearchBarDelegate, UIG
         self.filteredSongModel = data
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-    {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         hideSearchBar()
         tableView.reloadData()
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
-    {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         hideSearchBar()
         filteredSongModel = songModel
         tableView.reloadData()
     }
     
-    func refresh(_ sender:AnyObject)
-    {
-        filteredSongModel = songModel
-        self.tableView.reloadData()
-        self.refresh.endRefreshing()
-    }
-    
-    func createSearchBar()
-    {
-        // Search bar
-        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
-        searchBar = UISearchBar(frame: searchBarFrame)
-        searchBar.delegate = self;
-        searchBar.showsCancelButton = true;
-        searchBar.tintColor = UIColor.gray
-        self.addSearchBarButton()
-    }
-    
-    func addSearchBarButton(){
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
-    }
-    
-    func searchButtonItemClicked(_ sender:UIBarButtonItem){
-        self.tabBarController?.navigationItem.titleView = searchBar;
-        self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
-        searchBar.becomeFirstResponder()
-    }
-    
-    func hideSearchBar() {
+    fileprivate func hideSearchBar() {
         self.tabBarController?.navigationItem.titleView = nil
         self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
         self.searchBar.text = ""
         self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
+    
 }
