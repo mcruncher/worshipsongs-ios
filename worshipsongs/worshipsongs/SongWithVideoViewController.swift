@@ -73,6 +73,7 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         buttonTop.constant = screenHeight - 125
         actionButton.layer.cornerRadius = actionButton.layer.frame.height / 2
         actionButton.clipsToBounds = true
+        addLongPressGestureRecognizer()
     }
     
     func addFloatButton() {
@@ -343,16 +344,22 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         objectString.append(NSAttributedString(string: "<h1><a href=\"https://itunes.apple.com/us/app/tamil-christian-worship-songs/id1066174826?mt=8\">Tamil Christian Worship Songs</a></h1>"))
         objectString.append(NSAttributedString(string: "<h2>\(songName)</h2>"))
         for verseOrder in verseOrderList {
-            let key: String = (verseOrder as! String).lowercased()
-            let dataText: String? = listDataDictionary[key] as? String
-            let texts = parseString(text: dataText!)
-            print("verseOrder \(verseOrder)")
-            for text in texts {
-                objectString.append(NSAttributedString(string: text))
-                objectString.append(NSAttributedString(string: "<br/>"))
-            }
+            objectString.append(getObject(verseOrder: verseOrder as! String))
         }
         objectString.append(NSAttributedString(string: "</body></html>"))
+        return objectString
+    }
+    
+    func getObject(verseOrder: String) -> NSMutableAttributedString {
+        let objectString: NSMutableAttributedString = NSMutableAttributedString()
+        let key: String = verseOrder.lowercased()
+        let dataText: String? = listDataDictionary[key] as? String
+        let texts = parseString(text: dataText!)
+        print("verseOrder \(verseOrder)")
+        for text in texts {
+            objectString.append(NSAttributedString(string: text))
+            objectString.append(NSAttributedString(string: "<br/>"))
+        }
         return objectString
     }
     
@@ -368,15 +375,21 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         objectString.append(NSAttributedString(string: "Tamil Christian Worship Songs\n\n"))
         objectString.append(NSAttributedString(string: "\n\(songName)\n\n"))
         for verseOrder in verseOrderList {
-            let key: String = (verseOrder as! String).lowercased()
-            let dataText: String? = listDataDictionary[key] as? String
-            let texts = parseString(text: dataText!)
-            print("verseOrder \(verseOrder)")
-            for text in texts {
-                objectString.append(NSAttributedString(string: text))
-            }
-            objectString.append(NSAttributedString(string: "\n\n"))
+            objectString.append(getMessage(verseOrder: verseOrder as! String))
         }
+        return objectString
+    }
+    
+    func getMessage(verseOrder: String) ->  NSMutableAttributedString{
+        let objectString: NSMutableAttributedString = NSMutableAttributedString()
+        let key: String = (verseOrder).lowercased()
+        let dataText: String? = listDataDictionary[key] as? String
+        let texts = parseString(text: dataText!)
+        print("verseOrder \(verseOrder)")
+        for text in texts {
+            objectString.append(NSAttributedString(string: text))
+        }
+        objectString.append(NSAttributedString(string: "\n\n"))
         return objectString
     }
     
@@ -437,6 +450,61 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
             cells.append(cell)
         }
         return cells
+    }
+    
+}
+
+extension SongWithVideoViewController: UIGestureRecognizerDelegate {
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    fileprivate func addLongPressGestureRecognizer() {
+        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(SongWithVideoViewController.onCellViewLongPress(_:)))
+        longPressGesture.minimumPressDuration = 0.5
+        longPressGesture.delegate = self
+        self.tableView.addGestureRecognizer(longPressGesture)
+    }
+    
+    internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
+        let pressingPoint = longPressGesture.location(in: self.tableView)
+        if longPressGesture.state == UIGestureRecognizerState.began {
+            UIView.transition(with: self.tableView, duration: 00.35, options: [], animations: { () -> Void in
+                let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
+                self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+                let text = self.tableView.cellForRow(at: indexPath!)?.textLabel?.attributedText
+                self.shareLyrics(lyrics: text as! NSMutableAttributedString, indexPath: indexPath!)
+            }, completion: nil)
+        }
+    }
+    
+    func shareLyrics(lyrics: NSMutableAttributedString, indexPath: IndexPath) {
+        let objectString: NSMutableAttributedString = NSMutableAttributedString()
+        objectString.append(NSAttributedString(string: "<html><body>"))
+        objectString.append(NSAttributedString(string: "<h1><a href=\"http://apple.co/2mJwePJ\">Tamil Christian Worship Songs</a></h1><br/>"))
+        objectString.append(getMessage(verseOrder: verseOrderList[indexPath.section] as! String))
+        objectString.append(NSAttributedString(string: "</body></html>"))
+        
+        let messageString = getMessage(verseOrder: verseOrderList[indexPath.section] as! String)
+        messageString.append(NSAttributedString(string: "\n\n"))
+        messageString.append(NSAttributedString(string: "  http://apple.co/2mJwePJ"))
+        
+        let activityItem = CustomProvider(placeholderItem: "Default" as AnyObject, messagerMessage: messageString.string, emailMessage: objectString.string)
+        if let myWebsite = URL(string: "http://apple.co/2mJwePJ") {
+            let objectsToShare = [activityItem, myWebsite] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            let popUpView = self.tableView.cellForRow(at: indexPath)?.contentView
+            activityVC.popoverPresentationController?.sourceView = popUpView
+            activityVC.popoverPresentationController?.sourceRect = (popUpView?.bounds)!
+            activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
+            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
+            self.present(activityVC, animated: true, completion: { () -> Void in
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            })
+        }
+        
     }
     
 }
