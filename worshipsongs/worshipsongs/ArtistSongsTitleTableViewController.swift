@@ -46,7 +46,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     fileprivate func addLongPressGestureRecognizer() {
-        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TitlesTableViewController.onCellViewLongPress(_:)))
+        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TitlesViewController.onCellViewLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         longPressGesture.delegate = self
         self.tableView.addGestureRecognizer(longPressGesture)

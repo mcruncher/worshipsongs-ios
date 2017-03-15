@@ -8,12 +8,16 @@ import YouTubePlayer
 import KCFloatingActionButton
 import SystemConfiguration
 
-class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, XMLParserDelegate {
+class SongWithVideoViewController: UIViewController, XMLParserDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var player: YouTubePlayerView!
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var buttonTop: NSLayoutConstraint!
     @IBOutlet weak var playerHeight: NSLayoutConstraint!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var previousButton: UIButton!
+    
     var secondWindow: UIWindow?
     var secondScreenView: UIView?
     var externalLabel = UILabel()
@@ -76,7 +80,10 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         actionButton.layer.cornerRadius = actionButton.layer.frame.height / 2
         actionButton.clipsToBounds = true
         addLongPressGestureRecognizer()
+        setNextButton()
+        setPreviousButton()
     }
+    
     
     func refreshUI() {
         let verseOrderString = selectedSong.verse_order
@@ -86,6 +93,9 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         songLyrics = selectedSong.lyrics as NSString
         self.songName = selectedSong.title
         authorName = databaseHelper.getArtistName(selectedSong.id)
+        self.preferences.setValue(authorName, forKeyPath: "presentationAuthor")
+        self.preferences.setValue(songName, forKeyPath: "presentationSongName")
+        self.preferences.synchronize()
         if selectedSong.comment != nil {
             comment = selectedSong.comment
         } else {
@@ -99,10 +109,10 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         if !(DeviceUtils.isIpad()) {
+            self.onChangeOrientation(orientation: UIDevice.current.orientation)
             hideOrShowComponents()
         }
         presentationData.setupScreen()
-        self.onChangeOrientation(orientation: UIDevice.current.orientation)
     }
     
     func hideOrShowComponents() {
@@ -116,9 +126,13 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
             actionButton.isHidden = false
             hadYoutubeLink = false
         }
+        floatingbutton.close()
+        previousButton.isHidden = true
+        nextButton.isHidden = true
         player.isHidden = true
         playerHeight.constant = 0
         self.navigationItem.title = songName
+        actionButton.setImage(UIImage(named: "presentation"), for: UIControlState())
         self.tableView.reloadData()
     }
     
@@ -159,7 +173,8 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         let presentationItem = getKCFloatingActionButtonItem(title: "presentSong".localized, icon: UIImage(named: "presentation")!)
         presentationItem.handler = { item in
             self.floatingbutton.close()
-            self.presentation()
+            self.presentationData.setupScreen()
+            self.presentation(IndexPath(row: 0, section: 0))
         }
         floatingbutton.addItem(item: presentationItem)
         floatingbutton.sticky = true
@@ -226,41 +241,9 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         return footerview
     }
     
-    //    override func viewWillAppear(_ animated: Bool) {
-    //
-    //    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Table view data source
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        print("row\(self.verseOrderList.count)")
-        return self.verseOrderList.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let key: String = (verseOrderList[(indexPath as NSIndexPath).section] as! String).lowercased()
-        print("key\(key)")
-        let dataText: NSString? = listDataDictionary[key] as? NSString
-        cell.textLabel!.numberOfLines = 0
-        let fontSize = self.preferences.integer(forKey: "fontSize")
-        cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
-        cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
-        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
-        print("cell\(cell.textLabel!.attributedText )")
-        return cell
     }
     
     func parseSongUrl() -> String {
@@ -306,16 +289,6 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         setAction()
     }
     
-    func presentation() {
-        if UIScreen.screens.count > 1 {
-            performSegue(withIdentifier: "presentation", sender: self)
-        } else {
-            let alertController = self.getAlertController(message: "message.presentSong".localized)
-            alertController.addAction(self.getCancelAction())
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-    
     func setAction() {
         if hadYoutubeLink {
             if play {
@@ -335,7 +308,8 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
                 player.play()
             }
         } else {
-            presentation()
+            presentationData.setupScreen()
+            presentation(IndexPath(row: 0, section: 0))
         }
     }
     
@@ -350,13 +324,14 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
             fullScreenController.cells = getAllCells()
             fullScreenController.songName = songName
             fullScreenController.authorName = authorName
-        } else if (segue.identifier == "presentation") {
-            let presentationViewController = segue.destination as! PresentationViewController
-            presentationViewController.verseOrder = verseOrder
-            presentationViewController.songLyrics = songLyrics
-            presentationViewController.songName = songName
-            presentationViewController.authorName = authorName
         }
+//        else if (segue.identifier == "presentation") {
+//            let presentationViewController = segue.destination as! PresentationViewController
+//            presentationViewController.verseOrder = verseOrder
+//            presentationViewController.songLyrics = songLyrics
+//            presentationViewController.songName = songName
+//            presentationViewController.authorName = authorName
+//        }
     }
     
     func share() {
@@ -496,7 +471,6 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    
     func getAllCells() -> [UITableViewCell] {
         
         var cells = [UITableViewCell]()
@@ -518,10 +492,103 @@ class SongWithVideoViewController: UIViewController, UITableViewDelegate, UITabl
     
 }
 
+// MARK: - Table view data source
+extension SongWithVideoViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.verseOrderList.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let key: String = (verseOrderList[(indexPath as NSIndexPath).section] as! String).lowercased()
+        print("key\(key)")
+        let dataText: NSString? = listDataDictionary[key] as? NSString
+        cell.textLabel!.numberOfLines = 0
+        let fontSize = self.preferences.integer(forKey: "fontSize")
+        cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+        cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
+        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
+        print("cell\(cell.textLabel!.attributedText )")
+        return cell
+    }
+}
+
+extension SongWithVideoViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presentation(indexPath)
+        //tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - Presentation action source
+extension SongWithVideoViewController {
+    
+    fileprivate func setNextButton() {
+        nextButton.layer.cornerRadius = nextButton.layer.frame.height / 2
+        nextButton.clipsToBounds = true
+        nextButton.isHidden = true
+    }
+    
+    fileprivate func setPreviousButton() {
+        previousButton.layer.cornerRadius = previousButton.layer.frame.height / 2
+        previousButton.clipsToBounds = true
+        previousButton.isHidden = true
+    }
+    
+    @IBAction func tapOnPreviousButton(_ sender: Any) {
+        var indexPath = IndexPath(row: 0, section: 0)
+        if tableView.indexPathForSelectedRow != nil {
+            indexPath = IndexPath(row: (tableView.indexPathForSelectedRow?.row)!, section: (tableView.indexPathForSelectedRow?.section)! - 1)
+        }
+        presentation(indexPath)
+    }
+    
+    @IBAction func tapOnNextButton(_ sender: Any) {
+        var indexPath = IndexPath(row: 0, section: 0)
+        if tableView.indexPathForSelectedRow != nil {
+            indexPath = IndexPath(row: (tableView.indexPathForSelectedRow?.row)!, section: (tableView.indexPathForSelectedRow?.section)! + 1)
+        }
+        presentation(indexPath)
+    }
+    
+    func presentation(_ indexPath: IndexPath) {
+        if UIScreen.screens.count > 1 {
+            tableView.allowsSelection = true
+            presentVerse(indexPath)
+            actionButton.isHidden = true
+            floatingbutton.isHidden = true
+        } else {
+            let alertController = self.getAlertController(message: "message.presentSong".localized)
+            alertController.addAction(self.getCancelAction())
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func presentVerse(_ indexPath: IndexPath) {
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+        let key = (verseOrderList[(indexPath as NSIndexPath).section] as! String).lowercased()
+        let dataText: NSString? = listDataDictionary[key] as? NSString
+        self.preferences.setValue(dataText, forKey: "presentationLyrics")
+        let slideNumber = String(indexPath.section + 1) + " of " + String(tableView.numberOfSections)
+        self.preferences.setValue(slideNumber, forKeyPath: "presentationSlide")
+        self.preferences.synchronize()
+        self.presentationData.updateScreen()
+        previousButton.isHidden = indexPath.section <= 0
+        nextButton.isHidden = indexPath.section >= tableView.numberOfSections - 1
+    }
+    
+}
 
 extension SongWithVideoViewController: SongSelectionDelegate {
     
-    internal func songSelected(_ newSong: Songs!) {
+    internal func songSelected(_ newSong: Songs!)
+    {
         selectedSong = newSong
         
     }
@@ -535,10 +602,6 @@ extension SongWithVideoViewController: SongSelectionDelegate {
 extension SongWithVideoViewController: UIGestureRecognizerDelegate {
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
     fileprivate func addLongPressGestureRecognizer() {
         let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(SongWithVideoViewController.onCellViewLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
@@ -547,14 +610,17 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
     }
     
     internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
-        let pressingPoint = longPressGesture.location(in: self.tableView)
-        if longPressGesture.state == UIGestureRecognizerState.began {
-            UIView.transition(with: self.tableView, duration: 00.35, options: [], animations: { () -> Void in
-                let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
-                self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
-                let text = self.tableView.cellForRow(at: indexPath!)?.textLabel?.attributedText
-                self.shareLyrics(lyrics: text as! NSMutableAttributedString, indexPath: indexPath!)
-            }, completion: nil)
+        
+        if previousButton.isHidden && previousButton.isHidden {
+            let pressingPoint = longPressGesture.location(in: self.tableView)
+            if longPressGesture.state == UIGestureRecognizerState.began {
+                UIView.transition(with: self.tableView, duration: 00.35, options: [], animations: { () -> Void in
+                    let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
+                    self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+                    let text = self.tableView.cellForRow(at: indexPath!)?.textLabel?.attributedText
+                    self.shareLyrics(lyrics: text as! NSMutableAttributedString, indexPath: indexPath!)
+                }, completion: nil)
+            }
         }
     }
     
