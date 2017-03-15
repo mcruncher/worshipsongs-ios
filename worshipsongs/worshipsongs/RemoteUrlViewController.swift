@@ -44,8 +44,10 @@ class RemoteUrlViewController: UIViewController {
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         if DeviceUtils.isIpad() {
-            //splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
-            //splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
+            splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
+            splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
+            let leftNavController = splitViewController?.viewControllers.first as! UINavigationController
+            leftNavController.view.frame = CGRect(x: leftNavController.view.frame.origin.x, y: leftNavController.view.frame.origin.y, width: (splitViewController?.view.bounds.size.width)!, height: leftNavController.view.frame.height)
         }
     }
     
