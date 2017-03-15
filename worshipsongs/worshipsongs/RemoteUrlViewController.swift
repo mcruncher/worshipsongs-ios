@@ -1,9 +1,7 @@
 //
-//  RemoteUrlViewController.swift
-//  worshipsongs
 //
-//  Created by Vignesh Palanisamy on 24/02/2017.
-//  Copyright © 2017 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.7.0
 //
 
 import UIKit
@@ -43,5 +41,12 @@ class RemoteUrlViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        if DeviceUtils.isIpad() {
+            //splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
+            //splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
+        }
+    }
+    
 }

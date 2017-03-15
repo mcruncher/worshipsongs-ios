@@ -1,9 +1,6 @@
 //
-//  SettingsController.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 02/12/2016.
-//  Copyright © 2016 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.7.0
 //
 
 import UIKit
@@ -12,7 +9,7 @@ import FileBrowser
 import MessageUI
 
 class SettingsController: UITableViewController {
-
+    
     @IBOutlet weak var importDatabaseLabel: UILabel!
     @IBOutlet weak var importDatabaseCell: UITableViewCell!
     @IBOutlet weak var fontSizeSlider: UISlider!
@@ -77,7 +74,14 @@ class SettingsController: UITableViewController {
         let backButton = UIBarButtonItem(title: "back".localized, style: .plain, target: self, action: #selector(SettingsController.goBackToSongsList))
         navigationItem.leftBarButtonItem = backButton
         addTapGestureRecognizer()
+        //        if DeviceUtils.isIpad() {
+        //           // self.splitViewController!.preferredDisplayMode = .automatic
+        //            splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
+        //            splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
+        //        }
     }
+    
+    
     
     func setUp() {
         rateUsLabel.text = "rateUs".localized
@@ -208,7 +212,7 @@ class SettingsController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 4
@@ -397,7 +401,14 @@ class SettingsController: UITableViewController {
             self.present(activityVC, animated: true, completion: nil)
         }
     }
-
+    
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        if DeviceUtils.isIpad() {
+            //splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
+            //splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
+        }
+    }
+    
 }
 
 extension SettingsController: UIPickerViewDataSource, UIPickerViewDelegate {
