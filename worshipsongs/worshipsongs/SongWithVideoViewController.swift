@@ -102,7 +102,7 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
             comment = ""
         }
         setXmlParser()
-        if DeviceUtils.isIpad() {
+        if !DeviceUtils.isIpad() {
             hideOrShowComponents()
         }
     }
