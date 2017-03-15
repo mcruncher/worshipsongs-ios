@@ -102,6 +102,9 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
             comment = ""
         }
         setXmlParser()
+        if DeviceUtils.isIpad() {
+            hideOrShowComponents()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
