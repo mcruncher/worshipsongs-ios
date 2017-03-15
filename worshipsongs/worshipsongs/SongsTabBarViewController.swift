@@ -48,7 +48,7 @@ class SongsTabBarViewController: UITabBarController{
         presentationData = PresentationData()
         presentationData.setupScreen()
         if DeviceUtils.isIpad() {
-         //   self.onChangeOrientation(orientation: UIDevice.current.orientation)
+            self.onChangeOrientation(orientation: UIDevice.current.orientation)
         }
     }
     
@@ -67,36 +67,35 @@ class SongsTabBarViewController: UITabBarController{
         guard segue.identifier == "setting" else {
             return
         }
-//         splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
-//         splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
+        splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
+        splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
 
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         //setMasterViewWidth()
-         //self.onChangeOrientation(orientation: UIDevice.current.orientation)
+         self.onChangeOrientation(orientation: UIDevice.current.orientation)
     }
     
     func onChangeOrientation(orientation: UIDeviceOrientation) {
         switch orientation {
-        case .portrait:
-            setMasterViewWidth(2.50)
-            break
         case .landscapeRight, .landscapeLeft :
             setMasterViewWidth(2)
             break
         default:
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            setMasterViewWidth(2.50)
+            break
         }
     }
     
     fileprivate func setMasterViewWidth(_ widthFraction: CGFloat) {
         if DeviceUtils.isIpad() {
             splitViewController?.preferredPrimaryColumnWidthFraction = 0.40
-            let minimumWidth = min((splitViewController?.view.bounds)!.width,(splitViewController?.view.bounds)!.height)
+            let minimumWidth = min((splitViewController?.view.bounds.size.width)!,(splitViewController?.view.bounds.height)!)
             splitViewController?.minimumPrimaryColumnWidth = minimumWidth / widthFraction
             splitViewController?.maximumPrimaryColumnWidth = minimumWidth / widthFraction
-           
+            let leftNavController = splitViewController?.viewControllers.first as! UINavigationController
+            leftNavController.view.frame = CGRect(x: leftNavController.view.frame.origin.x, y: leftNavController.view.frame.origin.y, width: (minimumWidth / widthFraction), height: leftNavController.view.frame.height)
         }
     }
     
