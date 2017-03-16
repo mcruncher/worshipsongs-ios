@@ -584,7 +584,7 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
     
     internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
         
-        if (previousButton.isHidden && nextButton.isHidden) && (actionButton.isHidden == false  || floatingbutton.isHidden == false) {
+        if  actionButton.isHidden == false  || floatingbutton.isHidden == false {
             let pressingPoint = longPressGesture.location(in: self.tableView)
             if longPressGesture.state == UIGestureRecognizerState.began {
                 tableView.allowsSelection = true
