@@ -325,13 +325,6 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
             fullScreenController.songName = songName
             fullScreenController.authorName = authorName
         }
-        //        else if (segue.identifier == "presentation") {
-        //            let presentationViewController = segue.destination as! PresentationViewController
-        //            presentationViewController.verseOrder = verseOrder
-        //            presentationViewController.songLyrics = songLyrics
-        //            presentationViewController.songName = songName
-        //            presentationViewController.authorName = authorName
-        //        }
     }
     
     func share() {
