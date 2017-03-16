@@ -108,7 +108,6 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         if !(DeviceUtils.isIpad()) {
-            self.onChangeOrientation(orientation: UIDevice.current.orientation)
             hideOrShowComponents()
         }
         presentationData.setupScreen()
@@ -443,27 +442,6 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
         }
     }
     
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        if !DeviceUtils.isIpad() {
-            self.onChangeOrientation(orientation: UIDevice.current.orientation)
-        }
-    }
-    
-    func onChangeOrientation(orientation: UIDeviceOrientation) {
-        switch orientation {
-        case .portrait:
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-        case .landscapeRight:
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-            fullScreen()
-        case .landscapeLeft:
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-            fullScreen()
-        default:
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-        }
-    }
-    
     func getAllCells() -> [UITableViewCell] {
         
         var cells = [UITableViewCell]()
@@ -606,7 +584,7 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
     
     internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
         
-        if previousButton.isHidden && nextButton.isHidden {
+        if (previousButton.isHidden && nextButton.isHidden) && (actionButton.isHidden == false  || floatingbutton.isHidden == false) {
             let pressingPoint = longPressGesture.location(in: self.tableView)
             if longPressGesture.state == UIGestureRecognizerState.began {
                 tableView.allowsSelection = true
