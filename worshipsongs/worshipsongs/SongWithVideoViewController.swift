@@ -84,7 +84,6 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
         setPreviousButton()
     }
     
-    
     func refreshUI() {
         let verseOrderString = selectedSong.verse_order
         if !verseOrderString.isEmpty {
@@ -133,6 +132,7 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
         playerHeight.constant = 0
         self.navigationItem.title = songName
         actionButton.setImage(UIImage(named: "presentation"), for: UIControlState())
+        self.tableView.allowsSelection = false
         self.tableView.reloadData()
     }
     
@@ -325,13 +325,13 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
             fullScreenController.songName = songName
             fullScreenController.authorName = authorName
         }
-//        else if (segue.identifier == "presentation") {
-//            let presentationViewController = segue.destination as! PresentationViewController
-//            presentationViewController.verseOrder = verseOrder
-//            presentationViewController.songLyrics = songLyrics
-//            presentationViewController.songName = songName
-//            presentationViewController.authorName = authorName
-//        }
+        //        else if (segue.identifier == "presentation") {
+        //            let presentationViewController = segue.destination as! PresentationViewController
+        //            presentationViewController.verseOrder = verseOrder
+        //            presentationViewController.songLyrics = songLyrics
+        //            presentationViewController.songName = songName
+        //            presentationViewController.authorName = authorName
+        //        }
     }
     
     func share() {
@@ -521,8 +521,11 @@ extension SongWithVideoViewController: UITableViewDataSource {
 extension SongWithVideoViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presentation(indexPath)
-        //tableView.deselectRow(at: indexPath, animated: true)
+       // tableView.deselectRow(at: indexPath, animated: false)
+        if nextButton.isHidden == false || previousButton.isHidden == false {
+             presentation(indexPath)
+        }
+    
     }
 }
 
@@ -611,9 +614,10 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
     
     internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
         
-        if previousButton.isHidden && previousButton.isHidden {
+        if previousButton.isHidden && nextButton.isHidden {
             let pressingPoint = longPressGesture.location(in: self.tableView)
             if longPressGesture.state == UIGestureRecognizerState.began {
+                tableView.allowsSelection = true
                 UIView.transition(with: self.tableView, duration: 00.35, options: [], animations: { () -> Void in
                     let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
                     self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
@@ -648,6 +652,7 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
         activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.postToFacebook, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
         self.present(activityVC, animated: true, completion: { () -> Void in
             self.tableView.deselectRow(at: indexPath, animated: true)
+            self.tableView.allowsSelection = false
         })
     }
     
