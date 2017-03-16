@@ -514,7 +514,6 @@ extension SongWithVideoViewController: UITableViewDataSource {
 extension SongWithVideoViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // tableView.deselectRow(at: indexPath, animated: false)
         if nextButton.isHidden == false || previousButton.isHidden == false {
              presentation(indexPath)
         }
