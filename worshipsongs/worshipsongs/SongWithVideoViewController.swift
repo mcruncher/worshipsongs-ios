@@ -54,26 +54,10 @@ class SongWithVideoViewController: UIViewController  {
         super.viewDidLoad()
         addFloatButton()
         addShareBarButton()
-        if !comment.isEmpty && parseSongUrl() != "" {
-            loadYoutube(url: parseSongUrl())
-            floatingbutton.isHidden = false
-            actionButton.isHidden = true
-            hadYoutubeLink = true
-        } else {
-            floatingbutton.isHidden = true
-            actionButton.isHidden = false
-            hadYoutubeLink = false
-        }
-        player.isHidden = true
-        playerHeight.constant = 0
-        self.navigationItem.title = songName
-        if DeviceUtils.isIpad() {
-            self.splitViewController!.preferredDisplayMode = .primaryOverlay
-            self.splitViewController!.preferredDisplayMode = .allVisible
-        }
+        setSplitViewControllerProperties()
         setXmlParser()
-        self.tableView.estimatedRowHeight = 88.0
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        hideOrShowComponents()
+        setTableViewProperties()
         let screenSize = UIScreen.main.bounds
         let screenHeight = screenSize.height
         buttonTop.constant = screenHeight - 125
@@ -84,7 +68,9 @@ class SongWithVideoViewController: UIViewController  {
         setPreviousButton()
     }
     
+    
     func refreshUI() {
+       
         let verseOrderString = selectedSong.verse_order
         if !verseOrderString.isEmpty {
             self.verseOrder = splitVerseOrder(verseOrderString)
@@ -111,44 +97,6 @@ class SongWithVideoViewController: UIViewController  {
             hideOrShowComponents()
         }
         presentationData.setupScreen()
-    }
-    
-    func hideOrShowComponents() {
-        if !comment.isEmpty && parseSongUrl() != "" {
-            loadYoutube(url: parseSongUrl())
-            floatingbutton.isHidden = false
-            actionButton.isHidden = true
-            hadYoutubeLink = true
-        } else {
-            floatingbutton.isHidden = true
-            actionButton.isHidden = false
-            hadYoutubeLink = false
-        }
-        floatingbutton.close()
-        previousButton.isHidden = true
-        nextButton.isHidden = true
-        player.isHidden = true
-        playerHeight.constant = 0
-        self.navigationItem.title = songName
-        actionButton.setImage(UIImage(named: "presentation"), for: UIControlState())
-        self.tableView.allowsSelection = false
-        self.tableView.reloadData()
-    }
-    
-    func setXmlParser() {
-        element = ""
-        attribues = NSDictionary()
-        listDataDictionary = NSMutableDictionary()
-        parsedVerseOrderList = NSMutableArray()
-        verseOrderList = NSMutableArray()
-        let lyrics: Data = songLyrics.data(using: String.Encoding.utf8.rawValue)!
-        let parser = XMLParser(data: lyrics)
-        parser.delegate = self
-        parser.parse()
-        if(verseOrderList.count < 1){
-            print("parsedVerseOrderList:\(parsedVerseOrderList)")
-            verseOrderList = parsedVerseOrderList
-        }
     }
     
     func addFloatButton() {
@@ -234,6 +182,44 @@ class SongWithVideoViewController: UIViewController  {
         return item
     }
     
+    func hideOrShowComponents() {
+        if !comment.isEmpty && parseSongUrl() != "" {
+            loadYoutube(url: parseSongUrl())
+            floatingbutton.isHidden = false
+            actionButton.isHidden = true
+            hadYoutubeLink = true
+        } else {
+            floatingbutton.isHidden = true
+            actionButton.isHidden = isHideComponent()
+            hadYoutubeLink = false
+        }
+        floatingbutton.close()
+        previousButton.isHidden = true
+        nextButton.isHidden = true
+        player.isHidden = true
+        playerHeight.constant = 0
+        self.navigationItem.title = songName
+        actionButton.setImage(UIImage(named: "presentation"), for: UIControlState())
+        self.tableView.allowsSelection = false
+        self.tableView.isHidden = isHideComponent()
+        self.tableView.reloadData()
+    }
+    
+    private func setTableViewProperties() {
+        self.tableView.estimatedRowHeight = 88.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    private func isHideComponent() -> Bool {
+        return verseOrderList.count == 0
+    }
+    
+    private func setSplitViewControllerProperties() {
+        if DeviceUtils.isIpad() {
+            self.splitViewController!.preferredDisplayMode = .primaryOverlay
+            self.splitViewController!.preferredDisplayMode = .allVisible
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -260,7 +246,7 @@ class SongWithVideoViewController: UIViewController  {
         player.loadVideoURL(myVideoURL!)
         
     }
-
+    
     fileprivate func addShareBarButton() {
         self.navigationController!.navigationBar.tintColor = UIColor.gray
         let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(SongWithVideoViewController.share))
@@ -460,13 +446,29 @@ extension SongWithVideoViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if nextButton.isHidden == false || previousButton.isHidden == false {
-             presentation(indexPath)
+            presentation(indexPath)
         }
-    
+        
     }
 }
 
 extension SongWithVideoViewController: XMLParserDelegate {
+    
+    func setXmlParser() {
+        element = ""
+        attribues = NSDictionary()
+        listDataDictionary = NSMutableDictionary()
+        parsedVerseOrderList = NSMutableArray()
+        verseOrderList = NSMutableArray()
+        let lyrics: Data = songLyrics.data(using: String.Encoding.utf8.rawValue)!
+        let parser = XMLParser(data: lyrics)
+        parser.delegate = self
+        parser.parse()
+        if(verseOrderList.count < 1){
+            print("parsedVerseOrderList:\(parsedVerseOrderList)")
+            verseOrderList = parsedVerseOrderList
+        }
+    }
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         element = elementName
@@ -477,7 +479,7 @@ extension SongWithVideoViewController: XMLParserDelegate {
     }
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-    
+        
         text = string
         print("string:\(string)")
         let data = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
