@@ -54,9 +54,9 @@ class SongWithVideoViewController: UIViewController  {
         super.viewDidLoad()
         addFloatButton()
         addShareBarButton()
-        hideOrShowComponents()
         setSplitViewControllerProperties()
         setXmlParser()
+        hideOrShowComponents()
         setTableViewProperties()
         let screenSize = UIScreen.main.bounds
         let screenHeight = screenSize.height
@@ -211,7 +211,7 @@ class SongWithVideoViewController: UIViewController  {
     }
     
     private func isHideComponent() -> Bool {
-        return songName.characters.count == 0
+        return verseOrderList.count == 0
     }
     
     private func setSplitViewControllerProperties() {
