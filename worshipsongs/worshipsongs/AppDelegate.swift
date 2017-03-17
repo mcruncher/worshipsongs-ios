@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var progressView: UIView!
     let commonService = CommonService()
+    let dataBaseService = DatabaseService()
     fileprivate let preferences = UserDefaults.standard
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool{
@@ -24,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let version = getVersion()
         if preferences.dictionaryRepresentation().keys.contains("version") {
             if !(preferences.string(forKey: "version")?.equalsIgnoreCase(version))! {
-                copyFile("songs.sqlite")
+                dataBaseService.copyBundledDatabase("songs.sqlite")
                 preferences.setValue(version, forKey: "version")
                 preferences.synchronize()
             } else {
@@ -34,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             preferences.setValue(version, forKey: "version")
             preferences.synchronize()
-            copyFile("songs.sqlite")
+            dataBaseService.copyBundledDatabase("songs.sqlite")
         }
         updateDefaultSettings()
         createScheduleLocalNotification()
@@ -141,23 +142,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.setValue("", forKey: "presentationAuthor")
             self.preferences.synchronize()
         }
-    }
-    
-    func copyFile(_ fileName: NSString) {
-        print("File copy started")
-        let dbPath: String = commonService.getDocumentDirectoryPath(fileName as String)
-        do {
-            let fileManager = FileManager.default
-            if fileManager.fileExists(atPath: dbPath) {
-                try fileManager.removeItem(atPath: dbPath)
-            }
-            let fromPath: String? = Bundle.main.resourcePath?.stringByAppendingPathComponent(fileName as String)
-            try fileManager.copyItem(atPath: fromPath!, toPath: dbPath)
-            print("File copied successfully in \(dbPath)")
-        } catch let error as NSError {
-            print("Error occurred while copy \(dbPath): \(error)")
-        }
-        
     }
     
     func getVersion() -> String {

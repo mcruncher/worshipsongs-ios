@@ -13,7 +13,6 @@
 		2F01C9ED1E691FEC003939CD /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
 		2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */; };
 		2F0A70F91E1B432D0025F156 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0A70F81E1B432D0025F156 /* TitleTableViewCell.swift */; };
-		2F10441E1E63F5BC00DBDD54 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10441D1E63F5BC00DBDD54 /* DatabaseService.swift */; };
 		2F1044201E6422E200DBDD54 /* DatabaseLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10441F1E6422E200DBDD54 /* DatabaseLoadingViewController.swift */; };
 		2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */; };
 		2F19EAFE1E5FBE4D00B989D8 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */; };
@@ -45,6 +44,7 @@
 		2FE840F01DDBEAA1002B3379 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D591BC78DB8001C4B6F /* DatabaseHelper.swift */; };
 		2FE840F51DDC33A6002B3379 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FE840F71DDC33A6002B3379 /* Localizable.strings */; };
 		2FF0BE861E0CD218004E2127 /* SongWithVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF0BE851E0CD218004E2127 /* SongWithVideoViewController.swift */; };
+		2FFBC33E1E7BAB85006B2405 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10441D1E63F5BC00DBDD54 /* DatabaseService.swift */; };
 		2FFC99291DEFF4D600AEABEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D261BC788F8001C4B6F /* Assets.xcassets */; };
 		625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
@@ -544,6 +544,7 @@
 				2F0A70F91E1B432D0025F156 /* TitleTableViewCell.swift in Sources */,
 				2FE250301E43134E007BA85D /* PresentationData.swift in Sources */,
 				2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */,
+				2FFBC33E1E7BAB85006B2405 /* DatabaseService.swift in Sources */,
 				2F1F2A0B1E5C09290046EFDA /* FavoritesSong.swift in Sources */,
 				2FF0BE861E0CD218004E2127 /* SongWithVideoViewController.swift in Sources */,
 				2FE840F01DDBEAA1002B3379 /* DatabaseHelper.swift in Sources */,
@@ -566,7 +567,6 @@
 				2FE636591E41DED80092A696 /* ColorUtils.swift in Sources */,
 				2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */,
 				2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */,
-				2F10441E1E63F5BC00DBDD54 /* DatabaseService.swift in Sources */,
 				2FE2502E1E42FD7A007BA85D /* PresentationView.swift in Sources */,
 				2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */,
 				2FE636581E4190FF0092A696 /* PresentationViewController.swift in Sources */,
