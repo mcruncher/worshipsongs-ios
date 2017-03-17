@@ -146,10 +146,6 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         songTabBarController.navigationItem.title = "favorites".localized
         createSearchBar()
         refresh(self)
-        if DeviceUtils.isIpad() && songModel.count > 0 {
-            setDefaultSelectedSong()
-            onSelectSong(0)
-        }
     }
     
     func updateModel() {
@@ -171,7 +167,6 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
