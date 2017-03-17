@@ -103,17 +103,8 @@ class TitlesViewController: UITableViewController {
         songModel = databaseHelper.getSongModel()
         filteredSongModel = songModel
         tableView.reloadData()
-        if DeviceUtils.isIpad() && filteredSongModel.count > 0 {
-            setDefaultSelectedSong()
-            onSelectSong(0)
-        }
     }
     
-    private func setDefaultSelectedSong()
-    {
-        let indexPath = IndexPath(row: 0, section: 0)
-        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

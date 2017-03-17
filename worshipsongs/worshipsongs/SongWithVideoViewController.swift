@@ -8,7 +8,7 @@ import YouTubePlayer
 import KCFloatingActionButton
 import SystemConfiguration
 
-class SongWithVideoViewController: UIViewController, XMLParserDelegate {
+class SongWithVideoViewController: UIViewController  {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var player: YouTubePlayerView!
@@ -234,11 +234,6 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
         return item
     }
     
-    func getTableFooterView() -> UIView {
-        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 0))
-        footerview.backgroundColor = UIColor.groupTableViewBackground
-        return footerview
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -265,15 +260,7 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
         player.loadVideoURL(myVideoURL!)
         
     }
-    
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        element = elementName
-        print("element:\(element)")
-        attribues = attributeDict as NSDictionary
-        print("attribues:\(attribues)")
-        
-    }
-    
+
     fileprivate func addShareBarButton() {
         self.navigationController!.navigationBar.tintColor = UIColor.gray
         let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(SongWithVideoViewController.share))
@@ -422,26 +409,6 @@ class SongWithVideoViewController: UIViewController, XMLParserDelegate {
         return objectString
     }
     
-    
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
-        text = string
-        print("string:\(string)")
-        let data = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        print("data:\(data)")
-        if (!data.isEmpty) {
-            if element == "verse" {
-                let verseType = (attribues.object(forKey: "type") as! String).lowercased()
-                let verseLabel = attribues.object(forKey: "label")as! String
-                //lyricsData.append(data);
-                listDataDictionary.setObject(data as String, forKey: verseType.appending(verseLabel) as NSCopying)
-                if(verseOrderList.count < 1){
-                    parsedVerseOrderList.add(verseType + verseLabel)
-                    print("parsedVerseOrder:\(parsedVerseOrderList)")
-                }
-            }
-        }
-    }
-    
     func getAllCells() -> [UITableViewCell] {
         
         var cells = [UITableViewCell]()
@@ -496,6 +463,37 @@ extension SongWithVideoViewController: UITableViewDelegate {
              presentation(indexPath)
         }
     
+    }
+}
+
+extension SongWithVideoViewController: XMLParserDelegate {
+    
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        element = elementName
+        print("element:\(element)")
+        attribues = attributeDict as NSDictionary
+        print("attribues:\(attribues)")
+        
+    }
+    
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+    
+        text = string
+        print("string:\(string)")
+        let data = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        print("data:\(data)")
+        if (!data.isEmpty) {
+            if element == "verse" {
+                let verseType = (attribues.object(forKey: "type") as! String).lowercased()
+                let verseLabel = attribues.object(forKey: "label")as! String
+                //lyricsData.append(data);
+                listDataDictionary.setObject(data as String, forKey: verseType.appending(verseLabel) as NSCopying)
+                if(verseOrderList.count < 1){
+                    parsedVerseOrderList.add(verseType + verseLabel)
+                    print("parsedVerseOrder:\(parsedVerseOrderList)")
+                }
+            }
+        }
     }
 }
 
@@ -573,7 +571,6 @@ extension SongWithVideoViewController: SongSelectionDelegate {
 }
 
 extension SongWithVideoViewController: UIGestureRecognizerDelegate {
-    
     
     fileprivate func addLongPressGestureRecognizer() {
         let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(SongWithVideoViewController.onCellViewLongPress(_:)))
