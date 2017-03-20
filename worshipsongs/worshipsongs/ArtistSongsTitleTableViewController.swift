@@ -60,18 +60,21 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         }
     }
     
-    fileprivate func getConfirmationAlertController(_ indexPath: IndexPath) -> UIAlertController {
-        let confirmationAlertController = self.getMoveController(indexPath)
+    fileprivate func getConfirmationAlertController(_ indexPath: IndexPath) -> UIAlertController
+    {
+        let confirmationAlertController = self.getMoveController(indexPath, message: "message.add")
         confirmationAlertController.addAction(self.getMoveAction(indexPath))
-        confirmationAlertController.addAction(self.getCancelAction(indexPath))
+        confirmationAlertController.addAction(self.getCancelAction(indexPath, title: "no"))
         return confirmationAlertController
     }
     
-    fileprivate func getMoveController(_ indexPath: IndexPath) -> UIAlertController {
-        return UIAlertController(title: filteredSongModel[(indexPath as NSIndexPath).row].title, message: "message.add".localized, preferredStyle: UIAlertControllerStyle.alert)
+    fileprivate func getMoveController(_ indexPath: IndexPath, message: String) -> UIAlertController
+    {
+        return UIAlertController(title: filteredSongModel[(indexPath as NSIndexPath).row].title, message: message.localized, preferredStyle: UIAlertControllerStyle.alert)
     }
     
-    fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction {
+    fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction
+    {
         return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
             let song = self.filteredSongModel[indexPath.row]
             var favSongs = [FavoritesSongsWithOrder]()
@@ -83,16 +86,33 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
                     favSongOrderNumber = (favSongs.last?.orderNo)! + 1
                 }
             }
-            let favSong = FavoritesSongsWithOrder(orderNo: favSongOrderNumber, songId: song.id, songListName: "favorite")
-            favSongs.append(favSong)
-            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favSongs)
-            self.preferences.set(encodedData, forKey: "favorite")
-            self.preferences.synchronize()
+            let newFavSong = FavoritesSongsWithOrder(orderNo: favSongOrderNumber, songId: song.id, songListName: "favorite")
+            var isSongExist = false
+            for favSong in favSongs {
+                if favSong.songId == newFavSong.songId {
+                    isSongExist = true
+                    self.present(self.getExistsAlertController(indexPath), animated: true, completion: nil)
+                }
+            }
+            if !isSongExist {
+                favSongs.append(newFavSong)
+                let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favSongs)
+                self.preferences.set(encodedData, forKey: "favorite")
+                self.preferences.synchronize()
+            }
         })
     }
     
-    fileprivate func getCancelAction(_ indexPath: IndexPath) -> UIAlertAction {
-        return UIAlertAction(title: "No", style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
+    fileprivate func getExistsAlertController(_ indexPath: IndexPath) -> UIAlertController
+    {
+        let confirmationAlertController = self.getMoveController(indexPath, message: "message.exist")
+        confirmationAlertController.addAction(self.getCancelAction(indexPath, title: "ok"))
+        return confirmationAlertController
+    }
+    
+    fileprivate func getCancelAction(_ indexPath: IndexPath, title: String) -> UIAlertAction
+    {
+        return UIAlertAction(title: title.localized, style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
             self.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: UITableViewRowAnimation.automatic)
         })
     }
@@ -119,6 +139,12 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
         cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        let activeSong = preferences.string(forKey: "presentationSongName")
+        if cell.title.text == activeSong {
+            cell.title.textColor = UIColor.cruncherBlue()
+        } else {
+            cell.title.textColor = UIColor.black
+        }
         if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].comment.contains("youtube") {
             cell.playImage.isHidden = false
         } else {

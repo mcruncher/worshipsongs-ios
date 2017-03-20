@@ -71,6 +71,27 @@ class DatabaseService {
         }
     }
     
+    func copyBundledDatabase(_ fileName: NSString) {
+        print("File copy started")
+        var dbPath: String = commonService.getDocumentDirectoryPath(fileName as String)
+        let dbBakPath: String = commonService.getDocumentDirectoryPath("songs-bak.sqlite" as String)
+        do {
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: dbBakPath) {
+                try fileManager.removeItem(atPath: dbBakPath)
+                dbPath = dbBakPath
+            } else if fileManager.fileExists(atPath: dbPath) {
+                try fileManager.removeItem(atPath: dbPath)
+            }
+            let fromPath: String? = Bundle.main.resourcePath?.stringByAppendingPathComponent(fileName as String)
+            try fileManager.copyItem(atPath: fromPath!, toPath: dbPath)
+            print("File copied successfully in \(dbPath)")
+        } catch let error as NSError {
+            print("Error occurred while copy \(dbPath): \(error)")
+        }
+        
+    }
+    
     func importDriveDatabase(url: URL) {
         self.preferences.set(true, forKey: "database.lock")
         self.preferences.synchronize()
