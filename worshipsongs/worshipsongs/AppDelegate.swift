@@ -138,6 +138,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.setValue("", forKey: "presentationSlide")
             self.preferences.synchronize()
         }
+        if preferences.dictionaryRepresentation().keys.contains("presentationSlideNumber") {
+            self.preferences.setValue(0, forKey: "presentationSlideNumber")
+            self.preferences.synchronize()
+        }
         if preferences.dictionaryRepresentation().keys.contains("presentationAuthor") {
             self.preferences.setValue("", forKey: "presentationAuthor")
             self.preferences.synchronize()

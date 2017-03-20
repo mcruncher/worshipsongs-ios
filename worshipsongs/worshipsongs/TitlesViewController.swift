@@ -127,6 +127,12 @@ extension TitlesViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
         cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        let activeSong = preferences.string(forKey: "presentationSongName")
+        if cell.title.text == activeSong {
+            cell.title.textColor = UIColor.cruncherBlue()
+        } else {
+            cell.title.textColor = UIColor.black
+        }
         if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].comment.contains("youtube") {
             cell.playImage.isHidden = false
         } else {

@@ -182,6 +182,12 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
         cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].songs.title
         cell.id.text = filteredSongModel[(indexPath as NSIndexPath).row].songs.id
+        let activeSong = preferences.string(forKey: "presentationSongName")
+        if cell.title.text == activeSong {
+            cell.title.textColor = UIColor.cruncherBlue()
+        } else {
+            cell.title.textColor = UIColor.black
+        }
         if filteredSongModel[(indexPath as NSIndexPath).row].songs.comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].songs.comment.contains("youtube") {
             cell.playImage.isHidden = false
         } else {
