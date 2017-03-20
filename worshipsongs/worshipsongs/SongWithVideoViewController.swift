@@ -13,7 +13,6 @@ class SongWithVideoViewController: UIViewController  {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var player: YouTubePlayerView!
     @IBOutlet weak var actionButton: UIButton!
-    @IBOutlet weak var buttonTop: NSLayoutConstraint!
     @IBOutlet weak var playerHeight: NSLayoutConstraint!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var previousButton: UIButton!
@@ -58,16 +57,12 @@ class SongWithVideoViewController: UIViewController  {
         setXmlParser()
         hideOrShowComponents()
         setTableViewProperties()
-        let screenSize = UIScreen.main.bounds
-        let screenHeight = screenSize.height
-        buttonTop.constant = screenHeight - 125
         actionButton.layer.cornerRadius = actionButton.layer.frame.height / 2
         actionButton.clipsToBounds = true
         addLongPressGestureRecognizer()
         setNextButton()
         setPreviousButton()
     }
-    
     
     func refreshUI() {
        
@@ -78,9 +73,6 @@ class SongWithVideoViewController: UIViewController  {
         songLyrics = selectedSong.lyrics as NSString
         self.songName = selectedSong.title
         authorName = databaseHelper.getArtistName(selectedSong.id)
-        self.preferences.setValue(authorName, forKeyPath: "presentationAuthor")
-        self.preferences.setValue(songName, forKeyPath: "presentationSongName")
-        self.preferences.synchronize()
         if selectedSong.comment != nil {
             comment = selectedSong.comment
         } else {
@@ -96,7 +88,6 @@ class SongWithVideoViewController: UIViewController  {
         if !(DeviceUtils.isIpad()) {
             hideOrShowComponents()
         }
-        presentationData.setupScreen()
     }
     
     func addFloatButton() {
@@ -203,6 +194,11 @@ class SongWithVideoViewController: UIViewController  {
         self.tableView.allowsSelection = false
         self.tableView.isHidden = isHideComponent()
         self.tableView.reloadData()
+        let activeSong = preferences.string(forKey: "presentationSongName")
+        if activeSong != "" && selectedSong.title == activeSong {
+            let activeSection = preferences.integer(forKey: "presentationSlideNumber")
+            self.presentation(IndexPath(row: 0, section: activeSection))
+        }
     }
     
     private func setTableViewProperties() {
@@ -532,6 +528,10 @@ extension SongWithVideoViewController {
     
     func presentation(_ indexPath: IndexPath) {
         if UIScreen.screens.count > 1 {
+            self.preferences.setValue(authorName, forKeyPath: "presentationAuthor")
+            self.preferences.setValue(songName, forKeyPath: "presentationSongName")
+            self.preferences.synchronize()
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
             tableView.allowsSelection = true
             presentVerse(indexPath)
             actionButton.isHidden = true
@@ -544,12 +544,13 @@ extension SongWithVideoViewController {
     }
     
     func presentVerse(_ indexPath: IndexPath) {
-        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         let key = (verseOrderList[(indexPath as NSIndexPath).section] as! String).lowercased()
         let dataText: NSString? = listDataDictionary[key] as? NSString
         self.preferences.setValue(dataText, forKey: "presentationLyrics")
         let slideNumber = String(indexPath.section + 1) + " of " + String(tableView.numberOfSections)
         self.preferences.setValue(slideNumber, forKeyPath: "presentationSlide")
+        self.preferences.setValue(indexPath.section, forKeyPath: "presentationSlideNumber")
         self.preferences.synchronize()
         self.presentationData.updateScreen()
         previousButton.isHidden = indexPath.section <= 0

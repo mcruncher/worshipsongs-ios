@@ -827,7 +827,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32F-fu-gCZ">
-                                <rect key="frame" x="318" y="597" width="50" height="50"/>
+                                <rect key="frame" x="310" y="602" width="50" height="50"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3a6-6l-oO7"/>
@@ -846,7 +846,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8p-H3-xeg">
-                                <rect key="frame" x="318" y="555" width="50" height="50"/>
+                                <rect key="frame" x="310" y="602" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.23921568627450979" green="0.71173789789999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="77D-X1-vBd"/>
@@ -858,7 +858,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZr-uR-gdQ">
-                                <rect key="frame" x="7" y="597" width="50" height="50"/>
+                                <rect key="frame" x="15" y="602" width="50" height="50"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FyX-DQ-S3U"/>
@@ -873,25 +873,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="d8N-QM-9CL" firstAttribute="top" secondItem="lZr-uR-gdQ" secondAttribute="bottom" constant="20" id="L0X-Xg-r0N"/>
+                            <constraint firstItem="d8N-QM-9CL" firstAttribute="top" secondItem="X8p-H3-xeg" secondAttribute="bottom" constant="15" id="7RC-5O-jMa"/>
+                            <constraint firstItem="d8N-QM-9CL" firstAttribute="top" secondItem="lZr-uR-gdQ" secondAttribute="bottom" constant="15" id="L0X-Xg-r0N"/>
                             <constraint firstItem="d8N-QM-9CL" firstAttribute="top" secondItem="fDN-JI-X09" secondAttribute="bottom" id="OCQ-A9-rzc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="32F-fu-gCZ" secondAttribute="trailing" constant="-9" id="OZf-a3-EfC"/>
                             <constraint firstItem="ayV-T5-6r6" firstAttribute="leading" secondItem="Ev9-Sy-Ty2" secondAttribute="leading" id="P8X-Am-YKv"/>
-                            <constraint firstItem="lZr-uR-gdQ" firstAttribute="leading" secondItem="Ev9-Sy-Ty2" secondAttribute="leadingMargin" constant="-9" id="SgC-0t-A66"/>
-                            <constraint firstItem="X8p-H3-xeg" firstAttribute="top" secondItem="Zmq-L7-I9u" secondAttribute="bottom" constant="491" id="auq-qU-Iwe"/>
+                            <constraint firstAttribute="trailing" secondItem="32F-fu-gCZ" secondAttribute="trailing" constant="15" id="XN9-h8-9xA"/>
                             <constraint firstItem="fDN-JI-X09" firstAttribute="top" secondItem="ayV-T5-6r6" secondAttribute="bottom" constant="-70" id="eSP-T5-0W0"/>
+                            <constraint firstAttribute="trailing" secondItem="X8p-H3-xeg" secondAttribute="trailing" constant="15" id="gid-8H-tSC"/>
+                            <constraint firstItem="lZr-uR-gdQ" firstAttribute="leading" secondItem="Ev9-Sy-Ty2" secondAttribute="leading" constant="15" id="lyw-wN-Tsf"/>
                             <constraint firstAttribute="trailing" secondItem="fDN-JI-X09" secondAttribute="trailing" id="nL1-td-e9z"/>
                             <constraint firstItem="ayV-T5-6r6" firstAttribute="top" secondItem="Zmq-L7-I9u" secondAttribute="bottom" id="qD7-On-crl"/>
                             <constraint firstAttribute="trailing" secondItem="ayV-T5-6r6" secondAttribute="trailing" id="qN9-Zi-Vij"/>
                             <constraint firstItem="fDN-JI-X09" firstAttribute="leading" secondItem="Ev9-Sy-Ty2" secondAttribute="leading" id="qjk-9V-gep"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="X8p-H3-xeg" secondAttribute="trailing" constant="-9" id="qvd-1v-lz0"/>
-                            <constraint firstItem="d8N-QM-9CL" firstAttribute="top" secondItem="32F-fu-gCZ" secondAttribute="bottom" constant="20" id="zSe-XI-CMN"/>
+                            <constraint firstItem="d8N-QM-9CL" firstAttribute="top" secondItem="32F-fu-gCZ" secondAttribute="bottom" constant="15" id="zSe-XI-CMN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1T0-dJ-zMr"/>
                     <connections>
                         <outlet property="actionButton" destination="X8p-H3-xeg" id="PCc-dU-nJ1"/>
-                        <outlet property="buttonTop" destination="auq-qU-Iwe" id="8nz-8b-fjQ"/>
                         <outlet property="nextButton" destination="32F-fu-gCZ" id="P8Z-vU-qml"/>
                         <outlet property="player" destination="ayV-T5-6r6" id="jby-bJ-BTb"/>
                         <outlet property="playerHeight" destination="eny-X2-n5K" id="7KF-dl-W0y"/>
