@@ -194,13 +194,12 @@ class SongWithVideoViewController: UIViewController  {
         self.tableView.allowsSelection = false
         self.tableView.isHidden = isHideComponent()
         self.tableView.reloadData()
-
+        
         scrollToRow(IndexPath(row:0, section:0))
-       let activeSong = preferences.string(forKey: "presentationSongName")
+        let activeSong = preferences.string(forKey: "presentationSongName")
         if activeSong != "" && selectedSong.title == activeSong {
             let activeSection = preferences.integer(forKey: "presentationSlideNumber")
             self.presentation(IndexPath(row: 0, section: activeSection))
-
         }
     }
     
@@ -209,7 +208,7 @@ class SongWithVideoViewController: UIViewController  {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                 self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
             }
-       
+        }
     }
     
     private func setTableViewProperties() {
