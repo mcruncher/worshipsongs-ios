@@ -200,6 +200,9 @@ class SongWithVideoViewController: UIViewController  {
         playerHeight.constant = 0
         self.navigationItem.title = songName
         actionButton.setImage(UIImage(named: "presentation"), for: UIControlState())
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+          self.tableView.scrollToRow(at: IndexPath(row:0, section:0), at: .bottom, animated: true)
+        }
         self.tableView.allowsSelection = false
         self.tableView.isHidden = isHideComponent()
         self.tableView.reloadData()
@@ -448,7 +451,6 @@ extension SongWithVideoViewController: UITableViewDelegate {
         if nextButton.isHidden == false || previousButton.isHidden == false {
             presentation(indexPath)
         }
-        
     }
 }
 
