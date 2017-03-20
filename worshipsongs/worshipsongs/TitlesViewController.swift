@@ -144,7 +144,7 @@ extension TitlesViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
         cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
         let activeSong = preferences.string(forKey: "presentationSongName")
-        if cell.title.text == activeSong {
+        if cell.title.text == activeSong && UIScreen.screens.count > 1 {
             cell.title.textColor = UIColor.cruncherBlue()
         } else {
             cell.title.textColor = UIColor.black
