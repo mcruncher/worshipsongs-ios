@@ -16,6 +16,7 @@
 "message.remove" = "Do you want to remove this song from Favourites?";
 "favorite" = "Favourite";
 "message.add" = "Do you want to add this song to your Favourites?";
+"message.exist" = "Song has already been added to Favourites";
 "black" = "Black";
 "darkGray" = "Dark Gray";
 "lightGray" = "Light Gray";
