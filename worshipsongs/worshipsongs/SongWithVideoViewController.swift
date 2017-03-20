@@ -70,7 +70,6 @@ class SongWithVideoViewController: UIViewController  {
     
     
     func refreshUI() {
-       
         let verseOrderString = selectedSong.verse_order
         if !verseOrderString.isEmpty {
             self.verseOrder = splitVerseOrder(verseOrderString)
@@ -89,12 +88,14 @@ class SongWithVideoViewController: UIViewController  {
         setXmlParser()
         if DeviceUtils.isIpad() {
             hideOrShowComponents()
+            scrollToFirstRow()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if !(DeviceUtils.isIpad()) {
             hideOrShowComponents()
+            scrollToFirstRow()
         }
         presentationData.setupScreen()
     }
@@ -200,12 +201,15 @@ class SongWithVideoViewController: UIViewController  {
         playerHeight.constant = 0
         self.navigationItem.title = songName
         actionButton.setImage(UIImage(named: "presentation"), for: UIControlState())
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-          self.tableView.scrollToRow(at: IndexPath(row:0, section:0), at: .bottom, animated: true)
-        }
         self.tableView.allowsSelection = false
         self.tableView.isHidden = isHideComponent()
         self.tableView.reloadData()
+    }
+    
+    private func scrollToFirstRow() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+            self.tableView.scrollToRow(at: IndexPath(row:0, section:0), at: .bottom, animated: true)
+        }
     }
     
     private func setTableViewProperties() {
