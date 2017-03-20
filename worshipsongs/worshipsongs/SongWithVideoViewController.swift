@@ -88,14 +88,13 @@ class SongWithVideoViewController: UIViewController  {
         setXmlParser()
         if DeviceUtils.isIpad() {
             hideOrShowComponents()
-            scrollToFirstRow()
+            
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if !(DeviceUtils.isIpad()) {
             hideOrShowComponents()
-            scrollToFirstRow()
         }
         presentationData.setupScreen()
     }
@@ -204,11 +203,14 @@ class SongWithVideoViewController: UIViewController  {
         self.tableView.allowsSelection = false
         self.tableView.isHidden = isHideComponent()
         self.tableView.reloadData()
+        scrollToRow(IndexPath(row:0, section:0))
     }
     
-    private func scrollToFirstRow() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-            self.tableView.scrollToRow(at: IndexPath(row:0, section:0), at: .bottom, animated: true)
+    private func scrollToRow(_ indexPath: IndexPath) {
+        if !isHideComponent() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
         }
     }
     
