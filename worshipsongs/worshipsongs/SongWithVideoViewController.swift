@@ -152,7 +152,8 @@ class SongWithVideoViewController: UIViewController  {
     }
     
     fileprivate func getCancelAction() -> UIAlertAction {
-        return UIAlertAction(title: "ok".localized, style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
+        return UIAlertAction(title: "ok".localized, style: UIAlertActionStyle.default, handler: {(alert: UIAlertAction!) -> Void in
+            self.hideOrShowComponents()
         })
     }
     
@@ -196,12 +197,16 @@ class SongWithVideoViewController: UIViewController  {
         self.tableView.reloadData()
         var indexPath = IndexPath(row:0, section:0)
         let activeSong = preferences.string(forKey: "presentationSongName")
-        if activeSong != "" && selectedSong.title == activeSong {
+        if activeSong != "" && selectedSong.title == activeSong && UIScreen.screens.count > 1 {
+            self.presentationData.setupScreen()
             let activeSection = preferences.integer(forKey: "presentationSlideNumber")
             indexPath = IndexPath(row: 0, section: activeSection)
             self.presentation(indexPath)
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
         }
         scrollToRow(indexPath)
+        
     }
     
     private func scrollToRow(_ indexPath: IndexPath) {
@@ -541,7 +546,6 @@ extension SongWithVideoViewController {
             self.preferences.setValue(authorName, forKeyPath: "presentationAuthor")
             self.preferences.setValue(songName, forKeyPath: "presentationSongName")
             self.preferences.synchronize()
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
             tableView.allowsSelection = true
             presentVerse(indexPath)
             actionButton.isHidden = true
@@ -551,6 +555,7 @@ extension SongWithVideoViewController {
             alertController.addAction(self.getCancelAction())
             self.present(alertController, animated: true, completion: nil)
         }
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
     }
     
     func presentVerse(_ indexPath: IndexPath) {
