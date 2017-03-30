@@ -81,10 +81,10 @@ class TitlesViewController: UITableViewController {
                     favSongOrderNumber = (favSongs.last?.orderNo)! + 1
                 }
             }
-            let newFavSong = FavoritesSongsWithOrder(orderNo: favSongOrderNumber, songId: song.id, songListName: "favorite")
+            let newFavSong = FavoritesSongsWithOrder(orderNo: favSongOrderNumber, songName: song.title, songListName: "favorite")
             var isSongExist = false
             for favSong in favSongs {
-                if favSong.songId == newFavSong.songId {
+                if favSong.songName == newFavSong.songName {
                     isSongExist = true
                     self.present(self.getExistsAlertController(indexPath), animated: true, completion: nil)
                 }
