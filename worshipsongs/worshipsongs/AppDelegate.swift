@@ -98,6 +98,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.set(true, forKey: "defaultDatabase")
             self.preferences.synchronize()
         }
+        if !preferences.dictionaryRepresentation().keys.contains("latestFavoriteUpdated") {
+            self.preferences.set(false, forKey: "defaultDatabase")
+            self.preferences.synchronize()
+        }
         if !preferences.dictionaryRepresentation().keys.contains("fontSize") {
             self.preferences.setValue(17, forKey: "fontSize")
             self.preferences.synchronize()
@@ -144,6 +148,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         if preferences.dictionaryRepresentation().keys.contains("presentationAuthor") {
             self.preferences.setValue("", forKey: "presentationAuthor")
+            self.preferences.synchronize()
+        }
+        if self.preferences.array(forKey: "favorite") != nil {
+            let favSongs  = self.preferences.array(forKey: "favorite") as! [String]
+            var favoritesSongsWithOrders = [FavoritesSongsWithOrder]()
+            for i in 0..<favSongs.count {
+                favoritesSongsWithOrders.append(FavoritesSongsWithOrder(orderNo: i, songName: favSongs[i], songListName: "favorite"))
+            }
+            self.preferences.set(true, forKey: "latestFavoriteUpdated")
+            self.preferences.set(favoritesSongsWithOrders, forKey: "favorite")
+            self.preferences.synchronize()
+        }
+        if !self.preferences.bool(forKey: "latestFavoriteUpdated") {
+            self.preferences.set([FavoritesSongsWithOrder](), forKey: "favorite")
+            self.preferences.set(true, forKey: "latestFavoriteUpdated")
             self.preferences.synchronize()
         }
     }
