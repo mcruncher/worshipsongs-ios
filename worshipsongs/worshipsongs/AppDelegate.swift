@@ -156,12 +156,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             for i in 0..<favSongs.count {
                 favoritesSongsWithOrders.append(FavoritesSongsWithOrder(orderNo: i, songName: favSongs[i], songListName: "favorite"))
             }
+            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favoritesSongsWithOrders)
+            self.preferences.set(encodedData, forKey: "favorite")
             self.preferences.set(true, forKey: "latestFavoriteUpdated")
-            self.preferences.set(favoritesSongsWithOrders, forKey: "favorite")
             self.preferences.synchronize()
         }
         if !self.preferences.bool(forKey: "latestFavoriteUpdated") {
-            self.preferences.set([FavoritesSongsWithOrder](), forKey: "favorite")
+            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: [FavoritesSongsWithOrder]())
+            self.preferences.set(encodedData, forKey: "favorite")
             self.preferences.set(true, forKey: "latestFavoriteUpdated")
             self.preferences.synchronize()
         }
