@@ -201,11 +201,22 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     
     func onSelectSong(_ row: Int) {
         let selectedSong = filteredSongModel[row].songs
-        songTabBarController?.songdelegate?.songSelected(selectedSong)
-        hideSearchBar()
-        if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
-            splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
+        if selectedSong.id != "" {
+            songTabBarController?.songdelegate?.songSelected(selectedSong)
+            hideSearchBar()
+            if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
+                splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
+            }
+        } else {
+            self.present(self.getNonExistsAlertController(filteredSongModel[row].songTitle), animated: true, completion: nil)
         }
+    }
+    
+    
+    fileprivate func getNonExistsAlertController(_ songName: String) -> UIAlertController {
+        let confirmationAlertController = UIAlertController(title: songName, message: "message.not.exist".localized, preferredStyle: UIAlertControllerStyle.alert)
+        confirmationAlertController.addAction(UIAlertAction(title: "ok".localized, style: UIAlertActionStyle.default, handler: nil))
+        return confirmationAlertController
     }
     
     func splitVerseOrder(_ verseOrder: String) -> NSArray

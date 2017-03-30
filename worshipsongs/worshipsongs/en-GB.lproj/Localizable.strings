@@ -17,6 +17,7 @@
 "favorite" = "Favourite";
 "message.add" = "Do you want to add this song to your Favourites?";
 "message.exist" = "Song has already been added to Favourites";
+"message.not.exist" = "Song is not in this database or its title may have changed";
 "black" = "Black";
 "darkGray" = "Dark Gray";
 "lightGray" = "Light Gray";
