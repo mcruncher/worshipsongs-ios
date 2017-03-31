@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         if !preferences.dictionaryRepresentation().keys.contains("remote.url") {
-            self.preferences.setValue("https://github.com/crunchersaspire/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "remote.url")
+            self.preferences.setValue("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "remote.url")
             self.preferences.synchronize()
         }
         if !preferences.dictionaryRepresentation().keys.contains("defaultDatabase") {
@@ -104,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.synchronize()
         }
         if !preferences.dictionaryRepresentation().keys.contains("latestFavoriteUpdated") {
-            self.preferences.set(false, forKey: "defaultDatabase")
+            self.preferences.set(false, forKey: "latestFavoriteUpdated")
             self.preferences.synchronize()
         }
         if !preferences.dictionaryRepresentation().keys.contains("fontSize") {
