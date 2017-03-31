@@ -15,6 +15,8 @@
 		2F0A70F91E1B432D0025F156 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0A70F81E1B432D0025F156 /* TitleTableViewCell.swift */; };
 		2F1044201E6422E200DBDD54 /* DatabaseLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10441F1E6422E200DBDD54 /* DatabaseLoadingViewController.swift */; };
 		2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */; };
+		2F18C4C31E8DE6B800E540AF /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18C4C21E8DE6B800E540AF /* CategoriesTableViewController.swift */; };
+		2F18C4C51E8DF17700E540AF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18C4C41E8DF17700E540AF /* Category.swift */; };
 		2F19EAFE1E5FBE4D00B989D8 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */; };
 		2F19EB001E6005A000B989D8 /* RemoteUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F19EAFF1E6005A000B989D8 /* RemoteUrlViewController.swift */; };
 		2F1F2A0B1E5C09290046EFDA /* FavoritesSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F2A0A1E5C09290046EFDA /* FavoritesSong.swift */; };
@@ -78,6 +80,8 @@
 		2F10441D1E63F5BC00DBDD54 /* DatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		2F10441F1E6422E200DBDD54 /* DatabaseLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseLoadingViewController.swift; sourceTree = "<group>"; };
 		2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesSongsWithOrder.swift; sourceTree = "<group>"; };
+		2F18C4C21E8DE6B800E540AF /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
+		2F18C4C41E8DF17700E540AF /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		2F19EAFF1E6005A000B989D8 /* RemoteUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteUrlViewController.swift; sourceTree = "<group>"; };
 		2F1F2A0A1E5C09290046EFDA /* FavoritesSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesSong.swift; sourceTree = "<group>"; };
@@ -272,6 +276,7 @@
 				2FE636571E4190FF0092A696 /* PresentationViewController.swift */,
 				2F19EAFF1E6005A000B989D8 /* RemoteUrlViewController.swift */,
 				2F10441F1E6422E200DBDD54 /* DatabaseLoadingViewController.swift */,
+				2F18C4C21E8DE6B800E540AF /* CategoriesTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				2FD589941C1660A300668951 /* Author.swift */,
 				2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */,
 				2F1F2A0A1E5C09290046EFDA /* FavoritesSong.swift */,
+				2F18C4C41E8DF17700E540AF /* Category.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -544,6 +550,7 @@
 				2F0A70F91E1B432D0025F156 /* TitleTableViewCell.swift in Sources */,
 				2FE250301E43134E007BA85D /* PresentationData.swift in Sources */,
 				2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */,
+				2F18C4C31E8DE6B800E540AF /* CategoriesTableViewController.swift in Sources */,
 				2FFBC33E1E7BAB85006B2405 /* DatabaseService.swift in Sources */,
 				2F1F2A0B1E5C09290046EFDA /* FavoritesSong.swift in Sources */,
 				2FF0BE861E0CD218004E2127 /* SongWithVideoViewController.swift in Sources */,
@@ -572,6 +579,7 @@
 				2FE636581E4190FF0092A696 /* PresentationViewController.swift in Sources */,
 				2FD78E4C1C103A5D00A171B7 /* CustomTextSettingService.swift in Sources */,
 				2F19EB001E6005A000B989D8 /* RemoteUrlViewController.swift in Sources */,
+				2F18C4C51E8DF17700E540AF /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

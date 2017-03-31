@@ -192,4 +192,61 @@ class DatabaseHelper: NSObject {
         return authorName
     }
     
+    func getCategoryModel() -> [(Category)] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
+        //54D70B97-F386-4746-9A69-692E339668B8
+        print("path : \(path)")
+        database?.open()
+        var categoryModel = [Category]()
+        let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM topics ORDER BY name", withArgumentsIn: nil)
+        let id:String = "id"
+        let name: String = "name"
+        if (resultSet1 != nil)
+        {
+            while resultSet1!.next() {
+                categoryModel.append(Category(id: resultSet1!.string(forColumn: id), name: resultSet1!.string(forColumn: name)))
+            }
+        }
+        print("songModel count : \(categoryModel.count)")
+        return categoryModel
+    }
+    
+    func getCategorySongsModel(_ argument: String) -> [(Songs)] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
+        //54D70B97-F386-4746-9A69-692E339668B8
+        print("path : \(path)")
+        database?.open()
+        var songModelIds = [AnyObject]()
+        var arguments = [AnyObject]()
+        var args:String = ""
+        arguments.append(argument as AnyObject)
+        let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM songs_topics where topic_id = ?", withArgumentsIn: arguments)
+        if (resultSet1 != nil)
+        {
+            while resultSet1!.next() {
+                if(args != "")
+                {
+                    args="\(args),"
+                }
+                args="\(args)?"
+                songModelIds.append(resultSet1!.string(forColumn: "song_id") as AnyObject)
+            }
+        }
+        var songModel = [Songs]()
+        let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN (\(args)) ORDER BY title", withArgumentsIn: songModelIds)
+        let id = "id"
+        let titles: String = "title"
+        let lyrics: String = "lyrics"
+        let verseOrder: String = "verse_order"
+        if (resultSet2 != nil)
+        {
+            while resultSet2!.next() {
+                songModel.append(Songs(id: resultSet2!.string(forColumn: id), title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
+            }
+        }
+        return songModel
+    }
+    
 }
