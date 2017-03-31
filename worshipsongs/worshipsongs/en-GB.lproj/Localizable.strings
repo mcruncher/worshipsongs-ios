@@ -9,6 +9,7 @@
 "songs" = "Songs";
 "artists" = "Artists";
 "artist" = "Artist";
+"categories" = "Categories";
 "favorites" = "Favourites";
 
 "message.favorite" = "Long press on a song title to mark it as Favourite";
