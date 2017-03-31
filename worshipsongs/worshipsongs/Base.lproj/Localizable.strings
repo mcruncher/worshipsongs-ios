@@ -9,6 +9,7 @@
 "songs" = "Songs";
 "artists" = "Artists";
 "artist" = "Artist";
+"categories" = "Categories";
 "favorites" = "Favorites";
 
 "message.favorite" = "Long press on a song title to mark it as Favorite";
@@ -71,3 +72,4 @@
 "rateUs" = "Rate Us";
 "feedback" = "Send Feedback";
 "shareApp" = "Share This App";
+"refresh" = "Refresh";

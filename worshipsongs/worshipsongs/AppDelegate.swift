@@ -76,8 +76,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func updateDefaultSettings() {
         self.preferences.setValue("", forKey: "import.status")
+        self.preferences.setValue("", forKey: "presentationSongName")
+        self.preferences.setValue("", forKey: "presentationLyrics")
+        self.preferences.setValue("", forKey: "presentationSlide")
+        self.preferences.setValue(0, forKey: "presentationSlideNumber")
+        self.preferences.setValue("", forKey: "presentationAuthor")
         self.preferences.synchronize()
-        
+    
         if !preferences.dictionaryRepresentation().keys.contains("database.lock") {
             self.preferences.set(false, forKey: "database.lock")
             self.preferences.synchronize()
@@ -128,26 +133,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         if !preferences.dictionaryRepresentation().keys.contains("presentationBackgroundColor") {
             self.preferences.setValue(ColorUtils.Color.black.rawValue, forKey: "presentationBackgroundColor")
-            self.preferences.synchronize()
-        }
-        if preferences.dictionaryRepresentation().keys.contains("presentationLyrics") {
-            self.preferences.setValue("", forKey: "presentationLyrics")
-            self.preferences.synchronize()
-        }
-        if preferences.dictionaryRepresentation().keys.contains("presentationSongName") {
-            self.preferences.setValue("", forKey: "presentationSongName")
-            self.preferences.synchronize()
-        }
-        if preferences.dictionaryRepresentation().keys.contains("presentationSlide") {
-            self.preferences.setValue("", forKey: "presentationSlide")
-            self.preferences.synchronize()
-        }
-        if preferences.dictionaryRepresentation().keys.contains("presentationSlideNumber") {
-            self.preferences.setValue(0, forKey: "presentationSlideNumber")
-            self.preferences.synchronize()
-        }
-        if preferences.dictionaryRepresentation().keys.contains("presentationAuthor") {
-            self.preferences.setValue("", forKey: "presentationAuthor")
             self.preferences.synchronize()
         }
         if self.preferences.array(forKey: "favorite") != nil {
