@@ -192,11 +192,8 @@ class DatabaseHelper: NSObject {
         return authorName
     }
     
-    func getCategoryModel() -> [(Category)] {
+    func findCategory() -> [(Category)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
         database?.open()
         var categoryModel = [Category]()
         let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM topics ORDER BY name", withArgumentsIn: nil)
@@ -205,23 +202,20 @@ class DatabaseHelper: NSObject {
         if (resultSet1 != nil)
         {
             while resultSet1!.next() {
-                categoryModel.append(Category(id: resultSet1!.string(forColumn: id), name: resultSet1!.string(forColumn: name)))
+                categoryModel.append(Category(id: Int(resultSet1!.int(forColumn: id)), name: resultSet1!.string(forColumn: name)))
             }
         }
-        print("songModel count : \(categoryModel.count)")
+        print("Categories: \(categoryModel.count)")
         return categoryModel
     }
     
-    func getCategorySongsModel(_ argument: String) -> [(Songs)] {
+    func findCategorySongs(_ categoryId: Int) -> [(Songs)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
         database?.open()
         var songModelIds = [AnyObject]()
         var arguments = [AnyObject]()
         var args:String = ""
-        arguments.append(argument as AnyObject)
+        arguments.append(categoryId as AnyObject)
         let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM songs_topics where topic_id = ?", withArgumentsIn: arguments)
         if (resultSet1 != nil)
         {

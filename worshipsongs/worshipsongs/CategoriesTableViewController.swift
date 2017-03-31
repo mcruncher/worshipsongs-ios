@@ -28,7 +28,7 @@ class CategoriesTableViewController: UITableViewController   {
         tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         //refresh control
         refresh = UIRefreshControl()
-        refresh.attributedTitle = NSAttributedString(string: "Refresh")
+        refresh.attributedTitle = NSAttributedString(string: "refresh".localized)
         refresh.addTarget(self, action: #selector(CategoriesTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
     }
@@ -36,29 +36,19 @@ class CategoriesTableViewController: UITableViewController   {
     override func viewWillAppear(_ animated: Bool) {
         let songTabBarController = tabBarController as! SongsTabBarViewController
         songTabBarController.navigationItem.title = "categories".localized
-        categoryModel = databaseHelper.getCategoryModel()
+        categoryModel = databaseHelper.findCategory()
         filteredCategoryModel = categoryModel
         createSearchBar()
         tableView.reloadData()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return filteredCategoryModel.count
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -67,16 +57,14 @@ class CategoriesTableViewController: UITableViewController   {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         hideSearchBar()
         categoryName = filteredCategoryModel[(indexPath as NSIndexPath).row].name
-        songsModel = databaseHelper.getCategorySongsModel(filteredCategoryModel[(indexPath as NSIndexPath).row].id)
+        songsModel = databaseHelper.findCategorySongs(filteredCategoryModel[(indexPath as NSIndexPath).row].id)
         performSegue(withIdentifier: "artistTitle", sender: self)
         
     }
     
-    func splitVerseOrder(_ verseOrder: String) -> NSArray
-    {
+    func splitVerseOrder(_ verseOrder: String) -> NSArray {
         return verseOrder.components(separatedBy: " ") as NSArray
     }
     
@@ -89,10 +77,7 @@ class CategoriesTableViewController: UITableViewController   {
         }
     }
     
-    
-    
-    func refresh(_ sender:AnyObject)
-    {
+    func refresh(_ sender:AnyObject) {
         filteredCategoryModel = categoryModel
         self.tableView.reloadData()
         self.refresh.endRefreshing()
@@ -104,7 +89,6 @@ extension CategoriesTableViewController: UISearchBarDelegate {
     
     func createSearchBar()
     {
-        // Search bar
         let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
         searchBar = UISearchBar(frame: searchBarFrame)
         searchBar.delegate = self;
@@ -138,7 +122,6 @@ extension CategoriesTableViewController: UISearchBarDelegate {
     }
     
     func filterContentForSearchText(_ searchBar: UISearchBar) {
-        // Filter the array using the filter method
         let searchText = searchBar.text
         var data = categoryModel
         if (searchText?.characters.count)! > 0 {
@@ -150,14 +133,12 @@ extension CategoriesTableViewController: UISearchBarDelegate {
         self.filteredCategoryModel = data
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-    {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         hideSearchBar()
         tableView.reloadData()
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
-    {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         hideSearchBar()
         filteredCategoryModel = categoryModel
         tableView.reloadData()
