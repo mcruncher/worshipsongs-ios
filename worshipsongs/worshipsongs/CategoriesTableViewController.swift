@@ -1,9 +1,7 @@
 //
-//  CategoriesTableViewController.swift
-//  worshipsongs
 //
-//  Created by Vignesh Palanisamy on 31/03/2017.
-//  Copyright © 2017 Vignesh Palanisamy. All rights reserved.
+// author: Vignesh Palanisamy
+// version: 2.1.0
 //
 
 import UIKit
