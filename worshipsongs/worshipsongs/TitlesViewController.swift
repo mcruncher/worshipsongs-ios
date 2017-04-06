@@ -18,7 +18,6 @@ class TitlesViewController: UITableViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(TitlesViewController.hideSearch), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         addRefreshControl()
         addSearchBar()
         addLongPressGestureRecognizer()
@@ -193,10 +192,12 @@ extension TitlesViewController: UIGestureRecognizerDelegate {
     
 }
 
-extension TitlesViewController: UISearchBarDelegate {
+extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDelegate {
     
     fileprivate func addSearchBar() {
         // Search bar
+        let songTabBarController = self.tabBarController as! SongsTabBarViewController
+        songTabBarController.searchDelegate = self
         let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
         searchBar = UISearchBar(frame: searchBarFrame)
         searchBar.delegate = self;
@@ -253,9 +254,11 @@ extension TitlesViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
     
-    @objc fileprivate func hideSearch() {
+    func hideSearch() {
         if DeviceUtils.isIpad() {
             hideSearchBar()
+            filteredSongModel = songModel
+            tableView.reloadData()
         }
     }
     

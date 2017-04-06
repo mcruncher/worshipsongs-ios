@@ -99,11 +99,13 @@ class ArtistsTableViewController: UITableViewController   {
     
 }
 
-extension ArtistsTableViewController: UISearchBarDelegate {
+extension ArtistsTableViewController: UISearchBarDelegate, TitleOrContentBaseSearchDelegate {
     
     func createSearchBar()
     {
         // Search bar
+        let songTabBarController = self.tabBarController as! SongsTabBarViewController
+        songTabBarController.searchDelegate = self
         let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
         searchBar = UISearchBar(frame: searchBarFrame)
         searchBar.delegate = self;
@@ -123,6 +125,13 @@ extension ArtistsTableViewController: UISearchBarDelegate {
         searchBar.becomeFirstResponder()
     }
     
+    func hideSearch() {
+        if DeviceUtils.isIpad() {
+            hideSearchBar()
+            filteredAuthorModel = authorModel
+            tableView.reloadData()
+        }
+    }
     
     func hideSearchBar() {
         self.tabBarController?.navigationItem.titleView = nil

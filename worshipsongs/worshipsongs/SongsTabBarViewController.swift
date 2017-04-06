@@ -13,10 +13,15 @@ protocol SongSelectionDelegate: class {
     func songSelected(_ song: Songs!)
 }
 
+protocol TitleOrContentBaseSearchDelegate {
+    func hideSearch()
+}
+
 class SongsTabBarViewController: UITabBarController{
     
     fileprivate let preferences = UserDefaults.standard
     weak var songdelegate: SongSelectionDelegate?
+    var searchDelegate: TitleOrContentBaseSearchDelegate?
     var collapseDetailViewController = true
     var secondWindow: UIWindow?
     var presentationData = PresentationData()
@@ -27,6 +32,7 @@ class SongsTabBarViewController: UITabBarController{
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onBeforeUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onBeforeUpdateDatabase"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onAfterUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onAfterUpdateDatabase"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.hideSearchBar), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         splitViewController?.delegate = self
     }
     
@@ -44,6 +50,10 @@ class SongsTabBarViewController: UITabBarController{
     
     func onAfterUpdateDatabase(_ nsNotification: NSNotification) {
         self.selectedViewController?.viewWillAppear(true)
+    }
+    
+    func hideSearchBar() {
+        searchDelegate?.hideSearch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
