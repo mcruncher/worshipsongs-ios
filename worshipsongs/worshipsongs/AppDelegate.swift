@@ -82,6 +82,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.preferences.setValue(0, forKey: "presentationSlideNumber")
         self.preferences.setValue("", forKey: "presentationAuthor")
         self.preferences.synchronize()
+        
+        if !preferences.dictionaryRepresentation().keys.contains("searchBy") {
+            self.preferences.set("searchByTitle", forKey: "searchBy")
+            self.preferences.synchronize()
+        }
     
         if !preferences.dictionaryRepresentation().keys.contains("database.lock") {
             self.preferences.set(false, forKey: "database.lock")

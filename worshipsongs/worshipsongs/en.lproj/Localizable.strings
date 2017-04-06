@@ -72,3 +72,6 @@
 "feedback" = "Send Feedback";
 "shareApp" = "Share This App";
 "refresh" = "Refresh";
+"searchByTitle" = "Title";
+"searchByContent" = "Content";
+"searchBy" = "Search By";

@@ -20,6 +20,8 @@ class SongsTabBarViewController: UITabBarController{
     var collapseDetailViewController = true
     var secondWindow: UIWindow?
     var presentationData = PresentationData()
+    var searchBarDisplay = false
+    var optionMenu = UIAlertController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +59,27 @@ class SongsTabBarViewController: UITabBarController{
     }
     
     @IBAction func GoToSettingView(_ sender: Any) {
+        if searchBarDisplay {
+            optionMenu = UIAlertController(title: nil, message: "searchBy".localized, preferredStyle: .actionSheet)
+            optionMenu.addAction(searchByAction("searchByTitle"))
+            optionMenu.addAction(searchByAction("searchByContent"))
+            optionMenu.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
+            self.present(optionMenu, animated: true, completion: nil)
+        } else {
+            onClickLeftNavBarButton()
+        }
+    }
+    
+    func searchByAction(_ option: String) -> UIAlertAction {
+        return UIAlertAction(title: option.localized, style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.preferences.set(option, forKey: "searchBy")
+            self.preferences.synchronize()
+            self.navigationItem.leftBarButtonItem?.image = UIImage(named: option)
+        })
+    }
+    
+    func onClickLeftNavBarButton() {
         performSegue(withIdentifier: "setting", sender: self)
     }
     
