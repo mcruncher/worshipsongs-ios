@@ -5,7 +5,7 @@
 
 import UIKit
 
-class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
+class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, TitleOrContentBaseSearchDelegate {
     
     fileprivate var filteredSongModel = [FavoritesSong]()
     var songModel = [FavoritesSong]()
@@ -344,6 +344,8 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
     func createSearchBar()
     {
         // Search bar
+        let songTabBarController = self.tabBarController as? SongsTabBarViewController
+        songTabBarController?.searchDelegate = self
         let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
         searchBar = UISearchBar(frame: searchBarFrame)
         searchBar.delegate = self;
@@ -361,6 +363,14 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate {
         self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
         searchBar.becomeFirstResponder()
+    }
+    
+    func hideSearch() {
+        if DeviceUtils.isIpad() {
+            hideSearchBar()
+            refresh(self)
+            tableView.reloadData()
+        }
     }
     
     func hideSearchBar() {

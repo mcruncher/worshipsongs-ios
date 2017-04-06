@@ -85,10 +85,12 @@ class CategoriesTableViewController: UITableViewController   {
     
 }
 
-extension CategoriesTableViewController: UISearchBarDelegate {
+extension CategoriesTableViewController: UISearchBarDelegate, TitleOrContentBaseSearchDelegate {
     
     func createSearchBar()
     {
+        let songTabBarController = self.tabBarController as! SongsTabBarViewController
+        songTabBarController.searchDelegate = self
         let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
         searchBar = UISearchBar(frame: searchBarFrame)
         searchBar.delegate = self;
@@ -108,6 +110,13 @@ extension CategoriesTableViewController: UISearchBarDelegate {
         searchBar.becomeFirstResponder()
     }
     
+    func hideSearch() {
+        if DeviceUtils.isIpad() {
+            hideSearchBar()
+            filteredCategoryModel = categoryModel
+            tableView.reloadData()
+        }
+    }
     
     func hideSearchBar() {
         self.tabBarController?.navigationItem.titleView = nil
