@@ -73,11 +73,19 @@ class SongsTabBarViewController: UITabBarController{
             optionMenu = UIAlertController(title: nil, message: "searchBy".localized, preferredStyle: .actionSheet)
             optionMenu.addAction(searchByAction("searchByTitle"))
             optionMenu.addAction(searchByAction("searchByContent"))
+            optionMenu.addAction(getCancelAction())
             optionMenu.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
             self.present(optionMenu, animated: true, completion: nil)
         } else {
             onClickLeftNavBarButton()
         }
+    }
+    
+    fileprivate func getCancelAction() -> UIAlertAction {
+        return UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+        })
     }
     
     func searchByAction(_ option: String) -> UIAlertAction {
