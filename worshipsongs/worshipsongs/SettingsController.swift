@@ -234,7 +234,7 @@ class SettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "language".localized
+            return "display".localized
         case 1:
             return "primary.screen".localized
         case 2:
