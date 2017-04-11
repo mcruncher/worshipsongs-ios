@@ -68,6 +68,9 @@ class CustomTextSettingService {
             let rangeValue: NSRange = (customTagTextRange.object(at: index) as AnyObject).rangeValue
             attributedString.addAttribute(NSForegroundColorAttributeName, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!), range: rangeValue)
             onlyTamilAttribute.append(attributedString.attributedSubstring(from: rangeValue))
+            if index != customTagTextRange.count - 1 {
+                onlyTamilAttribute.append(NSAttributedString(string: "\n"))
+            }
         }
         return onlyTamilAttribute
     }
