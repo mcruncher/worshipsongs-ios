@@ -44,6 +44,10 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var presentationTamilColor: UITextField!
     @IBOutlet weak var presentationEnglishColor: UITextField!
     @IBOutlet weak var presentationBackgroundColor: UITextField!
+    @IBOutlet weak var displayTamilLabel: UILabel!
+    @IBOutlet weak var displayRomanisedLabel: UILabel!
+    @IBOutlet weak var displayTamilSwitch: UISwitch!
+    @IBOutlet weak var displayRomanisedSwitch: UISwitch!
     
     
     fileprivate let preferences = UserDefaults.standard
@@ -71,14 +75,11 @@ class SettingsController: UITableViewController {
         self.setPresentationScreenTamilFontColor()
         self.setPresentationScreenEnglishFontColor()
         self.setPresentationScreenBackgroundColor()
+        self.setTamilSwitchValue()
+        self.setRomanisedSwitchValue()
         let backButton = UIBarButtonItem(title: "back".localized, style: .plain, target: self, action: #selector(SettingsController.goBackToSongsList))
         navigationItem.leftBarButtonItem = backButton
         addTapGestureRecognizer()
-        //        if DeviceUtils.isIpad() {
-        //           // self.splitViewController!.preferredDisplayMode = .automatic
-        //            splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
-        //            splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
-        //        }
     }
     
     
@@ -100,6 +101,8 @@ class SettingsController: UITableViewController {
         presentationTamilColorLabel.text = "tamil.font.color".localized
         presentationEnglishColorLabel.text = "english.font.color".localized
         presentationBackgroundColorLabel.text = "background.color".localized
+        displayTamilLabel.text = "display.tamil".localized
+        displayRomanisedLabel.text = "display.romanised".localized
         self.restoreDatabaseCell.isHidden = self.preferences.bool(forKey: "defaultDatabase")
     }
     
@@ -184,6 +187,16 @@ class SettingsController: UITableViewController {
         presentationBackgroundColorPickerView.selectRow(ColorList.index(of: ColorUtils.Color(rawValue: presentationBackground)!)!, inComponent: 0, animated: true)
     }
     
+    func setTamilSwitchValue() {
+        let displayTamil = self.preferences.bool(forKey: "displayTamil")
+        displayTamilSwitch.isOn = displayTamil
+    }
+    
+    func setRomanisedSwitchValue() {
+        let displayRomanised = self.preferences.bool(forKey: "displayRomanised")
+        displayRomanisedSwitch.isOn = displayRomanised
+    }
+    
     func getToolBar(currentField: UITextField) -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
@@ -215,18 +228,20 @@ class SettingsController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 4
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "primary.screen".localized
+            return "language".localized
         case 1:
-            return "presentation.screen".localized
+            return "primary.screen".localized
         case 2:
-            return "advanced".localized
+            return "presentation.screen".localized
         case 3:
+            return "advanced".localized
+        case 4:
             return "general".localized
         default:
             return ""
@@ -235,14 +250,14 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         importDatabaseLabel.isEnabled = !self.preferences.bool(forKey: "database.lock")
-        if section == 2 && self.preferences.bool(forKey: "defaultDatabase") {
+        if section == 3 && self.preferences.bool(forKey: "defaultDatabase") {
             return 1
         }
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             switch indexPath.row {
             case 1:
                 tamilFontColorTextField.becomeFirstResponder()
@@ -254,7 +269,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             switch indexPath.row {
             case 1:
                 presentationTamilFontColorTextField.becomeFirstResponder()
@@ -269,7 +284,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
                 importDatabase()
@@ -281,7 +296,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 3 {
+        if indexPath.section == 4 {
             switch indexPath.row {
             case 0:
                 rateUs()
@@ -308,6 +323,16 @@ class SettingsController: UITableViewController {
         self.preferences.setValue(fontSizeSlider.value, forKey: "fontSize")
         self.preferences.synchronize()
         fontSIze.text = String(self.preferences.integer(forKey: "fontSize"))
+    }
+    
+    @IBAction func onChangeTamilSwitch(_ sender: Any) {
+        self.preferences.setValue(displayTamilSwitch.isOn, forKey: "displayTamil")
+        self.preferences.synchronize()
+    }
+    
+    @IBAction func onChangeEnglishSwitch(_ sender: Any) {
+        self.preferences.setValue(displayRomanisedSwitch.isOn, forKey: "displayRomanised")
+        self.preferences.synchronize()
     }
     
     func restoreDatabase() {

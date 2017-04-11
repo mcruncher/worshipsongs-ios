@@ -40,6 +40,7 @@ class SongWithVideoViewController: UIViewController  {
     fileprivate let preferences = UserDefaults.standard
     var play = false
     var noInternet = false
+    var tamilTagExists = false
     
     //new var
     var databaseHelper = DatabaseHelper()
@@ -420,7 +421,7 @@ class SongWithVideoViewController: UIViewController  {
             cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize + 5))
             cell.textLabel!.numberOfLines = 0
             cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
-            cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
+            cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!, tagExists: tamilTagExists);
             cells.append(cell)
         }
         return cells
@@ -448,7 +449,7 @@ extension SongWithVideoViewController: UITableViewDataSource {
         let fontSize = self.preferences.integer(forKey: "fontSize")
         cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
-        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
+        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!, tagExists: tamilTagExists)
         print("cell\(cell.textLabel!.attributedText )")
         return cell
     }
@@ -471,6 +472,8 @@ extension SongWithVideoViewController: XMLParserDelegate {
         listDataDictionary = NSMutableDictionary()
         parsedVerseOrderList = NSMutableArray()
         verseOrderList = NSMutableArray()
+        let regexService = RegexPatternMatcherService()
+        tamilTagExists = regexService.isPatternExists(songLyrics, pattern: "\\{\\w\\}")
         let lyrics: Data = songLyrics.data(using: String.Encoding.utf8.rawValue)!
         let parser = XMLParser(data: lyrics)
         parser.delegate = self

@@ -83,6 +83,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.preferences.setValue("", forKey: "presentationAuthor")
         self.preferences.synchronize()
         
+        if !preferences.dictionaryRepresentation().keys.contains("displayRomanised") {
+            self.preferences.set(true, forKey: "displayRomanised")
+            self.preferences.synchronize()
+        }
+        
+        if !preferences.dictionaryRepresentation().keys.contains("displayTamil") {
+            self.preferences.set(true, forKey: "displayTamil")
+            self.preferences.synchronize()
+        }
+        
         if !preferences.dictionaryRepresentation().keys.contains("searchBy") {
             self.preferences.set("searchByTitle", forKey: "searchBy")
             self.preferences.synchronize()
