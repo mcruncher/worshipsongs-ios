@@ -19,12 +19,12 @@ class CustomTextSettingService {
     let endPattern = "\\{/\\w\\}"
     fileprivate let preferences = UserDefaults.standard
     
-    func getAttributedString(_ cellText : NSString) -> NSMutableAttributedString {
-        return getAttributedString(cellText, secondScreen: false)
+    func getAttributedString(_ cellText : NSString, tagExists: Bool) -> NSMutableAttributedString {
+        return getAttributedString(cellText, tagExists: tagExists, secondScreen: false)
     }
 
     
-    func getAttributedString(_ cellText : NSString, secondScreen: Bool) -> NSMutableAttributedString {
+    func getAttributedString(_ cellText : NSString, tagExists: Bool, secondScreen: Bool) -> NSMutableAttributedString {
         print("cell Text \(cellText)")
         let customTagRangeArray = getCustomTagRanges(cellText)
         if(customTagRangeArray.count > 0)
@@ -40,28 +40,79 @@ class CustomTextSettingService {
         let attributedString = NSMutableAttributedString(string: customCellText as String)
         let textRange = NSMakeRange(0, customCellText.length)
         var englishFont = self.preferences.string(forKey: "englishFontColor")!
-        var tamilFont = self.preferences.string(forKey: "tamilFontColor")!
         if secondScreen {
             englishFont = self.preferences.string(forKey: "presentationEnglishFontColor")!
+        }
+        let displayRomanised = self.preferences.bool(forKey: "displayRomanised")
+        let displayTamil = self.preferences.bool(forKey: "displayTamil")
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: englishFont)!), range: textRange)
+        print("attributed String \(attributedString)")
+        if tagExists {
+            if !displayRomanised && displayTamil {
+                return getOnlyTamilLyrics(attributedString: attributedString, secondScreen: secondScreen)
+            } else if displayRomanised && !displayTamil {
+                return getOnlyEnglishLyrics(attributedString: attributedString)
+            }
+        }
+        return getAllLyrics(attributedString: attributedString, secondScreen: secondScreen)
+        
+    }
+    
+    func getOnlyTamilLyrics(attributedString: NSMutableAttributedString, secondScreen: Bool) -> NSMutableAttributedString {
+        var tamilFont = self.preferences.string(forKey: "tamilFontColor")!
+        if secondScreen {
             tamilFont = self.preferences.string(forKey: "presentationTamilFontColor")!
         }
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: englishFont)!), range: textRange)
-        
+        let onlyTamilAttribute: NSMutableAttributedString = NSMutableAttributedString(string: "")
         for index in 0 ..< customTagTextRange.count {
-            var rangeValue:NSRange
-            rangeValue = (customTagTextRange.object(at: index) as AnyObject).rangeValue
+            let rangeValue: NSRange = (customTagTextRange.object(at: index) as AnyObject).rangeValue
+            attributedString.addAttribute(NSForegroundColorAttributeName, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!), range: rangeValue)
+            onlyTamilAttribute.append(attributedString.attributedSubstring(from: rangeValue))
+            if index != customTagTextRange.count - 1 {
+                onlyTamilAttribute.append(NSAttributedString(string: "\n"))
+            }
+        }
+        return onlyTamilAttribute
+    }
+    
+    func getOnlyEnglishLyrics(attributedString: NSMutableAttributedString) -> NSMutableAttributedString {
+        let onlyEnglishAttribute: NSMutableAttributedString = NSMutableAttributedString(string: "")
+        var startPosition = 0
+        var length = 0
+        for index in 0 ..< customTagTextRange.count {
+            let rangeValue: NSRange = (customTagTextRange.object(at: index) as AnyObject).rangeValue
+            length = rangeValue.location - startPosition
+            if length > 0 {
+                onlyEnglishAttribute.append(attributedString.attributedSubstring(from: NSMakeRange(startPosition, length)))
+            }
+            startPosition = startPosition + length + rangeValue.length + 1
+            if index == customTagTextRange.count - 1 {
+                length = attributedString.length - startPosition
+                onlyEnglishAttribute.append(attributedString.attributedSubstring(from: NSMakeRange(startPosition, length)))
+            }
+        }
+        return onlyEnglishAttribute
+    }
+    
+    func getAllLyrics(attributedString: NSMutableAttributedString, secondScreen: Bool) -> NSMutableAttributedString {
+        var tamilFont = self.preferences.string(forKey: "tamilFontColor")!
+        if secondScreen {
+            tamilFont = self.preferences.string(forKey: "presentationTamilFontColor")!
+        }
+        for index in 0 ..< customTagTextRange.count {
+            let rangeValue: NSRange = (customTagTextRange.object(at: index) as AnyObject).rangeValue
             attributedString.addAttribute(NSForegroundColorAttributeName, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!), range: rangeValue)
         }
-        print("attributed String \(attributedString)")
-        return attributedString;
+        return attributedString
     }
+    
     
     func getCustomTagRanges(_ cellText : NSString) -> NSMutableArray{
         
         var startTagArray: NSMutableArray = NSMutableArray()
         var endTagArray: NSMutableArray = NSMutableArray()
         let tagRange: NSMutableArray = NSMutableArray()
-        
+
         startTagArray = regexPatternMatcherService.getRange(cellText as String, pattern: startPattern)
         endTagArray = regexPatternMatcherService.getRange(cellText as String, pattern: endPattern)
         if(startTagArray.count == endTagArray.count){

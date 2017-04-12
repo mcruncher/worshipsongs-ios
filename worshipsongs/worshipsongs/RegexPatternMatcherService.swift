@@ -49,4 +49,12 @@ class RegexPatternMatcherService{
         return internalExpression.stringByReplacingMatches(in: text as String, options: options, range: NSMakeRange(0, text.length), withTemplate: "") as NSString
     }
     
+    func isPatternExists(_ text: NSString, pattern: NSString) -> Bool
+    {
+        var internalExpression: NSRegularExpression
+        let options = NSRegularExpression.MatchingOptions(rawValue: 0)
+        internalExpression = try! NSRegularExpression(pattern: pattern as String, options: .caseInsensitive)
+        return internalExpression.matches(in: text as String, options: options, range: NSMakeRange(0, text.length)).count > 0
+    }
+    
 }
