@@ -40,7 +40,6 @@ class SongWithVideoViewController: UIViewController  {
     fileprivate let preferences = UserDefaults.standard
     var play = false
     var noInternet = false
-    var tamilTagExists = false
     
     //new var
     var databaseHelper = DatabaseHelper()
@@ -361,6 +360,7 @@ class SongWithVideoViewController: UIViewController  {
         for verseOrder in verseOrderList {
             objectString.append(getObject(verseOrder: verseOrder as! String))
         }
+        objectString.append(NSAttributedString(string: "<br/>"))
         objectString.append(NSAttributedString(string: "</body></html>"))
         return objectString
     }
@@ -375,14 +375,14 @@ class SongWithVideoViewController: UIViewController  {
             objectString.append(NSAttributedString(string: text))
             objectString.append(NSAttributedString(string: "<br/>"))
         }
+        objectString.append(NSAttributedString(string: "<br/>"))
         return objectString
     }
     
     func parseString(text: String) -> [String] {
-        var parsedText = text.replacingOccurrences(of: "{/y}", with: "{y} ")
-        print(parsedText)
-        parsedText.append("{y}")
-        return parsedText.components(separatedBy: "{y}")
+        let attributeText = customTextSettingService.getAttributedString(text as NSString)
+    //    let parsedText = attributeText.string.replacingOccurrences(of: "\n", with: "\n{n}")
+        return attributeText.string.components(separatedBy: "\n")
     }
     
     func getMessageToShare() -> NSMutableAttributedString {
@@ -392,6 +392,7 @@ class SongWithVideoViewController: UIViewController  {
         for verseOrder in verseOrderList {
             objectString.append(getMessage(verseOrder: verseOrder as! String))
         }
+        objectString.append(NSAttributedString(string: "\n"))
         return objectString
     }
     
@@ -403,8 +404,9 @@ class SongWithVideoViewController: UIViewController  {
         print("verseOrder \(verseOrder)")
         for text in texts {
             objectString.append(NSAttributedString(string: text))
+            objectString.append(NSAttributedString(string: "\n"))
         }
-        objectString.append(NSAttributedString(string: "\n\n"))
+        objectString.append(NSAttributedString(string: "\n"))
         return objectString
     }
     
@@ -421,7 +423,7 @@ class SongWithVideoViewController: UIViewController  {
             cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize + 5))
             cell.textLabel!.numberOfLines = 0
             cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
-            cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!, tagExists: tamilTagExists);
+            cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
             cells.append(cell)
         }
         return cells
@@ -449,7 +451,7 @@ extension SongWithVideoViewController: UITableViewDataSource {
         let fontSize = self.preferences.integer(forKey: "fontSize")
         cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
-        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!, tagExists: tamilTagExists)
+        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
         print("cell\(cell.textLabel!.attributedText )")
         return cell
     }
@@ -472,8 +474,6 @@ extension SongWithVideoViewController: XMLParserDelegate {
         listDataDictionary = NSMutableDictionary()
         parsedVerseOrderList = NSMutableArray()
         verseOrderList = NSMutableArray()
-        let regexService = RegexPatternMatcherService()
-        tamilTagExists = regexService.isPatternExists(songLyrics, pattern: "\\{\\w\\}")
         let lyrics: Data = songLyrics.data(using: String.Encoding.utf8.rawValue)!
         let parser = XMLParser(data: lyrics)
         parser.delegate = self

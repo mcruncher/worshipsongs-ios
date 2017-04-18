@@ -13,18 +13,19 @@ import Foundation
 class CustomTextSettingService {
     
     var customTagTextRange: NSMutableArray = NSMutableArray()
-    let regexPatternMatcherService:RegexPatternMatcherService = RegexPatternMatcherService()
+    let regexPatternMatcherService: RegexPatternMatcherService = RegexPatternMatcherService()
     var customCellText: NSString = NSString()
     let startPattern = "\\{\\w\\}"
     let endPattern = "\\{/\\w\\}"
     fileprivate let preferences = UserDefaults.standard
     
-    func getAttributedString(_ cellText : NSString, tagExists: Bool) -> NSMutableAttributedString {
-        return getAttributedString(cellText, tagExists: tagExists, secondScreen: false)
+    func getAttributedString(_ cellText : NSString) -> NSMutableAttributedString {
+        return getAttributedString(cellText, secondScreen: false)
     }
 
     
-    func getAttributedString(_ cellText : NSString, tagExists: Bool, secondScreen: Bool) -> NSMutableAttributedString {
+    func getAttributedString(_ cellText : NSString, secondScreen: Bool) -> NSMutableAttributedString {
+        let tagExists = regexPatternMatcherService.isPatternExists(cellText, pattern: startPattern as NSString)
         print("cell Text \(cellText)")
         let customTagRangeArray = getCustomTagRanges(cellText)
         if(customTagRangeArray.count > 0)

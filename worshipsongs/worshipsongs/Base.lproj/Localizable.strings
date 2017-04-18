@@ -76,6 +76,6 @@
 "searchByTitle" = "Title";
 "searchByContent" = "Content";
 "searchBy" = "Search By";
-"display" = "Display";
-"display.romanised" = "Display Romanised lyrics";
-"display.tamil" = "Display Tamil lyrics";
+"lyricsPreference" = "Lyrics Preference";
+"display.romanised" = "Romanised";
+"display.tamil" = "Tamil";
