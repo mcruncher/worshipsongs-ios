@@ -45,9 +45,7 @@ class PresentationData {
                 secondScreenView.songLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
                 let presentationText = self.preferences.string(forKey: "presentationLyrics")
                 let customTextSettingService: CustomTextSettingService = CustomTextSettingService()
-                let regexService = RegexPatternMatcherService()
-                let tagExists = regexService.isPatternExists(NSString(string:presentationText!), pattern: "\\{\\w\\}")
-                secondScreenView.songLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!), tagExists: tagExists, secondScreen: true)
+                secondScreenView.songLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!), secondScreen: true)
                 secondScreenView.authorLabel.text = "artist".localized + ": " + self.preferences.string(forKey: "presentationAuthor")!
                 secondScreenView.slideNumberLabel.text = self.preferences.string(forKey: "presentationSlide")
                 secondScreenView.songNameLabel.text = self.preferences.string(forKey: "presentationSongName")
@@ -69,9 +67,7 @@ class PresentationData {
         secondScreenView.songLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         let presentationText = self.preferences.string(forKey: "presentationLyrics")
         let customTextSettingService: CustomTextSettingService = CustomTextSettingService()
-        let regexService = RegexPatternMatcherService()
-        let tagExists = regexService.isPatternExists(NSString(string:presentationText!), pattern: "\\{\\w\\}")
-        secondScreenView.songLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!), tagExists: tagExists, secondScreen: true)
+        secondScreenView.songLabel.attributedText = customTextSettingService.getAttributedString(NSString(string:presentationText!), secondScreen: true)
         secondScreenView.authorLabel.text = "artist".localized + ": " + self.preferences.string(forKey: "presentationAuthor")!
         secondScreenView.slideNumberLabel.text = self.preferences.string(forKey: "presentationSlide")
         secondScreenView.songNameLabel.text = self.preferences.string(forKey: "presentationSongName")

@@ -71,7 +71,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         let fontSize = self.preferences.integer(forKey: "fontSize")
         cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
-        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!, tagExists: false);
+        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
         print("cell\(cell.textLabel!.attributedText )")
         return cell
     }
@@ -243,7 +243,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
 //            cell.textLabel!.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: fontColor)!)
             cell.textLabel!.numberOfLines = 0
             cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
-            cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!, tagExists: false);
+            cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
             cells.append(cell)
         }
         return cells
