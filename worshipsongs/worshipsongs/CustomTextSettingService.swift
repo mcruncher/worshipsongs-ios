@@ -87,7 +87,7 @@ class CustomTextSettingService {
                 onlyEnglishAttribute.append(attributedString.attributedSubstring(from: NSMakeRange(startPosition, length)))
             }
             startPosition = startPosition + length + rangeValue.length + 1
-            if index == customTagTextRange.count - 1 {
+            if index == customTagTextRange.count - 1 && attributedString.length > startPosition {
                 length = attributedString.length - startPosition
                 onlyEnglishAttribute.append(attributedString.attributedSubstring(from: NSMakeRange(startPosition, length)))
             }
