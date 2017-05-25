@@ -55,7 +55,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
         let pressingPoint = longPressGesture.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
-        if longPressGesture.state == UIGestureRecognizerState.began {
+        if indexPath != nil && longPressGesture.state == UIGestureRecognizerState.began {
             self.present(self.getConfirmationAlertController(indexPath!), animated: true, completion: nil)
         }
     }

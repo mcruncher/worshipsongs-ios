@@ -608,9 +608,11 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
                 tableView.allowsSelection = true
                 UIView.transition(with: self.tableView, duration: 00.35, options: [], animations: { () -> Void in
                     let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
-                    self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
-                    let text = self.tableView.cellForRow(at: indexPath!)?.textLabel?.attributedText
-                    self.shareLyrics(lyrics: text as! NSMutableAttributedString, indexPath: indexPath!)
+                    if indexPath != nil {
+                        self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+                        let text = self.tableView.cellForRow(at: indexPath!)?.textLabel?.attributedText
+                        self.shareLyrics(lyrics: text as! NSMutableAttributedString, indexPath: indexPath!)
+                    }
                 }, completion: nil)
             }
         }
