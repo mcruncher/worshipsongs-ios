@@ -74,31 +74,35 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
                 }
                 
             case UIGestureRecognizerState.changed:
-                var center = My.cellSnapshot!.center
-                center.y = locationInView.y
-                My.cellSnapshot!.center = center
-                if ((indexPath != nil) && (indexPath != Path.initialIndexPath as? IndexPath)) {
-                    tableView.moveRow(at: Path.initialIndexPath! as IndexPath, to: indexPath!)
-                    Path.initialIndexPath = indexPath as NSIndexPath?
+                if indexPath != nil && Path.initialIndexPath != nil{
+                    var center = My.cellSnapshot!.center
+                    center.y = locationInView.y
+                    My.cellSnapshot!.center = center
+                    if indexPath != Path.initialIndexPath as IndexPath? {
+                        tableView.moveRow(at: Path.initialIndexPath! as IndexPath, to: indexPath!)
+                        Path.initialIndexPath = indexPath as NSIndexPath?
+                    }
                 }
                 
             default:
-                let cell = tableView.cellForRow(at: Path.initialIndexPath! as IndexPath) as UITableViewCell!
-                cell?.isHidden = false
-                cell?.alpha = 0.0
-                UIView.animate(withDuration: 0.25, animations: { () -> Void in
-                    My.cellSnapshot!.center = (cell?.center)!
-                    My.cellSnapshot!.transform = CGAffineTransform.identity
-                    My.cellSnapshot!.alpha = 0.0
-                    cell?.alpha = 1.0
-                }, completion: { (finished) -> Void in
-                    if finished {
-                        Path.initialIndexPath = nil
-                        My.cellSnapshot!.removeFromSuperview()
-                        My.cellSnapshot = nil
-                    }
-                })
-                updateSongOrder()
+                if Path.initialIndexPath != nil {
+                    let cell = tableView.cellForRow(at: Path.initialIndexPath! as IndexPath) as UITableViewCell!
+                    cell?.isHidden = false
+                    cell?.alpha = 0.0
+                    UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                        My.cellSnapshot!.center = (cell?.center)!
+                        My.cellSnapshot!.transform = CGAffineTransform.identity
+                        My.cellSnapshot!.alpha = 0.0
+                        cell?.alpha = 1.0
+                    }, completion: { (finished) -> Void in
+                        if finished {
+                            Path.initialIndexPath = nil
+                            My.cellSnapshot!.removeFromSuperview()
+                            My.cellSnapshot = nil
+                        }
+                    })
+                    updateSongOrder()
+                }
             }
         }
     }
