@@ -1,7 +1,7 @@
 Worship songs for iOS
 ================
 
-This is an app for iOS. It is for worshippers to view the song lyrics on their Android devices. It is under development and available in App Store. Developer snapshots are available [here](#).
+This is an app for iOS. It is for worshippers to view the song lyrics on their iOS devices. It is under development and available in App Store. Developer snapshots are available [here](#).
 
 If the projected screen is far away and you want to view the song lyrics on hand held device or you may wish to carry the song lyrics where ever you go. Either way, this app for iOS helps you do this.
 
@@ -13,6 +13,6 @@ While worshipping you can set the screen to be awake such that there won't be a 
 
 Worship songs uses [OpenLp](http://openlp.org) database schema. 
 
-This project lives [here](https://github.com/crunchersaspire/worshipsongs-ios)
+This project lives [here](https://github.com/mcruncher/worshipsongs-ios)
 
 How to build project
