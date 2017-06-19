@@ -531,8 +531,8 @@ extension SettingsController: MFMailComposeViewControllerDelegate {
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setToRecipients(["technical@mcruncher.com"])
-        mailComposerVC.setSubject("Feedback")
+        mailComposerVC.setToRecipients(["appfeedback@mcruncher.com"])
+        mailComposerVC.setSubject("Worship Songs iOS Feedback")
         mailComposerVC.setMessageBody("Write your feedback here:", isHTML: false)
         return mailComposerVC
     }
