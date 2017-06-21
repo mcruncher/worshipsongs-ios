@@ -72,7 +72,7 @@ class SongWithVideoViewController: UIViewController  {
         songLyrics = selectedSong.lyrics as NSString
         self.songName = selectedSong.title
         authorName = databaseHelper.getArtistName(selectedSong.id)
-        if selectedSong.comment != nil {
+        if !selectedSong.comment.isEmpty {
             comment = selectedSong.comment
         } else {
             comment = ""
@@ -96,7 +96,7 @@ class SongWithVideoViewController: UIViewController  {
             self.floatingbutton.close()
             if self.isInternetAvailable() {
                 if self.noInternet {
-                    self.loadYoutube(url: self.parseSongUrl())
+                    self.loadYoutube(url: self.selectedSong.mediaUrl)
                     self.noInternet = false
                 }
                 self.setAction()
@@ -175,8 +175,8 @@ class SongWithVideoViewController: UIViewController  {
     }
     
     func hideOrShowComponents() {
-        if !comment.isEmpty && parseSongUrl() != "" {
-            loadYoutube(url: parseSongUrl())
+        if !comment.isEmpty && selectedSong.mediaUrl != "" {
+            loadYoutube(url: selectedSong.mediaUrl)
             floatingbutton.isHidden = false
             actionButton.isHidden = true
             hadYoutubeLink = true
@@ -203,7 +203,7 @@ class SongWithVideoViewController: UIViewController  {
             indexPath = IndexPath(row: 0, section: activeSection)
             self.presentation(indexPath)
         } else {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
         }
         scrollToRow(indexPath)
         
@@ -236,16 +236,6 @@ class SongWithVideoViewController: UIViewController  {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func parseSongUrl() -> String {
-        let properties = comment.components(separatedBy: "\n")
-        for property in properties {
-            if property.contains("mediaUrl"){
-                return property.components(separatedBy: "Url=")[1]
-            }
-        }
-        return ""
     }
     
     func loadYoutube(url: String) {
@@ -558,7 +548,7 @@ extension SongWithVideoViewController {
             alertController.addAction(self.getCancelAction())
             self.present(alertController, animated: true, completion: nil)
         }
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
     }
     
     func presentVerse(_ indexPath: IndexPath) {

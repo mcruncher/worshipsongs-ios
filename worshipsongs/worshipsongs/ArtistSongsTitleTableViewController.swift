@@ -19,6 +19,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     var songLyrics: NSString = NSString()
     var songName: String = ""
     var comment = ""
+    fileprivate var isLanguageTamil = true
     
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
@@ -31,6 +32,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         filteredSongModel = songModel
         createSearchBar()
         tableView.reloadData()
@@ -122,7 +124,6 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         // Dispose of any resources that can be recreated.
     }
     
-    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -138,17 +139,21 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
-        cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        if isLanguageTamil && !filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle.isEmpty {
+            cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle
+        } else {
+            cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        }
         let activeSong = preferences.string(forKey: "presentationSongName")
         if cell.title.text == activeSong && UIScreen.screens.count > 1 {
             cell.title.textColor = UIColor.cruncherBlue()
         } else {
             cell.title.textColor = UIColor.black
         }
-        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].comment.contains("youtube") {
-            cell.playImage.isHidden = false
-        } else {
+        if filteredSongModel[(indexPath as NSIndexPath).row].mediaUrl.isEmpty {
             cell.playImage.isHidden = true
+        } else {
+            cell.playImage.isHidden = false
         }
         return cell
     }
