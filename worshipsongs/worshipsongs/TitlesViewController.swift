@@ -266,7 +266,7 @@ extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDel
         if (searchText?.characters.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
                 if (self.preferences.string(forKey: "searchBy")?.equalsIgnoreCase("searchByTitle"))! {
-                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!)
+                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
                     return (stringMatch)
                 } else {
                     let stringMatch = (song.lyrics as NSString).localizedCaseInsensitiveContains(searchText!)

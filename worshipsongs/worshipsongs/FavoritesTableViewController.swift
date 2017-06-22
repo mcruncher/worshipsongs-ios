@@ -329,7 +329,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
         var data = songModel
         if (searchText?.characters.count)! > 0 {
             data = self.songModel.filter({( song: FavoritesSong) -> Bool in
-                let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!)
+                let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.songs.comment as NSString).localizedCaseInsensitiveContains(searchText!)
                 return (stringMatch)
                 
             })

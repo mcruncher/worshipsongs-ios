@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDelegate, UIGestureRecognizerDelegate  {
+class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
     var artistName: String = ""
     fileprivate let preferences = UserDefaults.standard
@@ -212,7 +212,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         var data = songModel
         if (searchText?.characters.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
-                let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!)
+                let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
                 return (stringMatch)
                 
             })
