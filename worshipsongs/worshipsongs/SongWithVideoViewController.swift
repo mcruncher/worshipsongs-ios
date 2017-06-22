@@ -40,6 +40,7 @@ class SongWithVideoViewController: UIViewController  {
     fileprivate let preferences = UserDefaults.standard
     var play = false
     var noInternet = false
+    fileprivate var isLanguageTamil = true
     
     //new var
     var databaseHelper = DatabaseHelper()
@@ -51,6 +52,7 @@ class SongWithVideoViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         addFloatButton()
         addShareBarButton()
         setSplitViewControllerProperties()
@@ -190,7 +192,7 @@ class SongWithVideoViewController: UIViewController  {
         nextButton.isHidden = true
         player.isHidden = true
         playerHeight.constant = 0
-        self.navigationItem.title = songName
+        self.navigationItem.title = isLanguageTamil && !selectedSong.i18nTitle.isEmpty ? selectedSong.i18nTitle : songName
         actionButton.setImage(UIImage(named: "presentation"), for: UIControlState())
         self.tableView.allowsSelection = false
         self.tableView.isHidden = isHideComponent()

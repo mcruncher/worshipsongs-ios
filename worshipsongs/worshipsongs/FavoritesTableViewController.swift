@@ -8,6 +8,7 @@ import UIKit
 class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, TitleOrContentBaseSearchDelegate {
     
     fileprivate var filteredSongModel = [FavoritesSong]()
+    fileprivate var isLanguageTamil = true
     var songModel = [FavoritesSong]()
     var songOrder = [Int]()
     var songTitles = [String]()
@@ -145,6 +146,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         let songTabBarController = tabBarController as! SongsTabBarViewController
         songTabBarController.navigationItem.title = "favorites".localized
         createSearchBar()
@@ -183,14 +185,18 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
-        cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].songTitle
+        if isLanguageTamil && !filteredSongModel[(indexPath as NSIndexPath).row].songs.i18nTitle.isEmpty {
+            cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].songs.i18nTitle
+        } else {
+            cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].songTitle
+        }
         let activeSong = preferences.string(forKey: "presentationSongName")
         if cell.title.text == activeSong {
             cell.title.textColor = UIColor.cruncherBlue()
         } else {
             cell.title.textColor = UIColor.black
         }
-        if filteredSongModel[(indexPath as NSIndexPath).row].songs.id != "" && filteredSongModel[(indexPath as NSIndexPath).row].songs.comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].songs.comment.contains("youtube") {
+        if filteredSongModel[(indexPath as NSIndexPath).row].songs.id != "" && !filteredSongModel[(indexPath as NSIndexPath).row].songs.mediaUrl.isEmpty {
             cell.playImage.isHidden = false
         } else {
             cell.playImage.isHidden = true

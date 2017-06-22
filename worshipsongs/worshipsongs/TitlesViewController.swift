@@ -129,7 +129,25 @@ class TitlesViewController: UITableViewController {
         songTabBarController?.navigationItem.title = "songs".localized
         songModel = databaseHelper.getSongModel()
         filteredSongModel = songModel
+        sortSongModel()
         tableView.reloadData()
+    }
+    
+    func sortSongModel()
+    {
+        if isLanguageTamil {
+            filteredSongModel = filteredSongModel.sorted(){ (a, b) -> Bool in
+                if a.i18nTitle.isEmpty {
+                    return false
+                } else if b.i18nTitle.isEmpty {
+                    return true
+                } else {
+                    return a.i18nTitle < b.i18nTitle
+                }
+            }
+        } else {
+            filteredSongModel = filteredSongModel.sorted(){ $0.title < $1.title }
+        }
     }
     
     
@@ -257,16 +275,19 @@ extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDel
             })
         }
         self.filteredSongModel = data
+        sortSongModel();
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         hideSearchBar()
+        sortSongModel()
         tableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         hideSearchBar()
         filteredSongModel = songModel
+        sortSongModel()
         tableView.reloadData()
     }
     
@@ -274,6 +295,7 @@ extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDel
         if DeviceUtils.isIpad() {
             hideSearchBar()
             filteredSongModel = songModel
+            sortSongModel()
             tableView.reloadData()
         }
     }

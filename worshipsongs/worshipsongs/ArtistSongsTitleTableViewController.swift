@@ -34,6 +34,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     override func viewWillAppear(_ animated: Bool) {
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         filteredSongModel = songModel
+        sortSongModel()
         createSearchBar()
         tableView.reloadData()
     }
@@ -45,6 +46,23 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         refresh.addTarget(self, action: #selector(ArtistSongsTitleTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
         self.navigationItem.title = artistName
+    }
+    
+    func sortSongModel()
+    {
+        if isLanguageTamil {
+            filteredSongModel = filteredSongModel.sorted(){ (a, b) -> Bool in
+                if a.i18nTitle.isEmpty {
+                    return false
+                } else if b.i18nTitle.isEmpty {
+                    return true
+                } else {
+                    return a.i18nTitle < b.i18nTitle
+                }
+            }
+        } else {
+            filteredSongModel = filteredSongModel.sorted(){ $0.title < $1.title }
+        }
     }
     
     fileprivate func addLongPressGestureRecognizer() {
@@ -200,11 +218,13 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
             })
         }
         self.filteredSongModel = data
+        sortSongModel()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
         hideSearchBar()
+        sortSongModel()
         tableView.reloadData()
     }
     
@@ -212,12 +232,14 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     {
         hideSearchBar()
         filteredSongModel = songModel
+        sortSongModel()
         tableView.reloadData()
     }
     
     func refresh(_ sender:AnyObject)
     {
         filteredSongModel = songModel
+        sortSongModel()
         self.tableView.reloadData()
         self.refresh.endRefreshing()
     }

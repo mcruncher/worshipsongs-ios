@@ -40,7 +40,7 @@ class Songs {
         let properties = comment.components(separatedBy: "\n")
         for property in properties {
             if property.contains("i18nTitle"){
-                return property.components(separatedBy: "=")[1]
+                return property.components(separatedBy: "=")[1].trimmingCharacters(in: .whitespacesAndNewlines)
             }
         }
         return ""
@@ -50,9 +50,11 @@ class Songs {
         let properties = comment.components(separatedBy: "\n")
         for property in properties {
             if property.contains("mediaUrl"){
-                return property.components(separatedBy: "Url=")[1]
+                return property.components(separatedBy: "Url=")[1].trimmingCharacters(in: .whitespacesAndNewlines)
             }
         }
         return ""
     }
+    
+    
 }
