@@ -30,8 +30,9 @@ class SongsTabBarViewController: UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onBeforeUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onBeforeUpdateDatabase"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onAfterUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onAfterUpdateDatabase"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.refreshTabbar(_:)), name: NSNotification.Name(rawValue: "refreshTabbar"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.hideSearchBar), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         splitViewController?.delegate = self
     }
@@ -48,7 +49,7 @@ class SongsTabBarViewController: UITabBarController{
         return preferences.dictionaryRepresentation().keys.contains("database.lock") && preferences.bool(forKey:"database.lock")
     }
     
-    func onAfterUpdateDatabase(_ nsNotification: NSNotification) {
+    func refreshTabbar(_ nsNotification: NSNotification) {
         self.selectedViewController?.viewWillAppear(true)
     }
     

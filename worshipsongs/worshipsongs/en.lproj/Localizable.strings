@@ -78,3 +78,7 @@
 "lyricsPreference" = "Lyrics Preference";
 "display.romanised" = "Romanised";
 "display.tamil" = "Tamil";
+"displayLanguage" = "Language Selected";
+"tamil" = "Tamil";
+"english" = "English";
+"language" = "Language";

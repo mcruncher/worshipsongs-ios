@@ -48,6 +48,8 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var displayRomanisedLabel: UILabel!
     @IBOutlet weak var displayTamilSwitch: UISwitch!
     @IBOutlet weak var displayRomanisedSwitch: UISwitch!
+    @IBOutlet weak var languageLabel: UILabel!
+    @IBOutlet weak var languageValue: UILabel!
     
     
     fileprivate let preferences = UserDefaults.standard
@@ -68,6 +70,7 @@ class SettingsController: UITableViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(SettingsController.revertDatabase(_:)), name: NSNotification.Name(rawValue: "revertDatabase"), object: nil)
         self.setUp()
+        self.setLanguage()
         self.setPrimaryScreenFontSize()
         self.setPresentationScreenFontSize()
         self.setPrimaryScreenTamilFontColor()
@@ -82,9 +85,12 @@ class SettingsController: UITableViewController {
         addTapGestureRecognizer()
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
+    }
     
     func setUp() {
+        languageLabel.text = "displayLanguage".localized
         rateUsLabel.text = "rateUs".localized
         feedBackLabel.text = "feedback".localized
         shareAppLabel.text = "shareApp".localized
@@ -118,6 +124,10 @@ class SettingsController: UITableViewController {
         self.presentationTamilFontColorTextField.resignFirstResponder()
         self.presentationEnglishFontColorTextField.resignFirstResponder()
         self.presentationBackgroundColorTextField.resignFirstResponder()
+    }
+    
+    func setLanguage() {
+        languageValue.text = self.preferences.string(forKey: "language")?.localized
     }
     
     func setPrimaryScreenFontSize() {
@@ -228,20 +238,22 @@ class SettingsController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 5
+        return 6
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "lyricsPreference".localized
+            return "language".localized
         case 1:
-            return "primary.screen".localized
+            return "lyricsPreference".localized
         case 2:
-            return "presentation.screen".localized
+            return "primary.screen".localized
         case 3:
-            return "advanced".localized
+            return "presentation.screen".localized
         case 4:
+            return "advanced".localized
+        case 5:
             return "general".localized
         default:
             return ""
@@ -250,14 +262,23 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         importDatabaseLabel.isEnabled = !self.preferences.bool(forKey: "database.lock")
-        if section == 3 && self.preferences.bool(forKey: "defaultDatabase") {
+        if section == 4 && self.preferences.bool(forKey: "defaultDatabase") {
             return 1
         }
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                selectLanguage()
+                break
+            default:
+                break
+            }
+        }
+        if indexPath.section == 2 {
             switch indexPath.row {
             case 1:
                 tamilFontColorTextField.becomeFirstResponder()
@@ -269,7 +290,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             switch indexPath.row {
             case 1:
                 presentationTamilFontColorTextField.becomeFirstResponder()
@@ -284,7 +305,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 3 {
+        if indexPath.section == 4 {
             switch indexPath.row {
             case 0:
                 importDatabase()
@@ -296,7 +317,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 4 {
+        if indexPath.section == 5 {
             switch indexPath.row {
             case 0:
                 rateUs()
@@ -314,9 +335,28 @@ class SettingsController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func selectLanguage() {
+        let optionMenu = UIAlertController(title: nil, message: "language".localized, preferredStyle: .actionSheet)
+        optionMenu.addAction(changeLanguageAction("tamil"))
+        optionMenu.addAction(changeLanguageAction("english"))
+        optionMenu.addAction(getOptionCancelAction())
+        optionMenu.popoverPresentationController?.sourceView = importDatabaseCell.contentView
+        optionMenu.popoverPresentationController?.sourceRect = importDatabaseCell.contentView.bounds
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
+    func changeLanguageAction(_ language: String) -> UIAlertAction  {
+        return UIAlertAction(title: language.localized, style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.preferences.setValue(language, forKey: "language")
+            self.preferences.synchronize()
+            self.languageValue.text = self.preferences.string(forKey: "language")?.localized
+        })
+    }
+    
     func revertDatabase(_ nsNotification: NSNotification) {
         databaseService.revertImport()
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
     }
     
     @IBAction func onChangeSize(_ sender: Any) {
@@ -362,7 +402,7 @@ class SettingsController: UITableViewController {
         let optionMenu = UIAlertController(title: nil, message: "import.database".localized, preferredStyle: .actionSheet)
         optionMenu.addAction(getDatabaseFromiCloudAction())
         optionMenu.addAction(getDatabaseFromRemoteUrlAction())
-        optionMenu.addAction(getDatabaseCancelAction())
+        optionMenu.addAction(getOptionCancelAction())
         optionMenu.popoverPresentationController?.sourceView = importDatabaseCell.contentView
         optionMenu.popoverPresentationController?.sourceRect = importDatabaseCell.contentView.bounds
         self.present(optionMenu, animated: true, completion: nil)
@@ -384,7 +424,7 @@ class SettingsController: UITableViewController {
         })
     }
     
-    fileprivate func getDatabaseCancelAction() -> UIAlertAction {
+    fileprivate func getOptionCancelAction() -> UIAlertAction {
         return UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
         })

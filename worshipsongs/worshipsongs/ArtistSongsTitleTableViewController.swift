@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDelegate, UIGestureRecognizerDelegate  {
+class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
     var artistName: String = ""
     fileprivate let preferences = UserDefaults.standard
@@ -19,6 +19,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     var songLyrics: NSString = NSString()
     var songName: String = ""
     var comment = ""
+    fileprivate var isLanguageTamil = true
     
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
@@ -31,7 +32,9 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         filteredSongModel = songModel
+        sortSongModel()
         createSearchBar()
         tableView.reloadData()
     }
@@ -43,6 +46,23 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         refresh.addTarget(self, action: #selector(ArtistSongsTitleTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
         self.navigationItem.title = artistName
+    }
+    
+    func sortSongModel()
+    {
+        if isLanguageTamil {
+            filteredSongModel = filteredSongModel.sorted(){ (a, b) -> Bool in
+                if a.i18nTitle.isEmpty {
+                    return false
+                } else if b.i18nTitle.isEmpty {
+                    return true
+                } else {
+                    return a.i18nTitle < b.i18nTitle
+                }
+            }
+        } else {
+            filteredSongModel = filteredSongModel.sorted(){ $0.title < $1.title }
+        }
     }
     
     fileprivate func addLongPressGestureRecognizer() {
@@ -122,7 +142,6 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         // Dispose of any resources that can be recreated.
     }
     
-    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -138,17 +157,21 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
-        cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        if isLanguageTamil && !filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle.isEmpty {
+            cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle
+        } else {
+            cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        }
         let activeSong = preferences.string(forKey: "presentationSongName")
         if cell.title.text == activeSong && UIScreen.screens.count > 1 {
             cell.title.textColor = UIColor.cruncherBlue()
         } else {
             cell.title.textColor = UIColor.black
         }
-        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].comment.contains("youtube") {
-            cell.playImage.isHidden = false
-        } else {
+        if filteredSongModel[(indexPath as NSIndexPath).row].mediaUrl.isEmpty {
             cell.playImage.isHidden = true
+        } else {
+            cell.playImage.isHidden = false
         }
         return cell
     }
@@ -189,17 +212,19 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         var data = songModel
         if (searchText?.characters.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
-                let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!)
+                let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
                 return (stringMatch)
                 
             })
         }
         self.filteredSongModel = data
+        sortSongModel()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
         hideSearchBar()
+        sortSongModel()
         tableView.reloadData()
     }
     
@@ -207,12 +232,14 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     {
         hideSearchBar()
         filteredSongModel = songModel
+        sortSongModel()
         tableView.reloadData()
     }
     
     func refresh(_ sender:AnyObject)
     {
         filteredSongModel = songModel
+        sortSongModel()
         self.tableView.reloadData()
         self.refresh.endRefreshing()
     }

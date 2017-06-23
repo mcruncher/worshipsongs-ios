@@ -107,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 databaseService.revertImport()
                 preferences.set(false, forKey: "database.lock")
                 preferences.synchronize()
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
             }
         }
         if !preferences.dictionaryRepresentation().keys.contains("remote.url") {

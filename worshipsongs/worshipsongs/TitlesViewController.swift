@@ -14,6 +14,7 @@ class TitlesViewController: UITableViewController {
     fileprivate var searchBar: UISearchBar!
     fileprivate var refresh = UIRefreshControl()
     fileprivate var songTabBarController: SongsTabBarViewController?
+    fileprivate var isLanguageTamil = true
     
     override func viewDidLoad()
     {
@@ -27,8 +28,18 @@ class TitlesViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        if !isLanguageSet() {
+            let viewController = storyboard?.instantiateViewController(withIdentifier: "language") as? LanguageSettingViewController
+            viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+            self.present(viewController!, animated: false, completion: nil)
+        }
+        isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         addSearchBar()
         initSetup()
+    }
+    
+    func isLanguageSet() -> Bool {
+        return preferences.dictionaryRepresentation().keys.contains("language")
     }
     
     func addRefreshControl()
@@ -118,7 +129,25 @@ class TitlesViewController: UITableViewController {
         songTabBarController?.navigationItem.title = "songs".localized
         songModel = databaseHelper.getSongModel()
         filteredSongModel = songModel
+        sortSongModel()
         tableView.reloadData()
+    }
+    
+    func sortSongModel()
+    {
+        if isLanguageTamil {
+            filteredSongModel = filteredSongModel.sorted(){ (a, b) -> Bool in
+                if a.i18nTitle.isEmpty {
+                    return false
+                } else if b.i18nTitle.isEmpty {
+                    return true
+                } else {
+                    return a.i18nTitle < b.i18nTitle
+                }
+            }
+        } else {
+            filteredSongModel = filteredSongModel.sorted(){ $0.title < $1.title }
+        }
     }
     
     
@@ -142,22 +171,27 @@ extension TitlesViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
-        cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        if isLanguageTamil && !filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle.isEmpty {
+            cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle
+        } else {
+            cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
+        }
         let activeSong = preferences.string(forKey: "presentationSongName")
         if cell.title.text == activeSong && UIScreen.screens.count > 1 {
             cell.title.textColor = UIColor.cruncherBlue()
         } else {
             cell.title.textColor = UIColor.black
         }
-        if filteredSongModel[(indexPath as NSIndexPath).row].comment != nil && filteredSongModel[(indexPath as NSIndexPath).row].comment.contains("youtube") {
-            cell.playImage.isHidden = false
-        } else {
+        if filteredSongModel[(indexPath as NSIndexPath).row].mediaUrl.isEmpty {
             cell.playImage.isHidden = true
+        } else {
+            cell.playImage.isHidden = false
         }
         return cell
     }
     
 }
+
 
 // MARK: - Table view delegate
 extension TitlesViewController {
@@ -232,7 +266,7 @@ extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDel
         if (searchText?.characters.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
                 if (self.preferences.string(forKey: "searchBy")?.equalsIgnoreCase("searchByTitle"))! {
-                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!)
+                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
                     return (stringMatch)
                 } else {
                     let stringMatch = (song.lyrics as NSString).localizedCaseInsensitiveContains(searchText!)
@@ -241,16 +275,19 @@ extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDel
             })
         }
         self.filteredSongModel = data
+        sortSongModel();
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         hideSearchBar()
+        sortSongModel()
         tableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         hideSearchBar()
         filteredSongModel = songModel
+        sortSongModel()
         tableView.reloadData()
     }
     
@@ -258,6 +295,7 @@ extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDel
         if DeviceUtils.isIpad() {
             hideSearchBar()
             filteredSongModel = songModel
+            sortSongModel()
             tableView.reloadData()
         }
     }

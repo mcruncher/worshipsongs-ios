@@ -25,7 +25,7 @@ class DatabaseService {
             try! FileManager.default.moveItem(at: NSURL(fileURLWithPath: databaseUrl) as URL, to: NSURL(fileURLWithPath: cacheUrl) as URL)
             try! FileManager.default.moveItem(at: NSURL(fileURLWithPath: defaultUrl) as URL, to: NSURL(fileURLWithPath: databaseUrl) as URL)
             try! FileManager.default.removeItem(atPath: cacheUrl)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
         }
         self.preferences.set(true, forKey: "defaultDatabase")
         self.preferences.synchronize()

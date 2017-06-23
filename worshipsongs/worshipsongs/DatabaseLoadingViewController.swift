@@ -37,7 +37,7 @@ class DatabaseLoadingViewController: UIViewController {
                 statusLabel.text = preferences.string(forKey: "import.status")?.localized
                 self.activityController.stopAnimating()
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { () -> Void in
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
                     self.close()
                 }
             } else {
@@ -51,7 +51,7 @@ class DatabaseLoadingViewController: UIViewController {
                         self.statusLabel.text = self.preferences.string(forKey: "import.status")?.localized
                         self.activityController.stopAnimating()
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { () -> Void in
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
                             self.close()
                         }
                     } else {
@@ -60,7 +60,7 @@ class DatabaseLoadingViewController: UIViewController {
                         self.statusLabel.text = self.preferences.string(forKey: "import.status")?.localized
                         self.databaseService.revertImport()
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { () -> Void in
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "onAfterUpdateDatabase"), object: nil,  userInfo: nil)
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
                             self.close()
                         }
                     }

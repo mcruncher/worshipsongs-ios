@@ -24,14 +24,10 @@ class DatabaseHelper: NSObject {
         database?.open()
         var songModel = [Songs]()
         let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM songs ORDER BY title", withArgumentsIn: nil)
-        let id = "id"
-        let titles: String = "title"
-        let lyrics: String = "lyrics"
-        let verseOrder: String = "verse_order"
         if (resultSet1 != nil)
         {
             while resultSet1!.next() {
-                songModel.append(Songs(id: resultSet1!.string(forColumn: id), title: resultSet1!.string(forColumn: titles), lyrics: resultSet1!.string(forColumn: lyrics),verse_order: resultSet1!.string(forColumn: verseOrder), comment: resultSet1!.string(forColumn: "comments")))
+                songModel.append(getSong(resultSet1!))
             }
         }
         print("songModel count : \(songModel.count)")
@@ -84,14 +80,11 @@ class DatabaseHelper: NSObject {
         }
         var songModel = [Songs]()
         let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN (\(args)) ORDER BY title", withArgumentsIn: songModelIds)
-        let id = "id"
-        let titles: String = "title"
-        let lyrics: String = "lyrics"
-        let verseOrder: String = "verse_order"
         if (resultSet2 != nil)
         {
             while resultSet2!.next() {
-                songModel.append(Songs(id: resultSet2!.string(forColumn: id), title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
+                
+                songModel.append(getSong(resultSet2!))
             }
         }
         return songModel
@@ -114,14 +107,10 @@ class DatabaseHelper: NSObject {
             args="\(args)?"
         }
         let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where title IN (\(args)) ORDER BY title", withArgumentsIn: argument)
-        let titles: String = "title"
-        let lyrics: String = "lyrics"
-        let verseOrder: String = "verse_order"
-        let id = "id"
         if (resultSet2 != nil)
         {
             while resultSet2!.next() {
-                songModel.append(Songs(id: resultSet2!.string(forColumn: id), title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
+                songModel.append(getSong(resultSet2!))
             }
         }
         print("songModel count : \(songModel.count)")
@@ -145,14 +134,10 @@ class DatabaseHelper: NSObject {
             args="\(args)?"
         }
         let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN (\(args)) ORDER BY title", withArgumentsIn: argument)
-        let titles: String = "title"
-        let lyrics: String = "lyrics"
-        let verseOrder: String = "verse_order"
-        let id = "id"
         if (resultSet2 != nil)
         {
             while resultSet2!.next() {
-                songModel.append(Songs(id: resultSet2!.string(forColumn: id), title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
+                songModel.append(getSong(resultSet2!))
             }
         }
         print("songModel count : \(songModel.count)")
@@ -241,6 +226,15 @@ class DatabaseHelper: NSObject {
             }
         }
         return songModel
+    }
+    
+    private func getSong(_ resultSet: FMResultSet) -> Songs {
+        let id : String = resultSet.string(forColumn: "id")
+        let title: String = resultSet.string(forColumn: "title")
+        let lyrics: String = resultSet.string(forColumn: "lyrics")
+        let verseOrder: String = resultSet.string(forColumn: "verse_order")
+        let comments: String = resultSet.string(forColumn: "comments") != nil ? resultSet.string(forColumn: "comments") : ""
+        return Songs(id: id, title: title, lyrics: lyrics, verse_order: verseOrder, comment: comments)
     }
     
 }
