@@ -76,7 +76,11 @@ class TitlesViewController: UITableViewController {
     
     fileprivate func getMoveController(_ indexPath: IndexPath, message: String) -> UIAlertController
     {
-        return UIAlertController(title: filteredSongModel[(indexPath as NSIndexPath).row].title, message: message.localized, preferredStyle: UIAlertControllerStyle.alert)
+        var title = filteredSongModel[(indexPath as NSIndexPath).row].title
+        if isLanguageTamil && !filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle.isEmpty {
+            title = filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle
+        }
+        return UIAlertController(title: title, message: message.localized, preferredStyle: UIAlertControllerStyle.alert)
     }
     
     fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction

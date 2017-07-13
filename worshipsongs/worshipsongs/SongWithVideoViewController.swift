@@ -348,7 +348,12 @@ class SongWithVideoViewController: UIViewController  {
         let objectString: NSMutableAttributedString = NSMutableAttributedString()
         objectString.append(NSAttributedString(string: "<html><body>"))
         objectString.append(NSAttributedString(string: "<h1><a href=\"https://itunes.apple.com/us/app/tamil-christian-worship-songs/id1066174826?mt=8\">Tamil Christian Worship Songs</a></h1>"))
-        objectString.append(NSAttributedString(string: "<h2>\(songName)</h2>"))
+        
+        if isLanguageTamil && !selectedSong.i18nTitle.isEmpty {
+            objectString.append(NSAttributedString(string: "<h2>\(selectedSong.i18nTitle)</h2>"))
+        } else {
+            objectString.append(NSAttributedString(string: "<h2>\(songName)</h2>"))
+        }
         for verseOrder in verseOrderList {
             objectString.append(getObject(verseOrder: verseOrder as! String))
         }
@@ -380,7 +385,12 @@ class SongWithVideoViewController: UIViewController  {
     func getMessageToShare() -> NSMutableAttributedString {
         let objectString: NSMutableAttributedString = NSMutableAttributedString()
         objectString.append(NSAttributedString(string: "Tamil Christian Worship Songs\n\n"))
-        objectString.append(NSAttributedString(string: "\n\(songName)\n\n"))
+        if isLanguageTamil && !selectedSong.i18nTitle.isEmpty{
+            objectString.append(NSAttributedString(string: "\n\(selectedSong.i18nTitle)\n\n"))
+        } else {
+            objectString.append(NSAttributedString(string: "\n\(songName)\n\n"))
+        }
+        
         for verseOrder in verseOrderList {
             objectString.append(getMessage(verseOrder: verseOrder as! String))
         }
@@ -444,7 +454,6 @@ extension SongWithVideoViewController: UITableViewDataSource {
         cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
-        print("cell\(cell.textLabel!.attributedText )")
         return cell
     }
 }
