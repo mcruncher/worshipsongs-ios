@@ -14,11 +14,14 @@ class LanguageSettingViewController: UIViewController {
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var tamilButton: UIButton!
     @IBOutlet weak var englishButton: UIButton!
+    @IBOutlet weak var okButton: UIButton!
+    fileprivate var language = "tamil";
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tamilButton.setTitle("tamil".localized, for: .normal)
-        englishButton.setTitle("english".localized, for: .normal)
+        tamilButton.setTitle(" " + "tamil".localized, for: .normal)
+        englishButton.setTitle(" " + "english".localized, for: .normal)
+        okButton.setTitle("ok".localized, for: .focused)
         // Do any additional setup after loading the view.
     }
 
@@ -28,15 +31,19 @@ class LanguageSettingViewController: UIViewController {
     }
     
     @IBAction func onClickEnglish(_ sender: Any) {
-        self.preferences.setValue("english", forKey: "language")
-        self.preferences.synchronize()
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
-        self.dismiss(animated: false, completion: nil)
-        
+        language = "english"
+        englishButton.setImage(#imageLiteral(resourceName: "select"), for: .normal)
+        tamilButton.setImage(#imageLiteral(resourceName: "unselect"), for: .normal)
     }
 
     @IBAction func onClickTamil(_ sender: Any) {
-        self.preferences.setValue("tamil", forKey: "language")
+        language = "tamil"
+        tamilButton.setImage(#imageLiteral(resourceName: "select"), for: .normal)
+        englishButton.setImage(#imageLiteral(resourceName: "unselect"), for: .normal)
+    }
+    
+    @IBAction func setLanguage(_ sender: Any) {
+        self.preferences.setValue(language, forKey: "language")
         self.preferences.synchronize()
         NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
         self.dismiss(animated: false, completion: nil)
