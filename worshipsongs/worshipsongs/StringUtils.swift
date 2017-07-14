@@ -65,6 +65,13 @@ extension String {
     }
     
     var localized: String {
+        let isLanguageTamil = UserDefaults.standard.string(forKey: "language") == "tamil"
+        if isLanguageTamil {
+            let language = "ta"
+            let path = Bundle.main.path(forResource: language, ofType: "lproj")
+            let bundle = Bundle(path: path!)
+            return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+        }
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
     
