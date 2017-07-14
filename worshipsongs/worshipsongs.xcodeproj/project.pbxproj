@@ -128,6 +128,7 @@
 		2FF0BE851E0CD218004E2127 /* SongWithVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongWithVideoViewController.swift; sourceTree = "<group>"; };
 		2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = worshipsongs.entitlements; sourceTree = "<group>"; };
 		2FFF807F1F1718560086439B /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
+		2FFF80811F171C8C0086439B /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		625E81741BD664D000BE80B8 /* XmlParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserService.swift; sourceTree = "<group>"; };
 		7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.debug.xcconfig"; sourceTree = "<group>"; };
@@ -457,6 +458,7 @@
 				en,
 				Base,
 				"en-GB",
+				ta,
 			);
 			mainGroup = 2F5D3D111BC788F8001C4B6F;
 			productRefGroup = 2F5D3D1B1BC788F8001C4B6F /* Products */;
@@ -648,6 +650,7 @@
 				2FE840F61DDC33A6002B3379 /* Base */,
 				2FE840F81DDC33BF002B3379 /* en-GB */,
 				2FE840F91DDC33CA002B3379 /* en */,
+				2FFF80811F171C8C0086439B /* ta */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

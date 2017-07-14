@@ -30,11 +30,14 @@ class SongsTabBarViewController: UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onBeforeUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onBeforeUpdateDatabase"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.refreshTabbar(_:)), name: NSNotification.Name(rawValue: "refreshTabbar"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.hideSearchBar), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         splitViewController?.delegate = self
+        self.viewControllers?[0].tabBarItem.title = "songs".localized
+        self.viewControllers?[1].tabBarItem.title = "artists".localized
+        self.viewControllers?[2].tabBarItem.title = "categories".localized
+        self.viewControllers?[3].tabBarItem.title = "favorites".localized
     }
     
     func onBeforeUpdateDatabase(_ nsNotification: NSNotification) {
@@ -51,6 +54,10 @@ class SongsTabBarViewController: UITabBarController{
     
     func refreshTabbar(_ nsNotification: NSNotification) {
         self.selectedViewController?.viewWillAppear(true)
+        self.viewControllers?[0].tabBarItem.title = "songs".localized
+        self.viewControllers?[1].tabBarItem.title = "artists".localized
+        self.viewControllers?[2].tabBarItem.title = "categories".localized
+        self.viewControllers?[3].tabBarItem.title = "favorites".localized
     }
     
     func hideSearchBar() {
