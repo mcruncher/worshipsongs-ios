@@ -146,6 +146,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "FavoritesTableViewController")
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         let songTabBarController = tabBarController as! SongsTabBarViewController
         songTabBarController.navigationItem.title = "favorites".localized

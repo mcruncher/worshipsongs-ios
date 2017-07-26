@@ -87,6 +87,7 @@ class SongWithVideoViewController: UIViewController  {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "SongWithVideoViewController")
         if !(DeviceUtils.isIpad()) {
             hideOrShowComponents()
         }

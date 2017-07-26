@@ -1,6 +1,7 @@
 use_frameworks!
 target "worshipsongs" do
  pod 'Appsee'
+ pod 'Google/Analytics'
  pod 'FMDB'
  pod 'YouTubePlayer', :git => 'https://github.com/gilesvangruisen/Swift-YouTube-Player.git', :tag => 'v0.4.0', :submodules => true
  pod "KCFloatingActionButton", :git => 'https://github.com/kciter/KCFloatingActionButton.git', :tag => '2.1.2', :submodules => true

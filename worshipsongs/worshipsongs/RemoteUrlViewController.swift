@@ -24,6 +24,10 @@ class RemoteUrlViewController: UIViewController {
         navigationItem.rightBarButtonItem = backButton
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "RemoteUrlViewController")
+    }
+    
     func doneLoading() {
         if !remoteUrl.text!.isEmpty && (remoteUrl.text?.contains(".sqlite") )!{
             self.preferences.setValue(remoteUrl.text, forKey: "remote.url")

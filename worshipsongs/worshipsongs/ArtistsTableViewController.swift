@@ -33,6 +33,7 @@ class ArtistsTableViewController: UITableViewController   {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "ArtistsTableViewController")
         let songTabBarController = tabBarController as! SongsTabBarViewController
         songTabBarController.navigationItem.title = "artists".localized
         authorModel = databaseHelper.getArtistModel()

@@ -34,6 +34,7 @@ class CategoriesTableViewController: UITableViewController   {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "CategoriesTableViewController")
         let songTabBarController = tabBarController as! SongsTabBarViewController
         songTabBarController.navigationItem.title = "categories".localized
         categoryModel = databaseHelper.findCategory()

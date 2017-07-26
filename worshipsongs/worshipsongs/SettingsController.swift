@@ -85,6 +85,10 @@ class SettingsController: UITableViewController {
         addTapGestureRecognizer()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "SettingsController")
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
     }

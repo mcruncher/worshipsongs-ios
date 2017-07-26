@@ -69,6 +69,7 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "PresentationViewController")
         self.tableView.reloadData()
         goto(IndexPath(row: 0, section: 0))
     }

@@ -26,6 +26,10 @@ class DatabaseLoadingViewController: UIViewController {
         checkDatabase()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "DatabaseLoadingViewController")
+    }
+    
     func checkDatabase() {
         statusLabel.text = preferences.string(forKey: "import.status")?.localized
         if isDatabaseLock() {

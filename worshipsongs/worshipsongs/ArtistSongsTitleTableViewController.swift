@@ -32,6 +32,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "ArtistSongsTitleTableViewController")
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         filteredSongModel = songModel
         sortSongModel()

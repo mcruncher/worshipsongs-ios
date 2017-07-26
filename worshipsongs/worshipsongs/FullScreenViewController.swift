@@ -32,6 +32,7 @@ class FullScreenViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "FullScreenViewController")
         self.onChangeOrientation(orientation: UIDevice.current.orientation)
         presentationView.songLabel.attributedText = cells[i].textLabel?.attributedText
         presentationView.songNameLabel.text = songName

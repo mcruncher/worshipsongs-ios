@@ -215,14 +215,10 @@ class DatabaseHelper: NSObject {
         }
         var songModel = [Songs]()
         let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN (\(args)) ORDER BY title", withArgumentsIn: songModelIds)
-        let id = "id"
-        let titles: String = "title"
-        let lyrics: String = "lyrics"
-        let verseOrder: String = "verse_order"
         if (resultSet2 != nil)
         {
             while resultSet2!.next() {
-                songModel.append(Songs(id: resultSet2!.string(forColumn: id), title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
+                songModel.append(getSong(resultSet2!))
             }
         }
         return songModel

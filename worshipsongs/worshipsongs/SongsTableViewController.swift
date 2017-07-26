@@ -38,6 +38,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "SongsTableViewController")
         self.tableView.reloadData()
         self.onChangeOrientation(orientation: UIDevice.current.orientation)
     }

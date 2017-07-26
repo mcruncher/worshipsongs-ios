@@ -46,3 +46,13 @@ extension UIView {
         layer.shadowRadius = shadowRadius
     }
 }
+
+extension UIViewController {
+    func analytics(name: String) {
+        guard let tracker = GAI.sharedInstance().defaultTracker else { return }
+        tracker.set(kGAIScreenName, value: name)
+        
+        guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
+        tracker.send(builder.build() as [NSObject : AnyObject])
+    }
+}

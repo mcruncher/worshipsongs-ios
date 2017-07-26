@@ -24,6 +24,10 @@ class LanguageSettingViewController: UIViewController {
         okButton.setTitle("ok".localized, for: .focused)
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        analytics(name: "LanguageSettingViewController")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

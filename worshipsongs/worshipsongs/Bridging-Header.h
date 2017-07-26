@@ -7,3 +7,4 @@
 //
 
 #import "FMDB/FMDatabase.h"
+#import <Google/Analytics.h>

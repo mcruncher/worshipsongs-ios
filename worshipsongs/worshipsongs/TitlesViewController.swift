@@ -28,6 +28,7 @@ class TitlesViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        analytics(name: "TitlesViewController")
         if !isLanguageSet() {
             let viewController = storyboard?.instantiateViewController(withIdentifier: "language") as? LanguageSettingViewController
             viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
