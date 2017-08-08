@@ -50,6 +50,8 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var displayRomanisedSwitch: UISwitch!
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var languageValue: UILabel!
+    @IBOutlet weak var updateSongsCell: UITableViewCell!
+    @IBOutlet weak var updateSongsLabel: UILabel!
     
     
     fileprivate let preferences = UserDefaults.standard
@@ -98,6 +100,7 @@ class SettingsController: UITableViewController {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             versionValueLabel.text = version
         }
+        updateSongsLabel.text = "update.songs".localized
         importDatabaseLabel.text = "import.database".localized
         restoreDatabaseLabel.text = "restore.database".localized
         primaryTextSizeLabel.text = "text.size".localized
@@ -238,22 +241,24 @@ class SettingsController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 6
+        return 7
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "language".localized
+            return ""
         case 1:
-            return "lyricsPreference".localized
+            return "language".localized
         case 2:
-            return "primary.screen".localized
+            return "lyricsPreference".localized
         case 3:
-            return "presentation.screen".localized
+            return "primary.screen".localized
         case 4:
-            return "advanced".localized
+            return "presentation.screen".localized
         case 5:
+            return "advanced".localized
+        case 6:
             return "general".localized
         default:
             return ""
@@ -262,8 +267,8 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         importDatabaseLabel.isEnabled = !self.preferences.bool(forKey: "database.lock")
-        if section == 4 && self.preferences.bool(forKey: "defaultDatabase") {
-            return 1
+        if section == 5 && self.preferences.bool(forKey: "defaultDatabase") {
+            return 2
         }
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
@@ -272,13 +277,22 @@ class SettingsController: UITableViewController {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
+                updateSongs()
+                break
+            default:
+                break
+            }
+        }
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0:
                 selectLanguage()
                 break
             default:
                 break
             }
         }
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             switch indexPath.row {
             case 1:
                 tamilFontColorTextField.becomeFirstResponder()
@@ -290,7 +304,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 3 {
+        if indexPath.section == 4 {
             switch indexPath.row {
             case 1:
                 presentationTamilFontColorTextField.becomeFirstResponder()
@@ -305,7 +319,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 4 {
+        if indexPath.section == 5 {
             switch indexPath.row {
             case 0:
                 importDatabase()
@@ -317,7 +331,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 5 {
+        if indexPath.section == 6 {
             switch indexPath.row {
             case 0:
                 rateUs()
@@ -333,6 +347,21 @@ class SettingsController: UITableViewController {
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        let headerHeight: CGFloat
+        
+        switch section {
+        case 0:
+            // hide the header
+            headerHeight = CGFloat.leastNonzeroMagnitude
+        default:
+            headerHeight = super.tableView(tableView, heightForHeaderInSection: section)
+        }
+        
+        return headerHeight
     }
     
     func selectLanguage() {
@@ -375,6 +404,38 @@ class SettingsController: UITableViewController {
         self.preferences.synchronize()
     }
     
+    func updateSongs() {
+        let viewController = storyboard?.instantiateViewController(withIdentifier: "updating") as? UpdateSongsViewController
+        viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+        self.present(viewController!, animated: false, completion: nil)
+    }
+    
+    fileprivate func getConfirmationAlertController() -> UIAlertController
+    {
+        let confirmationAlertController = self.getMoveController(message: "Updates Available")
+        confirmationAlertController.addAction(self.getMoveAction())
+        confirmationAlertController.addAction(self.getCancelAction(title: "no"))
+        return confirmationAlertController
+    }
+    
+    fileprivate func getMoveController(message: String) -> UIAlertController
+    {
+        return UIAlertController(title: "Update", message: message.localized, preferredStyle: UIAlertControllerStyle.alert)
+    }
+    
+    fileprivate func getMoveAction() -> UIAlertAction
+    {
+        return UIAlertAction(title: "Yes", style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
+        })
+        
+    }
+    
+    fileprivate func getCancelAction(title: String) -> UIAlertAction
+    {
+        return UIAlertAction(title: title.localized, style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
+        })
+    }
+    
     func restoreDatabase() {
         let alert = getAlertController("restore.database".localized, message: "message.restore.database".localized)
         alert.addAction(getYesAction("yes".localized))
@@ -396,6 +457,16 @@ class SettingsController: UITableViewController {
     
     fileprivate func getNoAction() -> UIAlertAction {
         return UIAlertAction(title: "no".localized, style: .default, handler: nil)
+    }
+    
+    func updatesongs() {
+        let optionMenu = UIAlertController(title: nil, message: "import.database".localized, preferredStyle: .actionSheet)
+        optionMenu.addAction(getDatabaseFromiCloudAction())
+        optionMenu.addAction(getDatabaseFromRemoteUrlAction())
+        optionMenu.addAction(getOptionCancelAction())
+        optionMenu.popoverPresentationController?.sourceView = importDatabaseCell.contentView
+        optionMenu.popoverPresentationController?.sourceRect = importDatabaseCell.contentView.bounds
+        self.present(optionMenu, animated: true, completion: nil)
     }
     
     func importDatabase() {

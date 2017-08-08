@@ -83,3 +83,11 @@
 "tamil" = "Tamil";
 "english" = "English";
 "language" = "Language";
+"updated.sucessfully" = "Songs downloaded";
+"updating.songs" = "Updating songs";
+"error.updating" = "Error occured while updating";
+"updated.song" = "Songs updated sucessfully";
+"update.avaliable" = "Songs update available. Do you want to update songs?";
+"update.songs" = "Update Songs";
+"update.checking" = "Checking for songs update...";
+"update.uptodate" = "Songs are up to date.";

@@ -76,6 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func updateDefaultSettings() {
         self.preferences.setValue("", forKey: "import.status")
+        self.preferences.setValue("", forKey: "update.status")
         self.preferences.setValue("", forKey: "presentationSongName")
         self.preferences.setValue("", forKey: "presentationLyrics")
         self.preferences.setValue("", forKey: "presentationSlide")
@@ -90,6 +91,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !preferences.dictionaryRepresentation().keys.contains("displayTamil") {
             self.preferences.set(true, forKey: "displayTamil")
+            self.preferences.synchronize()
+        }
+        
+        if !preferences.dictionaryRepresentation().keys.contains("sha") {
+            self.preferences.set("no_sha", forKey: "sha")
             self.preferences.synchronize()
         }
         
@@ -110,6 +116,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
             }
         }
+        
+        if !preferences.dictionaryRepresentation().keys.contains("update.lock") {
+            self.preferences.set(false, forKey: "update.lock")
+            self.preferences.synchronize()
+        } else {
+            if preferences.bool(forKey: "update.lock") {
+                let databaseService = DatabaseService()
+                databaseService.revertUpdate()
+                preferences.set(false, forKey: "update.lock")
+                preferences.synchronize()
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
+            }
+        }
+        
+        if !preferences.dictionaryRepresentation().keys.contains("check.update.url") {
+            self.preferences.setValue("https://api.github.com/repos/mcruncher/worshipsongs-android/git/refs/heads/master", forKey: "check.update.url")
+            self.preferences.synchronize()
+        }
+        
+        if !preferences.dictionaryRepresentation().keys.contains("update.url") {
+            self.preferences.setValue("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "update.url")
+            self.preferences.synchronize()
+        }
+        
         if !preferences.dictionaryRepresentation().keys.contains("remote.url") {
             self.preferences.setValue("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "remote.url")
             self.preferences.synchronize()

@@ -13,6 +13,8 @@
 		2F01C9ED1E691FEC003939CD /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
 		2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */; };
 		2F06EE041EF8EBF8006B5E62 /* LanguageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */; };
+		2F08FFD51F30093400B894FB /* UpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F08FFD41F30093400B894FB /* UpdateService.swift */; };
+		2F08FFD71F301B8A00B894FB /* RestApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F08FFD61F301B8A00B894FB /* RestApiService.swift */; };
 		2F0A70F91E1B432D0025F156 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0A70F81E1B432D0025F156 /* TitleTableViewCell.swift */; };
 		2F1044201E6422E200DBDD54 /* DatabaseLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10441F1E6422E200DBDD54 /* DatabaseLoadingViewController.swift */; };
 		2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */; };
@@ -49,6 +51,7 @@
 		2FF0BE861E0CD218004E2127 /* SongWithVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF0BE851E0CD218004E2127 /* SongWithVideoViewController.swift */; };
 		2FFBC33E1E7BAB85006B2405 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10441D1E63F5BC00DBDD54 /* DatabaseService.swift */; };
 		2FFC99291DEFF4D600AEABEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D261BC788F8001C4B6F /* Assets.xcassets */; };
+		2FFE61E01F317421007B08CC /* UpdateSongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE61DF1F317421007B08CC /* UpdateSongsViewController.swift */; };
 		2FFF80801F1718560086439B /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFF807F1F1718560086439B /* ViewUtils.swift */; };
 		625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
@@ -77,6 +80,8 @@
 		280B923D1E77830E00833EAA /* DeviceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtils.swift; sourceTree = "<group>"; };
 		285D5A631E76497000C3F1EE /* CommonConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
 		2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSettingViewController.swift; sourceTree = "<group>"; };
+		2F08FFD41F30093400B894FB /* UpdateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
+		2F08FFD61F301B8A00B894FB /* RestApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiService.swift; sourceTree = "<group>"; };
 		2F0A70F81E1B432D0025F156 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		2F0BCA091D9D0E0000B8C16B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		2F0BCA0B1D9D114B00B8C16B /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = "../../../../Library/Developer/Xcode/DerivedData/worshipsongs-glciooqfhxjknigyiwgebruvadtn/Build/Products/Debug-iphonesimulator/FMDB/FMDB.framework"; sourceTree = "<group>"; };
@@ -127,6 +132,7 @@
 		2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		2FF0BE851E0CD218004E2127 /* SongWithVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongWithVideoViewController.swift; sourceTree = "<group>"; };
 		2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = worshipsongs.entitlements; sourceTree = "<group>"; };
+		2FFE61DF1F317421007B08CC /* UpdateSongsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSongsViewController.swift; sourceTree = "<group>"; };
 		2FFF807F1F1718560086439B /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		2FFF80811F171C8C0086439B /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -283,6 +289,7 @@
 				2F10441F1E6422E200DBDD54 /* DatabaseLoadingViewController.swift */,
 				2F18C4C21E8DE6B800E540AF /* CategoriesTableViewController.swift */,
 				2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */,
+				2FFE61DF1F317421007B08CC /* UpdateSongsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -326,6 +333,7 @@
 				2FD78E4B1C103A5D00A171B7 /* CustomTextSettingService.swift */,
 				2FD78E4D1C103C1A00A171B7 /* RegexPatternMatcherService.swift */,
 				2F10441D1E63F5BC00DBDD54 /* DatabaseService.swift */,
+				2F08FFD61F301B8A00B894FB /* RestApiService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -346,6 +354,7 @@
 				2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */,
 				280B923D1E77830E00833EAA /* DeviceUtils.swift */,
 				2FFF807F1F1718560086439B /* ViewUtils.swift */,
+				2F08FFD41F30093400B894FB /* UpdateService.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -573,6 +582,7 @@
 				2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */,
 				2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */,
 				2FD5899A1C167CD300668951 /* TitlesViewController.swift in Sources */,
+				2F08FFD51F30093400B894FB /* UpdateService.swift in Sources */,
 				2F01C9ED1E691FEC003939CD /* StringUtils.swift in Sources */,
 				2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */,
 				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
@@ -588,7 +598,9 @@
 				2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */,
 				2FE636581E4190FF0092A696 /* PresentationViewController.swift in Sources */,
 				2FD78E4C1C103A5D00A171B7 /* CustomTextSettingService.swift in Sources */,
+				2FFE61E01F317421007B08CC /* UpdateSongsViewController.swift in Sources */,
 				2F19EB001E6005A000B989D8 /* RemoteUrlViewController.swift in Sources */,
+				2F08FFD71F301B8A00B894FB /* RestApiService.swift in Sources */,
 				2F18C4C51E8DF17700E540AF /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

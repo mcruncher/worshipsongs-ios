@@ -35,6 +35,19 @@ class DatabaseService {
         let databaseUrl = commonService.getDocumentDirectoryPath("songs.sqlite")
         let defaultUrl = commonService.getDocumentDirectoryPath("songs-bak.sqlite")
         let cacheUrl = commonService.getDocumentDirectoryPath("songs-cache.sqlite")
+        if FileManager.default.fileExists(atPath: defaultUrl) {
+            try! FileManager.default.removeItem(atPath: defaultUrl)
+            try! FileManager.default.moveItem(at: NSURL(fileURLWithPath: cacheUrl) as URL, to: NSURL(fileURLWithPath: defaultUrl) as URL)
+        } else {
+            try! FileManager.default.removeItem(atPath: databaseUrl)
+            try! FileManager.default.moveItem(at: NSURL(fileURLWithPath: cacheUrl) as URL, to: NSURL(fileURLWithPath: databaseUrl) as URL)
+        }
+    }
+    
+    func revertUpdate() {
+        let databaseUrl = commonService.getDocumentDirectoryPath("songs.sqlite")
+        let defaultUrl = commonService.getDocumentDirectoryPath("songs-bak.sqlite")
+        let cacheUrl = commonService.getDocumentDirectoryPath("songs-cache.sqlite")
         if FileManager.default.fileExists(atPath: databaseUrl) {
             try! FileManager.default.removeItem(atPath: databaseUrl)
         }
@@ -69,6 +82,36 @@ class DatabaseService {
                 
             })
         }
+    }
+    
+    func updateDatabase(url: URL) {
+        self.preferences.set(true, forKey: "update.lock")
+        self.preferences.synchronize()
+        let databaseUrl = commonService.getDocumentDirectoryPath("songs.sqlite")
+        let defaultUrl = commonService.getDocumentDirectoryPath("songs-bak.sqlite")
+        let cacheUrl = commonService.getDocumentDirectoryPath("songs-cache.sqlite")
+        if FileManager.default.fileExists(atPath: defaultUrl) {
+            if FileManager.default.fileExists(atPath: cacheUrl) {
+                try! FileManager.default.removeItem(atPath: cacheUrl)
+            }
+            try! FileManager.default.copyItem(at: NSURL(fileURLWithPath: defaultUrl) as URL, to: NSURL(fileURLWithPath: cacheUrl) as URL)
+            UpdateService.load(url: url , to: NSURL(fileURLWithPath: defaultUrl) as URL, completion: {
+                () -> Void in
+            })
+        } else {
+            if FileManager.default.fileExists(atPath: cacheUrl) {
+                try! FileManager.default.removeItem(atPath: cacheUrl)
+            }
+            try! FileManager.default.copyItem(at: NSURL(fileURLWithPath: databaseUrl) as URL, to: NSURL(fileURLWithPath: cacheUrl) as URL)
+            UpdateService.load(url: url , to: NSURL(fileURLWithPath: databaseUrl) as URL, completion: {
+                () -> Void in
+                
+            })
+        }
+    }
+    
+    func checkForUpdate(url: URL) {
+        
     }
     
     func copyBundledDatabase(_ fileName: NSString) {
