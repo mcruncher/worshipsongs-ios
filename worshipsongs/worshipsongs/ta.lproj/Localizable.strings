@@ -6,11 +6,11 @@
  Copyright © 2016 Vignesh Palanisamy. All rights reserved.
  */
 
-"songs" = "Songs";
-"artists" = "Artists";
+"songs" = "பாடல்கள்";
+"artists" = "ஆசிரியர்கள்";
 "artist" = "Artist";
-"categories" = "Categories";
-"favorites" = "Favorites";
+"categories" = "வகைகள்";
+"favorites" = "பிடித்தவை";
 
 "message.favorite" = "Long press on a song title to mark it as Favorite";
 "remove" = "Remove";
@@ -78,8 +78,8 @@
 "searchBy" = "Search By";
 "lyricsPreference" = "Lyrics Preference";
 "display.romanised" = "Romanised";
-"display.tamil" = "Tamil";
+"display.tamil" = "தமிழ்";
 "displayLanguage" = "Language Selected";
-"tamil" = "Tamil";
+"tamil" = "தமிழ்";
 "english" = "English";
 "language" = "Language";
