@@ -19,6 +19,7 @@ class ArtistsTableViewController: UITableViewController   {
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
     fileprivate var songTabBarController: SongsTabBarViewController?
+    fileprivate let preferences = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,14 +62,22 @@ class ArtistsTableViewController: UITableViewController   {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = filteredAuthorModel[(indexPath as NSIndexPath).row].displayName
+        if "tamil".equalsIgnoreCase(self.preferences.string(forKey: "language")!) {
+            cell.textLabel?.text = filteredAuthorModel[(indexPath as NSIndexPath).row].displayNameTamil
+        } else {
+            cell.textLabel?.text = filteredAuthorModel[(indexPath as NSIndexPath).row].displayNameEnglish
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         hideSearchBar()
-        artistName = filteredAuthorModel[(indexPath as NSIndexPath).row].displayName
+        if "tamil".equalsIgnoreCase(self.preferences.string(forKey: "language")!) {
+            artistName = filteredAuthorModel[(indexPath as NSIndexPath).row].displayNameTamil
+        } else {
+            artistName = filteredAuthorModel[(indexPath as NSIndexPath).row].displayNameEnglish
+        }
         songsModel = databaseHelper.getArtistSongsModel(filteredAuthorModel[(indexPath as NSIndexPath).row].id)
         performSegue(withIdentifier: "artistTitle", sender: self)
         

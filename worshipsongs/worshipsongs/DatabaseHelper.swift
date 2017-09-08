@@ -42,14 +42,10 @@ class DatabaseHelper: NSObject {
         database?.open()
         var authorModel = [Author]()
         let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM authors ORDER BY display_name", withArgumentsIn: nil)
-        let id:String = "id"
-        let firstName: String = "first_name"
-        let lastName: String = "last_name"
-        let displayName: String = "display_name"
         if (resultSet1 != nil)
         {
             while resultSet1!.next() {
-                authorModel.append(Author(id: resultSet1!.string(forColumn: id), firstName: resultSet1!.string(forColumn: firstName), lastName: resultSet1!.string(forColumn: lastName), displayName: resultSet1!.string(forColumn: displayName)))
+                authorModel.append(getAuthor(resultSet1!))
             }
         }
         print("songModel count : \(authorModel.count)")
@@ -182,12 +178,10 @@ class DatabaseHelper: NSObject {
         database?.open()
         var categoryModel = [Category]()
         let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM topics ORDER BY name", withArgumentsIn: nil)
-        let id:String = "id"
-        let name: String = "name"
         if (resultSet1 != nil)
         {
             while resultSet1!.next() {
-                categoryModel.append(Category(id: Int(resultSet1!.int(forColumn: id)), name: resultSet1!.string(forColumn: name)))
+                categoryModel.append(getCategory(resultSet1!))
             }
         }
         print("Categories: \(categoryModel.count)")
@@ -235,6 +229,37 @@ class DatabaseHelper: NSObject {
         let verseOrder: String = resultSet.string(forColumn: "verse_order")
         let comments: String = resultSet.string(forColumn: "comments") != nil ? resultSet.string(forColumn: "comments") : ""
         return Songs(id: id, title: title, lyrics: lyrics, verse_order: verseOrder, comment: comments)
+    }
+    
+    private func getAuthor(_ resultSet: FMResultSet) -> Author {
+        let id: String = resultSet.string(forColumn: "id")
+        let firstName: String = resultSet.string(forColumn: "first_name")
+        let lastName: String = resultSet.string(forColumn: "last_name")
+        let displayName: String = resultSet.string(forColumn: "display_name")
+        let displayNameTamil : String = getTamilTitle(displayName)
+        let displayNameEnglish: String = getEnglishTitle(displayName)
+        return Author(id: id, firstName: firstName, lastName: lastName, displayName: displayName, displayNameTamil: displayNameTamil, displayNameEnglish: displayNameEnglish)
+    }
+     
+    private func getCategory(_ resultSet: FMResultSet) -> Category {
+        let id: String = resultSet.string(forColumn: "id")
+        let name: String = resultSet.string(forColumn: "name")
+        let nameTamil : String = getTamilTitle(name)
+        let nameEnglish: String = getEnglishTitle(name)
+        return Category(id: Int(id)!, name: name, nameTamil: nameTamil, nameEnglish: nameEnglish)
+    }
+    
+    private func getTamilTitle(_ name: String) -> String {
+        let names = name.components(separatedBy: "{")
+        if names.count == 2 {
+            return names[1].replacingOccurrences(of: "}", with: " ")
+        }
+        return name
+    }
+    
+    private func getEnglishTitle(_ name: String) -> String {
+        let names = name.components(separatedBy: "{")
+        return names[0]
     }
     
 }

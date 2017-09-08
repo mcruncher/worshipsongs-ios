@@ -10,4 +10,6 @@ struct Author {
     var firstName: String
     var lastName: String
     var displayName: String
+    var displayNameTamil: String
+    var displayNameEnglish: String
 }
