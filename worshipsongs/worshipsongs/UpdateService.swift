@@ -29,8 +29,6 @@ class UpdateService: NSObject, NSURLConnectionDataDelegate {
                             try FileManager.default.copyItem(at: tempLocalUrl, to: localUrl)
                             preferences.setValue("updated.song", forKey: "update.status")
                             preferences.synchronize()
-                            preferences.set(false, forKey: "defaultDatabase")
-                            preferences.synchronize()
                         } else {
                             preferences.setValue("error.updating", forKey: "update.status")
                             preferences.synchronize()

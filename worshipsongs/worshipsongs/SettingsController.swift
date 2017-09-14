@@ -268,7 +268,7 @@ class SettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         importDatabaseLabel.isEnabled = !self.preferences.bool(forKey: "database.lock")
         if section == 5 && self.preferences.bool(forKey: "defaultDatabase") {
-            return 2
+            return 1
         }
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
