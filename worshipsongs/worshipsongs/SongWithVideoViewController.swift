@@ -644,7 +644,7 @@ extension SongWithVideoViewController {
         let shareActions = UIAlertController(title: "choose_options".localized, message: "", preferredStyle: .actionSheet)
         shareActions.addAction(getShareAction())
         shareActions.addAction(getShareAsPdfAction())
-        shareActions.addAction(getCancelnSheetAction())
+        shareActions.addAction(getCancelnActionSheet())
         self.present(shareActions, animated: true, completion: nil)
     }
     
@@ -677,7 +677,7 @@ extension SongWithVideoViewController {
         pdf.addBodyText(self.getMessageToShare().string)
     }
     
-    func getCancelnSheetAction() -> UIAlertAction {
+    func getCancelnActionSheet() -> UIAlertAction {
         return UIAlertAction(title: "cancel".localized, style: .cancel, handler: { _ in
             
         })
