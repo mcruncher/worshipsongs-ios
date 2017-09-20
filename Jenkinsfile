@@ -6,7 +6,9 @@ node('macmini-slave-1') {
     sh """
       cd worshipsongs
       fastlane unittest """
+      currentBuild.result = "SUCCESS"
   } catch (ex) {
+      currentBuild.result = "FAILED"
   } finally {
      sh "killall \"iOS Simulator\" || echo \"No matching processes belonging to you were found\""
      step([$class: 'JUnitResultArchiver', testResults: 'worshipsongs/fastlane/report/TEST-report.xml'])
