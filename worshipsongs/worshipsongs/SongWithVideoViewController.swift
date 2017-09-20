@@ -18,6 +18,7 @@ class SongWithVideoViewController: UIViewController  {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var previousButton: UIButton!
     
+    fileprivate let pdfExtension = ".pdf"
     var secondWindow: UIWindow?
     var secondScreenView: UIView?
     var externalLabel = UILabel()
@@ -636,8 +637,8 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
     }
     
 }
-//MARK: Share
-extension SongWithVideoViewController: UIDocumentInteractionControllerDelegate {
+//MARK: Share song in social media
+extension SongWithVideoViewController {
     
     func shareActions() {
         let shareActions = UIAlertController(title: "choose_options".localized, message: "", preferredStyle: .actionSheet)
@@ -655,7 +656,7 @@ extension SongWithVideoViewController: UIDocumentInteractionControllerDelegate {
     
     func getShareAsPdfAction() -> UIAlertAction {
         return UIAlertAction(title: "share_as_pdf".localized, style: .default, handler: { _ in
-            let pdf = SimplePDF(pdfTitle: "", authorName: "")
+            let pdf = SimplePDF(pdfTitle: "", authorName: "", fileName: self.getSongTitle() + self.pdfExtension)
             self.addDocumentContent(pdf)
             let tmpPDFPath = pdf.writePDFWithoutTableOfContents()
             let pdfURL = URL(fileURLWithPath: tmpPDFPath)
@@ -689,14 +690,7 @@ extension SongWithVideoViewController: UIDocumentInteractionControllerDelegate {
         otherMessage.append(NSAttributedString(string: "http://apple.co/2mJwePJ"))
         
         let firstActivityItem = CustomProvider(placeholderItem: "Default" as AnyObject, messagerMessage: messagerMessage.string, emailMessage: emailMessage.string, otherMessage: otherMessage.string)
-       // let objectsToShare = [firstActivityItem]
         showActivityViewController([firstActivityItem])
-//        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//        activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
-//        activityVC.excludedActivityTypes = getExcludedActivityTypes()
-//        activityVC.popoverPresentationController?.sourceView = self.view
-//        activityVC.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-//        self.present(activityVC, animated: true, completion: nil)
         
     }
     
