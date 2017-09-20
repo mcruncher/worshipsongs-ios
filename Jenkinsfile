@@ -19,7 +19,6 @@ node('macmini-slave-1') {
    sh """
       cd worshipsongs
       fastlane codeanalysis """
-  } catch (ex) {
   } finally{
       step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'worshipsongs/fastlane/report/cobertura.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
   }
