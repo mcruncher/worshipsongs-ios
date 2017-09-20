@@ -7,6 +7,14 @@ target "worshipsongs" do
  pod "SimplePDFSwift"
 end
 
+target 'worshipsongsTests' do
+ pod 'FMDB'
+ pod 'YouTubePlayer', :git => 'https://github.com/gilesvangruisen/Swift-YouTube-Player.git', :tag => 'v0.4.0', :submodules => true
+ pod "KCFloatingActionButton", :git => 'https://github.com/kciter/KCFloatingActionButton.git', :tag => '2.1.2', :submodules => true
+ pod 'FileBrowser', :git => 'https://github.com/marmelroy/FileBrowser.git', :tag => '0.2.0', :submodules => true
+ pod "SimplePDFSwift"
+end
+
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|

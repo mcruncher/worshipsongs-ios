@@ -1,0 +1,31 @@
+stage 'Unit test'
+node('macmini-slave-1') {
+  try {
+    checkout scm
+    sh "killall \"iOS Simulator\" || echo \"No matching processes belonging to you were found\""
+    sh """
+      cd worshipsongs
+      fastlane unittest """
+      currentBuild.result = "SUCCESS"
+  } catch (ex) {
+     currentBuild.result = "FAILED"
+  } finally {
+     sh "killall \"iOS Simulator\" || echo \"No matching processes belonging to you were found\""
+     step([$class: 'JUnitResultArchiver', testResults: 'worshipsongs/fastlane/report/TEST-report.xml'])
+  }
+}
+
+stage 'Code analysis'
+node('macmini-slave-1') {
+  try {
+   checkout scm
+   sh """
+      cd worshipsongs
+      fastlane codeanalysis """
+      currentBuild.result = "SUCCESS"
+  } catch (ex) {
+      currentBuild.result = "FAILED"
+  } finally{
+      step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'nectar/fastlane/report/cobertura.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
+  }
+}
