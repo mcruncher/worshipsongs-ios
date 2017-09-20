@@ -14,6 +14,7 @@
 		28D5C09D1F720443001530FF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09C1F720443001530FF /* Podfile */; };
 		28D5C09F1F7205AA001530FF /* Jenkinsfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09E1F7205AA001530FF /* Jenkinsfile */; };
 		28D5C0A11F720727001530FF /* sonar-project.properties in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C0A01F720727001530FF /* sonar-project.properties */; };
+		28D5C0A31F720ADA001530FF /* Jenkinsfile-publish in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */; };
 		2F01C9ED1E691FEC003939CD /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
 		2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */; };
 		2F06EE041EF8EBF8006B5E62 /* LanguageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */; };
@@ -88,6 +89,7 @@
 		28D5C09C1F720443001530FF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		28D5C09E1F7205AA001530FF /* Jenkinsfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Jenkinsfile; path = ../Jenkinsfile; sourceTree = "<group>"; };
 		28D5C0A01F720727001530FF /* sonar-project.properties */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sonar-project.properties"; sourceTree = "<group>"; };
+		28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Jenkinsfile-publish"; path = "../Jenkinsfile-publish"; sourceTree = "<group>"; };
 		2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSettingViewController.swift; sourceTree = "<group>"; };
 		2F08FFD41F30093400B894FB /* UpdateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
 		2F08FFD61F301B8A00B894FB /* RestApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiService.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		2F5D3D111BC788F8001C4B6F = {
 			isa = PBXGroup;
 			children = (
+				28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */,
 				28D5C0A01F720727001530FF /* sonar-project.properties */,
 				28D5C09E1F7205AA001530FF /* Jenkinsfile */,
 				28D5C09C1F720443001530FF /* Podfile */,
@@ -514,6 +517,7 @@
 				28D5C09D1F720443001530FF /* Podfile in Resources */,
 				2F5D3D2A1BC788F8001C4B6F /* LaunchScreen.storyboard in Resources */,
 				2FE250291E42E305007BA85D /* PresentationView.xib in Resources */,
+				28D5C0A31F720ADA001530FF /* Jenkinsfile-publish in Resources */,
 				2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */,
 				2FE3699B1EFA3AB100C948BE /* songs.sqlite in Resources */,
 				2FFC99291DEFF4D600AEABEF /* Assets.xcassets in Resources */,
