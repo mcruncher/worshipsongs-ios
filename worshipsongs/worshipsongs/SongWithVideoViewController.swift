@@ -649,7 +649,7 @@ extension SongWithVideoViewController {
     }
     
     func getShareAction() -> UIAlertAction {
-        return UIAlertAction(title: "share_song_title".localized, style: .default, handler: { _ in
+        return UIAlertAction(title: "share".localized, style: .default, handler: { _ in
             self.shareInSocialMedia()
         })
     }
