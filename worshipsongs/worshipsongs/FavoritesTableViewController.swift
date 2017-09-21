@@ -22,14 +22,12 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     fileprivate let preferences = UserDefaults.standard
     var searchBar: UISearchBar!
     var authorName = ""
+    var favorite = "favorite"
     
-    fileprivate var songTabBarController: SongsTabBarViewController?
+    var songTabBarController: SongsTabBarViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        songTabBarController = self.tabBarController as? SongsTabBarViewController
-        self.tabBarItem.title = "favorites".localized
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         self.tableView.tableFooterView = getTableFooterView()
         updateModel()
         let longpress = UILongPressGestureRecognizer(target: self, action: #selector(FavoritesTableViewController.longPressGestureRecognized))
@@ -37,7 +35,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
-        if (self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled)! && !hideDragAndDrop {
+        if !hideDragAndDrop {
             let longPress = gestureRecognizer as! UILongPressGestureRecognizer
             let state = longPress.state
             let locationInView = longPress.location(in: tableView)
@@ -126,11 +124,11 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
         var newSongOrder = [FavoritesSongsWithOrder]()
         for i in 0..<tableView.numberOfRows(inSection: 0) {
             let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! TitleTableViewCell
-            let favSong = FavoritesSongsWithOrder(orderNo: i, songName: cell.title.text!, songListName: "favorite")
+            let favSong = FavoritesSongsWithOrder(orderNo: i, songName: cell.title.text!, songListName: favorite)
             newSongOrder.append(favSong)
         }
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: newSongOrder)
-        self.preferences.set(encodedData, forKey: "favorite")
+        self.preferences.set(encodedData, forKey: favorite)
         self.preferences.synchronize()
     }
     
@@ -147,8 +145,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     
     override func viewWillAppear(_ animated: Bool) {
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
-        let songTabBarController = tabBarController as! SongsTabBarViewController
-        songTabBarController.navigationItem.title = "favorites".localized
+        self.navigationItem.title = favorite
         createSearchBar()
         refresh(self)
     }
@@ -271,7 +268,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     
     fileprivate func getDeleteAction(_ indexPath: IndexPath) -> UIAlertAction {
         return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
-            let decoded  = self.preferences.object(forKey: "favorite") as! Data
+            let decoded  = self.preferences.object(forKey: self.favorite) as! Data
             var newSongOrder = [FavoritesSongsWithOrder]()
             let favoritesSongsWithOrders = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
             let cell = self.tableView.cellForRow(at: indexPath) as! TitleTableViewCell
@@ -281,7 +278,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
                 }
             }
             let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: newSongOrder)
-            self.preferences.set(encodedData, forKey: "favorite")
+            self.preferences.set(encodedData, forKey: self.favorite)
             self.preferences.synchronize()
             self.refresh(self)
         })
@@ -295,8 +292,8 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     
     func refresh(_ sender:AnyObject)
     {
-        if self.preferences.data(forKey: "favorite") != nil {
-            let decoded  = self.preferences.object(forKey: "favorite") as! Data
+        if self.preferences.data(forKey: favorite) != nil {
+            let decoded  = self.preferences.object(forKey: favorite) as! Data
             let favoritesSongsWithOrders = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
             var favoritesSongs = [FavoritesSong]()
             for favoritesSongsWithOrder in favoritesSongsWithOrders {
@@ -354,8 +351,6 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     func createSearchBar()
     {
         // Search bar
-        let songTabBarController = self.tabBarController as? SongsTabBarViewController
-        songTabBarController?.searchDelegate = self
         let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
         searchBar = UISearchBar(frame: searchBarFrame)
         searchBar.delegate = self;
@@ -365,13 +360,13 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     func addSearchBarButton(){
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
+        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(FavoritesTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
     func searchButtonItemClicked(_ sender:UIBarButtonItem){
-        self.tabBarController?.navigationItem.titleView = searchBar;
-        self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.titleView = searchBar;
+        self.navigationItem.leftBarButtonItem?.isEnabled = false
+        self.navigationItem.rightBarButtonItem = nil
         searchBar.becomeFirstResponder()
     }
     
@@ -384,10 +379,10 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     func hideSearchBar() {
-        self.tabBarController?.navigationItem.titleView = nil
-        self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
+        self.navigationItem.titleView = nil
+        self.navigationItem.leftBarButtonItem?.isEnabled = true
         self.searchBar.text = ""
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
+        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(FavoritesTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
 }

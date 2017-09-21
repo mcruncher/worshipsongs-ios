@@ -62,69 +62,11 @@ class TitlesViewController: UITableViewController {
         let pressingPoint = longPressGesture.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
         if indexPath != nil && longPressGesture.state == UIGestureRecognizerState.began {
-            self.present(self.getConfirmationAlertController(indexPath!), animated: true, completion: nil)
+            let viewController = storyboard?.instantiateViewController(withIdentifier: "favorite") as? ManageFavoritesController
+            viewController?.song = filteredSongModel[(indexPath?.row)!]
+            viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+            self.present(viewController!, animated: false, completion: nil)
         }
-    }
-    
-    fileprivate func getConfirmationAlertController(_ indexPath: IndexPath) -> UIAlertController
-    {
-        let confirmationAlertController = self.getMoveController(indexPath, message: "message.add")
-        confirmationAlertController.addAction(self.getMoveAction(indexPath))
-        confirmationAlertController.addAction(self.getCancelAction(indexPath, title: "no"))
-        return confirmationAlertController
-    }
-    
-    fileprivate func getMoveController(_ indexPath: IndexPath, message: String) -> UIAlertController
-    {
-        var title = filteredSongModel[(indexPath as NSIndexPath).row].title
-        if isLanguageTamil && !filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle.isEmpty {
-            title = filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle
-        }
-        return UIAlertController(title: title, message: message.localized, preferredStyle: UIAlertControllerStyle.alert)
-    }
-    
-    fileprivate func getMoveAction(_ indexPath: IndexPath) -> UIAlertAction
-    {
-        return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
-            let song = self.filteredSongModel[indexPath.row]
-            var favSongs = [FavoritesSongsWithOrder]()
-            var favSongOrderNumber = 0
-            if self.preferences.data(forKey: "favorite") != nil {
-                let decoded  = self.preferences.object(forKey: "favorite") as! Data
-                favSongs = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
-                if favSongs.count > 0 {
-                    favSongOrderNumber = (favSongs.last?.orderNo)! + 1
-                }
-            }
-            let newFavSong = FavoritesSongsWithOrder(orderNo: favSongOrderNumber, songName: song.title, songListName: "favorite")
-            var isSongExist = false
-            for favSong in favSongs {
-                if favSong.songName == newFavSong.songName {
-                    isSongExist = true
-                    self.present(self.getExistsAlertController(indexPath), animated: true, completion: nil)
-                }
-            }
-            if !isSongExist {
-                favSongs.append(newFavSong)
-                let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favSongs)
-                self.preferences.set(encodedData, forKey: "favorite")
-                self.preferences.synchronize()
-            }
-        })
-    }
-    
-    fileprivate func getExistsAlertController(_ indexPath: IndexPath) -> UIAlertController
-    {
-        let confirmationAlertController = self.getMoveController(indexPath, message: "message.exist")
-        confirmationAlertController.addAction(self.getCancelAction(indexPath, title: "ok"))
-        return confirmationAlertController
-    }
-    
-    fileprivate func getCancelAction(_ indexPath: IndexPath, title: String) -> UIAlertAction
-    {
-        return UIAlertAction(title: title.localized, style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
-            self.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: UITableViewRowAnimation.automatic)
-        })
     }
     
     private func initSetup()

@@ -1,9 +1,6 @@
 //
-//  AppDelegate.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 10/9/15.
-//  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
+// author: Vignesh Palanisamy
+// version: 2.3.x
 //
 
 import UIKit
@@ -195,6 +192,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: [FavoritesSongsWithOrder]())
             self.preferences.set(encodedData, forKey: "favorite")
             self.preferences.set(true, forKey: "latestFavoriteUpdated")
+            self.preferences.synchronize()
+        }
+        
+        if !preferences.dictionaryRepresentation().keys.contains("favorites") {
+            var favorites = [String]()
+            favorites.append("favorite")
+            self.preferences.set(favorites, forKey: "favorites")
             self.preferences.synchronize()
         }
     }
