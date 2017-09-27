@@ -15,6 +15,7 @@ class TitlesViewController: UITableViewController {
     fileprivate var refresh = UIRefreshControl()
     fileprivate var songTabBarController: SongsTabBarViewController?
     fileprivate var isLanguageTamil = true
+    fileprivate var addToFav: Songs!
     
     override func viewDidLoad()
     {
@@ -62,10 +63,15 @@ class TitlesViewController: UITableViewController {
         let pressingPoint = longPressGesture.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
         if indexPath != nil && longPressGesture.state == UIGestureRecognizerState.began {
-            let viewController = storyboard?.instantiateViewController(withIdentifier: "favorite") as? ManageFavoritesController
-            viewController?.song = filteredSongModel[(indexPath?.row)!]
-            viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
-            self.present(viewController!, animated: false, completion: nil)
+            addToFav = filteredSongModel[(indexPath?.row)!]
+            performSegue(withIdentifier: "manageFav", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if (segue.identifier == "manageFav") {
+            let manageFavoritesController = segue.destination as! ManageFavoritesController
+            manageFavoritesController.song = addToFav
         }
     }
     

@@ -25,12 +25,17 @@ class ArtistsTableViewController: UITableViewController   {
         super.viewDidLoad()
         songTabBarController = self.tabBarController as? SongsTabBarViewController
         self.tabBarItem.title = "artists".localized
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         //refresh control
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
         refresh.addTarget(self, action: #selector(ArtistsTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
+        self.tableView.tableFooterView = getTableFooterView()
+    }
+    
+    func getTableFooterView() -> UIView {
+        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: (self.tabBarController?.tabBar.frame.height)!))
+        return footerview
     }
     
     override func viewWillAppear(_ animated: Bool) {

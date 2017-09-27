@@ -18,7 +18,6 @@ class FavoritesListViewController: UITableViewController {
         super.viewDidLoad()
         songTabBarController = self.tabBarController as? SongsTabBarViewController
         self.tabBarItem.title = "favorites".localized
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         favorites = (preferences.array(forKey: "favorites") as? [String])!
         filteredFavorites = favorites
         tableView.reloadData()
@@ -35,7 +34,7 @@ class FavoritesListViewController: UITableViewController {
     }
     
     func getTableFooterView() -> UIView {
-        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 25))
+        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: (self.tabBarController?.tabBar.frame.height)!))
         footerview.backgroundColor = UIColor.groupTableViewBackground
         let label = UILabel(frame: CGRect(x: 10, y: 5, width: tableView.frame.size.width, height: 15))
         label.text = "message.favorite".localized
@@ -104,16 +103,15 @@ class FavoritesListViewController: UITableViewController {
     fileprivate func getDeleteAction(_ indexPath: IndexPath) -> UIAlertAction {
         return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
             let favoriteName = self.filteredFavorites[indexPath.row]
-            self.filteredFavorites.remove(at: indexPath.row)
             var newFavorites = [String]()
             for index in 0..<self.favorites.count {
                 if !self.favorites[index].equalsIgnoreCase(favoriteName) {
                     newFavorites.append(self.favorites[index])
                 }
             }
-            self.preferences.removeObject(forKey: favoriteName)
             self.preferences.set(newFavorites, forKey: "favorites")
-            self.preferences.synchronize()
+            self.preferences.removeObject(forKey: favoriteName)
+            self.filteredFavorites.remove(at: indexPath.row)
             self.tableView.reloadData()
         })
     }

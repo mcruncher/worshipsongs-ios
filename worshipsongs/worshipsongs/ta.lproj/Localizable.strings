@@ -91,4 +91,6 @@
 "update.songs" = "Update Songs";
 "update.checking" = "Checking for songs update...";
 "update.uptodate" = "Songs are up to date.";
-"addToFavorites" = "Add to favorites";
+"addToFavorites" = "Add to favourites";
+"newFavorite" = "New favourite";
+"added.success" = "Song added to the '%@' successfully";
