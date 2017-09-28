@@ -7,6 +7,7 @@ import UIKit
 import YouTubePlayer
 import KCFloatingActionButton
 import SystemConfiguration
+import SimplePDFSwift
 
 class SongWithVideoViewController: UIViewController  {
     
@@ -17,6 +18,7 @@ class SongWithVideoViewController: UIViewController  {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var previousButton: UIButton!
     
+    fileprivate let pdfExtension = ".pdf"
     var secondWindow: UIWindow?
     var secondScreenView: UIView?
     var externalLabel = UILabel()
@@ -253,7 +255,7 @@ class SongWithVideoViewController: UIViewController  {
     
     fileprivate func addShareBarButton() {
         self.navigationController!.navigationBar.tintColor = UIColor.gray
-        let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(SongWithVideoViewController.share))
+        let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(SongWithVideoViewController.shareActions))
         navigationItem.rightBarButtonItem = doneButton
     }
     
@@ -303,21 +305,8 @@ class SongWithVideoViewController: UIViewController  {
         }
     }
     
-    func share() {
-        let emailMessage = getObjectToShare()
-        let messagerMessage = getMessageToShare()
-        let otherMessage = emailMessage
-        otherMessage.append(NSAttributedString(string: "http://apple.co/2mJwePJ"))
-        
-        let firstActivityItem = CustomProvider(placeholderItem: "Default" as AnyObject, messagerMessage: messagerMessage.string, emailMessage: emailMessage.string, otherMessage: otherMessage.string)
-        let objectsToShare = [firstActivityItem]
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
-        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.postToFacebook, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
-        activityVC.popoverPresentationController?.sourceView = self.view
-        activityVC.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        self.present(activityVC, animated: true, completion: nil)
-    }
+    
+    
     
     class CustomProvider : UIActivityItemProvider {
         var messagerMessage : String!
@@ -378,7 +367,7 @@ class SongWithVideoViewController: UIViewController  {
     
     func parseString(text: String) -> [String] {
         let attributeText = customTextSettingService.getAttributedString(text as NSString)
-    //    let parsedText = attributeText.string.replacingOccurrences(of: "\n", with: "\n{n}")
+        //    let parsedText = attributeText.string.replacingOccurrences(of: "\n", with: "\n{n}")
         return attributeText.string.components(separatedBy: "\n")
     }
     
@@ -647,5 +636,75 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
         })
     }
     
+}
+//MARK: Share song in social media
+extension SongWithVideoViewController {
+    
+    func shareActions() {
+        let shareActions = UIAlertController(title: "choose_options".localized, message: "", preferredStyle: .actionSheet)
+        shareActions.addAction(getShareAction())
+        shareActions.addAction(getShareAsPdfAction())
+        shareActions.addAction(getCancelnActionSheet())
+        self.present(shareActions, animated: true, completion: nil)
+    }
+    
+    func getShareAction() -> UIAlertAction {
+        return UIAlertAction(title: "share".localized, style: .default, handler: { _ in
+            self.shareInSocialMedia()
+        })
+    }
+    
+    func getShareAsPdfAction() -> UIAlertAction {
+        return UIAlertAction(title: "share_as_pdf".localized, style: .default, handler: { _ in
+            let pdf = SimplePDF(pdfTitle: "", authorName: "", fileName: self.getSongTitle() + self.pdfExtension)
+            self.addDocumentContent(pdf)
+            let tmpPDFPath = pdf.writePDFWithoutTableOfContents()
+            let pdfURL = URL(fileURLWithPath: tmpPDFPath)
+            self.showActivityViewController([pdfURL])
+        })
+    }
+    
+    fileprivate func getSongTitle() -> String {
+        if isLanguageTamil && !selectedSong.i18nTitle.isEmpty{
+            return selectedSong.i18nTitle
+        } else {
+            return songName
+        }
+    }
+    
+    fileprivate func addDocumentContent(_ pdf: SimplePDF) {
+        pdf.addH2(self.getSongTitle())
+        pdf.addBodyText(self.getMessageToShare().string)
+    }
+    
+    func getCancelnActionSheet() -> UIAlertAction {
+        return UIAlertAction(title: "cancel".localized, style: .cancel, handler: { _ in
+            
+        })
+    }
+    
+    func shareInSocialMedia() {
+        let emailMessage = getObjectToShare()
+        let messagerMessage = getMessageToShare()
+        let otherMessage = emailMessage
+        otherMessage.append(NSAttributedString(string: "http://apple.co/2mJwePJ"))
+        
+        let firstActivityItem = CustomProvider(placeholderItem: "Default" as AnyObject, messagerMessage: messagerMessage.string, emailMessage: emailMessage.string, otherMessage: otherMessage.string)
+        showActivityViewController([firstActivityItem])
+        
+    }
+    
+    func showActivityViewController(_ objectToShare: [Any]) {
+        let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
+        activityVC.setValue("Tamil Christian Worship Songs " + songName, forKey: "Subject")
+        activityVC.excludedActivityTypes = getExcludedActivityTypes()
+        activityVC.popoverPresentationController?.sourceView = self.view
+        activityVC.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    func getExcludedActivityTypes() -> [UIActivityType] {
+        return [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.postToFacebook, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
+    }
 }
 

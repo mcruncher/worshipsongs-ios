@@ -1,0 +1,18 @@
+stage 'Unit test'
+node('macmini-slave-1') {
+  try {
+    checkout scm
+    sh "killall \"iOS Simulator\" || echo \"No matching processes belonging to you were found\""
+    sh """
+      cd worshipsongs
+      fastlane unittest """
+  } finally {
+     sh "killall \"iOS Simulator\" || echo \"No matching processes belonging to you were found\""
+     step([$class: 'JUnitResultArchiver', testResults: 'worshipsongs/fastlane/report/TEST-report.xml'])
+  }
+}
+
+stage 'Build and deploy'
+node('java') {
+   build 'worshipsongs-ios-build-and-deploy'
+}

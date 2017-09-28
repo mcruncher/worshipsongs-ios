@@ -1,6 +1,6 @@
 # Customise this file, documentation can be found here:
 # https://github.com/fastlane/fastlane/tree/master/fastlane/docs
-# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+# All available actions: https://docs.fastlane.tools/actions
 # can also be listed using the `fastlane actions` command
 
 # Change the syntax highlighting to Ruby
@@ -11,7 +11,7 @@
 
 # This is the minimum version number required.
 # Update this, if you use features of a newer version
-fastlane_version "1.106.2"
+fastlane_version "2.53.1"
 
 default_platform :ios
 
@@ -19,23 +19,28 @@ platform :ios do
   before_all do
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
     cocoapods
-    
   end
 
-  desc "Runs all the tests"
-  lane :test do
-    scan
+  desc "Run unit  tests"
+  lane :unittest do
+    scan(scheme: "worshipsongsTests", code_coverage: true, output_types: "junit", output_directory:"fastlane/report", custom_report_file_name: "TEST-report.xml")
+  end
+
+  desc "Run code analysis and publish result to sonarqube"
+  lane :codeanalysis do
+    slather(cobertura_xml: true, jenkins: true, output_directory: "fastlane/report", scheme: "worshipsongs", workspace: "worshipsongs.xcworkspace", proj: "worshipsongs.xcodeproj", binary_basename: "worshipsongs")
+    sh('cd .. && lizard worshipsongs -l swift --xml --exclude "*/Pods/*" > fastlane/report/lizard-report.xml')
+    swiftlint(output_file: "fastlane/report/swiftlint.txt", ignore_exit_status: true)
+    sonar
   end
 
   lane :package do
-    # match(type: "appstore") # more information: https://codesigning.guide
     cert
     sigh(force: true)
     gym(scheme: "worshipsongs")
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"
-  desc "This will also make sure the profile is up to date"
   lane :beta do
     pilot(skip_submission: true, skip_waiting_for_build_processing: true)
   end
@@ -69,7 +74,7 @@ end
 
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
-# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+# All available actions: https://docs.fastlane.tools/actions
 
-# fastlane reports which actions are used
-# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer
+# fastlane reports which actions are used. No personal data is recorded. 
+# Learn more at https://github.com/fastlane/fastlane#metrics

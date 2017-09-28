@@ -10,6 +10,11 @@
 		280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A631E76497000C3F1EE /* CommonConstants.swift */; };
+		28D5C09B1F7200B9001530FF /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09A1F7200B9001530FF /* Fastfile */; };
+		28D5C09D1F720443001530FF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09C1F720443001530FF /* Podfile */; };
+		28D5C09F1F7205AA001530FF /* Jenkinsfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09E1F7205AA001530FF /* Jenkinsfile */; };
+		28D5C0A11F720727001530FF /* sonar-project.properties in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C0A01F720727001530FF /* sonar-project.properties */; };
+		28D5C0A31F720ADA001530FF /* Jenkinsfile-publish in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */; };
 		2F01C9ED1E691FEC003939CD /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
 		2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */; };
 		2F06EE041EF8EBF8006B5E62 /* LanguageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */; };
@@ -60,6 +65,7 @@
 		625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81771BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
+		87AB0EAEDBAD0DA755E638C5 /* Pods_worshipsongsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA51C43BD7720ED73B33145 /* Pods_worshipsongsTests.framework */; };
 		8BE5E1BD4721210E637DD017 /* Pods_worshipsongs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +89,11 @@
 /* Begin PBXFileReference section */
 		280B923D1E77830E00833EAA /* DeviceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtils.swift; sourceTree = "<group>"; };
 		285D5A631E76497000C3F1EE /* CommonConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
+		28D5C09A1F7200B9001530FF /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Fastfile; path = fastlane/Fastfile; sourceTree = "<group>"; };
+		28D5C09C1F720443001530FF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		28D5C09E1F7205AA001530FF /* Jenkinsfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Jenkinsfile; path = ../Jenkinsfile; sourceTree = "<group>"; };
+		28D5C0A01F720727001530FF /* sonar-project.properties */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sonar-project.properties"; sourceTree = "<group>"; };
+		28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Jenkinsfile-publish"; path = "../Jenkinsfile-publish"; sourceTree = "<group>"; };
 		2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSettingViewController.swift; sourceTree = "<group>"; };
 		2F08FFD41F30093400B894FB /* UpdateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
 		2F08FFD61F301B8A00B894FB /* RestApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiService.swift; sourceTree = "<group>"; };
@@ -144,9 +155,12 @@
 		2FFF807F1F1718560086439B /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		2FFF80811F171C8C0086439B /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46656C4C8593C9951B61F1FB /* Pods-worshipsongsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4CA51C43BD7720ED73B33145 /* Pods_worshipsongsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		625E81741BD664D000BE80B8 /* XmlParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserService.swift; sourceTree = "<group>"; };
 		7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.debug.xcconfig"; sourceTree = "<group>"; };
 		C527E03A25B5DD4563B2FAAC /* Pods-worshipsongs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.release.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.release.xcconfig"; sourceTree = "<group>"; };
+		DE568EB4E060A9A495A70122 /* Pods-worshipsongsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87AB0EAEDBAD0DA755E638C5 /* Pods_worshipsongsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +196,7 @@
 				2F0BCA0B1D9D114B00B8C16B /* FMDB.framework */,
 				2F0BCA091D9D0E0000B8C16B /* libPods.a */,
 				3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */,
+				4CA51C43BD7720ED73B33145 /* Pods_worshipsongsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -200,6 +216,11 @@
 		2F5D3D111BC788F8001C4B6F = {
 			isa = PBXGroup;
 			children = (
+				28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */,
+				28D5C0A01F720727001530FF /* sonar-project.properties */,
+				28D5C09E1F7205AA001530FF /* Jenkinsfile */,
+				28D5C09C1F720443001530FF /* Podfile */,
+				28D5C09A1F7200B9001530FF /* Fastfile */,
 				2F5D3D1C1BC788F8001C4B6F /* worshipsongs */,
 				2F5D3D331BC788F8001C4B6F /* worshipsongsTests */,
 				2F5D3D3E1BC788F8001C4B6F /* worshipsongsUITests */,
@@ -376,6 +397,8 @@
 			children = (
 				7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */,
 				C527E03A25B5DD4563B2FAAC /* Pods-worshipsongs.release.xcconfig */,
+				46656C4C8593C9951B61F1FB /* Pods-worshipsongsTests.debug.xcconfig */,
+				DE568EB4E060A9A495A70122 /* Pods-worshipsongsTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -407,9 +430,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F5D3D471BC788F8001C4B6F /* Build configuration list for PBXNativeTarget "worshipsongsTests" */;
 			buildPhases = (
+				C646CFB0734166D054448C8A /* [CP] Check Pods Manifest.lock */,
 				2F5D3D2C1BC788F8001C4B6F /* Sources */,
 				2F5D3D2D1BC788F8001C4B6F /* Frameworks */,
 				2F5D3D2E1BC788F8001C4B6F /* Resources */,
+				09CE6E23FE2F50ECC906E0B1 /* [CP] Embed Pods Frameworks */,
+				6B491825AB5A9E2F926B5ECE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -499,11 +525,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FE840F51DDC33A6002B3379 /* Localizable.strings in Resources */,
+				28D5C09B1F7200B9001530FF /* Fastfile in Resources */,
+				28D5C09D1F720443001530FF /* Podfile in Resources */,
 				2F5D3D2A1BC788F8001C4B6F /* LaunchScreen.storyboard in Resources */,
 				2FE250291E42E305007BA85D /* PresentationView.xib in Resources */,
+				28D5C0A31F720ADA001530FF /* Jenkinsfile-publish in Resources */,
 				2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */,
 				2FE3699B1EFA3AB100C948BE /* songs.sqlite in Resources */,
 				2FFC99291DEFF4D600AEABEF /* Assets.xcassets in Resources */,
+				28D5C0A11F720727001530FF /* sonar-project.properties in Resources */,
+				28D5C09F1F7205AA001530FF /* Jenkinsfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +570,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		09CE6E23FE2F50ECC906E0B1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1EADD1CFE41EF7EA53618455 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -551,7 +597,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3A1DC313FDF058F399C8BA3C /* [CP] Embed Pods Frameworks */ = {
@@ -567,6 +613,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6B491825AB5A9E2F926B5ECE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C646CFB0734166D054448C8A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -832,6 +908,7 @@
 		};
 		2F5D3D481BC788F8001C4B6F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46656C4C8593C9951B61F1FB /* Pods-worshipsongsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = worshipsongsTests/Info.plist;
@@ -845,6 +922,7 @@
 		};
 		2F5D3D491BC788F8001C4B6F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE568EB4E060A9A495A70122 /* Pods-worshipsongsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = worshipsongsTests/Info.plist;
