@@ -11,6 +11,7 @@ class ManageFavoritesController: UIViewController {
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var songLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    fileprivate static let addFav = "addFav"
     
     var songTitle = ""
     var isLanguageTamil = false
@@ -23,7 +24,7 @@ class ManageFavoritesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         songTitle = song.title
-        isLanguageTamil = preferences.string(forKey: "language") == "tamil"
+        isLanguageTamil = preferences.string(forKey: CommonConstansts.language) == CommonConstansts.tamil
         if isLanguageTamil && !song.i18nTitle.isEmpty {
             songTitle = song.i18nTitle
         }
@@ -38,7 +39,7 @@ class ManageFavoritesController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        favoriteList = (preferences.array(forKey: "favorites") as? [String])!
+        favoriteList = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
         tableView.isHidden = favoriteList.count <= 0
         tableView.reloadData()
     }
@@ -48,11 +49,11 @@ class ManageFavoritesController: UIViewController {
     }
     
     @IBAction func createFav(_ sender: Any) {
-        performSegue(withIdentifier: "addFav", sender: self)
+        performSegue(withIdentifier: ManageFavoritesController.addFav, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if (segue.identifier == "addFav") {
+        if (segue.identifier == ManageFavoritesController.addFav) {
             let addFavoritesController = segue.destination as! AddFavoriteViewController
             addFavoritesController.song = song
             addFavoritesController.songTitle = songTitle
@@ -92,7 +93,7 @@ extension ManageFavoritesController : UITableViewDelegate, UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favorite", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CommonConstansts.favorite, for: indexPath)
         cell.textLabel?.text = favoriteList[indexPath.row]
         var count = 0
         if self.preferences.dictionaryRepresentation().keys.contains(favoriteList[indexPath.row]) {

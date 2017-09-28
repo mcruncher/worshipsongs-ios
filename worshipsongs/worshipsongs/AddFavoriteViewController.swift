@@ -33,14 +33,14 @@ class AddFavoriteViewController: UIViewController {
     
     @IBAction func createFav(_ sender: Any) {
         favoriteName.resignFirstResponder()
-        var favoriteKey = "favorite"
+        var favoriteKey = CommonConstansts.favorite
         if !(favoriteName.text?.isEmpty)! {
             favoriteKey = favoriteName.text!
         }
-        favoriteList = (preferences.array(forKey: "favorites") as? [String])!
+        favoriteList = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
         if !favoriteList.contains(favoriteKey) {
             favoriteList.append(favoriteKey)
-            self.preferences.set(favoriteList, forKey: "favorites")
+            self.preferences.set(favoriteList, forKey: CommonConstansts.favorites)
             self.preferences.synchronize()
         }
         
