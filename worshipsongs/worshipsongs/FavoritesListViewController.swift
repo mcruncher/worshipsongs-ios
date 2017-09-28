@@ -8,6 +8,7 @@ import UIKit
 class FavoritesListViewController: UITableViewController {
     
     fileprivate let preferences = UserDefaults.standard
+    var pagingSpinner = UIActivityIndicatorView()
     var favorites = [String]()
     var filteredFavorites = [String]()
     var selectedFavorite = ""
@@ -18,24 +19,28 @@ class FavoritesListViewController: UITableViewController {
         super.viewDidLoad()
         songTabBarController = self.tabBarController as? SongsTabBarViewController
         self.tabBarItem.title = "favorites".localized
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
-        favorites = (preferences.array(forKey: "favorites") as? [String])!
+        favorites = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
         filteredFavorites = favorites
         tableView.reloadData()
         self.tableView.tableFooterView = getTableFooterView()
+        pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        pagingSpinner.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: self.tableView.frame.height)
+        pagingSpinner.hidesWhenStopped = true
+        pagingSpinner.center = self.view.center
+        self.view.addSubview(pagingSpinner)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let songTabBarController = tabBarController as! SongsTabBarViewController
         songTabBarController.navigationItem.title = "favorites".localized
-        favorites = (preferences.array(forKey: "favorites") as? [String])!
+        favorites = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
         filteredFavorites = favorites
         createSearchBar()
         tableView.reloadData()
     }
     
     func getTableFooterView() -> UIView {
-        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 25))
+        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: (self.tabBarController?.tabBar.frame.height)!))
         footerview.backgroundColor = UIColor.groupTableViewBackground
         let label = UILabel(frame: CGRect(x: 10, y: 5, width: tableView.frame.size.width, height: 15))
         label.text = "message.favorite".localized
@@ -59,18 +64,18 @@ class FavoritesListViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favorite", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CommonConstansts.favorite, for: indexPath)
         cell.textLabel?.text = filteredFavorites[indexPath.row]
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedFavorite = filteredFavorites[indexPath.row]
-        performSegue(withIdentifier: "favorite", sender: self)
+        performSegue(withIdentifier: CommonConstansts.favorite, sender: self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier?.equalsIgnoreCase("favorite"))! {
+        if (segue.identifier?.equalsIgnoreCase(CommonConstansts.favorite))! {
             let favoritesController: FavoritesTableViewController = segue.destination as! FavoritesTableViewController
             favoritesController.favorite = selectedFavorite
             favoritesController.songTabBarController = songTabBarController
@@ -84,7 +89,7 @@ class FavoritesListViewController: UITableViewController {
     }
     
     fileprivate func getTableViewRowAction(_ indexPath: IndexPath) -> UITableViewRowAction {
-        return UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Remove") { (action, indexPath) -> Void in
+        return UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "remove".localized) { (action, indexPath) -> Void in
             self.isEditing = false
             self.present(self.getConfirmationAlertController(indexPath), animated: true, completion: nil)
         }
@@ -102,24 +107,29 @@ class FavoritesListViewController: UITableViewController {
     }
     
     fileprivate func getDeleteAction(_ indexPath: IndexPath) -> UIAlertAction {
-        return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
+        return UIAlertAction(title: "yes".localized, style: .default, handler: {(alert: UIAlertAction!) -> Void in
+            self.pagingSpinner.backgroundColor = UIColor(white: 1, alpha: 0.5)
+            self.pagingSpinner.isHidden = false
+            self.pagingSpinner.startAnimating()
             let favoriteName = self.filteredFavorites[indexPath.row]
-            self.filteredFavorites.remove(at: indexPath.row)
             var newFavorites = [String]()
             for index in 0..<self.favorites.count {
                 if !self.favorites[index].equalsIgnoreCase(favoriteName) {
                     newFavorites.append(self.favorites[index])
                 }
             }
+            self.preferences.set(newFavorites, forKey: CommonConstansts.favorites)
             self.preferences.removeObject(forKey: favoriteName)
-            self.preferences.set(newFavorites, forKey: "favorites")
-            self.preferences.synchronize()
-            self.tableView.reloadData()
+            self.filteredFavorites.remove(at: indexPath.row)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { () -> Void in
+                self.tableView.reloadData()
+                self.pagingSpinner.stopAnimating()
+            }
         })
     }
     
     fileprivate func getCancelAction(_ indexPath: IndexPath) -> UIAlertAction {
-        return UIAlertAction(title: "No", style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
+        return UIAlertAction(title: "no".localized, style: UIAlertActionStyle.default,handler: {(alert: UIAlertAction!) -> Void in
             self.tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: UITableViewRowAnimation.automatic)
         })
     }

@@ -20,6 +20,7 @@
 		2F06EE041EF8EBF8006B5E62 /* LanguageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */; };
 		2F08FFD51F30093400B894FB /* UpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F08FFD41F30093400B894FB /* UpdateService.swift */; };
 		2F08FFD71F301B8A00B894FB /* RestApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F08FFD61F301B8A00B894FB /* RestApiService.swift */; };
+		2F0A5F601F7B35F00026EC48 /* AddFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0A5F5F1F7B35F00026EC48 /* AddFavoriteViewController.swift */; };
 		2F0A70F91E1B432D0025F156 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0A70F81E1B432D0025F156 /* TitleTableViewCell.swift */; };
 		2F1044201E6422E200DBDD54 /* DatabaseLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10441F1E6422E200DBDD54 /* DatabaseLoadingViewController.swift */; };
 		2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F16DED01E5A824000E3CA27 /* FavoritesSongsWithOrder.swift */; };
@@ -96,6 +97,7 @@
 		2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSettingViewController.swift; sourceTree = "<group>"; };
 		2F08FFD41F30093400B894FB /* UpdateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
 		2F08FFD61F301B8A00B894FB /* RestApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiService.swift; sourceTree = "<group>"; };
+		2F0A5F5F1F7B35F00026EC48 /* AddFavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoriteViewController.swift; sourceTree = "<group>"; };
 		2F0A70F81E1B432D0025F156 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		2F0BCA091D9D0E0000B8C16B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		2F0BCA0B1D9D114B00B8C16B /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = "../../../../Library/Developer/Xcode/DerivedData/worshipsongs-glciooqfhxjknigyiwgebruvadtn/Build/Products/Debug-iphonesimulator/FMDB/FMDB.framework"; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				2FFE61DF1F317421007B08CC /* UpdateSongsViewController.swift */,
 				2FEDF61A1F72044D005D1B83 /* ManageFavoritesController.swift */,
 				2FEDF61E1F721AF1005D1B83 /* FavoritesListViewController.swift */,
+				2F0A5F5F1F7B35F00026EC48 /* AddFavoriteViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -594,7 +597,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3A1DC313FDF058F399C8BA3C /* [CP] Embed Pods Frameworks */ = {
@@ -639,7 +642,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -673,6 +676,7 @@
 				2F08FFD51F30093400B894FB /* UpdateService.swift in Sources */,
 				2F01C9ED1E691FEC003939CD /* StringUtils.swift in Sources */,
 				2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */,
+				2F0A5F601F7B35F00026EC48 /* AddFavoriteViewController.swift in Sources */,
 				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
 				2FFF80801F1718560086439B /* ViewUtils.swift in Sources */,
 				2FD589951C1660A300668951 /* Author.swift in Sources */,
