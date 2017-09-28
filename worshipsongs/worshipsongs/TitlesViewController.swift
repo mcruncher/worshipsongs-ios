@@ -64,12 +64,12 @@ class TitlesViewController: UITableViewController {
         let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
         if indexPath != nil && longPressGesture.state == UIGestureRecognizerState.began {
             addToFav = filteredSongModel[(indexPath?.row)!]
-            performSegue(withIdentifier: "manageFav", sender: self)
+            performSegue(withIdentifier: CommonConstansts.manageFav, sender: self)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if (segue.identifier == "manageFav") {
+        if (segue.identifier == CommonConstansts.manageFav) {
             let manageFavoritesController = segue.destination as! ManageFavoritesController
             manageFavoritesController.song = addToFav
         }

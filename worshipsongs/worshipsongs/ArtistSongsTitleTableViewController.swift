@@ -75,7 +75,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
         if indexPath != nil && longPressGesture.state == UIGestureRecognizerState.began {
             addToFav = filteredSongModel[(indexPath?.row)!]
-            performSegue(withIdentifier: "manageFav", sender: self)
+            performSegue(withIdentifier: CommonConstansts.manageFav, sender: self)
         }
     }
     
@@ -140,7 +140,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
             songsTableViewController.songName = songName
             songsTableViewController.comment = comment
             songsTableViewController.authorName = artistName
-        } else if (segue.identifier == "manageFav") {
+        } else if (segue.identifier == CommonConstansts.manageFav) {
             let manageFavoritesController = segue.destination as! ManageFavoritesController
             manageFavoritesController.song = addToFav
         }

@@ -13,4 +13,5 @@ struct CommonConstansts {
     internal static let favorites = "favorites"
     internal static let language = "language"
     internal static let tamil = "tamil"
+    internal static let manageFav = "manageFav"
 }
