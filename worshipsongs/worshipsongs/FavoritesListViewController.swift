@@ -8,6 +8,7 @@ import UIKit
 class FavoritesListViewController: UITableViewController {
     
     fileprivate let preferences = UserDefaults.standard
+    var pagingSpinner = UIActivityIndicatorView()
     var favorites = [String]()
     var filteredFavorites = [String]()
     var selectedFavorite = ""
@@ -22,6 +23,11 @@ class FavoritesListViewController: UITableViewController {
         filteredFavorites = favorites
         tableView.reloadData()
         self.tableView.tableFooterView = getTableFooterView()
+        pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        pagingSpinner.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: self.tableView.frame.height)
+        pagingSpinner.hidesWhenStopped = true
+        pagingSpinner.center = self.view.center
+        self.view.addSubview(pagingSpinner)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +108,9 @@ class FavoritesListViewController: UITableViewController {
     
     fileprivate func getDeleteAction(_ indexPath: IndexPath) -> UIAlertAction {
         return UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction!) -> Void in
+            self.pagingSpinner.backgroundColor = UIColor(white: 1, alpha: 0.5)
+            self.pagingSpinner.isHidden = false
+            self.pagingSpinner.startAnimating()
             let favoriteName = self.filteredFavorites[indexPath.row]
             var newFavorites = [String]()
             for index in 0..<self.favorites.count {
@@ -112,7 +121,10 @@ class FavoritesListViewController: UITableViewController {
             self.preferences.set(newFavorites, forKey: "favorites")
             self.preferences.removeObject(forKey: favoriteName)
             self.filteredFavorites.remove(at: indexPath.row)
-            self.tableView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { () -> Void in
+                self.tableView.reloadData()
+                self.pagingSpinner.stopAnimating()
+            }
         })
     }
     

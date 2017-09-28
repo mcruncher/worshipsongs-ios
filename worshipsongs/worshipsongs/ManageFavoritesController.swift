@@ -94,13 +94,13 @@ extension ManageFavoritesController : UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favorite", for: indexPath)
         cell.textLabel?.text = favoriteList[indexPath.row]
-        let decoded  = self.preferences.object(forKey: favoriteList[indexPath.row]) as! Data
-        let favSongs = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
-        if favSongs.count > 0 {
-            cell.detailTextLabel?.text =  String(favSongs.count) + " Songs"
-        } else {
-            cell.detailTextLabel?.text = "0 Songs"
+        var count = 0
+        if self.preferences.dictionaryRepresentation().keys.contains(favoriteList[indexPath.row]) {
+            let decoded  = self.preferences.object(forKey: favoriteList[indexPath.row]) as! Data
+            let favSongs = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
+            count = favSongs.count
         }
+        cell.detailTextLabel?.text = NSString(format: "no.songs".localized as NSString, String(count)) as String
         return cell
     }
     
