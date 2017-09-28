@@ -9,4 +9,7 @@ struct CommonConstansts {
     
     internal static let OnSelectSongKey = "onSelectSong"
     internal static let songKey = "song"
+    
+    internal static let tamilKey = "tamil"
+    internal static let languageKey = "language"
 }

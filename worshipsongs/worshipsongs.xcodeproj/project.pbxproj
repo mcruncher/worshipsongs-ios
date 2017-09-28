@@ -18,6 +18,7 @@
 		28D5C09F1F7205AA001530FF /* Jenkinsfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09E1F7205AA001530FF /* Jenkinsfile */; };
 		28D5C0A11F720727001530FF /* sonar-project.properties in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C0A01F720727001530FF /* sonar-project.properties */; };
 		28D5C0A31F720ADA001530FF /* Jenkinsfile-publish in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */; };
+		28E0544F1F7B31EB006502EB /* SongBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0544E1F7B31EB006502EB /* SongBookController.swift */; };
 		2F01C9ED1E691FEC003939CD /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
 		2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */; };
 		2F06EE041EF8EBF8006B5E62 /* LanguageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */; };
@@ -99,6 +100,7 @@
 		28D5C09E1F7205AA001530FF /* Jenkinsfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Jenkinsfile; path = ../Jenkinsfile; sourceTree = "<group>"; };
 		28D5C0A01F720727001530FF /* sonar-project.properties */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sonar-project.properties"; sourceTree = "<group>"; };
 		28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Jenkinsfile-publish"; path = "../Jenkinsfile-publish"; sourceTree = "<group>"; };
+		28E0544E1F7B31EB006502EB /* SongBookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongBookController.swift; sourceTree = "<group>"; };
 		2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSettingViewController.swift; sourceTree = "<group>"; };
 		2F08FFD41F30093400B894FB /* UpdateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
 		2F08FFD61F301B8A00B894FB /* RestApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiService.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				2FFE61DF1F317421007B08CC /* UpdateSongsViewController.swift */,
 				2FEDF61A1F72044D005D1B83 /* ManageFavoritesController.swift */,
 				2FEDF61E1F721AF1005D1B83 /* FavoritesListViewController.swift */,
+				28E0544E1F7B31EB006502EB /* SongBookController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */,
 				2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */,
+				28E0544F1F7B31EB006502EB /* SongBookController.swift in Sources */,
 				2FD5899A1C167CD300668951 /* TitlesViewController.swift in Sources */,
 				2F08FFD51F30093400B894FB /* UpdateService.swift in Sources */,
 				2F01C9ED1E691FEC003939CD /* StringUtils.swift in Sources */,

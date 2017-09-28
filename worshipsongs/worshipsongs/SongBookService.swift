@@ -9,7 +9,10 @@ class SongBookService: NSObject {
     
     private var database: FMDatabase? = nil
     private  let commonService: CommonService = CommonService()
-    private let preferences = UserDefaults.standard
+    private let databaseService = DatabaseHelper()
+    private let id = "id"
+    private let name = "name"
+    private let publisher = "publisher"
     
     func findAll() -> [SongBook]  {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
@@ -22,26 +25,18 @@ class SongBookService: NSObject {
                 songBooks.append(getSongBook(resultSet!))
             }
         }
-        print("Song book: \(songBooks.count)")
         return songBooks
     }
     
     private func getSongBook(_ resultSet: FMResultSet) -> SongBook {
-        let id: String = resultSet.string(forColumn: "id")
-        let name: String =  getName( resultSet.string(forColumn: "name"), "tamil".equalsIgnoreCase(self.preferences.string(forKey: "language")!))
-        let publisher: String = resultSet.string(forColumn: "publisher")
-        return SongBook(id:  Int(id)!, name: name, publisher: publisher)
+        let id: String = resultSet.string(forColumn: self.id)
+        let tamilName = getTamilName(resultSet.string(forColumn: name))
+        let englishName = getEnglishName(resultSet.string(forColumn: name))
+        let publisher: String = resultSet.string(forColumn: self.publisher)
+        return SongBook(id:  Int(id)!, tamilName: tamilName, englishName: englishName, publisher: publisher)
     }
     
-    func getName(_ name: String, _ tamil: Bool) -> String {
-        if tamil {
-            return getTamilName(name)
-        } else {
-            return getDefaultName(name)
-        }
-    }
-    
-     func getTamilName(_ name: String) -> String {
+    func getTamilName(_ name: String) -> String {
         let names = name.components(separatedBy: "{")
         if names.count == 2 {
             return names[1].replacingOccurrences(of: "}", with: "")
@@ -49,9 +44,27 @@ class SongBookService: NSObject {
         return name
     }
     
-     func getDefaultName(_ name: String) -> String {
+    func getEnglishName(_ name: String) -> String {
         let names = name.components(separatedBy: "{")
         return names[0]
+    }
+    
+    func findBySongBookId(_ songBookId: Int) -> [Songs] {
+        var songList = [Songs]()
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        database?.open()
+        var arguments = [AnyObject]()
+        arguments.append(songBookId as AnyObject)
+        let resultSet: FMResultSet? = database!.executeQuery("select * from songs as s inner join songs_songbooks as ssb on ssb.song_id = s.id inner join song_books as sb on ssb.songbook_id = sb.id where sb.id = ?", withArgumentsIn: arguments)
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                let song = databaseService.getSong(resultSet!)
+                song.songBookNo = (resultSet?.string(forColumn: "entry"))!
+                songList.append(song)
+            }
+        }
+        return songList
     }
     
 }

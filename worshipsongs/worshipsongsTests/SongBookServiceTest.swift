@@ -18,25 +18,13 @@ class SongBookServiceTest: XCTestCase {
         super.tearDown()
     }
     
-    func testGetNameWhenLanguageIsEgnlish() {
-        let name = "foo{நன்றி}"
-        let result =  songBookService.getName(name, false)
-        XCTAssertEqual("foo", result)
-    }
-    
-    func testGetNameWhenLanguageIsTamil(){
-        let name = "foo{நன்றி}"
-        let result =  songBookService.getName(name, true)
-        XCTAssertEqual("நன்றி", result)
-    }
-    
     func testGetTamilName() {
         XCTAssertEqual("நன்றி", songBookService.getTamilName("foo{நன்றி}"))
     }
     
-    func testGetDefaultName() {
+    func testGetEnglishName() {
         let name = "foo{bar}"
-        XCTAssertEqual("foo", songBookService.getDefaultName(name))
+        XCTAssertEqual("foo", songBookService.getEnglishName(name))
     }
     
     

@@ -8,6 +8,7 @@ import Foundation
 
 struct SongBook {
     var id: Int
-    var name: String
+    var tamilName: String
+    var englishName: String
     var publisher: String
 }

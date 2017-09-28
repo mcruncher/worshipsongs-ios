@@ -15,7 +15,11 @@ class DatabaseHelper: NSObject {
     var database: FMDatabase? = nil
     var resultSet: FMResultSet? = nil
     let commonService: CommonService = CommonService()
-   
+    let id = "id"
+    let titles: String = "title"
+    let lyrics: String = "lyrics"
+    let verseOrder: String = "verse_order"
+    
     func getSongModel() -> [(Songs)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         let path = commonService.getDocumentDirectoryPath("songs.sqlite")
@@ -68,7 +72,7 @@ class DatabaseHelper: NSObject {
             while resultSet1!.next() {
                 if(args != "")
                 {
-                   args="\(args),"
+                    args="\(args),"
                 }
                 args="\(args)?"
                 songModelIds.append(resultSet1!.string(forColumn: "song_id") as AnyObject)
@@ -222,12 +226,13 @@ class DatabaseHelper: NSObject {
         return songModel
     }
     
-    private func getSong(_ resultSet: FMResultSet) -> Songs {
-        let id : String = resultSet.string(forColumn: "id")
-        let title: String = resultSet.string(forColumn: "title")
-        let lyrics: String = resultSet.string(forColumn: "lyrics")
-        let verseOrder: String = resultSet.string(forColumn: "verse_order")
-        let comments: String = resultSet.string(forColumn: "comments") != nil ? resultSet.string(forColumn: "comments") : ""
+    func getSong(_ resultSet: FMResultSet) -> Songs {
+        let id : String = resultSet.string(forColumn: self.id)
+        let title: String = resultSet.string(forColumn: self.titles)
+        let lyrics: String = resultSet.string(forColumn: self.lyrics)
+        let verseOrder: String = resultSet.string(forColumn: self.verseOrder)
+        let comments: String = resultSet.string(forColumn:
+            "comments") != nil ? resultSet.string(forColumn: "comments") : ""
         return Songs(id: id, title: title, lyrics: lyrics, verse_order: verseOrder, comment: comments)
     }
     
@@ -240,7 +245,7 @@ class DatabaseHelper: NSObject {
         let displayNameEnglish: String = getEnglishTitle(displayName)
         return Author(id: id, firstName: firstName, lastName: lastName, displayName: displayName, displayNameTamil: displayNameTamil, displayNameEnglish: displayNameEnglish)
     }
-     
+    
     private func getCategory(_ resultSet: FMResultSet) -> Category {
         let id: String = resultSet.string(forColumn: "id")
         let name: String = resultSet.string(forColumn: "name")
