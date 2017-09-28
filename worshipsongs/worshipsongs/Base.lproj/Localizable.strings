@@ -94,3 +94,8 @@
 "addToFavorites" = "Add to favourites";
 "newFavorite" = "New favourite";
 "added.success" = "Song added to the '%@' successfully";
+
+"choose_options" = "Choose options";
+"share" = "Share";
+"share_as_pdf"="Share as PDF";
+
