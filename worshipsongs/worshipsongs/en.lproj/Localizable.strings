@@ -91,7 +91,9 @@
 "update.songs" = "Update Songs";
 "update.checking" = "Checking for songs update...";
 "update.uptodate" = "Songs are up to date.";
-"addToFavorites" = "Add to favorites";
+"addToFavorites" = "Add to favourites";
+"newFavorite" = "New favourite";
+"added.success" = "Song added to the '%@' successfully";
 
 "choose_options" = "Choose options";
 "share" = "Share";
@@ -99,3 +101,4 @@
 
 "song_books"="Song books";
 "songno"="Song no";
+"no.songs" = "%@ songs";

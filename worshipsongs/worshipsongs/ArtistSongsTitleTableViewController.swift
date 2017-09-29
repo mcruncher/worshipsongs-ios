@@ -21,6 +21,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
     var comment = ""
     fileprivate var isLanguageTamil = true
     
+    fileprivate var addToFav: Songs!
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
     var songTabBarController: SongsTabBarViewController?
@@ -83,10 +84,8 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
         let pressingPoint = longPressGesture.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
         if indexPath != nil && longPressGesture.state == UIGestureRecognizerState.began {
-            let viewController = storyboard?.instantiateViewController(withIdentifier: "favorite") as? ManageFavoritesController
-            viewController?.song = filteredSongModel[(indexPath?.row)!]
-            viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
-            self.present(viewController!, animated: false, completion: nil)
+            addToFav = filteredSongModel[(indexPath?.row)!]
+            performSegue(withIdentifier: CommonConstansts.manageFav, sender: self)
         }
     }
     
@@ -173,6 +172,9 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
             songsTableViewController.songName = songName
             songsTableViewController.comment = comment
             songsTableViewController.authorName = artistName
+        } else if (segue.identifier == CommonConstansts.manageFav) {
+            let manageFavoritesController = segue.destination as! ManageFavoritesController
+            manageFavoritesController.song = addToFav
         }
     }
     

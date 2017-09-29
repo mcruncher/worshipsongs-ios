@@ -144,7 +144,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        isLanguageTamil = preferences.string(forKey: "language") == "tamil"
+        isLanguageTamil = preferences.string(forKey: CommonConstansts.language) == CommonConstansts.tamil
         self.navigationItem.title = favorite
         createSearchBar()
         refresh(self)
@@ -152,7 +152,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     
     func updateModel() {
         refresh = UIRefreshControl()
-        refresh.attributedTitle = NSAttributedString(string: "Refresh")
+        refresh.attributedTitle = NSAttributedString(string: "refresh".localized)
         refresh.addTarget(self, action: #selector(FavoritesTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
         refresh(self)
