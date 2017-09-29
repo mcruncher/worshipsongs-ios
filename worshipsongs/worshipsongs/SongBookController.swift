@@ -19,6 +19,7 @@ class SongBookController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         songTabBarController = self.tabBarController as? SongsTabBarViewController
         self.tabBarItem.title = "song_books".localized
     }
     
@@ -28,6 +29,7 @@ class SongBookController: UITableViewController {
         songBooks = songBookService.findAll()
         filterSongBooks = songBooks!
         createSearchBar()
+        tableView.reloadData()
     }
 }
 
@@ -70,6 +72,7 @@ extension SongBookController {
             titleTableViewController.artistName = CommonConstansts.tamilKey.equalsIgnoreCase(self.preferences.string(forKey:
                 CommonConstansts.languageKey)!) ? songBook.tamilName : songBook.englishName
             titleTableViewController.songModel = songs
+            titleTableViewController.transparentSearchEnabled = true
             titleTableViewController.songTabBarController = songTabBarController
         }
     }

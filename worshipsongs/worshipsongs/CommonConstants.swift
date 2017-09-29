@@ -12,4 +12,5 @@ struct CommonConstansts {
     
     internal static let tamilKey = "tamil"
     internal static let languageKey = "language"
+    internal static let searchKey = "searchKey"
 }

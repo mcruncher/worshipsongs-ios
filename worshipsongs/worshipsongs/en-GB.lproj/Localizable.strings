@@ -74,6 +74,7 @@
 "shareApp" = "Share This App";
 "refresh" = "Refresh";
 "searchByTitle" = "Title";
+"searchByNumber" = "Number";
 "searchByContent" = "Content";
 "searchBy" = "Search By";
 "lyricsPreference" = "Lyrics Preference";
@@ -98,3 +99,4 @@
 "share_as_pdf"="Share as PDF";
 
 "song_books"="Song books";
+"songno"="Song no";

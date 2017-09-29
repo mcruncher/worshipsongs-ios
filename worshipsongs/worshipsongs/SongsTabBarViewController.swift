@@ -58,7 +58,8 @@ class SongsTabBarViewController: UITabBarController{
         self.viewControllers?[0].tabBarItem.title = "songs".localized
         self.viewControllers?[1].tabBarItem.title = "artists".localized
         self.viewControllers?[2].tabBarItem.title = "categories".localized
-        self.viewControllers?[3].tabBarItem.title = "favorites".localized
+        self.viewControllers?[3].tabBarItem.title = "song_books".localized
+        self.viewControllers?[4].tabBarItem.title = "favorites".localized
     }
     
     func hideSearchBar() {

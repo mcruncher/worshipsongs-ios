@@ -100,6 +100,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.set("searchByTitle", forKey: "searchBy")
             self.preferences.synchronize()
         }
+        
+        if !preferences.dictionaryRepresentation().keys.contains(CommonConstansts.searchKey) {
+            self.preferences.set("searchByTitle", forKey: CommonConstansts.searchKey)
+            self.preferences.synchronize()
+        }
     
         if !preferences.dictionaryRepresentation().keys.contains("database.lock") {
             self.preferences.set(false, forKey: "database.lock")
