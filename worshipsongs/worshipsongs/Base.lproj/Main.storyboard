@@ -1588,7 +1588,7 @@
                             <outlet property="delegate" destination="cT6-MR-bbk" id="Mah-Gr-B65"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" tag="3" title="Song books" image="folder.png" id="P4Z-GN-LIe">
+                    <tabBarItem key="tabBarItem" tag="3" title="Song books" id="P4Z-GN-LIe">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>
                     <connections>
@@ -1709,7 +1709,6 @@
         <image name="category" width="29" height="29"/>
         <image name="edit" width="23" height="23"/>
         <image name="favaorite" width="26" height="26"/>
-        <image name="folder.png" width="36" height="36"/>
         <image name="next-indicator" width="12" height="21"/>
         <image name="play-dark" width="21" height="21"/>
         <image name="presentation" width="15" height="15"/>
@@ -1719,8 +1718,7 @@
         <image name="unselect" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rir-g5-zJn"/>
         <segue reference="9an-G3-4Uz"/>
-        <segue reference="cIJ-cn-8I7"/>
+        <segue reference="rir-g5-zJn"/>
     </inferredMetricsTieBreakers>
 </document>
