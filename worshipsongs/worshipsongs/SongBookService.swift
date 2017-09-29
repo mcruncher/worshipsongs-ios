@@ -13,6 +13,7 @@ class SongBookService: NSObject {
     private let id = "id"
     private let name = "name"
     private let publisher = "publisher"
+    private let entry = "entry"
     
     func findAll() -> [SongBook]  {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
@@ -60,7 +61,7 @@ class SongBookService: NSObject {
         {
             while resultSet!.next() {
                 let song = databaseService.getSong(resultSet!)
-                song.songBookNo = (resultSet?.string(forColumn: "entry"))!
+                song.songBookNo = (resultSet?.string(forColumn: entry))!
                 songList.append(song)
             }
         }
