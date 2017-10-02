@@ -98,4 +98,8 @@
 "choose_options" = "Choose options";
 "share" = "Share";
 "share_as_pdf"="Share as PDF";
+
+"song_books"="Song books";
+"songno"="Song no";
 "no.songs" = "%@ songs";
+"searchByTitleOrNumber" = "Title or Number";

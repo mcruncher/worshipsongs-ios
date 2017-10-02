@@ -102,8 +102,6 @@ class ArtistsTableViewController: UITableViewController   {
         }
     }
     
-    
-    
     func refresh(_ sender:AnyObject)
     {
         filteredAuthorModel = authorModel

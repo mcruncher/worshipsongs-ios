@@ -15,7 +15,11 @@ class DatabaseHelper: NSObject {
     var database: FMDatabase? = nil
     var resultSet: FMResultSet? = nil
     let commonService: CommonService = CommonService()
-   
+    let id = "id"
+    let titles: String = "title"
+    let lyrics: String = "lyrics"
+    let verseOrder: String = "verse_order"
+    
     func getSongModel() -> [(Songs)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         let path = commonService.getDocumentDirectoryPath("songs.sqlite")
@@ -68,7 +72,7 @@ class DatabaseHelper: NSObject {
             while resultSet1!.next() {
                 if(args != "")
                 {
-                   args="\(args),"
+                    args="\(args),"
                 }
                 args="\(args)?"
                 songModelIds.append(resultSet1!.string(forColumn: "song_id") as AnyObject)
@@ -191,43 +195,28 @@ class DatabaseHelper: NSObject {
     func findCategorySongs(_ categoryId: Int) -> [(Songs)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         database?.open()
-        var songModelIds = [AnyObject]()
         var arguments = [AnyObject]()
-        var args:String = ""
         arguments.append(categoryId as AnyObject)
-        let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM songs_topics where topic_id = ?", withArgumentsIn: arguments)
-        if (resultSet1 != nil)
-        {
-            while resultSet1!.next() {
-                if(args != "")
-                {
-                    args="\(args),"
-                }
-                args="\(args)?"
-                songModelIds.append(resultSet1!.string(forColumn: "song_id") as AnyObject)
-            }
-        }
         var songModel = [Songs]()
-        let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN (\(args)) ORDER BY title", withArgumentsIn: songModelIds)
-        let id = "id"
-        let titles: String = "title"
-        let lyrics: String = "lyrics"
-        let verseOrder: String = "verse_order"
+        let resultSet2: FMResultSet? = database!.executeQuery("select * " +
+            "from songs as s inner join songs_topics as st on st.song_id = s.id inner join " +
+            "topics as t on st.topic_id = t.id where t.id= ?", withArgumentsIn: arguments)
         if (resultSet2 != nil)
         {
             while resultSet2!.next() {
-                songModel.append(Songs(id: resultSet2!.string(forColumn: id), title: resultSet2!.string(forColumn: titles), lyrics: resultSet2!.string(forColumn: lyrics),verse_order: resultSet2!.string(forColumn: verseOrder), comment: resultSet2!.string(forColumn: "comments")))
+                songModel.append(getSong(resultSet2!))
             }
         }
         return songModel
     }
     
-    private func getSong(_ resultSet: FMResultSet) -> Songs {
-        let id : String = resultSet.string(forColumn: "id")
-        let title: String = resultSet.string(forColumn: "title")
-        let lyrics: String = resultSet.string(forColumn: "lyrics")
-        let verseOrder: String = resultSet.string(forColumn: "verse_order")
-        let comments: String = resultSet.string(forColumn: "comments") != nil ? resultSet.string(forColumn: "comments") : ""
+    func getSong(_ resultSet: FMResultSet) -> Songs {
+        let id : String = resultSet.string(forColumn: self.id)
+        let title: String = resultSet.string(forColumn: self.titles)
+        let lyrics: String = resultSet.string(forColumn: self.lyrics)
+        let verseOrder: String = resultSet.string(forColumn: self.verseOrder)
+        let comments: String = resultSet.string(forColumn:
+            "comments") != nil ? resultSet.string(forColumn: "comments") : ""
         return Songs(id: id, title: title, lyrics: lyrics, verse_order: verseOrder, comment: comments)
     }
     
@@ -240,7 +229,7 @@ class DatabaseHelper: NSObject {
         let displayNameEnglish: String = getEnglishTitle(displayName)
         return Author(id: id, firstName: firstName, lastName: lastName, displayName: displayName, displayNameTamil: displayNameTamil, displayNameEnglish: displayNameEnglish)
     }
-     
+    
     private func getCategory(_ resultSet: FMResultSet) -> Category {
         let id: String = resultSet.string(forColumn: "id")
         let name: String = resultSet.string(forColumn: "name")
@@ -249,7 +238,7 @@ class DatabaseHelper: NSObject {
         return Category(id: Int(id)!, name: name, nameTamil: nameTamil, nameEnglish: nameEnglish)
     }
     
-    private func getTamilTitle(_ name: String) -> String {
+   func getTamilTitle(_ name: String) -> String {
         let names = name.components(separatedBy: "{")
         if names.count == 2 {
             return names[1].replacingOccurrences(of: "}", with: " ")
@@ -257,7 +246,7 @@ class DatabaseHelper: NSObject {
         return name
     }
     
-    private func getEnglishTitle(_ name: String) -> String {
+   func getEnglishTitle(_ name: String) -> String {
         let names = name.components(separatedBy: "{")
         return names[0]
     }

@@ -703,10 +703,11 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="aO2-t1-htF" kind="relationship" relationship="viewControllers" id="zfM-lj-bAQ"/>
                         <segue destination="zTk-j6-cLt" kind="show" identifier="setting" id="A2n-1s-Efh"/>
+                        <segue destination="aO2-t1-htF" kind="relationship" relationship="viewControllers" id="zfM-lj-bAQ"/>
                         <segue destination="wFG-Ok-SgU" kind="relationship" relationship="viewControllers" id="vow-GB-zew"/>
                         <segue destination="bJ4-SQ-vPD" kind="relationship" relationship="viewControllers" id="sLX-kh-wi1"/>
+                        <segue destination="cT6-MR-bbk" kind="relationship" relationship="viewControllers" id="eI7-78-yCD"/>
                         <segue destination="g6U-by-0zG" kind="relationship" relationship="viewControllers" id="bz9-0H-usA"/>
                     </connections>
                 </tabBarController>
@@ -859,42 +860,52 @@
         <scene sceneID="Qc9-kq-ftb">
             <objects>
                 <tableViewController id="Gr3-T3-zCg" customClass="ArtistSongsTitleTableViewController" customModule="worshipsongs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wD6-tz-EvQ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" id="wD6-tz-EvQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="suP-PQ-lrw" customClass="TitleTableViewCell" customModule="worshipsongs" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="65" id="suP-PQ-lrw" customClass="TitleTableViewCell" customModule="worshipsongs" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="suP-PQ-lrw" id="TFQ-1g-GJe">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-dark" translatesAutoresizingMaskIntoConstraints="NO" id="jeM-jg-Xym">
-                                            <rect key="frame" x="347" y="12" width="20" height="20"/>
+                                            <rect key="frame" x="347" y="21.5" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="JEH-Gn-LcN"/>
                                                 <constraint firstAttribute="width" constant="20" id="kOj-tz-Efi"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PV0-4n-Yb4">
-                                            <rect key="frame" x="8" y="12" width="334" height="19.5"/>
+                                            <rect key="frame" x="20" y="21.5" width="322" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song book no" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXz-NS-kKH">
+                                            <rect key="frame" x="20" y="47" width="335" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="PV0-4n-Yb4" firstAttribute="leading" secondItem="TFQ-1g-GJe" secondAttribute="leading" constant="20" id="5uP-X8-5dd"/>
                                         <constraint firstItem="jeM-jg-Xym" firstAttribute="centerY" secondItem="TFQ-1g-GJe" secondAttribute="centerY" id="AA1-GI-Rjg"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="jeM-jg-Xym" secondAttribute="trailing" id="H2J-Xh-2Di"/>
                                         <constraint firstItem="jeM-jg-Xym" firstAttribute="leading" secondItem="PV0-4n-Yb4" secondAttribute="trailing" constant="5" id="KuH-hv-DQj"/>
-                                        <constraint firstItem="PV0-4n-Yb4" firstAttribute="centerY" secondItem="TFQ-1g-GJe" secondAttribute="centerY" id="LmG-gl-Meb"/>
-                                        <constraint firstItem="PV0-4n-Yb4" firstAttribute="leading" secondItem="TFQ-1g-GJe" secondAttribute="leadingMargin" id="cxe-HJ-4L7"/>
+                                        <constraint firstItem="PV0-4n-Yb4" firstAttribute="top" secondItem="jeM-jg-Xym" secondAttribute="top" id="XaB-lC-Mj2"/>
+                                        <constraint firstAttribute="bottom" secondItem="XXz-NS-kKH" secondAttribute="bottom" constant="3" id="h4e-xs-8hY"/>
+                                        <constraint firstItem="XXz-NS-kKH" firstAttribute="leading" secondItem="TFQ-1g-GJe" secondAttribute="leading" constant="20" id="uPE-3S-2Zs"/>
+                                        <constraint firstAttribute="trailing" secondItem="XXz-NS-kKH" secondAttribute="trailing" constant="20" id="ui3-8W-8I2"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="playImage" destination="jeM-jg-Xym" id="Zrp-SE-uWc"/>
+                                    <outlet property="songNumber" destination="XXz-NS-kKH" id="VKq-eT-I7t"/>
                                     <outlet property="title" destination="PV0-4n-Yb4" id="xTP-6W-B05"/>
                                 </connections>
                             </tableViewCell>
@@ -910,7 +921,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYc-uV-IDq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1073" y="-1131"/>
+            <point key="canvasLocation" x="1086" y="-1119"/>
         </scene>
         <!--Song With Video View Controller-->
         <scene sceneID="qu4-yj-fpd">
@@ -1545,6 +1556,49 @@
             </objects>
             <point key="canvasLocation" x="-2292" y="-810.0449775112445"/>
         </scene>
+        <!--Song books-->
+        <scene sceneID="MtO-EM-LsN">
+            <objects>
+                <tableViewController id="cT6-MR-bbk" customClass="SongBookController" customModule="worshipsongs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="895-xM-K0d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="UFc-C2-asZ" style="IBUITableViewCellStyleDefault" id="WVe-mo-Xha">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WVe-mo-Xha" id="GRn-nE-cx7">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UFc-C2-asZ">
+                                            <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cT6-MR-bbk" id="Py9-BB-BU1"/>
+                            <outlet property="delegate" destination="cT6-MR-bbk" id="Mah-Gr-B65"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" tag="3" title="Song books" image="title" id="P4Z-GN-LIe">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
+                    </tabBarItem>
+                    <connections>
+                        <segue destination="Gr3-T3-zCg" kind="show" identifier="artistTitle" id="rir-g5-zJn"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GxM-un-vQR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="214" y="-3255"/>
+        </scene>
         <!--Favorites-->
         <scene sceneID="mB2-ua-Ivx">
             <objects>
@@ -1577,7 +1631,7 @@
                             <outlet property="delegate" destination="g6U-by-0zG" id="RX4-ld-g3Q"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" tag="3" title="Favorites" image="favaorite" id="XjL-Xj-XUM">
+                    <tabBarItem key="tabBarItem" tag="4" title="Favorites" image="favaorite" id="XjL-Xj-XUM">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>
                     <connections>
@@ -1664,7 +1718,7 @@
         <image name="unselect" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9an-G3-4Uz"/>
-        <segue reference="cIJ-cn-8I7"/>
+        <segue reference="FD1-G2-b8c"/>
+        <segue reference="rir-g5-zJn"/>
     </inferredMetricsTieBreakers>
 </document>

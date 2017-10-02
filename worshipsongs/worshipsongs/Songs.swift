@@ -15,6 +15,7 @@ class Songs {
     var comment = ""
     var i18nTitle = ""
     var mediaUrl = ""
+    var songBookNo = ""
     
     init(id: String, title: String, lyrics: String, verse_order: String, comment: String) {
         self.id = id
@@ -34,6 +35,7 @@ class Songs {
         self.comment = ""
         self.i18nTitle = ""
         self.mediaUrl = ""
+        self.songBookNo = ""
     }
     
     private func getI18nTitle(comment: String) -> String {
