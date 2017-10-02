@@ -1620,7 +1620,7 @@
                             <outlet property="delegate" destination="cT6-MR-bbk" id="Mah-Gr-B65"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" tag="3" title="Song books" image="title" id="P4Z-GN-LIe">
+                    <tabBarItem key="tabBarItem" tag="3" title="Song books" image="song-book" id="P4Z-GN-LIe">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>
                     <connections>
@@ -1746,7 +1746,8 @@
         <image name="presentation" width="15" height="15"/>
         <image name="select" width="22" height="22"/>
         <image name="setting" width="18" height="18"/>
-        <image name="title" width="29" height="29"/>
+        <image name="song-book" width="29" height="29"/>
+        <image name="title" width="21" height="24"/>
         <image name="unselect" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
