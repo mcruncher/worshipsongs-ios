@@ -1588,7 +1588,7 @@
                             <outlet property="delegate" destination="cT6-MR-bbk" id="Mah-Gr-B65"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" tag="3" title="Song books" id="P4Z-GN-LIe">
+                    <tabBarItem key="tabBarItem" tag="3" title="Song books" image="title" id="P4Z-GN-LIe">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>
                     <connections>
@@ -1718,7 +1718,7 @@
         <image name="unselect" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9an-G3-4Uz"/>
+        <segue reference="FD1-G2-b8c"/>
         <segue reference="rir-g5-zJn"/>
     </inferredMetricsTieBreakers>
 </document>
