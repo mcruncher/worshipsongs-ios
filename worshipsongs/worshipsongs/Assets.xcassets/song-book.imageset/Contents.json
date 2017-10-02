@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "songs.png",
+      "filename" : "title.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "songs@2x.png",
+      "filename" : "title@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "songs@3x.png",
+      "filename" : "title@3x.png",
       "scale" : "3x"
     }
   ],
