@@ -12,7 +12,6 @@
 		285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A631E76497000C3F1EE /* CommonConstants.swift */; };
 		28786FCC1F78F7310085B216 /* SongBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28786FCB1F78F7310085B216 /* SongBook.swift */; };
 		28786FCE1F78FAD30085B216 /* SongBookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28786FCD1F78FAD30085B216 /* SongBookService.swift */; };
-		28C773A71F79DCE6000ED9A1 /* SongBookServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C773A61F79DCE6000ED9A1 /* SongBookServiceTest.swift */; };
 		28D5C09B1F7200B9001530FF /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09A1F7200B9001530FF /* Fastfile */; };
 		28D5C09D1F720443001530FF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09C1F720443001530FF /* Podfile */; };
 		28D5C09F1F7205AA001530FF /* Jenkinsfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09E1F7205AA001530FF /* Jenkinsfile */; };
@@ -96,7 +95,6 @@
 		285D5A631E76497000C3F1EE /* CommonConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
 		28786FCB1F78F7310085B216 /* SongBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongBook.swift; sourceTree = "<group>"; };
 		28786FCD1F78FAD30085B216 /* SongBookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongBookService.swift; sourceTree = "<group>"; };
-		28C773A61F79DCE6000ED9A1 /* SongBookServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongBookServiceTest.swift; sourceTree = "<group>"; };
 		28D5C09A1F7200B9001530FF /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Fastfile; path = fastlane/Fastfile; sourceTree = "<group>"; };
 		28D5C09C1F720443001530FF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		28D5C09E1F7205AA001530FF /* Jenkinsfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Jenkinsfile; path = ../Jenkinsfile; sourceTree = "<group>"; };
@@ -273,7 +271,6 @@
 			children = (
 				2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */,
 				2F5D3D361BC788F8001C4B6F /* Info.plist */,
-				28C773A61F79DCE6000ED9A1 /* SongBookServiceTest.swift */,
 			);
 			path = worshipsongsTests;
 			sourceTree = "<group>";
@@ -723,7 +720,6 @@
 				625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */,
 				2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */,
-				28C773A71F79DCE6000ED9A1 /* SongBookServiceTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

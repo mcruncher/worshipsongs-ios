@@ -238,7 +238,7 @@ class DatabaseHelper: NSObject {
         return Category(id: Int(id)!, name: name, nameTamil: nameTamil, nameEnglish: nameEnglish)
     }
     
-    private func getTamilTitle(_ name: String) -> String {
+   func getTamilTitle(_ name: String) -> String {
         let names = name.components(separatedBy: "{")
         if names.count == 2 {
             return names[1].replacingOccurrences(of: "}", with: " ")
@@ -246,7 +246,7 @@ class DatabaseHelper: NSObject {
         return name
     }
     
-    private func getEnglishTitle(_ name: String) -> String {
+   func getEnglishTitle(_ name: String) -> String {
         let names = name.components(separatedBy: "{")
         return names[0]
     }

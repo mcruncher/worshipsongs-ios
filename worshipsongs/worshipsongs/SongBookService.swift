@@ -31,23 +31,10 @@ class SongBookService: NSObject {
     
     private func getSongBook(_ resultSet: FMResultSet) -> SongBook {
         let id: String = resultSet.string(forColumn: self.id)
-        let tamilName = getTamilName(resultSet.string(forColumn: name))
-        let englishName = getEnglishName(resultSet.string(forColumn: name))
+        let tamilName = databaseService.getTamilTitle(resultSet.string(forColumn: name))
+        let englishName = databaseService.getEnglishTitle(resultSet.string(forColumn: name))
         let publisher: String = resultSet.string(forColumn: self.publisher)
         return SongBook(id:  Int(id)!, tamilName: tamilName, englishName: englishName, publisher: publisher)
-    }
-    
-    func getTamilName(_ name: String) -> String {
-        let names = name.components(separatedBy: "{")
-        if names.count == 2 {
-            return names[1].replacingOccurrences(of: "}", with: "")
-        }
-        return name
-    }
-    
-    func getEnglishName(_ name: String) -> String {
-        let names = name.components(separatedBy: "{")
-        return names[0]
     }
     
     func findBySongBookId(_ songBookId: Int) -> [Songs] {
