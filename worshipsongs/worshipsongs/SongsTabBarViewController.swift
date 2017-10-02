@@ -37,7 +37,8 @@ class SongsTabBarViewController: UITabBarController{
         self.viewControllers?[0].tabBarItem.title = "songs".localized
         self.viewControllers?[1].tabBarItem.title = "artists".localized
         self.viewControllers?[2].tabBarItem.title = "categories".localized
-        self.viewControllers?[3].tabBarItem.title = "favorites".localized
+        self.viewControllers?[3].tabBarItem.title = "song_books".localized
+        self.viewControllers?[4].tabBarItem.title = "favorites".localized
     }
     
     func onBeforeUpdateDatabase(_ nsNotification: NSNotification) {
@@ -57,7 +58,8 @@ class SongsTabBarViewController: UITabBarController{
         self.viewControllers?[0].tabBarItem.title = "songs".localized
         self.viewControllers?[1].tabBarItem.title = "artists".localized
         self.viewControllers?[2].tabBarItem.title = "categories".localized
-        self.viewControllers?[3].tabBarItem.title = "favorites".localized
+        self.viewControllers?[3].tabBarItem.title = "song_books".localized
+        self.viewControllers?[4].tabBarItem.title = "favorites".localized
     }
     
     func hideSearchBar() {
@@ -118,12 +120,12 @@ class SongsTabBarViewController: UITabBarController{
         }
         splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
         splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
-
+        
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         //setMasterViewWidth()
-         self.onChangeOrientation(orientation: UIDevice.current.orientation)
+        self.onChangeOrientation(orientation: UIDevice.current.orientation)
     }
     
     func onChangeOrientation(orientation: UIDeviceOrientation) {

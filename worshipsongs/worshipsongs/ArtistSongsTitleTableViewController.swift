@@ -5,8 +5,9 @@
 
 import UIKit
 
-class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
+class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecognizerDelegate {
     
+   
     var artistName: String = ""
     fileprivate let preferences = UserDefaults.standard
     var songModel = [Songs]()
@@ -22,6 +23,8 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
     var songTabBarController: SongsTabBarViewController?
+    var transparentSearchEnabled = false
+    fileprivate var enableBackButton = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         filteredSongModel = songModel
         sortSongModel()
         createSearchBar()
+        addLeftBarButton()
         tableView.reloadData()
     }
     
@@ -48,7 +52,11 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     
     func sortSongModel()
     {
-        if isLanguageTamil {
+        if transparentSearchEnabled {
+            filteredSongModel = filteredSongModel.sorted(){(song1, song2) -> Bool in
+                return getSongBookNumber(song1) < getSongBookNumber(song2)
+            }
+        } else if isLanguageTamil {
             filteredSongModel = filteredSongModel.sorted(){ (a, b) -> Bool in
                 if a.i18nTitle.isEmpty {
                     return false
@@ -85,7 +93,6 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -115,6 +122,13 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         } else {
             cell.playImage.isHidden = false
         }
+        let songBookNo = getSongBookNumber(filteredSongModel[indexPath.row])
+        if songBookNo > 0 {
+            cell.songNumber.isHidden = false
+            cell.songNumber.text = "songno".localized + " " +  String(songBookNo)
+        } else {
+            cell.songNumber.isHidden = true
+        }
         return cell
     }
     
@@ -125,6 +139,22 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
             splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let song = filteredSongModel[indexPath.row]
+        if getSongBookNumber(song) > 0, transparentSearchEnabled {
+            return 65.0
+        } else {
+            return 50.0
+        }
+    }
+    
+    func getSongBookNumber(_ song: Songs) -> Int {
+        guard  let songBookNumber = Int(song.songBookNo) else {
+            return 0
+        }
+        return songBookNumber
     }
     
     func splitVerseOrder(_ verseOrder: String) -> NSArray
@@ -146,6 +176,28 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         }
     }
     
+    func refresh(_ sender:AnyObject)
+    {
+        filteredSongModel = songModel
+        sortSongModel()
+        self.tableView.reloadData()
+        self.refresh.endRefreshing()
+    }
+    
+}
+
+extension ArtistSongsTitleTableViewController : UISearchBarDelegate {
+    
+    func createSearchBar()
+    {
+        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
+        searchBar = UISearchBar(frame: searchBarFrame)
+        searchBar.delegate = self;
+        searchBar.showsCancelButton = true;
+        searchBar.tintColor = UIColor.gray
+        self.addSearchBarButton()
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filterContentForSearchText(searchBar)
         self.tableView.reloadData()
@@ -157,9 +209,16 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         var data = songModel
         if (searchText?.characters.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
-                let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
-                return (stringMatch)
-                
+                if transparentSearchEnabled {
+                    if (self.preferences.string(forKey: CommonConstansts.searchKey)?.equalsIgnoreCase(CommonConstansts.searchByTitleOrNumber))! {
+                        return song.title.localizedCaseInsensitiveContains(searchText!) || song.songBookNo.equalsIgnoreCase(searchText!)
+                    } else {
+                        return song.lyrics.localizedCaseInsensitiveContains(searchText!) || song.comment.localizedCaseInsensitiveContains(searchText!)
+                    }
+                } else {
+                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
+                    return (stringMatch)
+                }
             })
         }
         self.filteredSongModel = data
@@ -181,42 +240,78 @@ class ArtistSongsTitleTableViewController: UITableViewController, UISearchBarDel
         tableView.reloadData()
     }
     
-    func refresh(_ sender:AnyObject)
-    {
-        filteredSongModel = songModel
-        sortSongModel()
-        self.tableView.reloadData()
-        self.refresh.endRefreshing()
-    }
-    
     func addSearchBarButton(){
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistSongsTitleTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
     func searchButtonItemClicked(_ sender:UIBarButtonItem){
         self.navigationItem.titleView = searchBar;
-        self.navigationItem.leftBarButtonItem?.isEnabled = false
+        enableBackButton = false
+        addLeftBarButton()
         self.navigationItem.rightBarButtonItem = nil
         searchBar.becomeFirstResponder()
     }
     
-    
     func hideSearchBar() {
         self.navigationItem.titleView = nil
-        self.navigationItem.leftBarButtonItem?.isEnabled = true
+        enableBackButton = true
+        addLeftBarButton()
         self.searchBar.text = ""
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistSongsTitleTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
-    func createSearchBar()
-    {
-        // Search bar
-        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
-        searchBar = UISearchBar(frame: searchBarFrame)
-        searchBar.delegate = self;
-        searchBar.showsCancelButton = true;
-        searchBar.tintColor = UIColor.gray
-        self.addSearchBarButton()
+}
+
+//MARK:- Navigation button
+extension ArtistSongsTitleTableViewController{
+    
+    fileprivate func addLeftBarButton() {
+        if transparentSearchEnabled {
+            var uiBarButtonItem = UIBarButtonItem()
+            if enableBackButton {
+                uiBarButtonItem = UIBarButtonItem(title: "back".localized, style: .plain, target: self, action: #selector(ArtistSongsTitleTableViewController.onTapLeftButton))
+            } else {
+                let button = UIButton()
+                let searchBy = self.preferences.string(forKey: CommonConstansts.searchKey)
+                let imageName = CommonConstansts.searchByTitleOrNumber.equalsIgnoreCase(searchBy!) ?
+                    CommonConstansts.searchByTitle : CommonConstansts.searchByContent
+                let origImage = UIImage(named: imageName)
+                let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+                button.setImage(tintedImage, for: UIControlState())
+                button.tintColor = .gray
+                button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                button.addTarget(self, action: #selector(ArtistSongsTitleTableViewController.onTapLeftButton),for: .touchUpInside)
+                uiBarButtonItem.customView = button
+            }
+            self.navigationItem.setLeftBarButton(uiBarButtonItem, animated: true)
+        }
     }
     
+    func onTapLeftButton() {
+        if enableBackButton {
+            _ = self.navigationController?.popViewController(animated: true)
+        } else {
+            let optionMenu = UIAlertController(title: nil, message: "searchBy".localized, preferredStyle: .actionSheet)
+            optionMenu.addAction(searchByAction(CommonConstansts.searchByTitleOrNumber))
+            optionMenu.addAction(searchByAction(CommonConstansts.searchByContent))
+            optionMenu.addAction(getCancelAction())
+            optionMenu.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
+            self.present(optionMenu, animated: true, completion: nil)
+        }
+    }
+    
+    fileprivate func getCancelAction() -> UIAlertAction {
+        return UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+        })
+    }
+    func searchByAction(_ option: String) -> UIAlertAction {
+        return UIAlertAction(title: option.localized, style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.preferences.set(option, forKey: CommonConstansts.searchKey)
+            self.preferences.synchronize()
+            self.addLeftBarButton()
+        })
+    }
 }

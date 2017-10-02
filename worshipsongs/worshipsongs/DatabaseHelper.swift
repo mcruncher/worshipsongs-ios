@@ -12,7 +12,11 @@ class DatabaseHelper: NSObject {
     var database: FMDatabase? = nil
     var resultSet: FMResultSet? = nil
     let commonService: CommonService = CommonService()
-   
+    let id = "id"
+    let titles: String = "title"
+    let lyrics: String = "lyrics"
+    let verseOrder: String = "verse_order"
+    
     func getSongModel() -> [(Songs)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         let path = commonService.getDocumentDirectoryPath("songs.sqlite")
@@ -177,12 +181,13 @@ class DatabaseHelper: NSObject {
         return songModel
     }
     
-    private func getSong(_ resultSet: FMResultSet) -> Songs {
-        let id : String = resultSet.string(forColumn: "id")
-        let title: String = resultSet.string(forColumn: "title")
-        let lyrics: String = resultSet.string(forColumn: "lyrics")
-        let verseOrder: String = resultSet.string(forColumn: "verse_order")
-        let comments: String = resultSet.string(forColumn: "comments") != nil ? resultSet.string(forColumn: "comments") : ""
+    func getSong(_ resultSet: FMResultSet) -> Songs {
+        let id : String = resultSet.string(forColumn: self.id)
+        let title: String = resultSet.string(forColumn: self.titles)
+        let lyrics: String = resultSet.string(forColumn: self.lyrics)
+        let verseOrder: String = resultSet.string(forColumn: self.verseOrder)
+        let comments: String = resultSet.string(forColumn:
+            "comments") != nil ? resultSet.string(forColumn: "comments") : ""
         return Songs(id: id, title: title, lyrics: lyrics, verse_order: verseOrder, comment: comments)
     }
     
@@ -196,7 +201,7 @@ class DatabaseHelper: NSObject {
         let noOfSongs: String = resultSet.string(forColumn: "no_songs")
         return Author(id: id, firstName: firstName, lastName: lastName, displayName: displayName, displayNameTamil: displayNameTamil, displayNameEnglish: displayNameEnglish, noOfSongs: Int(noOfSongs)!)
     }
-     
+    
     private func getCategory(_ resultSet: FMResultSet) -> Category {
         let id: String = resultSet.string(forColumn: "id")
         let name: String = resultSet.string(forColumn: "name")
@@ -206,7 +211,7 @@ class DatabaseHelper: NSObject {
         return Category(id: Int(id)!, name: name, nameTamil: nameTamil, nameEnglish: nameEnglish, noOfSongs: Int(noOfSongs)!)
     }
     
-    private func getTamilTitle(_ name: String) -> String {
+   func getTamilTitle(_ name: String) -> String {
         let names = name.components(separatedBy: "{")
         if names.count == 2 {
             return names[1].replacingOccurrences(of: "}", with: " ")
@@ -214,7 +219,7 @@ class DatabaseHelper: NSObject {
         return name
     }
     
-    private func getEnglishTitle(_ name: String) -> String {
+   func getEnglishTitle(_ name: String) -> String {
         let names = name.components(separatedBy: "{")
         return names[0]
     }
