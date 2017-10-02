@@ -11,4 +11,5 @@ struct Category {
     var name: String
     var nameTamil: String
     var nameEnglish: String
+    var noOfSongs: Int
 }

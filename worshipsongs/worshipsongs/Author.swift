@@ -12,4 +12,5 @@ struct Author {
     var displayName: String
     var displayNameTamil: String
     var displayNameEnglish: String
+    var noOfSongs: Int
 }

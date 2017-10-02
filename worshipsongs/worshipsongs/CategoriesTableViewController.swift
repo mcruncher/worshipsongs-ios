@@ -59,10 +59,11 @@ class CategoriesTableViewController: UITableViewController   {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         if "tamil".equalsIgnoreCase(self.preferences.string(forKey: "language")!) {
-            cell.textLabel?.text = filteredCategoryModel[(indexPath as NSIndexPath).row].nameTamil
+            cell.textLabel?.text = filteredCategoryModel[indexPath.row].nameTamil
         } else {
-            cell.textLabel?.text = filteredCategoryModel[(indexPath as NSIndexPath).row].nameEnglish
+            cell.textLabel?.text = filteredCategoryModel[indexPath.row].nameEnglish
         }
+        cell.detailTextLabel?.text = NSString(format: "no.songs".localized as NSString, String(filteredCategoryModel[indexPath.row].noOfSongs)) as String
         return cell
     }
     
