@@ -68,10 +68,11 @@ class ArtistsTableViewController: UITableViewController   {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         if "tamil".equalsIgnoreCase(self.preferences.string(forKey: "language")!) {
-            cell.textLabel?.text = filteredAuthorModel[(indexPath as NSIndexPath).row].displayNameTamil
+            cell.textLabel?.text = filteredAuthorModel[indexPath.row].displayNameTamil
         } else {
-            cell.textLabel?.text = filteredAuthorModel[(indexPath as NSIndexPath).row].displayNameEnglish
+            cell.textLabel?.text = filteredAuthorModel[indexPath.row].displayNameEnglish
         }
+        cell.detailTextLabel?.text = NSString(format: "no.songs".localized as NSString, String(filteredAuthorModel[indexPath.row].noOfSongs)) as String
         return cell
     }
     
