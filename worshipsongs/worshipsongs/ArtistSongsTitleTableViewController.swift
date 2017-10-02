@@ -7,9 +7,7 @@ import UIKit
 
 class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecognizerDelegate {
     
-    fileprivate let searchByTitle = "searchByTitle"
-    fileprivate let searchByNumber = "searchByNumber"
-    fileprivate let searchByContent = "searchByContent"
+   
     var artistName: String = ""
     fileprivate let preferences = UserDefaults.standard
     var songModel = [Songs]()
@@ -212,10 +210,8 @@ extension ArtistSongsTitleTableViewController : UISearchBarDelegate {
         if (searchText?.characters.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
                 if transparentSearchEnabled {
-                    if (self.preferences.string(forKey: CommonConstansts.searchKey)?.equalsIgnoreCase("searchByTitle"))! {
-                        return song.title.localizedCaseInsensitiveContains(searchText!)
-                    } else if (self.preferences.string(forKey: CommonConstansts.searchKey)?.equalsIgnoreCase("searchByNumber"))! {
-                        return song.songBookNo.equalsIgnoreCase(searchText!)
+                    if (self.preferences.string(forKey: CommonConstansts.searchKey)?.equalsIgnoreCase(CommonConstansts.searchByTitleOrNumber))! {
+                        return song.title.localizedCaseInsensitiveContains(searchText!) || song.songBookNo.equalsIgnoreCase(searchText!)
                     } else {
                         return song.lyrics.localizedCaseInsensitiveContains(searchText!) || song.comment.localizedCaseInsensitiveContains(searchText!)
                     }
@@ -223,8 +219,6 @@ extension ArtistSongsTitleTableViewController : UISearchBarDelegate {
                     let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
                     return (stringMatch)
                 }
-                
-                
             })
         }
         self.filteredSongModel = data
@@ -273,22 +267,22 @@ extension ArtistSongsTitleTableViewController{
     
     fileprivate func addLeftBarButton() {
         if transparentSearchEnabled {
-            let button = UIButton()
+            var uiBarButtonItem = UIBarButtonItem()
             if enableBackButton {
-                button.setTitle("back".localized, for: UIControlState())
-                button.setTitleColor(.gray, for: UIControlState())
+                uiBarButtonItem = UIBarButtonItem(title: "back".localized, style: .plain, target: self, action: #selector(ArtistSongsTitleTableViewController.onTapLeftButton))
             } else {
+                let button = UIButton()
                 let searchBy = self.preferences.string(forKey: CommonConstansts.searchKey)
-                let imageName = searchByNumber.equalsIgnoreCase(searchBy!) ? searchByTitle : searchBy
-                let origImage = UIImage(named: imageName!)
+                let imageName = CommonConstansts.searchByTitleOrNumber.equalsIgnoreCase(searchBy!) ?
+                    CommonConstansts.searchByTitle : CommonConstansts.searchByContent
+                let origImage = UIImage(named: imageName)
                 let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
                 button.setImage(tintedImage, for: UIControlState())
                 button.tintColor = .gray
+                button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                button.addTarget(self, action: #selector(ArtistSongsTitleTableViewController.onTapLeftButton),for: .touchUpInside)
+                uiBarButtonItem.customView = button
             }
-            button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-            button.addTarget(self, action: #selector(ArtistSongsTitleTableViewController.onTapLeftButton),for: .touchUpInside)
-            let uiBarButtonItem = UIBarButtonItem()
-            uiBarButtonItem.customView = button
             self.navigationItem.setLeftBarButton(uiBarButtonItem, animated: true)
         }
     }
@@ -298,9 +292,8 @@ extension ArtistSongsTitleTableViewController{
             _ = self.navigationController?.popViewController(animated: true)
         } else {
             let optionMenu = UIAlertController(title: nil, message: "searchBy".localized, preferredStyle: .actionSheet)
-            optionMenu.addAction(searchByAction(searchByTitle))
-            optionMenu.addAction(searchByAction(searchByNumber))
-            optionMenu.addAction(searchByAction(searchByContent))
+            optionMenu.addAction(searchByAction(CommonConstansts.searchByTitleOrNumber))
+            optionMenu.addAction(searchByAction(CommonConstansts.searchByContent))
             optionMenu.addAction(getCancelAction())
             optionMenu.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
             self.present(optionMenu, animated: true, completion: nil)

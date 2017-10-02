@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if !preferences.dictionaryRepresentation().keys.contains(CommonConstansts.searchKey) {
-            self.preferences.set("searchByTitle", forKey: CommonConstansts.searchKey)
+            self.preferences.set(CommonConstansts.searchByTitleOrNumber, forKey: CommonConstansts.searchKey)
             self.preferences.synchronize()
         }
     

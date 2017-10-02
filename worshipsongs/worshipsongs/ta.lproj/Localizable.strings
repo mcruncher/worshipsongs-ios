@@ -103,3 +103,4 @@
 "song_books"="பாடல் புத்தகங்கள்";
 "songno"="பாடல் எண்";
 "no.songs" = "%@ songs";
+"searchByTitleOrNumber" = "Title or Number";
