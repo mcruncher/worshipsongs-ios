@@ -34,7 +34,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
         tableView.addGestureRecognizer(longpress)
     }
     
-    func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
+    @objc func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
         if !hideDragAndDrop {
             let longPress = gestureRecognizer as! UILongPressGestureRecognizer
             let state = longPress.state
@@ -290,7 +290,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
         })
     }
     
-    func refresh(_ sender:AnyObject)
+    @objc func refresh(_ sender:AnyObject)
     {
         if self.preferences.data(forKey: favorite) != nil {
             let decoded  = self.preferences.object(forKey: favorite) as! Data
@@ -363,7 +363,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(FavoritesTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
-    func searchButtonItemClicked(_ sender:UIBarButtonItem){
+    @objc func searchButtonItemClicked(_ sender:UIBarButtonItem){
         self.navigationItem.titleView = searchBar;
         self.navigationItem.leftBarButtonItem?.isEnabled = false
         self.navigationItem.rightBarButtonItem = nil

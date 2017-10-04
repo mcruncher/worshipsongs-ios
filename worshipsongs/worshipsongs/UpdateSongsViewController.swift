@@ -76,7 +76,7 @@ class UpdateSongsViewController: UIViewController {
     
     @IBOutlet weak var cancel: UIButton!
     
-    func revertUpdate(_ nsNotification: NSNotification) {
+    @objc func revertUpdate(_ nsNotification: NSNotification) {
         databaseService.revertImport()
     }
     

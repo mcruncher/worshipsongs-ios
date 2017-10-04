@@ -97,7 +97,7 @@ extension SongBookController: UISearchBarDelegate {
         self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(SongBookController.searchButtonItemClicked(_:))), animated: true)
     }
     
-    func searchButtonItemClicked(_ sender:UIBarButtonItem){
+    @objc func searchButtonItemClicked(_ sender:UIBarButtonItem){
         self.tabBarController?.navigationItem.titleView = searchBar
         self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
         self.tabBarController?.navigationItem.rightBarButtonItem = nil

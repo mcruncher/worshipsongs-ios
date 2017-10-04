@@ -71,8 +71,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         let fontSize = self.preferences.integer(forKey: "fontSize")
         cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
-        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
-        print("cell\(cell.textLabel!.attributedText )")
+        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
         return cell
     }
     
@@ -107,7 +106,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         }
     }
     
-    func share() {
+    @objc func share() {
         let emailMessage = getObjectToShare()
         let messagerMessage = getMessageToShare()
         let firstActivityItem = CustomProvider(placeholderItem: "Default" as AnyObject, messagerMessage: messagerMessage.string, emailMessage: emailMessage.string)
@@ -133,7 +132,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
             self.emailMessage = emailMessage
         }
         
-        override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+        override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
             if activityType == UIActivityType.message {
                 return messagerMessage as AnyObject?
             } else if activityType == UIActivityType.mail {

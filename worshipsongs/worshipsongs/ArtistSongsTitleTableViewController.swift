@@ -176,7 +176,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
         }
     }
     
-    func refresh(_ sender:AnyObject)
+    @objc func refresh(_ sender:AnyObject)
     {
         filteredSongModel = songModel
         sortSongModel()
@@ -244,7 +244,7 @@ extension ArtistSongsTitleTableViewController : UISearchBarDelegate {
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistSongsTitleTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
-    func searchButtonItemClicked(_ sender:UIBarButtonItem){
+    @objc func searchButtonItemClicked(_ sender:UIBarButtonItem){
         self.navigationItem.titleView = searchBar;
         enableBackButton = false
         addLeftBarButton()
@@ -287,7 +287,7 @@ extension ArtistSongsTitleTableViewController{
         }
     }
     
-    func onTapLeftButton() {
+    @objc func onTapLeftButton() {
         if enableBackButton {
             _ = self.navigationController?.popViewController(animated: true)
         } else {

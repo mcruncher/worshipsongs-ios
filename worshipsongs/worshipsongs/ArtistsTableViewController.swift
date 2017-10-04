@@ -103,7 +103,7 @@ class ArtistsTableViewController: UITableViewController   {
         }
     }
     
-    func refresh(_ sender:AnyObject)
+    @objc func refresh(_ sender:AnyObject)
     {
         filteredAuthorModel = authorModel
         self.tableView.reloadData()
@@ -131,7 +131,7 @@ extension ArtistsTableViewController: UISearchBarDelegate, TitleOrContentBaseSea
         self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistsTableViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
-    func searchButtonItemClicked(_ sender:UIBarButtonItem){
+    @objc func searchButtonItemClicked(_ sender:UIBarButtonItem){
         self.tabBarController?.navigationItem.titleView = searchBar;
         self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
         self.tabBarController?.navigationItem.rightBarButtonItem = nil

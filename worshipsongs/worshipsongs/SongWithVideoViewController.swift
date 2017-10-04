@@ -327,7 +327,7 @@ class SongWithVideoViewController: UIViewController  {
             self.otherMessage = otherMessage
         }
         
-        override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+        override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
             if activityType == UIActivityType.message {
                 return messagerMessage as AnyObject?
             } else if activityType == UIActivityType.mail {
@@ -597,7 +597,7 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
         self.tableView.addGestureRecognizer(longPressGesture)
     }
     
-    internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
+    @objc internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
         
         if  actionButton.isHidden == false  || floatingbutton.isHidden == false {
             let pressingPoint = longPressGesture.location(in: self.tableView)
@@ -647,7 +647,7 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
 //MARK: Share song in social media
 extension SongWithVideoViewController {
     
-    func shareActions() {
+    @objc func shareActions() {
         let shareActions = UIAlertController(title: "choose_options".localized, message: "", preferredStyle: .actionSheet)
         shareActions.addAction(getShareAction())
         shareActions.addAction(getShareAsPdfAction())

@@ -44,7 +44,7 @@ class FullScreenViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func swipeLeft() {
+    @objc func swipeLeft() {
         if i < cells.count - 1 {
             let labelOrginx = self.presentationView.songLabel.frame.origin.x
             self.presentationView.songLabel.attributedText = NSAttributedString(string: "")
@@ -60,7 +60,7 @@ class FullScreenViewController: UIViewController {
         
     }
 
-    func swipeRight() {
+    @objc func swipeRight() {
         if i > 0 {
             let labelOrginx = self.presentationView.songLabel.frame.origin.x
             self.presentationView.songLabel.attributedText = NSAttributedString(string: "")
