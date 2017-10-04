@@ -51,14 +51,14 @@ class TitlesViewController: UITableViewController {
         self.tableView.addSubview(refresh)
     }
     
-    func refresh(_ sender:AnyObject)
+    @objc func refresh(_ sender:AnyObject)
     {
         filteredSongModel = songModel
         self.tableView.reloadData()
         self.refresh.endRefreshing()
     }
     
-    internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer)
+    @objc internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer)
     {
         let pressingPoint = longPressGesture.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
@@ -196,7 +196,7 @@ extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDel
         self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
     }
     
-    func searchButtonItemClicked(_ sender:UIBarButtonItem) {
+    @objc func searchButtonItemClicked(_ sender:UIBarButtonItem) {
         self.tabBarController?.navigationItem.titleView = searchBar;
         let songTabBarController = self.tabBarController as! SongsTabBarViewController
         songTabBarController.searchBarDisplay = true

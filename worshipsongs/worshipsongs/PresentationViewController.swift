@@ -57,7 +57,7 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
         navigationItem.leftBarButtonItem = backButton
     }
     
-    func goBackToSongsList() {
+    @objc func goBackToSongsList() {
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
         self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
     }
@@ -106,7 +106,6 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
         cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
-        print("cell\(cell.textLabel!.attributedText )")
         return cell
     }
     

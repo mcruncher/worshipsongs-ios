@@ -51,7 +51,7 @@ open class AutoCompleteTextField: UITextField, UITableViewDataSource, UITableVie
     /// Shows autocomplete text with formatting
     open var enableAttributedText = false
     /// User Defined Attributes
-    open var autoCompleteAttributes: [String: AnyObject]?
+    open var autoCompleteAttributes: [NSAttributedStringKey: AnyObject]?
     // Hides autocomplete tableview after selecting a suggestion
     open var hidesWhenSelected = true
     /// Hides autocomplete tableview when the textfield is empty
@@ -163,8 +163,8 @@ open class AutoCompleteTextField: UITextField, UITableViewDataSource, UITableVie
     // MARK: - Private Interface
     fileprivate func reload() {
         if enableAttributedText {
-            let attrs = [NSForegroundColorAttributeName: autoCompleteTextColor, NSFontAttributeName:
-                UIFont.systemFont(ofSize: 12.0)] as [String : Any]
+            let attrs = [NSAttributedStringKey.foregroundColor: autoCompleteTextColor, NSAttributedStringKey.font:
+                UIFont.systemFont(ofSize: 12.0)] as [NSAttributedStringKey : Any]
             if attributedAutoCompleteStrings == nil {
                 attributedAutoCompleteStrings = [NSAttributedString]()
             } else {
@@ -188,8 +188,8 @@ open class AutoCompleteTextField: UITextField, UITableViewDataSource, UITableVie
     
     fileprivate func commonInit() {
         hidesWhenEmpty = true
-        autoCompleteAttributes = [NSForegroundColorAttributeName: UIColor.black]
-        autoCompleteAttributes![NSFontAttributeName] = UIFont(name: "HelveticaNeue-Bold", size: 12)
+        autoCompleteAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+        autoCompleteAttributes![NSAttributedStringKey.font] = UIFont(name: "HelveticaNeue-Bold", size: 12)
         self.addTarget(self, action: #selector(AutoCompleteTextField.textFieldDidChange), for: .editingChanged)
     }
     
@@ -215,7 +215,7 @@ open class AutoCompleteTextField: UITextField, UITableViewDataSource, UITableVie
     }
     
     // MARK: - Internal
-    func textFieldDidChange() {
+    @objc func textFieldDidChange() {
         onTextChange(text!)
         if text!.isEmpty {
             autoCompleteStrings = nil

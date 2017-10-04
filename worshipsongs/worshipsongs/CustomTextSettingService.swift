@@ -46,7 +46,7 @@ class CustomTextSettingService {
         }
         let displayRomanised = self.preferences.bool(forKey: "displayRomanised")
         let displayTamil = self.preferences.bool(forKey: "displayTamil")
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: englishFont)!), range: textRange)
+        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: englishFont)!), range: textRange)
         print("attributed String \(attributedString)")
         if tagExists {
             if !displayRomanised && displayTamil {
@@ -67,7 +67,7 @@ class CustomTextSettingService {
         let onlyTamilAttribute: NSMutableAttributedString = NSMutableAttributedString(string: "")
         for index in 0 ..< customTagTextRange.count {
             let rangeValue: NSRange = (customTagTextRange.object(at: index) as AnyObject).rangeValue
-            attributedString.addAttribute(NSForegroundColorAttributeName, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!), range: rangeValue)
+            attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!), range: rangeValue)
             onlyTamilAttribute.append(attributedString.attributedSubstring(from: rangeValue))
             if index != customTagTextRange.count - 1 {
                 onlyTamilAttribute.append(NSAttributedString(string: "\n"))
@@ -102,7 +102,7 @@ class CustomTextSettingService {
         }
         for index in 0 ..< customTagTextRange.count {
             let rangeValue: NSRange = (customTagTextRange.object(at: index) as AnyObject).rangeValue
-            attributedString.addAttribute(NSForegroundColorAttributeName, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!), range: rangeValue)
+            attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: ColorUtils.getColor(color: ColorUtils.Color(rawValue: tamilFont)!), range: rangeValue)
         }
         return attributedString
     }

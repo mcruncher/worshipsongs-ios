@@ -24,7 +24,7 @@ class RemoteUrlViewController: UIViewController {
         navigationItem.rightBarButtonItem = backButton
     }
     
-    func doneLoading() {
+    @objc func doneLoading() {
         if !remoteUrl.text!.isEmpty && (remoteUrl.text?.contains(".sqlite") )!{
             self.preferences.setValue(remoteUrl.text, forKey: "remote.url")
             self.preferences.synchronize()

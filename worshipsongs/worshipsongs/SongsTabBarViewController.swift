@@ -41,7 +41,7 @@ class SongsTabBarViewController: UITabBarController{
         self.viewControllers?[4].tabBarItem.title = "favorites".localized
     }
     
-    func onBeforeUpdateDatabase(_ nsNotification: NSNotification) {
+    @objc func onBeforeUpdateDatabase(_ nsNotification: NSNotification) {
         if isDatabaseLock() {
             let viewController = storyboard?.instantiateViewController(withIdentifier: "loading") as? DatabaseLoadingViewController
             viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
@@ -53,7 +53,7 @@ class SongsTabBarViewController: UITabBarController{
         return preferences.dictionaryRepresentation().keys.contains("database.lock") && preferences.bool(forKey:"database.lock")
     }
     
-    func refreshTabbar(_ nsNotification: NSNotification) {
+    @objc func refreshTabbar(_ nsNotification: NSNotification) {
         self.selectedViewController?.viewWillAppear(true)
         self.viewControllers?[0].tabBarItem.title = "songs".localized
         self.viewControllers?[1].tabBarItem.title = "artists".localized
@@ -62,7 +62,7 @@ class SongsTabBarViewController: UITabBarController{
         self.viewControllers?[4].tabBarItem.title = "favorites".localized
     }
     
-    func hideSearchBar() {
+    @objc func hideSearchBar() {
         searchDelegate?.hideSearch()
     }
     

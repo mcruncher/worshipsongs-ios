@@ -121,7 +121,7 @@ class SettingsController: UITableViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    internal func dismissKeyboard() {
+    @objc internal func dismissKeyboard() {
         self.tamilFontColorTextField.resignFirstResponder()
         self.englishFontColorTextField.resignFirstResponder()
         self.presentationTamilFontColorTextField.resignFirstResponder()
@@ -222,12 +222,12 @@ class SettingsController: UITableViewController {
         return toolBar
     }
     
-    func doneEditing() {
+    @objc func doneEditing() {
         dismissKeyboard()
     }
     
     
-    func goBackToSongsList() {
+    @objc func goBackToSongsList() {
         self.navigationController!.popToRootViewController(animated: true)
     }
     
@@ -383,7 +383,7 @@ class SettingsController: UITableViewController {
         })
     }
     
-    func revertDatabase(_ nsNotification: NSNotification) {
+    @objc func revertDatabase(_ nsNotification: NSNotification) {
         databaseService.revertImport()
         NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
     }
