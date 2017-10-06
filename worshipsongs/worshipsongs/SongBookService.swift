@@ -14,12 +14,15 @@ class SongBookService: NSObject {
     private let name = "name"
     private let publisher = "publisher"
     private let entry = "entry"
+    private let noOfSongs = "no_of_songs"
     
     func findAll() -> [SongBook]  {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         database?.open()
         var songBooks = [SongBook]()
-        let resultSet: FMResultSet? = database!.executeQuery("select * from song_books order by name ", withArgumentsIn: nil)
+        let resultSet: FMResultSet? = database!.executeQuery("select sb.id, sb.name, sb.publisher, " +
+            "(select count(*) from songs_songbooks where songbook_id = sb.id) as no_of_songs " +
+            "from song_books as sb order by sb.name ", withArgumentsIn: nil)
         if (resultSet != nil)
         {
             while resultSet!.next() {
@@ -34,7 +37,8 @@ class SongBookService: NSObject {
         let tamilName = databaseService.getTamilTitle(resultSet.string(forColumn: name))
         let englishName = databaseService.getEnglishTitle(resultSet.string(forColumn: name))
         let publisher: String = resultSet.string(forColumn: self.publisher)
-        return SongBook(id:  Int(id)!, tamilName: tamilName, englishName: englishName, publisher: publisher)
+        let noOfSongs: String = resultSet.string(forColumn: self.noOfSongs)
+        return SongBook(id: Int(id)!, tamilName: tamilName, englishName: englishName, publisher: publisher, noOfSongs: Int(noOfSongs)!)
     }
     
     func findBySongBookId(_ songBookId: Int) -> [Songs] {
