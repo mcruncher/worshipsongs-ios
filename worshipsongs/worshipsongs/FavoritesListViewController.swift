@@ -66,6 +66,13 @@ class FavoritesListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CommonConstansts.favorite, for: indexPath)
         cell.textLabel?.text = filteredFavorites[indexPath.row]
+        var count = 0
+        if self.preferences.dictionaryRepresentation().keys.contains(filteredFavorites[indexPath.row]) {
+            let decoded  = self.preferences.object(forKey: filteredFavorites[indexPath.row]) as! Data
+            let favSongs = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
+            count = favSongs.count
+        }
+        cell.detailTextLabel?.text = NSString(format: "no.songs".localized as NSString, String(count)) as String
         return cell
     }
     

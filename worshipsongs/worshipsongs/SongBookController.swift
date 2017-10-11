@@ -48,6 +48,7 @@ extension SongBookController {
         let songBook =  filterSongBooks[indexPath.row]
         cell.textLabel?.text = CommonConstansts.tamilKey.equalsIgnoreCase(self.preferences.string(forKey:
             CommonConstansts.languageKey)!) ? songBook.tamilName : songBook.englishName
+        cell.detailTextLabel?.text = NSString(format: "no.songs".localized as NSString, String(songBook.noOfSongs)) as String
         return cell
     }
 }

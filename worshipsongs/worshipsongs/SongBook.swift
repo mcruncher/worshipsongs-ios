@@ -11,4 +11,5 @@ struct SongBook {
     var tamilName: String
     var englishName: String
     var publisher: String
+    var noOfSongs: Int
 }
