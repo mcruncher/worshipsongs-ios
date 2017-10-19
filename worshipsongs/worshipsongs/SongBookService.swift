@@ -22,7 +22,7 @@ class SongBookService: NSObject {
         var songBooks = [SongBook]()
         let resultSet: FMResultSet? = database!.executeQuery("select sb.id, sb.name, sb.publisher, " +
             "(select count(*) from songs_songbooks where songbook_id = sb.id) as no_of_songs " +
-            "from song_books as sb order by sb.name ", withArgumentsIn: nil)
+            "from song_books as sb order by sb.name ", withArgumentsIn: [])
         if (resultSet != nil)
         {
             while resultSet!.next() {
@@ -33,11 +33,11 @@ class SongBookService: NSObject {
     }
     
     private func getSongBook(_ resultSet: FMResultSet) -> SongBook {
-        let id: String = resultSet.string(forColumn: self.id)
-        let tamilName = databaseService.getTamilTitle(resultSet.string(forColumn: name))
-        let englishName = databaseService.getEnglishTitle(resultSet.string(forColumn: name))
-        let publisher: String = resultSet.string(forColumn: self.publisher)
-        let noOfSongs: String = resultSet.string(forColumn: self.noOfSongs)
+        let id: String = resultSet.string(forColumn: self.id)!
+        let tamilName = databaseService.getTamilTitle(resultSet.string(forColumn: name)!)
+        let englishName = databaseService.getEnglishTitle(resultSet.string(forColumn: name)!)
+        let publisher: String = resultSet.string(forColumn: self.publisher)!
+        let noOfSongs: String = resultSet.string(forColumn: self.noOfSongs)!
         return SongBook(id: Int(id)!, tamilName: tamilName, englishName: englishName, publisher: publisher, noOfSongs: Int(noOfSongs)!)
     }
     
@@ -60,3 +60,4 @@ class SongBookService: NSObject {
     }
     
 }
+
