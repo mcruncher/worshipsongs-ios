@@ -195,7 +195,7 @@ class SongWithVideoViewController: UIViewController  {
         player.isHidden = true
         playerHeight.constant = 0
         let songNumber = selectedSong != nil ? getSongNumber(selectedSong) : ""
-        self.navigationItem.title = isLanguageTamil && !selectedSong.i18nTitle.isEmpty ? songNumber + selectedSong.i18nTitle : songNumber + songName
+        self.navigationItem.title = isLanguageTamil && selectedSong != nil && !selectedSong.i18nTitle.isEmpty ? songNumber + selectedSong.i18nTitle : songNumber + songName
         actionButton.setImage(UIImage(named: "presentation"), for: UIControlState())
         self.tableView.allowsSelection = false
         self.tableView.isHidden = isHideComponent()
