@@ -52,6 +52,13 @@ class SongWithVideoViewController: UIViewController  {
         }
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
@@ -580,7 +587,6 @@ extension SongWithVideoViewController: SongSelectionDelegate {
     internal func songSelected(_ newSong: Songs!)
     {
         selectedSong = newSong
-        
     }
     
     func splitVerseOrder(_ verseOrder: String) -> NSArray

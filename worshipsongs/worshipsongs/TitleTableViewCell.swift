@@ -14,12 +14,8 @@ class TitleTableViewCell: UITableViewCell {
     @IBOutlet weak var playImage: UIImageView!
     @IBOutlet weak var id: UILabel!
     @IBOutlet weak var songNumber: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-  
-    
+    var titleTextColor = UIColor.black
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
