@@ -265,6 +265,13 @@ class SettingsController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
+        if let headerTitle = view as? UITableViewHeaderFooterView {
+            headerTitle.textLabel?.textColor = UIColor.black
+        }
+        view.backgroundColor = UIColor.lightGray
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         importDatabaseLabel.isEnabled = !self.preferences.bool(forKey: "database.lock")
         if section == 5 && self.preferences.bool(forKey: "defaultDatabase") {

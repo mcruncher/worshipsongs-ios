@@ -20,6 +20,13 @@ class TitlesViewController: UITableViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedStringKey.foregroundColor: UIColor.black,
+                NSAttributedStringKey.font : UIFont.preferredFont(forTextStyle: .largeTitle)
+            ]
+        }
         addRefreshControl()
         addSearchBar()
         addLongPressGestureRecognizer()
@@ -132,7 +139,7 @@ extension TitlesViewController {
         if cell.title.text == activeSong && UIScreen.screens.count > 1 {
             cell.title.textColor = UIColor.cruncherBlue()
         } else {
-            cell.title.textColor = UIColor.black
+            cell.title.textColor = cell.titleTextColor
         }
         if filteredSongModel[(indexPath as NSIndexPath).row].mediaUrl.isEmpty {
             cell.playImage.isHidden = true

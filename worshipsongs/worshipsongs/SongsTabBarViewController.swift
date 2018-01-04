@@ -30,6 +30,7 @@ class SongsTabBarViewController: UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBar.tintColor = UIColor.cruncherBlue()
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onBeforeUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onBeforeUpdateDatabase"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.refreshTabbar(_:)), name: NSNotification.Name(rawValue: "refreshTabbar"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.hideSearchBar), name: NSNotification.Name.UIKeyboardWillHide, object: nil)

@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate let preferences = UserDefaults.standard
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool{
-        UINavigationBar.appearance().tintColor = UIColor.gray
+        UINavigationBar.appearance().tintColor = UIColor.cruncherBlue()
         let notificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         UIApplication.shared.registerUserNotificationSettings(notificationSettings)
         let version = getVersion()
