@@ -521,7 +521,7 @@ class SettingsController: UITableViewController {
     }
     
     func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
-        guard let url = URL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=" + appId) else {
+        guard let url = URL(string : "itms-apps://itunes.apple.com/app/id1066174826?mt=8&action=write-review") else {
             completion(false)
             return
         }
