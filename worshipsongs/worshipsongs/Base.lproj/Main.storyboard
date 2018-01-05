@@ -1746,6 +1746,154 @@
             </objects>
             <point key="canvasLocation" x="-3103.1999999999998" y="-810.0449775112445"/>
         </scene>
+        <!--Rate Us View Controller-->
+        <scene sceneID="IOu-tX-bTG">
+            <objects>
+                <viewController storyboardIdentifier="rateUs" id="szS-wZ-rDw" customClass="RateUsViewController" customModule="worshipsongs" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HeN-J3-kTF"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Po-Nx-nSh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HWp-5D-kAm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jvL-ds-2NV">
+                                <rect key="frame" x="75" y="173.5" width="225" height="320"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoying Worship songs?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYd-Xu-eF7">
+                                        <rect key="frame" x="17" y="150" width="191" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Lh-gR-XfP">
+                                        <rect key="frame" x="0.0" y="237" width="225" height="40"/>
+                                        <color key="backgroundColor" red="0.47244805097579956" green="0.82023006677627563" blue="0.98299127817153931" alpha="0.24942323825503357" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="EgV-Dl-quQ"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="shareApp:" destination="szS-wZ-rDw" eventType="touchUpInside" id="dKg-ha-fUW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3XI-ME-2E9">
+                                        <rect key="frame" x="0.0" y="285" width="225" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Ipw-nj-YO0"/>
+                                        </constraints>
+                                        <state key="normal" title="Remind me later">
+                                            <color key="titleColor" red="0.10528384894132614" green="0.65000742673873901" blue="0.99324303865432739" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="remindMeLater:" destination="szS-wZ-rDw" eventType="touchUpInside" id="pee-Pm-ZK7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORA-j4-Oe0">
+                                        <rect key="frame" x="0.0" y="192" width="225" height="40"/>
+                                        <color key="backgroundColor" red="0.47244805097579956" green="0.82023006677627563" blue="0.98299127817153931" alpha="0.24640834731543623" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Uzw-Ab-dll"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rateApp:" destination="szS-wZ-rDw" eventType="touchUpInside" id="WHh-YY-H93"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="worship-icon" translatesAutoresizingMaskIntoConstraints="NO" id="v73-xN-Yma">
+                                        <rect key="frame" x="52" y="14" width="120" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="P9G-z6-3oc"/>
+                                            <constraint firstAttribute="height" constant="120" id="e6Z-eC-Mq6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star" translatesAutoresizingMaskIntoConstraints="NO" id="hSP-Br-LvO">
+                                        <rect key="frame" x="35" y="197" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="hl0-G2-DEk"/>
+                                            <constraint firstAttribute="height" constant="30" id="pnb-vA-xCu"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Share" translatesAutoresizingMaskIntoConstraints="NO" id="3Re-Ov-eHg">
+                                        <rect key="frame" x="38" y="245" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="6uz-45-dD4"/>
+                                            <constraint firstAttribute="width" constant="24" id="Smx-Sq-U0I"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWy-os-iFw">
+                                        <rect key="frame" x="80" y="202" width="57.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this app" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjX-ft-rf3">
+                                        <rect key="frame" x="80" y="248" width="110" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="OYd-Xu-eF7" firstAttribute="top" secondItem="jvL-ds-2NV" secondAttribute="top" constant="150" id="3xW-2J-cfn"/>
+                                    <constraint firstItem="3Re-Ov-eHg" firstAttribute="top" secondItem="ORA-j4-Oe0" secondAttribute="bottom" constant="13" id="9Fk-4H-gSy"/>
+                                    <constraint firstItem="v73-xN-Yma" firstAttribute="top" secondItem="jvL-ds-2NV" secondAttribute="top" constant="14" id="COP-FX-334"/>
+                                    <constraint firstItem="3XI-ME-2E9" firstAttribute="leading" secondItem="jvL-ds-2NV" secondAttribute="leading" id="CW1-AH-iyu"/>
+                                    <constraint firstAttribute="trailing" secondItem="3XI-ME-2E9" secondAttribute="trailing" id="CtV-Wh-hlg"/>
+                                    <constraint firstItem="RWy-os-iFw" firstAttribute="top" secondItem="OYd-Xu-eF7" secondAttribute="bottom" constant="31" id="Ldv-tP-m0y"/>
+                                    <constraint firstAttribute="width" constant="225" id="NcN-Pi-I1c"/>
+                                    <constraint firstItem="vjX-ft-rf3" firstAttribute="top" secondItem="ORA-j4-Oe0" secondAttribute="bottom" constant="16" id="NhC-La-U6c"/>
+                                    <constraint firstItem="1Lh-gR-XfP" firstAttribute="top" secondItem="ORA-j4-Oe0" secondAttribute="bottom" constant="5" id="OMR-LN-INW"/>
+                                    <constraint firstItem="hSP-Br-LvO" firstAttribute="leading" secondItem="jvL-ds-2NV" secondAttribute="leading" constant="35" id="Rd4-fr-7RD"/>
+                                    <constraint firstItem="3Re-Ov-eHg" firstAttribute="leading" secondItem="jvL-ds-2NV" secondAttribute="leading" constant="38" id="bIZ-7a-8g3"/>
+                                    <constraint firstAttribute="height" constant="320" id="bvS-bx-aHy"/>
+                                    <constraint firstItem="RWy-os-iFw" firstAttribute="leading" secondItem="hSP-Br-LvO" secondAttribute="trailing" constant="15" id="cYu-4G-47w"/>
+                                    <constraint firstItem="1Lh-gR-XfP" firstAttribute="leading" secondItem="ORA-j4-Oe0" secondAttribute="leading" id="eHB-sa-u63"/>
+                                    <constraint firstItem="ORA-j4-Oe0" firstAttribute="top" secondItem="OYd-Xu-eF7" secondAttribute="bottom" constant="21" id="gnh-4V-bxq"/>
+                                    <constraint firstItem="hSP-Br-LvO" firstAttribute="top" secondItem="OYd-Xu-eF7" secondAttribute="bottom" constant="26" id="j8H-i4-Zsl"/>
+                                    <constraint firstItem="vjX-ft-rf3" firstAttribute="leading" secondItem="3Re-Ov-eHg" secondAttribute="trailing" constant="18" id="lMh-Nm-t6o"/>
+                                    <constraint firstAttribute="trailing" secondItem="ORA-j4-Oe0" secondAttribute="trailing" id="lXC-P9-kps"/>
+                                    <constraint firstItem="OYd-Xu-eF7" firstAttribute="centerX" secondItem="jvL-ds-2NV" secondAttribute="centerX" id="lyc-IT-QZy"/>
+                                    <constraint firstAttribute="bottom" secondItem="3XI-ME-2E9" secondAttribute="bottom" constant="5" id="mFn-F5-lia"/>
+                                    <constraint firstItem="ORA-j4-Oe0" firstAttribute="leading" secondItem="jvL-ds-2NV" secondAttribute="leading" id="n0L-mP-6hS"/>
+                                    <constraint firstItem="1Lh-gR-XfP" firstAttribute="centerX" secondItem="jvL-ds-2NV" secondAttribute="centerX" id="vB8-ng-4uu"/>
+                                    <constraint firstItem="v73-xN-Yma" firstAttribute="centerX" secondItem="jvL-ds-2NV" secondAttribute="centerX" id="ypQ-SX-WcV"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.64804159630000002" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="jvL-ds-2NV" firstAttribute="centerY" secondItem="HWp-5D-kAm" secondAttribute="centerY" id="QSv-a2-URM"/>
+                            <constraint firstItem="jvL-ds-2NV" firstAttribute="centerX" secondItem="HWp-5D-kAm" secondAttribute="centerX" id="aod-p7-sTb"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="OYd-Xu-eF7" id="Bqw-ad-r1p"/>
+                        <outlet property="rateUsLabel" destination="RWy-os-iFw" id="6Ef-6o-KBJ"/>
+                        <outlet property="remindMeLaterButton" destination="3XI-ME-2E9" id="rIZ-mP-aVq"/>
+                        <outlet property="shareAppLabel" destination="vjX-ft-rf3" id="Dui-Hf-6cZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gfb-CP-KVK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5114.3999999999996" y="-791.15442278860576"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Share" width="23" height="23"/>
@@ -1763,6 +1911,7 @@
         <image name="song-book" width="29" height="29"/>
         <image name="title" width="21" height="24"/>
         <image name="unselect" width="22" height="22"/>
+        <image name="worship-icon" width="90" height="90"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="FD1-G2-b8c"/>

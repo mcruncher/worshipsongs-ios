@@ -206,6 +206,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.set(favorites, forKey: "favorites")
             self.preferences.synchronize()
         }
+        
+        if !preferences.dictionaryRepresentation().keys.contains("rateUsDate") {
+            let calendar = NSCalendar.current
+            let date = calendar.date(byAdding: .day, value: 7, to: Date())!
+            self.preferences.set(date, forKey: "rateUsDate")
+            self.preferences.synchronize()
+        }
     }
     
     func getVersion() -> String {

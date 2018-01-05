@@ -41,6 +41,11 @@ class TitlesViewController: UITableViewController {
             viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
             self.present(viewController!, animated: false, completion: nil)
         }
+        if !isUserRateUs() {
+            let viewController = storyboard?.instantiateViewController(withIdentifier: "rateUs") as? RateUsViewController
+            viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+            self.present(viewController!, animated: false, completion: nil)
+        }
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         addSearchBar()
         initSetup()
@@ -48,6 +53,11 @@ class TitlesViewController: UITableViewController {
     
     func isLanguageSet() -> Bool {
         return preferences.dictionaryRepresentation().keys.contains("language")
+    }
+    
+    func isUserRateUs() -> Bool {
+        let rateUsDate = preferences.object(forKey: "rateUsDate") as? Date
+        return rateUsDate! > Date()
     }
     
     func addRefreshControl()

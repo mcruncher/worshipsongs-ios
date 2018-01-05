@@ -62,6 +62,7 @@
 		2FEDF61D1F720D18005D1B83 /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDF61C1F720D18005D1B83 /* AutoCompleteTextField.swift */; };
 		2FEDF61F1F721AF1005D1B83 /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDF61E1F721AF1005D1B83 /* FavoritesListViewController.swift */; };
 		2FF0BE861E0CD218004E2127 /* SongWithVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF0BE851E0CD218004E2127 /* SongWithVideoViewController.swift */; };
+		2FF27BA81FFF05EE009055AD /* RateUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF27BA71FFF05EE009055AD /* RateUsViewController.swift */; };
 		2FFBC33E1E7BAB85006B2405 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10441D1E63F5BC00DBDD54 /* DatabaseService.swift */; };
 		2FFC99291DEFF4D600AEABEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D261BC788F8001C4B6F /* Assets.xcassets */; };
 		2FFE61E01F317421007B08CC /* UpdateSongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE61DF1F317421007B08CC /* UpdateSongsViewController.swift */; };
@@ -158,6 +159,7 @@
 		2FEDF61C1F720D18005D1B83 /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		2FEDF61E1F721AF1005D1B83 /* FavoritesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
 		2FF0BE851E0CD218004E2127 /* SongWithVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongWithVideoViewController.swift; sourceTree = "<group>"; };
+		2FF27BA71FFF05EE009055AD /* RateUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUsViewController.swift; sourceTree = "<group>"; };
 		2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = worshipsongs.entitlements; sourceTree = "<group>"; };
 		2FFE61DF1F317421007B08CC /* UpdateSongsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSongsViewController.swift; sourceTree = "<group>"; };
 		2FFF807F1F1718560086439B /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				2FEDF61E1F721AF1005D1B83 /* FavoritesListViewController.swift */,
 				28E0544E1F7B31EB006502EB /* SongBookController.swift */,
 				2F0A5F5F1F7B35F00026EC48 /* AddFavoriteViewController.swift */,
+				2FF27BA71FFF05EE009055AD /* RateUsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */,
 				2FE2502E1E42FD7A007BA85D /* PresentationView.swift in Sources */,
 				2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */,
+				2FF27BA81FFF05EE009055AD /* RateUsViewController.swift in Sources */,
 				2FE636581E4190FF0092A696 /* PresentationViewController.swift in Sources */,
 				2FD78E4C1C103A5D00A171B7 /* CustomTextSettingService.swift in Sources */,
 				2FFE61E01F317421007B08CC /* UpdateSongsViewController.swift in Sources */,
