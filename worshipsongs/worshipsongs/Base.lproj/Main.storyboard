@@ -1886,6 +1886,7 @@
                     <connections>
                         <outlet property="label" destination="OYd-Xu-eF7" id="Bqw-ad-r1p"/>
                         <outlet property="rateUsLabel" destination="RWy-os-iFw" id="6Ef-6o-KBJ"/>
+                        <outlet property="ratesUsView" destination="jvL-ds-2NV" id="zLK-4X-5Ug"/>
                         <outlet property="remindMeLaterButton" destination="3XI-ME-2E9" id="rIZ-mP-aVq"/>
                         <outlet property="shareAppLabel" destination="vjX-ft-rf3" id="Dui-Hf-6cZ"/>
                     </connections>

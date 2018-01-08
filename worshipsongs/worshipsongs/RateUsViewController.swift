@@ -11,6 +11,7 @@ import StoreKit
 
 class RateUsViewController: UIViewController {
 
+    @IBOutlet weak var ratesUsView: UIView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var rateUsLabel: UILabel!
     @IBOutlet weak var shareAppLabel: UILabel!
@@ -81,7 +82,7 @@ class RateUsViewController: UIViewController {
         if let myWebsite = NSURL(string: "http://apple.co/2mJwePJ") {
             let objectsToShare = [myWebsite]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            let popUpView = self.view
+            let popUpView = self.ratesUsView
             activityVC.popoverPresentationController?.sourceView = popUpView
             activityVC.popoverPresentationController?.sourceRect = (popUpView?.bounds)!
             activityVC.setValue("Tamil Christian Worship Songs on the App Store - iTunes - Apple", forKey: "Subject")

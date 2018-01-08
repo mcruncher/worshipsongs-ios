@@ -209,7 +209,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !preferences.dictionaryRepresentation().keys.contains("rateUsDate") {
             let calendar = NSCalendar.current
-            let date = calendar.date(byAdding: .day, value: 7, to: Date())!
+            let date = calendar.date(byAdding: .day, value: 0, to: Date())!
             self.preferences.set(date, forKey: "rateUsDate")
             self.preferences.synchronize()
         }
