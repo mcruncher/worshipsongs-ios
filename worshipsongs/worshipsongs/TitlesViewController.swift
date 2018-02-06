@@ -28,7 +28,10 @@ class TitlesViewController: UITableViewController {
             ]
         }
         addRefreshControl()
-        addSearchBar()
+        let songTabBarController = self.tabBarController as! SongsTabBarViewController
+        songTabBarController.searchDelegate = self
+        songTabBarController.setSearchBar()
+        //addSearchBar()
         addLongPressGestureRecognizer()
         initSetup()
     }
@@ -47,7 +50,7 @@ class TitlesViewController: UITableViewController {
             self.present(viewController!, animated: false, completion: nil)
         }
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
-        addSearchBar()
+       // addSearchBar()
         initSetup()
     }
     
@@ -176,7 +179,7 @@ extension TitlesViewController {
     func onSelectSong(_ row: Int) {
         let selectedSong = filteredSongModel[row]
         songTabBarController?.songdelegate?.songSelected(selectedSong)
-        hideSearchBar()
+       // hideSearchBar()
         if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
             splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
         }
@@ -195,42 +198,111 @@ extension TitlesViewController: UIGestureRecognizerDelegate {
     
 }
 
-extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDelegate {
-    
-    fileprivate func addSearchBar() {
-        // Search bar
-        let songTabBarController = self.tabBarController as! SongsTabBarViewController
-        songTabBarController.searchDelegate = self
-        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
-        searchBar = UISearchBar(frame: searchBarFrame)
-        searchBar.delegate = self;
-        searchBar.showsCancelButton = true;
-        searchBar.tintColor = UIColor.gray
-        self.addSearchBarButton()
+extension TitlesViewController : TitleOrContentBaseSearchDelegate {
+    func hideSearch() {
+        
     }
     
-    fileprivate func addSearchBarButton() {
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
+    func getSearchController() -> UISearchController {
+        let search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self
+        return search
     }
     
-    @objc func searchButtonItemClicked(_ sender:UIBarButtonItem) {
-        self.tabBarController?.navigationItem.titleView = searchBar;
-        let songTabBarController = self.tabBarController as! SongsTabBarViewController
-        songTabBarController.searchBarDisplay = true
-        let searchBy = self.preferences.string(forKey: "searchBy")
-        self.tabBarController?.navigationItem.leftBarButtonItem?.image = UIImage(named: searchBy!)
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
-        searchBar.becomeFirstResponder()
-    }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterContentForSearchText(searchBar)
-        self.tableView.reloadData()
-    }
-    
-    fileprivate func filterContentForSearchText(_ searchBar: UISearchBar) {
+}
+
+
+//extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDelegate {
+//
+//    fileprivate func addSearchBar() {
+//        // Search bar
+//        let songTabBarController = self.tabBarController as! SongsTabBarViewController
+//        songTabBarController.searchDelegate = self
+//        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
+//        searchBar = UISearchBar(frame: searchBarFrame)
+//        searchBar.delegate = self;
+//        searchBar.showsCancelButton = true;
+//        searchBar.tintColor = UIColor.gray
+//        self.addSearchBarButton()
+//    }
+//
+//    fileprivate func addSearchBarButton() {
+//        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
+//    }
+//
+//    @objc func searchButtonItemClicked(_ sender:UIBarButtonItem) {
+//        self.tabBarController?.navigationItem.titleView = searchBar;
+//        let songTabBarController = self.tabBarController as! SongsTabBarViewController
+//        songTabBarController.searchBarDisplay = true
+//        let searchBy = self.preferences.string(forKey: "searchBy")
+//        self.tabBarController?.navigationItem.leftBarButtonItem?.image = UIImage(named: searchBy!)
+//        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+//        searchBar.becomeFirstResponder()
+//    }
+//
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        filterContentForSearchText(searchBar)
+//        self.tableView.reloadData()
+//    }
+//
+//    fileprivate func filterContentForSearchText(_ searchBar: UISearchBar) {
+//        // Filter the array using the filter method
+//        let searchText = searchBar.text
+//        var data = songModel
+//        if (searchText?.characters.count)! > 0 {
+//            data = self.songModel.filter({( song: Songs) -> Bool in
+//                if (self.preferences.string(forKey: "searchBy")?.equalsIgnoreCase("searchByTitle"))! {
+//                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
+//                    return (stringMatch)
+//                } else {
+//                    let stringMatch = (song.lyrics as NSString).localizedCaseInsensitiveContains(searchText!)
+//                    return (stringMatch)
+//                }
+//            })
+//        }
+//        self.filteredSongModel = data
+//        sortSongModel();
+//    }
+//
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        hideSearchBar()
+//        sortSongModel()
+//        tableView.reloadData()
+//    }
+//
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        hideSearchBar()
+//        filteredSongModel = songModel
+//        sortSongModel()
+//        tableView.reloadData()
+//    }
+//
+//    func hideSearch() {
+//        if DeviceUtils.isIpad() {
+//            hideSearchBar()
+//            filteredSongModel = songModel
+//            sortSongModel()
+//            tableView.reloadData()
+//        }
+//    }
+//
+//    fileprivate func hideSearchBar() {
+//        self.tabBarController?.navigationItem.titleView = nil
+//        let songTabBarController = self.tabBarController as! SongsTabBarViewController
+//        songTabBarController.searchBarDisplay = false
+//        songTabBarController.optionMenu.dismiss(animated: true, completion: nil)
+//        self.tabBarController?.navigationItem.leftBarButtonItem?.image = UIImage(named: "setting")
+//        self.searchBar.text = ""
+//        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
+//    }
+//
+//}
+
+extension TitlesViewController : UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
         // Filter the array using the filter method
-        let searchText = searchBar.text
+        let searchText = searchController.searchBar.text
         var data = songModel
         if (searchText?.characters.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
@@ -245,38 +317,7 @@ extension TitlesViewController: UISearchBarDelegate, TitleOrContentBaseSearchDel
         }
         self.filteredSongModel = data
         sortSongModel();
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        hideSearchBar()
-        sortSongModel()
         tableView.reloadData()
     }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        hideSearchBar()
-        filteredSongModel = songModel
-        sortSongModel()
-        tableView.reloadData()
-    }
-    
-    func hideSearch() {
-        if DeviceUtils.isIpad() {
-            hideSearchBar()
-            filteredSongModel = songModel
-            sortSongModel()
-            tableView.reloadData()
-        }
-    }
-    
-    fileprivate func hideSearchBar() {
-        self.tabBarController?.navigationItem.titleView = nil
-        let songTabBarController = self.tabBarController as! SongsTabBarViewController
-        songTabBarController.searchBarDisplay = false
-        songTabBarController.optionMenu.dismiss(animated: true, completion: nil)
-        self.tabBarController?.navigationItem.leftBarButtonItem?.image = UIImage(named: "setting")
-        self.searchBar.text = ""
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(TitlesViewController.searchButtonItemClicked(_:))), animated: true)
-    }
-    
 }
+

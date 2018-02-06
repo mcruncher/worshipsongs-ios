@@ -15,6 +15,7 @@ protocol SongSelectionDelegate: class {
 
 protocol TitleOrContentBaseSearchDelegate {
     func hideSearch()
+    func getSearchController() -> UISearchController
 }
 
 class SongsTabBarViewController: UITabBarController{
@@ -72,6 +73,16 @@ class SongsTabBarViewController: UITabBarController{
         presentationData.setupScreen()
         if DeviceUtils.isIpad() {
             self.onChangeOrientation(orientation: UIDevice.current.orientation)
+        }
+    }
+    
+    func setSearchBar() {
+        DispatchQueue.main.async {
+            if #available(iOS 11.0, *) {
+                self.navigationItem.searchController = self.searchDelegate?.getSearchController()
+                self.navigationItem.searchController?.dimsBackgroundDuringPresentation = false
+                self.definesPresentationContext = true
+            }
         }
     }
     
