@@ -23,7 +23,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
     fileprivate var addToFav: Songs!
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
-    var songTabBarController: SongsTabBarViewController?
+    var songSelectionDelegate: SongSelectionDelegate?
     var transparentSearchEnabled = false
     fileprivate var enableBackButton = true
     
@@ -34,9 +34,10 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
         if #available(iOS 11.0, *) {
             searchController.obscuresBackgroundDuringPresentation = false
             self.navigationItem.searchController = searchController
-            definesPresentationContext = true
+            self.definesPresentationContext = true
+        } else {
+            createSearchBar()
         }
-        //createSearchBar()
         updateModel()
         addLongPressGestureRecognizer()
     }
@@ -45,7 +46,6 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         filteredSongModel = songModel
         sortSongModel()
-        addLeftBarButton()
         tableView.reloadData()
     }
     
@@ -142,8 +142,9 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedSong = filteredSongModel[indexPath.row]
-        songTabBarController?.songdelegate?.songSelected(selectedSong)
-         if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
+        songSelectionDelegate?.songSelected(selectedSong)
+        hideSearchBar()
+         if let detailViewController = songSelectionDelegate as? SongWithVideoViewController {
                 splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: self)
             }
     }
@@ -213,132 +214,87 @@ extension ArtistSongsTitleTableViewController : UISearchResultsUpdating {
 }
 
 
-//extension ArtistSongsTitleTableViewController : UISearchBarDelegate {
-//
-//    func createSearchBar()
-//    {
-//        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
-//        searchBar = UISearchBar(frame: searchBarFrame)
-//        searchBar.delegate = self;
-//        searchBar.showsCancelButton = true;
-//        searchBar.tintColor = UIColor.gray
-//        self.addSearchBarButton()
-//    }
-//
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        filterContentForSearchText(searchBar)
-//        self.tableView.reloadData()
-//    }
-//
-//    func filterContentForSearchText(_ searchBar: UISearchBar) {
-//        // Filter the array using the filter method
-//        let searchText = searchBar.text
-//        var data = songModel
-//        if (searchText?.characters.count)! > 0 {
-//            data = self.songModel.filter({( song: Songs) -> Bool in
-//                if transparentSearchEnabled {
-//                    if (self.preferences.string(forKey: CommonConstansts.searchKey)?.equalsIgnoreCase(CommonConstansts.searchByTitleOrNumber))! {
-//                        return song.title.localizedCaseInsensitiveContains(searchText!) || song.songBookNo.equalsIgnoreCase(searchText!)
-//                    } else {
-//                        return song.lyrics.localizedCaseInsensitiveContains(searchText!) || song.comment.localizedCaseInsensitiveContains(searchText!)
-//                    }
-//                } else {
-//                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
-//                    return (stringMatch)
-//                }
-//            })
-//        }
-//        self.filteredSongModel = data
-//        sortSongModel()
-//    }
-//
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-//    {
-//        hideSearchBar()
-//        sortSongModel()
-//        tableView.reloadData()
-//    }
-//
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
-//    {
-//        hideSearchBar()
-//        filteredSongModel = songModel
-//        sortSongModel()
-//        tableView.reloadData()
-//    }
-//
-//    func addSearchBarButton(){
-//        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistSongsTitleTableViewController.searchButtonItemClicked(_:))), animated: true)
-//    }
-//
-//    @objc func searchButtonItemClicked(_ sender:UIBarButtonItem){
-//        self.navigationItem.titleView = searchBar;
-//        enableBackButton = false
-//        addLeftBarButton()
-//        self.navigationItem.rightBarButtonItem = nil
-//        searchBar.becomeFirstResponder()
-//    }
-//
-//    func hideSearchBar() {
-//        self.navigationItem.titleView = nil
-//        enableBackButton = true
-//        addLeftBarButton()
-//        self.searchBar.text = ""
-//        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistSongsTitleTableViewController.searchButtonItemClicked(_:))), animated: true)
-//    }
-//
-//}
+extension ArtistSongsTitleTableViewController : UISearchBarDelegate {
 
-//MARK:- Navigation button
-extension ArtistSongsTitleTableViewController{
-    
-    fileprivate func addLeftBarButton() {
-        if transparentSearchEnabled {
-            var uiBarButtonItem = UIBarButtonItem()
-            if enableBackButton {
-                uiBarButtonItem = UIBarButtonItem(title: "back".localized, style: .plain, target: self, action: #selector(ArtistSongsTitleTableViewController.onTapLeftButton))
-            } else {
-                let button = UIButton()
-                let searchBy = self.preferences.string(forKey: CommonConstansts.searchKey)
-                let imageName = CommonConstansts.searchByTitleOrNumber.equalsIgnoreCase(searchBy!) ?
-                    CommonConstansts.searchByTitle : CommonConstansts.searchByContent
-                let origImage = UIImage(named: imageName)
-                let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
-                button.setImage(tintedImage, for: UIControlState())
-                button.tintColor = .gray
-                button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-                button.addTarget(self, action: #selector(ArtistSongsTitleTableViewController.onTapLeftButton),for: .touchUpInside)
-                uiBarButtonItem.customView = button
-            }
-            self.navigationItem.setLeftBarButton(uiBarButtonItem, animated: true)
+    func createSearchBar()
+    {
+        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
+        searchBar = UISearchBar(frame: searchBarFrame)
+        searchBar.delegate = self;
+        searchBar.showsCancelButton = true;
+        searchBar.tintColor = UIColor.gray
+        self.addSearchBarButton()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContentForSearchText(searchBar)
+        self.tableView.reloadData()
+    }
+
+    func filterContentForSearchText(_ searchBar: UISearchBar) {
+        // Filter the array using the filter method
+        let searchText = searchBar.text
+        var data = songModel
+        if (searchText?.characters.count)! > 0 {
+            data = self.songModel.filter({( song: Songs) -> Bool in
+                if transparentSearchEnabled {
+                    if (self.preferences.string(forKey: CommonConstansts.searchKey)?.equalsIgnoreCase(CommonConstansts.searchByTitleOrNumber))! {
+                        return song.title.localizedCaseInsensitiveContains(searchText!) || song.songBookNo.equalsIgnoreCase(searchText!)
+                    } else {
+                        return song.lyrics.localizedCaseInsensitiveContains(searchText!) || song.comment.localizedCaseInsensitiveContains(searchText!)
+                    }
+                } else {
+                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
+                    return (stringMatch)
+                }
+            })
+        }
+        self.filteredSongModel = data
+        sortSongModel()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        hideSearchBar()
+        sortSongModel()
+        tableView.reloadData()
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
+    {
+        hideSearchBar()
+        filteredSongModel = songModel
+        sortSongModel()
+        tableView.reloadData()
+    }
+
+    func addSearchBarButton(){
+        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistSongsTitleTableViewController.searchButtonItemClicked(_:))), animated: true)
+    }
+
+    @objc func searchButtonItemClicked(_ sender:UIBarButtonItem){
+        self.navigationItem.titleView = searchBar;
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.rightBarButtonItem = nil
+        searchBar.becomeFirstResponder()
+    }
+
+    func hideSearchBar() {
+        guard #available(iOS 11.0, *) else {
+            self.navigationItem.titleView = nil
+            self.searchBar.text = ""
+            self.navigationItem.hidesBackButton = false
+            self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistSongsTitleTableViewController.searchButtonItemClicked(_:))), animated: true)
+            return
         }
     }
     
-    @objc func onTapLeftButton() {
-        if enableBackButton {
-            _ = self.navigationController?.popViewController(animated: true)
-        } else {
-            let optionMenu = UIAlertController(title: nil, message: "searchBy".localized, preferredStyle: .actionSheet)
-            optionMenu.addAction(searchByAction(CommonConstansts.searchByTitleOrNumber))
-            optionMenu.addAction(searchByAction(CommonConstansts.searchByContent))
-            optionMenu.addAction(getCancelAction())
-            optionMenu.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
-            self.present(optionMenu, animated: true, completion: nil)
+    func hideSearch() {
+        if DeviceUtils.isIpad() {
+            hideSearchBar()
+            refresh(self)
+            tableView.reloadData()
         }
     }
-    
-    fileprivate func getCancelAction() -> UIAlertAction {
-        return UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-            
-        })
-    }
-    func searchByAction(_ option: String) -> UIAlertAction {
-        return UIAlertAction(title: option.localized, style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.preferences.set(option, forKey: CommonConstansts.searchKey)
-            self.preferences.synchronize()
-            self.addLeftBarButton()
-        })
-    }
+
 }

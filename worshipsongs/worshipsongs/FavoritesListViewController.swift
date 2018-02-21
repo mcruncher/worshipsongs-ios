@@ -17,9 +17,6 @@ class FavoritesListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        songTabBarController = self.tabBarController as? SongsTabBarViewController
-        songTabBarController?.searchDelegate = self
-        songTabBarController?.setSearchBar()
         self.tabBarItem.title = "favorites".localized
         favorites = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
         filteredFavorites = favorites
@@ -33,11 +30,12 @@ class FavoritesListViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let songTabBarController = tabBarController as! SongsTabBarViewController
-        songTabBarController.navigationItem.title = "favorites".localized
+        songTabBarController = tabBarController as? SongsTabBarViewController
+        songTabBarController?.navigationItem.title = "favorites".localized
         favorites = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
         filteredFavorites = favorites
-      //  createSearchBar()
+        songTabBarController?.searchDelegate = self
+        songTabBarController?.searchDelegate4S = self
         tableView.reloadData()
     }
     
@@ -79,6 +77,7 @@ class FavoritesListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        songTabBarController?.closeSearchBar()
         selectedFavorite = filteredFavorites[indexPath.row]
         performSegue(withIdentifier: CommonConstansts.favorite, sender: self)
     }
@@ -145,24 +144,10 @@ class FavoritesListViewController: UITableViewController {
     
 }
 
-extension FavoritesListViewController : TitleOrContentBaseSearchDelegate {
-    func hideSearch() {
-        
-    }
-    
-    func getSearchController() -> UISearchController {
-        let search = UISearchController(searchResultsController: nil)
-        search.searchResultsUpdater = self
-        return search
-    }
-    
-    
-}
-
-extension FavoritesListViewController : UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
+extension FavoritesListViewController : SearchDelegateIOS11 {
+    func filter(_ searchBar: UISearchBar) {
         // Filter the array using the filter method
-        let searchText = searchController.searchBar.text
+        let searchText = searchBar.text
         var data = favorites
         if (searchText?.characters.count)! > 0 {
             data = self.filteredFavorites.filter({ (matchedText) -> Bool in
@@ -172,77 +157,26 @@ extension FavoritesListViewController : UISearchResultsUpdating {
         self.filteredFavorites = data
         tableView.reloadData()
     }
+    
+    func hideSearch() {
+        if DeviceUtils.isIpad() {
+            songTabBarController?.closeSearchBar()
+            filteredFavorites = favorites
+            tableView.reloadData()
+        }
+    }
+    
 }
 
-//extension FavoritesListViewController: UISearchBarDelegate, TitleOrContentBaseSearchDelegate {
-//
-//    func createSearchBar()
-//    {
-//        // Search bar
-//        let songTabBarController = self.tabBarController as! SongsTabBarViewController
-//        songTabBarController.searchDelegate = self
-//        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
-//        searchBar = UISearchBar(frame: searchBarFrame)
-//        searchBar.delegate = self;
-//        searchBar.showsCancelButton = true;
-//        searchBar.tintColor = UIColor.gray
-//        self.addSearchBarButton()
-//    }
-//
-//    func addSearchBarButton(){
-//        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistsTableViewController.searchButtonItemClicked(_:))), animated: true)
-//    }
-//
-//    func searchButtonItemClicked(_ sender:UIBarButtonItem){
-//        self.tabBarController?.navigationItem.titleView = searchBar;
-//        self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
-//        self.tabBarController?.navigationItem.rightBarButtonItem = nil
-//        searchBar.becomeFirstResponder()
-//    }
-//
-//    func hideSearch() {
-//        if DeviceUtils.isIpad() {
-//            hideSearchBar()
-//            filteredFavorites = favorites
-//            tableView.reloadData()
-//        }
-//    }
-//
-//    func hideSearchBar() {
-//        self.tabBarController?.navigationItem.titleView = nil
-//        self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
-//        self.searchBar.text = ""
-//        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistsTableViewController.searchButtonItemClicked(_:))), animated: true)
-//    }
-//
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        filterContentForSearchText(self.searchBar)
-//        self.tableView.reloadData()
-//    }
-//
-//    func filterContentForSearchText(_ searchBar: UISearchBar) {
-//        // Filter the array using the filter method
-//        let searchText = searchBar.text
-//        var data = favorites
-//        if (searchText?.characters.count)! > 0 {
-//            data = self.filteredFavorites.filter({ (matchedText) -> Bool in
-//                return matchedText.localizedCaseInsensitiveContains(searchText!)
-//            })
-//        }
-//        self.filteredFavorites = data
-//    }
-//
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-//    {
-//        hideSearchBar()
-//        tableView.reloadData()
-//    }
-//
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
-//    {
-//        hideSearchBar()
-//        filteredFavorites = favorites
-//        tableView.reloadData()
-//    }
-//}
+extension FavoritesListViewController: SearchDelegateFor4S {
+    func reloadSearchData() {
+        tableView.reloadData()
+    }
+    
+    func cancelSearch() {
+        filteredFavorites = favorites
+        tableView.reloadData()
+    }
+    
+}
 
