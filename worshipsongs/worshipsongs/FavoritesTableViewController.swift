@@ -155,7 +155,6 @@ class FavoritesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         isLanguageTamil = preferences.string(forKey: CommonConstansts.language) == CommonConstansts.tamil
         self.navigationItem.title = favorite
-        refresh(self)
     }
     
     func updateModel() {
@@ -349,7 +348,7 @@ extension FavoritesTableViewController: UISearchBarDelegate {
         // Filter the array using the filter method
         let searchText = searchBar.text
         var data = songModel
-        if (searchText?.characters.count)! > 0 {
+        if (searchText?.count)! > 0 {
             data = self.songModel.filter({( song: FavoritesSong) -> Bool in
                 let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.songs.comment as NSString).localizedCaseInsensitiveContains(searchText!)
                 return (stringMatch)
@@ -403,7 +402,7 @@ extension FavoritesTableViewController : UISearchResultsUpdating {
         // Filter the array using the filter method
         let searchText = searchController.searchBar.text
         var data = songModel
-        if (searchText?.characters.count)! > 0 {
+        if (searchText?.count)! > 0 {
             data = self.songModel.filter({( song: FavoritesSong) -> Bool in
                 let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.songs.comment as NSString).localizedCaseInsensitiveContains(searchText!)
                 return (stringMatch)

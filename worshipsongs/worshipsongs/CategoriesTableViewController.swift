@@ -104,7 +104,7 @@ extension CategoriesTableViewController : SearchDelegateIOS11 {
     func filter(_ searchBar: UISearchBar) {
         let searchText = searchBar.text
         var data = categoryModel
-        if (searchText?.characters.count)! > 0 {
+        if (searchText?.count)! > 0 {
             data = self.categoryModel.filter({( category: Category) -> Bool in
                 let stringMatch = (category.name as NSString).localizedCaseInsensitiveContains(searchText!)
                 return (stringMatch)

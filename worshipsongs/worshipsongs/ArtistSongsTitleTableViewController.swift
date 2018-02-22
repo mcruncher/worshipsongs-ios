@@ -40,13 +40,13 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
         }
         updateModel()
         addLongPressGestureRecognizer()
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         filteredSongModel = songModel
         sortSongModel()
-        tableView.reloadData()
     }
     
     func updateModel() {
@@ -193,7 +193,7 @@ extension ArtistSongsTitleTableViewController : UISearchResultsUpdating {
         // Filter the array using the filter method
         let searchText = searchController.searchBar.text
         var data = songModel
-        if (searchText?.characters.count)! > 0 {
+        if (searchText?.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
                 if (self.preferences.string(forKey: "searchBy")?.equalsIgnoreCase("searchByContent"))! {
                     let stringMatch = (transparentSearchEnabled && song.songBookNo.equalsIgnoreCase(searchText!)) || (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!) || (song.lyrics as NSString).localizedCaseInsensitiveContains(searchText!)
@@ -232,7 +232,7 @@ extension ArtistSongsTitleTableViewController : UISearchBarDelegate {
         // Filter the array using the filter method
         let searchText = searchBar.text
         var data = songModel
-        if (searchText?.characters.count)! > 0 {
+        if (searchText?.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
                 if transparentSearchEnabled {
                     if (self.preferences.string(forKey: CommonConstansts.searchKey)?.equalsIgnoreCase(CommonConstansts.searchByTitleOrNumber))! {

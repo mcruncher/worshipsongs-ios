@@ -98,7 +98,7 @@ extension SongBookController : SearchDelegateIOS11 {
         var data = songBooks
         let tamilLocalizaied = CommonConstansts.tamilKey.equalsIgnoreCase(self.preferences.string(forKey:
             CommonConstansts.languageKey)!)
-        if (searchText?.characters.count)! > 0 {
+        if (searchText?.count)! > 0 {
             data = (self.songBooks?.filter({( song: SongBook) -> Bool in
                 let name = tamilLocalizaied ? song.tamilName : song.englishName
                 return name.localizedCaseInsensitiveContains(searchText!)

@@ -115,7 +115,7 @@ extension ArtistsTableViewController : SearchDelegateIOS11 {
         // Filter the array using the filter method
         let searchText = searchBar.text
         var data = authorModel
-        if (searchText?.characters.count)! > 0 {
+        if (searchText?.count)! > 0 {
             data = self.authorModel.filter({( song: Author) -> Bool in
                 let stringMatch = (song.displayName as NSString).localizedCaseInsensitiveContains(searchText!)
                 return (stringMatch)

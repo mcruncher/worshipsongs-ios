@@ -149,7 +149,7 @@ extension FavoritesListViewController : SearchDelegateIOS11 {
         // Filter the array using the filter method
         let searchText = searchBar.text
         var data = favorites
-        if (searchText?.characters.count)! > 0 {
+        if (searchText?.count)! > 0 {
             data = self.filteredFavorites.filter({ (matchedText) -> Bool in
                 return matchedText.localizedCaseInsensitiveContains(searchText!)
             })

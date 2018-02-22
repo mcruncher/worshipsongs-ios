@@ -30,6 +30,7 @@ class TitlesViewController: UITableViewController {
         addRefreshControl()
         addLongPressGestureRecognizer()
         initSetup()
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -98,7 +99,6 @@ class TitlesViewController: UITableViewController {
         songModel = databaseHelper.getSongModel()
         filteredSongModel = songModel
         sortSongModel()
-        tableView.reloadData()
     }
     
     func sortSongModel()
@@ -205,7 +205,7 @@ extension TitlesViewController : SearchDelegateIOS11 {
     func filter(_ searchBar: UISearchBar) {
         let searchText = searchBar.text
         var data = songModel
-        if (searchText?.characters.count)! > 0 {
+        if (searchText?.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
                 if (self.preferences.string(forKey: "searchBy")?.equalsIgnoreCase("searchByContent"))! {
                     let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!) || (song.lyrics as NSString).localizedCaseInsensitiveContains(searchText!)
