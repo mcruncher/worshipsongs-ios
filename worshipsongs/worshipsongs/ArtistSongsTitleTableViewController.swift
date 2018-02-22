@@ -80,13 +80,13 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
     }
     
     fileprivate func addLongPressGestureRecognizer() {
-        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TitlesViewController.onCellViewLongPress(_:)))
+        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ArtistSongsTitleTableViewController.onCellViewLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         longPressGesture.delegate = self
         self.tableView.addGestureRecognizer(longPressGesture)
     }
     
-    internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
+    @objc internal func onCellViewLongPress(_ longPressGesture: UILongPressGestureRecognizer) {
         let pressingPoint = longPressGesture.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: pressingPoint)
         if indexPath != nil && longPressGesture.state == UIGestureRecognizerState.began {
@@ -195,14 +195,11 @@ extension ArtistSongsTitleTableViewController : UISearchResultsUpdating {
         var data = songModel
         if (searchText?.characters.count)! > 0 {
             data = self.songModel.filter({( song: Songs) -> Bool in
-                if transparentSearchEnabled {
-                    if (self.preferences.string(forKey: CommonConstansts.searchKey)?.equalsIgnoreCase(CommonConstansts.searchByTitleOrNumber))! {
-                        return song.title.localizedCaseInsensitiveContains(searchText!) || song.songBookNo.equalsIgnoreCase(searchText!)
-                    } else {
-                        return song.lyrics.localizedCaseInsensitiveContains(searchText!) || song.comment.localizedCaseInsensitiveContains(searchText!)
-                    }
+                if (self.preferences.string(forKey: "searchBy")?.equalsIgnoreCase("searchByContent"))! {
+                    let stringMatch = (transparentSearchEnabled && song.songBookNo.equalsIgnoreCase(searchText!)) || (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!) || (song.lyrics as NSString).localizedCaseInsensitiveContains(searchText!)
+                    return (stringMatch)
                 } else {
-                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
+                    let stringMatch = (transparentSearchEnabled && song.songBookNo.equalsIgnoreCase(searchText!)) || (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
                     return (stringMatch)
                 }
             })
