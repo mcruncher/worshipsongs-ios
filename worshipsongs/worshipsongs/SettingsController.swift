@@ -52,6 +52,8 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var languageValue: UILabel!
     @IBOutlet weak var updateSongsCell: UITableViewCell!
     @IBOutlet weak var updateSongsLabel: UILabel!
+    @IBOutlet weak var searchByContent: UILabel!
+    @IBOutlet weak var searchByContentSwitch: UISwitch!
     
     
     fileprivate let preferences = UserDefaults.standard
@@ -82,6 +84,7 @@ class SettingsController: UITableViewController {
         self.setPresentationScreenBackgroundColor()
         self.setTamilSwitchValue()
         self.setRomanisedSwitchValue()
+        self.setSearchBySwitchValue()
         let backButton = UIBarButtonItem(title: "back".localized, style: .plain, target: self, action: #selector(SettingsController.goBackToSongsList))
         navigationItem.leftBarButtonItem = backButton
         addTapGestureRecognizer()
@@ -112,6 +115,7 @@ class SettingsController: UITableViewController {
         presentationBackgroundColorLabel.text = "background.color".localized
         displayTamilLabel.text = "display.tamil".localized
         displayRomanisedLabel.text = "display.romanised".localized
+        searchByContent.text = "searchByContent".localized
         self.restoreDatabaseCell.isHidden = self.preferences.bool(forKey: "defaultDatabase")
     }
     
@@ -210,6 +214,10 @@ class SettingsController: UITableViewController {
         displayRomanisedSwitch.isOn = displayRomanised
     }
     
+    func setSearchBySwitchValue() {
+        searchByContentSwitch.isOn = "searchByContent".equalsIgnoreCase(self.preferences.string(forKey: "searchBy")!)
+    }
+    
     func getToolBar(currentField: UITextField) -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
@@ -249,16 +257,18 @@ class SettingsController: UITableViewController {
         case 0:
             return ""
         case 1:
-            return "language".localized
+            return "searchBy".localized
         case 2:
-            return "lyricsPreference".localized
+            return "language".localized
         case 3:
-            return "primary.screen".localized
+            return "lyricsPreference".localized
         case 4:
-            return "presentation.screen".localized
+            return "primary.screen".localized
         case 5:
-            return "advanced".localized
+            return "presentation.screen".localized
         case 6:
+            return "advanced".localized
+        case 7:
             return "general".localized
         default:
             return ""
@@ -274,7 +284,7 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         importDatabaseLabel.isEnabled = !self.preferences.bool(forKey: "database.lock")
-        if section == 5 && self.preferences.bool(forKey: "defaultDatabase") {
+        if section == 6 && self.preferences.bool(forKey: "defaultDatabase") {
             return 1
         }
         return super.tableView(tableView, numberOfRowsInSection: section)
@@ -290,7 +300,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 selectLanguage()
@@ -299,7 +309,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 3 {
+        if indexPath.section == 4 {
             switch indexPath.row {
             case 1:
                 tamilFontColorTextField.becomeFirstResponder()
@@ -311,7 +321,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 4 {
+        if indexPath.section == 5 {
             switch indexPath.row {
             case 1:
                 presentationTamilFontColorTextField.becomeFirstResponder()
@@ -326,7 +336,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 5 {
+        if indexPath.section == 6 {
             switch indexPath.row {
             case 0:
                 importDatabase()
@@ -338,7 +348,7 @@ class SettingsController: UITableViewController {
                 break
             }
         }
-        if indexPath.section == 6 {
+        if indexPath.section == 7 {
             switch indexPath.row {
             case 0:
                 rateUs()
@@ -408,6 +418,15 @@ class SettingsController: UITableViewController {
     
     @IBAction func onChangeEnglishSwitch(_ sender: Any) {
         self.preferences.setValue(displayRomanisedSwitch.isOn, forKey: "displayRomanised")
+        self.preferences.synchronize()
+    }
+    
+    @IBAction func searchSongsByContent(_ sender: Any) {
+        if displayRomanisedSwitch.isOn {
+            self.preferences.setValue("searchByContent", forKey: "searchBy")
+        } else {
+            self.preferences.setValue("", forKey: "searchBy")
+        }
         self.preferences.synchronize()
     }
     

@@ -5,7 +5,7 @@
 
 import UIKit
 
-class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, TitleOrContentBaseSearchDelegate {
+class FavoritesTableViewController: UITableViewController {
     
     fileprivate var filteredSongModel = [FavoritesSong]()
     fileprivate var isLanguageTamil = true
@@ -28,6 +28,15 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        if #available(iOS 11.0, *) {
+            searchController.obscuresBackgroundDuringPresentation = false
+            self.navigationItem.searchController = searchController
+            definesPresentationContext = true
+        } else {
+            createSearchBar()
+        }
         self.tableView.tableFooterView = getTableFooterView()
         updateModel()
         let longpress = UILongPressGestureRecognizer(target: self, action: #selector(FavoritesTableViewController.longPressGestureRecognized))
@@ -146,8 +155,6 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     override func viewWillAppear(_ animated: Bool) {
         isLanguageTamil = preferences.string(forKey: CommonConstansts.language) == CommonConstansts.tamil
         self.navigationItem.title = favorite
-        createSearchBar()
-        refresh(self)
     }
     
     func updateModel() {
@@ -314,6 +321,23 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
         self.refresh.endRefreshing()
         hideDragAndDrop = false
     }
+}
+
+extension FavoritesTableViewController: UISearchBarDelegate {
+    
+    @objc func onTapLeftButton() {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    func createSearchBar()
+    {
+        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
+        searchBar = UISearchBar(frame: searchBarFrame)
+        searchBar.delegate = self;
+        searchBar.showsCancelButton = true;
+        searchBar.tintColor = UIColor.gray
+        self.addSearchBarButton()
+    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filterContentForSearchText(searchBar)
@@ -324,7 +348,7 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
         // Filter the array using the filter method
         let searchText = searchBar.text
         var data = songModel
-        if (searchText?.characters.count)! > 0 {
+        if (searchText?.count)! > 0 {
             data = self.songModel.filter({( song: FavoritesSong) -> Bool in
                 let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.songs.comment as NSString).localizedCaseInsensitiveContains(searchText!)
                 return (stringMatch)
@@ -348,16 +372,6 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
         tableView.reloadData()
     }
     
-    func createSearchBar()
-    {
-        // Search bar
-        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
-        searchBar = UISearchBar(frame: searchBarFrame)
-        searchBar.delegate = self;
-        searchBar.showsCancelButton = true;
-        searchBar.tintColor = UIColor.gray
-        self.addSearchBarButton()
-    }
     
     func addSearchBarButton(){
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(FavoritesTableViewController.searchButtonItemClicked(_:))), animated: true)
@@ -365,24 +379,37 @@ class FavoritesTableViewController: UITableViewController, UISearchBarDelegate, 
     
     @objc func searchButtonItemClicked(_ sender:UIBarButtonItem){
         self.navigationItem.titleView = searchBar;
-        self.navigationItem.leftBarButtonItem?.isEnabled = false
+        self.navigationItem.hidesBackButton = true
         self.navigationItem.rightBarButtonItem = nil
         searchBar.becomeFirstResponder()
     }
     
-    func hideSearch() {
-        if DeviceUtils.isIpad() {
-            hideSearchBar()
-            refresh(self)
-            tableView.reloadData()
-        }
-    }
-    
     func hideSearchBar() {
-        self.navigationItem.titleView = nil
-        self.navigationItem.leftBarButtonItem?.isEnabled = true
-        self.searchBar.text = ""
-        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(FavoritesTableViewController.searchButtonItemClicked(_:))), animated: true)
+        guard #available(iOS 11.0, *) else {
+            self.navigationItem.titleView = nil
+            self.searchBar.text = ""
+            self.navigationItem.hidesBackButton = false
+            addSearchBarButton()
+            return
+        }
+        
     }
-    
+
+}
+
+extension FavoritesTableViewController : UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        // Filter the array using the filter method
+        let searchText = searchController.searchBar.text
+        var data = songModel
+        if (searchText?.count)! > 0 {
+            data = self.songModel.filter({( song: FavoritesSong) -> Bool in
+                let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.songs.comment as NSString).localizedCaseInsensitiveContains(searchText!)
+                return (stringMatch)
+        
+            })
+        }
+        self.filteredSongModel = data
+        tableView.reloadData()
+    }
 }

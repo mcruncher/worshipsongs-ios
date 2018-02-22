@@ -1,5 +1,5 @@
 stage 'Unit test'
-node('IMac-slave-1') {
+node('imac-slave-1') {
   try {
     checkout scm
     sh "killall \"iOS Simulator\" || echo \"No matching processes belonging to you were found\""
@@ -13,7 +13,7 @@ node('IMac-slave-1') {
 }
 
 stage 'Code analysis'
-node('IMac-slave-1') {
+node('imac-slave-1') {
   try {
    checkout scm
    sh """
