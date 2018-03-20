@@ -422,7 +422,7 @@ class SettingsController: UITableViewController {
     }
     
     @IBAction func searchSongsByContent(_ sender: Any) {
-        if displayRomanisedSwitch.isOn {
+        if searchByContentSwitch.isOn {
             self.preferences.setValue("searchByContent", forKey: "searchBy")
         } else {
             self.preferences.setValue("", forKey: "searchBy")

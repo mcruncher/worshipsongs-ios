@@ -82,7 +82,6 @@ class SongsTabBarViewController: UITabBarController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        self.selectedViewController?.viewWillAppear(true)
         presentationData = PresentationData()
         presentationData.setupScreen()
         if DeviceUtils.isIpad() {
