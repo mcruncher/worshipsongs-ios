@@ -37,7 +37,6 @@
 		2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */; };
 		2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */; };
 		2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D231BC788F8001C4B6F /* Main.storyboard */; };
-		2F5D3D2A1BC788F8001C4B6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D281BC788F8001C4B6F /* LaunchScreen.storyboard */; };
 		2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */; };
 		2F5D3D401BC788F8001C4B6F /* worshipsongsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D3F1BC788F8001C4B6F /* worshipsongsUITests.swift */; };
 		2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D551BC78D51001C4B6F /* Songs.swift */; };
@@ -124,7 +123,6 @@
 		2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F5D3D241BC788F8001C4B6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F5D3D261BC788F8001C4B6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2F5D3D291BC788F8001C4B6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F5D3D2B1BC788F8001C4B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F5D3D301BC788F8001C4B6F /* worshipsongsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = worshipsongsTests.swift; sourceTree = "<group>"; };
@@ -289,7 +287,6 @@
 		2F5D3D4D1BC78946001C4B6F /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				2F5D3D281BC788F8001C4B6F /* LaunchScreen.storyboard */,
 				2F5D3D231BC788F8001C4B6F /* Main.storyboard */,
 				2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */,
 			);
@@ -542,7 +539,6 @@
 				2FE840F51DDC33A6002B3379 /* Localizable.strings in Resources */,
 				28D5C09B1F7200B9001530FF /* Fastfile in Resources */,
 				28D5C09D1F720443001530FF /* Podfile in Resources */,
-				2F5D3D2A1BC788F8001C4B6F /* LaunchScreen.storyboard in Resources */,
 				2FE250291E42E305007BA85D /* PresentationView.xib in Resources */,
 				28D5C0A31F720ADA001530FF /* Jenkinsfile-publish in Resources */,
 				28F271A71F7E30A30082CCF1 /* LICENSE in Resources */,
@@ -758,14 +754,6 @@
 				2F5D3D241BC788F8001C4B6F /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2F5D3D281BC788F8001C4B6F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2F5D3D291BC788F8001C4B6F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		2FE840F71DDC33A6002B3379 /* Localizable.strings */ = {
