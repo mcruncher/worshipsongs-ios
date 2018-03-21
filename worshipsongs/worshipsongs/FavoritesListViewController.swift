@@ -40,7 +40,7 @@ class FavoritesListViewController: UITableViewController {
     }
     
     func getTableFooterView() -> UIView {
-        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: (self.tabBarController?.tabBar.frame.height)!))
+        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 25))
         footerview.backgroundColor = UIColor.groupTableViewBackground
         let label = UILabel(frame: CGRect(x: 10, y: 5, width: tableView.frame.size.width, height: 15))
         label.text = "message.favorite".localized
