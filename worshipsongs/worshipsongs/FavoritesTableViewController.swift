@@ -28,15 +28,7 @@ class FavoritesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        if #available(iOS 11.0, *) {
-            searchController.obscuresBackgroundDuringPresentation = false
-            self.navigationItem.searchController = searchController
-            definesPresentationContext = true
-        } else {
-            createSearchBar()
-        }
+        addShareBarButton()
         self.tableView.tableFooterView = getTableFooterView()
         updateModel()
         let longpress = UILongPressGestureRecognizer(target: self, action: #selector(FavoritesTableViewController.longPressGestureRecognized))
@@ -167,17 +159,13 @@ class FavoritesTableViewController: UITableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: - Table view data source
+
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return filteredSongModel.count
     }
     
@@ -212,7 +200,6 @@ class FavoritesTableViewController: UITableViewController {
         let selectedSong = filteredSongModel[row].songs
         if selectedSong.id != "" {
             songTabBarController?.songdelegate?.songSelected(selectedSong)
-            hideSearchBar()
             if let detailViewController = songTabBarController?.songdelegate as? SongWithVideoViewController {
                 splitViewController?.showDetailViewController(detailViewController.navigationController!, sender: nil)
             }
@@ -316,95 +303,45 @@ class FavoritesTableViewController: UITableViewController {
         self.refresh.endRefreshing()
         hideDragAndDrop = false
     }
-}
-
-extension FavoritesTableViewController: UISearchBarDelegate {
     
-    @objc func onTapLeftButton() {
-        _ = self.navigationController?.popViewController(animated: true)
-    }
-    
-    func createSearchBar()
-    {
-        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
-        searchBar = UISearchBar(frame: searchBarFrame)
-        searchBar.delegate = self;
-        searchBar.showsCancelButton = true;
-        searchBar.tintColor = UIColor.gray
-        self.addSearchBarButton()
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterContentForSearchText(searchBar)
-        self.tableView.reloadData()
-    }
-    
-    func filterContentForSearchText(_ searchBar: UISearchBar) {
-        // Filter the array using the filter method
-        let searchText = searchBar.text
-        var data = songModel
-        if (searchText?.count)! > 0 {
-            data = self.songModel.filter({( song: FavoritesSong) -> Bool in
-                let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.songs.comment as NSString).localizedCaseInsensitiveContains(searchText!)
-                return (stringMatch)
-                
-            })
-        }
-        self.filteredSongModel = data
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-    {
-        hideSearchBar()
-        tableView.reloadData()
-        hideDragAndDrop = true
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
-    {
-        hideSearchBar()
-        refresh(self)
-        tableView.reloadData()
-    }
-    
-    
-    func addSearchBarButton(){
-        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(FavoritesTableViewController.searchButtonItemClicked(_:))), animated: true)
-    }
-    
-    @objc func searchButtonItemClicked(_ sender:UIBarButtonItem){
-        self.navigationItem.titleView = searchBar;
-        self.navigationItem.hidesBackButton = true
-        self.navigationItem.rightBarButtonItem = nil
-        searchBar.becomeFirstResponder()
-    }
-    
-    func hideSearchBar() {
-        guard #available(iOS 11.0, *) else {
-            self.navigationItem.titleView = nil
-            self.searchBar.text = ""
-            self.navigationItem.hidesBackButton = false
-            addSearchBarButton()
-            return
-        }
-        
-    }
-
-}
-
-extension FavoritesTableViewController : UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        // Filter the array using the filter method
-        let searchText = searchController.searchBar.text
-        var data = songModel
-        if (searchText?.count)! > 0 {
-            data = self.songModel.filter({( song: FavoritesSong) -> Bool in
-                let stringMatch = (song.songs.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.songs.comment as NSString).localizedCaseInsensitiveContains(searchText!)
-                return (stringMatch)
-        
-            })
-        }
-        self.filteredSongModel = data
-        tableView.reloadData()
+    fileprivate func addShareBarButton() {
+        self.navigationController!.navigationBar.tintColor = UIColor.gray
+        let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(FavoritesTableViewController.shareInSocialMedia))
+        navigationItem.rightBarButtonItem = doneButton
     }
 }
+
+extension FavoritesTableViewController {
+    @objc func shareInSocialMedia() {
+        let messagerMessage = getMessageToShare()
+        messagerMessage.append(NSAttributedString(string: "https://goo.gl/k1QG4J"))
+        showActivityViewController([messagerMessage])
+    }
+    
+    func getMessageToShare() -> NSMutableAttributedString {
+        let objectString: NSMutableAttributedString = NSMutableAttributedString()
+        objectString.append(NSAttributedString(string: favorite + "\n"))
+        var number = 0
+        for songModel in filteredSongModel {
+            number = number + 1
+            objectString.append(NSAttributedString(string: "\n\(number). \(songModel.songs.i18nTitle)\n"))
+            objectString.append(NSAttributedString(string: "\(songModel.songs.title)\n"))
+        }
+        objectString.append(NSAttributedString(string: "\n"))
+        return objectString
+    }
+    
+    func showActivityViewController(_ objectToShare: [Any]) {
+        let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
+        activityVC.setValue("Tamil Christian Worship Songs " + favorite, forKey: "Subject")
+        activityVC.excludedActivityTypes = getExcludedActivityTypes()
+        activityVC.popoverPresentationController?.sourceView = self.view
+        activityVC.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    func getExcludedActivityTypes() -> [UIActivityType] {
+        return [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.postToFacebook, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
+    }
+}
+
