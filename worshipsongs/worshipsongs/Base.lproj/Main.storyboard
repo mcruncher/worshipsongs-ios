@@ -832,6 +832,13 @@
                                             <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spf-6u-uM2">
+                                            <rect key="frame" x="216" y="12" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="7Ho-Wb-Flu" firstAttribute="centerY" secondItem="5Yv-OP-KoW" secondAttribute="centerY" id="El5-29-BGC"/>
@@ -844,6 +851,7 @@
                                 <connections>
                                     <outlet property="id" destination="bZO-X2-Lki" id="LRH-hu-YpS"/>
                                     <outlet property="playImage" destination="EmZ-Vg-Ait" id="xGB-PW-8tS"/>
+                                    <outlet property="songTitle" destination="spf-6u-uM2" id="His-NG-7id"/>
                                     <outlet property="title" destination="7Ho-Wb-Flu" id="2h1-M7-4bT"/>
                                 </connections>
                             </tableViewCell>
