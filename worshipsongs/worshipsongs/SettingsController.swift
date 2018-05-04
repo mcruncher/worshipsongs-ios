@@ -5,7 +5,6 @@
 
 import UIKit
 import Foundation
-import FileBrowser
 import MessageUI
 
 class SettingsController: UITableViewController {

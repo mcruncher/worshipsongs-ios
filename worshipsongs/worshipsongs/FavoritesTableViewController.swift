@@ -125,12 +125,13 @@ class FavoritesTableViewController: UITableViewController {
         var newSongOrder = [FavoritesSongsWithOrder]()
         for i in 0..<tableView.numberOfRows(inSection: 0) {
             let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! TitleTableViewCell
-            let favSong = FavoritesSongsWithOrder(orderNo: i, songName: cell.title.text!, songListName: favorite)
+            let favSong = FavoritesSongsWithOrder(orderNo: i, songName: cell.songTitle.text!, songListName: favorite)
             newSongOrder.append(favSong)
         }
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: newSongOrder)
         self.preferences.set(encodedData, forKey: favorite)
         self.preferences.synchronize()
+        updateModel()
     }
     
     func getTableFooterView() -> UIView {
@@ -177,6 +178,7 @@ class FavoritesTableViewController: UITableViewController {
         } else {
             cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].songTitle
         }
+        cell.songTitle.text = filteredSongModel[(indexPath as NSIndexPath).row].songTitle
         let activeSong = preferences.string(forKey: "presentationSongName")
         if cell.title.text == activeSong {
             cell.title.textColor = UIColor.cruncherBlue()
@@ -324,8 +326,12 @@ extension FavoritesTableViewController {
         var number = 0
         for songModel in filteredSongModel {
             number = number + 1
-            objectString.append(NSAttributedString(string: "\n\(number). \(songModel.songs.i18nTitle)\n"))
-            objectString.append(NSAttributedString(string: "\(songModel.songs.title)\n"))
+            if !songModel.songs.i18nTitle.isEmpty {
+                objectString.append(NSAttributedString(string: "\n\(number). \(songModel.songs.i18nTitle)\n"))
+                objectString.append(NSAttributedString(string: "\(songModel.songs.title)\n"))
+            } else {
+                objectString.append(NSAttributedString(string: "\n\(number). \(songModel.songs.title)\n"))
+            }
         }
         objectString.append(NSAttributedString(string: "\n"))
         return objectString
