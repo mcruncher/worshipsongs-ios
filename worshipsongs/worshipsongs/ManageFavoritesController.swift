@@ -40,6 +40,7 @@ class ManageFavoritesController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         favoriteList = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
+        favoriteList.reverse()
         tableView.isHidden = favoriteList.count <= 0
         tableView.reloadData()
     }
