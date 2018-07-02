@@ -33,6 +33,7 @@ class FavoritesListViewController: UITableViewController {
         songTabBarController = tabBarController as? SongsTabBarViewController
         songTabBarController?.navigationItem.title = "favorites".localized
         favorites = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
+        favorites.reverse()
         filteredFavorites = favorites
         songTabBarController?.searchDelegate = self
         songTabBarController?.searchDelegate4S = self
