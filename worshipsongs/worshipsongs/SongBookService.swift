@@ -36,7 +36,7 @@ class SongBookService: NSObject {
         let id: String = resultSet.string(forColumn: self.id)!
         let tamilName = databaseService.getTamilTitle(resultSet.string(forColumn: name)!)
         let englishName = databaseService.getEnglishTitle(resultSet.string(forColumn: name)!)
-        let publisher: String = resultSet.string(forColumn: self.publisher)!
+        let publisher: String = resultSet.string(forColumn: self.publisher) != nil ? resultSet.string(forColumn: self.publisher)! : ""
         let noOfSongs: String = resultSet.string(forColumn: self.noOfSongs)!
         return SongBook(id: Int(id)!, tamilName: tamilName, englishName: englishName, publisher: publisher, noOfSongs: Int(noOfSongs)!)
     }

@@ -51,7 +51,6 @@
 		2FE250291E42E305007BA85D /* PresentationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FE250281E42E305007BA85D /* PresentationView.xib */; };
 		2FE2502E1E42FD7A007BA85D /* PresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2502A1E42E39A007BA85D /* PresentationView.swift */; };
 		2FE250301E43134E007BA85D /* PresentationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2502F1E43134E007BA85D /* PresentationData.swift */; };
-		2FE3699B1EFA3AB100C948BE /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2FE3699A1EFA3AB100C948BE /* songs.sqlite */; };
 		2FE636581E4190FF0092A696 /* PresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE636571E4190FF0092A696 /* PresentationViewController.swift */; };
 		2FE636591E41DED80092A696 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE48541DF149DB00948236 /* ColorUtils.swift */; };
 		2FE840EF1DDBE7FB002B3379 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */; };
@@ -117,6 +116,7 @@
 		2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		2F19EAFF1E6005A000B989D8 /* RemoteUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteUrlViewController.swift; sourceTree = "<group>"; };
 		2F1F2A0A1E5C09290046EFDA /* FavoritesSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesSong.swift; sourceTree = "<group>"; };
+		2F505D4320F6E53F009FF45D /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 		2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsTableViewController.swift; sourceTree = "<group>"; };
 		2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsTabBarViewController.swift; sourceTree = "<group>"; };
 		2F5D3D1A1BC788F8001C4B6F /* worshipsongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = worshipsongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,7 +146,6 @@
 		2FE250281E42E305007BA85D /* PresentationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentationView.xib; sourceTree = "<group>"; };
 		2FE2502A1E42E39A007BA85D /* PresentationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationView.swift; sourceTree = "<group>"; };
 		2FE2502F1E43134E007BA85D /* PresentationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationData.swift; sourceTree = "<group>"; };
-		2FE3699A1EFA3AB100C948BE /* songs.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = songs.sqlite; sourceTree = "<group>"; };
 		2FE636571E4190FF0092A696 /* PresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationViewController.swift; sourceTree = "<group>"; };
 		2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		2FE840F61DDC33A6002B3379 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -340,7 +339,7 @@
 		2F5D3D511BC78CCE001C4B6F /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				2FE3699A1EFA3AB100C948BE /* songs.sqlite */,
+				2F505D4320F6E53F009FF45D /* songs.sqlite */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -543,7 +542,6 @@
 				28D5C0A31F720ADA001530FF /* Jenkinsfile-publish in Resources */,
 				28F271A71F7E30A30082CCF1 /* LICENSE in Resources */,
 				2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */,
-				2FE3699B1EFA3AB100C948BE /* songs.sqlite in Resources */,
 				2FFC99291DEFF4D600AEABEF /* Assets.xcassets in Resources */,
 				28D5C0A11F720727001530FF /* sonar-project.properties in Resources */,
 				28D5C09F1F7205AA001530FF /* Jenkinsfile in Resources */,
