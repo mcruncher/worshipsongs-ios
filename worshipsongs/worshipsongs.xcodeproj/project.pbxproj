@@ -33,6 +33,7 @@
 		2F19EAFE1E5FBE4D00B989D8 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */; };
 		2F19EB001E6005A000B989D8 /* RemoteUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F19EAFF1E6005A000B989D8 /* RemoteUrlViewController.swift */; };
 		2F1F2A0B1E5C09290046EFDA /* FavoritesSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F2A0A1E5C09290046EFDA /* FavoritesSong.swift */; };
+		2F505D4420F7557B009FF45D /* songs.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2F505D4320F6E53F009FF45D /* songs.sqlite */; };
 		2F56417D1BCB3A9700064269 /* SongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56417C1BCB3A9700064269 /* SongsTableViewController.swift */; };
 		2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */; };
 		2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */; };
@@ -535,6 +536,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F505D4420F7557B009FF45D /* songs.sqlite in Resources */,
 				2FE840F51DDC33A6002B3379 /* Localizable.strings in Resources */,
 				28D5C09B1F7200B9001530FF /* Fastfile in Resources */,
 				28D5C09D1F720443001530FF /* Podfile in Resources */,
