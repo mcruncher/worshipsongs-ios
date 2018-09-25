@@ -24,4 +24,5 @@ struct CommonConstansts {
     internal static let searchByTitle = "searchByTitle"
     internal static let searchByTitleOrNumber = "searchByTitleOrNumber"
     internal static let searchByContent = "searchByContent"
+    internal static let updateFavorites = "updateFavorites"
 }

@@ -56,6 +56,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        let url:NSURL = userActivity.webpageURL! as NSURL
+        guard var importString = url.absoluteString?.lastPathComponent else {
+            return true
+        }
+        if let i = importString.index(of: "?") {
+            importString.remove(at: i)
+        }
+        guard let importFav = importString.fromBase64()?.split(separator: ";") else {
+            return true
+        }
+        let favoriteName = String(importFav[0])
+        var favSongs:[String] = [String]()
+        let databaseHelper = DatabaseHelper()
+        for j in 1..<importFav.count {
+            let songs = databaseHelper.getSongsModelByIds([String(importFav[j])])
+            if songs.count > 0 {
+                favSongs.append(String(songs[0].title))
+            }
+        }
+        var favoritesSongsWithOrders = [FavoritesSongsWithOrder]()
+        for i in 0..<favSongs.count {
+            favoritesSongsWithOrders.append(FavoritesSongsWithOrder(orderNo: i, songName: favSongs[i], songListName: favoriteName))
+        }
+        var favoriteList = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
+        if !favoriteList.contains(favoriteName) {
+            favoriteList.append(favoriteName)
+            self.preferences.set(favoriteList, forKey: CommonConstansts.favorites)
+            self.preferences.synchronize()
+        }
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favoritesSongsWithOrders)
+        self.preferences.set(encodedData, forKey: favoriteName)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: CommonConstansts.updateFavorites), object: nil, userInfo: nil)
+        return true
+    }
+    
     func setSplitViewController() {
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         
