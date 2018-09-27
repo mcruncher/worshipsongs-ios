@@ -334,6 +334,7 @@ extension FavoritesTableViewController {
             }
         }
         objectString.append(NSAttributedString(string: "\n \n"))
+        objectString.append(NSAttributedString(string: "Use the below link to add the songs to your favorites"))
         return objectString
     }
     
