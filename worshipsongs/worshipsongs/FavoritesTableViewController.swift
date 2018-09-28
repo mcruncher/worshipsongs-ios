@@ -272,6 +272,7 @@ class FavoritesTableViewController: UITableViewController {
             self.preferences.set(encodedData, forKey: self.favorite)
             self.preferences.synchronize()
             self.refresh(self)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: CommonConstansts.updateFavorites), object: nil, userInfo: nil)
         })
     }
     
@@ -316,8 +317,7 @@ class FavoritesTableViewController: UITableViewController {
 extension FavoritesTableViewController {
     @objc func shareInSocialMedia() {
         let messagerMessage = getMessageToShare()
-        messagerMessage.append(NSAttributedString(string: "https://goo.gl/k1QG4J"))
-        showActivityViewController([messagerMessage])
+        showActivityViewController([messagerMessage.string, getUrlToShare()])
     }
     
     func getMessageToShare() -> NSMutableAttributedString {
@@ -333,8 +333,25 @@ extension FavoritesTableViewController {
                 objectString.append(NSAttributedString(string: "\n\(number). \(songModel.songs.title)\n"))
             }
         }
-        objectString.append(NSAttributedString(string: "\n"))
+        objectString.append(NSAttributedString(string: "\n \n"))
+        objectString.append(NSAttributedString(string: "Use the below link to add the songs to your favorites"))
         return objectString
+    }
+    
+    func getUrlToShare() -> NSURL {
+        let urlString: NSMutableAttributedString = NSMutableAttributedString()
+        urlString.append(NSAttributedString(string: "https://mcruncher.github.io/worshipsongs/?"))
+        urlString.append(NSAttributedString(string: getImportLink()))
+        return NSURL(string:urlString.string)!
+    }
+    
+    func getImportLink() -> String {
+        let objectString: NSMutableAttributedString = NSMutableAttributedString()
+        objectString.append(NSAttributedString(string: favorite))
+        for songModel in filteredSongModel {
+            objectString.append(NSAttributedString(string: ";\(songModel.songs.id)"))
+        }
+        return objectString.string.toBase64()
     }
     
     func showActivityViewController(_ objectToShare: [Any]) {

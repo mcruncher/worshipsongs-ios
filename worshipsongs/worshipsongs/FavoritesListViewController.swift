@@ -17,8 +17,15 @@ class FavoritesListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(FavoritesListViewController.setup), name:
+            NSNotification.Name(rawValue: CommonConstansts.updateFavorites), object: nil)
         self.tabBarItem.title = "favorites".localized
+        setup()
+    }
+    
+    @objc func setup() {
         favorites = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
+        favorites.reverse()
         filteredFavorites = favorites
         tableView.reloadData()
         self.tableView.tableFooterView = getTableFooterView()
