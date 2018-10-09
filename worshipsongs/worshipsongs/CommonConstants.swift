@@ -25,4 +25,6 @@ struct CommonConstansts {
     internal static let searchByTitleOrNumber = "searchByTitleOrNumber"
     internal static let searchByContent = "searchByContent"
     internal static let updateFavorites = "updateFavorites"
+    internal static let activeTabbar = "activeTabbar"
+    internal static let activeTab = "activeTab"
 }
