@@ -2,6 +2,15 @@ use_frameworks!
 target "worshipsongs" do
  pod 'FMDB'
  pod 'YouTubePlayer', :git => 'https://github.com/gilesvangruisen/Swift-YouTube-Player.git', :tag => 'v0.4.0', :submodules => true
+ pod "KCFloatingActionButton", :git => 'https://github.com/kciter/KCFloatingActionButton.git', :tag => '2.1.2', :submodules => true
+ pod 'SimplePDFSwift', :git => 'https://github.com/ishaq/SimplePDF.git', :tag => '0.2.1', :submodules => true
+end
+
+target 'worshipsongsTests' do
+  pod 'FMDB'
+  pod 'YouTubePlayer', :git => 'https://github.com/gilesvangruisen/Swift-YouTube-Player.git', :tag => 'v0.4.0', :submodules => true
+  pod "KCFloatingActionButton", :git => 'https://github.com/kciter/KCFloatingActionButton.git', :tag => '2.1.2', :submodules => true
+  pod 'SimplePDFSwift', :git => 'https://github.com/ishaq/SimplePDF.git', :tag => '0.2.1', :submodules => true
 end
 
 post_install do |installer|

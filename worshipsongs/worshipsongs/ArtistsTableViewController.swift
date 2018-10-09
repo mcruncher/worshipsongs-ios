@@ -1,14 +1,11 @@
 //
-//  ArtistsTableViewController.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 08/12/2015.
-//  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.0.0
 //
 
 import UIKit
 
-class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
+class ArtistsTableViewController: UITableViewController   {
     
     var authorModel = [Author]()
     var artistName: String = ""
@@ -21,24 +18,32 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
     
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
+    fileprivate var songTabBarController: SongsTabBarViewController?
+    fileprivate let preferences = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarItem.title = "artists".localized
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, (self.tabBarController?.tabBar.frame.height)!, 0)
         //refresh control
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Refresh")
         refresh.addTarget(self, action: #selector(ArtistsTableViewController.refresh(_:)), for:UIControlEvents.valueChanged)
         self.tableView.addSubview(refresh)
+        self.tableView.tableFooterView = getTableFooterView()
+    }
+    
+    func getTableFooterView() -> UIView {
+        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: (self.tabBarController?.tabBar.frame.height)!))
+        return footerview
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let songTabBarController = tabBarController as! SongsTabBarViewController
-        songTabBarController.navigationItem.title = "artists".localized
+        songTabBarController = tabBarController as? SongsTabBarViewController
+        songTabBarController?.navigationItem.title = "artists".localized
+        songTabBarController?.searchDelegate = self
+        songTabBarController?.searchDelegate4S = self
         authorModel = databaseHelper.getArtistModel()
         filteredAuthorModel = authorModel
-        createSearchBar()
         tableView.reloadData()
     }
     
@@ -62,17 +67,24 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = filteredAuthorModel[(indexPath as NSIndexPath).row].displayName
+        if "tamil".equalsIgnoreCase(self.preferences.string(forKey: "language")!) {
+            cell.textLabel?.text = filteredAuthorModel[indexPath.row].displayNameTamil
+        } else {
+            cell.textLabel?.text = filteredAuthorModel[indexPath.row].displayNameEnglish
+        }
+        cell.detailTextLabel?.text = NSString(format: "no.songs".localized as NSString, String(filteredAuthorModel[indexPath.row].noOfSongs)) as String
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        hideSearchBar()
-        artistName = filteredAuthorModel[(indexPath as NSIndexPath).row].displayName
+        songTabBarController?.closeSearchBar()
+        if "tamil".equalsIgnoreCase(self.preferences.string(forKey: "language")!) {
+            artistName = filteredAuthorModel[(indexPath as NSIndexPath).row].displayNameTamil
+        } else {
+            artistName = filteredAuthorModel[(indexPath as NSIndexPath).row].displayNameEnglish
+        }
         songsModel = databaseHelper.getArtistSongsModel(filteredAuthorModel[(indexPath as NSIndexPath).row].id)
         performSegue(withIdentifier: "artistTitle", sender: self)
-        
     }
     
     func splitVerseOrder(_ verseOrder: String) -> NSArray
@@ -85,74 +97,54 @@ class ArtistsTableViewController: UITableViewController, UISearchBarDelegate  {
             let titleTableViewController = segue.destination as! ArtistSongsTitleTableViewController
             titleTableViewController.artistName = artistName
             titleTableViewController.songModel = songsModel
+            titleTableViewController.songSelectionDelegate = songTabBarController?.songdelegate
         }
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterContentForSearchText(self.searchBar)
-        self.tableView.reloadData()
-    }
-    
-    func filterContentForSearchText(_ searchBar: UISearchBar) {
-        // Filter the array using the filter method
-        let searchText = searchBar.text
-        var data = [(Author)]()
-        data = self.authorModel.filter({( song: Author) -> Bool in
-            let stringMatch = (song.displayName as NSString).localizedCaseInsensitiveContains(searchText!)
-            return (stringMatch)
-            
-        })
-        self.filteredAuthorModel = data
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-    {
-        hideSearchBar()
-        tableView.reloadData()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
-    {
-        hideSearchBar()
-        filteredAuthorModel = authorModel
-        tableView.reloadData()
-    }
-    
-    func refresh(_ sender:AnyObject)
+    @objc func refresh(_ sender:AnyObject)
     {
         filteredAuthorModel = authorModel
         self.tableView.reloadData()
         self.refresh.endRefreshing()
     }
-  
-    func createSearchBar()
-    {
-        // Search bar
-        let searchBarFrame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.size.width, height: 44);
-        searchBar = UISearchBar(frame: searchBarFrame)
-        searchBar.delegate = self;
-        searchBar.showsCancelButton = true;
-        searchBar.tintColor = UIColor.gray
-        self.addSearchBarButton()
-    }
     
-    func addSearchBarButton(){
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistsTableViewController.searchButtonItemClicked(_:))), animated: true)
-    }
-    
-    
-    func searchButtonItemClicked(_ sender:UIBarButtonItem){
-        self.tabBarController?.navigationItem.titleView = searchBar;
-        self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = false
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
-        searchBar.becomeFirstResponder()
-    }
-    
-    
-    func hideSearchBar() {
-        self.tabBarController?.navigationItem.titleView = nil
-        self.tabBarController?.navigationItem.leftBarButtonItem?.isEnabled = true
-        self.searchBar.text = ""
-        self.tabBarController?.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ArtistsTableViewController.searchButtonItemClicked(_:))), animated: true)
-    }
 }
+
+extension ArtistsTableViewController : SearchDelegateIOS11 {
+    func filter(_ searchBar: UISearchBar) {
+        // Filter the array using the filter method
+        let searchText = searchBar.text
+        var data = authorModel
+        if (searchText?.count)! > 0 {
+            data = self.authorModel.filter({( song: Author) -> Bool in
+                let stringMatch = (song.displayName as NSString).localizedCaseInsensitiveContains(searchText!)
+                return (stringMatch)
+            })
+        }
+        self.filteredAuthorModel = data
+        tableView.reloadData()
+    }
+    
+    
+    func hideSearch() {
+        if DeviceUtils.isIpad() {
+            songTabBarController?.closeSearchBar()
+            filteredAuthorModel = authorModel
+            tableView.reloadData()
+        }
+    }
+    
+}
+
+extension ArtistsTableViewController: SearchDelegateFor4S {
+    func reloadSearchData() {
+        tableView.reloadData()
+    }
+    
+    func cancelSearch() {
+        filteredAuthorModel = authorModel
+        tableView.reloadData()
+    }
+    
+}
+

@@ -1,9 +1,6 @@
 //
-//  SongsTableViewController.swift
-//  worshipsongs
-//
-//  Created by Vignesh Palanisamy on 10/12/15.
-//  Copyright © 2015 Vignesh Palanisamy. All rights reserved.
+// author: Madasamy, Vignesh Palanisamy
+// version: 1.0.0
 //
 
 import UIKit
@@ -20,7 +17,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     var listDataDictionary : NSMutableDictionary = NSMutableDictionary()
     var parsedVerseOrderList: NSMutableArray = NSMutableArray()
     var verseOrderList: NSMutableArray = NSMutableArray()
-    var text: String!
+    //var text: String!
     fileprivate let preferences = UserDefaults.standard
 
     override func viewDidLoad() {
@@ -35,6 +32,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
             print("parsedVerseOrderList:\(parsedVerseOrderList)")
             verseOrderList = parsedVerseOrderList
         }
+        
         self.tableView.estimatedRowHeight = 88.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -72,11 +70,8 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         cell.textLabel!.numberOfLines = 0
         let fontSize = self.preferences.integer(forKey: "fontSize")
         cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
-//        let fontColor = self.preferences.string(forKey: "englishFontColor")!
-//        cell.textLabel!.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: fontColor)!)
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
-        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
-        print("cell\(cell.textLabel!.attributedText )")
+        cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
         return cell
     }
     
@@ -111,7 +106,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         }
     }
     
-    func share() {
+    @objc func share() {
         let emailMessage = getObjectToShare()
         let messagerMessage = getMessageToShare()
         let firstActivityItem = CustomProvider(placeholderItem: "Default" as AnyObject, messagerMessage: messagerMessage.string, emailMessage: emailMessage.string)
@@ -137,7 +132,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
             self.emailMessage = emailMessage
         }
         
-        override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+        override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
             if activityType == UIActivityType.message {
                 return messagerMessage as AnyObject?
             } else if activityType == UIActivityType.mail {
@@ -193,9 +188,8 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         return objectString
     }
     
-    
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        text = string
+        //text = string
         print("string:\(string)")
         let data = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         print("data:\(data)")
@@ -255,4 +249,6 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     }
 
 }
+
+
 

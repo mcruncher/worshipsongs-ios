@@ -50,3 +50,11 @@ struct ColorUtils {
     }
 }
 
+extension UIColor {
+    
+    class func cruncherBlue() -> UIColor {
+        return UIColor(red: 61/255, green: 181/255, blue: 255/255, alpha: 1.0)
+    }
+}
+
+

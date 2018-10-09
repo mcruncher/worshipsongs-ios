@@ -65,6 +65,13 @@ extension String {
     }
     
     var localized: String {
+        let isLanguageTamil = UserDefaults.standard.string(forKey: "language") == "tamil"
+        if isLanguageTamil {
+            let language = "ta"
+            let path = Bundle.main.path(forResource: language, ofType: "lproj")
+            let bundle = Bundle(path: path!)
+            return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+        }
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
     
@@ -74,5 +81,16 @@ extension String {
         dateStringFormatter.timeZone = TimeZone(abbreviation: "GMT")
         let date = dateStringFormatter.date(from: self)!
         return date
+    }
+    
+    func fromBase64() -> String? {
+        guard let data = Data(base64Encoded: self) else {
+            return nil
+        }
+        return String(data: data, encoding: .utf8)
+    }
+        
+    func toBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
     }
 }

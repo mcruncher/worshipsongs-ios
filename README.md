@@ -13,6 +13,6 @@ While worshipping you can set the screen to be awake such that there won't be a 
 
 Worship songs uses [OpenLp](http://openlp.org) database schema. 
 
-This project lives [here](https://github.com/crunchersaspire/worshipsongs-ios)
+This project lives [here](https://github.com/mcruncher/worshipsongs-ios)
 
 How to build project
