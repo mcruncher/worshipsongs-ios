@@ -41,6 +41,8 @@ class SongsTabBarViewController: UITabBarController{
         tabBar.tintColor = UIColor.cruncherBlue()
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onBeforeUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onBeforeUpdateDatabase"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.refreshTabbar(_:)), name: NSNotification.Name(rawValue: "refreshTabbar"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.activeTabbar(_:)), name:
+            NSNotification.Name(rawValue: CommonConstansts.activeTabbar), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.hideSearchBar), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         initLeftNavBarButton()
         setSearchBar()
@@ -75,6 +77,23 @@ class SongsTabBarViewController: UITabBarController{
         self.viewControllers?[2].tabBarItem.title = "categories".localized
         self.viewControllers?[3].tabBarItem.title = "song_books".localized
         self.viewControllers?[4].tabBarItem.title = "favorites".localized
+    }
+    
+    @objc func activeTabbar(_ notification: NSNotification) {
+        self.selectedViewController?.viewWillAppear(true)
+        self.viewControllers?[0].tabBarItem.title = "songs".localized
+        self.viewControllers?[1].tabBarItem.title = "artists".localized
+        self.viewControllers?[2].tabBarItem.title = "categories".localized
+        self.viewControllers?[3].tabBarItem.title = "song_books".localized
+        self.viewControllers?[4].tabBarItem.title = "favorites".localized
+        let activeTab = ((notification as NSNotification).userInfo![CommonConstansts.activeTab] as? String)!
+        var tabid = 0
+        while tabid < (self.viewControllers?.count)! {
+            if self.viewControllers?[tabid].tabBarItem.title == activeTab {
+                self.selectedIndex = tabid
+            }
+            tabid = tabid + 1
+        }
     }
     
     @objc func hideSearchBar() {

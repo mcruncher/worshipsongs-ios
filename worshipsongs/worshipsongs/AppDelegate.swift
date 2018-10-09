@@ -89,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favoritesSongsWithOrders)
         self.preferences.set(encodedData, forKey: favoriteName)
         NotificationCenter.default.post(name: Notification.Name(rawValue: CommonConstansts.updateFavorites), object: nil, userInfo: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: CommonConstansts.activeTabbar), object: nil, userInfo: [CommonConstansts.activeTab: "favorites".localized])
         return true
     }
     
