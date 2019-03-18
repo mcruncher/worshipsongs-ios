@@ -170,7 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if !preferences.dictionaryRepresentation().keys.contains("check.update.url") {
-            self.preferences.setValue("https://api.github.com/repos/mcruncher/worshipsongs-android/git/refs/heads/master", forKey: "check.update.url")
+            self.preferences.setValue("https://api.github.com/repos/mcruncher/worshipsongs-db-dev/git/refs/heads/master", forKey: "check.update.url")
             self.preferences.synchronize()
         }
         
