@@ -31,18 +31,15 @@ class SongWithVideoViewController: UIViewController  {
     var authorName = ""
     var songLyrics: NSString = NSString()
     var verseOrder: NSArray = NSArray()
-    var element:String!
-    var attribues : NSDictionary = NSDictionary()
     var listDataDictionary : NSMutableDictionary = NSMutableDictionary()
-    var parsedVerseOrderList: NSMutableArray = NSMutableArray()
     var verseOrderList: NSMutableArray = NSMutableArray()
-    var text: String!
     var presentationIndex = 0
     var comment: String = ""
     fileprivate let preferences = UserDefaults.standard
     var play = false
     var noInternet = false
     fileprivate var isLanguageTamil = true
+    fileprivate let xmlParser = LyricsXmlParser()
     
     //new var
     var databaseHelper = DatabaseHelper()
@@ -65,7 +62,7 @@ class SongWithVideoViewController: UIViewController  {
         addFloatButton()
         addShareBarButton()
         setSplitViewControllerProperties()
-        setXmlParser()
+        (listDataDictionary, verseOrderList) = xmlParser.getXmlParser(song: selectedSong)
         hideOrShowComponents()
         setTableViewProperties()
         actionButton.layer.cornerRadius = actionButton.layer.frame.height / 2
@@ -88,7 +85,7 @@ class SongWithVideoViewController: UIViewController  {
         } else {
             comment = ""
         }
-        setXmlParser()
+       (listDataDictionary, verseOrderList) = xmlParser.getXmlParser(song: selectedSong)
         if DeviceUtils.isIpad() {
             hideOrShowComponents()
             
@@ -320,102 +317,6 @@ class SongWithVideoViewController: UIViewController  {
         }
     }
     
-    
-    
-    
-    class CustomProvider : UIActivityItemProvider {
-        var messagerMessage : String!
-        var emailMessage : String!
-        var otherMessage : String!
-        
-        init(placeholderItem: AnyObject, messagerMessage : String, emailMessage : String, otherMessage : String) {
-            super.init(placeholderItem: placeholderItem)
-            self.messagerMessage = messagerMessage
-            self.emailMessage = emailMessage
-            self.otherMessage = otherMessage
-        }
-        
-        override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
-            if activityType == UIActivityType.message {
-                return messagerMessage as AnyObject?
-            } else if activityType == UIActivityType.mail {
-                return emailMessage as AnyObject?
-            } else if activityType == UIActivityType.postToTwitter {
-                return NSLocalizedString(messagerMessage, comment: "comment")
-            } else {
-                return otherMessage
-            }
-        }
-    }
-    
-    func getObjectToShare() -> NSMutableAttributedString {
-        let objectString: NSMutableAttributedString = NSMutableAttributedString()
-        objectString.append(NSAttributedString(string: "<html><body>"))
-        objectString.append(NSAttributedString(string: "<h1><a href=\"https://itunes.apple.com/us/app/tamil-christian-worship-songs/id1066174826?mt=8\">Tamil Christian Worship Songs</a></h1>"))
-        
-        if isLanguageTamil && !selectedSong.i18nTitle.isEmpty {
-            objectString.append(NSAttributedString(string: "<h2>\(selectedSong.i18nTitle)</h2>"))
-        } else {
-            objectString.append(NSAttributedString(string: "<h2>\(songName)</h2>"))
-        }
-        for verseOrder in verseOrderList {
-            objectString.append(getObject(verseOrder: verseOrder as! String))
-        }
-        objectString.append(NSAttributedString(string: "<br/>"))
-        objectString.append(NSAttributedString(string: "</body></html>"))
-        return objectString
-    }
-    
-    func getObject(verseOrder: String) -> NSMutableAttributedString {
-        let objectString: NSMutableAttributedString = NSMutableAttributedString()
-        let key: String = verseOrder.lowercased()
-        let dataText: String? = listDataDictionary[key] as? String
-        let texts = parseString(text: dataText!)
-        print("verseOrder \(verseOrder)")
-        for text in texts {
-            objectString.append(NSAttributedString(string: text))
-            objectString.append(NSAttributedString(string: "<br/>"))
-        }
-        objectString.append(NSAttributedString(string: "<br/>"))
-        return objectString
-    }
-    
-    func parseString(text: String) -> [String] {
-        let attributeText = customTextSettingService.getAttributedString(text as NSString)
-        //    let parsedText = attributeText.string.replacingOccurrences(of: "\n", with: "\n{n}")
-        return attributeText.string.components(separatedBy: "\n")
-    }
-    
-    func getMessageToShare() -> NSMutableAttributedString {
-        let objectString: NSMutableAttributedString = NSMutableAttributedString()
-        objectString.append(NSAttributedString(string: "Tamil Christian Worship Songs\n\n"))
-        if isLanguageTamil && !selectedSong.i18nTitle.isEmpty{
-            objectString.append(NSAttributedString(string: "\n\(selectedSong.i18nTitle)\n\n"))
-        } else {
-            objectString.append(NSAttributedString(string: "\n\(songName)\n\n"))
-        }
-        
-        for verseOrder in verseOrderList {
-            objectString.append(getMessage(verseOrder: verseOrder as! String))
-        }
-        objectString.append(NSAttributedString(string: "\n"))
-        return objectString
-    }
-    
-    func getMessage(verseOrder: String) ->  NSMutableAttributedString{
-        let objectString: NSMutableAttributedString = NSMutableAttributedString()
-        let key: String = (verseOrder).lowercased()
-        let dataText: String? = listDataDictionary[key] as? String
-        let texts = parseString(text: dataText!)
-        print("verseOrder \(verseOrder)")
-        for text in texts {
-            objectString.append(NSAttributedString(string: text))
-            objectString.append(NSAttributedString(string: "\n"))
-        }
-        objectString.append(NSAttributedString(string: "\n"))
-        return objectString
-    }
-    
     func getAllCells() -> [UITableViewCell] {
         
         var cells = [UITableViewCell]()
@@ -467,53 +368,6 @@ extension SongWithVideoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if nextButton.isHidden == false || previousButton.isHidden == false {
             presentation(indexPath)
-        }
-    }
-}
-
-extension SongWithVideoViewController: XMLParserDelegate {
-    
-    func setXmlParser() {
-        element = ""
-        attribues = NSDictionary()
-        listDataDictionary = NSMutableDictionary()
-        parsedVerseOrderList = NSMutableArray()
-        verseOrderList = NSMutableArray()
-        let lyrics: Data = songLyrics.data(using: String.Encoding.utf8.rawValue)!
-        let parser = XMLParser(data: lyrics)
-        parser.delegate = self
-        parser.parse()
-        if(verseOrderList.count < 1){
-            print("parsedVerseOrderList:\(parsedVerseOrderList)")
-            verseOrderList = parsedVerseOrderList
-        }
-    }
-    
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        element = elementName
-        print("element:\(element)")
-        attribues = attributeDict as NSDictionary
-        print("attribues:\(attribues)")
-        
-    }
-    
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
-        
-        text = string
-        print("string:\(string)")
-        let data = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        print("data:\(data)")
-        if (!data.isEmpty) {
-            if element == "verse" {
-                let verseType = (attribues.object(forKey: "type") as! String).lowercased()
-                let verseLabel = attribues.object(forKey: "label")as! String
-                //lyricsData.append(data);
-                listDataDictionary.setObject(data as String, forKey: verseType.appending(verseLabel) as NSCopying)
-                if(verseOrderList.count < 1){
-                    parsedVerseOrderList.add(verseType + verseLabel)
-                    print("parsedVerseOrder:\(parsedVerseOrderList)")
-                }
-            }
         }
     }
 }
@@ -626,10 +480,11 @@ extension SongWithVideoViewController: UIGestureRecognizerDelegate {
         let objectString: NSMutableAttributedString = NSMutableAttributedString()
         objectString.append(NSAttributedString(string: "<html><body>"))
         objectString.append(NSAttributedString(string: "<h1><a href=\"http://apple.co/2mJwePJ\">Tamil Christian Worship Songs</a></h1>"))
-        objectString.append(getObject(verseOrder: verseOrderList[indexPath.section] as! String))
+        
+        objectString.append(MessageParser.getObject(verseOrderList[indexPath.section] as! String, listDataDictionary))
         objectString.append(NSAttributedString(string: "</body></html>"))
         
-        let messageString = getMessage(verseOrder: verseOrderList[indexPath.section] as! String)
+        let messageString = MessageParser.getMessage(verseOrderList[indexPath.section] as! String, listDataDictionary)
         messageString.append(NSAttributedString(string: "\n\n"))
         messageString.append(NSAttributedString(string: "  http://apple.co/2mJwePJ"))
         
@@ -688,7 +543,7 @@ extension SongWithVideoViewController {
     
     fileprivate func addDocumentContent(_ pdf: SimplePDF) {
         pdf.addH2(self.getSongTitle())
-        pdf.addBodyText(self.getMessageToShare().string)
+        pdf.addBodyText(MessageParser.getMessageToShare(selectedSong, verseOrderList, listDataDictionary).string)
     }
     
     func getCancelnActionSheet() -> UIAlertAction {
@@ -698,8 +553,8 @@ extension SongWithVideoViewController {
     }
     
     func shareInSocialMedia() {
-        let emailMessage = getObjectToShare()
-        let messagerMessage = getMessageToShare()
+        let emailMessage = MessageParser.getObjectToShare(selectedSong, verseOrderList, listDataDictionary)
+        let messagerMessage = MessageParser.getMessageToShare(selectedSong, verseOrderList, listDataDictionary)
         let otherMessage = emailMessage
         otherMessage.append(NSAttributedString(string: "http://apple.co/2mJwePJ"))
         

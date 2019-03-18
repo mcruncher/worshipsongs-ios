@@ -44,6 +44,9 @@
 		2FA7034121522C3900AD320B /* worshipsongs.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */; };
 		2FA885CF215325430069DE89 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */; };
 		2FA885D0215325570069DE89 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
+		2FB0ADC422151DFB00EB305F /* LyricsXmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC322151DFB00EB305F /* LyricsXmlParser.swift */; };
+		2FB0ADC622154B6600EB305F /* CustomProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC522154B6600EB305F /* CustomProvider.swift */; };
+		2FB0ADC8221552D500EB305F /* MessageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC7221552D500EB305F /* MessageParser.swift */; };
 		2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD589921C165FC300668951 /* ArtistsTableViewController.swift */; };
 		2FD589951C1660A300668951 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD589941C1660A300668951 /* Author.swift */; };
 		2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD589981C16775C00668951 /* ArtistSongsTitleTableViewController.swift */; };
@@ -138,6 +141,9 @@
 		2F5D3D5E1BC7A5B3001C4B6F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		2F5D3D5F1BC7A74E001C4B6F /* TitlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitlesViewController.swift; sourceTree = "<group>"; };
 		2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		2FB0ADC322151DFB00EB305F /* LyricsXmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsXmlParser.swift; sourceTree = "<group>"; };
+		2FB0ADC522154B6600EB305F /* CustomProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProvider.swift; sourceTree = "<group>"; };
+		2FB0ADC7221552D500EB305F /* MessageParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageParser.swift; sourceTree = "<group>"; };
 		2FD589921C165FC300668951 /* ArtistsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsTableViewController.swift; sourceTree = "<group>"; };
 		2FD589941C1660A300668951 /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		2FD589981C16775C00668951 /* ArtistSongsTitleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistSongsTitleTableViewController.swift; sourceTree = "<group>"; };
@@ -380,6 +386,9 @@
 				2F10441D1E63F5BC00DBDD54 /* DatabaseService.swift */,
 				2F08FFD61F301B8A00B894FB /* RestApiService.swift */,
 				28786FCD1F78FAD30085B216 /* SongBookService.swift */,
+				2FB0ADC322151DFB00EB305F /* LyricsXmlParser.swift */,
+				2FB0ADC522154B6600EB305F /* CustomProvider.swift */,
+				2FB0ADC7221552D500EB305F /* MessageParser.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -674,6 +683,7 @@
 				2FE250301E43134E007BA85D /* PresentationData.swift in Sources */,
 				28786FCC1F78F7310085B216 /* SongBook.swift in Sources */,
 				2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */,
+				2FB0ADC622154B6600EB305F /* CustomProvider.swift in Sources */,
 				2F18C4C31E8DE6B800E540AF /* CategoriesTableViewController.swift in Sources */,
 				2FFBC33E1E7BAB85006B2405 /* DatabaseService.swift in Sources */,
 				2F1F2A0B1E5C09290046EFDA /* FavoritesSong.swift in Sources */,
@@ -694,6 +704,7 @@
 				2F08FFD51F30093400B894FB /* UpdateService.swift in Sources */,
 				2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */,
 				2F0A5F601F7B35F00026EC48 /* AddFavoriteViewController.swift in Sources */,
+				2FB0ADC8221552D500EB305F /* MessageParser.swift in Sources */,
 				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
 				2FFF80801F1718560086439B /* ViewUtils.swift in Sources */,
 				2FD589951C1660A300668951 /* Author.swift in Sources */,
@@ -705,6 +716,7 @@
 				2FE636591E41DED80092A696 /* ColorUtils.swift in Sources */,
 				2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */,
 				2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */,
+				2FB0ADC422151DFB00EB305F /* LyricsXmlParser.swift in Sources */,
 				2FE2502E1E42FD7A007BA85D /* PresentationView.swift in Sources */,
 				2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */,
 				2FF27BA81FFF05EE009055AD /* RateUsViewController.swift in Sources */,

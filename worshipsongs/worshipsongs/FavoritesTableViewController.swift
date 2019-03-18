@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import SimplePDFSwift
 
 class FavoritesTableViewController: UITableViewController {
     
@@ -23,6 +24,7 @@ class FavoritesTableViewController: UITableViewController {
     var searchBar: UISearchBar!
     var authorName = ""
     var favorite = "favorite"
+    fileprivate let xmlParser = LyricsXmlParser()
     
     var songTabBarController: SongsTabBarViewController?
     
@@ -309,15 +311,46 @@ class FavoritesTableViewController: UITableViewController {
     
     fileprivate func addShareBarButton() {
         self.navigationController!.navigationBar.tintColor = UIColor.gray
-        let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(FavoritesTableViewController.shareInSocialMedia))
+        let doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Share"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(FavoritesTableViewController.shareActions))
         navigationItem.rightBarButtonItem = doneButton
     }
 }
 
 extension FavoritesTableViewController {
+    
+    @objc func shareActions() {
+        let shareActions = UIAlertController(title: "choose_options".localized, message: "", preferredStyle: .actionSheet)
+        shareActions.addAction(getShareAction())
+        shareActions.addAction(getShareAsPdfAction())
+        shareActions.addAction(getCancelnActionSheet())
+        self.present(shareActions, animated: true, completion: nil)
+    }
+    
+    func getShareAction() -> UIAlertAction {
+        return UIAlertAction(title: "share".localized, style: .default, handler: { _ in
+            self.shareInSocialMedia()
+        })
+    }
+    
     @objc func shareInSocialMedia() {
         let messagerMessage = getMessageToShare()
         showActivityViewController([messagerMessage.string, getUrlToShare()])
+    }
+    
+    func getShareAsPdfAction() -> UIAlertAction {
+        return UIAlertAction(title: "share_as_pdf".localized, style: .default, handler: { _ in
+            let pdf = SimplePDF(pdfTitle: "", authorName: "", fileName: self.favorite + ".pdf")
+            self.addDocumentContent(pdf)
+            let tmpPDFPath = pdf.writePDFWithoutTableOfContents()
+            let pdfURL = URL(fileURLWithPath: tmpPDFPath)
+            self.showActivityViewController([pdfURL])
+        })
+    }
+    
+    func getCancelnActionSheet() -> UIAlertAction {
+        return UIAlertAction(title: "cancel".localized, style: .cancel, handler: { _ in
+            
+        })
     }
     
     func getMessageToShare() -> NSMutableAttributedString {
@@ -365,6 +398,37 @@ extension FavoritesTableViewController {
     
     func getExcludedActivityTypes() -> [UIActivityType] {
         return [UIActivityType.airDrop, UIActivityType.postToWeibo, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.postToFlickr, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.copyToPasteboard, UIActivityType.postToFacebook, UIActivityType.saveToCameraRoll, UIActivityType.print, UIActivityType.openInIBooks, UIActivityType(rawValue: "Reminders")]
+    }
+    
+    fileprivate func addDocumentContent(_ pdf: SimplePDF) {
+        var number = 0
+        var remainingSize = 0
+        var startNewPage = true
+        for songModel in filteredSongModel {
+            if startNewPage {
+                pdf.startNewPage()
+                remainingSize = 0
+            }
+            let titleString: NSMutableAttributedString = NSMutableAttributedString()
+            number = number + 1
+            if !songModel.songs.i18nTitle.isEmpty {
+                titleString.append(NSAttributedString(string: "\(number). \(songModel.songs.i18nTitle)\n"))
+                titleString.append(NSAttributedString(string: "\(songModel.songs.title)\n"))
+            } else {
+                titleString.append(NSAttributedString(string: "\(number). \(songModel.songs.title)\n"))
+            }
+            pdf.addH2(titleString.string)
+            let (listDataDictionary, verseOrderList) = xmlParser.getXmlParser(song: songModel.songs)
+            let objectString: NSMutableAttributedString = NSMutableAttributedString()
+            objectString.append(NSAttributedString(string: "\n"))
+            objectString.append(MessageParser.getVerses(verseOrderList, listDataDictionary))
+            objectString.append(NSAttributedString(string: "\n \n"))
+            pdf.addBodyText(objectString.string)
+            let objectStringSize = Int(objectString.size().height.rounded()) + remainingSize
+            remainingSize = objectStringSize % Int(pdf.availablePageSize.height.rounded())
+            let pageHalfHeight = Int(pdf.availablePageSize.height.rounded()) / 2
+            startNewPage = remainingSize > pageHalfHeight
+        }
     }
 }
 
