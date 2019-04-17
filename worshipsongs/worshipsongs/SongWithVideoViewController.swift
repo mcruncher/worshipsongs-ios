@@ -62,7 +62,9 @@ class SongWithVideoViewController: UIViewController  {
         addFloatButton()
         addShareBarButton()
         setSplitViewControllerProperties()
-        (listDataDictionary, verseOrderList) = xmlParser.getXmlParser(song: selectedSong)
+        if selectedSong != nil {
+            (listDataDictionary, verseOrderList) = xmlParser.getXmlParser(song: selectedSong)
+        }
         hideOrShowComponents()
         setTableViewProperties()
         actionButton.layer.cornerRadius = actionButton.layer.frame.height / 2
