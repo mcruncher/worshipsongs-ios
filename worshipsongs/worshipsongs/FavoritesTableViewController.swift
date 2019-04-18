@@ -4,7 +4,6 @@
 //
 
 import UIKit
-import SimplePDFSwift
 
 class FavoritesTableViewController: UITableViewController {
     

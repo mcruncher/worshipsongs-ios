@@ -5,9 +5,8 @@
 
 import UIKit
 import YouTubePlayer
-import KCFloatingActionButton
+import Floaty
 import SystemConfiguration
-import SimplePDFSwift
 
 class SongWithVideoViewController: UIViewController  {
     
@@ -22,7 +21,7 @@ class SongWithVideoViewController: UIViewController  {
     var secondWindow: UIWindow?
     var secondScreenView: UIView?
     var externalLabel = UILabel()
-    var floatingbutton = KCFloatingActionButton()
+    var floatingbutton = Floaty()
     var hadYoutubeLink = false
     
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
@@ -167,8 +166,8 @@ class SongWithVideoViewController: UIViewController  {
         })
     }
     
-    func getKCFloatingActionButtonItem(title: String, icon: UIImage) -> KCFloatingActionButtonItem {
-        let item = KCFloatingActionButtonItem()
+    func getKCFloatingActionButtonItem(title: String, icon: UIImage) -> FloatyItem {
+        let item = FloatyItem()
         item.size = 43
         item.buttonColor = UIColor.cruncherBlue()
         item.title = title
