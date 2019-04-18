@@ -47,6 +47,9 @@
 		2FB0ADC422151DFB00EB305F /* LyricsXmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC322151DFB00EB305F /* LyricsXmlParser.swift */; };
 		2FB0ADC622154B6600EB305F /* CustomProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC522154B6600EB305F /* CustomProvider.swift */; };
 		2FB0ADC8221552D500EB305F /* MessageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC7221552D500EB305F /* MessageParser.swift */; };
+		2FC6EA4122680B5C007882A6 /* SimplePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6EA3E22680B5C007882A6 /* SimplePDF.swift */; };
+		2FC6EA4222680B5C007882A6 /* SimplePDFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6EA3F22680B5C007882A6 /* SimplePDFLabel.swift */; };
+		2FC6EA4322680B5C007882A6 /* SimplePDFUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6EA4022680B5C007882A6 /* SimplePDFUtilities.swift */; };
 		2FD589931C165FC400668951 /* ArtistsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD589921C165FC300668951 /* ArtistsTableViewController.swift */; };
 		2FD589951C1660A300668951 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD589941C1660A300668951 /* Author.swift */; };
 		2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD589981C16775C00668951 /* ArtistSongsTitleTableViewController.swift */; };
@@ -144,6 +147,9 @@
 		2FB0ADC322151DFB00EB305F /* LyricsXmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsXmlParser.swift; sourceTree = "<group>"; };
 		2FB0ADC522154B6600EB305F /* CustomProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProvider.swift; sourceTree = "<group>"; };
 		2FB0ADC7221552D500EB305F /* MessageParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageParser.swift; sourceTree = "<group>"; };
+		2FC6EA3E22680B5C007882A6 /* SimplePDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDF.swift; sourceTree = "<group>"; };
+		2FC6EA3F22680B5C007882A6 /* SimplePDFLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFLabel.swift; sourceTree = "<group>"; };
+		2FC6EA4022680B5C007882A6 /* SimplePDFUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFUtilities.swift; sourceTree = "<group>"; };
 		2FD589921C165FC300668951 /* ArtistsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsTableViewController.swift; sourceTree = "<group>"; };
 		2FD589941C1660A300668951 /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		2FD589981C16775C00668951 /* ArtistSongsTitleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistSongsTitleTableViewController.swift; sourceTree = "<group>"; };
@@ -368,6 +374,9 @@
 		2F5D3D571BC78D85001C4B6F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				2FC6EA3E22680B5C007882A6 /* SimplePDF.swift */,
+				2FC6EA3F22680B5C007882A6 /* SimplePDFLabel.swift */,
+				2FC6EA4022680B5C007882A6 /* SimplePDFUtilities.swift */,
 				2F5D3D611BC7AD30001C4B6F /* Utilities */,
 				2F5D3D581BC78D97001C4B6F /* Service */,
 				285D5A631E76497000C3F1EE /* CommonConstants.swift */,
@@ -682,6 +691,7 @@
 				2FEDF61D1F720D18005D1B83 /* AutoCompleteTextField.swift in Sources */,
 				2FE250301E43134E007BA85D /* PresentationData.swift in Sources */,
 				28786FCC1F78F7310085B216 /* SongBook.swift in Sources */,
+				2FC6EA4222680B5C007882A6 /* SimplePDFLabel.swift in Sources */,
 				2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */,
 				2FB0ADC622154B6600EB305F /* CustomProvider.swift in Sources */,
 				2F18C4C31E8DE6B800E540AF /* CategoriesTableViewController.swift in Sources */,
@@ -712,6 +722,7 @@
 				2F1044201E6422E200DBDD54 /* DatabaseLoadingViewController.swift in Sources */,
 				2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */,
 				285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */,
+				2FC6EA4122680B5C007882A6 /* SimplePDF.swift in Sources */,
 				2FA885D0215325570069DE89 /* StringUtils.swift in Sources */,
 				2FE636591E41DED80092A696 /* ColorUtils.swift in Sources */,
 				2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */,
@@ -727,6 +738,7 @@
 				2F08FFD71F301B8A00B894FB /* RestApiService.swift in Sources */,
 				28786FCE1F78FAD30085B216 /* SongBookService.swift in Sources */,
 				2F18C4C51E8DF17700E540AF /* Category.swift in Sources */,
+				2FC6EA4322680B5C007882A6 /* SimplePDFUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
