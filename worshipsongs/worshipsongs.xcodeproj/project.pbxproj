@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0644C42C23143B2BB0DD3BC2 /* Pods_worshipsongsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EA4BAEE65D0F35BD73DFC13 /* Pods_worshipsongsTests.framework */; };
 		280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A631E76497000C3F1EE /* CommonConstants.swift */; };
@@ -76,8 +77,7 @@
 		625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81771BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
-		87AB0EAEDBAD0DA755E638C5 /* Pods_worshipsongsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA51C43BD7720ED73B33145 /* Pods_worshipsongsTests.framework */; };
-		8BE5E1BD4721210E637DD017 /* Pods_worshipsongs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */; };
+		784204D30C6A913695C3F904 /* Pods_worshipsongs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F722D4F407D8BE33834804 /* Pods_worshipsongs.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +98,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06B8B21982BCE5199CCDB771 /* Pods-worshipsongsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongsTests.release.xcconfig"; path = "Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests.release.xcconfig"; sourceTree = "<group>"; };
+		0EA4BAEE65D0F35BD73DFC13 /* Pods_worshipsongsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		280B923D1E77830E00833EAA /* DeviceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtils.swift; sourceTree = "<group>"; };
 		285D5A631E76497000C3F1EE /* CommonConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
 		28786FCB1F78F7310085B216 /* SongBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongBook.swift; sourceTree = "<group>"; };
@@ -175,13 +177,11 @@
 		2FFE61DF1F317421007B08CC /* UpdateSongsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSongsViewController.swift; sourceTree = "<group>"; };
 		2FFF807F1F1718560086439B /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		2FFF80811F171C8C0086439B /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		46656C4C8593C9951B61F1FB /* Pods-worshipsongsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4CA51C43BD7720ED73B33145 /* Pods_worshipsongsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F553271C94215E99604A0B3 /* Pods-worshipsongsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongsTests.debug.xcconfig"; path = "Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		625E81741BD664D000BE80B8 /* XmlParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserService.swift; sourceTree = "<group>"; };
-		7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.debug.xcconfig"; sourceTree = "<group>"; };
-		C527E03A25B5DD4563B2FAAC /* Pods-worshipsongs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.release.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs.release.xcconfig"; sourceTree = "<group>"; };
-		DE568EB4E060A9A495A70122 /* Pods-worshipsongsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests.release.xcconfig"; sourceTree = "<group>"; };
+		8B1C9EEAB6A545ACB79F5420 /* Pods-worshipsongs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.release.xcconfig"; path = "Target Support Files/Pods-worshipsongs/Pods-worshipsongs.release.xcconfig"; sourceTree = "<group>"; };
+		B0DCFD48D12CABC2495B3567 /* Pods-worshipsongs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.debug.xcconfig"; path = "Target Support Files/Pods-worshipsongs/Pods-worshipsongs.debug.xcconfig"; sourceTree = "<group>"; };
+		F0F722D4F407D8BE33834804 /* Pods_worshipsongs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_worshipsongs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,7 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BE5E1BD4721210E637DD017 /* Pods_worshipsongs.framework in Frameworks */,
+				784204D30C6A913695C3F904 /* Pods_worshipsongs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87AB0EAEDBAD0DA755E638C5 /* Pods_worshipsongsTests.framework in Frameworks */,
+				0644C42C23143B2BB0DD3BC2 /* Pods_worshipsongsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,8 +216,8 @@
 			children = (
 				2F0BCA0B1D9D114B00B8C16B /* FMDB.framework */,
 				2F0BCA091D9D0E0000B8C16B /* libPods.a */,
-				3CB60133AF1FEF5F97794053 /* Pods_worshipsongs.framework */,
-				4CA51C43BD7720ED73B33145 /* Pods_worshipsongsTests.framework */,
+				F0F722D4F407D8BE33834804 /* Pods_worshipsongs.framework */,
+				0EA4BAEE65D0F35BD73DFC13 /* Pods_worshipsongsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -248,7 +248,7 @@
 				2F5D3D3E1BC788F8001C4B6F /* worshipsongsUITests */,
 				2F5D3D1B1BC788F8001C4B6F /* Products */,
 				1611C2B2A4FA5A6BE0CC88B1 /* Frameworks */,
-				C71AB278B042CB5172BCC9B6 /* Pods */,
+				A498699B23ED8B29AED4A2D1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -423,15 +423,16 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
-		C71AB278B042CB5172BCC9B6 /* Pods */ = {
+		A498699B23ED8B29AED4A2D1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */,
-				C527E03A25B5DD4563B2FAAC /* Pods-worshipsongs.release.xcconfig */,
-				46656C4C8593C9951B61F1FB /* Pods-worshipsongsTests.debug.xcconfig */,
-				DE568EB4E060A9A495A70122 /* Pods-worshipsongsTests.release.xcconfig */,
+				B0DCFD48D12CABC2495B3567 /* Pods-worshipsongs.debug.xcconfig */,
+				8B1C9EEAB6A545ACB79F5420 /* Pods-worshipsongs.release.xcconfig */,
+				4F553271C94215E99604A0B3 /* Pods-worshipsongsTests.debug.xcconfig */,
+				06B8B21982BCE5199CCDB771 /* Pods-worshipsongsTests.release.xcconfig */,
 			);
 			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,12 +442,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F5D3D441BC788F8001C4B6F /* Build configuration list for PBXNativeTarget "worshipsongs" */;
 			buildPhases = (
-				1EADD1CFE41EF7EA53618455 /* [CP] Check Pods Manifest.lock */,
+				E9FAB3F24B5EBAFBF455219C /* [CP] Check Pods Manifest.lock */,
 				2F5D3D161BC788F8001C4B6F /* Sources */,
 				2F5D3D171BC788F8001C4B6F /* Frameworks */,
 				2F5D3D181BC788F8001C4B6F /* Resources */,
-				3A1DC313FDF058F399C8BA3C /* [CP] Embed Pods Frameworks */,
-				051A516C0FBA352ED138936B /* [CP] Copy Pods Resources */,
+				CB97FFE5AC6D1FDED2A94CB6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -461,12 +461,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F5D3D471BC788F8001C4B6F /* Build configuration list for PBXNativeTarget "worshipsongsTests" */;
 			buildPhases = (
-				C646CFB0734166D054448C8A /* [CP] Check Pods Manifest.lock */,
+				00D1C59633439059CA434AD5 /* [CP] Check Pods Manifest.lock */,
 				2F5D3D2C1BC788F8001C4B6F /* Sources */,
 				2F5D3D2D1BC788F8001C4B6F /* Frameworks */,
 				2F5D3D2E1BC788F8001C4B6F /* Resources */,
-				09CE6E23FE2F50ECC906E0B1 /* [CP] Embed Pods Frameworks */,
-				6B491825AB5A9E2F926B5ECE /* [CP] Copy Pods Resources */,
+				1476ADF117D03F15BC8EFCC7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -590,94 +589,92 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		051A516C0FBA352ED138936B /* [CP] Copy Pods Resources */ = {
+		00D1C59633439059CA434AD5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-worshipsongsTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		09CE6E23FE2F50ECC906E0B1 /* [CP] Embed Pods Frameworks */ = {
+		1476ADF117D03F15BC8EFCC7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
+				"${BUILT_PRODUCTS_DIR}/YouTubePlayer/YouTubePlayer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1EADD1CFE41EF7EA53618455 /* [CP] Check Pods Manifest.lock */ = {
+		CB97FFE5AC6D1FDED2A94CB6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		3A1DC313FDF058F399C8BA3C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-worshipsongs/Pods-worshipsongs-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
+				"${BUILT_PRODUCTS_DIR}/YouTubePlayer/YouTubePlayer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-worshipsongs/Pods-worshipsongs-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-worshipsongs/Pods-worshipsongs-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6B491825AB5A9E2F926B5ECE /* [CP] Copy Pods Resources */ = {
+		E9FAB3F24B5EBAFBF455219C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C646CFB0734166D054448C8A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-worshipsongs-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -899,7 +896,7 @@
 		};
 		2F5D3D451BC788F8001C4B6F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D16091B8C52A083244D6B3C /* Pods-worshipsongs.debug.xcconfig */;
+			baseConfigurationReference = B0DCFD48D12CABC2495B3567 /* Pods-worshipsongs.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -924,7 +921,7 @@
 		};
 		2F5D3D461BC788F8001C4B6F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C527E03A25B5DD4563B2FAAC /* Pods-worshipsongs.release.xcconfig */;
+			baseConfigurationReference = 8B1C9EEAB6A545ACB79F5420 /* Pods-worshipsongs.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -949,7 +946,7 @@
 		};
 		2F5D3D481BC788F8001C4B6F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46656C4C8593C9951B61F1FB /* Pods-worshipsongsTests.debug.xcconfig */;
+			baseConfigurationReference = 4F553271C94215E99604A0B3 /* Pods-worshipsongsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = worshipsongsTests/Info.plist;
@@ -964,7 +961,7 @@
 		};
 		2F5D3D491BC788F8001C4B6F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE568EB4E060A9A495A70122 /* Pods-worshipsongsTests.release.xcconfig */;
+			baseConfigurationReference = 06B8B21982BCE5199CCDB771 /* Pods-worshipsongsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = worshipsongsTests/Info.plist;
