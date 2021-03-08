@@ -1,14 +1,23 @@
 use_frameworks!
+
+def common_pods
+  pod 'FMDB'
+  pod 'YouTubePlayer', :git => 'https://github.com/gilesvangruisen/Swift-YouTube-Player.git', :tag => 'v0.5.0', :submodules => true
+  pod 'Floaty', :git => 'https://github.com/kciter/KCFloatingActionButton.git', :tag => '4.1.0', :submodules => true  
+end
+
+def test_pods
+  pod 'SwiftLint', '~> 0.42.0'  
+end
+
 target "worshipsongs" do
- pod 'FMDB'
- pod 'YouTubePlayer', :git => 'https://github.com/gilesvangruisen/Swift-YouTube-Player.git', :tag => 'v0.5.0', :submodules => true
- pod 'Floaty', :git => 'https://github.com/kciter/KCFloatingActionButton.git', :tag => '4.1.0', :submodules => true
+  common_pods
 end
 
 target 'worshipsongsTests' do
-  pod 'FMDB'
-  pod 'YouTubePlayer', :git => 'https://github.com/gilesvangruisen/Swift-YouTube-Player.git', :tag => 'v0.5.0', :submodules => true
-  pod 'Floaty', :git => 'https://github.com/kciter/KCFloatingActionButton.git', :tag => '4.1.0', :submodules => true
+  inherit! :search_paths
+  common_pods
+  test_pods  
 end
 
 post_install do |installer|
