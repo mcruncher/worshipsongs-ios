@@ -43,6 +43,6 @@ Pods/
 
 **/AppStore_com.mcruncher.worshipsongs.mobileprovision
 **/*.cer
-**/worshipsongs/fastlane/README.md
-**/worshipsongs/fastlane/report.xml
+fastlane/README.md
+fastlane/report.xml
 **/worshipsongs/worshipsongs.app.dSYM.zip
