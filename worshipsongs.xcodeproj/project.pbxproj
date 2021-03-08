@@ -12,13 +12,7 @@
 		285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A631E76497000C3F1EE /* CommonConstants.swift */; };
 		28786FCC1F78F7310085B216 /* SongBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28786FCB1F78F7310085B216 /* SongBook.swift */; };
 		28786FCE1F78FAD30085B216 /* SongBookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28786FCD1F78FAD30085B216 /* SongBookService.swift */; };
-		28D5C09B1F7200B9001530FF /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09A1F7200B9001530FF /* Fastfile */; };
-		28D5C09D1F720443001530FF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09C1F720443001530FF /* Podfile */; };
-		28D5C09F1F7205AA001530FF /* Jenkinsfile in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C09E1F7205AA001530FF /* Jenkinsfile */; };
-		28D5C0A11F720727001530FF /* sonar-project.properties in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C0A01F720727001530FF /* sonar-project.properties */; };
-		28D5C0A31F720ADA001530FF /* Jenkinsfile-publish in Resources */ = {isa = PBXBuildFile; fileRef = 28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */; };
 		28E0544F1F7B31EB006502EB /* SongBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0544E1F7B31EB006502EB /* SongBookController.swift */; };
-		28F271A71F7E30A30082CCF1 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 28F271A61F7E30A30082CCF1 /* LICENSE */; };
 		2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840FA1DDC6210002B3379 /* FullScreenViewController.swift */; };
 		2F06EE041EF8EBF8006B5E62 /* LanguageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */; };
 		2F08FFD51F30093400B894FB /* UpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F08FFD41F30093400B894FB /* UpdateService.swift */; };
@@ -102,13 +96,7 @@
 		285D5A631E76497000C3F1EE /* CommonConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
 		28786FCB1F78F7310085B216 /* SongBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongBook.swift; sourceTree = "<group>"; };
 		28786FCD1F78FAD30085B216 /* SongBookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongBookService.swift; sourceTree = "<group>"; };
-		28D5C09A1F7200B9001530FF /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Fastfile; path = fastlane/Fastfile; sourceTree = "<group>"; };
-		28D5C09C1F720443001530FF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		28D5C09E1F7205AA001530FF /* Jenkinsfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Jenkinsfile; path = ../Jenkinsfile; sourceTree = "<group>"; };
-		28D5C0A01F720727001530FF /* sonar-project.properties */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sonar-project.properties"; sourceTree = "<group>"; };
-		28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Jenkinsfile-publish"; path = "../Jenkinsfile-publish"; sourceTree = "<group>"; };
 		28E0544E1F7B31EB006502EB /* SongBookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongBookController.swift; sourceTree = "<group>"; };
-		28F271A61F7E30A30082CCF1 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2F06EE031EF8EBF8006B5E62 /* LanguageSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSettingViewController.swift; sourceTree = "<group>"; };
 		2F08FFD41F30093400B894FB /* UpdateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
 		2F08FFD61F301B8A00B894FB /* RestApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiService.swift; sourceTree = "<group>"; };
@@ -237,12 +225,6 @@
 		2F5D3D111BC788F8001C4B6F = {
 			isa = PBXGroup;
 			children = (
-				28F271A61F7E30A30082CCF1 /* LICENSE */,
-				28D5C0A21F720ADA001530FF /* Jenkinsfile-publish */,
-				28D5C0A01F720727001530FF /* sonar-project.properties */,
-				28D5C09E1F7205AA001530FF /* Jenkinsfile */,
-				28D5C09C1F720443001530FF /* Podfile */,
-				28D5C09A1F7200B9001530FF /* Fastfile */,
 				2F5D3D1C1BC788F8001C4B6F /* worshipsongs */,
 				2F5D3D331BC788F8001C4B6F /* worshipsongsTests */,
 				2F5D3D3E1BC788F8001C4B6F /* worshipsongsUITests */,
@@ -431,7 +413,6 @@
 				71DAEADD10A11A2E479545EB /* Pods-worshipsongsTests.debug.xcconfig */,
 				94DA441153DA07131B08E8CB /* Pods-worshipsongsTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -535,6 +516,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"en-GB",
@@ -560,15 +542,9 @@
 				2FA7034121522C3900AD320B /* worshipsongs.entitlements in Resources */,
 				2F505D4420F7557B009FF45D /* songs.sqlite in Resources */,
 				2FE840F51DDC33A6002B3379 /* Localizable.strings in Resources */,
-				28D5C09B1F7200B9001530FF /* Fastfile in Resources */,
-				28D5C09D1F720443001530FF /* Podfile in Resources */,
 				2FE250291E42E305007BA85D /* PresentationView.xib in Resources */,
-				28D5C0A31F720ADA001530FF /* Jenkinsfile-publish in Resources */,
-				28F271A71F7E30A30082CCF1 /* LICENSE in Resources */,
 				2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */,
 				2FFC99291DEFF4D600AEABEF /* Assets.xcassets in Resources */,
-				28D5C0A11F720727001530FF /* sonar-project.properties in Resources */,
-				28D5C09F1F7205AA001530FF /* Jenkinsfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
