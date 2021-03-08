@@ -1,39 +1,99 @@
-# Customise this file, documentation can be found here:
-# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
-# All available actions: https://docs.fastlane.tools/actions
-# can also be listed using the `fastlane actions` command
-
-# Change the syntax highlighting to Ruby
-# All lines starting with a # are ignored when running `fastlane`
-
-# If you want to automatically update fastlane if a new version is available:
-# update_fastlane
-
-# This is the minimum version number required.
-# Update this, if you use features of a newer version
+# Fastlane constants
 fastlane_version "2.53.1"
-
 default_platform :ios
+
+# Constants
+XCODE_WORKSPACE = "worshipsongs.xcworkspace"
+XCODE_PROJECT = "worshipsongs.xcodeproj"
+REPORTS_DIR = "fastlane/reports"
+TEMP_KEYCHAIN_PASSWORD = "temp"
 
 platform :ios do
   before_all do
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
-    cocoapods
+    ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "true"
   end
 
-  desc "Run unit  tests"
-  lane :unittest do
-    scan(scheme: "worshipsongsTests", code_coverage: true, output_types: "junit", output_directory:"fastlane/report", custom_report_file_name: "TEST-report.xml")
+  ##### Setup ######
+  desc "Installs pod dependencies"
+  lane :install_pods do
+    cocoapods repo_update:true
+  end
+  
+  desc "Cleans the project"
+  lane :clean do
+    clear_derived_data
   end
 
-  desc "Run code analysis and publish result to sonarqube"
-  lane :codeanalysis do
-    slather(cobertura_xml: true, jenkins: true, output_directory: "fastlane/report", scheme: "worshipsongs", workspace: "worshipsongs.xcworkspace", proj: "worshipsongs.xcodeproj", binary_basename: "worshipsongs")
-    sh('cd .. && lizard worshipsongs -l swift --xml --exclude "*/Pods/*" > fastlane/report/lizard-report.xml')
-    swiftlint(output_file: "fastlane/report/swiftlint.txt", ignore_exit_status: true)
-    sonar
+  ##### Tests ######
+  desc "Runs Unit Tests"
+  lane :unit_tests do
+    scan(
+      scheme: "worshipsongsTests",
+      code_coverage: true,
+      output_types: "junit",
+      output_directory: REPORTS_DIR,
+      output_files: "TEST-report.xml",
+      clean: true
+    )
   end
-
+  
+  ##### Code Quality ######
+  desc "Performs Code Coverage analysis"
+  lane :code_coverage do
+    slather(
+      sonarqube_xml: true,
+      jenkins: true,
+      output_directory: REPORTS_DIR,
+      scheme: "worshipsongs",
+      workspace: XCODE_WORKSPACE,
+      proj: XCODE_PROJECT,
+      binary_basename: "worshipsongs"
+    )
+  end
+  
+  desc "Performs Code Style analysis"
+  lane :code_style do
+    swiftlint(
+      executable: "./Pods/SwiftLint/swiftlint",
+      output_file: "#{REPORTS_DIR}/swiftlint.txt",
+      ignore_exit_status: true
+    )
+  end
+  
+  desc "Performs Code Complexity analysis"
+  lane :code_complexity do
+    sh("cd .. && lizard worshipsongs -l swift --xml --exclude '*/Pods/*' > #{REPORTS_DIR}/lizard-report.xml")
+  end
+  
+  desc "Runs Sonar"
+  lane :sonarqube do |options|
+    branch_name = options[:branch_name]
+    puts "Branch name: #{branch_name}"
+    
+    pull_request_key = ENV["CHANGE_ID"]
+    puts "Pull Request Key: #{pull_request_key}"
+    
+    if branch_name.downcase == "master" || branch_name.downcase.include?("release")
+      puts "Sonar Branch Analysis shall be performed for #{branch_name}..."
+      sonar(
+        project_version: get_version_number(xcodeproj: XCODE_PROJECT),
+        branch_name: branch_name
+      )
+    elsif !pull_request_key.nil?
+      puts "Sonar Pull Request Analysis shall be performed for #{branch_name}..."
+      sonar(
+        project_version: get_version_number(xcodeproj: XCODE_PROJECT),
+        pull_request_key: pull_request_key,
+        pull_request_branch: branch_name,
+        pull_request_base: ENV["CHANGE_TARGET"]
+      )
+    else
+      puts "Neither Sonar Branch Analysis nor Sonar Pull Request Analysis shall be performed for #{branch_name}"
+      sonar(project_version: get_version_number(xcodeproj: XCODE_PROJECT))
+    end
+        
+  end
+  
   lane :package do
     cert
     sigh(force: true)
@@ -54,27 +114,4 @@ platform :ios do
     # frameit
   end
 
-  # You can define as many lanes as you want
-
-  after_all do |lane|
-    # This block is called, only if the executed lane was successful
-
-    # slack(
-    #   message: "Successfully deployed new App Update."
-    # )
-  end
-
-  error do |lane, exception|
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
-  end
 end
-
-
-# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
-# All available actions: https://docs.fastlane.tools/actions
-
-# fastlane reports which actions are used. No personal data is recorded. 
-# Learn more at https://github.com/fastlane/fastlane#metrics
