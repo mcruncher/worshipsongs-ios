@@ -89,6 +89,7 @@ platform :ios do
       )
     else
       puts "Neither Sonar Branch Analysis nor Sonar Pull Request Analysis shall be performed for #{branch_name}"
+      sonar(project_version: get_version_number(xcodeproj: XCODE_PROJECT))
     end
         
   end
