@@ -124,7 +124,7 @@ platform :ios do
   ##### Build and Deploy ######
   desc "Builds and signs the app"
   lane :build do
-    gym(scheme: "Furiend", export_method: "app-store")
+    gym(scheme: "worshipsongs", export_method: "app-store")
   end
 
   desc "Deploys a new build to Apple TestFlight"

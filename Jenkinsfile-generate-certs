@@ -1,0 +1,24 @@
+@Library('ios-libs') _
+pipeline {
+  agent { label "ios" }
+  
+  environment {
+    MATCH_GIT_URL="$CODE_REPO_URL/ios/ios-code-signing.git"
+    
+    APP_STORE_CONNECT_API_KEY_KEY_ID = credentials('appstore-connect-api-key-id')
+    APP_STORE_CONNECT_API_KEY_ISSUER_ID = credentials('appstore-connect-api-issuer-id')
+    APP_STORE_CONNECT_API_KEY_KEY = credentials('appstore-connect-api-key-content-base64')
+    APP_STORE_CONNECT_API_KEY_IS_KEY_CONTENT_BASE64 = true
+	APP_STORE_CONNECT_API_KEY_IN_HOUSE=false
+  }
+    
+  stages {
+
+    stage('Generate Certs') {
+      steps {
+        generateAndFetchCerts()
+      }      
+    }    
+	
+  }  
+}

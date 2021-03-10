@@ -9,6 +9,7 @@ pipeline {
     APP_STORE_CONNECT_API_KEY_ISSUER_ID = credentials('appstore-connect-api-issuer-id')
     APP_STORE_CONNECT_API_KEY_KEY = credentials('appstore-connect-api-key-content-base64')
     APP_STORE_CONNECT_API_KEY_IS_KEY_CONTENT_BASE64 = true
+	APP_STORE_CONNECT_API_KEY_IN_HOUSE=false
   }
     
   stages {
