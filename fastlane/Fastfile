@@ -94,24 +94,47 @@ platform :ios do
         
   end
   
-  lane :package do
-    cert
-    sigh(force: true)
-    gym(scheme: "worshipsongs")
+  ##### Apple Member Center ######
+  desc "Fetches the distribution certificates and provisioning profiles to compile the app for AppStore distribution"
+  lane :dist_certificates_fetch do
+    temp_keychain_name = "fastlane_appstore"
+    ensure_temp_keychain temp_keychain_name
+    match(
+      type: "appstore",
+      readonly: true,
+      keychain_name: temp_keychain_name,
+      keychain_password: TEMP_KEYCHAIN_PASSWORD
+    )
   end
 
-  desc "Submit a new Beta Build to Apple TestFlight"
-  lane :beta do
-    pilot(skip_submission: true, skip_waiting_for_build_processing: true)
+  ##### Build and Deploy ######
+  desc "Builds and signs the app"
+  lane :build do
+    gym(scheme: "Furiend", export_method: "app-store")
   end
 
-  desc "Deploy a new version to the App Store"
-  lane :release do
-    # match(type: "appstore")
-    # snapshot
-    gym(scheme: "worshipsongs") # Build your app - more options available
-    deliver(force: true)
-    # frameit
+  desc "Deploys a new build to Apple TestFlight"
+  lane :deploy_testflight do
+    puts "TestFlight notes: #{ENV['TESTFLIGHT_NOTES']}"
+    pilot(
+      api_key: app_store_connect_api_key(),
+      skip_submission: true,
+      skip_waiting_for_build_processing: true,
+      changelog: ENV["TESTFLIGHT_NOTES"]      
+    )
   end
 
+  ##### Private ######
+  def ensure_temp_keychain(name)
+    delete_keychain(
+      name: name
+    ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+    
+    create_keychain(
+      name: name,
+      password: TEMP_KEYCHAIN_PASSWORD,
+      unlock: true,
+      timeout: false
+    )
+  end
 end
