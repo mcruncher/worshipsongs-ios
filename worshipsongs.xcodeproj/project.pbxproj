@@ -885,6 +885,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
+				MARKETING_VERSION = 2.8.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mcruncher.worshipsongs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -911,6 +912,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
+				MARKETING_VERSION = 2.8.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mcruncher.worshipsongs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
