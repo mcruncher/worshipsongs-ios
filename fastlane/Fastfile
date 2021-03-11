@@ -1,0 +1,154 @@
+# Fastlane constants
+fastlane_version "2.53.1"
+default_platform :ios
+
+# Constants
+XCODE_WORKSPACE = "worshipsongs.xcworkspace"
+XCODE_PROJECT = "worshipsongs.xcodeproj"
+REPORTS_DIR = "fastlane/reports"
+TEMP_KEYCHAIN_PASSWORD = "temp"
+
+platform :ios do
+  before_all do
+    ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "true"
+  end
+
+  ##### Setup ######
+  desc "Installs pod dependencies"
+  lane :install_pods do
+    cocoapods repo_update:true
+  end
+  
+  desc "Cleans the project"
+  lane :clean do
+    clear_derived_data
+  end
+
+  ##### Tests ######
+  desc "Runs Unit Tests"
+  lane :unit_tests do
+    scan(
+      scheme: "worshipsongsTests",
+      code_coverage: true,
+      output_types: "junit",
+      output_directory: REPORTS_DIR,
+      output_files: "TEST-report.xml",
+      clean: true
+    )
+  end
+  
+  ##### Code Quality ######
+  desc "Performs Code Coverage analysis"
+  lane :code_coverage do
+    slather(
+      sonarqube_xml: true,
+      jenkins: true,
+      output_directory: REPORTS_DIR,
+      scheme: "worshipsongs",
+      workspace: XCODE_WORKSPACE,
+      proj: XCODE_PROJECT,
+      binary_basename: "worshipsongs"
+    )
+  end
+  
+  desc "Performs Code Style analysis"
+  lane :code_style do
+    swiftlint(
+      executable: "./Pods/SwiftLint/swiftlint",
+      output_file: "#{REPORTS_DIR}/swiftlint.txt",
+      ignore_exit_status: true
+    )
+  end
+  
+  desc "Performs Code Complexity analysis"
+  lane :code_complexity do
+    sh("cd .. && lizard worshipsongs -l swift --xml --exclude '*/Pods/*' > #{REPORTS_DIR}/lizard-report.xml")
+  end
+  
+  desc "Runs Sonar"
+  lane :sonarqube do |options|
+    branch_name = options[:branch_name]
+    puts "Branch name: #{branch_name}"
+    
+    pull_request_key = ENV["CHANGE_ID"]
+    puts "Pull Request Key: #{pull_request_key}"
+    
+    if branch_name.downcase == "master" || branch_name.downcase == "develop" || branch_name.downcase.include?("release")
+      puts "Sonar Branch Analysis shall be performed for #{branch_name}..."
+      sonar(
+        project_version: get_version_number(xcodeproj: XCODE_PROJECT),
+        branch_name: branch_name
+      )
+    elsif !pull_request_key.nil?
+      puts "Sonar Pull Request Analysis shall be performed for #{branch_name}..."
+      sonar(
+        project_version: get_version_number(xcodeproj: XCODE_PROJECT),
+        pull_request_key: pull_request_key,
+        pull_request_branch: branch_name,
+        pull_request_base: ENV["CHANGE_TARGET"]
+      )
+    else
+      puts "Neither Sonar Branch Analysis nor Sonar Pull Request Analysis shall be performed for #{branch_name}"
+      sonar(project_version: get_version_number(xcodeproj: XCODE_PROJECT))
+    end
+        
+  end
+  
+  ##### Apple Member Center ######
+  desc "Generates and fetches the distribution certificates and provisioning profiles to compile the app for AppStore distribution"
+  lane :dist_certificates_generate_and_fetch do
+    temp_keychain_name = "fastlane_appstore"
+    ensure_temp_keychain temp_keychain_name
+    match(
+      type: "appstore",
+      readonly: false,
+      api_key: app_store_connect_api_key(),
+      keychain_name: temp_keychain_name,
+      keychain_password: TEMP_KEYCHAIN_PASSWORD
+    )
+  end
+  
+  desc "Fetches the distribution certificates and provisioning profiles to compile the app for AppStore distribution"
+  lane :dist_certificates_fetch do
+    temp_keychain_name = "fastlane_appstore"
+    ensure_temp_keychain temp_keychain_name
+    match(
+      type: "appstore",
+      readonly: true,
+      api_key: app_store_connect_api_key(),
+      keychain_name: temp_keychain_name,
+      keychain_password: TEMP_KEYCHAIN_PASSWORD
+    )
+  end
+
+  ##### Build and Deploy ######
+  desc "Builds and signs the app"
+  lane :build do
+    gym(scheme: "worshipsongs", export_method: "app-store")
+  end
+
+  desc "Deploys a new build to Apple TestFlight"
+  lane :deploy_testflight do
+    puts "TestFlight notes: #{ENV['TESTFLIGHT_NOTES']}"
+    pilot(
+      api_key: app_store_connect_api_key(),
+      skip_submission: true,
+      skip_waiting_for_build_processing: true,
+      changelog: ENV["TESTFLIGHT_NOTES"]      
+    )
+  end
+
+  ##### Private ######
+  def ensure_temp_keychain(name)
+    delete_keychain(
+      name: name
+    ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+    
+    create_keychain(
+      name: name,
+      password: TEMP_KEYCHAIN_PASSWORD,
+      unlock: true,
+      timeout: false
+    )
+  end
+end
