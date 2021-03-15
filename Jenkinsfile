@@ -5,7 +5,6 @@ pipeline {
   stages {
     stage('Unit Tests') {
       steps {
-        notifyBuildStatus('STARTED', 'github')
         runUnitTests()
       }
       
@@ -23,11 +22,5 @@ pipeline {
       }
     }
     
-  }
-  
-  post {
-    always {
-      notifyBuildStatus(currentBuild.result, 'github')
-    }
-  }
+  }  
 }

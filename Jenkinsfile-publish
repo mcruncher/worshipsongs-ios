@@ -40,7 +40,6 @@ pipeline {
 
     stage('Unit Tests') {
       steps {
-        notifyBuildStatus 'STARTED'
         runUnitTests()
       }
       
@@ -72,9 +71,4 @@ pipeline {
 
   }
   
-  post {
-    always {
-      notifyBuildStatus currentBuild.result
-    }
-  }
 }
