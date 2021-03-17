@@ -3,46 +3,28 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - SwiftLint (0.42.0)
-  - YouTubePlayer (0.5.0)
+  - SwiftLint (0.43.1)
+  - YouTubePlayer (0.7.2)
 
 DEPENDENCIES:
-  - Floaty (from `https://github.com/kciter/KCFloatingActionButton.git`, tag `4.1.0`)
+  - Floaty
   - FMDB
-  - SwiftLint (~> 0.42.0)
-  - YouTubePlayer (from `https://github.com/gilesvangruisen/Swift-YouTube-Player.git`, tag `v0.5.0`)
+  - SwiftLint
+  - YouTubePlayer
 
 SPEC REPOS:
   trunk:
+    - Floaty
     - FMDB
     - SwiftLint
-
-EXTERNAL SOURCES:
-  Floaty:
-    :git: https://github.com/kciter/KCFloatingActionButton.git
-    :submodules: true
-    :tag: 4.1.0
-  YouTubePlayer:
-    :git: https://github.com/gilesvangruisen/Swift-YouTube-Player.git
-    :submodules: true
-    :tag: v0.5.0
-
-CHECKOUT OPTIONS:
-  Floaty:
-    :git: https://github.com/kciter/KCFloatingActionButton.git
-    :submodules: true
-    :tag: 4.1.0
-  YouTubePlayer:
-    :git: https://github.com/gilesvangruisen/Swift-YouTube-Player.git
-    :submodules: true
-    :tag: v0.5.0
+    - YouTubePlayer
 
 SPEC CHECKSUMS:
   Floaty: 1a4e213f3512cf3045ef9cb0c1ff456226d1f66a
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
-  YouTubePlayer: c9581f0405e3240d1549b194bc1134bfc018a51d
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+  YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: 4991f7756e3abf6fdf71297f90dca5eadda7e47e
+PODFILE CHECKSUM: 3716037c5bdd373db6ce39bd15f8bb05601b47ad
 
 COCOAPODS: 1.10.1

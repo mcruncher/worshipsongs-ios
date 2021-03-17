@@ -1,13 +1,14 @@
+platform :ios, '9.0'
 use_frameworks!
 
 def common_pods
   pod 'FMDB'
-  pod 'YouTubePlayer', :git => 'https://github.com/gilesvangruisen/Swift-YouTube-Player.git', :tag => 'v0.5.0', :submodules => true
-  pod 'Floaty', :git => 'https://github.com/kciter/KCFloatingActionButton.git', :tag => '4.1.0', :submodules => true  
+  pod 'YouTubePlayer'
+  pod 'Floaty'
 end
 
 def test_pods
-  pod 'SwiftLint', '~> 0.42.0'  
+  pod 'SwiftLint'
 end
 
 target "worshipsongs" do
