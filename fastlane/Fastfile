@@ -24,6 +24,22 @@ platform :ios do
     clear_derived_data
   end
 
+  ##### Development ######
+  desc "Automatically bumps the major version"
+  lane :bump_major_version do
+    increment_version_number(bump_type: "major")
+  end
+
+  desc "Automatically bumps minor version"
+  lane :bump_minor_version do
+    increment_version_number(bump_type: "minor")
+  end
+  
+  desc "Automatically bumps the patch version"
+  lane :bump_patch_version do
+    increment_version_number(bump_type: "patch")
+  end
+
   ##### Tests ######
   desc "Runs Unit Tests"
   lane :unit_tests do
