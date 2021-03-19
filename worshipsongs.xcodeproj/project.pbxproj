@@ -10,7 +10,7 @@
 		1A9333A826031B4300953865 /* IOpenLPServiceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */; };
 		1A9333B926031C9200953865 /* OpenLPServiceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */; };
 		1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */; };
-		1A9333D82603372E00953865 /* sample.osj in Resources */ = {isa = PBXBuildFile; fileRef = 1A9333D72603372E00953865 /* sample.osj */; };
+		1A9333D82603372E00953865 /* openlp-service-lite.osj in Resources */ = {isa = PBXBuildFile; fileRef = 1A9333D72603372E00953865 /* openlp-service-lite.osj */; };
 		280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A631E76497000C3F1EE /* CommonConstants.swift */; };
@@ -99,7 +99,7 @@
 		1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOpenLPServiceConverter.swift; sourceTree = "<group>"; };
 		1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverter.swift; sourceTree = "<group>"; };
 		1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverterSpec.swift; sourceTree = "<group>"; };
-		1A9333D72603372E00953865 /* sample.osj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample.osj; sourceTree = "<group>"; };
+		1A9333D72603372E00953865 /* openlp-service-lite.osj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "openlp-service-lite.osj"; sourceTree = "<group>"; };
 		280B923D1E77830E00833EAA /* DeviceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtils.swift; sourceTree = "<group>"; };
 		285D5A631E76497000C3F1EE /* CommonConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
 		28786FCB1F78F7310085B216 /* SongBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongBook.swift; sourceTree = "<group>"; };
@@ -234,14 +234,6 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
-		1A9333D62603371400953865 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				1A9333D72603372E00953865 /* sample.osj */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		1A9333E7260347DA00953865 /* OpenLP */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +241,14 @@
 				1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */,
 			);
 			name = OpenLP;
+			sourceTree = "<group>";
+		};
+		1ADDED35260439C3004724DD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1A9333D72603372E00953865 /* openlp-service-lite.osj */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		2F0A70F71E1B43020025F156 /* Component */ = {
@@ -305,7 +305,7 @@
 		2F5D3D331BC788F8001C4B6F /* worshipsongsTests */ = {
 			isa = PBXGroup;
 			children = (
-				1A9333D62603371400953865 /* Resources */,
+				1ADDED35260439C3004724DD /* Resources */,
 				1A9333CC26031DBA00953865 /* Library */,
 				2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */,
 				2F5D3D361BC788F8001C4B6F /* Info.plist */,
@@ -596,7 +596,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A9333D82603372E00953865 /* sample.osj in Resources */,
+				1A9333D82603372E00953865 /* openlp-service-lite.osj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
