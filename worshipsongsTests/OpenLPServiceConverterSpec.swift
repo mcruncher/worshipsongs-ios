@@ -14,19 +14,21 @@ class OpenLPServiceConverterSpec : QuickSpec {
     override func spec() {
         describe("OpenLPServiceConverter") {
             let openLPServiceConverter = OpenLPServiceConverter()
-            let songsModel: [Songs] = DatabaseHelper().getSongModel()
+            let databaseHelper = DatabaseHelper()
             var favouriteList: [FavoritesSongsWithOrder]!
+            var song1: Songs!
+            var song2: Songs!
             var expectedJson: JSON!
             var result: JSON!
             
             describe("Convert favourite list to OpenLP Service Lite JSON format") {
                 context("given a favourite list exist with some songs") {
                     beforeEach {
-                        print(songsModel[0].title)
-                        print(songsModel[1].title)
+                        song1 = databaseHelper.findSongs(byTitle: "Amazing Grace")[0]
+                        song2 = databaseHelper.findSongs(byTitle: "God is good")[0]
                         
-                        let favouriteSong1 = FavoritesSongsWithOrder(orderNo: 1, songName: songsModel[0].title, songListName: "foo")
-                        let favouriteSong2 = FavoritesSongsWithOrder(orderNo: 2, songName: songsModel[1].title, songListName: "foo")
+                        let favouriteSong1 = FavoritesSongsWithOrder(orderNo: 1, songName: song1.title, songListName: "foo")
+                        let favouriteSong2 = FavoritesSongsWithOrder(orderNo: 2, songName: song2.title, songListName: "foo")
                         favouriteList = [favouriteSong1, favouriteSong2]
                     }
                     
@@ -58,8 +60,8 @@ class OpenLPServiceConverterSpec : QuickSpec {
                             }
                             
                             it("should have the following service header for the first song") {
-                                let expectedSongTitle = "Aabiragaamin Thaevan"
-                                let expectedAuthor = "Fr. S. J. Berchmans {பெர்க்மான்ஸ்}"
+                                let expectedSongTitle = "Amazing Grace (my chains are gone)"
+                                let expectedAuthor = "Author Unknown {ஆசிரியர் தெரியவில்லை}"
                                 
                                 let serviceItem = result[1]["serviceitem"]
                                 let serviceItemHeader = serviceItem["header"]
@@ -93,12 +95,11 @@ class OpenLPServiceConverterSpec : QuickSpec {
                                 expect(serviceItemHeader["search"]).to(equal(""))
                                 
                                 let data = serviceItemHeader["data"]
-                                let expectedTitleInData = "aabiragaamin thaevan@abrahamin daevan abiragamin devan"
                                 expect(data.count).to(equal(2))
-                                expect(data["title"].string).to(equal(expectedTitleInData))
+//                                expect(data["title"].string).to(equal(expectedJson[1]["serviceitem"]["header"]["data"]["title"].string))
                                 expect(data["authors"].string).to(equal(expectedAuthor))
                                 
-                                //expect(serviceItemHeader["xml_version"].string).to(equal(self.getExpectedLyricsForSong1()))
+//                                expect(serviceItemHeader["xml_version"].string).to(equal())
                                 
                                 expect(serviceItemHeader["auto_play_slides_once"].bool).to(beFalse())
                                 expect(serviceItemHeader["auto_play_slides_loop"].bool).to(beFalse())
@@ -116,9 +117,5 @@ class OpenLPServiceConverterSpec : QuickSpec {
                 }
             }            
         }
-    }
-    
-    private func getExpectedLyricsForSong1() -> String {
-        "<?xml version='1.0' encoding='UTF-8'?>\n<song xmlns=\"http://openlyrics.info/namespace/2009/song\" version=\"0.8\" createdIn=\"OpenLP 2.4.6\" modifiedIn=\"OpenLP 2.4.6\" modifiedDate=\"2018-04-17T01:12:04\"><properties><titles><title>Aabiragaamin Thaevan</title><title>Abrahamin Daevan Abiragamin Devan</title></titles><comments><comment>i18nTitle=ஆபிரகாமின் தேவன் ஈசாக்கின் தேவன்\nalbum=Jebathoatta Jeyageethanggal 35\nmediaUrl=https://www.youtube.com/watch?v=EQl-y2iikf4</comment></comments><verseOrder>c1 c2 v1 o1 c1 c2 v2 o2 c1 c2 v3 o3 c1 c2</verseOrder><authors><author>Fr. S. J. Berchmans {பெர்க்மான்ஸ்}</author></authors><songbooks><songbook name=\"Jebathoatta Jeyageethanggal {ஜெபத்தோட்ட ஜெயகீதங்கள்}\" entry=\"377\"/></songbooks><themes><theme>Jebathoatta Jeyageethanggal {ஜெபத்தோட்ட ஜெயகீதங்கள்}</theme></themes></properties><format><tags application=\"OpenLP\"><tag name=\"y\"><open><![CDATA[<span style=\"-webkit-text-fill-color:yellow\">]]></open><close><![CDATA[</span>]]></close></tag></tags></format><lyrics><verse name=\"c1\"><lines><tag name=\"y\">ஆபிரகாமின் தேவன் ஈசாக்கின் தேவன்</tag><br/>Aabiragaamin thaevan eesaakkin thaevan<br/><tag name=\"y\">யாக்கோபின் தேவன் உன்னை ஆசிர்வதிப்பார்</tag><br/>Yaakoabin thaevan unnai aasirvathipaar</lines></verse><verse name=\"c2\"><lines><tag name=\"y\">தகதிமி தகஜனு தகதிமி தகஜனு</tag><br/>Thakathimi thagajanu thakathimi thagajanu<br/><tag name=\"y\">தகதிமி தகஜனு தகதிமி தகஜனு ஆ....ஆ</tag><br/>Thakathimi thagajanu thakathimi thagajanu aa aa aa...</lines></verse><verse name=\"v1\"><lines><tag name=\"y\">1. கர்த்தருக்கு பயந்து</tag><br/>Kartharukku payanthu<br/><tag name=\"y\">வழிகளில் நடக்கின்ற நீ</tag><br/>Vazhigalil nadakindra nee<br/><tag name=\"y\">பாக்கியவான் பாக்கியவான்</tag><br/>Paakkiyavaan paakkiyavaan</lines></verse><verse name=\"o1\"><lines><tag name=\"y\">உழைப்பின் பயனை நீ</tag><br/>Uzhaippin payanai nee<br/><tag name=\"y\">உண்பது நிச்சயமே நிச்சயமே</tag><br/>Unbathu nichayamae nichayamae</lines></verse><verse name=\"v2\"><lines><tag name=\"y\">2.நன்மையும் பாக்கியமும்</tag><br/>Nanmaiyum paakiyamum<br/><tag name=\"y\">உன் வாழ்வில் நீ காண்பாய்</tag><br/>Un vaazhvil nee kaanbaai<br/><tag name=\"y\">செல்வமும் ஆஸ்தியும் தேடி வரும் தினமும்</tag><br/>Selvamum aasthiyum thaedi varum thinamum</lines></verse><verse name=\"o2\"><lines><tag name=\"y\">ஜீவனுள்ள நாட்களெல்லாம்</tag><br/>Jeevanulla naatkalellaam<br/><tag name=\"y\">செழிப்பை நீ காண்பாய் நீ காண்பாய்</tag><br/>Sezhippai nee kaanbaai nee kaanbaai</lines></verse><verse name=\"v3\"><lines><tag name=\"y\">3. இல்லத்தில் உன் மனைவி</tag><br/>Illathil un manaivi<br/><tag name=\"y\">கனிதரும் திராட்சைச் செடி</tag><br/>Kanitharum thiraatchaich chedi<br/><tag name=\"y\">பிள்ளைகள் ஒலிவமரக் கன்றுகள்போல் வளர்வார்கள்</tag><br/>Pillaigal olivamarak kandrugalpol valarvaargal</lines></verse><verse name=\"o3\"><lines><tag name=\"y\">பிள்ளைகளின் பிள்ளைகளை காண்பது</tag><br/>Pillaigalin pillaigalai kaanbathu<br/><tag name=\"y\">நிச்சயம் நிச்சயமே</tag><br/>Nichchayam nichchayamae</lines></verse></lyrics></song>"
     }
 }

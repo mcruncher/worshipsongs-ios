@@ -103,6 +103,26 @@ class DatabaseHelper: NSObject {
         return songModel
     }
     
+    func findSongs(byTitle title: String) -> [Songs] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
+
+        database?.open()
+        var songs = [Songs]()
+
+        var arguments = [AnyObject]()
+        arguments.append("%\(title)%" as AnyObject)
+
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where title LIKE ? ORDER BY title", withArgumentsIn: arguments)
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                songs.append(getSong(resultSet!))
+            }
+        }
+        return songs
+    }
+    
     func getSongsModelByIds(_ argument: [String]) -> [(Songs)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         let path = commonService.getDocumentDirectoryPath("songs.sqlite")
