@@ -13,9 +13,11 @@ class DatabaseHelper: NSObject {
     var resultSet: FMResultSet? = nil
     let commonService: CommonService = CommonService()
     let id = "id"
-    let titles: String = "title"
+    let title: String = "title"
+    let alternateTitle = "alternate_title"
     let lyrics: String = "lyrics"
     let verseOrder: String = "verse_order"
+    let comments = "comments"
     
     func getSongModel() -> [(Songs)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
@@ -74,7 +76,7 @@ class DatabaseHelper: NSObject {
         return songModel
     }
     
-    func getSongsModelTitles(_ argument: [String]) -> [(Songs)] {
+    func findSongsByTitles(_ argument: [String]) -> [(Songs)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         let path = commonService.getDocumentDirectoryPath("songs.sqlite")
         //54D70B97-F386-4746-9A69-692E339668B8
@@ -182,13 +184,17 @@ class DatabaseHelper: NSObject {
     }
     
     func getSong(_ resultSet: FMResultSet) -> Songs {
-        let id : String = resultSet.string(forColumn: self.id)!
-        let title: String = resultSet.string(forColumn: self.titles)!
-        let lyrics: String = resultSet.string(forColumn: self.lyrics)!
-        let verseOrder: String = resultSet.string(forColumn: self.verseOrder)!
-        let comments: String = resultSet.string(forColumn:
-            "comments") != nil ? resultSet.string(forColumn: "comments")! : ""
-        return Songs(id: id, title: title, lyrics: lyrics, verse_order: verseOrder, comment: comments)
+        let song = Songs()
+        song.id = resultSet.string(forColumn: self.id)!
+        song.title = resultSet.string(forColumn: self.title)!
+        song.alternateTitle = resultSet.string(forColumn: self.alternateTitle)!
+        song.lyrics = resultSet.string(forColumn: self.lyrics)!
+        song.verse_order = resultSet.string(forColumn: self.verseOrder)!
+        
+        let comment = resultSet.string(forColumn: self.comments)
+        song.comment = comment != nil ? comment! : ""
+        
+        return song
     }
     
     private func getAuthor(_ resultSet: FMResultSet) -> Author {

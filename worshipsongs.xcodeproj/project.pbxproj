@@ -221,6 +221,7 @@
 		1A9333CC26031DBA00953865 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				1ADDED3C2604857F004724DD /* Service */,
 				1A9333CD26031DC900953865 /* Utilities */,
 			);
 			name = Library;
@@ -249,6 +250,13 @@
 				1A9333D72603372E00953865 /* openlp-service-lite.osj */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		1ADDED3C2604857F004724DD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Service;
 			sourceTree = "<group>";
 		};
 		2F0A70F71E1B43020025F156 /* Component */ = {

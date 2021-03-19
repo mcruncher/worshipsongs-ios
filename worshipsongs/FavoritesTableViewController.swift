@@ -290,7 +290,7 @@ class FavoritesTableViewController: UITableViewController {
             let favoritesSongsWithOrders = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
             var favoritesSongs = [FavoritesSong]()
             for favoritesSongsWithOrder in favoritesSongsWithOrders {
-                let songs = databaseHelper.getSongsModelTitles([favoritesSongsWithOrder.songName])
+                let songs = databaseHelper.findSongsByTitles([favoritesSongsWithOrder.songName])
                 if songs.count > 0 {
                     favoritesSongs.append(FavoritesSong(songTitle:favoritesSongsWithOrder.songName, songs: songs[0], favoritesSongsWithOrder: favoritesSongsWithOrder))
                 } else {

@@ -10,6 +10,7 @@ import Foundation
 class Songs {
     var id = ""
     var title = ""
+    var alternateTitle = ""
     var lyrics = ""
     var verse_order = ""
     var comment = ""
