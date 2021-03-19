@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A9333A826031B4300953865 /* IOpenLPServiceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */; };
+		1A9333B926031C9200953865 /* OpenLPServiceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */; };
+		1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */; };
+		1A9333D82603372E00953865 /* sample.osj in Resources */ = {isa = PBXBuildFile; fileRef = 1A9333D72603372E00953865 /* sample.osj */; };
 		280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A631E76497000C3F1EE /* CommonConstants.swift */; };
@@ -92,6 +96,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOpenLPServiceConverter.swift; sourceTree = "<group>"; };
+		1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverter.swift; sourceTree = "<group>"; };
+		1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverterSpec.swift; sourceTree = "<group>"; };
+		1A9333D72603372E00953865 /* sample.osj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample.osj; sourceTree = "<group>"; };
 		280B923D1E77830E00833EAA /* DeviceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtils.swift; sourceTree = "<group>"; };
 		285D5A631E76497000C3F1EE /* CommonConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
 		28786FCB1F78F7310085B216 /* SongBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongBook.swift; sourceTree = "<group>"; };
@@ -210,6 +218,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1A9333CC26031DBA00953865 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				1A9333CD26031DC900953865 /* Utilities */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		1A9333CD26031DC900953865 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		1A9333D62603371400953865 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1A9333D72603372E00953865 /* sample.osj */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1A9333E7260347DA00953865 /* OpenLP */ = {
+			isa = PBXGroup;
+			children = (
+				1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */,
+				1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */,
+			);
+			name = OpenLP;
+			sourceTree = "<group>";
+		};
 		2F0A70F71E1B43020025F156 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +305,8 @@
 		2F5D3D331BC788F8001C4B6F /* worshipsongsTests */ = {
 			isa = PBXGroup;
 			children = (
+				1A9333D62603371400953865 /* Resources */,
+				1A9333CC26031DBA00953865 /* Library */,
 				2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */,
 				2F5D3D361BC788F8001C4B6F /* Info.plist */,
 			);
@@ -356,6 +399,7 @@
 		2F5D3D571BC78D85001C4B6F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				1A9333E7260347DA00953865 /* OpenLP */,
 				2FC6EA3E22680B5C007882A6 /* SimplePDF.swift */,
 				2FC6EA3F22680B5C007882A6 /* SimplePDFLabel.swift */,
 				2FC6EA4022680B5C007882A6 /* SimplePDFUtilities.swift */,
@@ -552,6 +596,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A9333D82603372E00953865 /* sample.osj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,12 +641,20 @@
 				"${PODS_ROOT}/Target Support Files/Pods-worshipsongs/Pods-worshipsongs-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectAutoregistration/SwinjectAutoregistration.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
 				"${BUILT_PRODUCTS_DIR}/YouTubePlayer/YouTubePlayer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectAutoregistration.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectStoryboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,13 +693,27 @@
 				"${PODS_ROOT}/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectAutoregistration/SwinjectAutoregistration.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
 				"${BUILT_PRODUCTS_DIR}/YouTubePlayer/YouTubePlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/Cuckoo/Cuckoo.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectAutoregistration.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectStoryboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cuckoo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -666,6 +733,7 @@
 				28786FCC1F78F7310085B216 /* SongBook.swift in Sources */,
 				2FC6EA4222680B5C007882A6 /* SimplePDFLabel.swift in Sources */,
 				2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */,
+				1A9333A826031B4300953865 /* IOpenLPServiceConverter.swift in Sources */,
 				2FB0ADC622154B6600EB305F /* CustomProvider.swift in Sources */,
 				2F18C4C31E8DE6B800E540AF /* CategoriesTableViewController.swift in Sources */,
 				2FFBC33E1E7BAB85006B2405 /* DatabaseService.swift in Sources */,
@@ -679,6 +747,7 @@
 				2FDE48531DF140BD00948236 /* SettingsController.swift in Sources */,
 				2FEDF61F1F721AF1005D1B83 /* FavoritesListViewController.swift in Sources */,
 				280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */,
+				1A9333B926031C9200953865 /* OpenLPServiceConverter.swift in Sources */,
 				625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */,
 				2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */,
@@ -721,6 +790,7 @@
 			files = (
 				625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */,
+				1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */,
 				2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
