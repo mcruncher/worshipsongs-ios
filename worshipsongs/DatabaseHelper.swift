@@ -130,14 +130,14 @@ class DatabaseHelper: NSObject {
         return songModel
     }
     
-    func getArtistName(_ argument: String) -> String {
+    func findAuthor(bySongId songId: String) -> String {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         let path = commonService.getDocumentDirectoryPath("songs.sqlite")
         //54D70B97-F386-4746-9A69-692E339668B8
         print("path : \(path)")
         database?.open()
         var arguments = [AnyObject]()
-        arguments.append(argument as AnyObject)
+        arguments.append(songId as AnyObject)
         var authorName = " "
         let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM authors where id IN " +
             "(SELECT author_id FROM authors_songs where song_id = ?) ORDER BY display_name", withArgumentsIn: arguments)

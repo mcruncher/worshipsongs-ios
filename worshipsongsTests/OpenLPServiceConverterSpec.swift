@@ -75,7 +75,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
                                 let footer = serviceItemHeader["footer"]
                                 expect(footer.count).to(equal(2))
                                 expect(footer[0].string).to(equal(expectedSongTitle))
-//                                expect(footer[1].string).to(equal("Written by: \(expectedAuthor)"))
+                                expect(footer[1].string).to(equal("Written by: \(expectedAuthor)"))
                                 
                                 expect(serviceItemHeader["type"]).to(equal(1))
                                 expect(serviceItemHeader["icon"]).to(equal(":/plugins/plugin_songs.png"))
@@ -83,10 +83,10 @@ class OpenLPServiceConverterSpec : QuickSpec {
                                 let audit = serviceItemHeader["audit"]
                                 expect(audit.count).to(equal(4))
                                 expect(audit[0].string).to(equal(expectedSongTitle))
-//                                expect(audit[1]).to(equal(["\(expectedAuthor)"]))
+                                expect(audit[1]).to(equal(["\(expectedAuthor)"]))
                                 expect(audit[2]).to(equal(""))
                                 expect(audit[3]).to(equal(""))
-                                
+                                
                                 expect(serviceItemHeader["notes"]).to(equal(""))
                                 expect(serviceItemHeader["from_plugin"].bool).to(beFalse())
                                 expect(serviceItemHeader["capabilities"]).to(equal([2, 1, 5, 8, 9, 13]))
@@ -96,7 +96,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
                                 let expectedTitleInData = "aabiragaamin thaevan@abrahamin daevan abiragamin devan"
                                 expect(data.count).to(equal(2))
                                 expect(data["title"].string).to(equal(expectedTitleInData))
-//                                expect(data["authors"].string).to(equal(expectedAuthor))
+                                expect(data["authors"].string).to(equal(expectedAuthor))
                                 
                                 //expect(serviceItemHeader["xml_version"].string).to(equal(self.getExpectedLyricsForSong1()))
                                 

@@ -80,7 +80,7 @@ class SongWithVideoViewController: UIViewController  {
         }
         songLyrics = selectedSong.lyrics as NSString
         self.songName = selectedSong.title
-        authorName = databaseHelper.getArtistName(selectedSong.id)
+        authorName = databaseHelper.findAuthor(bySongId: selectedSong.id)
         if !selectedSong.comment.isEmpty {
             comment = selectedSong.comment
         } else {

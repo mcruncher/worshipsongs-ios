@@ -69,19 +69,19 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
     }
     
     private func getFooter(forSong song: Songs) -> [String] {
-        let footer = [song.title, "Written by: "]
+        let footer = [song.title, "Written by: \(databaseHelper.findAuthor(bySongId: song.id))"]
         return footer
     }
     
     private func getAudit(forSong song: Songs) -> [Any] {
-        let audit = [song.title, [""], "", ""] as [Any]
+        let audit = [song.title, [databaseHelper.findAuthor(bySongId: song.id)], "", ""] as [Any]
         return audit
     }
     
     private func getData(forSong song: Songs) -> [String : String] {
         let data = [
             "title": "\(song.title.lowercased())@\(song.alternateTitle.lowercased())",
-            "authors": ""
+            "authors": databaseHelper.findAuthor(bySongId: song.id)
         ]
         return data
     }

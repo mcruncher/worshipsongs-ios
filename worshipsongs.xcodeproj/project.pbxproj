@@ -11,6 +11,7 @@
 		1A9333B926031C9200953865 /* OpenLPServiceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */; };
 		1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */; };
 		1A9333D82603372E00953865 /* openlp-service-lite.osj in Resources */ = {isa = PBXBuildFile; fileRef = 1A9333D72603372E00953865 /* openlp-service-lite.osj */; };
+		1ADDED4126048B2D004724DD /* DatabaseHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */; };
 		280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A631E76497000C3F1EE /* CommonConstants.swift */; };
@@ -100,6 +101,7 @@
 		1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverter.swift; sourceTree = "<group>"; };
 		1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverterSpec.swift; sourceTree = "<group>"; };
 		1A9333D72603372E00953865 /* openlp-service-lite.osj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "openlp-service-lite.osj"; sourceTree = "<group>"; };
+		1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelperSpec.swift; sourceTree = "<group>"; };
 		280B923D1E77830E00833EAA /* DeviceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtils.swift; sourceTree = "<group>"; };
 		285D5A631E76497000C3F1EE /* CommonConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
 		28786FCB1F78F7310085B216 /* SongBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongBook.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 		1ADDED3C2604857F004724DD /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -796,6 +799,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ADDED4126048B2D004724DD /* DatabaseHelperSpec.swift in Sources */,
 				625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */,
 				1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */,
