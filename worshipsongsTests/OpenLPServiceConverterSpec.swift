@@ -173,7 +173,16 @@ class OpenLPServiceConverterSpec : QuickSpec {
                         }
                     }
                 }
-            }            
+            }
+            
+            describe("Get footer authors") {
+                it("should be in the expected format") {
+                    expect(openLPServiceConverter.getFooterAuthors(["foo"])).to(equal("Written by: foo"))
+                    expect(openLPServiceConverter.getFooterAuthors(["foo", "bar"])).to(equal("Written by: foo and bar"))
+                    expect(openLPServiceConverter.getFooterAuthors(["foo", "bar", "foobar"])).to(equal("Written by: foo, bar and foobar"))
+                }
+            }
+            
         }
     }
 }

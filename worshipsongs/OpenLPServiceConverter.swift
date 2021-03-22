@@ -40,7 +40,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             "plugin": "songs",
             "theme": NSNull(),
             "title": song.title,
-            "footer": getFooter(forSong: song),
+            "footer": getFooter(forSong: song, forAuthors: authors),
             "type": 1, // not sure what is this, need to check OpenLP docs
             "icon": ":/plugins/plugin_songs.png",
             "audit": getAudit(forSong: song, forAuthors: authors),
@@ -68,9 +68,24 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return serviceItemHeader
     }
     
-    private func getFooter(forSong song: Songs) -> [String] {
-        let footer = [song.title, "Written by: \(databaseHelper.findAuthor(bySongId: song.id))"]
+    private func getFooter(forSong song: Songs, forAuthors authors: [String]) -> [String] {
+        let footer = [song.title, getFooterAuthors(authors)]
         return footer
+    }
+    
+    func getFooterAuthors(_ authors: [String]) -> String {
+        var formattedAuthors = ""
+        if authors.count == 1 {
+            formattedAuthors = authors[0]
+        } else if authors.count == 2 {
+            formattedAuthors = "\(authors[0]) and \(authors[1])"
+        } else {
+            let pneultimateIndex = authors.count - 2
+            let authorsExceptTheLastOne = authors[0...pneultimateIndex]
+            let formattedAuthorsExceptTheLastOne = authorsExceptTheLastOne.joined(separator: ", ")
+            formattedAuthors = "\(formattedAuthorsExceptTheLastOne) and \(authors[authors.count - 1])"
+        }
+        return "Written by: \(formattedAuthors)"
     }
     
     private func getAudit(forSong song: Songs, forAuthors authors: [String]) -> [Any] {
