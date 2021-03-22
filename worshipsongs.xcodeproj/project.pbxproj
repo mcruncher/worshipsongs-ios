@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A8A4B5326082D28003126F8 /* StringExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8A4B5226082D28003126F8 /* StringExtensionsSpec.swift */; };
 		1A9333A826031B4300953865 /* IOpenLPServiceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */; };
 		1A9333B926031C9200953865 /* OpenLPServiceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */; };
 		1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */; };
@@ -42,7 +43,7 @@
 		2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D5B1BC7A216001C4B6F /* CommonService.swift */; };
 		2FA7034121522C3900AD320B /* worshipsongs.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */; };
 		2FA885CF215325430069DE89 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */; };
-		2FA885D0215325570069DE89 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
+		2FA885D0215325570069DE89 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* String+Extensions.swift */; };
 		2FB0ADC422151DFB00EB305F /* LyricsXmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC322151DFB00EB305F /* LyricsXmlParser.swift */; };
 		2FB0ADC622154B6600EB305F /* CustomProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC522154B6600EB305F /* CustomProvider.swift */; };
 		2FB0ADC8221552D500EB305F /* MessageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC7221552D500EB305F /* MessageParser.swift */; };
@@ -97,6 +98,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A8A4B5226082D28003126F8 /* StringExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsSpec.swift; sourceTree = "<group>"; };
 		1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOpenLPServiceConverter.swift; sourceTree = "<group>"; };
 		1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverter.swift; sourceTree = "<group>"; };
 		1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverterSpec.swift; sourceTree = "<group>"; };
@@ -141,7 +143,7 @@
 		2F5D3D5B1BC7A216001C4B6F /* CommonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonService.swift; sourceTree = "<group>"; };
 		2F5D3D5E1BC7A5B3001C4B6F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		2F5D3D5F1BC7A74E001C4B6F /* TitlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitlesViewController.swift; sourceTree = "<group>"; };
-		2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		2F5D3D621BC7AD5E001C4B6F /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		2FB0ADC322151DFB00EB305F /* LyricsXmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsXmlParser.swift; sourceTree = "<group>"; };
 		2FB0ADC522154B6600EB305F /* CustomProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProvider.swift; sourceTree = "<group>"; };
 		2FB0ADC7221552D500EB305F /* MessageParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageParser.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */,
+				1A8A4B5226082D28003126F8 /* StringExtensionsSpec.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -450,7 +453,7 @@
 		2F5D3D611BC7AD30001C4B6F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */,
+				2F5D3D621BC7AD5E001C4B6F /* String+Extensions.swift */,
 				2FDE48541DF149DB00948236 /* ColorUtils.swift */,
 				2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */,
 				280B923D1E77830E00833EAA /* DeviceUtils.swift */,
@@ -776,7 +779,7 @@
 				2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */,
 				285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */,
 				2FC6EA4122680B5C007882A6 /* SimplePDF.swift in Sources */,
-				2FA885D0215325570069DE89 /* StringUtils.swift in Sources */,
+				2FA885D0215325570069DE89 /* String+Extensions.swift in Sources */,
 				2FE636591E41DED80092A696 /* ColorUtils.swift in Sources */,
 				2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */,
 				2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */,
@@ -802,6 +805,7 @@
 				1ADDED4126048B2D004724DD /* DatabaseHelperSpec.swift in Sources */,
 				625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */,
+				1A8A4B5326082D28003126F8 /* StringExtensionsSpec.swift in Sources */,
 				1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */,
 				2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */,
 			);

@@ -61,7 +61,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
                             
                             it("should have the following service header for the first song") {
                                 let expectedSongTitle = "Amazing Grace (my chains are gone)"
-                                let expectedAuthor = "Author Unknown {ஆசிரியர் தெரியவில்லை}"
+                                let expectedAuthor = "John Newton"
                                 
                                 let serviceItem = result[1]["serviceitem"]
                                 let serviceItemHeader = serviceItem["header"]
@@ -95,8 +95,9 @@ class OpenLPServiceConverterSpec : QuickSpec {
                                 expect(serviceItemHeader["search"]).to(equal(""))
                                 
                                 let data = serviceItemHeader["data"]
+                                let expectedDataTitle = "amazing grace my chains are gone@unending love amazing grace"
                                 expect(data.count).to(equal(2))
-//                                expect(data["title"].string).to(equal(expectedJson[1]["serviceitem"]["header"]["data"]["title"].string))
+                                expect(data["title"].string).to(equal(expectedDataTitle))
                                 expect(data["authors"].string).to(equal(expectedAuthor))
                                 
 //                                expect(serviceItemHeader["xml_version"].string).to(equal())
@@ -112,6 +113,63 @@ class OpenLPServiceConverterSpec : QuickSpec {
                                 expect(serviceItemHeader["will_auto_start"].bool).to(beFalse())
                                 expect(serviceItemHeader["processor"].null).to(beAnInstanceOf(NSNull.self))
                             }
+                            
+                            it("should have the following service header for the second song") {
+                                let expectedSongTitle = "God Is Good All The Time"
+                                let expectedAuthor1 = "Don Moen"
+                                let expectedAuthor2 = "Paul Overstreet"
+                                
+                                let serviceItem = result[2]["serviceitem"]
+                                let serviceItemHeader = serviceItem["header"]
+                                
+                                print("No. of elements in service item header: \(serviceItemHeader.count)")
+                                expect(serviceItemHeader.count).to(equal(expectedJson[1]["serviceitem"]["header"].count))
+                                
+                                expect(serviceItemHeader["name"]).to(equal("songs"))
+                                expect(serviceItemHeader["plugin"]).to(equal("songs"))
+                                expect(serviceItemHeader["theme"].null).to(beAnInstanceOf(NSNull.self))
+                                expect(serviceItemHeader["title"].string).to(equal(expectedSongTitle))
+                                
+                                let footer = serviceItemHeader["footer"]
+                                expect(footer.count).to(equal(2))
+                                expect(footer[0].string).to(equal(expectedSongTitle))
+                                expect(footer[1].string).to(equal("Written by: \(expectedAuthor1) and \(expectedAuthor2)"))
+                                
+                                expect(serviceItemHeader["type"]).to(equal(1))
+                                expect(serviceItemHeader["icon"]).to(equal(":/plugins/plugin_songs.png"))
+
+                                let audit = serviceItemHeader["audit"]
+                                expect(audit.count).to(equal(4))
+                                expect(audit[0].string).to(equal(expectedSongTitle))
+                                expect(audit[1]).to(equal([expectedAuthor1, expectedAuthor2]))
+                                expect(audit[2]).to(equal(""))
+                                expect(audit[3]).to(equal(""))
+                                
+                                expect(serviceItemHeader["notes"]).to(equal(""))
+                                expect(serviceItemHeader["from_plugin"].bool).to(beFalse())
+                                expect(serviceItemHeader["capabilities"]).to(equal([2, 1, 5, 8, 9, 13]))
+                                expect(serviceItemHeader["search"]).to(equal(""))
+                                
+                                let data = serviceItemHeader["data"]
+                                let expectedDataTitle = "god is good all the time@god is good all the time"
+                                expect(data.count).to(equal(2))
+                                expect(data["title"].string).to(equal(expectedDataTitle))
+                                expect(data["authors"].string).to(equal("Don Moen, Paul Overstreet"))
+                                
+//                                expect(serviceItemHeader["xml_version"].string).to(equal())
+                                
+                                expect(serviceItemHeader["auto_play_slides_once"].bool).to(beFalse())
+                                expect(serviceItemHeader["auto_play_slides_loop"].bool).to(beFalse())
+                                expect(serviceItemHeader["timed_slide_interval"]).to(equal(0))
+                                expect(serviceItemHeader["start_time"]).to(equal(0))
+                                expect(serviceItemHeader["end_time"]).to(equal(0))
+                                expect(serviceItemHeader["media_length"]).to(equal(0))
+                                expect(serviceItemHeader["background_audio"]).to(equal([]))
+                                expect(serviceItemHeader["theme_overwritten"].bool).to(beFalse())
+                                expect(serviceItemHeader["will_auto_start"].bool).to(beFalse())
+                                expect(serviceItemHeader["processor"].null).to(beAnInstanceOf(NSNull.self))
+                            }
+
                         }
                     }
                 }

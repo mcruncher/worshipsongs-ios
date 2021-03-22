@@ -17,6 +17,7 @@ extension String {
             return (self as NSString).lastPathComponent
         }
     }
+    
     var pathExtension: String {
         
         get {
@@ -24,6 +25,7 @@ extension String {
             return (self as NSString).pathExtension
         }
     }
+    
     var stringByDeletingLastPathComponent: String {
         
         get {
@@ -31,6 +33,7 @@ extension String {
             return (self as NSString).deletingLastPathComponent
         }
     }
+    
     var stringByDeletingPathExtension: String {
         
         get {
@@ -44,24 +47,6 @@ extension String {
             
             return (self as NSString).pathComponents
         }
-    }
-    
-    func stringByAppendingPathComponent(_ path: String) -> String {
-        
-        let nsSt = self as NSString
-        
-        return nsSt.appendingPathComponent(path)
-    }
-    
-    func stringByAppendingPathExtension(_ ext: String) -> String? {
-        
-        let nsSt = self as NSString
-        
-        return nsSt.appendingPathExtension(ext)
-    }
-    
-    func equalsIgnoreCase(_ string: String) -> Bool {
-        return self.caseInsensitiveCompare(string) == ComparisonResult.orderedSame
     }
     
     var localized: String {
@@ -83,13 +68,37 @@ extension String {
         return date
     }
     
+    var withoutSpecialCharacters: String {
+        var stringWithoutSpecialChars = self.components(separatedBy: CharacterSet.symbols).joined(separator: "")
+        stringWithoutSpecialChars = stringWithoutSpecialChars.components(separatedBy: CharacterSet.punctuationCharacters).joined(separator: "")
+        return stringWithoutSpecialChars
+    }
+        
+    func stringByAppendingPathComponent(_ path: String) -> String {
+        
+        let nsSt = self as NSString
+        
+        return nsSt.appendingPathComponent(path)
+    }
+    
+    func stringByAppendingPathExtension(_ ext: String) -> String? {
+        
+        let nsSt = self as NSString
+        
+        return nsSt.appendingPathExtension(ext)
+    }
+    
+    func equalsIgnoreCase(_ string: String) -> Bool {
+        return self.caseInsensitiveCompare(string) == ComparisonResult.orderedSame
+    }
+    
     func fromBase64() -> String? {
         guard let data = Data(base64Encoded: self) else {
             return nil
         }
         return String(data: data, encoding: .utf8)
     }
-        
+    
     func toBase64() -> String {
         return Data(self.utf8).base64EncodedString()
     }

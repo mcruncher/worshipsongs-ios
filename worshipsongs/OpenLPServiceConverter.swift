@@ -1,6 +1,7 @@
 //
 // Author: James Selvakumar
 // Since: 3.0.0
+// Ref: https://gitlab.com/openlp/openlp/-/blob/master/openlp/core/lib/serviceitem.py
 // Copyright © 2021 mCruncher. All rights reserved.
 // 
 
@@ -14,8 +15,9 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         var openLPService = [getGeneralServiceInfo()]
         for favouriteSong in favouriteList {
             let songs = databaseHelper.findSongsByTitles([favouriteSong.songName])
-            if songs.count > 0 {
-                openLPService.append(getServiceItem(forSong: songs[0]))
+            for song in songs {
+                let authors = databaseHelper.findAuthors(bySongId: song.id)
+                openLPService.append(getServiceItem(forSong: song, forAuthors: authors))
             }
         }
         return JSON(openLPService)
@@ -27,14 +29,12 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return generalServiceInfo
     }
     
-    private func getServiceItem(forSong song: Songs) -> [String: Any?] {
-        let serviceItem = ["serviceitem": getServiceItemHeader(forSong: song)] as [String: Any?]
+    private func getServiceItem(forSong song: Songs, forAuthors authors: [String]) -> [String: Any?] {
+        let serviceItem = ["serviceitem": getServiceItemHeader(forSong: song, forAuthors: authors)] as [String: Any?]
         return serviceItem
     }
-    
-    // The elements are ordered based on the OpenLP api.
-    // Ref: https://gitlab.com/openlp/openlp/-/blob/master/openlp/core/lib/serviceitem.py
-    private func getServiceItemHeader(forSong song: Songs) -> [String: Any?] {
+            
+    private func getServiceItemHeader(forSong song: Songs, forAuthors authors: [String]) -> [String: Any?] {
         let serviceItemHeaderContent  = [
             "name": "songs",
             "plugin": "songs",
@@ -43,12 +43,12 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             "footer": getFooter(forSong: song),
             "type": 1, // not sure what is this, need to check OpenLP docs
             "icon": ":/plugins/plugin_songs.png",
-            "audit": getAudit(forSong: song),
+            "audit": getAudit(forSong: song, forAuthors: authors),
             "notes": "",
             "from_plugin": false,
             "capabilities": [2, 1, 5, 8, 9, 13], // not sure what is this, need to check OpenLP docs
             "search": "",
-            "data": getData(forSong: song),
+            "data": getData(forSong: song, forAuthors: authors),
             "xml_version": getXmlVersion(ofSong: song),
             "auto_play_slides_once": false,
             "auto_play_slides_loop": false,
@@ -73,15 +73,15 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return footer
     }
     
-    private func getAudit(forSong song: Songs) -> [Any] {
-        let audit = [song.title, [databaseHelper.findAuthor(bySongId: song.id)], "", ""] as [Any]
+    private func getAudit(forSong song: Songs, forAuthors authors: [String]) -> [Any] {
+        let audit = [song.title, authors, "", ""] as [Any]
         return audit
     }
     
-    private func getData(forSong song: Songs) -> [String : String] {
+    private func getData(forSong song: Songs, forAuthors authors: [String]) -> [String : String] {
         let data = [
-            "title": "\(song.title.lowercased())@\(song.alternateTitle.lowercased())",
-            "authors": databaseHelper.findAuthor(bySongId: song.id)
+            "title": "\(song.title.withoutSpecialCharacters.lowercased())@\(song.alternateTitle.withoutSpecialCharacters.lowercased())",
+            "authors": authors.joined(separator: ", ")
         ]
         return data
     }

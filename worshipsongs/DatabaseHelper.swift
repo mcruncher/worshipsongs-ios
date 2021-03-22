@@ -153,21 +153,41 @@ class DatabaseHelper: NSObject {
     func findAuthor(bySongId songId: String) -> String {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
         database?.open()
+        
         var arguments = [AnyObject]()
         arguments.append(songId as AnyObject)
+        
         var authorName = " "
-        let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM authors where id IN " +
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM authors where id IN " +
             "(SELECT author_id FROM authors_songs where song_id = ?) ORDER BY display_name", withArgumentsIn: arguments)
-        if (resultSet2 != nil)
+        if (resultSet != nil)
         {
-            while resultSet2!.next() {
-                authorName = resultSet2!.string(forColumn: "display_name")!
+            while resultSet!.next() {
+                authorName = resultSet!.string(forColumn: "display_name")!
             }
         }
         return authorName
+    }
+
+    func findAuthors(bySongId songId: String) -> [String] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        database?.open()
+
+        var authors = [String]()
+        
+        var arguments = [AnyObject]()
+        arguments.append(songId as AnyObject)
+
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM authors where id IN " +
+            "(SELECT author_id FROM authors_songs where song_id = ?) ORDER BY display_name", withArgumentsIn: arguments)
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                authors.append(resultSet!.string(forColumn: "display_name")!)
+            }
+        }
+        return authors
     }
     
     func findCategory() -> [(Category)] {
