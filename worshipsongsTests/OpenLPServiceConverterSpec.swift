@@ -104,7 +104,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
                                 expect(data["authors"].string).to(equal(expectedAuthor))
                                 
                                 let expectedXmlVersion = expectedJson[1]["serviceitem"]["header"]["xml_version"].string
-//                                expect(serviceItemHeader["xml_version"].string).to(equal(expectedXmlVersion))
+                                //expect(serviceItemHeader["xml_version"].string).to(equal(expectedXmlVersion))
                                 
                                 expect(serviceItemHeader["auto_play_slides_once"].bool).to(beFalse())
                                 expect(serviceItemHeader["auto_play_slides_loop"].bool).to(beFalse())
@@ -191,10 +191,10 @@ class OpenLPServiceConverterSpec : QuickSpec {
                 var result: AEXMLDocument!
                 
                 beforeEach {
-                    result = openLPServiceConverter.getXmlVersion(ofSong: song1, withAuthors: databaseHelper.findAuthors(bySongId: song1.id))
+                    result = openLPServiceConverter.getXmlVersion(forSong: song1, withAuthors: databaseHelper.findAuthors(bySongId: song1.id))
                     print(result.xml)
                 }
-                
+                                
                 it("should have the required attributes in the 'song' element") {
                     let attributes = result.root.attributes
                     
@@ -224,6 +224,37 @@ class OpenLPServiceConverterSpec : QuickSpec {
                     expect(themes.children.count).to(equal(1))
                     
                     expect(properties.children.count).to(equal(4))
+                }
+                
+                it("should have a lyrics element with respective child elements") {
+                    let lyrics = result.root["lyrics"]
+                    print(song1.lyrics)
+                    
+                    let expectedVerse1Lines = "Amazing Grace! how sweet the sound<br/>That saved a wretch like me;<br/>I once was lost, but now am found,<br/>Was blind, but now I see."
+                    expect(lyrics.children[0].attributes["name"]).to(equal("v1"))
+                    expect(lyrics.children[0]["lines"].value).to(equal(expectedVerse1Lines))
+                    
+                    let expectedVerse2Lines = "'Twas grace that taught my heart to fear<br/>And grace my fears relieved<br/>How precious did that grace appear<br/>The hour I first believed"
+                    expect(lyrics.children[1].attributes["name"]).to(equal("v2"))
+                    expect(lyrics.children[1]["lines"].value).to(equal(expectedVerse2Lines))
+
+                    let expectedChorus1Lines = "My chains are gone <br/>I've been set free<br/>My God my Saviour<br/>Has ransomed me"
+                    expect(lyrics.children[2].attributes["name"]).to(equal("c1"))
+                    expect(lyrics.children[2]["lines"].value).to(equal(expectedChorus1Lines))
+
+                    let expectedChorus2Lines = "And like a flood His mercy reigns<br/>Unending love amazing grace"
+                    expect(lyrics.children[3].attributes["name"]).to(equal("c2"))
+                    expect(lyrics.children[3]["lines"].value).to(equal(expectedChorus2Lines))
+
+                    let expectedVerse3Lines = "The Lord has promised good to me<br/>His word my hope secures<br/>He will my shield and portion be<br/>As long as life endures"
+                    expect(lyrics.children[4].attributes["name"]).to(equal("v3"))
+                    expect(lyrics.children[4]["lines"].value).to(equal(expectedVerse3Lines))
+
+                    let expectedBridge1Lines = "The earth shall soon dissolve like snow<br/>The sun forbear to shine<br/>But God, Who called me here below<br/>Will be forever mine<br/>Will be forever mine<br/>You are forever mine"
+                    expect(lyrics.children[5].attributes["name"]).to(equal("b1"))
+                    expect(lyrics.children[5]["lines"].value).to(equal(expectedBridge1Lines))
+
+                    expect(lyrics.children.count).to(equal(6))
                 }
             }
         }

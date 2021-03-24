@@ -417,7 +417,7 @@ extension FavoritesTableViewController {
                 titleString.append(NSAttributedString(string: "\(number). \(songModel.songs.title)\n"))
             }
             pdf.addH2(titleString.string)
-            let (listDataDictionary, verseOrderList) = xmlParser.getXmlParser(song: songModel.songs)
+            let (listDataDictionary, verseOrderList) = xmlParser.parse(song: songModel.songs)
             let objectString: NSMutableAttributedString = NSMutableAttributedString()
             objectString.append(NSAttributedString(string: "\n"))
             objectString.append(MessageParser.getVerses(verseOrderList, listDataDictionary))

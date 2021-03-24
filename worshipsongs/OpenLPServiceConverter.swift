@@ -34,7 +34,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         let serviceItem = ["serviceitem": getServiceItemHeader(forSong: song, withAuthors: authors)] as [String: Any?]
         return serviceItem
     }
-            
+    
     private func getServiceItemHeader(forSong song: Songs, withAuthors authors: [String]) -> [String: Any?] {
         let serviceItemHeaderContent  = [
             "name": "songs",
@@ -50,7 +50,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             "capabilities": [2, 1, 5, 8, 9, 13], // not sure what is this, need to check OpenLP docs
             "search": "",
             "data": getData(forSong: song, forAuthors: authors),
-            "xml_version": getXmlVersion(ofSong: song, withAuthors: authors).xml,
+            "xml_version": getXmlVersion(forSong: song, withAuthors: authors).xml,
             "auto_play_slides_once": false,
             "auto_play_slides_loop": false,
             "timed_slide_interval": 0,
@@ -102,18 +102,26 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return data
     }
     
-    func getXmlVersion(ofSong song: Songs, withAuthors authors: [String]) -> AEXMLDocument {
+    func getXmlVersion(forSong song: Songs, withAuthors authors: [String]) -> AEXMLDocument {
         let root = AEXMLDocument()
         let songAttributes = ["xmlns":"http://openlyrics.info/namespace/2009/song", "version":"0.8",
                               "createdIn":"OpenLP 2.4.6", "modifiedIn":"OpenLP 2.4.6"]
+        
         let songElement = root.addChild(name: "song", attributes: songAttributes)
-        let propertiesElement = songElement.addChild(name: "properties")
+        songElement.addChild(getPropertiesElement(forSong: song, withAuthors: authors))
+        songElement.addChild(getLyricsElement(forSong: song))
+        
+        return root
+    }
+
+    private func getPropertiesElement(forSong song: Songs, withAuthors authors: [String]) -> AEXMLElement {
+        let propertiesElement = AEXMLElement(name: "properties")
         
         let titlesElement = propertiesElement.addChild(name: "titles")
         titlesElement.addChild(name: "title", value: song.title)
         titlesElement.addChild(name: "title", value: song.alternateTitle)
         
-        let verseOrderElement = propertiesElement.addChild(name: "verseOrder", value: song.verse_order)        
+        let verseOrderElement = propertiesElement.addChild(name: "verseOrder", value: song.verse_order)
         
         let authorsElement = propertiesElement.addChild(name: "authors")
         for author in authors {
@@ -125,7 +133,26 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         for topic in topics {
             themesElement.addChild(name: "theme", value: topic)
         }
-        
-        return root
+        return propertiesElement
+    }
+    
+    private func getLyricsElement(forSong song: Songs) -> AEXMLElement {
+        let lyricsElement = AEXMLElement(name: "lyrics")
+        do {
+            let lyricsXmlDocument = try AEXMLDocument(xml: song.lyrics)
+            if let verses = lyricsXmlDocument.root["lyrics"]["verse"].all {
+                for verse in verses {
+                    let verseType = verse.attributes["type"]!
+                    let verseLabel = verse.attributes["label"]!
+                    let lines = verse.value?.replacingOccurrences(of: "\n", with: "<br/>")
+                    
+                    let verseElement = lyricsElement.addChild(name: "verse", attributes: ["name": verseType + verseLabel])
+                    verseElement.addChild(name: "lines", value: lines)
+                }
+            }
+        } catch {
+            print("Error parsing the lyrics xml")
+        }
+        return lyricsElement
     }
 }
