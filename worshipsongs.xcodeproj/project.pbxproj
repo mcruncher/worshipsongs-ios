@@ -37,7 +37,6 @@
 		2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */; };
 		2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */; };
 		2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D231BC788F8001C4B6F /* Main.storyboard */; };
-		2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */; };
 		2F5D3D401BC788F8001C4B6F /* worshipsongsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D3F1BC788F8001C4B6F /* worshipsongsUITests.swift */; };
 		2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D551BC78D51001C4B6F /* Songs.swift */; };
 		2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D5B1BC7A216001C4B6F /* CommonService.swift */; };
@@ -133,7 +132,6 @@
 		2F5D3D261BC788F8001C4B6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F5D3D2B1BC788F8001C4B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F5D3D301BC788F8001C4B6F /* worshipsongsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = worshipsongsTests.swift; sourceTree = "<group>"; };
 		2F5D3D361BC788F8001C4B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F5D3D3B1BC788F8001C4B6F /* worshipsongsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F5D3D3F1BC788F8001C4B6F /* worshipsongsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = worshipsongsUITests.swift; sourceTree = "<group>"; };
@@ -321,7 +319,6 @@
 			children = (
 				1ADDED35260439C3004724DD /* Resources */,
 				1A9333CC26031DBA00953865 /* Library */,
-				2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */,
 				2F5D3D361BC788F8001C4B6F /* Info.plist */,
 			);
 			path = worshipsongsTests;
@@ -653,6 +650,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-worshipsongs/Pods-worshipsongs-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AEXML/AEXML.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -663,6 +661,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AEXML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -705,6 +704,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AEXML/AEXML.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -718,6 +718,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AEXML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -807,7 +808,6 @@
 				283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */,
 				1A8A4B5326082D28003126F8 /* StringExtensionsSpec.swift in Sources */,
 				1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */,
-				2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

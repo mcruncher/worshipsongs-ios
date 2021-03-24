@@ -1,4 +1,5 @@
 PODS:
+  - AEXML (4.6.0)
   - Cuckoo (1.4.1):
     - Cuckoo/Swift (= 1.4.1)
   - Cuckoo/Swift (1.4.1)
@@ -18,6 +19,7 @@ PODS:
   - YouTubePlayer (0.7.2)
 
 DEPENDENCIES:
+  - AEXML
   - Cuckoo (~> 1.4.1)
   - Floaty
   - FMDB
@@ -32,6 +34,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AEXML
     - Cuckoo
     - Floaty
     - FMDB
@@ -54,6 +57,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/Swinject/SwinjectStoryboard.git
 
 SPEC CHECKSUMS:
+  AEXML: 2fbb73d8724797ed2cde888731e176fa4d44dd83
   Cuckoo: 4625f7f54d9bb880123270e8969898d6c1d036b5
   Floaty: 1a4e213f3512cf3045ef9cb0c1ff456226d1f66a
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
@@ -66,6 +70,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: f0d5b1c16459949d6ff1cbb6610107946b18e1f8
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: 80c9bc412ec80c0fd73847de777b8bf809ed5265
+PODFILE CHECKSUM: 23a17ad923d9fd41d8daaabca9d74d8e47c7c960
 
 COCOAPODS: 1.10.1

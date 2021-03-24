@@ -223,6 +223,26 @@ class DatabaseHelper: NSObject {
         return songModel
     }
     
+    func findTopics(bySongId songId: String) -> [String] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        database?.open()
+
+        var topics = [String]()
+        
+        var arguments = [AnyObject]()
+        arguments.append(songId as AnyObject)
+
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM topics where id IN " +
+            "(SELECT topic_id FROM songs_topics where song_id = ?) ORDER BY name", withArgumentsIn: arguments)
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                topics.append(resultSet!.string(forColumn: "name")!)
+            }
+        }
+        return topics
+    }
+    
     func getSong(_ resultSet: FMResultSet) -> Songs {
         let song = Songs()
         song.id = resultSet.string(forColumn: self.id)!

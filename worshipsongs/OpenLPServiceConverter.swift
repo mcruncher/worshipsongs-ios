@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftyJSON
+import AEXML
 
 class OpenLPServiceConverter : IOpenLPServiceConverter {
     private let databaseHelper = DatabaseHelper()
@@ -30,11 +31,11 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
     }
     
     private func getServiceItem(forSong song: Songs, forAuthors authors: [String]) -> [String: Any?] {
-        let serviceItem = ["serviceitem": getServiceItemHeader(forSong: song, forAuthors: authors)] as [String: Any?]
+        let serviceItem = ["serviceitem": getServiceItemHeader(forSong: song, withAuthors: authors)] as [String: Any?]
         return serviceItem
     }
             
-    private func getServiceItemHeader(forSong song: Songs, forAuthors authors: [String]) -> [String: Any?] {
+    private func getServiceItemHeader(forSong song: Songs, withAuthors authors: [String]) -> [String: Any?] {
         let serviceItemHeaderContent  = [
             "name": "songs",
             "plugin": "songs",
@@ -49,7 +50,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             "capabilities": [2, 1, 5, 8, 9, 13], // not sure what is this, need to check OpenLP docs
             "search": "",
             "data": getData(forSong: song, forAuthors: authors),
-            "xml_version": getXmlVersion(ofSong: song),
+            "xml_version": getXmlVersion(ofSong: song, withAuthors: authors).xml,
             "auto_play_slides_once": false,
             "auto_play_slides_loop": false,
             "timed_slide_interval": 0,
@@ -101,7 +102,30 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return data
     }
     
-    private func getXmlVersion(ofSong song: Songs) -> String {
-        return ""
+    func getXmlVersion(ofSong song: Songs, withAuthors authors: [String]) -> AEXMLDocument {
+        let root = AEXMLDocument()
+        let songAttributes = ["xmlns":"http://openlyrics.info/namespace/2009/song", "version":"0.8",
+                              "createdIn":"OpenLP 2.4.6", "modifiedIn":"OpenLP 2.4.6"]
+        let songElement = root.addChild(name: "song", attributes: songAttributes)
+        let propertiesElement = songElement.addChild(name: "properties")
+        
+        let titlesElement = propertiesElement.addChild(name: "titles")
+        titlesElement.addChild(name: "title", value: song.title)
+        titlesElement.addChild(name: "title", value: song.alternateTitle)
+        
+        let verseOrderElement = propertiesElement.addChild(name: "verseOrder", value: song.verse_order)        
+        
+        let authorsElement = propertiesElement.addChild(name: "authors")
+        for author in authors {
+            authorsElement.addChild(name: "author", value: author)
+        }
+        
+        let themesElement = propertiesElement.addChild(name: "themes")
+        let topics = databaseHelper.findTopics(bySongId: song.id)
+        for topic in topics {
+            themesElement.addChild(name: "theme", value: topic)
+        }
+        
+        return root
     }
 }

@@ -9,6 +9,7 @@ def common_pods
   pod 'SwinjectAutoregistration', '~> 2.7.0'
   pod 'SwinjectStoryboard', :git => 'https://github.com/Swinject/SwinjectStoryboard.git', :commit => '0ca45c83a8aa398c153d8a036c95abb4343cfa0c'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'AEXML'
 end
 
 def test_pods

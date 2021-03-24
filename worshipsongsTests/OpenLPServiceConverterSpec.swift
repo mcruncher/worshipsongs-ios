@@ -8,6 +8,7 @@ import Foundation
 import Quick
 import Nimble
 import SwiftyJSON
+import AEXML
 @testable import worshipsongs
 
 class OpenLPServiceConverterSpec : QuickSpec {
@@ -21,12 +22,14 @@ class OpenLPServiceConverterSpec : QuickSpec {
             var expectedJson: JSON!
             var result: JSON!
             
+            beforeEach {
+                song1 = databaseHelper.findSongs(byTitle: "Amazing Grace")[0]
+                song2 = databaseHelper.findSongs(byTitle: "God is good")[0]
+            }
+            
             describe("Convert favourite list to OpenLP Service Lite JSON format") {
                 context("given a favourite list exist with some songs") {
                     beforeEach {
-                        song1 = databaseHelper.findSongs(byTitle: "Amazing Grace")[0]
-                        song2 = databaseHelper.findSongs(byTitle: "God is good")[0]
-                        
                         let favouriteSong1 = FavoritesSongsWithOrder(orderNo: 1, songName: song1.title, songListName: "foo")
                         let favouriteSong2 = FavoritesSongsWithOrder(orderNo: 2, songName: song2.title, songListName: "foo")
                         favouriteList = [favouriteSong1, favouriteSong2]
@@ -100,7 +103,8 @@ class OpenLPServiceConverterSpec : QuickSpec {
                                 expect(data["title"].string).to(equal(expectedDataTitle))
                                 expect(data["authors"].string).to(equal(expectedAuthor))
                                 
-//                                expect(serviceItemHeader["xml_version"].string).to(equal())
+                                let expectedXmlVersion = expectedJson[1]["serviceitem"]["header"]["xml_version"].string
+//                                expect(serviceItemHeader["xml_version"].string).to(equal(expectedXmlVersion))
                                 
                                 expect(serviceItemHeader["auto_play_slides_once"].bool).to(beFalse())
                                 expect(serviceItemHeader["auto_play_slides_loop"].bool).to(beFalse())
@@ -183,6 +187,45 @@ class OpenLPServiceConverterSpec : QuickSpec {
                 }
             }
             
+            describe("Get xml version of song") {
+                var result: AEXMLDocument!
+                
+                beforeEach {
+                    result = openLPServiceConverter.getXmlVersion(ofSong: song1, withAuthors: databaseHelper.findAuthors(bySongId: song1.id))
+                    print(result.xml)
+                }
+                
+                it("should have the required attributes in the 'song' element") {
+                    let attributes = result.root.attributes
+                    
+                    expect(attributes["xmlns"]).to(equal("http://openlyrics.info/namespace/2009/song"))
+                    expect(attributes["version"]).to(equal("0.8"))
+                    expect(attributes["createdIn"]).to(equal("OpenLP 2.4.6"))
+                    expect(attributes["modifiedIn"]).to(equal("OpenLP 2.4.6"))
+//                    expect(attributes["modifiedDate"]).to(equal("2021-01-01T09:00:00"))
+                }
+                
+                it("should have a properties element with respective child elements") {
+                    let properties = result.root["properties"]
+                    
+                    let titles = properties["titles"]
+                    expect(titles.children[0].value).to(equal("Amazing Grace (my chains are gone)"))
+                    expect(titles.children[1].value).to(equal("unending love, amazing grace"))
+                    expect(titles.children.count).to(equal(2))
+                    
+                    expect(properties["verseOrder"].value).to(equal("v1 v2 c1 c2 v3 c1 c2 b1"))
+                    
+                    let authors = properties["authors"]
+                    expect(authors.children[0].value).to(equal("John Newton"))
+                    expect(authors.children.count).to(equal(1))
+                    
+                    let themes = properties["themes"]
+                    expect(themes.children[0].value).to(equal("English {ஆங்கிலம்}"))
+                    expect(themes.children.count).to(equal(1))
+                    
+                    expect(properties.children.count).to(equal(4))
+                }
+            }
         }
     }
 }
