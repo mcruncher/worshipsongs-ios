@@ -31,7 +31,11 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
     }
     
     private func getServiceItem(forSong song: Songs, forAuthors authors: [String]) -> [String: Any?] {
-        let serviceItem = ["serviceitem": getHeader(forSong: song, withAuthors: authors)] as [String: Any?]
+        var serviceItemElements: [String: Any?] = [:]
+        serviceItemElements["header"] = getHeader(forSong: song, withAuthors: authors)
+        serviceItemElements["data"] = getData(forSong: song)
+        
+        let serviceItem = ["serviceitem": serviceItemElements]
         return serviceItem
     }
     
@@ -63,10 +67,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             "processor": NSNull()
         ] as [String : Any?]
         
-        let serviceItemHeader = [
-            "header": serviceItemHeaderContent
-        ] as [String: Any?]
-        return serviceItemHeader
+        return serviceItemHeaderContent
     }
     
     private func getFooter(forSong song: Songs, forAuthors authors: [String]) -> [String] {
@@ -156,8 +157,29 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return lyricsElement
     }
     
-//    func getData(forSong song: Songs) -> [String: Any?] {
-//        let data: [String: Any?] = [:]
-//        return data
-//    }
+    func getData(forSong song: Songs) -> [[String: String]] {
+        var data: [[String: String]] = []
+        
+        var listDataDictionary : NSMutableDictionary = NSMutableDictionary()
+        var verseOrderList: NSMutableArray = NSMutableArray()
+        (listDataDictionary, verseOrderList) = LyricsXmlParser().parse(song: song)
+        
+        print("Verse order : \(song.verse_order)")
+        
+        for verseOrderItem in song.verse_order.components(separatedBy: " ") {
+            let verseOrderItemString = (verseOrderItem as! String)
+            let rawSlide: String? = listDataDictionary[verseOrderItemString.lowercased()] as? String
+            
+            var dataItem: [String: String] = [:]
+            var linesInSlide = rawSlide?.components(separatedBy: "\n")
+            var firstLineInSlide: String = linesInSlide?[0] ?? ""
+            dataItem["title"] = firstLineInSlide.count > 30 ? String(firstLineInSlide.prefix(30)) : firstLineInSlide
+            dataItem["verseTag"] = verseOrderItem.uppercased()
+            dataItem["raw_slide"] = rawSlide
+            
+            data.append(dataItem)
+        }
+        
+        return data
+    }
 }
