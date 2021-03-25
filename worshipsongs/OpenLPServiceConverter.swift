@@ -31,11 +31,11 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
     }
     
     private func getServiceItem(forSong song: Songs, forAuthors authors: [String]) -> [String: Any?] {
-        let serviceItem = ["serviceitem": getServiceItemHeader(forSong: song, withAuthors: authors)] as [String: Any?]
+        let serviceItem = ["serviceitem": getHeader(forSong: song, withAuthors: authors)] as [String: Any?]
         return serviceItem
     }
     
-    private func getServiceItemHeader(forSong song: Songs, withAuthors authors: [String]) -> [String: Any?] {
+    private func getHeader(forSong song: Songs, withAuthors authors: [String]) -> [String: Any?] {
         let serviceItemHeaderContent  = [
             "name": "songs",
             "plugin": "songs",
@@ -49,7 +49,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             "from_plugin": false,
             "capabilities": [2, 1, 5, 8, 9, 13], // not sure what is this, need to check OpenLP docs
             "search": "",
-            "data": getData(forSong: song, forAuthors: authors),
+            "data": getHeaderData(forSong: song, forAuthors: authors),
             "xml_version": getXmlVersion(forSong: song, withAuthors: authors).xml,
             "auto_play_slides_once": false,
             "auto_play_slides_loop": false,
@@ -94,7 +94,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return audit
     }
     
-    private func getData(forSong song: Songs, forAuthors authors: [String]) -> [String : String] {
+    private func getHeaderData(forSong song: Songs, forAuthors authors: [String]) -> [String : String] {
         let data = [
             "title": "\(song.title.withoutSpecialCharacters.lowercased())@\(song.alternateTitle.withoutSpecialCharacters.lowercased())",
             "authors": authors.joined(separator: ", ")
@@ -155,4 +155,9 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         }
         return lyricsElement
     }
+    
+//    func getData(forSong song: Songs) -> [String: Any?] {
+//        let data: [String: Any?] = [:]
+//        return data
+//    }
 }
