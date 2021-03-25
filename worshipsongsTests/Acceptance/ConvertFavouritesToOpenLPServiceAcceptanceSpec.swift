@@ -187,6 +187,20 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
                             expect(serviceItemHeader["processor"].null).to(beAnInstanceOf(NSNull.self))
                         }
                         
+                        it("should have a data element for the second song") {
+                            let data = result[2]["serviceitem"]["data"]
+                            print("Data: \(data)")
+                            
+                            expect(data.count).to(equal(13))
+                            expect(data[0]["title"].string).toNot(beEmpty())
+                            expect(data[0]["verseTag"].string).to(equal("C1"))
+                            expect(data[0]["raw_slide"].string).toNot(beEmpty())
+                            
+                            expect(data[12]["title"].string).toNot(beEmpty())
+                            expect(data[12]["verseTag"].string).to(equal("C2"))
+                            expect(data[12]["raw_slide"].string).toNot(beEmpty())
+                        }
+
                     }
                 }
             }
