@@ -40,13 +40,13 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
                         let path = bundle.path(forResource: "openlp-service-lite", ofType: "osj")!
                         let jsonData = NSData(contentsOfFile: path)!
                         expectedJson = try! JSON(data: jsonData as Data)
-                        print("Expected Json:\n \(expectedJson)")
+                        print("Expected JSON:\n \(expectedJson!)")
                     }
                     
                     context("when converting the favourite list to oszl json format") {
                         beforeEach {
                             result = openLPServiceConverter.toOszlJson(favouriteList: favouriteList!)
-                            print("Result: \(result.rawValue)")
+                            print("Actual JSON:\n \(result.rawString()!)")
                         }
                         
                         it("should have a top level array with three elements") {

@@ -54,7 +54,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             "capabilities": [2, 1, 5, 8, 9, 13], // not sure what is this, need to check OpenLP docs
             "search": "",
             "data": getHeaderData(forSong: song, forAuthors: authors),
-            "xml_version": getXmlVersion(forSong: song, withAuthors: authors).xml,
+            "xml_version": getXmlVersion(forSong: song, withAuthors: authors).xmlCompact,
             "auto_play_slides_once": false,
             "auto_play_slides_loop": false,
             "timed_slide_interval": 0,

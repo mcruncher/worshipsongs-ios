@@ -35,7 +35,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
             
             beforeEach {
                 result = openLPServiceConverter.getXmlVersion(forSong: song, withAuthors: databaseHelper.findAuthors(bySongId: song.id))
-                print(result.xml)
+                print("Result xml: \n \(result.xmlCompact)")
             }
             
             it("should have the required attributes in the 'song' element") {
