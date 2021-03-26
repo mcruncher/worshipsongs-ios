@@ -102,8 +102,11 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
                             expect(data["title"].string).to(equal(expectedDataTitle))
                             expect(data["authors"].string).to(equal(expectedAuthor))
                             
-                            let expectedXmlVersion = expectedJson[1]["serviceitem"]["header"]["xml_version"].string
-//                            expect(serviceItemHeader["xml_version"].string).to(equal(expectedXmlVersion))
+                            let expectedXmlVersion = expectedJson[1]["serviceitem"]["header"]["xml_version"].string!
+                            let actualXmlVersion = serviceItemHeader["xml_version"].string!
+                            print("Expected xml: \n \(expectedXmlVersion)")
+                            print("Actual xml: \n \(actualXmlVersion)")
+                            expect(actualXmlVersion).toNot(beEmpty())
                             
                             expect(serviceItemHeader["auto_play_slides_once"].bool).to(beFalse())
                             expect(serviceItemHeader["auto_play_slides_loop"].bool).to(beFalse())
@@ -173,7 +176,7 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
                             expect(data["title"].string).to(equal(expectedDataTitle))
                             expect(data["authors"].string).to(equal("Don Moen, Paul Overstreet"))
                             
-//                            expect(serviceItemHeader["xml_version"].string).to(equal())
+                            expect(serviceItemHeader["xml_version"].string).toNot(beEmpty())
                             
                             expect(serviceItemHeader["auto_play_slides_once"].bool).to(beFalse())
                             expect(serviceItemHeader["auto_play_slides_loop"].bool).to(beFalse())

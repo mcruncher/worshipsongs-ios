@@ -9,16 +9,18 @@ import FMDB
 
 class DatabaseHelper: NSObject {
     
+    private let idColumn = "id"
+    private let titleColumn: String = "title"
+    private let alternateTitleColumn = "alternate_title"
+    private let lyricsColumn: String = "lyrics"
+    private let verseOrderColumn: String = "verse_order"
+    private let lastModifiedColumn = "last_modified"
+    private let commentsColumn = "comments"
+
     var database: FMDatabase? = nil
     var resultSet: FMResultSet? = nil
     let commonService: CommonService = CommonService()
-    let id = "id"
-    let title: String = "title"
-    let alternateTitle = "alternate_title"
-    let lyrics: String = "lyrics"
-    let verseOrder: String = "verse_order"
-    let comments = "comments"
-    
+        
     func getSongModel() -> [(Songs)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         let path = commonService.getDocumentDirectoryPath("songs.sqlite")
@@ -245,13 +247,20 @@ class DatabaseHelper: NSObject {
     
     func getSong(_ resultSet: FMResultSet) -> Songs {
         let song = Songs()
-        song.id = resultSet.string(forColumn: self.id)!
-        song.title = resultSet.string(forColumn: self.title)!
-        song.alternateTitle = resultSet.string(forColumn: self.alternateTitle)!
-        song.lyrics = resultSet.string(forColumn: self.lyrics)!
-        song.verse_order = resultSet.string(forColumn: self.verseOrder)!
+        song.id = resultSet.string(forColumn: idColumn)!
+        song.title = resultSet.string(forColumn: titleColumn)!
+        song.alternateTitle = resultSet.string(forColumn: alternateTitleColumn)!
+        song.lyrics = resultSet.string(forColumn: lyricsColumn)!
+        song.verse_order = resultSet.string(forColumn: verseOrderColumn)!
         
-        let comment = resultSet.string(forColumn: self.comments)
+        let timestamp = resultSet.string(forColumn: lastModifiedColumn)
+        if timestamp != nil {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            song.lastModified = dateFormatter.date(from: timestamp!)
+        }
+        
+        let comment = resultSet.string(forColumn: commentsColumn)
         song.comment = comment != nil ? comment! : ""
         
         return song

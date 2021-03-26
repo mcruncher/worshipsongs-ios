@@ -106,13 +106,24 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
     func getXmlVersion(forSong song: Songs, withAuthors authors: [String]) -> AEXMLDocument {
         let root = AEXMLDocument()
         let songAttributes = ["xmlns":"http://openlyrics.info/namespace/2009/song", "version":"0.8",
-                              "createdIn":"OpenLP 2.4.6", "modifiedIn":"OpenLP 2.4.6"]
+                              "createdIn":"OpenLP 2.4.6", "modifiedIn":"OpenLP 2.4.6", "modifiedDate":getSongModifiedDate(song)]
         
         let songElement = root.addChild(name: "song", attributes: songAttributes)
         songElement.addChild(getPropertiesElement(forSong: song, withAuthors: authors))
         songElement.addChild(getLyricsElement(forSong: song))
         
         return root
+    }
+    
+    private func getSongModifiedDate(_ song: Songs) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        if song.lastModified != nil {
+            print(song.lastModified)
+            return dateFormatter.string(from: song.lastModified!)
+        } else {
+            return ""
+        }
     }
 
     private func getPropertiesElement(forSong song: Songs, withAuthors authors: [String]) -> AEXMLElement {

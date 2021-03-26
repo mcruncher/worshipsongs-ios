@@ -13,6 +13,7 @@ class Songs {
     var alternateTitle = ""
     var lyrics = ""
     var verse_order = ""
+    var lastModified: Date?
     var comment = ""
     var i18nTitle = ""
     var mediaUrl = ""

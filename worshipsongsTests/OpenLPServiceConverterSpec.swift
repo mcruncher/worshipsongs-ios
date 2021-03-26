@@ -45,7 +45,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
                 expect(attributes["version"]).to(equal("0.8"))
                 expect(attributes["createdIn"]).to(equal("OpenLP 2.4.6"))
                 expect(attributes["modifiedIn"]).to(equal("OpenLP 2.4.6"))
-                //                    expect(attributes["modifiedDate"]).to(equal("2021-01-01T09:00:00"))
+                expect(attributes["modifiedDate"]).to(equal("2021-03-19T08:32:37"))
             }
             
             it("should have a properties element with respective child elements") {
