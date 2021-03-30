@@ -124,14 +124,15 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
                             let data = result[1]["serviceitem"]["data"]
                             print("Data: \(data)")
                             
-                            expect(data.count).to(equal(8))
-                            expect(data[0]["title"].string).toNot(beEmpty())
-                            expect(data[0]["verseTag"].string).to(equal("V1"))
-                            expect(data[0]["raw_slide"].string).toNot(beEmpty())
+                            let expectedData = expectedJson[1]["serviceitem"]["data"]
                             
-                            expect(data[7]["title"].string).toNot(beEmpty())
-                            expect(data[7]["verseTag"].string).to(equal("B1"))
-                            expect(data[7]["raw_slide"].string).toNot(beEmpty())
+                            expect(data.count).to(equal(8))
+                            
+                            expectedData.enumerated().forEach {index, element in
+                                expect(data[index]["title"].string).to(equal(expectedData[index]["title"].string))
+                                expect(data[index]["verseTag"].string).to(equal(expectedData[index]["verseTag"].string))
+                                expect(data[index]["raw_slide"].string).to(equal(expectedData[index]["raw_slide"].string))
+                            }
                         }
                         
                         it("should have a service header for the second song") {
@@ -194,16 +195,16 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
                             let data = result[2]["serviceitem"]["data"]
                             print("Data: \(data)")
                             
-                            expect(data.count).to(equal(13))
-                            expect(data[0]["title"].string).toNot(beEmpty())
-                            expect(data[0]["verseTag"].string).to(equal("C1"))
-                            expect(data[0]["raw_slide"].string).toNot(beEmpty())
+                            let expectedData = expectedJson[2]["serviceitem"]["data"]
                             
-                            expect(data[12]["title"].string).toNot(beEmpty())
-                            expect(data[12]["verseTag"].string).to(equal("C2"))
-                            expect(data[12]["raw_slide"].string).toNot(beEmpty())
+                            expect(data.count).to(equal(13))
+                            
+                            expectedData.enumerated().forEach {index, element in
+                                expect(data[index]["title"].string).to(equal(expectedData[index]["title"].string))
+                                expect(data[index]["verseTag"].string).to(equal(expectedData[index]["verseTag"].string))
+                                expect(data[index]["raw_slide"].string).to(equal(expectedData[index]["raw_slide"].string))
+                            }
                         }
-
                     }
                 }
             }
