@@ -116,6 +116,10 @@ class SettingsController: UITableViewController {
         displayRomanisedLabel.text = "display.romanised".localized
         searchByContent.text = "searchByContent".localized
         self.restoreDatabaseCell.isHidden = self.preferences.bool(forKey: "defaultDatabase")
+        fontSizeSlider.minimumValue = 5
+        fontSizeSlider.maximumValue = 40
+        presentationFontSlider.minimumValue = 25
+        presentationFontSlider.maximumValue = 999
     }
     
     fileprivate func addTapGestureRecognizer() {
