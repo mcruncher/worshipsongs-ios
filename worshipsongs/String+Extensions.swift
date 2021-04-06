@@ -102,4 +102,8 @@ extension String {
     func toBase64() -> String {
         return Data(self.utf8).base64EncodedString()
     }
+    
+    func toAscii() -> String {
+        return String(data: (self.data(using: .nonLossyASCII))!, encoding: .ascii)!
+    }
 }

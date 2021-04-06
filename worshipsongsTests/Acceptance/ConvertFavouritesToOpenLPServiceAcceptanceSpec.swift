@@ -200,9 +200,9 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
                             expect(data.count).to(equal(13))
                             
                             expectedData.enumerated().forEach {index, element in
-                                expect(data[index]["title"].string).to(equal(expectedData[index]["title"].string))
+                                expect(data[index]["title"].string).to(equal(expectedData[index]["title"].string?.toAscii()))
                                 expect(data[index]["verseTag"].string).to(equal(expectedData[index]["verseTag"].string))
-                                expect(data[index]["raw_slide"].string).to(equal(expectedData[index]["raw_slide"].string))
+                                expect(data[index]["raw_slide"].string).to(equal(expectedData[index]["raw_slide"].string?.toAscii()))
                             }
                         }
                     }

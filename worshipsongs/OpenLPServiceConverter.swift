@@ -160,7 +160,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         let themesElement = propertiesElement.addChild(name: "themes")
         let topics = databaseHelper.findTopics(bySongId: song.id)
         for topic in topics {
-            themesElement.addChild(name: "theme", value: asciiString(topic))
+            themesElement.addChild(name: "theme", value: topic.toAscii())
         }
         return propertiesElement
     }
@@ -176,7 +176,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
                     let lines = verse.value?.replacingOccurrences(of: "\n", with: "<br/>")
                     
                     let verseElement = lyricsElement.addChild(name: "verse", attributes: ["name": verseType + verseLabel])
-                    verseElement.addChild(name: "lines", value: lines)
+                    verseElement.addChild(name: "lines", value: lines!.toAscii())
                 }
             }
         } catch {
@@ -201,17 +201,14 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             var dataItem: [String: String] = [:]
             var linesInSlide = rawSlide?.components(separatedBy: "\n")
             var firstLineInSlide: String = linesInSlide?[0] ?? ""
-            dataItem["title"] = firstLineInSlide.count > 30 ? String(firstLineInSlide.prefix(30)) : firstLineInSlide
+            let title = firstLineInSlide.count > 30 ? String(firstLineInSlide.prefix(30)) : firstLineInSlide
+            dataItem["title"] = title.toAscii()
             dataItem["verseTag"] = verseOrderItem.uppercased()
-            dataItem["raw_slide"] = rawSlide
+            dataItem["raw_slide"] = rawSlide?.toAscii()
             
             data.append(dataItem)
         }
         
         return data
-    }
-    
-    func asciiString(_ inputString: String) -> String {
-        return String(data: (inputString.data(using: .nonLossyASCII))!, encoding: .ascii)!
     }
 }

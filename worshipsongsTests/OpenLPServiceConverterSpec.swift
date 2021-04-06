@@ -63,7 +63,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
                 expect(authors.children.count).to(equal(1))
                 
                 let themes = properties["themes"]
-                expect(themes.children[0].value).to(equal("English {ஆங்கிலம்}"))
+                expect(themes.children[0].value).to(equal("English {\\u0b86\\u0b99\\u0bcd\\u0b95\\u0bbf\\u0bb2\\u0bae\\u0bcd}"))
                 expect(themes.children.count).to(equal(1))
                 
                 expect(properties.children.count).to(equal(4))
@@ -142,14 +142,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
                 expect(result[7]["raw_slide"]).to(equal("The earth shall soon dissolve like snow\nThe sun forbear to shine\nBut God, Who called me here below\nWill be forever mine\nWill be forever mine\nYou are forever mine"))
             }
         }
-        
-        describe("Ascii string") {
-            it("should encode unicode chars using appropriate unicode code points") {
-                expect(openLPServiceConverter.asciiString("foo")).to(equal("foo"))
-                expect(openLPServiceConverter.asciiString("English {ஆங்கிலம்}")).to(equal("English {\\u0b86\\u0b99\\u0bcd\\u0b95\\u0bbf\\u0bb2\\u0bae\\u0bcd}"))                
-            }
-        }
-        
+                
         describe("To OpenLP Service Lite") {
             var favouriteList: [FavoritesSong]!
             
