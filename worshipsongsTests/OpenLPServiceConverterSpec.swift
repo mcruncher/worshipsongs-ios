@@ -142,5 +142,33 @@ class OpenLPServiceConverterSpec : QuickSpec {
                 expect(result[7]["raw_slide"]).to(equal("The earth shall soon dissolve like snow\nThe sun forbear to shine\nBut God, Who called me here below\nWill be forever mine\nWill be forever mine\nYou are forever mine"))
             }
         }
+        
+        describe("Ascii string") {
+            it("should encode unicode chars using appropriate unicode code points") {
+                expect(openLPServiceConverter.asciiString("foo")).to(equal("foo"))
+                expect(openLPServiceConverter.asciiString("English {ஆங்கிலம்}")).to(equal("English {\\u0b86\\u0b99\\u0bcd\\u0b95\\u0bbf\\u0bb2\\u0bae\\u0bcd}"))                
+            }
+        }
+        
+        describe("To OpenLP Service Lite") {
+            var favouriteList: [FavoritesSong]!
+            
+            context("given a favourite list exists") {
+                
+                beforeEach {
+                    let songWithOrder = FavoritesSongsWithOrder(orderNo: 1, songName: song.title, songListName: "foo")
+                    favouriteList = [FavoritesSong(songTitle: song.title, songs: song, favoritesSongsWithOrder: songWithOrder)]
+                    
+                }
+                
+                it("should be converted to OpenLP Service Lite") {
+                    openLPServiceConverter.toOpenLPServiceLite(favouriteName: "foo", favouriteList: favouriteList)
+
+                    let jsonFilePath = SimplePDFUtilities.pathForTmpFile("service_data.osj")
+
+                    expect(FileManager.default.fileExists(atPath: jsonFilePath)).to(beTrue())
+                }
+            }
+        }
     }
 }

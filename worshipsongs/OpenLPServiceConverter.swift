@@ -12,10 +12,27 @@ import AEXML
 class OpenLPServiceConverter : IOpenLPServiceConverter {
     private let databaseHelper = DatabaseHelper()
     
-    func toOszlJson(favouriteList: [FavoritesSongsWithOrder]) -> JSON {
+    func toOpenLPServiceLite(favouriteName: String, favouriteList: [FavoritesSong]) -> URL? {
+        let jsonFilePath = SimplePDFUtilities.pathForTmpFile("service_data.osj")
+        let json = toOszlJson(favouriteList: favouriteList)
+        do {
+            let jsonString = try json.rawString(options: .init(rawValue: 0))
+            print("Json string: \n \(jsonString)")
+            let jsonUrl = URL(fileURLWithPath: jsonFilePath)
+            try jsonString?.write(to: jsonUrl, atomically: true, encoding: .ascii)
+            print("Finished writing the json to the file \(jsonFilePath)")
+            return jsonUrl
+        } catch {
+            print("Error occurred while converting the favourite list to OpenLP Service Lite.")
+            print(error)
+        }
+        return nil
+    }
+    
+    func toOszlJson(favouriteList: [FavoritesSong]) -> JSON {
         var openLPService = [getGeneralServiceInfo()]
         for favouriteSong in favouriteList {
-            let songs = databaseHelper.findSongsByTitles([favouriteSong.songName])
+            let songs = databaseHelper.findSongsByTitles([favouriteSong.songs.title])
             for song in songs {
                 let authors = databaseHelper.findAuthors(bySongId: song.id)
                 openLPService.append(getServiceItem(forSong: song, forAuthors: authors))
@@ -143,7 +160,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         let themesElement = propertiesElement.addChild(name: "themes")
         let topics = databaseHelper.findTopics(bySongId: song.id)
         for topic in topics {
-            themesElement.addChild(name: "theme", value: topic)
+            themesElement.addChild(name: "theme", value: asciiString(topic))
         }
         return propertiesElement
     }
@@ -192,5 +209,9 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         }
         
         return data
+    }
+    
+    func asciiString(_ inputString: String) -> String {
+        return String(data: (inputString.data(using: .nonLossyASCII))!, encoding: .ascii)!
     }
 }

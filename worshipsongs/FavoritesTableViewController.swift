@@ -26,9 +26,12 @@ class FavoritesTableViewController: UITableViewController {
     fileprivate let xmlParser = LyricsXmlParser()
     
     var songTabBarController: SongsTabBarViewController?
+    var openLPServiceConverter: IOpenLPServiceConverter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        openLPServiceConverter = OpenLPServiceConverter()
+        
         addShareBarButton()
         self.tableView.tableFooterView = getTableFooterView()
         updateModel()
@@ -321,6 +324,7 @@ extension FavoritesTableViewController {
         let shareActions = UIAlertController(title: "choose_options".localized, message: "", preferredStyle: .actionSheet)
         shareActions.addAction(getShareAction())
         shareActions.addAction(getShareAsPdfAction())
+        shareActions.addAction(getShareAsOpenLPServiceAction())
         shareActions.addAction(getCancelnActionSheet())
         self.present(shareActions, animated: true, completion: nil)
     }
@@ -428,6 +432,15 @@ extension FavoritesTableViewController {
             let pageHalfHeight = Int(pdf.availablePageSize.height.rounded()) / 2
             startNewPage = remainingSize > pageHalfHeight
         }
+    }
+    
+    private func getShareAsOpenLPServiceAction() -> UIAlertAction {
+        return UIAlertAction(title: "shareAsOpenLPService".localized, style: .default, handler: { _ in
+            let fileUrl = self.openLPServiceConverter.toOpenLPServiceLite(favouriteName: self.favorite, favouriteList: self.filteredSongModel)
+            if fileUrl != nil {
+                self.showActivityViewController([fileUrl])
+            }
+        })
     }
 }
 

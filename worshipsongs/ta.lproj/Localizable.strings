@@ -98,6 +98,7 @@
 "choose_options" = "Choose options";
 "share" = "Share";
 "share_as_pdf"="Share as PDF";
+"shareAsOpenLPService"="Share as OpenLP Service";
 
 "song_books"="பாடல் புத்தகங்கள்";
 "songno"="பாடல் எண்";

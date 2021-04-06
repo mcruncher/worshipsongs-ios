@@ -8,5 +8,6 @@ import Foundation
 import SwiftyJSON
 
 protocol IOpenLPServiceConverter {
-    func toOszlJson(favouriteList: [FavoritesSongsWithOrder]) -> JSON
+    func toOpenLPServiceLite(favouriteName: String, favouriteList: [FavoritesSong]) -> URL?
+    func toOszlJson(favouriteList: [FavoritesSong]) -> JSON
 }
