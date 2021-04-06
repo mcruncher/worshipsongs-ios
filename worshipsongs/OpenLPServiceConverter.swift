@@ -34,7 +34,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         for favouriteSong in favouriteList {
             let songs = databaseHelper.findSongsByTitles([favouriteSong.songs.title])
             for song in songs {
-                let authors = databaseHelper.findAuthors(bySongId: song.id)
+                let authors = databaseHelper.findAuthors(bySongId: song.id).map({$0.toAscii()})
                 openLPService.append(getServiceItem(forSong: song, forAuthors: authors))
             }
         }
