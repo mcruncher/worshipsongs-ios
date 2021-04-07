@@ -9,6 +9,7 @@ import Quick
 import Nimble
 import SwiftyJSON
 import AEXML
+import Zip
 @testable import worshipsongs
 
 class OpenLPServiceConverterSpec : QuickSpec {
@@ -119,7 +120,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
                 expect(result[6]["title"]).to(equal("And like a flood His mercy rei"))
                 expect(result[7]["title"]).to(equal("The earth shall soon dissolve "))
             }
-                        
+            
             it("should have respective verse tags") {
                 expect(result[0]["verseTag"]).to(equal("V1"))
                 expect(result[1]["verseTag"]).to(equal("V2"))
@@ -142,25 +143,46 @@ class OpenLPServiceConverterSpec : QuickSpec {
                 expect(result[7]["raw_slide"]).to(equal("The earth shall soon dissolve like snow\nThe sun forbear to shine\nBut God, Who called me here below\nWill be forever mine\nWill be forever mine\nYou are forever mine"))
             }
         }
-                
+        
         describe("To OpenLP Service Lite") {
             var favouriteList: [FavoritesSong]!
+            let favouriteName = "foo"
+            let serviceDataFilePath = SimplePDFUtilities.pathForTmpFile("service_data.osj")
+            let serviceFilePath = SimplePDFUtilities.pathForTmpFile("\(favouriteName).oszl")
             
             context("given a favourite list exists") {
                 
                 beforeEach {
                     let songWithOrder = FavoritesSongsWithOrder(orderNo: 1, songName: song.title, songListName: "foo")
                     favouriteList = [FavoritesSong(songTitle: song.title, songs: song, favoritesSongsWithOrder: songWithOrder)]
+                }
+                
+                context("when converting the favourite list to OpenLP Service") {
+                    
+                    beforeEach {
+                        openLPServiceConverter.toOpenLPServiceLite(favouriteName: favouriteName, favouriteList: favouriteList)
+                    }
+                    
+                    afterEach {
+                        do {
+                            try FileManager.default.removeItem(atPath: serviceFilePath)                        
+                        } catch {}
+                    }
+                    
+                    it("should be converted to OpenLP Service Lite") {
+                        expect(FileManager.default.fileExists(atPath: serviceFilePath)).to(beTrue())
+                        expect(FileManager.default.fileExists(atPath: serviceDataFilePath)).to(beFalse())
+                    }
+                    
+                    it("should have a service_data.osj file inside it") {
+                        do {
+                            try Zip.quickUnzipFile(URL(fileURLWithPath: serviceFilePath))
+                            expect(FileManager.default.fileExists(atPath: serviceDataFilePath)).to(beTrue())
+                        } catch {}
+                    }
                     
                 }
                 
-                it("should be converted to OpenLP Service Lite") {
-                    openLPServiceConverter.toOpenLPServiceLite(favouriteName: "foo", favouriteList: favouriteList)
-
-                    let jsonFilePath = SimplePDFUtilities.pathForTmpFile("service_data.osj")
-
-                    expect(FileManager.default.fileExists(atPath: jsonFilePath)).to(beTrue())
-                }
             }
         }
     }

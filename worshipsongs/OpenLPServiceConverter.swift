@@ -8,25 +8,55 @@
 import Foundation
 import SwiftyJSON
 import AEXML
+import Zip
 
 class OpenLPServiceConverter : IOpenLPServiceConverter {
     private let databaseHelper = DatabaseHelper()
     
     func toOpenLPServiceLite(favouriteName: String, favouriteList: [FavoritesSong]) -> URL? {
-        let jsonFilePath = SimplePDFUtilities.pathForTmpFile("service_data.osj")
-        let json = toOszlJson(favouriteList: favouriteList)
         do {
-            let jsonString = try json.rawString(options: .init(rawValue: 0))
-            print("Json string: \n \(jsonString)")
-            let jsonUrl = URL(fileURLWithPath: jsonFilePath)
-            try jsonString?.write(to: jsonUrl, atomically: true, encoding: .ascii)
-            print("Finished writing the json to the file \(jsonFilePath)")
-            return jsonUrl
+            let serviceDataFilePath = SimplePDFUtilities.pathForTmpFile("service_data.osj")
+            let serviceFilePath = SimplePDFUtilities.pathForTmpFile("\(favouriteName).oszl")
+            
+            let serviceDataFileUrl = URL(fileURLWithPath: serviceDataFilePath)
+            let serviceFileUrl = URL(fileURLWithPath: serviceFilePath)
+            
+            createServiceDataFile(favouriteList: favouriteList, url: serviceDataFileUrl)
+            createServiceFile(favouriteName: favouriteName, serviceDataFileUrl: serviceDataFileUrl, serviceFileUrl: serviceFileUrl)
+            return serviceFileUrl
         } catch {
             print("Error occurred while converting the favourite list to OpenLP Service Lite.")
             print(error)
         }
         return nil
+    }
+    
+    private func createServiceDataFile(favouriteList: [FavoritesSong], url: URL) {
+        do {
+            let json = toOszlJson(favouriteList: favouriteList)
+            let jsonString = json.rawString(options: .init(rawValue: 0))
+            print("Json string: \n \(jsonString)")
+            if FileManager.default.fileExists(atPath: url.path) {
+                try FileManager.default.removeItem(atPath: url.path)
+            }
+            try jsonString?.write(to: url, atomically: true, encoding: .ascii)
+            print("Finished writing the json to the file \(url.path)")
+        } catch {
+            print("Error occurred while creating service data file")
+            print(error)
+        }
+    }
+    
+    private func createServiceFile(favouriteName: String, serviceDataFileUrl: URL, serviceFileUrl: URL) {
+        do {
+            try Zip.zipFiles(paths: [serviceDataFileUrl], zipFilePath: serviceFileUrl, password: nil, progress: nil)
+            print("Finished creating the service file \(serviceFileUrl)")
+            
+            print("Removing the service data file \(serviceDataFileUrl)")
+            try FileManager.default.removeItem(at: serviceDataFileUrl)
+        } catch {
+            print("Error occurred while creating service file")
+        }
     }
     
     func toOszlJson(favouriteList: [FavoritesSong]) -> JSON {
@@ -142,7 +172,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             return ""
         }
     }
-
+    
     private func getPropertiesElement(forSong song: Songs, withAuthors authors: [String]) -> AEXMLElement {
         let propertiesElement = AEXMLElement(name: "properties")
         

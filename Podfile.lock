@@ -17,6 +17,7 @@ PODS:
   - SwinjectStoryboard (2.2.0):
     - Swinject (~> 2.7.1)
   - YouTubePlayer (0.7.2)
+  - Zip (2.1.1)
 
 DEPENDENCIES:
   - AEXML
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - SwinjectAutoregistration (~> 2.7.0)
   - SwinjectStoryboard (from `https://github.com/Swinject/SwinjectStoryboard.git`, commit `0ca45c83a8aa398c153d8a036c95abb4343cfa0c`)
   - YouTubePlayer
+  - Zip (~> 2.1)
 
 SPEC REPOS:
   trunk:
@@ -45,6 +47,7 @@ SPEC REPOS:
     - Swinject
     - SwinjectAutoregistration
     - YouTubePlayer
+    - Zip
 
 EXTERNAL SOURCES:
   SwinjectStoryboard:
@@ -69,7 +72,8 @@ SPEC CHECKSUMS:
   SwinjectAutoregistration: 330f5012642a8b5c89a8a4adb0c5e52df07382c0
   SwinjectStoryboard: f0d5b1c16459949d6ff1cbb6610107946b18e1f8
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
+  Zip: 414f59909701fda9a84ab774ebe0f5449b1082cc
 
-PODFILE CHECKSUM: 23a17ad923d9fd41d8daaabca9d74d8e47c7c960
+PODFILE CHECKSUM: a2b437dcb490915e48d67c42504a8c082742d407
 
 COCOAPODS: 1.10.1
