@@ -39,6 +39,12 @@ class OpenLPServiceConverterSpec : QuickSpec {
                 print("Result xml: \n \(result.xmlCompact)")
             }
             
+            it("should have the required document header") {
+                let xmlString = result.xmlCompact
+                
+                expect(xmlString.contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>")).to(beTrue())
+            }
+            
             it("should have the required attributes in the 'song' element") {
                 let attributes = result.root.attributes
                 
@@ -147,8 +153,9 @@ class OpenLPServiceConverterSpec : QuickSpec {
         describe("To OpenLP Service Lite") {
             var favouriteList: [FavoritesSong]!
             let favouriteName = "foo"
-            let serviceDataFilePath = SimplePDFUtilities.pathForTmpFile("service_data.osj")
-            let serviceFilePath = SimplePDFUtilities.pathForTmpFile("\(favouriteName).oszl")
+            let serviceDataFileUrl = URL(fileURLWithPath: SimplePDFUtilities.pathForTmpFile("service_data.osj"))
+            let serviceFileUrl = URL(fileURLWithPath: SimplePDFUtilities.pathForTmpFile("\(favouriteName).oszl"))
+            let tempDirUrl = serviceDataFileUrl.deletingLastPathComponent()
             
             context("given a favourite list exists") {
                 
@@ -165,20 +172,32 @@ class OpenLPServiceConverterSpec : QuickSpec {
                     
                     afterEach {
                         do {
-                            try FileManager.default.removeItem(atPath: serviceFilePath)                        
+                            try FileManager.default.removeItem(atPath: serviceFileUrl.path)                        
                         } catch {}
                     }
                     
                     it("should be converted to OpenLP Service Lite") {
-                        expect(FileManager.default.fileExists(atPath: serviceFilePath)).to(beTrue())
-                        expect(FileManager.default.fileExists(atPath: serviceDataFilePath)).to(beFalse())
+                        expect(FileManager.default.fileExists(atPath: serviceFileUrl.path)).to(beTrue())
+                        expect(FileManager.default.fileExists(atPath: serviceDataFileUrl.path)).to(beFalse())
                     }
                     
                     it("should have a service_data.osj file inside it") {
                         do {
-                            try Zip.quickUnzipFile(URL(fileURLWithPath: serviceFilePath))
-                            expect(FileManager.default.fileExists(atPath: serviceDataFilePath)).to(beTrue())
+                            Zip.addCustomFileExtension(serviceFileUrl.pathExtension)
+                            try Zip.unzipFile(serviceFileUrl, destination: URL(fileURLWithPath: tempDirUrl.path), overwrite: true, password: nil)
                         } catch {}
+
+                        let items = try FileManager.default.contentsOfDirectory(atPath: tempDirUrl.path)
+                        for item in items {
+                            print("Temp dir item: \(item)")
+                        }
+                        
+                        expect(FileManager.default.fileExists(atPath: serviceDataFileUrl.path)).to(beTrue())
+                        let serviceDataText = try String(contentsOf: serviceDataFileUrl, encoding: .ascii)
+                        print("Service data text:\n \(serviceDataText)")
+                        
+                        //the unicode characters should be properly encoded
+                        expect(serviceDataText.contains("<themes><theme>English {\\u0b86\\u0b99\\u0bcd\\u0b95\\u0bbf\\u0bb2\\u0bae\\u0bcd}</theme></themes>"))                        
                     }
                     
                 }

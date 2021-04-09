@@ -34,12 +34,13 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
     private func createServiceDataFile(favouriteList: [FavoritesSong], url: URL) {
         do {
             let json = toOszlJson(favouriteList: favouriteList)
-            let jsonString = json.rawString(options: .init(rawValue: 0))
+            let jsonRawString = json.rawString(options: .init(rawValue: 0))
+            var jsonString = jsonRawString!.replacingOccurrences(of: "\\\\", with: "\\")
             print("Json string: \n \(jsonString)")
             if FileManager.default.fileExists(atPath: url.path) {
                 try FileManager.default.removeItem(atPath: url.path)
             }
-            try jsonString?.write(to: url, atomically: true, encoding: .ascii)
+            try jsonString.write(to: url, atomically: true, encoding: .ascii)
             print("Finished writing the json to the file \(url.path)")
         } catch {
             print("Error occurred while creating service data file")
@@ -49,6 +50,11 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
     
     private func createServiceFile(favouriteName: String, serviceDataFileUrl: URL, serviceFileUrl: URL) {
         do {
+            if FileManager.default.fileExists(atPath: serviceFileUrl.path) {
+                try FileManager.default.removeItem(atPath: serviceFileUrl.path)
+            }
+
+            Zip.addCustomFileExtension(serviceFileUrl.pathExtension)
             try Zip.zipFiles(paths: [serviceDataFileUrl], zipFilePath: serviceFileUrl, password: nil, progress: nil)
             print("Finished creating the service file \(serviceFileUrl)")
             
@@ -151,7 +157,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
     }
     
     func getXmlVersion(forSong song: Songs, withAuthors authors: [String]) -> AEXMLDocument {
-        let root = AEXMLDocument()
+        let root = WSXMLDocument()
         let songAttributes = ["xmlns":"http://openlyrics.info/namespace/2009/song", "version":"0.8",
                               "createdIn":"OpenLP 2.4.6", "modifiedIn":"OpenLP 2.4.6", "modifiedDate":getSongModifiedDate(song)]
         
@@ -240,5 +246,13 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         }
         
         return data
+    }
+}
+
+class WSXMLDocument : AEXMLDocument {
+    open override var xml: String {
+        var xml =  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        xml += root.xml
+        return xml
     }
 }
