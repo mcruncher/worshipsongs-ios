@@ -35,7 +35,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         do {
             let json = toOszlJson(favouriteList: favouriteList)
             let jsonRawString = json.rawString(options: .init(rawValue: 0))
-            var jsonString = jsonRawString!.replacingOccurrences(of: "\\\\", with: "\\")
+            var jsonString = jsonRawString!.replacingOccurrences(of: "\\\\", with: "\\").replacingOccurrences(of: "\\/", with: "/")
             print("Json string: \n \(jsonString)")
             if FileManager.default.fileExists(atPath: url.path) {
                 try FileManager.default.removeItem(atPath: url.path)
@@ -107,7 +107,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             "capabilities": [2, 1, 5, 8, 9, 13], // not sure what is this, need to check OpenLP docs
             "search": "",
             "data": getHeaderData(forSong: song, forAuthors: authors),
-            "xml_version": getXmlVersion(forSong: song, withAuthors: authors).xmlCompact,
+            "xml_version": getXmlVersionAsString(forSong: song, withAuthors: authors),
             "auto_play_slides_once": false,
             "auto_play_slides_loop": false,
             "timed_slide_interval": 0,
@@ -154,6 +154,12 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             "authors": authors.joined(separator: ", ")
         ]
         return data
+    }
+    
+    func getXmlVersionAsString(forSong song: Songs, withAuthors authors: [String]) -> String {
+        var xmlString = getXmlVersion(forSong: song, withAuthors: authors).xmlCompact
+        xmlString = xmlString.replacingOccurrences(of: "&lt;", with: "<").replacingOccurrences(of: "&gt;", with: ">").replacingOccurrences(of: "&apos;", with: "'")
+        return xmlString
     }
     
     func getXmlVersion(forSong song: Songs, withAuthors authors: [String]) -> AEXMLDocument {

@@ -108,6 +108,22 @@ class OpenLPServiceConverterSpec : QuickSpec {
             }
         }
         
+        describe("Get xml string") {
+            var result: String!
+            
+            beforeEach {
+                result = openLPServiceConverter.getXmlVersionAsString(forSong: song, withAuthors: databaseHelper.findAuthors(bySongId: song.id))
+            }
+            
+            it("should not escape the <br/> html tag") {
+                expect(result.contains("&lt;br/&gt;")).to(beFalse())
+                expect(result.contains("&apos;Twas")).to(beFalse())
+                
+                expect(result.contains("<br/>")).to(beTrue())
+                expect(result.contains("'Twas")).to(beTrue())
+            }
+        }
+        
         describe("Get data") {
             var result: [[String: String]]!
             
@@ -197,7 +213,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
                         print("Service data text:\n \(serviceDataText)")
                         
                         //the unicode characters should be properly encoded
-                        expect(serviceDataText.contains("<themes><theme>English {\\u0b86\\u0b99\\u0bcd\\u0b95\\u0bbf\\u0bb2\\u0bae\\u0bcd}</theme></themes>"))                        
+                        expect(serviceDataText.contains("<themes><theme>English {\\u0b86\\u0b99\\u0bcd\\u0b95\\u0bbf\\u0bb2\\u0bae\\u0bcd}</theme></themes>")).to(beTrue())
                     }
                     
                 }
