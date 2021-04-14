@@ -67,13 +67,7 @@ extension String {
         let date = dateStringFormatter.date(from: self)!
         return date
     }
-    
-    var withoutSpecialCharacters: String {
-        var stringWithoutSpecialChars = self.components(separatedBy: CharacterSet.symbols).joined(separator: "")
-        stringWithoutSpecialChars = stringWithoutSpecialChars.components(separatedBy: CharacterSet.punctuationCharacters).joined(separator: "")
-        return stringWithoutSpecialChars
-    }
-        
+            
     func stringByAppendingPathComponent(_ path: String) -> String {
         
         let nsSt = self as NSString

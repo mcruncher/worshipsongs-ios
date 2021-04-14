@@ -10,19 +10,7 @@ import Nimble
 @testable import worshipsongs
 
 class StringExtensionsSpec : QuickSpec {
-    override func spec() {
-        describe("Without special characters") {
-            it("should not have symbols") {
-                expect("foo$".withoutSpecialCharacters).to(equal("foo"))
-                expect("foo$+=*%/@bar".withoutSpecialCharacters).to(equal("foobar"))
-            }
-            
-            it("should not have punctuation characters") {
-                expect("(f_o-o.b,a'r;:?)[]{}!".withoutSpecialCharacters).to(equal("foobar"))
-//                expect("foo&bar".withoutSpecialCharacters).to(equal("foobar"))
-            }
-        }
-        
+    override func spec() {        
         describe("To ascii") {
             it("should encode unicode chars using appropriate unicode code points") {
                 expect("foo".toAscii()).to(equal("foo"))

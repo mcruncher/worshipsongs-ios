@@ -31,6 +31,25 @@ class OpenLPServiceConverterSpec : QuickSpec {
             }
         }
         
+        describe("Get search string") {
+            it("should replace non-word chars with whitespaces and convert the string to lowercase") {
+                expect(openLPServiceConverter.getSearchString("Amazing Grace (my chains are gone)")).to(equal("amazing grace my chains are gone "))
+                expect(openLPServiceConverter.getSearchString("Bless the Lord (Ten Thousand Reasons)")).to(equal("bless the lord ten thousand reasons "))
+                expect(openLPServiceConverter.getSearchString("Abide With Me")).to(equal("abide with me"))
+                expect(openLPServiceConverter.getSearchString("Jesus you're my firm foundation")).to(equal("jesus youre my firm foundation"))
+                expect(openLPServiceConverter.getSearchString("Aagaathathu Ethuvumillai – Ummaal")).to(equal("aagaathathu ethuvumillai ummaal"))
+                expect(openLPServiceConverter.getSearchString("foo_bar")).to(equal("foo bar"))
+            }
+        }
+        
+        describe("Get header data title") {
+            it("should have appropriate search string including title and alternate title") {
+                let headerData = openLPServiceConverter.getHeaderData(forSong: song, forAuthors: [])
+                
+                expect(headerData["title"]).to(equal("amazing grace my chains are gone @unending love amazing grace"))
+            }
+        }
+        
         describe("Get xml version of song") {
             var result: AEXMLDocument!
             

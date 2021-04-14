@@ -12,6 +12,8 @@ import Zip
 
 class OpenLPServiceConverter : IOpenLPServiceConverter {
     private let databaseHelper = DatabaseHelper()
+    private let nonWordCharactersPattern = "[\\W_]+"
+    private let apostrophePattern = "[\\'`’ʻ′]"
     
     func toOpenLPServiceLite(favouriteName: String, favouriteList: [FavoritesSong]) -> URL? {
         do {
@@ -148,12 +150,19 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return audit
     }
     
-    private func getHeaderData(forSong song: Songs, forAuthors authors: [String]) -> [String : String] {
+    func getHeaderData(forSong song: Songs, forAuthors authors: [String]) -> [String : String] {
         let data = [
-            "title": "\(song.title.withoutSpecialCharacters.lowercased())@\(song.alternateTitle.withoutSpecialCharacters.lowercased())",
+            "title": "\(getSearchString(song.title))@\(getSearchString(song.alternateTitle))",
             "authors": authors.joined(separator: ", ")
         ]
         return data
+    }
+    
+    // Ref: https://gitlab.com/openlp/openlp/-/blob/2.4.6/openlp/plugins/songs/lib/__init__.py#L342
+    func getSearchString(_ string: String) -> String {
+        return string.replacingOccurrences(of: apostrophePattern, with: "", options: .regularExpression)
+            .replacingOccurrences(of: nonWordCharactersPattern, with: " ", options: .regularExpression)
+            .lowercased()
     }
     
     func getXmlVersionAsString(forSong song: Songs, withAuthors authors: [String]) -> String {

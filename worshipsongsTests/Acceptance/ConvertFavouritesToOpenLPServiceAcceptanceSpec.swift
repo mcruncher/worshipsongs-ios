@@ -85,7 +85,8 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
                             expect(serviceItemHeader["icon"]).to(equal(":/plugins/plugin_songs.png"))
                             
                             let audit = serviceItemHeader["audit"]
-                            expect(audit.count).to(equal(4))
+                            let expectedAudit = expectedJson[1]["serviceitem"]["header"]["audit"]
+                            expect(audit.count).to(equal(expectedAudit.count))
                             expect(audit[0].string).to(equal(expectedSongTitle))
                             expect(audit[1]).to(equal(["\(expectedAuthor)"]))
                             expect(audit[2]).to(equal(""))
@@ -97,10 +98,10 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
                             expect(serviceItemHeader["search"]).to(equal(""))
                             
                             let data = serviceItemHeader["data"]
-                            let expectedDataTitle = "amazing grace my chains are gone@unending love amazing grace"
+                            let expectedData = expectedJson[1]["serviceitem"]["header"]["data"]
                             expect(data.count).to(equal(2))
-                            expect(data["title"].string).to(equal(expectedDataTitle))
-                            expect(data["authors"].string).to(equal(expectedAuthor))
+                            expect(data["title"].string).to(equal(expectedData["title"].string))
+                            expect(data["authors"].string).to(equal(expectedData["authors"].string))
                             
                             let expectedXmlVersion = expectedJson[1]["serviceitem"]["header"]["xml_version"].string!
                             let actualXmlVersion = serviceItemHeader["xml_version"].string!
@@ -172,10 +173,10 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
                             expect(serviceItemHeader["search"]).to(equal(""))
                             
                             let data = serviceItemHeader["data"]
-                            let expectedDataTitle = "god is good all the time@god is good all the time"
+                            let expectedData = expectedJson[2]["serviceitem"]["header"]["data"]
                             expect(data.count).to(equal(2))
-                            expect(data["title"].string).to(equal(expectedDataTitle))
-                            expect(data["authors"].string).to(equal("Don Moen, Paul Overstreet"))
+                            expect(data["title"].string).to(equal(expectedData["title"].string))
+                            expect(data["authors"].string).to(equal(expectedData["authors"].string))
                             
                             expect(serviceItemHeader["xml_version"].string).toNot(beEmpty())
                             
