@@ -515,6 +515,7 @@ extension SongWithVideoViewController {
         shareActions.addAction(getShareAction())
         shareActions.addAction(getShareAsPdfAction())
         shareActions.addAction(getCancelnActionSheet())
+        shareActions.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         self.present(shareActions, animated: true, completion: nil)
     }
     

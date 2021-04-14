@@ -326,6 +326,7 @@ extension FavoritesTableViewController {
         shareActions.addAction(getShareAsPdfAction())
         shareActions.addAction(getShareAsOpenLPServiceAction())
         shareActions.addAction(getCancelnActionSheet())
+        shareActions.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         self.present(shareActions, animated: true, completion: nil)
     }
     
