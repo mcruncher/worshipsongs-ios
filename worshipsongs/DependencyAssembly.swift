@@ -9,7 +9,8 @@ import Swinject
 import SwinjectAutoregistration
 
 extension SwinjectStoryboard {
-    @objc class func setup() {        
+    @objc class func setup() {
+        AppLogger.log(level: .debug, "Preparing DI container...")        
         registerServices()
     }
     

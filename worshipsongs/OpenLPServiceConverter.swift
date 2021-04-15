@@ -27,7 +27,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             createServiceFile(favouriteName: favouriteName, serviceDataFileUrl: serviceDataFileUrl, serviceFileUrl: serviceFileUrl)
             return serviceFileUrl
         } catch {
-            print("Error occurred while converting the favourite list to OpenLP Service Lite.")
+            AppLogger.log(level: .error, "Error occurred while converting the favourite list to OpenLP Service Lite.")
             print(error)
         }
         return nil
@@ -38,14 +38,14 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             let json = toOszlJson(favouriteList: favouriteList)
             let jsonRawString = json.rawString(options: .init(rawValue: 0))
             var jsonString = jsonRawString!.replacingOccurrences(of: "\\\\", with: "\\").replacingOccurrences(of: "\\/", with: "/")
-            print("Json string: \n \(jsonString)")
+            AppLogger.log(level: .debug, "Json string: \n \(jsonString)")
             if FileManager.default.fileExists(atPath: url.path) {
                 try FileManager.default.removeItem(atPath: url.path)
             }
             try jsonString.write(to: url, atomically: true, encoding: .ascii)
-            print("Finished writing the json to the file \(url.path)")
+            AppLogger.log(level: .debug, "Finished writing the json to the file \(url.path)")
         } catch {
-            print("Error occurred while creating service data file")
+            AppLogger.log(level: .error, "Error occurred while creating service data file")
             print(error)
         }
     }
@@ -58,9 +58,9 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
 
             Zip.addCustomFileExtension(serviceFileUrl.pathExtension)
             try Zip.zipFiles(paths: [serviceDataFileUrl], zipFilePath: serviceFileUrl, password: nil, progress: nil)
-            print("Finished creating the service file \(serviceFileUrl)")
+            AppLogger.log(level: .info, "Finished creating the service file \(serviceFileUrl)")
             
-            print("Removing the service data file \(serviceDataFileUrl)")
+            AppLogger.log(level: .debug, "Removing the service data file \(serviceDataFileUrl)")
             try FileManager.default.removeItem(at: serviceDataFileUrl)
         } catch {
             print("Error occurred while creating service file")
@@ -231,7 +231,8 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
                 }
             }
         } catch {
-            print("Error parsing the lyrics xml")
+            AppLogger.log(level: .error, "Error parsing the lyrics xml")
+            print(error)
         }
         return lyricsElement
     }
@@ -243,7 +244,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         var verseOrderList: NSMutableArray = NSMutableArray()
         (listDataDictionary, verseOrderList) = LyricsXmlParser().parse(song: song)
         
-        print("Verse order : \(song.verse_order)")
+        AppLogger.log(level: .debug, "Verse order : \(song.verse_order)")
         
         for verseOrderItem in song.verse_order.components(separatedBy: " ") {
             let verseOrderItemString = (verseOrderItem as! String)
