@@ -41,7 +41,7 @@ class CategoriesTableViewController: UITableViewController   {
     override func viewWillAppear(_ animated: Bool) {
         songTabBarController = tabBarController as? SongsTabBarViewController
         songTabBarController?.navigationItem.title = "categories".localized
-        categoryModel = databaseHelper.findCategory()
+        categoryModel = databaseHelper.findCategories()
         filteredCategoryModel = categoryModel
         songTabBarController?.searchDelegate = self
         songTabBarController?.searchDelegate4S = self
@@ -74,7 +74,7 @@ class CategoriesTableViewController: UITableViewController   {
         } else {
             categoryName = filteredCategoryModel[(indexPath as NSIndexPath).row].nameEnglish
         }
-        songsModel = databaseHelper.findCategorySongs(filteredCategoryModel[(indexPath as NSIndexPath).row].id)
+        songsModel = databaseHelper.findSongs(byCategoryId: filteredCategoryModel[(indexPath as NSIndexPath).row].id)
         performSegue(withIdentifier: "artistTitle", sender: self)
         
     }

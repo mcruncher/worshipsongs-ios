@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var favSongs:[String] = [String]()
         let databaseHelper = DatabaseHelper()
         for j in 1..<importFav.count {
-            let songs = databaseHelper.getSongsModelByIds([String(importFav[j])])
+            let songs = databaseHelper.findSongs(bySongIds: [String(importFav[j])])
             if songs.count > 0 {
                 favSongs.append(String(songs[0].title))
             }

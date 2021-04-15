@@ -70,7 +70,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
     func toOszlJson(favouriteList: [FavoritesSong]) -> JSON {
         var openLPService = [getGeneralServiceInfo()]
         for favouriteSong in favouriteList {
-            let songs = databaseHelper.findSongsByTitles([favouriteSong.songs.title])
+            let songs = databaseHelper.findSongs(byTitles: [favouriteSong.songs.title])
             for song in songs {
                 let authors = databaseHelper.findAuthors(bySongId: song.id).map({$0.toAscii()})
                 openLPService.append(getServiceItem(forSong: song, forAuthors: authors))
@@ -209,7 +209,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         }
         
         let themesElement = propertiesElement.addChild(name: "themes")
-        let topics = databaseHelper.findTopics(bySongId: song.id)
+        let topics = databaseHelper.findCategories(bySongId: song.id)
         for topic in topics {
             themesElement.addChild(name: "theme", value: topic.toAscii())
         }

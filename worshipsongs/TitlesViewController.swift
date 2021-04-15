@@ -96,7 +96,7 @@ class TitlesViewController: UITableViewController {
         songTabBarController?.navigationItem.title = "songs".localized
         songTabBarController?.searchDelegate = self
         songTabBarController?.searchDelegate4S = self
-        songModel = databaseHelper.getSongModel()
+        songModel = databaseHelper.findSongs()
         filteredSongModel = songModel
         sortSongModel()
     }
