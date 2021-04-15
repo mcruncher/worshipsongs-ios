@@ -201,7 +201,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         titlesElement.addChild(name: "title", value: song.title)
         titlesElement.addChild(name: "title", value: song.alternateTitle)
         
-        let verseOrderElement = propertiesElement.addChild(name: "verseOrder", value: song.verse_order)
+        propertiesElement.addChild(name: "verseOrder", value: song.verse_order)
         
         let authorsElement = propertiesElement.addChild(name: "authors")
         for author in authors {
@@ -240,8 +240,8 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
     func getData(forSong song: Songs) -> [[String: String]] {
         var data: [[String: String]] = []
         
-        var listDataDictionary : NSMutableDictionary = NSMutableDictionary()
-        var verseOrderList: NSMutableArray = NSMutableArray()
+        var listDataDictionary : NSMutableDictionary!
+        let verseOrderList: NSMutableArray!
         (listDataDictionary, verseOrderList) = LyricsXmlParser().parse(song: song)
         
         AppLogger.log(level: .debug, "Verse order : \(song.verse_order)")
@@ -251,8 +251,8 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             let rawSlide: String? = listDataDictionary[verseOrderItemString.lowercased()] as? String
             
             var dataItem: [String: String] = [:]
-            var linesInSlide = rawSlide?.components(separatedBy: "\n")
-            var firstLineInSlide: String = linesInSlide?[0] ?? ""
+            let linesInSlide = rawSlide?.components(separatedBy: "\n")
+            let firstLineInSlide: String = linesInSlide?[0] ?? ""
             let title = firstLineInSlide.count > 30 ? String(firstLineInSlide.prefix(30)) : firstLineInSlide
             dataItem["title"] = title.toAscii()
             dataItem["verseTag"] = verseOrderItem.uppercased()
@@ -267,8 +267,8 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
 
 class WSXMLDocument : AEXMLDocument {
     open override var xml: String {
-        var xml =  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-        xml += root.xml
-        return xml
+        var xmlString =  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        xmlString += root.xml
+        return xmlString
     }
 }
