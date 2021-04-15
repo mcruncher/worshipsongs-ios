@@ -62,7 +62,7 @@ class SongWithVideoViewController: UIViewController  {
         addShareBarButton()
         setSplitViewControllerProperties()
         if selectedSong != nil {
-            (listDataDictionary, verseOrderList) = xmlParser.getXmlParser(song: selectedSong)
+            (listDataDictionary, verseOrderList) = xmlParser.parse(song: selectedSong)
         }
         hideOrShowComponents()
         setTableViewProperties()
@@ -80,13 +80,13 @@ class SongWithVideoViewController: UIViewController  {
         }
         songLyrics = selectedSong.lyrics as NSString
         self.songName = selectedSong.title
-        authorName = databaseHelper.getArtistName(selectedSong.id)
+        authorName = databaseHelper.findAuthor(bySongId: selectedSong.id)
         if !selectedSong.comment.isEmpty {
             comment = selectedSong.comment
         } else {
             comment = ""
         }
-       (listDataDictionary, verseOrderList) = xmlParser.getXmlParser(song: selectedSong)
+       (listDataDictionary, verseOrderList) = xmlParser.parse(song: selectedSong)
         if DeviceUtils.isIpad() {
             hideOrShowComponents()
             

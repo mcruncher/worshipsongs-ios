@@ -10,6 +10,7 @@ pipeline {
       
       post {
         always {
+		  fastlane("clean_simulator")
           terminateSimulator()
           archiveUnitTestsReport()
         }

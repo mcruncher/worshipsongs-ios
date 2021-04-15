@@ -16,7 +16,7 @@ class LyricsXmlParser: NSObject, XMLParserDelegate {
     var parsedVerseOrderList: NSMutableArray = NSMutableArray()
     var verseOrderList: NSMutableArray = NSMutableArray()
     
-    func getXmlParser(song: Songs) -> (NSMutableDictionary, NSMutableArray){
+    func parse(song: Songs) -> (NSMutableDictionary, NSMutableArray){
         element = ""
         attribues = NSDictionary()
         listDataDictionary = NSMutableDictionary()

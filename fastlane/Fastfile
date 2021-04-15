@@ -23,6 +23,11 @@ platform :ios do
   lane :clean do
     clear_derived_data
   end
+  
+  desc "Cleans the simulator"
+  lane :clean_simulator do
+    reset_simulator_contents
+  end
 
   ##### Development ######
   desc "Automatically bumps the major version"

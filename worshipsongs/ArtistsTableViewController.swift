@@ -42,7 +42,7 @@ class ArtistsTableViewController: UITableViewController   {
         songTabBarController?.navigationItem.title = "artists".localized
         songTabBarController?.searchDelegate = self
         songTabBarController?.searchDelegate4S = self
-        authorModel = databaseHelper.getArtistModel()
+        authorModel = databaseHelper.findAuthors()
         filteredAuthorModel = authorModel
         tableView.reloadData()
     }
@@ -83,7 +83,7 @@ class ArtistsTableViewController: UITableViewController   {
         } else {
             artistName = filteredAuthorModel[(indexPath as NSIndexPath).row].displayNameEnglish
         }
-        songsModel = databaseHelper.getArtistSongsModel(filteredAuthorModel[(indexPath as NSIndexPath).row].id)
+        songsModel = databaseHelper.findSongs(byAuthorId: filteredAuthorModel[(indexPath as NSIndexPath).row].id)
         performSegue(withIdentifier: "artistTitle", sender: self)
     }
     

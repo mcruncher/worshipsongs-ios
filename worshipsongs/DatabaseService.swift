@@ -160,7 +160,7 @@ class DatabaseService {
     
     func verifyDatabase() -> Bool {
         let databaseHelper = DatabaseHelper()
-        let songModel = databaseHelper.getSongModel()
+        let songModel = databaseHelper.findSongs()
         return songModel.count > 0
     }
     

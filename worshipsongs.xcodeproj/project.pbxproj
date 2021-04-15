@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A8A4B5326082D28003126F8 /* StringExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8A4B5226082D28003126F8 /* StringExtensionsSpec.swift */; };
+		1A9333A826031B4300953865 /* IOpenLPServiceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */; };
+		1A9333B926031C9200953865 /* OpenLPServiceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */; };
+		1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */; };
+		1A9333D82603372E00953865 /* openlp-service-lite.osj in Resources */ = {isa = PBXBuildFile; fileRef = 1A9333D72603372E00953865 /* openlp-service-lite.osj */; };
+		1AADE9112627CD5C00EED553 /* DependencyAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE9102627CD5C00EED553 /* DependencyAssembly.swift */; };
+		1AADE9162627D40500EED553 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE9152627D40500EED553 /* AppLogger.swift */; };
+		1ADDED4126048B2D004724DD /* DatabaseHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */; };
+		1AF35E63260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF35E62260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift */; };
 		280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
 		285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D5A631E76497000C3F1EE /* CommonConstants.swift */; };
@@ -31,13 +40,12 @@
 		2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A6A7E1C15624B001E8B93 /* SongsTabBarViewController.swift */; };
 		2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */; };
 		2F5D3D251BC788F8001C4B6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D3D231BC788F8001C4B6F /* Main.storyboard */; };
-		2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */; };
 		2F5D3D401BC788F8001C4B6F /* worshipsongsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D3F1BC788F8001C4B6F /* worshipsongsUITests.swift */; };
 		2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D551BC78D51001C4B6F /* Songs.swift */; };
 		2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D5B1BC7A216001C4B6F /* CommonService.swift */; };
 		2FA7034121522C3900AD320B /* worshipsongs.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */; };
 		2FA885CF215325430069DE89 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE840EE1DDBE7FB002B3379 /* FavoritesTableViewController.swift */; };
-		2FA885D0215325570069DE89 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */; };
+		2FA885D0215325570069DE89 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D3D621BC7AD5E001C4B6F /* String+Extensions.swift */; };
 		2FB0ADC422151DFB00EB305F /* LyricsXmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC322151DFB00EB305F /* LyricsXmlParser.swift */; };
 		2FB0ADC622154B6600EB305F /* CustomProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC522154B6600EB305F /* CustomProvider.swift */; };
 		2FB0ADC8221552D500EB305F /* MessageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB0ADC7221552D500EB305F /* MessageParser.swift */; };
@@ -92,6 +100,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A8A4B5226082D28003126F8 /* StringExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsSpec.swift; sourceTree = "<group>"; };
+		1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOpenLPServiceConverter.swift; sourceTree = "<group>"; };
+		1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverter.swift; sourceTree = "<group>"; };
+		1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverterSpec.swift; sourceTree = "<group>"; };
+		1A9333D72603372E00953865 /* openlp-service-lite.osj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "openlp-service-lite.osj"; sourceTree = "<group>"; };
+		1AADE9102627CD5C00EED553 /* DependencyAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyAssembly.swift; sourceTree = "<group>"; };
+		1AADE9152627D40500EED553 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
+		1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelperSpec.swift; sourceTree = "<group>"; };
+		1AF35E62260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift; sourceTree = "<group>"; };
 		280B923D1E77830E00833EAA /* DeviceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtils.swift; sourceTree = "<group>"; };
 		285D5A631E76497000C3F1EE /* CommonConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
 		28786FCB1F78F7310085B216 /* SongBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongBook.swift; sourceTree = "<group>"; };
@@ -121,7 +138,6 @@
 		2F5D3D261BC788F8001C4B6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F5D3D2B1BC788F8001C4B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F5D3D301BC788F8001C4B6F /* worshipsongsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = worshipsongsTests.swift; sourceTree = "<group>"; };
 		2F5D3D361BC788F8001C4B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F5D3D3B1BC788F8001C4B6F /* worshipsongsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = worshipsongsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F5D3D3F1BC788F8001C4B6F /* worshipsongsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = worshipsongsUITests.swift; sourceTree = "<group>"; };
@@ -131,7 +147,7 @@
 		2F5D3D5B1BC7A216001C4B6F /* CommonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonService.swift; sourceTree = "<group>"; };
 		2F5D3D5E1BC7A5B3001C4B6F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		2F5D3D5F1BC7A74E001C4B6F /* TitlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitlesViewController.swift; sourceTree = "<group>"; };
-		2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		2F5D3D621BC7AD5E001C4B6F /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		2FB0ADC322151DFB00EB305F /* LyricsXmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsXmlParser.swift; sourceTree = "<group>"; };
 		2FB0ADC522154B6600EB305F /* CustomProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProvider.swift; sourceTree = "<group>"; };
 		2FB0ADC7221552D500EB305F /* MessageParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageParser.swift; sourceTree = "<group>"; };
@@ -210,6 +226,57 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1A9333CC26031DBA00953865 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				1ADDED3C2604857F004724DD /* Service */,
+				1A9333CD26031DC900953865 /* Utilities */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		1A9333CD26031DC900953865 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1A9333CE26031E0000953865 /* OpenLPServiceConverterSpec.swift */,
+				1A8A4B5226082D28003126F8 /* StringExtensionsSpec.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		1A9333E7260347DA00953865 /* OpenLP */ = {
+			isa = PBXGroup;
+			children = (
+				1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */,
+				1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */,
+			);
+			name = OpenLP;
+			sourceTree = "<group>";
+		};
+		1ADDED35260439C3004724DD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1A9333D72603372E00953865 /* openlp-service-lite.osj */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1ADDED3C2604857F004724DD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		1AF35E61260C16FE00AF0F2E /* Acceptance */ = {
+			isa = PBXGroup;
+			children = (
+				1AF35E62260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift */,
+			);
+			path = Acceptance;
+			sourceTree = "<group>";
+		};
 		2F0A70F71E1B43020025F156 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,7 +331,9 @@
 		2F5D3D331BC788F8001C4B6F /* worshipsongsTests */ = {
 			isa = PBXGroup;
 			children = (
-				2F5D3D341BC788F8001C4B6F /* worshipsongsTests.swift */,
+				1AF35E61260C16FE00AF0F2E /* Acceptance */,
+				1ADDED35260439C3004724DD /* Resources */,
+				1A9333CC26031DBA00953865 /* Library */,
 				2F5D3D361BC788F8001C4B6F /* Info.plist */,
 			);
 			path = worshipsongsTests;
@@ -284,6 +353,7 @@
 			children = (
 				2F5D3D231BC788F8001C4B6F /* Main.storyboard */,
 				2F5D3D1D1BC788F8001C4B6F /* AppDelegate.swift */,
+				1AADE9102627CD5C00EED553 /* DependencyAssembly.swift */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -356,12 +426,14 @@
 		2F5D3D571BC78D85001C4B6F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				1A9333E7260347DA00953865 /* OpenLP */,
 				2FC6EA3E22680B5C007882A6 /* SimplePDF.swift */,
 				2FC6EA3F22680B5C007882A6 /* SimplePDFLabel.swift */,
 				2FC6EA4022680B5C007882A6 /* SimplePDFUtilities.swift */,
 				2F5D3D611BC7AD30001C4B6F /* Utilities */,
 				2F5D3D581BC78D97001C4B6F /* Service */,
 				285D5A631E76497000C3F1EE /* CommonConstants.swift */,
+				1AADE9152627D40500EED553 /* AppLogger.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -395,7 +467,7 @@
 		2F5D3D611BC7AD30001C4B6F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				2F5D3D621BC7AD5E001C4B6F /* StringUtils.swift */,
+				2F5D3D621BC7AD5E001C4B6F /* String+Extensions.swift */,
 				2FDE48541DF149DB00948236 /* ColorUtils.swift */,
 				2F19EAFD1E5FBE4D00B989D8 /* Downloader.swift */,
 				280B923D1E77830E00833EAA /* DeviceUtils.swift */,
@@ -552,6 +624,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A9333D82603372E00953865 /* openlp-service-lite.osj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,15 +667,27 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-worshipsongs/Pods-worshipsongs-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AEXML/AEXML.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectAutoregistration/SwinjectAutoregistration.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
 				"${BUILT_PRODUCTS_DIR}/YouTubePlayer/YouTubePlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/Zip/Zip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AEXML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectAutoregistration.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectStoryboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -638,15 +723,33 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AEXML/AEXML.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectAutoregistration/SwinjectAutoregistration.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
 				"${BUILT_PRODUCTS_DIR}/YouTubePlayer/YouTubePlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/Zip/Zip.framework",
+				"${BUILT_PRODUCTS_DIR}/Cuckoo/Cuckoo.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AEXML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectAutoregistration.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectStoryboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cuckoo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -666,6 +769,7 @@
 				28786FCC1F78F7310085B216 /* SongBook.swift in Sources */,
 				2FC6EA4222680B5C007882A6 /* SimplePDFLabel.swift in Sources */,
 				2F5D3D561BC78D51001C4B6F /* Songs.swift in Sources */,
+				1A9333A826031B4300953865 /* IOpenLPServiceConverter.swift in Sources */,
 				2FB0ADC622154B6600EB305F /* CustomProvider.swift in Sources */,
 				2F18C4C31E8DE6B800E540AF /* CategoriesTableViewController.swift in Sources */,
 				2FFBC33E1E7BAB85006B2405 /* DatabaseService.swift in Sources */,
@@ -678,7 +782,9 @@
 				2F19EAFE1E5FBE4D00B989D8 /* Downloader.swift in Sources */,
 				2FDE48531DF140BD00948236 /* SettingsController.swift in Sources */,
 				2FEDF61F1F721AF1005D1B83 /* FavoritesListViewController.swift in Sources */,
+				1AADE9162627D40500EED553 /* AppLogger.swift in Sources */,
 				280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */,
+				1A9333B926031C9200953865 /* OpenLPServiceConverter.swift in Sources */,
 				625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				2F5D3D5C1BC7A216001C4B6F /* CommonService.swift in Sources */,
 				2FD589991C16775C00668951 /* ArtistSongsTitleTableViewController.swift in Sources */,
@@ -696,7 +802,7 @@
 				2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */,
 				285D5A641E76497000C3F1EE /* CommonConstants.swift in Sources */,
 				2FC6EA4122680B5C007882A6 /* SimplePDF.swift in Sources */,
-				2FA885D0215325570069DE89 /* StringUtils.swift in Sources */,
+				2FA885D0215325570069DE89 /* String+Extensions.swift in Sources */,
 				2FE636591E41DED80092A696 /* ColorUtils.swift in Sources */,
 				2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */,
 				2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */,
@@ -710,6 +816,7 @@
 				2F19EB001E6005A000B989D8 /* RemoteUrlViewController.swift in Sources */,
 				2F08FFD71F301B8A00B894FB /* RestApiService.swift in Sources */,
 				28786FCE1F78FAD30085B216 /* SongBookService.swift in Sources */,
+				1AADE9112627CD5C00EED553 /* DependencyAssembly.swift in Sources */,
 				2F18C4C51E8DF17700E540AF /* Category.swift in Sources */,
 				2FC6EA4322680B5C007882A6 /* SimplePDFUtilities.swift in Sources */,
 			);
@@ -719,9 +826,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ADDED4126048B2D004724DD /* DatabaseHelperSpec.swift in Sources */,
 				625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */,
+				1AF35E63260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift in Sources */,
 				283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */,
-				2F5D3D351BC788F8001C4B6F /* worshipsongsTests.swift in Sources */,
+				1A8A4B5326082D28003126F8 /* StringExtensionsSpec.swift in Sources */,
+				1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

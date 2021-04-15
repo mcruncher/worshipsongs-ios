@@ -8,187 +8,244 @@ import FMDB
 
 
 class DatabaseHelper: NSObject {
-    
+    private let dbName = "songs.sqlite"
+    private let idColumn = "id"
+    private let titleColumn: String = "title"
+    private let alternateTitleColumn = "alternate_title"
+    private let lyricsColumn: String = "lyrics"
+    private let verseOrderColumn: String = "verse_order"
+    private let lastModifiedColumn = "last_modified"
+    private let commentsColumn = "comments"
+
     var database: FMDatabase? = nil
-    var resultSet: FMResultSet? = nil
     let commonService: CommonService = CommonService()
-    let id = "id"
-    let titles: String = "title"
-    let lyrics: String = "lyrics"
-    let verseOrder: String = "verse_order"
-    
-    func getSongModel() -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
+        
+    func findSongs() -> [(Songs)] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
-        var songModel = [Songs]()
-        let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM songs ORDER BY title", withArgumentsIn: [])
-        if (resultSet1 != nil)
+        var songs = [Songs]()
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs ORDER BY title", withArgumentsIn: [])
+        if (resultSet != nil)
         {
-            while resultSet1!.next() {
-                songModel.append(getSong(resultSet1!))
+            while resultSet!.next() {
+                songs.append(getSong(resultSet!))
             }
         }
-        print("songModel count : \(songModel.count)")
-        return songModel
+        AppLogger.log(level: .debug, "Total no. of songs: \(songs.count)")
+        return songs
     }
-    
-    func getArtistModel() -> [(Author)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
-        database?.open()
-        var authorModel = [Author]()
-        let resultSet1: FMResultSet? = database!.executeQuery("SELECT a.id, a.first_name, a.last_name, a.display_name," +
-            "(select COUNT(*) from authors_songs where author_id = a.id) AS no_songs FROM authors AS a ORDER BY a.display_name", withArgumentsIn: [])
-        if (resultSet1 != nil)
-        {
-            while resultSet1!.next() {
-                authorModel.append(getAuthor(resultSet1!))
-            }
-        }
-        print("ArtistModel count : \(authorModel.count)")
-        return authorModel
-    }
-    
-    func getArtistSongsModel(_ argument: String) -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
+        
+    func findSongs(byAuthorId authorId: String) -> [(Songs)] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var arguments = [AnyObject]()
-        arguments.append(argument as AnyObject)
-        var songModel = [Songs]()
+        arguments.append(authorId as AnyObject)
+        var songs = [Songs]()
         let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN " +
             "(SELECT song_id FROM authors_songs where author_id = ?) ORDER BY title", withArgumentsIn: arguments)
         if (resultSet != nil)
         {
             while resultSet!.next() {
-                songModel.append(getSong(resultSet!))
+                songs.append(getSong(resultSet!))
             }
         }
-        return songModel
+        return songs
     }
     
-    func getSongsModelTitles(_ argument: [String]) -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
+    func findSongs(byTitle title: String) -> [Songs] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
+
         database?.open()
-        var songModel = [Songs]()
-        
-        var args: String = ""
-        for _ in argument {
-            if(args != "")
-            {
-                args="\(args),"
-            }
-            args="\(args)?"
-        }
-        let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where title IN (\(args)) ORDER BY title", withArgumentsIn: argument)
-        if (resultSet2 != nil)
-        {
-            while resultSet2!.next() {
-                songModel.append(getSong(resultSet2!))
-            }
-        }
-        print("songModel count : \(songModel.count)")
-        return songModel
-    }
-    
-    func getSongsModelByIds(_ argument: [String]) -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
-        database?.open()
-        var songModel = [Songs]()
-        
-        var args: String = ""
-        for _ in argument {
-            if(args != "")
-            {
-                args="\(args),"
-            }
-            args="\(args)?"
-        }
-        let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN (\(args)) ORDER BY title", withArgumentsIn: argument)
-        if (resultSet2 != nil)
-        {
-            while resultSet2!.next() {
-                songModel.append(getSong(resultSet2!))
-            }
-        }
-        print("songModel count : \(songModel.count)")
-        return songModel
-    }
-    
-    func getArtistName(_ argument: String) -> String {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
-        database?.open()
+        var songs = [Songs]()
+
         var arguments = [AnyObject]()
-        arguments.append(argument as AnyObject)
-        var authorName = " "
-        let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM authors where id IN " +
-            "(SELECT author_id FROM authors_songs where song_id = ?) ORDER BY display_name", withArgumentsIn: arguments)
-        if (resultSet2 != nil)
+        arguments.append("%\(title)%" as AnyObject)
+
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where title LIKE ? ORDER BY title", withArgumentsIn: arguments)
+        if (resultSet != nil)
         {
-            while resultSet2!.next() {
-                authorName = resultSet2!.string(forColumn: "display_name")!
+            while resultSet!.next() {
+                songs.append(getSong(resultSet!))
             }
         }
-        return authorName
+        return songs
     }
-    
-    func findCategory() -> [(Category)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        database?.open()
-        var categoryModel = [Category]()
-        let resultSet1: FMResultSet? = database!.executeQuery("SELECT t.id, t.name, (select COUNT(*) " +
-            "from songs_topics where topic_id = t.id) AS no_songs FROM topics AS t ORDER BY t.name", withArgumentsIn: [])
-        if (resultSet1 != nil)
-        {
-            while resultSet1!.next() {
-                categoryModel.append(getCategory(resultSet1!))
-            }
-        }
-        print("Categories: \(categoryModel.count)")
-        return categoryModel
-    }
-    
-    func findCategorySongs(_ categoryId: Int) -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+
+    func findSongs(byCategoryId categoryId: Int) -> [(Songs)] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var arguments = [AnyObject]()
         arguments.append(categoryId as AnyObject)
-        var songModel = [Songs]()
+        var songs = [Songs]()
         let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN " +
             "(SELECT song_id FROM songs_topics where topic_id = ?) ORDER BY title", withArgumentsIn: arguments)
         if (resultSet != nil)
         {
             while resultSet!.next() {
-                songModel.append(getSong(resultSet!))
+                songs.append(getSong(resultSet!))
             }
         }
-        return songModel
+        return songs
+    }
+
+    func findSongs(byTitles titles: [String]) -> [(Songs)] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
+        database?.open()
+        var songs = [Songs]()
+        
+        var args: String = ""
+        for _ in titles {
+            if(args != "")
+            {
+                args="\(args),"
+            }
+            args="\(args)?"
+        }
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where title IN (\(args)) ORDER BY title", withArgumentsIn: titles)
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                songs.append(getSong(resultSet!))
+            }
+        }
+        AppLogger.log(level: .debug, "No. of songs matching the titles \(titles): \(songs.count)")
+        return songs
+    }
+        
+    func findSongs(bySongIds ids: [String]) -> [(Songs)] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
+        database?.open()
+        var songs = [Songs]()
+        
+        var args: String = ""
+        for _ in ids {
+            if(args != "")
+            {
+                args="\(args),"
+            }
+            args="\(args)?"
+        }
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN (\(args)) ORDER BY title", withArgumentsIn: ids)
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                songs.append(getSong(resultSet!))
+            }
+        }
+        AppLogger.log(level: .debug, "No. of songs matching the ids \(ids): \(songs.count)")
+        return songs
+    }
+        
+    func findAuthors() -> [(Author)] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
+        database?.open()
+        var authors = [Author]()
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT a.id, a.first_name, a.last_name, a.display_name," +
+            "(select COUNT(*) from authors_songs where author_id = a.id) AS no_songs FROM authors AS a ORDER BY a.display_name", withArgumentsIn: [])
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                authors.append(getAuthor(resultSet!))
+            }
+        }
+        AppLogger.log(level: .debug, "Total no. of authors: \(authors.count)")
+        return authors
+    }
+
+    func findAuthor(bySongId songId: String) -> String {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
+        database?.open()
+        
+        var arguments = [AnyObject]()
+        arguments.append(songId as AnyObject)
+        
+        var authorName = " "
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM authors where id IN " +
+            "(SELECT author_id FROM authors_songs where song_id = ?) ORDER BY display_name", withArgumentsIn: arguments)
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                authorName = resultSet!.string(forColumn: "display_name")!
+            }
+        }
+        return authorName
+    }
+
+    func findAuthors(bySongId songId: String) -> [String] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
+        database?.open()
+
+        var authors = [String]()
+        
+        var arguments = [AnyObject]()
+        arguments.append(songId as AnyObject)
+
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM authors where id IN " +
+            "(SELECT author_id FROM authors_songs where song_id = ?) ORDER BY display_name", withArgumentsIn: arguments)
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                authors.append(resultSet!.string(forColumn: "display_name")!)
+            }
+        }
+        return authors
+    }
+    
+    func findCategories() -> [(Category)] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
+        database?.open()
+        var categories = [Category]()
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT t.id, t.name, (select COUNT(*) " +
+            "from songs_topics where topic_id = t.id) AS no_songs FROM topics AS t ORDER BY t.name", withArgumentsIn: [])
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                categories.append(getCategory(resultSet!))
+            }
+        }
+        AppLogger.log(level: .debug, "No. of categories: \(categories.count)")
+        return categories
+    }
+        
+    func findCategories(bySongId songId: String) -> [String] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
+        database?.open()
+
+        var topics = [String]()
+        
+        var arguments = [AnyObject]()
+        arguments.append(songId as AnyObject)
+
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM topics where id IN " +
+            "(SELECT topic_id FROM songs_topics where song_id = ?) ORDER BY name", withArgumentsIn: arguments)
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                topics.append(resultSet!.string(forColumn: "name")!)
+            }
+        }
+        return topics
     }
     
     func getSong(_ resultSet: FMResultSet) -> Songs {
-        let id : String = resultSet.string(forColumn: self.id)!
-        let title: String = resultSet.string(forColumn: self.titles)!
-        let lyrics: String = resultSet.string(forColumn: self.lyrics)!
-        let verseOrder: String = resultSet.string(forColumn: self.verseOrder)!
-        let comments: String = resultSet.string(forColumn:
-            "comments") != nil ? resultSet.string(forColumn: "comments")! : ""
-        return Songs(id: id, title: title, lyrics: lyrics, verse_order: verseOrder, comment: comments)
+        let song = Songs()
+        song.id = resultSet.string(forColumn: idColumn)!
+        song.title = resultSet.string(forColumn: titleColumn)!
+        song.alternateTitle = resultSet.string(forColumn: alternateTitleColumn)!
+        song.lyrics = resultSet.string(forColumn: lyricsColumn)!
+        song.verse_order = resultSet.string(forColumn: verseOrderColumn)!
+        
+        let timestamp = resultSet.string(forColumn: lastModifiedColumn)
+        if timestamp != nil {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            song.lastModified = dateFormatter.date(from: timestamp!)
+        }
+        
+        let comment = resultSet.string(forColumn: commentsColumn)
+        song.comment = comment != nil ? comment! : ""
+        
+        return song
     }
     
     private func getAuthor(_ resultSet: FMResultSet) -> Author {

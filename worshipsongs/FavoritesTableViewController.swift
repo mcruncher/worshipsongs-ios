@@ -26,9 +26,10 @@ class FavoritesTableViewController: UITableViewController {
     fileprivate let xmlParser = LyricsXmlParser()
     
     var songTabBarController: SongsTabBarViewController?
+    var openLPServiceConverter: IOpenLPServiceConverter!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         addShareBarButton()
         self.tableView.tableFooterView = getTableFooterView()
         updateModel()
@@ -290,7 +291,7 @@ class FavoritesTableViewController: UITableViewController {
             let favoritesSongsWithOrders = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
             var favoritesSongs = [FavoritesSong]()
             for favoritesSongsWithOrder in favoritesSongsWithOrders {
-                let songs = databaseHelper.getSongsModelTitles([favoritesSongsWithOrder.songName])
+                let songs = databaseHelper.findSongs(byTitles: [favoritesSongsWithOrder.songName])
                 if songs.count > 0 {
                     favoritesSongs.append(FavoritesSong(songTitle:favoritesSongsWithOrder.songName, songs: songs[0], favoritesSongsWithOrder: favoritesSongsWithOrder))
                 } else {
@@ -321,6 +322,7 @@ extension FavoritesTableViewController {
         let shareActions = UIAlertController(title: "choose_options".localized, message: "", preferredStyle: .actionSheet)
         shareActions.addAction(getShareAction())
         shareActions.addAction(getShareAsPdfAction())
+        shareActions.addAction(getShareAsOpenLPServiceAction())
         shareActions.addAction(getCancelnActionSheet())
         shareActions.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         self.present(shareActions, animated: true, completion: nil)
@@ -418,7 +420,7 @@ extension FavoritesTableViewController {
                 titleString.append(NSAttributedString(string: "\(number). \(songModel.songs.title)\n"))
             }
             pdf.addH2(titleString.string)
-            let (listDataDictionary, verseOrderList) = xmlParser.getXmlParser(song: songModel.songs)
+            let (listDataDictionary, verseOrderList) = xmlParser.parse(song: songModel.songs)
             let objectString: NSMutableAttributedString = NSMutableAttributedString()
             objectString.append(NSAttributedString(string: "\n"))
             objectString.append(MessageParser.getVerses(verseOrderList, listDataDictionary))
@@ -429,6 +431,15 @@ extension FavoritesTableViewController {
             let pageHalfHeight = Int(pdf.availablePageSize.height.rounded()) / 2
             startNewPage = remainingSize > pageHalfHeight
         }
+    }
+    
+    private func getShareAsOpenLPServiceAction() -> UIAlertAction {
+        return UIAlertAction(title: "shareAsOpenLPService".localized, style: .default, handler: { _ in
+            let fileUrl = self.openLPServiceConverter.toOpenLPServiceLite(favouriteName: self.favorite, favouriteList: self.filteredSongModel)
+            if fileUrl != nil {
+                self.showActivityViewController([fileUrl])
+            }
+        })
     }
 }
 
