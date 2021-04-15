@@ -29,9 +29,7 @@ class FavoritesTableViewController: UITableViewController {
     var openLPServiceConverter: IOpenLPServiceConverter!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        openLPServiceConverter = OpenLPServiceConverter()
-        
+        super.viewDidLoad()        
         addShareBarButton()
         self.tableView.tableFooterView = getTableFooterView()
         updateModel()
