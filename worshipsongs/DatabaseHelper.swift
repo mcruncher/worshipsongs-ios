@@ -8,7 +8,7 @@ import FMDB
 
 
 class DatabaseHelper: NSObject {
-    
+    private let dbName = "songs.sqlite"
     private let idColumn = "id"
     private let titleColumn: String = "title"
     private let alternateTitleColumn = "alternate_title"
@@ -18,21 +18,17 @@ class DatabaseHelper: NSObject {
     private let commentsColumn = "comments"
 
     var database: FMDatabase? = nil
-    var resultSet: FMResultSet? = nil
     let commonService: CommonService = CommonService()
         
     func getSongModel() -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var songModel = [Songs]()
-        let resultSet1: FMResultSet? = database!.executeQuery("SELECT * FROM songs ORDER BY title", withArgumentsIn: [])
-        if (resultSet1 != nil)
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs ORDER BY title", withArgumentsIn: [])
+        if (resultSet != nil)
         {
-            while resultSet1!.next() {
-                songModel.append(getSong(resultSet1!))
+            while resultSet!.next() {
+                songModel.append(getSong(resultSet!))
             }
         }
         print("songModel count : \(songModel.count)")
@@ -40,18 +36,15 @@ class DatabaseHelper: NSObject {
     }
     
     func getArtistModel() -> [(Author)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var authorModel = [Author]()
-        let resultSet1: FMResultSet? = database!.executeQuery("SELECT a.id, a.first_name, a.last_name, a.display_name," +
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT a.id, a.first_name, a.last_name, a.display_name," +
             "(select COUNT(*) from authors_songs where author_id = a.id) AS no_songs FROM authors AS a ORDER BY a.display_name", withArgumentsIn: [])
-        if (resultSet1 != nil)
+        if (resultSet != nil)
         {
-            while resultSet1!.next() {
-                authorModel.append(getAuthor(resultSet1!))
+            while resultSet!.next() {
+                authorModel.append(getAuthor(resultSet!))
             }
         }
         print("ArtistModel count : \(authorModel.count)")
@@ -59,10 +52,7 @@ class DatabaseHelper: NSObject {
     }
     
     func getArtistSongsModel(_ argument: String) -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var arguments = [AnyObject]()
         arguments.append(argument as AnyObject)
@@ -79,10 +69,7 @@ class DatabaseHelper: NSObject {
     }
     
     func findSongsByTitles(_ argument: [String]) -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var songModel = [Songs]()
         
@@ -94,11 +81,11 @@ class DatabaseHelper: NSObject {
             }
             args="\(args)?"
         }
-        let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where title IN (\(args)) ORDER BY title", withArgumentsIn: argument)
-        if (resultSet2 != nil)
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where title IN (\(args)) ORDER BY title", withArgumentsIn: argument)
+        if (resultSet != nil)
         {
-            while resultSet2!.next() {
-                songModel.append(getSong(resultSet2!))
+            while resultSet!.next() {
+                songModel.append(getSong(resultSet!))
             }
         }
         print("songModel count : \(songModel.count)")
@@ -106,8 +93,7 @@ class DatabaseHelper: NSObject {
     }
     
     func findSongs(byTitle title: String) -> [Songs] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
 
         database?.open()
         var songs = [Songs]()
@@ -126,10 +112,7 @@ class DatabaseHelper: NSObject {
     }
     
     func getSongsModelByIds(_ argument: [String]) -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
-        //54D70B97-F386-4746-9A69-692E339668B8
-        print("path : \(path)")
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var songModel = [Songs]()
         
@@ -141,11 +124,11 @@ class DatabaseHelper: NSObject {
             }
             args="\(args)?"
         }
-        let resultSet2: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN (\(args)) ORDER BY title", withArgumentsIn: argument)
-        if (resultSet2 != nil)
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN (\(args)) ORDER BY title", withArgumentsIn: argument)
+        if (resultSet != nil)
         {
-            while resultSet2!.next() {
-                songModel.append(getSong(resultSet2!))
+            while resultSet!.next() {
+                songModel.append(getSong(resultSet!))
             }
         }
         print("songModel count : \(songModel.count)")
@@ -153,8 +136,7 @@ class DatabaseHelper: NSObject {
     }
     
     func findAuthor(bySongId songId: String) -> String {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
-        let path = commonService.getDocumentDirectoryPath("songs.sqlite")
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         
         var arguments = [AnyObject]()
@@ -173,7 +155,7 @@ class DatabaseHelper: NSObject {
     }
 
     func findAuthors(bySongId songId: String) -> [String] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
 
         var authors = [String]()
@@ -193,15 +175,15 @@ class DatabaseHelper: NSObject {
     }
     
     func findCategory() -> [(Category)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var categoryModel = [Category]()
-        let resultSet1: FMResultSet? = database!.executeQuery("SELECT t.id, t.name, (select COUNT(*) " +
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT t.id, t.name, (select COUNT(*) " +
             "from songs_topics where topic_id = t.id) AS no_songs FROM topics AS t ORDER BY t.name", withArgumentsIn: [])
-        if (resultSet1 != nil)
+        if (resultSet != nil)
         {
-            while resultSet1!.next() {
-                categoryModel.append(getCategory(resultSet1!))
+            while resultSet!.next() {
+                categoryModel.append(getCategory(resultSet!))
             }
         }
         print("Categories: \(categoryModel.count)")
@@ -209,7 +191,7 @@ class DatabaseHelper: NSObject {
     }
     
     func findCategorySongs(_ categoryId: Int) -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var arguments = [AnyObject]()
         arguments.append(categoryId as AnyObject)
@@ -226,7 +208,7 @@ class DatabaseHelper: NSObject {
     }
     
     func findTopics(bySongId songId: String) -> [String] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
 
         var topics = [String]()
