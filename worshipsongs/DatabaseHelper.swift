@@ -8,7 +8,7 @@ import FMDB
 
 
 class DatabaseHelper: NSObject {
-    private let dbName = "songs.sqlite"
+    let dbName = "songs.sqlite"
     private let idColumn = "id"
     private let titleColumn: String = "title"
     private let alternateTitleColumn = "alternate_title"
@@ -28,7 +28,7 @@ class DatabaseHelper: NSObject {
         if (resultSet != nil)
         {
             while resultSet!.next() {
-                songs.append(getSong(resultSet!))
+                songs.append(getSong(fromResultSet: resultSet!))
             }
         }
         AppLogger.log(level: .debug, "Total no. of songs: \(songs.count)")
@@ -46,7 +46,7 @@ class DatabaseHelper: NSObject {
         if (resultSet != nil)
         {
             while resultSet!.next() {
-                songs.append(getSong(resultSet!))
+                songs.append(getSong(fromResultSet: resultSet!))
             }
         }
         return songs
@@ -65,29 +65,12 @@ class DatabaseHelper: NSObject {
         if (resultSet != nil)
         {
             while resultSet!.next() {
-                songs.append(getSong(resultSet!))
+                songs.append(getSong(fromResultSet: resultSet!))
             }
         }
         return songs
     }
-
-    func findSongs(byCategoryId categoryId: Int) -> [(Songs)] {
-        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
-        database?.open()
-        var arguments = [AnyObject]()
-        arguments.append(categoryId as AnyObject)
-        var songs = [Songs]()
-        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN " +
-            "(SELECT song_id FROM songs_topics where topic_id = ?) ORDER BY title", withArgumentsIn: arguments)
-        if (resultSet != nil)
-        {
-            while resultSet!.next() {
-                songs.append(getSong(resultSet!))
-            }
-        }
-        return songs
-    }
-
+    
     func findSongs(byTitles titles: [String]) -> [(Songs)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
@@ -105,10 +88,27 @@ class DatabaseHelper: NSObject {
         if (resultSet != nil)
         {
             while resultSet!.next() {
-                songs.append(getSong(resultSet!))
+                songs.append(getSong(fromResultSet: resultSet!))
             }
         }
         AppLogger.log(level: .debug, "No. of songs matching the titles \(titles): \(songs.count)")
+        return songs
+    }
+
+    func findSongs(byCategoryId categoryId: Int) -> [(Songs)] {
+        database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
+        database?.open()
+        var arguments = [AnyObject]()
+        arguments.append(categoryId as AnyObject)
+        var songs = [Songs]()
+        let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN " +
+            "(SELECT song_id FROM songs_topics where topic_id = ?) ORDER BY title", withArgumentsIn: arguments)
+        if (resultSet != nil)
+        {
+            while resultSet!.next() {
+                songs.append(getSong(fromResultSet: resultSet!))
+            }
+        }
         return songs
     }
         
@@ -129,7 +129,7 @@ class DatabaseHelper: NSObject {
         if (resultSet != nil)
         {
             while resultSet!.next() {
-                songs.append(getSong(resultSet!))
+                songs.append(getSong(fromResultSet: resultSet!))
             }
         }
         AppLogger.log(level: .debug, "No. of songs matching the ids \(ids): \(songs.count)")
@@ -226,26 +226,32 @@ class DatabaseHelper: NSObject {
         }
         return topics
     }
-    
-    func getSong(_ resultSet: FMResultSet) -> Songs {
-        let song = Songs()
-        song.id = resultSet.string(forColumn: idColumn)!
-        song.title = resultSet.string(forColumn: titleColumn)!
-        song.alternateTitle = resultSet.string(forColumn: alternateTitleColumn)!
-        song.lyrics = resultSet.string(forColumn: lyricsColumn)!
-        song.verse_order = resultSet.string(forColumn: verseOrderColumn)!
+        
+    func getSong(fromResultSet resultSet: FMResultSet) -> Songs {
+        let id = resultSet.string(forColumn: idColumn)!
+        let title = resultSet.string(forColumn: titleColumn)!
+        let alternateTitle = resultSet.string(forColumn: alternateTitleColumn)!
+        let lyrics = resultSet.string(forColumn: lyricsColumn)!
+        let verse_order = resultSet.string(forColumn: verseOrderColumn)!
         
         let timestamp = resultSet.string(forColumn: lastModifiedColumn)
+        var lastModified: Date?
+        
         if timestamp != nil {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            song.lastModified = dateFormatter.date(from: timestamp!)
+            lastModified = dateFormatter.date(from: timestamp!)
         }
         
-        let comment = resultSet.string(forColumn: commentsColumn)
-        song.comment = comment != nil ? comment! : ""
+        var comments = resultSet.string(forColumn: commentsColumn)
+        if comments == nil {
+            comments = ""
+        }
         
-        return song
+        let song = Songs(id: id, title: title, lyrics: lyrics, verse_order: verse_order, comment: comments!)
+        song.alternateTitle = alternateTitle
+        song.lastModified = lastModified
+        return song;
     }
     
     private func getAuthor(_ resultSet: FMResultSet) -> Author {
