@@ -51,7 +51,7 @@ class SongBookService: NSObject {
         if (resultSet != nil)
         {
             while resultSet!.next() {
-                let song = databaseService.getSong(resultSet!)
+                let song = databaseService.getSong(fromResultSet: resultSet!)
                 song.songBookNo = (resultSet?.string(forColumn: entry))!
                 songList.append(song)
             }

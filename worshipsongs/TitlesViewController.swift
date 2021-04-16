@@ -7,15 +7,15 @@ import UIKit
 
 class TitlesViewController: UITableViewController {
     
-    fileprivate let preferences = UserDefaults.standard
-    fileprivate var songModel = [Songs]()
-    fileprivate var filteredSongModel = [Songs]()
-    fileprivate var databaseHelper = DatabaseHelper()
-    fileprivate var searchBar: UISearchBar!
-    fileprivate var refresh = UIRefreshControl()
-    fileprivate var songTabBarController: SongsTabBarViewController?
-    fileprivate var isLanguageTamil = true
-    fileprivate var addToFav: Songs!
+    private let preferences = UserDefaults.standard
+    private var songModel = [Songs]()
+    private var filteredSongModel = [Songs]()
+    private var databaseHelper = DatabaseHelper()
+    private var searchBar: UISearchBar!
+    private var refresh = UIRefreshControl()
+    private var songTabBarController: SongsTabBarViewController?
+    private var addToFav: Songs!
+    private var titlesViewModel = TitlesViewModel()
     
     override func viewDidLoad()
     {
@@ -36,7 +36,7 @@ class TitlesViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        if !isLanguageSet() {
+        if !titlesViewModel.isLanguageSet() {
             let viewController = storyboard?.instantiateViewController(withIdentifier: "language") as? LanguageSettingViewController
             viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
             self.present(viewController!, animated: false, completion: nil)
@@ -46,14 +46,9 @@ class TitlesViewController: UITableViewController {
             viewController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
             self.present(viewController!, animated: false, completion: nil)
         }
-        isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         initSetup()
     }
-    
-    func isLanguageSet() -> Bool {
-        return preferences.dictionaryRepresentation().keys.contains("language")
-    }
-    
+        
     func isUserRateUs() -> Bool {
         let rateUsDate = preferences.object(forKey: "rateUsDate") as? Date
         return rateUsDate! > Date()
@@ -103,7 +98,8 @@ class TitlesViewController: UITableViewController {
     
     func sortSongModel()
     {
-        if isLanguageTamil {
+        if titlesViewModel.isLanguageTamil() {
+            AppLogger.log(level: .debug, "Sorting by i18nTitle...")
             filteredSongModel = filteredSongModel.sorted(){ (a, b) -> Bool in
                 if a.i18nTitle.isEmpty {
                     return false
@@ -139,22 +135,18 @@ extension TitlesViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleTableViewCell
-        if isLanguageTamil && !filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle.isEmpty {
-            cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].i18nTitle
-        } else {
-            cell.title.text = filteredSongModel[(indexPath as NSIndexPath).row].title
-        }
+        let song = filteredSongModel[(indexPath as NSIndexPath).row]
+        
+        cell.title.text = titlesViewModel.getTitleCellText(forSong: song)
+                
         let activeSong = preferences.string(forKey: "presentationSongName")
         if cell.title.text == activeSong && UIScreen.screens.count > 1 {
             cell.title.textColor = UIColor.cruncherBlue()
         } else {
             cell.title.textColor = cell.titleTextColor
         }
-        if filteredSongModel[(indexPath as NSIndexPath).row].mediaUrl.isEmpty {
-            cell.playImage.isHidden = true
-        } else {
-            cell.playImage.isHidden = false
-        }
+        
+        cell.playImage.isHidden = titlesViewModel.shouldPlayImageBeHidden(forSong: song)
         return cell
     }
     

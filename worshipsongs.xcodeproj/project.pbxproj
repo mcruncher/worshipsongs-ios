@@ -14,6 +14,8 @@
 		1A9333D82603372E00953865 /* openlp-service-lite.osj in Resources */ = {isa = PBXBuildFile; fileRef = 1A9333D72603372E00953865 /* openlp-service-lite.osj */; };
 		1AADE9112627CD5C00EED553 /* DependencyAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE9102627CD5C00EED553 /* DependencyAssembly.swift */; };
 		1AADE9162627D40500EED553 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE9152627D40500EED553 /* AppLogger.swift */; };
+		1AADE9272629639400EED553 /* TitlesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE9262629639400EED553 /* TitlesViewModel.swift */; };
+		1AADE930262963C600EED553 /* TitlesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE92F262963C600EED553 /* TitlesViewModelSpec.swift */; };
 		1ADDED4126048B2D004724DD /* DatabaseHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */; };
 		1AF35E63260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF35E62260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift */; };
 		280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
@@ -107,6 +109,8 @@
 		1A9333D72603372E00953865 /* openlp-service-lite.osj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "openlp-service-lite.osj"; sourceTree = "<group>"; };
 		1AADE9102627CD5C00EED553 /* DependencyAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyAssembly.swift; sourceTree = "<group>"; };
 		1AADE9152627D40500EED553 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
+		1AADE9262629639400EED553 /* TitlesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlesViewModel.swift; sourceTree = "<group>"; };
+		1AADE92F262963C600EED553 /* TitlesViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlesViewModelSpec.swift; sourceTree = "<group>"; };
 		1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelperSpec.swift; sourceTree = "<group>"; };
 		1AF35E62260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift; sourceTree = "<group>"; };
 		280B923D1E77830E00833EAA /* DeviceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtils.swift; sourceTree = "<group>"; };
@@ -253,6 +257,22 @@
 			name = OpenLP;
 			sourceTree = "<group>";
 		};
+		1AADE9252629636C00EED553 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1AADE9262629639400EED553 /* TitlesViewModel.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		1AADE92E262963B800EED553 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1AADE92F262963C600EED553 /* TitlesViewModelSpec.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
 		1ADDED35260439C3004724DD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +334,7 @@
 		2F5D3D1C1BC788F8001C4B6F /* worshipsongs */ = {
 			isa = PBXGroup;
 			children = (
+				1AADE9252629636C00EED553 /* ViewModel */,
 				2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */,
 				2F0A70F71E1B43020025F156 /* Component */,
 				2F5D3D5D1BC7A572001C4B6F /* vender */,
@@ -331,6 +352,7 @@
 		2F5D3D331BC788F8001C4B6F /* worshipsongsTests */ = {
 			isa = PBXGroup;
 			children = (
+				1AADE92E262963B800EED553 /* ViewModel */,
 				1AF35E61260C16FE00AF0F2E /* Acceptance */,
 				1ADDED35260439C3004724DD /* Resources */,
 				1A9333CC26031DBA00953865 /* Library */,
@@ -797,6 +819,7 @@
 				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
 				2FFF80801F1718560086439B /* ViewUtils.swift in Sources */,
 				2FD589951C1660A300668951 /* Author.swift in Sources */,
+				1AADE9272629639400EED553 /* TitlesViewModel.swift in Sources */,
 				2FA885CF215325430069DE89 /* FavoritesTableViewController.swift in Sources */,
 				2F1044201E6422E200DBDD54 /* DatabaseLoadingViewController.swift in Sources */,
 				2F055E2C1DE28664003908CF /* FullScreenViewController.swift in Sources */,
@@ -830,6 +853,7 @@
 				625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				1AF35E63260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift in Sources */,
 				283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */,
+				1AADE930262963C600EED553 /* TitlesViewModelSpec.swift in Sources */,
 				1A8A4B5326082D28003126F8 /* StringExtensionsSpec.swift in Sources */,
 				1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */,
 			);

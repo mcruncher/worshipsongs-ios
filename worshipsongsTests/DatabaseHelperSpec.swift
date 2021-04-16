@@ -7,6 +7,7 @@
 import Foundation
 import Quick
 import Nimble
+import FMDB
 @testable import worshipsongs
 
 class DatabaseHelperSepc : QuickSpec {
@@ -39,7 +40,7 @@ class DatabaseHelperSepc : QuickSpec {
                     expect(result.count).to(beGreaterThan(0))
                 }
             }
-                        
+            
             describe("Find songs by title") {
                 it("should return the list of songs matching the given title") {
                     let result = databaseHelper.findSongs(byTitle: "Amazing")
@@ -53,7 +54,7 @@ class DatabaseHelperSepc : QuickSpec {
                     expect(result[0].lastModified).to(equal(dateFormatter.date(from: "2021-03-19 08:32:37")))
                 }
             }
-
+            
             describe("Find songs by titles") {
                 it("should return the songs matching the given titles") {
                     let songs = databaseHelper.findSongs()
@@ -62,7 +63,7 @@ class DatabaseHelperSepc : QuickSpec {
                     expect(result.count).to(equal(2))
                 }
             }
-
+            
             describe("Find songs by song ids") {
                 it("should return the songs matching the given song ids") {
                     let songs = databaseHelper.findSongs()
@@ -79,10 +80,10 @@ class DatabaseHelperSepc : QuickSpec {
                     expect(result.count).to(beGreaterThan(1))
                 }
             }
-                                    
+            
             describe("Find authors by song id") {
                 let songs = databaseHelper.findSongs(byTitle: "God is good all the time")
-
+                
                 it("should fetch all the authors for a given song") {
                     let authors = databaseHelper.findAuthors(bySongId: songs[0].id)
                     
@@ -105,9 +106,69 @@ class DatabaseHelperSepc : QuickSpec {
                 
                 it("should fetch all the topics for a given song") {
                     let categories = databaseHelper.findCategories(bySongId: songs[0].id)
-                                        
+                    
                     expect(categories.count).to(equal(1))
                     expect(categories[0]).to(equal("English {ஆங்கிலம்}"))
+                }
+            }
+            
+            describe("Get song") {
+                var commonService: CommonService!
+                var database: FMDatabase!
+                var songs: [Songs]!
+                var arguments: [AnyObject]!
+                var resultSet: FMResultSet!
+                
+                beforeEach {
+                    commonService = CommonService()
+                    songs = [Songs]()
+                    arguments = [AnyObject]()
+
+                    database = FMDatabase(path: commonService.getDocumentDirectoryPath(databaseHelper.dbName))
+                    database.open()
+                }
+                
+                context("when constructing a song object for a song which does not have a i18nTitle") {
+                    beforeEach {
+                        resultSet = database.executeQuery("SELECT * FROM songs WHERE verse_order != '' AND comments = '' ORDER BY title", withArgumentsIn: arguments)
+                        while resultSet!.next() {
+                            songs.append(databaseHelper.getSong(fromResultSet: resultSet!))
+                        }
+                    }
+                    
+                    it("should construct a song object with all the necessary attributes") {
+                        
+                        expect(songs[0].id).toNot(beEmpty())
+                        expect(songs[0].title).toNot(beEmpty())
+                        expect(songs[0].lyrics).toNot(beEmpty())
+                        expect(songs[0].verse_order).toNot(beEmpty())
+                        expect(songs[0].lastModified).toNot(beNil())
+                        
+                        expect(songs[0].i18nTitle).to(beEmpty())
+                        expect(songs[0].comment).to(beEmpty())
+                    }
+                }
+                
+                context("when constructing a song object for a song which has an i18nTitle and mediaurl") {
+                    beforeEach {
+                        resultSet = database.executeQuery("SELECT * FROM songs WHERE verse_order != '' AND comments LIKE 'i18n%' ORDER BY title", withArgumentsIn: arguments)
+                        while resultSet!.next() {
+                            songs.append(databaseHelper.getSong(fromResultSet: resultSet!))
+                        }
+                    }
+                    
+                    it("should construct a song object with all the necessary attributes") {
+                        
+                        expect(songs[0].id).toNot(beEmpty())
+                        expect(songs[0].title).toNot(beEmpty())
+                        expect(songs[0].lyrics).toNot(beEmpty())
+                        expect(songs[0].verse_order).toNot(beEmpty())
+                        expect(songs[0].lastModified).toNot(beNil())
+                        
+                        expect(songs[0].comment).toNot(beEmpty())
+                        expect(songs[0].i18nTitle).toNot(beEmpty())
+                        expect(songs[0].mediaUrl).toNot(beEmpty())
+                    }
                 }
             }
         }
