@@ -27,7 +27,20 @@ class TitlesViewModelSpec : QuickSpec {
             
             context("given the app is not configured to display i8nTitle") {
                                                 
-                context("given a song exists") {
+                context("given a song exists with i18nTitle") {
+                    
+                    beforeEach {
+                        song = Songs()
+                        song.title = "foo"
+                        song.i18nTitle = "bar"
+                    }
+                    
+                    it("should be the title") {
+                        expect(titlesViewModel.getTitleCellText(forSong: song)).to(equal(song.title))
+                    }
+                }
+                
+                context("given a song exists with no i18nTitle") {
                     
                     beforeEach {
                         song = Songs()
