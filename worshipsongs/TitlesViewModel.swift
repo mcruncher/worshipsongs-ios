@@ -11,7 +11,7 @@ class TitlesViewModel {
     private let preferences = UserDefaults.standard
     
     func getTitleCellText(forSong song: Songs) -> String {
-        if !song.i18nTitle.isEmpty {
+        if isLanguageTamil() && !song.i18nTitle.isEmpty {
             return song.i18nTitle
         }
         return song.title

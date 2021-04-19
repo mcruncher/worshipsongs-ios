@@ -185,6 +185,29 @@ class OpenLPServiceConverterSpec : QuickSpec {
             }
         }
         
+        describe("Get data for a song without verse order") {
+            var result: [[String: String]]!
+            
+            context("given a song exists without verse order") {
+                beforeEach {
+                    let songWithoutVerseOrder: Songs = databaseHelper.findSongs(byTitle: "(Let Us Be)")[0]
+                    result = openLPServiceConverter.getData(forSong: songWithoutVerseOrder)
+                }
+                
+                context("when getting data") {
+                    it("should have respective elements") {
+                        expect(result.count).to(equal(3))
+                        
+                        for i in 0...result.count - 1 {
+                            expect(result[i]["title"]).toNot(beEmpty())
+                            expect(result[i]["verseTag"]).toNot(beEmpty())
+                            expect(result[i]["raw_slide"]).toNot(beEmpty())
+                        }
+                    }
+                }
+            }
+        }
+        
         describe("To OpenLP Service Lite") {
             var favouriteList: [FavoritesSong]!
             let favouriteName = "foo"

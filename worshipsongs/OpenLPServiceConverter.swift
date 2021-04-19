@@ -244,9 +244,15 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         let verseOrderList: NSMutableArray!
         (listDataDictionary, verseOrderList) = LyricsXmlParser().parse(song: song)
         
-        AppLogger.log(level: .debug, "Verse order : \(song.verse_order)")
+        var verseOrder = song.verse_order.components(separatedBy: " ")
+        AppLogger.log(level: .debug, "Verse order defined for the song: \(song.verse_order)")
+        if song.verse_order.isEmpty {
+            AppLogger.log(level: .debug, "Verse order not defined for the song. Interpreting it from the song data...")
+            verseOrder = verseOrderList as NSArray as! [String]
+            AppLogger.log(level: .debug, "Verse order interpreted from the song data: \(verseOrder)")
+        }
         
-        for verseOrderItem in song.verse_order.components(separatedBy: " ") {
+        for verseOrderItem in verseOrder {
             let verseOrderItemString = (verseOrderItem as! String)
             let rawSlide: String? = listDataDictionary[verseOrderItemString.lowercased()] as? String
             
