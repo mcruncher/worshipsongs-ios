@@ -16,6 +16,7 @@
 		1AADE9162627D40500EED553 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE9152627D40500EED553 /* AppLogger.swift */; };
 		1AADE9272629639400EED553 /* TitlesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE9262629639400EED553 /* TitlesViewModel.swift */; };
 		1AADE930262963C600EED553 /* TitlesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE92F262963C600EED553 /* TitlesViewModelSpec.swift */; };
+		1ACC3A7C262D3A9C006BCB16 /* LyricsXmlParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACC3A7B262D3A9C006BCB16 /* LyricsXmlParserSpec.swift */; };
 		1ADDED4126048B2D004724DD /* DatabaseHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */; };
 		1AF35E63260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF35E62260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift */; };
 		280B923E1E77830E00833EAA /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B923D1E77830E00833EAA /* DeviceUtils.swift */; };
@@ -111,6 +112,7 @@
 		1AADE9152627D40500EED553 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 		1AADE9262629639400EED553 /* TitlesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlesViewModel.swift; sourceTree = "<group>"; };
 		1AADE92F262963C600EED553 /* TitlesViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlesViewModelSpec.swift; sourceTree = "<group>"; };
+		1ACC3A7B262D3A9C006BCB16 /* LyricsXmlParserSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsXmlParserSpec.swift; sourceTree = "<group>"; };
 		1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelperSpec.swift; sourceTree = "<group>"; };
 		1AF35E62260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift; sourceTree = "<group>"; };
 		280B923D1E77830E00833EAA /* DeviceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtils.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				1ADDED4026048B2D004724DD /* DatabaseHelperSpec.swift */,
+				1ACC3A7B262D3A9C006BCB16 /* LyricsXmlParserSpec.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -852,6 +855,7 @@
 				1ADDED4126048B2D004724DD /* DatabaseHelperSpec.swift in Sources */,
 				625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */,
 				1AF35E63260C17C500AF0F2E /* ConvertFavouritesToOpenLPServiceAcceptanceSpec.swift in Sources */,
+				1ACC3A7C262D3A9C006BCB16 /* LyricsXmlParserSpec.swift in Sources */,
 				283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */,
 				1AADE930262963C600EED553 /* TitlesViewModelSpec.swift in Sources */,
 				1A8A4B5326082D28003126F8 /* StringExtensionsSpec.swift in Sources */,
