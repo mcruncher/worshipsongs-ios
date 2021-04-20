@@ -248,7 +248,7 @@ class DatabaseHelper: NSObject {
             comments = ""
         }
         
-        let song = Song(id: id, title: title, lyrics: lyrics, verse_order: verse_order, comment: comments!)
+        let song = Song(id: id, title: title, lyrics: lyrics, verseOrder: verse_order, comment: comments!)
         song.alternateTitle = alternateTitle
         song.lastModified = lastModified
         return song;

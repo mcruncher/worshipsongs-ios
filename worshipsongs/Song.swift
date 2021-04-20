@@ -19,11 +19,11 @@ class Song {
     var mediaUrl = ""
     var songBookNo = ""
     
-    init(id: String, title: String, lyrics: String, verse_order: String, comment: String) {
+    init(id: String, title: String, lyrics: String, verseOrder: String, comment: String) {
         self.id = id
         self.title = title
         self.lyrics = lyrics
-        self.verseOrder = verse_order
+        self.verseOrder = verseOrder
         self.comment = comment
         self.i18nTitle = getI18nTitle(comment: comment)
         self.mediaUrl = getMediaUrl(comment: comment)
