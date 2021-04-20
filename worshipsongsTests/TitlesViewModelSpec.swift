@@ -20,13 +20,14 @@ class TitlesViewModelSpec : QuickSpec {
         
         afterEach {
             preferences.removeObject(forKey: "language")
+            preferences.removeObject(forKey: "searchBy")
         }
         
         describe("Get title cell text") {
             var song: Songs!
             
             context("given the app is not configured to display i8nTitle") {
-                                                
+                
                 context("given a song exists with i18nTitle") {
                     
                     beforeEach {
@@ -52,7 +53,7 @@ class TitlesViewModelSpec : QuickSpec {
                     }
                 }
             }
-
+            
             context("given the app is configured to display i8nTitle") {
                 
                 beforeEach {
@@ -120,7 +121,7 @@ class TitlesViewModelSpec : QuickSpec {
                     expect(titlesViewModel.isLanguageSet()).to(beFalse())
                 }
             }
-
+            
             context("given the language is set") {
                 
                 beforeEach {
@@ -130,6 +131,85 @@ class TitlesViewModelSpec : QuickSpec {
                 it("should be true") {
                     expect(titlesViewModel.isLanguageSet()).to(beTrue())
                 }
+            }
+        }
+        
+        describe("Filter songs by search text") {
+            var songs: [Songs]!
+            let expectedSongTitle = "Siluvai Sumantha Uruvam"
+            
+            context("given a song exists with the title: 'Siluvai Sumantha Uruvam', alternate title: 'Siluvai Sumandha' and i18nTitle: 'சிலுவை சுமந்த உருவம்'") {
+            
+                beforeEach {
+                    songs = DatabaseHelper().findSongs()
+                }
+                
+                context("and the user searches by title") {
+                    context("when the user searches by the text 'Sumantha'") {
+                        it("should contain the respective song in the search result") {
+                            let result = titlesViewModel.filter(songs: songs, bySearchText: "Sumantha").map {$0.title}
+                            
+                            expect(result).to(contain(expectedSongTitle))
+                        }
+                    }
+                    
+                    context("when the user searches by the text 'Sumandha'") {
+                        it("should contain the respective song in the search result") {
+                            let result = titlesViewModel.filter(songs: songs, bySearchText: "Sumandha").map {$0.title}
+                            
+                            expect(result).to(contain(expectedSongTitle))
+                        }
+                    }
+                    
+                    context("when the user searches by the text 'சுமந்த'") {
+                        it("should contain the respective song in the search result") {
+                            let result = titlesViewModel.filter(songs: songs, bySearchText: "சுமந்த").map {$0.title}
+                            
+                            expect(result).to(contain(expectedSongTitle))
+                        }
+                    }
+                }
+                
+                context("and the user searches by content") {
+                    
+                    beforeEach {
+                        preferences.setValue("searchByContent", forKey: "searchBy")
+                    }
+                    
+                    context("when the user searches by the text 'Sumantha'") {
+                        it("should contain the respective song in the search result") {
+                            let result = titlesViewModel.filter(songs: songs, bySearchText: "Sumantha").map {$0.title}
+                            
+                            expect(result).to(contain(expectedSongTitle))
+                        }
+                    }
+                    
+                    context("when the user searches by the text 'Sumandha'") {
+                        it("should contain the respective song in the search result") {
+                            let result = titlesViewModel.filter(songs: songs, bySearchText: "Sumandha").map {$0.title}
+                            
+                            expect(result).to(contain(expectedSongTitle))
+                        }
+                    }
+                    
+                    context("when the user searches by the text 'சுமந்த'") {
+                        it("should contain the respective song in the search result") {
+                            let result = titlesViewModel.filter(songs: songs, bySearchText: "சுமந்த").map {$0.title}
+                            
+                            expect(result).to(contain(expectedSongTitle))
+                        }
+                    }
+                    
+                    context("when the user searches by the text 'Parigaari'") {
+                        it("should contain the respective song in the search result") {
+                            let result = titlesViewModel.filter(songs: songs, bySearchText: "Parigaari").map {$0.title}
+                            
+                            expect(result).to(contain(expectedSongTitle))
+                        }
+                    }
+
+                }
+ 
             }
         }
     }
