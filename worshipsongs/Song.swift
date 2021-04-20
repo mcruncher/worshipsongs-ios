@@ -7,12 +7,12 @@ import Foundation
 
 
 
-class Songs {
+class Song {
     var id = ""
     var title = ""
     var alternateTitle = ""
     var lyrics = ""
-    var verse_order = ""
+    var verseOrder = ""
     var lastModified: Date?
     var comment = ""
     var i18nTitle = ""
@@ -23,7 +23,7 @@ class Songs {
         self.id = id
         self.title = title
         self.lyrics = lyrics
-        self.verse_order = verse_order
+        self.verseOrder = verse_order
         self.comment = comment
         self.i18nTitle = getI18nTitle(comment: comment)
         self.mediaUrl = getMediaUrl(comment: comment)
@@ -33,7 +33,7 @@ class Songs {
         self.id = ""
         self.title = ""
         self.lyrics = ""
-        self.verse_order = ""
+        self.verseOrder = ""
         self.comment = ""
         self.i18nTitle = ""
         self.mediaUrl = ""

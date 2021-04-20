@@ -17,7 +17,7 @@ class ManageFavoritesController: UIViewController {
     var isLanguageTamil = false
     
     var suggestedFavorites = [String]()
-    var song: Songs!
+    var song: Song!
     fileprivate var screenYPostion = CGFloat()
     var favoriteList = [String]()
     

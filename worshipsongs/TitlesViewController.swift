@@ -8,13 +8,13 @@ import UIKit
 class TitlesViewController: UITableViewController {
     
     private let preferences = UserDefaults.standard
-    private var songModel = [Songs]()
-    private var filteredSongModel = [Songs]()
+    private var songModel = [Song]()
+    private var filteredSongModel = [Song]()
     private var databaseHelper = DatabaseHelper()
     private var searchBar: UISearchBar!
     private var refresh = UIRefreshControl()
     private var songTabBarController: SongsTabBarViewController?
-    private var addToFav: Songs!
+    private var addToFav: Song!
     private var titlesViewModel = TitlesViewModel()
     
     override func viewDidLoad()

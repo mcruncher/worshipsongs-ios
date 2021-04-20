@@ -10,21 +10,21 @@ class TitlesViewModel {
     
     private let preferences = UserDefaults.standard
     
-    func getTitleCellText(forSong song: Songs) -> String {
+    func getTitleCellText(forSong song: Song) -> String {
         if isLanguageTamil() && !song.i18nTitle.isEmpty {
             return song.i18nTitle
         }
         return song.title
     }
     
-    func shouldPlayImageBeHidden(forSong song: Songs) -> Bool {
+    func shouldPlayImageBeHidden(forSong song: Song) -> Bool {
         return song.mediaUrl.isEmpty
     }
     
-    func filter(songs: [Songs], bySearchText searchText: String) -> [Songs] {
+    func filter(songs: [Song], bySearchText searchText: String) -> [Song] {
         var filteredSongs = songs
         if searchText.count > 0 {
-            filteredSongs = songs.filter({( song: Songs) -> Bool in
+            filteredSongs = songs.filter({( song: Song) -> Bool in
                 if isSearchByContent() {
                     let stringMatch = song.title.localizedCaseInsensitiveContains(searchText) ||
                         song.alternateTitle.localizedCaseInsensitiveContains(searchText) || 

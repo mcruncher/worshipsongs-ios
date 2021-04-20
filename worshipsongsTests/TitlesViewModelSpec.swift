@@ -24,14 +24,14 @@ class TitlesViewModelSpec : QuickSpec {
         }
         
         describe("Get title cell text") {
-            var song: Songs!
+            var song: Song!
             
             context("given the app is not configured to display i8nTitle") {
                 
                 context("given a song exists with i18nTitle") {
                     
                     beforeEach {
-                        song = Songs()
+                        song = Song()
                         song.title = "foo"
                         song.i18nTitle = "bar"
                     }
@@ -44,7 +44,7 @@ class TitlesViewModelSpec : QuickSpec {
                 context("given a song exists with no i18nTitle") {
                     
                     beforeEach {
-                        song = Songs()
+                        song = Song()
                         song.title = "foo"
                     }
                     
@@ -63,7 +63,7 @@ class TitlesViewModelSpec : QuickSpec {
                 context("given a song exists with i18nTitle") {
                     
                     beforeEach {
-                        song = Songs()
+                        song = Song()
                         song.title = "foo"
                         song.i18nTitle = "bar"
                     }
@@ -76,7 +76,7 @@ class TitlesViewModelSpec : QuickSpec {
                 context("given a song exists with no i18nTitle") {
                     
                     beforeEach {
-                        song = Songs()
+                        song = Song()
                         song.title = "foo"
                     }
                     
@@ -89,12 +89,12 @@ class TitlesViewModelSpec : QuickSpec {
         }
         
         describe("Should play image be hidden") {
-            var song: Songs!
+            var song: Song!
             
             context("given a song exists without a mediaUrl") {
                 
                 beforeEach {
-                    song = Songs()
+                    song = Song()
                 }
                 
                 it("should be hidden") {
@@ -105,7 +105,7 @@ class TitlesViewModelSpec : QuickSpec {
             context("given a song exists without a mediaUrl") {
                 
                 beforeEach {
-                    song = Songs()
+                    song = Song()
                     song.mediaUrl = "foo"
                 }
                 
@@ -135,7 +135,7 @@ class TitlesViewModelSpec : QuickSpec {
         }
         
         describe("Filter songs by search text") {
-            var songs: [Songs]!
+            var songs: [Song]!
             let expectedSongTitle = "Siluvai Sumantha Uruvam"
             
             context("given a song exists with the title: 'Siluvai Sumantha Uruvam', alternate title: 'Siluvai Sumandha' and i18nTitle: 'சிலுவை சுமந்த உருவம்'") {

@@ -41,8 +41,8 @@ class SongBookService: NSObject {
         return SongBook(id: Int(id)!, tamilName: tamilName, englishName: englishName, publisher: publisher, noOfSongs: Int(noOfSongs)!)
     }
     
-    func findBySongBookId(_ songBookId: Int) -> [Songs] {
-        var songList = [Songs]()
+    func findBySongBookId(_ songBookId: Int) -> [Song] {
+        var songList = [Song]()
         database = FMDatabase(path: commonService.getDocumentDirectoryPath("songs.sqlite"))
         database?.open()
         var arguments = [AnyObject]()

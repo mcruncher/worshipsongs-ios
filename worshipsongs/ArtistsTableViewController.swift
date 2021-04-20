@@ -11,7 +11,7 @@ class ArtistsTableViewController: UITableViewController   {
     var artistName: String = ""
     var filteredAuthorModel = [Author]()
     var databaseHelper = DatabaseHelper()
-    var songsModel = [Songs]()
+    var songsModel = [Song]()
     var verseList: NSArray = NSArray()
     var songLyrics: NSString = NSString()
     var songName: String = ""

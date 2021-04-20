@@ -10,17 +10,17 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
    
     var artistName: String = ""
     fileprivate let preferences = UserDefaults.standard
-    var songModel = [Songs]()
-    var filteredSongModel = [Songs]()
+    var songModel = [Song]()
+    var filteredSongModel = [Song]()
     var databaseHelper = DatabaseHelper()
     var verseList: NSArray = NSArray()
     var songLyrics: NSString = NSString()
     var songName: String = ""
     var comment = ""
-    var selectedSong: Songs!
+    var selectedSong: Song!
     fileprivate var isLanguageTamil = true
     
-    fileprivate var addToFav: Songs!
+    fileprivate var addToFav: Song!
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
     var songSelectionDelegate: SongSelectionDelegate?
@@ -159,7 +159,7 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
         }
     }
     
-    func getSongBookNumber(_ song: Songs) -> Int {
+    func getSongBookNumber(_ song: Song) -> Int {
         guard  let songBookNumber = Int(song.songBookNo) else {
             return 0
         }
@@ -194,7 +194,7 @@ extension ArtistSongsTitleTableViewController : UISearchResultsUpdating {
         let searchText = searchController.searchBar.text
         var data = songModel
         if (searchText?.count)! > 0 {
-            data = self.songModel.filter({( song: Songs) -> Bool in
+            data = self.songModel.filter({( song: Song) -> Bool in
                 if (self.preferences.string(forKey: "searchBy")?.equalsIgnoreCase("searchByContent"))! {
                     let stringMatch = (transparentSearchEnabled && song.songBookNo.equalsIgnoreCase(searchText!)) || (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!) || (song.lyrics as NSString).localizedCaseInsensitiveContains(searchText!)
                     return (stringMatch)
@@ -233,7 +233,7 @@ extension ArtistSongsTitleTableViewController : UISearchBarDelegate {
         let searchText = searchBar.text
         var data = songModel
         if (searchText?.count)! > 0 {
-            data = self.songModel.filter({( song: Songs) -> Bool in
+            data = self.songModel.filter({( song: Song) -> Bool in
                 if transparentSearchEnabled {
                     if (self.preferences.string(forKey: CommonConstansts.searchKey)?.equalsIgnoreCase(CommonConstansts.searchByTitleOrNumber))! {
                         return song.title.localizedCaseInsensitiveContains(searchText!) || song.songBookNo.equalsIgnoreCase(searchText!)

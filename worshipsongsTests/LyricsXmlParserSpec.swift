@@ -20,7 +20,7 @@ class LyricsXmlParserSpec : QuickSpec {
         }
         
         describe("Parse song") {
-            var song: Songs!
+            var song: Song!
             var listDataDictionary: NSMutableDictionary!
             var verseOrderList: NSMutableArray!
             

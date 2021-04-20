@@ -85,7 +85,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return generalServiceInfo
     }
     
-    private func getServiceItem(forSong song: Songs, forAuthors authors: [String]) -> [String: Any?] {
+    private func getServiceItem(forSong song: Song, forAuthors authors: [String]) -> [String: Any?] {
         var serviceItemElements: [String: Any?] = [:]
         serviceItemElements["header"] = getHeader(forSong: song, withAuthors: authors)
         serviceItemElements["data"] = getData(forSong: song)
@@ -94,7 +94,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return serviceItem
     }
     
-    private func getHeader(forSong song: Songs, withAuthors authors: [String]) -> [String: Any?] {
+    private func getHeader(forSong song: Song, withAuthors authors: [String]) -> [String: Any?] {
         let serviceItemHeaderContent  = [
             "name": "songs",
             "plugin": "songs",
@@ -125,7 +125,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return serviceItemHeaderContent
     }
     
-    private func getFooter(forSong song: Songs, forAuthors authors: [String]) -> [String] {
+    private func getFooter(forSong song: Song, forAuthors authors: [String]) -> [String] {
         let footer = [song.title, getFooterAuthors(authors)]
         return footer
     }
@@ -145,12 +145,12 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return "Written by: \(formattedAuthors)"
     }
     
-    private func getAudit(forSong song: Songs, forAuthors authors: [String]) -> [Any] {
+    private func getAudit(forSong song: Song, forAuthors authors: [String]) -> [Any] {
         let audit = [song.title, authors, "", ""] as [Any]
         return audit
     }
     
-    func getHeaderData(forSong song: Songs, forAuthors authors: [String]) -> [String : String] {
+    func getHeaderData(forSong song: Song, forAuthors authors: [String]) -> [String : String] {
         let data = [
             "title": "\(getSearchString(song.title))@\(getSearchString(song.alternateTitle))",
             "authors": authors.joined(separator: ", ")
@@ -165,13 +165,13 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
             .lowercased()
     }
     
-    func getXmlVersionAsString(forSong song: Songs, withAuthors authors: [String]) -> String {
+    func getXmlVersionAsString(forSong song: Song, withAuthors authors: [String]) -> String {
         var xmlString = getXmlVersion(forSong: song, withAuthors: authors).xmlCompact
         xmlString = xmlString.replacingOccurrences(of: "&lt;", with: "<").replacingOccurrences(of: "&gt;", with: ">").replacingOccurrences(of: "&apos;", with: "'")
         return xmlString
     }
     
-    func getXmlVersion(forSong song: Songs, withAuthors authors: [String]) -> AEXMLDocument {
+    func getXmlVersion(forSong song: Song, withAuthors authors: [String]) -> AEXMLDocument {
         let root = WSXMLDocument()
         let songAttributes = ["xmlns":"http://openlyrics.info/namespace/2009/song", "version":"0.8",
                               "createdIn":"OpenLP 2.4.6", "modifiedIn":"OpenLP 2.4.6", "modifiedDate":getSongModifiedDate(song)]
@@ -183,7 +183,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return root
     }
     
-    private func getSongModifiedDate(_ song: Songs) -> String {
+    private func getSongModifiedDate(_ song: Song) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         if song.lastModified != nil {
@@ -194,14 +194,14 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         }
     }
     
-    private func getPropertiesElement(forSong song: Songs, withAuthors authors: [String]) -> AEXMLElement {
+    private func getPropertiesElement(forSong song: Song, withAuthors authors: [String]) -> AEXMLElement {
         let propertiesElement = AEXMLElement(name: "properties")
         
         let titlesElement = propertiesElement.addChild(name: "titles")
         titlesElement.addChild(name: "title", value: song.title)
         titlesElement.addChild(name: "title", value: song.alternateTitle)
         
-        propertiesElement.addChild(name: "verseOrder", value: song.verse_order)
+        propertiesElement.addChild(name: "verseOrder", value: song.verseOrder)
         
         let authorsElement = propertiesElement.addChild(name: "authors")
         for author in authors {
@@ -216,7 +216,7 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return propertiesElement
     }
     
-    private func getLyricsElement(forSong song: Songs) -> AEXMLElement {
+    private func getLyricsElement(forSong song: Song) -> AEXMLElement {
         let lyricsElement = AEXMLElement(name: "lyrics")
         do {
             let lyricsXmlDocument = try AEXMLDocument(xml: song.lyrics)
@@ -237,16 +237,16 @@ class OpenLPServiceConverter : IOpenLPServiceConverter {
         return lyricsElement
     }
     
-    func getData(forSong song: Songs) -> [[String: String]] {
+    func getData(forSong song: Song) -> [[String: String]] {
         var data: [[String: String]] = []
         
         var listDataDictionary : NSMutableDictionary!
         let verseOrderList: NSMutableArray!
         (listDataDictionary, verseOrderList) = LyricsXmlParser().parse(song: song)
         
-        var verseOrder = song.verse_order.components(separatedBy: " ")
-        AppLogger.log(level: .debug, "Verse order defined for the song: \(song.verse_order)")
-        if song.verse_order.isEmpty {
+        var verseOrder = song.verseOrder.components(separatedBy: " ")
+        AppLogger.log(level: .debug, "Verse order defined for the song: \(song.verseOrder)")
+        if song.verseOrder.isEmpty {
             AppLogger.log(level: .debug, "Verse order not defined for the song. Interpreting it from the song data...")
             verseOrder = verseOrderList as NSArray as! [String]
             AppLogger.log(level: .debug, "Verse order interpreted from the song data: \(verseOrder)")

@@ -12,7 +12,7 @@ class CategoriesTableViewController: UITableViewController   {
     var categoryName: String = ""
     var filteredCategoryModel = [Category]()
     var databaseHelper = DatabaseHelper()
-    var songsModel = [Songs]()
+    var songsModel = [Song]()
     var verseList: NSArray = NSArray()
     var songLyrics: NSString = NSString()
     var songName: String = ""

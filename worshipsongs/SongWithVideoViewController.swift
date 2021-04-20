@@ -42,7 +42,7 @@ class SongWithVideoViewController: UIViewController  {
     
     //new var
     var databaseHelper = DatabaseHelper()
-    var selectedSong: Songs! {
+    var selectedSong: Song! {
         didSet (newSong) {
             self.refreshUI()
         }
@@ -74,7 +74,7 @@ class SongWithVideoViewController: UIViewController  {
     }
     
     func refreshUI() {
-        let verseOrderString = selectedSong.verse_order
+        let verseOrderString = selectedSong.verseOrder
         if !verseOrderString.isEmpty {
             self.verseOrder = splitVerseOrder(verseOrderString)
         }
@@ -219,7 +219,7 @@ class SongWithVideoViewController: UIViewController  {
         
     }
     
-    private func getSongNumber(_ song: Songs) -> String {
+    private func getSongNumber(_ song: Song) -> String {
         guard let songNumber = Int(song.songBookNo), songNumber > 0 else {
             return ""
         }
@@ -439,7 +439,7 @@ extension SongWithVideoViewController {
 
 extension SongWithVideoViewController: SongSelectionDelegate {
     
-    internal func songSelected(_ newSong: Songs!)
+    internal func songSelected(_ newSong: Song!)
     {
         selectedSong = newSong
     }
