@@ -115,13 +115,13 @@ class DatabaseHelperSepc : QuickSpec {
             describe("Get song") {
                 var commonService: CommonService!
                 var database: FMDatabase!
-                var songs: [Songs]!
+                var songs: [Song]!
                 var arguments: [AnyObject]!
                 var resultSet: FMResultSet!
                 
                 beforeEach {
                     commonService = CommonService()
-                    songs = [Songs]()
+                    songs = [Song]()
                     arguments = [AnyObject]()
 
                     database = FMDatabase(path: commonService.getDocumentDirectoryPath(databaseHelper.dbName))
@@ -141,7 +141,7 @@ class DatabaseHelperSepc : QuickSpec {
                         expect(songs[0].id).toNot(beEmpty())
                         expect(songs[0].title).toNot(beEmpty())
                         expect(songs[0].lyrics).toNot(beEmpty())
-                        expect(songs[0].verse_order).toNot(beEmpty())
+                        expect(songs[0].verseOrder).toNot(beEmpty())
                         expect(songs[0].lastModified).toNot(beNil())
                         
                         expect(songs[0].i18nTitle).to(beEmpty())
@@ -162,7 +162,7 @@ class DatabaseHelperSepc : QuickSpec {
                         expect(songs[0].id).toNot(beEmpty())
                         expect(songs[0].title).toNot(beEmpty())
                         expect(songs[0].lyrics).toNot(beEmpty())
-                        expect(songs[0].verse_order).toNot(beEmpty())
+                        expect(songs[0].verseOrder).toNot(beEmpty())
                         expect(songs[0].lastModified).toNot(beNil())
                         
                         expect(songs[0].comment).toNot(beEmpty())

@@ -20,10 +20,10 @@ class DatabaseHelper: NSObject {
     var database: FMDatabase? = nil
     let commonService: CommonService = CommonService()
         
-    func findSongs() -> [(Songs)] {
+    func findSongs() -> [(Song)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
-        var songs = [Songs]()
+        var songs = [Song]()
         let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs ORDER BY title", withArgumentsIn: [])
         if (resultSet != nil)
         {
@@ -35,12 +35,12 @@ class DatabaseHelper: NSObject {
         return songs
     }
         
-    func findSongs(byAuthorId authorId: String) -> [(Songs)] {
+    func findSongs(byAuthorId authorId: String) -> [(Song)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var arguments = [AnyObject]()
         arguments.append(authorId as AnyObject)
-        var songs = [Songs]()
+        var songs = [Song]()
         let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN " +
             "(SELECT song_id FROM authors_songs where author_id = ?) ORDER BY title", withArgumentsIn: arguments)
         if (resultSet != nil)
@@ -52,11 +52,11 @@ class DatabaseHelper: NSObject {
         return songs
     }
     
-    func findSongs(byTitle title: String) -> [Songs] {
+    func findSongs(byTitle title: String) -> [Song] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
 
         database?.open()
-        var songs = [Songs]()
+        var songs = [Song]()
 
         var arguments = [AnyObject]()
         arguments.append("%\(title)%" as AnyObject)
@@ -71,10 +71,10 @@ class DatabaseHelper: NSObject {
         return songs
     }
     
-    func findSongs(byTitles titles: [String]) -> [(Songs)] {
+    func findSongs(byTitles titles: [String]) -> [(Song)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
-        var songs = [Songs]()
+        var songs = [Song]()
         
         var args: String = ""
         for _ in titles {
@@ -95,12 +95,12 @@ class DatabaseHelper: NSObject {
         return songs
     }
 
-    func findSongs(byCategoryId categoryId: Int) -> [(Songs)] {
+    func findSongs(byCategoryId categoryId: Int) -> [(Song)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
         var arguments = [AnyObject]()
         arguments.append(categoryId as AnyObject)
-        var songs = [Songs]()
+        var songs = [Song]()
         let resultSet: FMResultSet? = database!.executeQuery("SELECT * FROM songs where id IN " +
             "(SELECT song_id FROM songs_topics where topic_id = ?) ORDER BY title", withArgumentsIn: arguments)
         if (resultSet != nil)
@@ -112,10 +112,10 @@ class DatabaseHelper: NSObject {
         return songs
     }
         
-    func findSongs(bySongIds ids: [String]) -> [(Songs)] {
+    func findSongs(bySongIds ids: [String]) -> [(Song)] {
         database = FMDatabase(path: commonService.getDocumentDirectoryPath(dbName))
         database?.open()
-        var songs = [Songs]()
+        var songs = [Song]()
         
         var args: String = ""
         for _ in ids {
@@ -227,7 +227,7 @@ class DatabaseHelper: NSObject {
         return topics
     }
         
-    func getSong(fromResultSet resultSet: FMResultSet) -> Songs {
+    func getSong(fromResultSet resultSet: FMResultSet) -> Song {
         let id = resultSet.string(forColumn: idColumn)!
         let title = resultSet.string(forColumn: titleColumn)!
         let alternateTitle = resultSet.string(forColumn: alternateTitleColumn)!
@@ -248,7 +248,7 @@ class DatabaseHelper: NSObject {
             comments = ""
         }
         
-        let song = Songs(id: id, title: title, lyrics: lyrics, verse_order: verse_order, comment: comments!)
+        let song = Song(id: id, title: title, lyrics: lyrics, verseOrder: verse_order, comment: comments!)
         song.alternateTitle = alternateTitle
         song.lastModified = lastModified
         return song;

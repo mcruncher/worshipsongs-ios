@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol SongSelectionDelegate: class {
-    func songSelected(_ song: Songs!)
+    func songSelected(_ song: Song!)
 }
 
 protocol SearchDelegateIOS11 {

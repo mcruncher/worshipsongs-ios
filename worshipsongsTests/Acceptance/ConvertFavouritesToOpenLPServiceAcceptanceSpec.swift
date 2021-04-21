@@ -16,8 +16,8 @@ class ConvertFavouritesToOpenLPServiceAcceptanceSpec : QuickSpec {
         let openLPServiceConverter = OpenLPServiceConverter()
         let databaseHelper = DatabaseHelper()
         var favouriteList: [FavoritesSong]!
-        var song1: Songs!
-        var song2: Songs!
+        var song1: Song!
+        var song2: Song!
         var expectedJson: JSON!
         var result: JSON!
         

@@ -8,13 +8,13 @@ import UIKit
 class TitlesViewController: UITableViewController {
     
     private let preferences = UserDefaults.standard
-    private var songModel = [Songs]()
-    private var filteredSongModel = [Songs]()
+    private var songModel = [Song]()
+    private var filteredSongModel = [Song]()
     private var databaseHelper = DatabaseHelper()
     private var searchBar: UISearchBar!
     private var refresh = UIRefreshControl()
     private var songTabBarController: SongsTabBarViewController?
-    private var addToFav: Songs!
+    private var addToFav: Song!
     private var titlesViewModel = TitlesViewModel()
     
     override func viewDidLoad()
@@ -195,20 +195,8 @@ extension TitlesViewController : SearchDelegateIOS11 {
     }
     
     func filter(_ searchBar: UISearchBar) {
-        let searchText = searchBar.text
-        var data = songModel
-        if (searchText?.count)! > 0 {
-            data = self.songModel.filter({( song: Songs) -> Bool in
-                if (self.preferences.string(forKey: "searchBy")?.equalsIgnoreCase("searchByContent"))! {
-                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!) || (song.lyrics as NSString).localizedCaseInsensitiveContains(searchText!)
-                    return (stringMatch)
-                } else {
-                    let stringMatch = (song.title as NSString).localizedCaseInsensitiveContains(searchText!) || (song.comment as NSString).localizedCaseInsensitiveContains(searchText!)
-                    return (stringMatch)
-                }
-            })
-        }
-        self.filteredSongModel = data
+        let searchText = searchBar.text!
+        self.filteredSongModel = titlesViewModel.filter(songs: songModel, bySearchText: searchText)
         sortSongModel();
         tableView.reloadData()
     }

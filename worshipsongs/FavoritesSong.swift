@@ -7,6 +7,6 @@ import Foundation
 
 struct FavoritesSong {
     var songTitle: String
-    var songs: Songs
+    var songs: Song
     var favoritesSongsWithOrder: FavoritesSongsWithOrder
 }

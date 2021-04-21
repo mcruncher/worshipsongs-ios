@@ -295,7 +295,7 @@ class FavoritesTableViewController: UITableViewController {
                 if songs.count > 0 {
                     favoritesSongs.append(FavoritesSong(songTitle:favoritesSongsWithOrder.songName, songs: songs[0], favoritesSongsWithOrder: favoritesSongsWithOrder))
                 } else {
-                    favoritesSongs.append(FavoritesSong(songTitle:favoritesSongsWithOrder.songName, songs: Songs(), favoritesSongsWithOrder: favoritesSongsWithOrder))
+                    favoritesSongs.append(FavoritesSong(songTitle:favoritesSongsWithOrder.songName, songs: Song(), favoritesSongsWithOrder: favoritesSongsWithOrder))
                 }
             }
             songModel = favoritesSongs

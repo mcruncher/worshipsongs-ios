@@ -16,7 +16,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
     override func spec() {
         let openLPServiceConverter = OpenLPServiceConverter()
         let databaseHelper = DatabaseHelper()
-        var song: Songs!
+        var song: Song!
         
         beforeEach {
             song = databaseHelper.findSongs(byTitle: "Amazing Grace")[0]
@@ -190,7 +190,7 @@ class OpenLPServiceConverterSpec : QuickSpec {
             
             context("given a song exists without verse order") {
                 beforeEach {
-                    let songWithoutVerseOrder: Songs = databaseHelper.findSongs(byTitle: "(Let Us Be)")[0]
+                    let songWithoutVerseOrder: Song = databaseHelper.findSongs(byTitle: "(Let Us Be)")[0]
                     result = openLPServiceConverter.getData(forSong: songWithoutVerseOrder)
                 }
                 

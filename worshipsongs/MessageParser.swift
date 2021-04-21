@@ -13,7 +13,7 @@ struct MessageParser {
     fileprivate static let preferences = UserDefaults.standard
     fileprivate static let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     
-    static func getMessageToShare(_ song: Songs, _ verseOrderList: NSMutableArray, _ listDataDictionary : NSMutableDictionary) -> NSMutableAttributedString {
+    static func getMessageToShare(_ song: Song, _ verseOrderList: NSMutableArray, _ listDataDictionary : NSMutableDictionary) -> NSMutableAttributedString {
         let isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         let objectString: NSMutableAttributedString = NSMutableAttributedString()
         objectString.append(NSAttributedString(string: "Tamil Christian Worship Songs\n\n"))
@@ -55,7 +55,7 @@ struct MessageParser {
         return attributeText.string.components(separatedBy: "\n")
     }
     
-    static func getObjectToShare(_ song: Songs, _ verseOrderList: NSMutableArray, _ listDataDictionary : NSMutableDictionary) -> NSMutableAttributedString {
+    static func getObjectToShare(_ song: Song, _ verseOrderList: NSMutableArray, _ listDataDictionary : NSMutableDictionary) -> NSMutableAttributedString {
         let objectString: NSMutableAttributedString = NSMutableAttributedString()
         objectString.append(NSAttributedString(string: "<html><body>"))
         objectString.append(NSAttributedString(string: "<h1><a href=\"https://itunes.apple.com/us/app/tamil-christian-worship-songs/id1066174826?mt=8\">Tamil Christian Worship Songs</a></h1>"))
