@@ -59,7 +59,6 @@ class SongWithVideoViewController: UIViewController  {
         super.viewDidLoad()
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         addFloatButton()
-        addShareBarButton()
         setSplitViewControllerProperties()
         if selectedSong != nil {
             (listDataDictionary, verseOrderList) = xmlParser.parse(song: selectedSong)
@@ -74,6 +73,7 @@ class SongWithVideoViewController: UIViewController  {
     }
     
     func refreshUI() {
+        addShareBarButton()
         let verseOrderString = selectedSong.verseOrder
         if !verseOrderString.isEmpty {
             self.verseOrder = splitVerseOrder(verseOrderString)
