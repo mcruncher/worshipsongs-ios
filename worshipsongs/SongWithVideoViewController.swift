@@ -22,7 +22,7 @@ class SongWithVideoViewController: UIViewController  {
     var secondScreenView: UIView?
     var externalLabel = UILabel()
     var floatingbutton = Floaty()
-    var hadYoutubeLink = false
+    var hasYoutubeLink = false
     
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     let presentationData = PresentationData()
@@ -188,11 +188,11 @@ class SongWithVideoViewController: UIViewController  {
             loadYoutube(url: selectedSong.mediaUrl)
             floatingbutton.isHidden = false
             actionButton.isHidden = true
-            hadYoutubeLink = true
+            hasYoutubeLink = true
         } else {
             floatingbutton.isHidden = true
             actionButton.isHidden = isHideComponent()
-            hadYoutubeLink = false
+            hasYoutubeLink = false
         }
         floatingbutton.close()
         previousButton.isHidden = true
@@ -256,11 +256,13 @@ class SongWithVideoViewController: UIViewController  {
     }
     
     func loadYoutube(url: String) {
-        player.playerVars = ["rel" : 0 as AnyObject,
-                             "showinfo" : 0 as AnyObject,
-                             "modestbranding": 1 as AnyObject,
-                             "playsinline" : 1 as AnyObject,
-                             "autoplay" : 1 as AnyObject]
+        player.playerVars = [
+            "rel" : 0,
+            "showinfo" : 0,
+            "modestbranding": 1,
+            "playsinline" : 1            
+        ] as YouTubePlayerView.YouTubePlayerParameters
+        
         let myVideoURL = URL(string: url)
         player.loadVideoURL(myVideoURL!)
         
@@ -281,8 +283,9 @@ class SongWithVideoViewController: UIViewController  {
     }
     
     func setAction() {
-        if hadYoutubeLink {
+        if hasYoutubeLink {
             if play {
+                AppLogger.log(level: .debug, "Stopping the video...")
                 play = false
                 actionButton.isHidden = true
                 floatingbutton.isHidden = false
@@ -290,6 +293,7 @@ class SongWithVideoViewController: UIViewController  {
                 playerHeight.constant = 0
                 player.stop()
             } else {
+                AppLogger.log(level: .debug, "Playing the video...")
                 play = true
                 actionButton.setImage(UIImage(named: "stop"), for: UIControlState())
                 floatingbutton.isHidden = true
