@@ -1,16 +1,16 @@
 PODS:
   - AEXML (4.6.0)
-  - Cuckoo (1.4.1):
-    - Cuckoo/Swift (= 1.4.1)
-  - Cuckoo/Swift (1.4.1)
+  - Cuckoo (1.5.0):
+    - Cuckoo/Swift (= 1.5.0)
+  - Cuckoo/Swift (1.5.0)
   - Floaty (4.1.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - Nimble (9.0.0)
-  - Quick (3.0.1)
+  - Nimble (9.2.0)
+  - Quick (4.0.0)
   - SwiftLint (0.43.1)
-  - SwiftyJSON (4.3.0)
+  - SwiftyJSON (5.0.1)
   - Swinject (2.7.1)
   - SwinjectAutoregistration (2.7.0):
     - Swinject (~> 2.7)
@@ -21,13 +21,13 @@ PODS:
 
 DEPENDENCIES:
   - AEXML
-  - Cuckoo (~> 1.4.1)
+  - Cuckoo
   - Floaty
   - FMDB
-  - Nimble (~> 9.0.0)
-  - Quick (~> 3.0.0)
+  - Nimble
+  - Quick
   - SwiftLint
-  - SwiftyJSON (~> 4.0)
+  - SwiftyJSON
   - Swinject (~> 2.7.1)
   - SwinjectAutoregistration (~> 2.7.0)
   - SwinjectStoryboard (from `https://github.com/Swinject/SwinjectStoryboard.git`, commit `0ca45c83a8aa398c153d8a036c95abb4343cfa0c`)
@@ -61,19 +61,19 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AEXML: 2fbb73d8724797ed2cde888731e176fa4d44dd83
-  Cuckoo: 4625f7f54d9bb880123270e8969898d6c1d036b5
+  Cuckoo: 09ff1b7c6613b9c27dafea90702ca32208fe59d3
   Floaty: 1a4e213f3512cf3045ef9cb0c1ff456226d1f66a
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
-  Quick: 947834f0d0f43fc933d0e9dd00086a76e783e4fb
+  Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
+  Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
-  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   SwinjectAutoregistration: 330f5012642a8b5c89a8a4adb0c5e52df07382c0
   SwinjectStoryboard: f0d5b1c16459949d6ff1cbb6610107946b18e1f8
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
   Zip: 414f59909701fda9a84ab774ebe0f5449b1082cc
 
-PODFILE CHECKSUM: a2b437dcb490915e48d67c42504a8c082742d407
+PODFILE CHECKSUM: b899658f79dd36ab5fbd75cf07c75a796d92fbe3
 
 COCOAPODS: 1.10.1
