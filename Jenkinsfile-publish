@@ -1,19 +1,19 @@
 @Library('ios-libs') _
 pipeline {
   agent { label "ios" }
-  
+
   environment {
-    MATCH_GIT_URL="$CODE_REPO_URL/ios/ios-code-signing.git"
-    
+    MATCH_GIT_URL="$CODE_REPO_SSH_URL/ios-code-signing.git"
+
     APP_STORE_CONNECT_API_KEY_KEY_ID = credentials('appstore-connect-api-key-id')
     APP_STORE_CONNECT_API_KEY_ISSUER_ID = credentials('appstore-connect-api-issuer-id')
     APP_STORE_CONNECT_API_KEY_KEY = credentials('appstore-connect-api-key-content-base64')
     APP_STORE_CONNECT_API_KEY_IS_KEY_CONTENT_BASE64 = true
 	APP_STORE_CONNECT_API_KEY_IN_HOUSE=false
   }
-    
+
   stages {
-    stage('Get TestFlight Notes') {      
+    stage('Get TestFlight Notes') {
       steps {
         echo "Prompting user to enter TestFlight notes..."
         script {
@@ -42,7 +42,7 @@ pipeline {
       steps {
         runUnitTests()
       }
-      
+
       post {
         always {
 		  fastlane("clean_simulator")
@@ -51,25 +51,25 @@ pipeline {
         }
       }
     }
-    
+
     stage('Code Analysis') {
       steps {
         runCodeAnalysis branchName: "$BRANCH"
       }
     }
-        
+
     stage('Build'){
       steps {
         buildApp()
       }
     }
-    
+
     stage('Deploy to TestFlight') {
-      steps {        
+      steps {
         deploy deployLane: "deploy_testflight"
       }
     }
 
   }
-  
+
 }
