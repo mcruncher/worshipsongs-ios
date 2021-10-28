@@ -186,11 +186,6 @@ class SongsTabBarViewController: UITabBarController{
         performSegue(withIdentifier: "setting", sender: self)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
-    }
-    
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         //setMasterViewWidth()
         self.onChangeOrientation(orientation: UIDevice.current.orientation)
