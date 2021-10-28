@@ -11,11 +11,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var progressView: UIView!
+    var notificationCenterService: INotificationCenterService!
     let commonService = CommonService()
     let dataBaseService = DatabaseService()
     fileprivate let preferences = UserDefaults.standard
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool{
+        notificationCenterService = NotificationCenterService()
         UINavigationBar.appearance().tintColor = UIColor.cruncherBlue()
         let notificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         UIApplication.shared.registerUserNotificationSettings(notificationSettings)
@@ -88,8 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favoritesSongsWithOrders)
         self.preferences.set(encodedData, forKey: favoriteName)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: CommonConstansts.updateFavorites), object: nil, userInfo: nil)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: CommonConstansts.activeTabbar), object: nil, userInfo: [CommonConstansts.activeTab: "favorites".localized])
+        notificationCenterService.post(name: CommonConstansts.updateFavorites, userInfo: nil)
+        notificationCenterService.post(name: CommonConstansts.activeTabbar, userInfo: [CommonConstansts.activeTab: "favorites".localized])
         return true
     }
     
@@ -152,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 databaseService.revertImport()
                 preferences.set(false, forKey: "database.lock")
                 preferences.synchronize()
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
+                notificationCenterService.post(name: "refreshTabbar", userInfo: nil)
             }
         }
         
@@ -165,7 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 databaseService.revertUpdate()
                 preferences.set(false, forKey: "update.lock")
                 preferences.synchronize()
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
+                notificationCenterService.post(name: "refreshTabbar", userInfo: nil)
             }
         }
         

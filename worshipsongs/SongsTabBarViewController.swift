@@ -27,6 +27,7 @@ class SongsTabBarViewController: UITabBarController{
     
     fileprivate let preferences = UserDefaults.standard
     fileprivate var searchBar: UISearchBar!
+    var notificationCenterService: INotificationCenterService!
     weak var songdelegate: SongSelectionDelegate?
     var searchDelegate: SearchDelegateIOS11?
     var searchDelegate4S: SearchDelegateFor4S?
@@ -39,11 +40,15 @@ class SongsTabBarViewController: UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = UIColor.cruncherBlue()
-        NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.onBeforeUpdateDatabase(_:)), name: NSNotification.Name(rawValue: "onBeforeUpdateDatabase"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.refreshTabbar(_:)), name: NSNotification.Name(rawValue: "refreshTabbar"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.activeTabbar(_:)), name:
-            NSNotification.Name(rawValue: CommonConstansts.activeTabbar), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SongsTabBarViewController.hideSearchBar), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenterService = NotificationCenterService()
+        notificationCenterService.addObserver(self, forName: "onBeforeUpdateDatabase", selector: #selector(SongsTabBarViewController.onBeforeUpdateDatabase(_:)))
+        
+        notificationCenterService.addObserver(self, forName: "refreshTabbar", selector: #selector(SongsTabBarViewController.refreshTabbar(_:)))
+        
+        notificationCenterService.addObserver(self, forName: CommonConstansts.activeTabbar, selector: #selector(SongsTabBarViewController.activeTabbar(_:)))
+     
+        notificationCenterService.addObserver(self, forName: NSNotification.Name.UIKeyboardWillHide.rawValue, selector: #selector(SongsTabBarViewController.hideSearchBar))
+        
         initLeftNavBarButton()
         setSearchBar()
         splitViewController?.delegate = self
@@ -179,18 +184,6 @@ class SongsTabBarViewController: UITabBarController{
     
     @objc func onClickLeftNavBarButton() {
         performSegue(withIdentifier: "setting", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard DeviceUtils.isIpad() else {
-            return
-        }
-        guard segue.identifier == "setting" else {
-            return
-        }
-        splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
-        splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
-        
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {

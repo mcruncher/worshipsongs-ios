@@ -84,6 +84,8 @@
 		625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81771BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
+		6CC71EAF272A5D650053CF13 /* INotificationCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC71EAE272A5D650053CF13 /* INotificationCenterService.swift */; };
+		6CC71EB1272A5DFC0053CF13 /* NotificationCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC71EB0272A5DFC0053CF13 /* NotificationCenterService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,6 +190,8 @@
 		2FFF807F1F1718560086439B /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		2FFF80811F171C8C0086439B /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/Localizable.strings; sourceTree = "<group>"; };
 		625E81741BD664D000BE80B8 /* XmlParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserService.swift; sourceTree = "<group>"; };
+		6CC71EAE272A5D650053CF13 /* INotificationCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INotificationCenterService.swift; sourceTree = "<group>"; };
+		6CC71EB0272A5DFC0053CF13 /* NotificationCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterService.swift; sourceTree = "<group>"; };
 		71DAEADD10A11A2E479545EB /* Pods-worshipsongsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongsTests.debug.xcconfig"; path = "Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D8462F5D2DACE7FAB0DFA95 /* Pods-worshipsongs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongs.release.xcconfig"; path = "Target Support Files/Pods-worshipsongs/Pods-worshipsongs.release.xcconfig"; sourceTree = "<group>"; };
 		94DA441153DA07131B08E8CB /* Pods-worshipsongsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongsTests.release.xcconfig"; path = "Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -479,6 +483,8 @@
 				2FB0ADC322151DFB00EB305F /* LyricsXmlParser.swift */,
 				2FB0ADC522154B6600EB305F /* CustomProvider.swift */,
 				2FB0ADC7221552D500EB305F /* MessageParser.swift */,
+				6CC71EAE272A5D650053CF13 /* INotificationCenterService.swift */,
+				6CC71EB0272A5DFC0053CF13 /* NotificationCenterService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -835,6 +841,7 @@
 				2FA885D0215325570069DE89 /* String+Extensions.swift in Sources */,
 				2FE636591E41DED80092A696 /* ColorUtils.swift in Sources */,
 				2F5A6A7F1C15624B001E8B93 /* SongsTabBarViewController.swift in Sources */,
+				6CC71EAF272A5D650053CF13 /* INotificationCenterService.swift in Sources */,
 				2FD78E4E1C103C1A00A171B7 /* RegexPatternMatcherService.swift in Sources */,
 				2FB0ADC422151DFB00EB305F /* LyricsXmlParser.swift in Sources */,
 				2FE2502E1E42FD7A007BA85D /* PresentationView.swift in Sources */,
@@ -849,6 +856,7 @@
 				1AADE9112627CD5C00EED553 /* DependencyAssembly.swift in Sources */,
 				2F18C4C51E8DF17700E540AF /* Category.swift in Sources */,
 				2FC6EA4322680B5C007882A6 /* SimplePDFUtilities.swift in Sources */,
+				6CC71EB1272A5DFC0053CF13 /* NotificationCenterService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,6 +20,7 @@ class SongWithVideoViewController: UIViewController  {
     fileprivate let pdfExtension = ".pdf"
     var secondWindow: UIWindow?
     var secondScreenView: UIView?
+    var notificationCenterService: INotificationCenterService!
     var externalLabel = UILabel()
     var floatingbutton = Floaty()
     var hasYoutubeLink = false
@@ -57,6 +58,8 @@ class SongWithVideoViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        notificationCenterService = NotificationCenterService()
+        notificationCenterService.addObserver(self, forName: "refresh", selector: #selector(SongWithVideoViewController.refresh(_:)))
         isLanguageTamil = preferences.string(forKey: "language") == "tamil"
         addFloatButton()
         setSplitViewControllerProperties()
@@ -70,6 +73,10 @@ class SongWithVideoViewController: UIViewController  {
         addLongPressGestureRecognizer()
         setNextButton()
         setPreviousButton()
+    }
+    
+    @objc func refresh(_ nsNotification: NSNotification) {
+        refreshUI()
     }
     
     func refreshUI() {
@@ -213,7 +220,7 @@ class SongWithVideoViewController: UIViewController  {
             indexPath = IndexPath(row: 0, section: activeSection)
             self.presentation(indexPath)
         } else {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
+            notificationCenterService.post(name: "refreshTabbar", userInfo: nil)
         }
         scrollToRow(indexPath)
         
