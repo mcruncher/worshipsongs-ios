@@ -68,10 +68,12 @@ class SettingsController: UITableViewController {
     fileprivate let presentationTamilFontColorPickerView = UIPickerView()
     fileprivate let presentationEnglishFontColorPickerView = UIPickerView()
     fileprivate let databaseService = DatabaseService()
+    var notificationCenterService: INotificationCenterService!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(SettingsController.revertDatabase(_:)), name: NSNotification.Name(rawValue: "revertDatabase"), object: nil)
+        notificationCenterService = NotificationCenterService()
+        notificationCenterService.addObserver(self, forName: "revertDatabase", selector: #selector(SettingsController.revertDatabase(_:)))
         self.setUp()
         self.setLanguage()
         self.setPrimaryScreenFontSize()
@@ -90,7 +92,11 @@ class SettingsController: UITableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
+        notificationCenterService.post(name: "refreshTabbar", userInfo: nil)
+    }
+    
+    func refresh() {
+        notificationCenterService.post(name: "refresh", userInfo: nil)
     }
     
     func setUp() {
@@ -400,28 +406,33 @@ class SettingsController: UITableViewController {
             self.preferences.setValue(language, forKey: "language")
             self.preferences.synchronize()
             self.languageValue.text = self.preferences.string(forKey: "language")?.localized
+            self.refresh()
         })
     }
     
     @objc func revertDatabase(_ nsNotification: NSNotification) {
         databaseService.revertImport()
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
+        notificationCenterService.post(name: "refreshTabbar", userInfo: nil)
     }
     
     @IBAction func onChangeSize(_ sender: Any) {
         self.preferences.setValue(fontSizeSlider.value, forKey: "fontSize")
         self.preferences.synchronize()
         fontSIze.text = String(self.preferences.integer(forKey: "fontSize"))
+        self.refresh()
     }
     
     @IBAction func onChangeTamilSwitch(_ sender: Any) {
         self.preferences.setValue(displayTamilSwitch.isOn, forKey: "displayTamil")
         self.preferences.synchronize()
+        self.refresh()
+
     }
     
     @IBAction func onChangeEnglishSwitch(_ sender: Any) {
         self.preferences.setValue(displayRomanisedSwitch.isOn, forKey: "displayRomanised")
         self.preferences.synchronize()
+        self.refresh()
     }
     
     @IBAction func searchSongsByContent(_ sender: Any) {
@@ -568,12 +579,12 @@ class SettingsController: UITableViewController {
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        if DeviceUtils.isIpad() {
-            splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
-            splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
-            let leftNavController = splitViewController?.viewControllers.first as! UINavigationController
-            leftNavController.view.frame = CGRect(x: leftNavController.view.frame.origin.x, y: leftNavController.view.frame.origin.y, width: (splitViewController?.view.bounds.size.width)!, height: leftNavController.view.frame.height)
-        }
+//        if DeviceUtils.isIpad() {
+//            splitViewController?.preferredPrimaryColumnWidthFraction = 1.0
+//            splitViewController?.maximumPrimaryColumnWidth = (splitViewController?.view.bounds.size.width)!
+//            let leftNavController = splitViewController?.viewControllers.first as! UINavigationController
+//            leftNavController.view.frame = CGRect(x: leftNavController.view.frame.origin.x, y: leftNavController.view.frame.origin.y, width: (splitViewController?.view.bounds.size.width)!, height: leftNavController.view.frame.height)
+//        }
     }
     
 }
@@ -634,6 +645,7 @@ extension SettingsController: UIPickerViewDataSource, UIPickerViewDelegate {
             self.preferences.setValue(presentationBackground, forKey: "presentationBackgroundColor")
             self.preferences.synchronize()
         }
+        notificationCenterService.post(name: "refresh", userInfo: nil)
     }
 }
 
