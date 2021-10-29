@@ -76,7 +76,9 @@ class SongWithVideoViewController: UIViewController  {
     }
     
     @objc func refresh(_ nsNotification: NSNotification) {
-        refreshUI()
+        if selectedSong != nil {
+            refreshUI()
+        }
     }
     
     func refreshUI() {
