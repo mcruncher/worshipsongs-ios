@@ -84,6 +84,7 @@
 		625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81771BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
+		6C87C10D272FDAE700DFBEFF /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C87C10C272FDAE700DFBEFF /* SongSpec.swift */; };
 		6CC71EAF272A5D650053CF13 /* INotificationCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC71EAE272A5D650053CF13 /* INotificationCenterService.swift */; };
 		6CC71EB1272A5DFC0053CF13 /* NotificationCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC71EB0272A5DFC0053CF13 /* NotificationCenterService.swift */; };
 /* End PBXBuildFile section */
@@ -190,6 +191,7 @@
 		2FFF807F1F1718560086439B /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		2FFF80811F171C8C0086439B /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/Localizable.strings; sourceTree = "<group>"; };
 		625E81741BD664D000BE80B8 /* XmlParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserService.swift; sourceTree = "<group>"; };
+		6C87C10C272FDAE700DFBEFF /* SongSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSpec.swift; sourceTree = "<group>"; };
 		6CC71EAE272A5D650053CF13 /* INotificationCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INotificationCenterService.swift; sourceTree = "<group>"; };
 		6CC71EB0272A5DFC0053CF13 /* NotificationCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterService.swift; sourceTree = "<group>"; };
 		71DAEADD10A11A2E479545EB /* Pods-worshipsongsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-worshipsongsTests.debug.xcconfig"; path = "Target Support Files/Pods-worshipsongsTests/Pods-worshipsongsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 		2F5D3D331BC788F8001C4B6F /* worshipsongsTests */ = {
 			isa = PBXGroup;
 			children = (
+				6C87C10B272FDACA00DFBEFF /* Model */,
 				1AADE92E262963B800EED553 /* ViewModel */,
 				1AF35E61260C16FE00AF0F2E /* Acceptance */,
 				1ADDED35260439C3004724DD /* Resources */,
@@ -509,6 +512,14 @@
 				2F5E0C82265CF5BA00498D1C /* UITabbar+Extensions.swift */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		6C87C10B272FDACA00DFBEFF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C87C10C272FDAE700DFBEFF /* SongSpec.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F3D09AE71D24D43033390CB4 /* Pods */ = {
@@ -871,6 +882,7 @@
 				283D8F0A1E7797540078B159 /* DeviceUtils.swift in Sources */,
 				1AADE930262963C600EED553 /* TitlesViewModelSpec.swift in Sources */,
 				1A8A4B5326082D28003126F8 /* StringExtensionsSpec.swift in Sources */,
+				6C87C10D272FDAE700DFBEFF /* SongSpec.swift in Sources */,
 				1A9333CF26031E0000953865 /* OpenLPServiceConverterSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
