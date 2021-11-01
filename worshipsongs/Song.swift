@@ -40,20 +40,20 @@ class Song {
         self.songBookNo = ""
     }
     
-    private func getI18nTitle(comment: String) -> String {
+    func getI18nTitle(comment: String) -> String {
         let properties = comment.components(separatedBy: "\n")
         for property in properties {
-            if property.contains("i18nTitle"){
+            if property.contains("i18nTitle"), property.contains("=") {
                 return property.components(separatedBy: "=")[1].trimmingCharacters(in: .whitespacesAndNewlines)
             }
         }
         return ""
     }
     
-    private func getMediaUrl(comment: String) -> String {
+    func getMediaUrl(comment: String) -> String {
         let properties = comment.components(separatedBy: "\n")
         for property in properties {
-            if property.contains("mediaUrl"){
+            if property.contains("mediaUrl"), property.contains("Url=") {
                 return property.components(separatedBy: "Url=")[1].trimmingCharacters(in: .whitespacesAndNewlines)
             }
         }
