@@ -60,6 +60,7 @@ pipeline {
 
     stage('Build'){
       steps {
+        sh './bundle-db.sh'
         buildApp()
       }
     }

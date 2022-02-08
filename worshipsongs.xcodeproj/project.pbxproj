@@ -107,6 +107,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A81F81C27B1FF830074A7B0 /* Jenkinsfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Jenkinsfile; sourceTree = SOURCE_ROOT; };
+		1A81F81D27B1FF830074A7B0 /* Jenkinsfile-publish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jenkinsfile-publish"; sourceTree = SOURCE_ROOT; };
+		1A81F81E27B1FF830074A7B0 /* Jenkinsfile-generate-certs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jenkinsfile-generate-certs"; sourceTree = SOURCE_ROOT; };
+		1A81F81F27B1FF830074A7B0 /* sonar-project.properties */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sonar-project.properties"; sourceTree = SOURCE_ROOT; };
+		1A81F82027B1FF830074A7B0 /* bundle-db.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "bundle-db.sh"; sourceTree = SOURCE_ROOT; };
+		1A81F82627B1FFA90074A7B0 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Fastfile; path = fastlane/Fastfile; sourceTree = SOURCE_ROOT; };
+		1A81F82827B1FFB40074A7B0 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = SOURCE_ROOT; };
 		1A8A4B5226082D28003126F8 /* StringExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsSpec.swift; sourceTree = "<group>"; };
 		1A9333A726031B4300953865 /* IOpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOpenLPServiceConverter.swift; sourceTree = "<group>"; };
 		1A9333B826031C9200953865 /* OpenLPServiceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLPServiceConverter.swift; sourceTree = "<group>"; };
@@ -345,6 +352,13 @@
 		2F5D3D1C1BC788F8001C4B6F /* worshipsongs */ = {
 			isa = PBXGroup;
 			children = (
+				1A81F82827B1FFB40074A7B0 /* Gemfile */,
+				1A81F82627B1FFA90074A7B0 /* Fastfile */,
+				1A81F82027B1FF830074A7B0 /* bundle-db.sh */,
+				1A81F81C27B1FF830074A7B0 /* Jenkinsfile */,
+				1A81F81E27B1FF830074A7B0 /* Jenkinsfile-generate-certs */,
+				1A81F81D27B1FF830074A7B0 /* Jenkinsfile-publish */,
+				1A81F81F27B1FF830074A7B0 /* sonar-project.properties */,
 				1AADE9252629636C00EED553 /* ViewModel */,
 				2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */,
 				2F0A70F71E1B43020025F156 /* Component */,
