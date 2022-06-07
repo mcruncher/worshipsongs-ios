@@ -195,7 +195,7 @@ GEM
     httpclient (2.8.3)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     json (2.5.1)
     jwt (2.2.3)
     lazy_priority_queue (0.1.1)
@@ -213,6 +213,8 @@ GEM
     nokogiri (1.11.5-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.11.5-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.11.5-x86_64-linux)
       racc (~> 1.4)
     os (1.1.1)
     parallel (1.20.1)
@@ -284,6 +286,7 @@ GEM
 PLATFORMS
   universal-darwin-21
   x86_64-darwin-19
+  x86_64-linux
 
 DEPENDENCIES
   cocoapods
