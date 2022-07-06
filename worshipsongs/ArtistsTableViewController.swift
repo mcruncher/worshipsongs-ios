@@ -123,17 +123,7 @@ extension ArtistsTableViewController : SearchDelegateIOS11 {
         }
         self.filteredAuthorModel = data
         tableView.reloadData()
-    }
-    
-    
-    func hideSearch() {
-        if DeviceUtils.isIpad() {
-            songTabBarController?.closeSearchBar()
-            filteredAuthorModel = authorModel
-            tableView.reloadData()
-        }
-    }
-    
+    }        
 }
 
 extension ArtistsTableViewController: SearchDelegateFor4S {

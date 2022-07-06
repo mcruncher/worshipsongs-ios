@@ -47,11 +47,10 @@ class DatabaseHelperSepc : QuickSpec {
                     
                     expect(result.count).to(equal(3))
                     expect(result[0].title).to(equal("Amazing Grace (my chains are gone)"))
-                    print("Last modified: \(result[0].lastModified)")
                     
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                    expect(result[0].lastModified).to(equal(dateFormatter.date(from: "2021-03-19 08:32:37")))
+                    expect(result[0].lastModified).to(equal(dateFormatter.date(from: "2022-07-06 07:15:33")))
                 }
             }
             
