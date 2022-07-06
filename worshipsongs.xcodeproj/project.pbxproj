@@ -109,7 +109,6 @@
 
 /* Begin PBXFileReference section */
 		1A81F81C27B1FF830074A7B0 /* Jenkinsfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Jenkinsfile; sourceTree = SOURCE_ROOT; };
-		1A81F81D27B1FF830074A7B0 /* Jenkinsfile-publish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jenkinsfile-publish"; sourceTree = SOURCE_ROOT; };
 		1A81F81E27B1FF830074A7B0 /* Jenkinsfile-generate-certs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jenkinsfile-generate-certs"; sourceTree = SOURCE_ROOT; };
 		1A81F81F27B1FF830074A7B0 /* sonar-project.properties */ = {isa = PBXFileReference; lastKnownFileType = text; path = "sonar-project.properties"; sourceTree = SOURCE_ROOT; };
 		1A81F82027B1FF830074A7B0 /* bundle-db.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "bundle-db.sh"; sourceTree = SOURCE_ROOT; };
@@ -359,7 +358,6 @@
 				1A81F82027B1FF830074A7B0 /* bundle-db.sh */,
 				1A81F81C27B1FF830074A7B0 /* Jenkinsfile */,
 				1A81F81E27B1FF830074A7B0 /* Jenkinsfile-generate-certs */,
-				1A81F81D27B1FF830074A7B0 /* Jenkinsfile-publish */,
 				1A81F81F27B1FF830074A7B0 /* sonar-project.properties */,
 				1AADE9252629636C00EED553 /* ViewModel */,
 				2FFA62F31E5EBDB9002C56AC /* worshipsongs.entitlements */,
