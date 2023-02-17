@@ -30,6 +30,7 @@ class TitlesViewController: UITableViewController {
         addRefreshControl()
         addLongPressGestureRecognizer()
         initSetup()
+        resetFilter()
         tableView.reloadData()
     }
     
@@ -92,6 +93,9 @@ class TitlesViewController: UITableViewController {
         songTabBarController?.searchDelegate = self
         songTabBarController?.searchDelegate4S = self
         songModel = databaseHelper.findSongs()
+    }
+    
+    private func resetFilter() {
         filteredSongModel = songModel
         sortSongModel()
     }
@@ -187,13 +191,6 @@ extension TitlesViewController: UIGestureRecognizerDelegate {
 }
 
 extension TitlesViewController : SearchDelegateIOS11 {
-    func hideSearch() {
-        if DeviceUtils.isIpad() {
-            songTabBarController?.closeSearchBar()
-            cancelSearch()
-        }
-    }
-    
     func filter(_ searchBar: UISearchBar) {
         let searchText = searchBar.text!
         self.filteredSongModel = titlesViewModel.filter(songs: songModel, bySearchText: searchText)

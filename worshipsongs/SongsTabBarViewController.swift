@@ -14,7 +14,6 @@ protocol SongSelectionDelegate: class {
 }
 
 protocol SearchDelegateIOS11 {
-    func hideSearch()
     func filter(_ searchBar: UISearchBar)
 }
 
@@ -41,13 +40,10 @@ class SongsTabBarViewController: UITabBarController{
         super.viewDidLoad()
         tabBar.tintColor = UIColor.cruncherBlue()
         notificationCenterService = NotificationCenterService()
+        
         notificationCenterService.addObserver(self, forName: "onBeforeUpdateDatabase", selector: #selector(SongsTabBarViewController.onBeforeUpdateDatabase(_:)))
-        
-        notificationCenterService.addObserver(self, forName: "refreshTabbar", selector: #selector(SongsTabBarViewController.refreshTabbar(_:)))
-        
+        notificationCenterService.addObserver(self, forName: "refreshTabbar", selector: #selector(SongsTabBarViewController.refreshTabbar(_:)))        
         notificationCenterService.addObserver(self, forName: CommonConstansts.activeTabbar, selector: #selector(SongsTabBarViewController.activeTabbar(_:)))
-     
-        notificationCenterService.addObserver(self, forName: NSNotification.Name.UIKeyboardWillHide.rawValue, selector: #selector(SongsTabBarViewController.hideSearchBar))
         
         initLeftNavBarButton()
         setSearchBar()
@@ -100,11 +96,7 @@ class SongsTabBarViewController: UITabBarController{
             tabid = tabid + 1
         }
     }
-    
-    @objc func hideSearchBar() {
-        searchDelegate?.hideSearch()
-    }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         presentationData = PresentationData()
         presentationData.setupScreen()

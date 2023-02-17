@@ -112,16 +112,7 @@ extension CategoriesTableViewController : SearchDelegateIOS11 {
         }
         self.filteredCategoryModel = data
         tableView.reloadData()
-    }
-    
-    func hideSearch() {
-        if DeviceUtils.isIpad() {
-            songTabBarController?.closeSearchBar()
-            filteredCategoryModel = categoryModel
-            tableView.reloadData()
-        }
-    }
-
+    }    
 }
 
 extension CategoriesTableViewController: SearchDelegateFor4S {

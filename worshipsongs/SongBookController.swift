@@ -107,12 +107,4 @@ extension SongBookController : SearchDelegateIOS11 {
         self.filterSongBooks = data!
         tableView.reloadData()
     }
-    
-    func hideSearch() {
-        if DeviceUtils.isIpad() {
-            songTabBarController?.closeSearchBar()
-            filterSongBooks = songBooks!
-            tableView.reloadData()
-        }
-    }
 }

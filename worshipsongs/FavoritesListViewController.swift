@@ -164,16 +164,7 @@ extension FavoritesListViewController : SearchDelegateIOS11 {
         }
         self.filteredFavorites = data
         tableView.reloadData()
-    }
-    
-    func hideSearch() {
-        if DeviceUtils.isIpad() {
-            songTabBarController?.closeSearchBar()
-            filteredFavorites = favorites
-            tableView.reloadData()
-        }
-    }
-    
+    }    
 }
 
 extension FavoritesListViewController: SearchDelegateFor4S {
