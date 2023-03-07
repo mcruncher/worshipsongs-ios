@@ -16,6 +16,7 @@ class TitlesViewController: UITableViewController {
     private var songTabBarController: SongsTabBarViewController?
     private var addToFav: Song!
     private var titlesViewModel = TitlesViewModel()
+    var notificationCenterService: INotificationCenterService!
     
     override func viewDidLoad()
     {
@@ -27,6 +28,8 @@ class TitlesViewController: UITableViewController {
                 NSAttributedStringKey.font : UIFont.preferredFont(forTextStyle: .largeTitle)
             ]
         }
+        notificationCenterService = NotificationCenterService()
+        notificationCenterService.addObserver(self, forName: "refresh", selector: #selector(TitlesViewController.refresh(_:)))
         addRefreshControl()
         addLongPressGestureRecognizer()
         initSetup()
