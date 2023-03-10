@@ -11,7 +11,7 @@ class Downloader {
     class func load(url: URL, to localUrl: URL, completion: @escaping () -> ()) {
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig)
-        let preferences = UserDefaults.standard
+        let localPreferences = UserDefaults.standard
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
@@ -21,39 +21,39 @@ class Downloader {
                     print("Success: \(statusCode)")
                     do {
                         if statusCode == 200 {
-                            preferences.setValue("imported.sucessfully", forKey: "import.status")
-                            preferences.synchronize()
+                            localPreferences.set("imported.sucessfully", forKey: "import.status")
+                            localPreferences.synchronize()
                             if FileManager.default.fileExists(atPath: localUrl.path) {
                                 try! FileManager.default.removeItem(atPath: localUrl.path)
                             }
                             try FileManager.default.copyItem(at: tempLocalUrl, to: localUrl)
-                            preferences.set(false, forKey: "defaultDatabase")
-                            preferences.synchronize()
+                            localPreferences.set(false, forKey: "defaultDatabase")
+                            localPreferences.synchronize()
                         } else {
-                            preferences.setValue("error.importing", forKey: "import.status")
-                            preferences.synchronize()
+                            localPreferences.set("error.importing", forKey: "import.status")
+                            localPreferences.synchronize()
                         }
                         completion()
-                        preferences.set(false, forKey: "database.lock")
-                        preferences.synchronize()
+                        localPreferences.set(false, forKey: "database.lock")
+                        localPreferences.synchronize()
                     } catch (let writeError) {
-                        preferences.setValue("error.copying", forKey: "import.status")
-                        preferences.set(false, forKey: "database.lock")
-                        preferences.synchronize()
+                        localPreferences.set("error.copying", forKey: "import.status")
+                        localPreferences.set(false, forKey: "database.lock")
+                        localPreferences.synchronize()
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "revertDatabase"), object: nil,  userInfo: nil)
                         print("error writing file \(localUrl) : \(writeError)")
                     }
                 } else {
-                    preferences.setValue("error.importing", forKey: "import.status")
-                    preferences.set(false, forKey: "database.lock")
-                    preferences.synchronize()
+                    localPreferences.set("error.importing", forKey: "import.status")
+                    localPreferences.set(false, forKey: "database.lock")
+                    localPreferences.synchronize()
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "revertDatabase"), object: nil,  userInfo: nil)
                 }
                 
             } else {
-                preferences.setValue("error.importing", forKey: "import.status")
-                preferences.set(false, forKey: "database.lock")
-                preferences.synchronize()
+                localPreferences.set("error.importing", forKey: "import.status")
+                localPreferences.set(false, forKey: "database.lock")
+                localPreferences.synchronize()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "revertDatabase"), object: nil,  userInfo: nil)
                 print("Failure: %@ \(error?.localizedDescription)");
             }

@@ -35,7 +35,7 @@ class SongWithVideoViewController: UIViewController  {
     var verseOrderList: NSMutableArray = NSMutableArray()
     var presentationIndex = 0
     var comment: String = ""
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
     var play = false
     var noInternet = false
     fileprivate var isLanguageTamil = true
@@ -218,8 +218,9 @@ class SongWithVideoViewController: UIViewController  {
         let activeSong = preferences.string(forKey: "presentationSongName")
         if activeSong != "" && selectedSong.title == activeSong && UIScreen.screens.count > 1 {
             self.presentationData.setupScreen()
-            let activeSection = preferences.integer(forKey: "presentationSlideNumber")
-            indexPath = IndexPath(row: 0, section: activeSection)
+            if let activeSection = preferences.object(forKey: "presentationSlideNumber") as? Int {
+                indexPath = IndexPath(row: 0, section: activeSection)
+            }
             self.presentation(indexPath)
         } else {
             notificationCenterService.post(name: "refreshTabbar", userInfo: nil)
@@ -340,8 +341,9 @@ class SongWithVideoViewController: UIViewController  {
             let key: String = (verseOrderList[i] as! String).lowercased()
             let dataText: NSString? = listDataDictionary[key] as? NSString
             let cell = UITableViewCell()
-            let fontSize = self.preferences.integer(forKey: "fontSize")
-            cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize + 5))
+            if let fontSize = self.preferences.object(forKey: "fontSize") as? Int {
+                cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize + 5))
+            }
             cell.textLabel!.numberOfLines = 0
             cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
             cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);
@@ -369,8 +371,9 @@ extension SongWithVideoViewController: UITableViewDataSource {
         print("key\(key)")
         let dataText: NSString? = listDataDictionary[key] as? NSString
         cell.textLabel!.numberOfLines = 0
-        let fontSize = self.preferences.integer(forKey: "fontSize")
-        cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+        if let fontSize = self.preferences.object(forKey: "fontSize") as? Int {
+            cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+        }
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
         return cell
@@ -419,8 +422,8 @@ extension SongWithVideoViewController {
     
     func presentation(_ indexPath: IndexPath) {
         if UIScreen.screens.count > 1 {
-            self.preferences.setValue(authorName, forKeyPath: "presentationAuthor")
-            self.preferences.setValue(songName, forKeyPath: "presentationSongName")
+            self.preferences.set(authorName, forKey: "presentationAuthor")
+            self.preferences.set(songName, forKey: "presentationSongName")
             self.preferences.synchronize()
             tableView.allowsSelection = true
             presentVerse(indexPath)
@@ -438,10 +441,10 @@ extension SongWithVideoViewController {
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         let key = (verseOrderList[(indexPath as NSIndexPath).section] as! String).lowercased()
         let dataText: NSString? = listDataDictionary[key] as? NSString
-        self.preferences.setValue(dataText, forKey: "presentationLyrics")
+        self.preferences.set(dataText, forKey: "presentationLyrics")
         let slideNumber = String(indexPath.section + 1) + " of " + String(tableView.numberOfSections)
-        self.preferences.setValue(slideNumber, forKeyPath: "presentationSlide")
-        self.preferences.setValue(indexPath.section, forKeyPath: "presentationSlideNumber")
+        self.preferences.set(slideNumber, forKey: "presentationSlide")
+        self.preferences.set(indexPath.section, forKey: "presentationSlideNumber")
         self.preferences.synchronize()
         self.presentationData.updateScreen()
         previousButton.isHidden = indexPath.section <= 0

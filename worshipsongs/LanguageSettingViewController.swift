@@ -10,7 +10,7 @@ import UIKit
 
 class LanguageSettingViewController: UIViewController {
 
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var tamilButton: UIButton!
     @IBOutlet weak var englishButton: UIButton!
@@ -43,7 +43,7 @@ class LanguageSettingViewController: UIViewController {
     }
     
     @IBAction func setLanguage(_ sender: Any) {
-        self.preferences.setValue(language, forKey: "language")
+        self.preferences.set(language, forKey: "language")
         self.preferences.synchronize()
         NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshTabbar"), object: nil,  userInfo: nil)
         self.dismiss(animated: false, completion: nil)

@@ -55,7 +55,7 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var searchByContentSwitch: UISwitch!
     
     
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
     fileprivate let ColorList = ColorUtils.Color.allValues
     var englishFont: String = ""
     var tamilFont: String = ""
@@ -147,15 +147,17 @@ class SettingsController: UITableViewController {
     }
     
     func setPrimaryScreenFontSize() {
-        let size = self.preferences.integer(forKey: "fontSize")
-        fontSizeSlider.value = Float(size)
-        fontSIze.text = String(size)
+        if let size = self.preferences.object(forKey: "fontSize") as? Int {
+            fontSizeSlider.value = Float(size)
+            fontSIze.text = String(size)
+        }
     }
     
     func setPresentationScreenFontSize() {
-        let presentationSize = self.preferences.integer(forKey: "presentationFontSize")
-        presentationFontSlider.value = Float(presentationSize)
-        presentationFontSize.text = String(presentationSize)
+        if let presentationSize = self.preferences.object(forKey: "presentationFontSize") as? Int {
+            presentationFontSlider.value = Float(presentationSize)
+            presentationFontSize.text = String(presentationSize)
+        }
     }
     
     func setPrimaryScreenTamilFontColor() {
@@ -403,7 +405,7 @@ class SettingsController: UITableViewController {
     func changeLanguageAction(_ language: String) -> UIAlertAction  {
         return UIAlertAction(title: language.localized, style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            self.preferences.setValue(language, forKey: "language")
+            self.preferences.set(language, forKey: "language")
             self.preferences.synchronize()
             self.languageValue.text = self.preferences.string(forKey: "language")?.localized
             self.refresh()
@@ -416,30 +418,30 @@ class SettingsController: UITableViewController {
     }
     
     @IBAction func onChangeSize(_ sender: Any) {
-        self.preferences.setValue(fontSizeSlider.value, forKey: "fontSize")
+        self.preferences.set(fontSizeSlider.value, forKey: "fontSize")
         self.preferences.synchronize()
-        fontSIze.text = String(self.preferences.integer(forKey: "fontSize"))
+        fontSIze.text = self.preferences.object(forKey: "fontSize") as? String
         self.refresh()
     }
     
     @IBAction func onChangeTamilSwitch(_ sender: Any) {
-        self.preferences.setValue(displayTamilSwitch.isOn, forKey: "displayTamil")
+        self.preferences.set(displayTamilSwitch.isOn, forKey: "displayTamil")
         self.preferences.synchronize()
         self.refresh()
 
     }
     
     @IBAction func onChangeEnglishSwitch(_ sender: Any) {
-        self.preferences.setValue(displayRomanisedSwitch.isOn, forKey: "displayRomanised")
+        self.preferences.set(displayRomanisedSwitch.isOn, forKey: "displayRomanised")
         self.preferences.synchronize()
         self.refresh()
     }
     
     @IBAction func searchSongsByContent(_ sender: Any) {
         if searchByContentSwitch.isOn {
-            self.preferences.setValue("searchByContent", forKey: "searchBy")
+            self.preferences.set("searchByContent", forKey: "searchBy")
         } else {
-            self.preferences.setValue("", forKey: "searchBy")
+            self.preferences.set("", forKey: "searchBy")
         }
         self.preferences.synchronize()
     }
@@ -542,9 +544,9 @@ class SettingsController: UITableViewController {
     }
     
     @IBAction func onChangePresentationSize(_ sender: Any) {
-        self.preferences.setValue(presentationFontSlider.value, forKey: "presentationFontSize")
+        self.preferences.set(presentationFontSlider.value, forKey: "presentationFontSize")
         self.preferences.synchronize()
-        presentationFontSize.text = String(self.preferences.integer(forKey: "presentationFontSize"))
+        presentationFontSize.text = self.preferences.object(forKey: "presentationFontSize") as? String
     }
     
     func rateUs() {
@@ -609,31 +611,31 @@ extension SettingsController: UIPickerViewDataSource, UIPickerViewDelegate {
             tamilFont = ColorList[row].rawValue
             tamilFontColorTextField.text = tamilFont.localized
             primaryTamilColor.backgroundColor = ColorUtils.getColor(color: ColorList[row])
-            self.preferences.setValue(tamilFont, forKey: "tamilFontColor")
+            self.preferences.set(tamilFont, forKey: "tamilFontColor")
             self.preferences.synchronize()
         } else if pickerView.tag == 2 {
             englishFont = ColorList[row].rawValue
             englishFontColorTextField.text = englishFont.localized
             primaryEnglishColor.backgroundColor = ColorUtils.getColor(color: ColorList[row])
-            self.preferences.setValue(englishFont, forKey: "englishFontColor")
+            self.preferences.set(englishFont, forKey: "englishFontColor")
             self.preferences.synchronize()
         } else if pickerView.tag == 3 {
             presentationTamilFont = ColorList[row].rawValue
             presentationTamilFontColorTextField.text = presentationTamilFont.localized
             presentationTamilColor.backgroundColor = ColorUtils.getColor(color: ColorList[row])
-            self.preferences.setValue(presentationTamilFont, forKey: "presentationTamilFontColor")
+            self.preferences.set(presentationTamilFont, forKey: "presentationTamilFontColor")
             self.preferences.synchronize()
         } else if pickerView.tag == 4 {
             presentationEnglishFont = ColorList[row].rawValue
             presentationEnglishFontColorTextField.text = presentationEnglishFont.localized
             presentationEnglishColor.backgroundColor = ColorUtils.getColor(color: ColorList[row])
-            self.preferences.setValue(presentationEnglishFont, forKey: "presentationEnglishFontColor")
+            self.preferences.set(presentationEnglishFont, forKey: "presentationEnglishFontColor")
             self.preferences.synchronize()
         } else {
             presentationBackground = ColorList[row].rawValue
             presentationBackgroundColorTextField.text = presentationBackground.localized
             presentationBackgroundColor.backgroundColor = ColorUtils.getColor(color: ColorList[row])
-            self.preferences.setValue(presentationBackground, forKey: "presentationBackgroundColor")
+            self.preferences.set(presentationBackground, forKey: "presentationBackgroundColor")
             self.preferences.synchronize()
         }
         notificationCenterService.post(name: "refresh", userInfo: nil)

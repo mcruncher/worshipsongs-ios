@@ -50,7 +50,7 @@ extension String {
     }
     
     var localized: String {
-        let isLanguageTamil = UserDefaults.standard.string(forKey: "language") == "tamil"
+        let isLanguageTamil = NSUbiquitousKeyValueStore.default.string(forKey: "language") == "tamil"
         if isLanguageTamil {
             let language = "ta"
             let path = Bundle.main.path(forResource: language, ofType: "lproj")

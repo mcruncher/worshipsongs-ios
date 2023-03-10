@@ -9,7 +9,6 @@ class ArtistSongsTitleTableViewController: UITableViewController, UIGestureRecog
     
    
     var artistName: String = ""
-    fileprivate let preferences = UserDefaults.standard
     var songModel = [Song]()
     var filteredSongModel = [Song]()
     var databaseHelper = DatabaseHelper()

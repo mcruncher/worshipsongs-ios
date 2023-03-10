@@ -27,7 +27,7 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
     var text: String!
     var presentationIndex = 0
     var comment: String = ""
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
     var play = false
     
     override func viewDidLoad() {
@@ -50,8 +50,8 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
         nextButton.layer.cornerRadius = previousButton.layer.frame.height / 2
         nextButton.clipsToBounds = true
         nextButton.isHidden = self.verseOrder.count <= 1
-        self.preferences.setValue(authorName, forKeyPath: "presentationAuthor")
-        self.preferences.setValue(songName, forKeyPath: "presentationSongName")
+        self.preferences.set(authorName, forKey: "presentationAuthor")
+        self.preferences.set(songName, forKey: "presentationSongName")
         self.preferences.synchronize()
         let backButton = UIBarButtonItem(title: "back".localized, style: .plain, target: self, action: #selector(PresentationViewController.goBackToSongsList))
         navigationItem.leftBarButtonItem = backButton
@@ -102,8 +102,9 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
         print("key\(key)")
         let dataText: NSString? = listDataDictionary[key] as? NSString
         cell.textLabel!.numberOfLines = 0
-        let fontSize = self.preferences.integer(forKey: "fontSize")
-        cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+        if let fontSize = self.preferences.object(forKey: "fontSize") as? Int {
+            cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+        }
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
         return cell
@@ -137,9 +138,9 @@ class PresentationViewController: UIViewController, UITableViewDelegate, UITable
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
         let key = (verseOrderList[(indexPath as NSIndexPath).section] as! String).lowercased()
         let dataText: NSString? = listDataDictionary[key] as? NSString
-        self.preferences.setValue(dataText, forKey: "presentationLyrics")
+        self.preferences.set(dataText, forKey: "presentationLyrics")
         let slideNumber = String(indexPath.section + 1) + " of " + String(tableView.numberOfSections)
-        self.preferences.setValue(slideNumber, forKeyPath: "presentationSlide")
+        self.preferences.set(slideNumber, forKey: "presentationSlide")
         self.preferences.synchronize()
         self.presentationData.updateScreen()
         previousButton.isHidden = indexPath.section <= 0

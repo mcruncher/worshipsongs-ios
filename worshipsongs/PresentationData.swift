@@ -12,7 +12,7 @@ import UIKit
 class PresentationData {
     
     let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
     var secondWindow: UIWindow?
     let secondScreenView = PresentationView()
     
@@ -31,14 +31,15 @@ class PresentationData {
             secondWindow?.isHidden = false
             let presentationBackgroundColor = self.preferences.string(forKey: "presentationBackgroundColor")
             secondScreenView.view.backgroundColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: presentationBackgroundColor!)!)
-            let fontSize = self.preferences.integer(forKey: "presentationFontSize")
-            let fontColor = self.preferences.string(forKey: "presentationEnglishFontColor")!
-            secondScreenView.songLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
-            secondScreenView.slideNumberLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
+            if let fontSize = self.preferences.object(forKey: "presentationFontSize") as? Int {
+                secondScreenView.songLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+                secondScreenView.slideNumberLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
+                secondScreenView.songNameLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
+                secondScreenView.authorLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
+            }
+                let fontColor = self.preferences.string(forKey: "presentationEnglishFontColor")!
             secondScreenView.slideNumberLabel.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: fontColor)!)
-            secondScreenView.songNameLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
             secondScreenView.songNameLabel.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: fontColor)!)
-            secondScreenView.authorLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize) / 3)
             secondScreenView.authorLabel.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: fontColor)!)
             if isPresentationStringNotEmpty() {
                 secondScreenView.songLabel.numberOfLines = 0
@@ -59,7 +60,7 @@ class PresentationData {
     }
     
     fileprivate func isPresentationStringNotEmpty() -> Bool {
-        return preferences.dictionaryRepresentation().keys.contains("presentationLyrics") && self.preferences.string(forKey: "presentationLyrics") != ""
+        return preferences.dictionaryRepresentation.keys.contains("presentationLyrics") && self.preferences.string(forKey: "presentationLyrics") != ""
     }
     
     func updateScreen() {

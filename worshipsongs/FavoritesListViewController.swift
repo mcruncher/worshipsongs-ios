@@ -7,7 +7,7 @@ import UIKit
 
 class FavoritesListViewController: UITableViewController {
     
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
     var pagingSpinner = UIActivityIndicatorView()
     var favorites = [String]()
     var filteredFavorites = [String]()
@@ -75,7 +75,7 @@ class FavoritesListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: CommonConstansts.favorite, for: indexPath)
         cell.textLabel?.text = filteredFavorites[indexPath.row]
         var count = 0
-        if self.preferences.dictionaryRepresentation().keys.contains(filteredFavorites[indexPath.row]) {
+        if self.preferences.dictionaryRepresentation.keys.contains(filteredFavorites[indexPath.row]) {
             let decoded  = self.preferences.object(forKey: filteredFavorites[indexPath.row]) as! Data
             let favSongs = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
             count = favSongs.count

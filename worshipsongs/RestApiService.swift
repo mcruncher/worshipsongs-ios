@@ -10,7 +10,6 @@ import Foundation
 class RestApiService: NSObject, NSURLConnectionDataDelegate
 {
     var responseData:Data!
-    let preferences = UserDefaults.standard
     var sha: String = ""
     
     func requestToGetDataAsDictionary(_ request : NSMutableURLRequest) -> NSDictionary

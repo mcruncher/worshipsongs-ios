@@ -14,7 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var notificationCenterService: INotificationCenterService!
     let commonService = CommonService()
     let dataBaseService = DatabaseService()
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
+    fileprivate let localPreferences = UserDefaults.standard
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool{
         notificationCenterService = NotificationCenterService()
@@ -22,18 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         UIApplication.shared.registerUserNotificationSettings(notificationSettings)
         let version = getVersion()
-        if preferences.dictionaryRepresentation().keys.contains("version") {
+        if localPreferences.dictionaryRepresentation().keys.contains("version") {
             if !(preferences.string(forKey: "version")?.equalsIgnoreCase(version))! {
                 dataBaseService.copyBundledDatabase("songs.sqlite")
-                preferences.setValue(version, forKey: "version")
-                preferences.synchronize()
+                localPreferences.set(version, forKey: "version")
+                localPreferences.synchronize()
             } else {
                 print("Same version")
             }
             
         } else {
-            preferences.setValue(version, forKey: "version")
-            preferences.synchronize()
+            print(version)
+            localPreferences.set(version, forKey: "version")
+            localPreferences.synchronize()
             dataBaseService.copyBundledDatabase("songs.sqlite")
         }
         updateDefaultSettings()
@@ -111,114 +113,114 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func updateDefaultSettings() {
-        self.preferences.setValue("", forKey: "import.status")
-        self.preferences.setValue("", forKey: "update.status")
-        self.preferences.setValue("", forKey: "presentationSongName")
-        self.preferences.setValue("", forKey: "presentationLyrics")
-        self.preferences.setValue("", forKey: "presentationSlide")
-        self.preferences.setValue(0, forKey: "presentationSlideNumber")
-        self.preferences.setValue("", forKey: "presentationAuthor")
+        self.localPreferences.set("", forKey: "import.status")
+        self.localPreferences.set("", forKey: "update.status")
+        self.localPreferences.set("", forKey: "presentationSongName")
+        self.localPreferences.set("", forKey: "presentationLyrics")
+        self.localPreferences.set("", forKey: "presentationSlide")
+        self.localPreferences.set(0, forKey: "presentationSlideNumber")
+        self.localPreferences.set("", forKey: "presentationAuthor")
         self.preferences.synchronize()
         
-        if !preferences.dictionaryRepresentation().keys.contains("displayRomanised") {
+        if !preferences.dictionaryRepresentation.keys.contains("displayRomanised") {
             self.preferences.set(true, forKey: "displayRomanised")
             self.preferences.synchronize()
         }
         
-        if !preferences.dictionaryRepresentation().keys.contains("displayTamil") {
+        if !preferences.dictionaryRepresentation.keys.contains("displayTamil") {
             self.preferences.set(true, forKey: "displayTamil")
             self.preferences.synchronize()
         }
         
-        if !preferences.dictionaryRepresentation().keys.contains("sha") {
+        if !preferences.dictionaryRepresentation.keys.contains("sha") {
             self.preferences.set("no_sha", forKey: "sha")
             self.preferences.synchronize()
         }
         
-        if !preferences.dictionaryRepresentation().keys.contains("searchBy") {
+        if !preferences.dictionaryRepresentation.keys.contains("searchBy") {
             self.preferences.set("searchByTitle", forKey: "searchBy")
             self.preferences.synchronize()
         }
         
-        if !preferences.dictionaryRepresentation().keys.contains(CommonConstansts.searchKey) {
+        if !preferences.dictionaryRepresentation.keys.contains(CommonConstansts.searchKey) {
             self.preferences.set(CommonConstansts.searchByTitleOrNumber, forKey: CommonConstansts.searchKey)
             self.preferences.synchronize()
         }
     
-        if !preferences.dictionaryRepresentation().keys.contains("database.lock") {
-            self.preferences.set(false, forKey: "database.lock")
-            self.preferences.synchronize()
+        if !localPreferences.dictionaryRepresentation().keys.contains("database.lock") {
+            self.localPreferences.set(false, forKey: "database.lock")
+            self.localPreferences.synchronize()
         } else {
-            if preferences.bool(forKey: "database.lock") {
+            if localPreferences.bool(forKey: "database.lock") {
                 let databaseService = DatabaseService()
                 databaseService.revertImport()
-                preferences.set(false, forKey: "database.lock")
-                preferences.synchronize()
+                localPreferences.set(false, forKey: "database.lock")
+                localPreferences.synchronize()
                 notificationCenterService.post(name: "refreshTabbar", userInfo: nil)
             }
         }
         
-        if !preferences.dictionaryRepresentation().keys.contains("update.lock") {
-            self.preferences.set(false, forKey: "update.lock")
-            self.preferences.synchronize()
+        if !localPreferences.dictionaryRepresentation().keys.contains("update.lock") {
+            self.localPreferences.set(false, forKey: "update.lock")
+            self.localPreferences.synchronize()
         } else {
-            if preferences.bool(forKey: "update.lock") {
+            if localPreferences.bool(forKey: "update.lock") {
                 let databaseService = DatabaseService()
                 databaseService.revertUpdate()
-                preferences.set(false, forKey: "update.lock")
-                preferences.synchronize()
+                localPreferences.set(false, forKey: "update.lock")
+                localPreferences.synchronize()
                 notificationCenterService.post(name: "refreshTabbar", userInfo: nil)
             }
         }
         
-        if !preferences.dictionaryRepresentation().keys.contains("check.update.url") {
-            self.preferences.setValue("https://api.github.com/repos/mcruncher/worshipsongs-db-dev/git/refs/heads/master", forKey: "check.update.url")
+        if !preferences.dictionaryRepresentation.keys.contains("check.update.url") {
+            self.preferences.set("https://api.github.com/repos/mcruncher/worshipsongs-db-dev/git/refs/heads/master", forKey: "check.update.url")
             self.preferences.synchronize()
         }
         
-        if !preferences.dictionaryRepresentation().keys.contains("update.url") {
-            self.preferences.setValue("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "update.url")
+        if !preferences.dictionaryRepresentation.keys.contains("update.url") {
+            self.preferences.set("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "update.url")
             self.preferences.synchronize()
         }
         
-        if !preferences.dictionaryRepresentation().keys.contains("remote.url") {
-            self.preferences.setValue("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "remote.url")
+        if !preferences.dictionaryRepresentation.keys.contains("remote.url") {
+            self.preferences.set("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "remote.url")
             self.preferences.synchronize()
         }
-        if !preferences.dictionaryRepresentation().keys.contains("defaultDatabase") {
-            self.preferences.set(true, forKey: "defaultDatabase")
-            self.preferences.synchronize()
+        if !localPreferences.dictionaryRepresentation().keys.contains("defaultDatabase") {
+            self.localPreferences.set(true, forKey: "defaultDatabase")
+            self.localPreferences.synchronize()
         }
-        if !preferences.dictionaryRepresentation().keys.contains("latestFavoriteUpdated") {
+        if !preferences.dictionaryRepresentation.keys.contains("latestFavoriteUpdated") {
             self.preferences.set(false, forKey: "latestFavoriteUpdated")
             self.preferences.synchronize()
         }
-        if !preferences.dictionaryRepresentation().keys.contains("fontSize") {
-            self.preferences.setValue(17, forKey: "fontSize")
+        if !preferences.dictionaryRepresentation.keys.contains("fontSize") {
+            self.preferences.set(17, forKey: "fontSize")
             self.preferences.synchronize()
         }
-        if !preferences.dictionaryRepresentation().keys.contains("presentationFontSize") {
-            self.preferences.setValue(40, forKey: "presentationFontSize")
+        if !preferences.dictionaryRepresentation.keys.contains("presentationFontSize") {
+            self.preferences.set(40, forKey: "presentationFontSize")
             self.preferences.synchronize()
         }
-        if !preferences.dictionaryRepresentation().keys.contains("tamilFontColor") {
-            self.preferences.setValue(ColorUtils.Color.red.rawValue, forKey: "tamilFontColor")
+        if !preferences.dictionaryRepresentation.keys.contains("tamilFontColor") {
+            self.preferences.set(ColorUtils.Color.red.rawValue, forKey: "tamilFontColor")
             self.preferences.synchronize()
         }
-        if !preferences.dictionaryRepresentation().keys.contains("englishFontColor") {
-            self.preferences.setValue(ColorUtils.Color.darkGray.rawValue, forKey: "englishFontColor")
+        if !preferences.dictionaryRepresentation.keys.contains("englishFontColor") {
+            self.preferences.set(ColorUtils.Color.darkGray.rawValue, forKey: "englishFontColor")
             self.preferences.synchronize()
         }
-        if !preferences.dictionaryRepresentation().keys.contains("presentationTamilFontColor") {
-            self.preferences.setValue(ColorUtils.Color.red.rawValue, forKey: "presentationTamilFontColor")
+        if !preferences.dictionaryRepresentation.keys.contains("presentationTamilFontColor") {
+            self.preferences.set(ColorUtils.Color.red.rawValue, forKey: "presentationTamilFontColor")
             self.preferences.synchronize()
         }
-        if !preferences.dictionaryRepresentation().keys.contains("presentationEnglishFontColor") {
-            self.preferences.setValue(ColorUtils.Color.white.rawValue, forKey: "presentationEnglishFontColor")
+        if !preferences.dictionaryRepresentation.keys.contains("presentationEnglishFontColor") {
+            self.preferences.set(ColorUtils.Color.white.rawValue, forKey: "presentationEnglishFontColor")
             self.preferences.synchronize()
         }
-        if !preferences.dictionaryRepresentation().keys.contains("presentationBackgroundColor") {
-            self.preferences.setValue(ColorUtils.Color.black.rawValue, forKey: "presentationBackgroundColor")
+        if !preferences.dictionaryRepresentation.keys.contains("presentationBackgroundColor") {
+            self.preferences.set(ColorUtils.Color.black.rawValue, forKey: "presentationBackgroundColor")
             self.preferences.synchronize()
         }
         if self.preferences.array(forKey: "favorite") != nil {
@@ -239,14 +241,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.preferences.synchronize()
         }
         
-        if !preferences.dictionaryRepresentation().keys.contains("favorites") {
+        if !preferences.dictionaryRepresentation.keys.contains("favorites") {
             var favorites = [String]()
             favorites.append("favorite")
             self.preferences.set(favorites, forKey: "favorites")
             self.preferences.synchronize()
         }
         
-        if !preferences.dictionaryRepresentation().keys.contains("rateUsDate") {
+        if !preferences.dictionaryRepresentation.keys.contains("rateUsDate") {
             let calendar = NSCalendar.current
             let date = calendar.date(byAdding: .day, value: 0, to: Date())!
             self.preferences.set(date, forKey: "rateUsDate")

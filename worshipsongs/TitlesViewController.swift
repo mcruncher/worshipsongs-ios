@@ -7,7 +7,7 @@ import UIKit
 
 class TitlesViewController: UITableViewController {
     
-    private let preferences = UserDefaults.standard
+    private let localPreferences = UserDefaults.standard
     private var songModel = [Song]()
     private var filteredSongModel = [Song]()
     private var databaseHelper = DatabaseHelper()
@@ -54,7 +54,7 @@ class TitlesViewController: UITableViewController {
     }
         
     func isUserRateUs() -> Bool {
-        let rateUsDate = preferences.object(forKey: "rateUsDate") as? Date
+        let rateUsDate = localPreferences.object(forKey: "rateUsDate") as? Date
         return rateUsDate! > Date()
     }
     
@@ -146,7 +146,7 @@ extension TitlesViewController {
         
         cell.title.text = titlesViewModel.getTitleCellText(forSong: song)
                 
-        let activeSong = preferences.string(forKey: "presentationSongName")
+        let activeSong = localPreferences.string(forKey: "presentationSongName")
         if cell.title.text == activeSong && UIScreen.screens.count > 1 {
             cell.title.textColor = UIColor.cruncherBlue()
         } else {
