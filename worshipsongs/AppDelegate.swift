@@ -14,8 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var notificationCenterService: INotificationCenterService!
     let commonService = CommonService()
     let dataBaseService = DatabaseService()
-    fileprivate let preferences = NSUbiquitousKeyValueStore.default
-    fileprivate let localPreferences = UserDefaults.standard
+    var preferencesService: IPreferencesService!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool{
         notificationCenterService = NotificationCenterService()
@@ -23,19 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         UIApplication.shared.registerUserNotificationSettings(notificationSettings)
         let version = getVersion()
-        if localPreferences.dictionaryRepresentation().keys.contains("version") {
-            if !(preferences.string(forKey: "version")?.equalsIgnoreCase(version))! {
+        if let appVersion = preferencesService.object(forKey: "version", local: true) as? String {
+            if !(appVersion.equalsIgnoreCase(version)) {
                 dataBaseService.copyBundledDatabase("songs.sqlite")
-                localPreferences.set(version, forKey: "version")
-                localPreferences.synchronize()
+                preferencesService.set(version, forKey: "version", local: true)
             } else {
                 print("Same version")
             }
             
         } else {
             print(version)
-            localPreferences.set(version, forKey: "version")
-            localPreferences.synchronize()
+            preferencesService.set(version, forKey: "version", local: true)
             dataBaseService.copyBundledDatabase("songs.sqlite")
         }
         updateDefaultSettings()
@@ -84,14 +81,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for i in 0..<favSongs.count {
             favoritesSongsWithOrders.append(FavoritesSongsWithOrder(orderNo: i, songName: favSongs[i], songListName: favoriteName))
         }
-        var favoriteList = (preferences.array(forKey: CommonConstansts.favorites) as? [String])!
-        if !favoriteList.contains(favoriteName) {
-            favoriteList.append(favoriteName)
-            self.preferences.set(favoriteList, forKey: CommonConstansts.favorites)
-            self.preferences.synchronize()
+        if var favoriteList = preferencesService.object(forKey: CommonConstansts.favorites, local: false) as? [String] {
+            if !favoriteList.contains(favoriteName) {
+                favoriteList.append(favoriteName)
+                preferencesService.set(favoriteList, forKey: CommonConstansts.favorites, local: false)
+            }
         }
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favoritesSongsWithOrders)
-        self.preferences.set(encodedData, forKey: favoriteName)
+        preferencesService.set(encodedData, forKey: favoriteName, local:false)
         notificationCenterService.post(name: CommonConstansts.updateFavorites, userInfo: nil)
         notificationCenterService.post(name: CommonConstansts.activeTabbar, userInfo: [CommonConstansts.activeTab: "favorites".localized])
         return true
@@ -113,146 +110,228 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func updateDefaultSettings() {
-        self.localPreferences.set("", forKey: "import.status")
-        self.localPreferences.set("", forKey: "update.status")
-        self.localPreferences.set("", forKey: "presentationSongName")
-        self.localPreferences.set("", forKey: "presentationLyrics")
-        self.localPreferences.set("", forKey: "presentationSlide")
-        self.localPreferences.set(0, forKey: "presentationSlideNumber")
-        self.localPreferences.set("", forKey: "presentationAuthor")
-        self.preferences.synchronize()
+        preferencesService.set("", forKey: "import.status", local: true)
+        preferencesService.set("", forKey: "update.status", local: true)
+        preferencesService.set("", forKey: "presentationSongName", local: true)
+        preferencesService.set("", forKey: "presentationLyrics", local: true)
+        preferencesService.set("", forKey: "presentationSlide", local: true)
+        preferencesService.set(0, forKey: "presentationSlideNumber", local: true)
+        preferencesService.set("", forKey: "presentationAuthor", local: true)
         
-        if !preferences.dictionaryRepresentation.keys.contains("displayRomanised") {
-            self.preferences.set(true, forKey: "displayRomanised")
-            self.preferences.synchronize()
+        if !preferencesService.isExist(forKey: "displayRomanised", local: false) {
+            if let displayRomanised = preferencesService.object(forKey: "displayRomanised", local: true) as? Bool {
+                preferencesService.set(displayRomanised, forKey: "displayRomanised", local: false)
+            } else {
+                preferencesService.set(true, forKey: "displayRomanised", local: false)
+
+            }
         }
         
-        if !preferences.dictionaryRepresentation.keys.contains("displayTamil") {
-            self.preferences.set(true, forKey: "displayTamil")
-            self.preferences.synchronize()
+        if !preferencesService.isExist(forKey: "displayTamil", local: false) {
+            if let displayTamil = preferencesService.object(forKey: "displayTamil", local: true) as? Bool {
+                preferencesService.set(displayTamil, forKey: "displayTamil", local: false)
+            } else {
+                preferencesService.set(true, forKey: "displayTamil", local: false)
+
+            }
         }
         
-        if !preferences.dictionaryRepresentation.keys.contains("sha") {
-            self.preferences.set("no_sha", forKey: "sha")
-            self.preferences.synchronize()
+        if !preferencesService.isExist(forKey: "sha", local: false) {
+            if let sha = preferencesService.object(forKey: "sha", local: true) as? String {
+                preferencesService.set(sha, forKey: "sha", local: false)
+            } else {
+                preferencesService.set("no_sha", forKey: "sha", local: false)
+
+            }
         }
         
-        if !preferences.dictionaryRepresentation.keys.contains("searchBy") {
-            self.preferences.set("searchByTitle", forKey: "searchBy")
-            self.preferences.synchronize()
+        if !preferencesService.isExist(forKey: "searchBy", local: false) {
+            if let searchBy = preferencesService.object(forKey: "searchBy", local: true) as? String {
+                preferencesService.set(searchBy, forKey: "searchBy", local: false)
+            } else {
+                preferencesService.set("searchByTitle", forKey: "searchBy", local: false)
+
+            }
         }
         
-        if !preferences.dictionaryRepresentation.keys.contains(CommonConstansts.searchKey) {
-            self.preferences.set(CommonConstansts.searchByTitleOrNumber, forKey: CommonConstansts.searchKey)
-            self.preferences.synchronize()
+        if !preferencesService.isExist(forKey: CommonConstansts.searchKey, local: false) {
+            if let searchKey = preferencesService.object(forKey: CommonConstansts.searchKey, local: true) as? String {
+                preferencesService.set(searchKey, forKey: CommonConstansts.searchKey, local: false)
+            } else {
+                preferencesService.set(CommonConstansts.searchByTitleOrNumber, forKey: CommonConstansts.searchKey, local: false)
+
+            }
         }
-    
-        if !localPreferences.dictionaryRepresentation().keys.contains("database.lock") {
-            self.localPreferences.set(false, forKey: "database.lock")
-            self.localPreferences.synchronize()
-        } else {
-            if localPreferences.bool(forKey: "database.lock") {
+        
+        if let databaseLock = preferencesService.object(forKey: "database.lock", local: true) as? Bool {
+            if databaseLock {
                 let databaseService = DatabaseService()
                 databaseService.revertImport()
-                localPreferences.set(false, forKey: "database.lock")
-                localPreferences.synchronize()
+                preferencesService.set(false, forKey: "database.lock", local: true)
                 notificationCenterService.post(name: "refreshTabbar", userInfo: nil)
             }
+        } else {
+            preferencesService.set(false, forKey: "database.lock", local: true)
         }
         
-        if !localPreferences.dictionaryRepresentation().keys.contains("update.lock") {
-            self.localPreferences.set(false, forKey: "update.lock")
-            self.localPreferences.synchronize()
-        } else {
-            if localPreferences.bool(forKey: "update.lock") {
+        if let updateLock = preferencesService.object(forKey: "update.lock", local: true) as? Bool {
+            if updateLock {
                 let databaseService = DatabaseService()
                 databaseService.revertUpdate()
-                localPreferences.set(false, forKey: "update.lock")
-                localPreferences.synchronize()
+                preferencesService.set(false, forKey: "update.lock", local: true)
                 notificationCenterService.post(name: "refreshTabbar", userInfo: nil)
             }
+        } else {
+            preferencesService.set(false, forKey: "update.lock", local: true)
         }
-        
-        if !preferences.dictionaryRepresentation.keys.contains("check.update.url") {
-            self.preferences.set("https://api.github.com/repos/mcruncher/worshipsongs-db-dev/git/refs/heads/master", forKey: "check.update.url")
-            self.preferences.synchronize()
-        }
-        
-        if !preferences.dictionaryRepresentation.keys.contains("update.url") {
-            self.preferences.set("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "update.url")
-            self.preferences.synchronize()
-        }
-        
-        if !preferences.dictionaryRepresentation.keys.contains("remote.url") {
-            self.preferences.set("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "remote.url")
-            self.preferences.synchronize()
-        }
-        if !localPreferences.dictionaryRepresentation().keys.contains("defaultDatabase") {
-            self.localPreferences.set(true, forKey: "defaultDatabase")
-            self.localPreferences.synchronize()
-        }
-        if !preferences.dictionaryRepresentation.keys.contains("latestFavoriteUpdated") {
-            self.preferences.set(false, forKey: "latestFavoriteUpdated")
-            self.preferences.synchronize()
-        }
-        if !preferences.dictionaryRepresentation.keys.contains("fontSize") {
-            self.preferences.set(17, forKey: "fontSize")
-            self.preferences.synchronize()
-        }
-        if !preferences.dictionaryRepresentation.keys.contains("presentationFontSize") {
-            self.preferences.set(40, forKey: "presentationFontSize")
-            self.preferences.synchronize()
-        }
-        if !preferences.dictionaryRepresentation.keys.contains("tamilFontColor") {
-            self.preferences.set(ColorUtils.Color.red.rawValue, forKey: "tamilFontColor")
-            self.preferences.synchronize()
-        }
-        if !preferences.dictionaryRepresentation.keys.contains("englishFontColor") {
-            self.preferences.set(ColorUtils.Color.darkGray.rawValue, forKey: "englishFontColor")
-            self.preferences.synchronize()
-        }
-        if !preferences.dictionaryRepresentation.keys.contains("presentationTamilFontColor") {
-            self.preferences.set(ColorUtils.Color.red.rawValue, forKey: "presentationTamilFontColor")
-            self.preferences.synchronize()
-        }
-        if !preferences.dictionaryRepresentation.keys.contains("presentationEnglishFontColor") {
-            self.preferences.set(ColorUtils.Color.white.rawValue, forKey: "presentationEnglishFontColor")
-            self.preferences.synchronize()
-        }
-        if !preferences.dictionaryRepresentation.keys.contains("presentationBackgroundColor") {
-            self.preferences.set(ColorUtils.Color.black.rawValue, forKey: "presentationBackgroundColor")
-            self.preferences.synchronize()
-        }
-        if self.preferences.array(forKey: "favorite") != nil {
-            let favSongs  = self.preferences.array(forKey: "favorite") as! [String]
-            var favoritesSongsWithOrders = [FavoritesSongsWithOrder]()
-            for i in 0..<favSongs.count {
-                favoritesSongsWithOrders.append(FavoritesSongsWithOrder(orderNo: i, songName: favSongs[i], songListName: "favorite"))
+    
+        if !preferencesService.isExist(forKey: "check.update.url", local: false) {
+            if let checkUpdateUrl = preferencesService.object(forKey: "check.update.url", local: true) as? String {
+                preferencesService.set(checkUpdateUrl, forKey: "check.update.url", local: false)
+            } else {
+                preferencesService.set("https://api.github.com/repos/mcruncher/worshipsongs-db-dev/git/refs/heads/master", forKey: "check.update.url", local: false)
             }
-            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favoritesSongsWithOrders)
-            self.preferences.set(encodedData, forKey: "favorite")
-            self.preferences.set(true, forKey: "latestFavoriteUpdated")
-            self.preferences.synchronize()
-        }
-        if !self.preferences.bool(forKey: "latestFavoriteUpdated") {
-            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: [FavoritesSongsWithOrder]())
-            self.preferences.set(encodedData, forKey: "favorite")
-            self.preferences.set(true, forKey: "latestFavoriteUpdated")
-            self.preferences.synchronize()
         }
         
-        if !preferences.dictionaryRepresentation.keys.contains("favorites") {
-            var favorites = [String]()
-            favorites.append("favorite")
-            self.preferences.set(favorites, forKey: "favorites")
-            self.preferences.synchronize()
+        if !preferencesService.isExist(forKey: "update.url", local: false) {
+            if let updateUrl = preferencesService.object(forKey: "update.url", local: true) as? String {
+                preferencesService.set(updateUrl, forKey: "update.url", local: false)
+            } else {
+                preferencesService.set("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "update.url", local: false)
+            }
+        }
+    
+        if !preferencesService.isExist(forKey: "remote.url", local: false) {
+            if let remoteUrl = preferencesService.object(forKey: "remote.url", local: true) as? String {
+                preferencesService.set(remoteUrl, forKey: "remote.url", local: false)
+            } else {
+                preferencesService.set("https://github.com/mcruncher/worshipsongs-db-dev/raw/master/songs.sqlite", forKey: "remote.url", local: false)
+            }
         }
         
-        if !preferences.dictionaryRepresentation.keys.contains("rateUsDate") {
+        if !preferencesService.isExist(forKey: "defaultDatabase", local: false) {
+            if let defaultDatabase = preferencesService.object(forKey: "defaultDatabase", local: true) as? Bool {
+                preferencesService.set(defaultDatabase, forKey: "defaultDatabase", local: false)
+            } else {
+                preferencesService.set(true, forKey: "defaultDatabase", local: false)
+
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: "latestFavoriteUpdated", local: false) {
+            if let latestFavoriteUpdated = preferencesService.object(forKey: "latestFavoriteUpdated", local: true) as? Bool {
+                preferencesService.set(latestFavoriteUpdated, forKey: "latestFavoriteUpdated", local: false)
+            } else {
+                preferencesService.set(false, forKey: "latestFavoriteUpdated", local: false)
+
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: "fontSize", local: false) {
+            if let fontSize = preferencesService.object(forKey: "fontSize", local: true) as? Int {
+                preferencesService.set(fontSize, forKey: "fontSize", local: false)
+            } else {
+                preferencesService.set(17, forKey: "fontSize", local: false)
+
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: "presentationFontSize", local: false) {
+            if let presentationFontSize = preferencesService.object(forKey: "presentationFontSize", local: true) as? Int {
+                preferencesService.set(presentationFontSize, forKey: "presentationFontSize", local: false)
+            } else {
+                preferencesService.set(40, forKey: "presentationFontSize", local: false)
+
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: "tamilFontColor", local: false) {
+            if let tamilFontColor = preferencesService.object(forKey: "tamilFontColor", local: true) as? String {
+                preferencesService.set(tamilFontColor, forKey: "tamilFontColor", local: false)
+            } else {
+                preferencesService.set(ColorUtils.Color.red.rawValue, forKey: "tamilFontColor", local: false)
+
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: "englishFontColor", local: false) {
+            if let englishFontColor = preferencesService.object(forKey: "englishFontColor", local: true) as? String {
+                preferencesService.set(englishFontColor, forKey: "englishFontColor", local: false)
+            } else {
+                preferencesService.set(ColorUtils.Color.darkGray.rawValue, forKey: "englishFontColor", local: false)
+
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: "presentationTamilFontColor", local: false) {
+            if let presentationTamilFontColor = preferencesService.object(forKey: "presentationTamilFontColor", local: true) as? String {
+                preferencesService.set(presentationTamilFontColor, forKey: "presentationTamilFontColor", local: false)
+            } else {
+                preferencesService.set(ColorUtils.Color.red.rawValue, forKey: "presentationTamilFontColor", local: false)
+
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: "presentationEnglishFontColor", local: false) {
+            if let presentationEnglishFontColor = preferencesService.object(forKey: "presentationEnglishFontColor", local: true) as? String {
+                preferencesService.set(presentationEnglishFontColor, forKey: "presentationEnglishFontColor", local: false)
+            } else {
+                preferencesService.set(ColorUtils.Color.white.rawValue, forKey: "presentationEnglishFontColor", local: false)
+
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: "presentationBackgroundColor", local: false) {
+            if let presentationBackgroundColor = preferencesService.object(forKey: "presentationBackgroundColor", local: true) as? String {
+                preferencesService.set(presentationBackgroundColor, forKey: "presentationBackgroundColor", local: false)
+            } else {
+                preferencesService.set(ColorUtils.Color.black.rawValue, forKey: "presentationBackgroundColor", local: false)
+
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: CommonConstansts.favorite, local: false) {
+            updateFavoriteSongs(local: true)
+        } else {
+            updateFavoriteSongs(local: false)
+        }
+        
+        if let latestFavoriteUpdated = preferencesService.object(forKey: "latestFavoriteUpdated", local: false) as? Bool {
+            if !latestFavoriteUpdated {
+                let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: [FavoritesSongsWithOrder]())
+                preferencesService.set(encodedData, forKey: CommonConstansts.favorite, local: false)
+                preferencesService.set(true, forKey: "latestFavoriteUpdated", local: false)
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: CommonConstansts.favorites, local: false) {
+            if let favoriteList = preferencesService.object(forKey: CommonConstansts.favorites, local: true) as? [String] {
+                preferencesService.set(favoriteList, forKey: CommonConstansts.favorites, local: false)
+            } else {
+                var favorites = [String]()
+                favorites.append(CommonConstansts.favorite)
+                preferencesService.set(favorites, forKey: CommonConstansts.favorites, local: false)
+            }
+        }
+        
+        if !preferencesService.isExist(forKey: "rateUsDate", local: false) {
             let calendar = NSCalendar.current
             let date = calendar.date(byAdding: .day, value: 0, to: Date())!
-            self.preferences.set(date, forKey: "rateUsDate")
-            self.preferences.synchronize()
+            preferencesService.set(date, forKey: "rateUsDate", local: false)
+        }
+        
+        
+    }
+    
+    fileprivate func updateFavoriteSongs(local: Bool) {
+        if let favSongs = preferencesService.object(forKey: CommonConstansts.favorite, local: local) as? [String] {
+            var favoritesSongsWithOrders = [FavoritesSongsWithOrder]()
+            for i in 0..<favSongs.count {
+                favoritesSongsWithOrders.append(FavoritesSongsWithOrder(orderNo: i, songName: favSongs[i], songListName: CommonConstansts.favorite))
+            }
+            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: favoritesSongsWithOrders)
+            preferencesService.set(encodedData, forKey: CommonConstansts.favorite, local: false)
+            preferencesService.set(true, forKey: "latestFavoriteUpdated", local: false)
         }
     }
     
