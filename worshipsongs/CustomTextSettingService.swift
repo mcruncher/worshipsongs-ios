@@ -17,7 +17,6 @@ class CustomTextSettingService {
     var customCellText: NSString = NSString()
     let startPattern = "\\{\\w\\}"
     let endPattern = "\\{/\\w\\}"
-    fileprivate let preferences = UserDefaults.standard
     
     func getAttributedString(_ cellText : NSString) -> NSMutableAttributedString {
         return getAttributedString(cellText, secondScreen: false)

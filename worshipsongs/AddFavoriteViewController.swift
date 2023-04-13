@@ -7,7 +7,7 @@ import UIKit
 
 class AddFavoriteViewController: UIViewController {
     @IBOutlet weak var favoriteName: UITextField!
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
     var songTitle = ""
     var isLanguageTamil = false
     

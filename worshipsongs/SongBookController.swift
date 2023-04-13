@@ -9,7 +9,6 @@ class SongBookController: UITableViewController {
     
     fileprivate let cellIdentifier = "cell"
     fileprivate let artistTitleIdentifier = "artistTitle"
-    fileprivate let preferences = UserDefaults.standard
     fileprivate let songBookService = SongBookService()
     fileprivate var songBooks: [SongBook]?
     fileprivate var filterSongBooks = [SongBook]()

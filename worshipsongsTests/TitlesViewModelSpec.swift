@@ -12,7 +12,7 @@ import Nimble
 class TitlesViewModelSpec : QuickSpec {
     override func spec() {
         var titlesViewModel: TitlesViewModel!
-        let preferences = UserDefaults.standard
+        let preferences = NSUbiquitousKeyValueStore.default
         
         beforeEach {
             titlesViewModel = TitlesViewModel()
@@ -57,7 +57,7 @@ class TitlesViewModelSpec : QuickSpec {
             context("given the app is configured to display i8nTitle") {
                 
                 beforeEach {
-                    preferences.setValue("tamil", forKey: "language")
+                    preferences.set("tamil", forKey: "language")
                 }
                 
                 context("given a song exists with i18nTitle") {
@@ -125,7 +125,7 @@ class TitlesViewModelSpec : QuickSpec {
             context("given the language is set") {
                 
                 beforeEach {
-                    preferences.setValue("foo", forKey: "language")
+                    preferences.set("foo", forKey: "language")
                 }
                 
                 it("should be true") {
@@ -173,7 +173,7 @@ class TitlesViewModelSpec : QuickSpec {
                 context("and the user searches by content") {
                     
                     beforeEach {
-                        preferences.setValue("searchByContent", forKey: "searchBy")
+                        preferences.set("searchByContent", forKey: "searchBy")
                     }
                     
                     context("when the user searches by the text 'Sumantha'") {

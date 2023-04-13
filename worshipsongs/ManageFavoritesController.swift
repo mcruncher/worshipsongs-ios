@@ -7,7 +7,7 @@ import UIKit
 
 class ManageFavoritesController: UIViewController {
 
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var songLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -97,7 +97,7 @@ extension ManageFavoritesController : UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: CommonConstansts.favorite, for: indexPath)
         cell.textLabel?.text = favoriteList[indexPath.row]
         var count = 0
-        if self.preferences.dictionaryRepresentation().keys.contains(favoriteList[indexPath.row]) {
+        if self.preferences.dictionaryRepresentation.keys.contains(favoriteList[indexPath.row]) {
             let decoded  = self.preferences.object(forKey: favoriteList[indexPath.row]) as! Data
             let favSongs = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [FavoritesSongsWithOrder]
             count = favSongs.count

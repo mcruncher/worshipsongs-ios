@@ -12,7 +12,7 @@ class UpdateSongsViewController: UIViewController {
     
     @IBOutlet weak var activityController: UIActivityIndicatorView!
     @IBOutlet weak var statusLabel: UILabel!
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
     fileprivate let databaseService = DatabaseService()
     let restApiService: RestApiService = RestApiService()
     @IBOutlet weak var updateButton: UIButton!
@@ -22,7 +22,7 @@ class UpdateSongsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(UpdateSongsViewController.revertUpdate(_:)), name: NSNotification.Name(rawValue: "revertUpdate"), object: nil)
-        preferences.setValue("updating.songs", forKey: "update.status")
+        preferences.set("updating.songs", forKey: "update.status")
         preferences.synchronize()
         statusLabel.text = "update.checking".localized
         activityController.hidesWhenStopped = true
@@ -92,8 +92,8 @@ class UpdateSongsViewController: UIViewController {
                 self.activityController.stopAnimating()
                 self.close()
             } else {
-                self.preferences.setValue(restApiService.sha, forKey: "sha")
-                self.preferences.setValue("Songs updated", forKey: "import.status")
+                self.preferences.set(restApiService.sha, forKey: "sha")
+                self.preferences.set("Songs updated", forKey: "import.status")
                 self.preferences.synchronize()
                 self.statusLabel.text = self.preferences.string(forKey: "import.status")?.localized
                 self.activityController.stopAnimating()
@@ -103,7 +103,7 @@ class UpdateSongsViewController: UIViewController {
     }
     
     func isDatabaseLock() -> Bool {
-        return preferences.dictionaryRepresentation().keys.contains("update.lock") && preferences.bool(forKey:"update.lock")
+        return preferences.dictionaryRepresentation.keys.contains("update.lock") && preferences.bool(forKey:"update.lock")
     }
     
     override func didReceiveMemoryWarning() {

@@ -24,7 +24,7 @@ protocol SearchDelegateFor4S {
 
 class SongsTabBarViewController: UITabBarController{
     
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let localPreferences = UserDefaults.standard
     fileprivate var searchBar: UISearchBar!
     var notificationCenterService: INotificationCenterService!
     weak var songdelegate: SongSelectionDelegate?
@@ -68,7 +68,7 @@ class SongsTabBarViewController: UITabBarController{
     }
     
     func isDatabaseLock() -> Bool {
-        return preferences.dictionaryRepresentation().keys.contains("database.lock") && preferences.bool(forKey:"database.lock")
+        return localPreferences.dictionaryRepresentation().keys.contains("database.lock") && localPreferences.bool(forKey:"database.lock")
     }
     
     @objc func refreshTabbar(_ nsNotification: NSNotification) {

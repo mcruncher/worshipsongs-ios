@@ -11,7 +11,7 @@ import Foundation
 class DatabaseService {
     
     fileprivate let commonService = CommonService()
-    let preferences = UserDefaults.standard
+    let localPreferences = UserDefaults.standard
     
     func restoreDatabase() {
         let databaseUrl = commonService.getDocumentDirectoryPath("songs.sqlite")
@@ -152,10 +152,10 @@ class DatabaseService {
             try! FileManager.default.moveItem(at: NSURL(fileURLWithPath: databaseUrl) as URL, to: NSURL(fileURLWithPath: cacheUrl) as URL)
             try! FileManager.default.copyItem(at: url, to: NSURL(fileURLWithPath: databaseUrl) as URL)
         }
-        preferences.setValue("imported.sucessfully", forKey: "import.status")
-        preferences.set(false, forKey: "defaultDatabase")
-        preferences.set(false, forKey: "database.lock")
-        preferences.synchronize()
+        localPreferences.set("imported.sucessfully", forKey: "import.status")
+        localPreferences.set(false, forKey: "defaultDatabase")
+        localPreferences.set(false, forKey: "database.lock")
+        localPreferences.synchronize()
     }
     
     func verifyDatabase() -> Bool {

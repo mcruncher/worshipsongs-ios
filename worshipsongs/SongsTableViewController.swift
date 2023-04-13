@@ -18,7 +18,7 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
     var parsedVerseOrderList: NSMutableArray = NSMutableArray()
     var verseOrderList: NSMutableArray = NSMutableArray()
     //var text: String!
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,8 +68,9 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
         print("key\(key)")
         let dataText: NSString? = listDataDictionary[key] as? NSString
         cell.textLabel!.numberOfLines = 0
-        let fontSize = self.preferences.integer(forKey: "fontSize")
-        cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+        if let fontSize = self.preferences.object(forKey: "fontSize") as? Int {
+            cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+        }
         cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!)
         return cell
@@ -236,10 +237,9 @@ class SongsTableViewController: UITableViewController, XMLParserDelegate{
             let key: String = (verseOrderList[i] as! String).lowercased()
             let dataText: NSString? = listDataDictionary[key] as? NSString
             let cell = UITableViewCell()
-            let fontSize = self.preferences.integer(forKey: "fontSize")
-            cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize + 5))
-//            let fontColor = self.preferences.string(forKey: "englishFontColor")!
-//            cell.textLabel!.textColor = ColorUtils.getColor(color: ColorUtils.Color(rawValue: fontColor)!)
+            if let fontSize = self.preferences.object(forKey: "fontSize") as? Int {
+                cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(fontSize + 5))
+            }
             cell.textLabel!.numberOfLines = 0
             cell.textLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
             cell.textLabel!.attributedText = customTextSettingService.getAttributedString(dataText!);

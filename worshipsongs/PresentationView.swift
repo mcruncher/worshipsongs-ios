@@ -15,7 +15,6 @@ class PresentationView: UIView {
     @IBOutlet weak var slideNumberLabel: UILabel!
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
-    fileprivate let preferences = UserDefaults.standard
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

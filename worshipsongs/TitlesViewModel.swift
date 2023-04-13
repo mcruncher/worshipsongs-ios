@@ -8,7 +8,7 @@ import Foundation
 
 class TitlesViewModel {
     
-    private let preferences = UserDefaults.standard
+    private let preferences = NSUbiquitousKeyValueStore.default
     
     func getTitleCellText(forSong song: Song) -> String {
         if isLanguageTamil() && !song.i18nTitle.isEmpty {
@@ -43,7 +43,7 @@ class TitlesViewModel {
     }
     
     func isLanguageSet() -> Bool {
-        return preferences.dictionaryRepresentation().keys.contains("language")
+        return preferences.dictionaryRepresentation.keys.contains("language")
     }
     
     func isLanguageTamil() -> Bool {

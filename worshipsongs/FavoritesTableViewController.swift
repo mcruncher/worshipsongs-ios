@@ -19,7 +19,6 @@ class FavoritesTableViewController: UITableViewController {
     var songName: String = ""
     var comment = ""
     var hideDragAndDrop = false
-    fileprivate let preferences = UserDefaults.standard
     var searchBar: UISearchBar!
     var authorName = ""
     var favorite = "favorite"

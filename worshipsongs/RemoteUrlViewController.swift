@@ -9,7 +9,7 @@ import UIKit
 class RemoteUrlViewController: UIViewController {
 
     @IBOutlet weak var remoteUrl: UITextView!
-    fileprivate let preferences = UserDefaults.standard
+    fileprivate let preferences = NSUbiquitousKeyValueStore.default
     fileprivate let databaseService = DatabaseService()
     
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class RemoteUrlViewController: UIViewController {
     
     @objc func doneLoading() {
         if !remoteUrl.text!.isEmpty && (remoteUrl.text?.contains(".sqlite") )!{
-            self.preferences.setValue(remoteUrl.text, forKey: "remote.url")
+            self.preferences.set(remoteUrl.text, forKey: "remote.url")
             self.preferences.synchronize()
             databaseService.importDatabase(url: NSURL(string: remoteUrl.text!)! as URL)
             self.navigationController!.popToRootViewController(animated: true)

@@ -85,6 +85,8 @@
 		625E81751BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81761BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
 		625E81771BD664D000BE80B8 /* XmlParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E81741BD664D000BE80B8 /* XmlParserService.swift */; };
+		6C4477FD29E399B3000DDEBE /* IPreferencesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4477FC29E399B3000DDEBE /* IPreferencesService.swift */; };
+		6C4477FF29E3A103000DDEBE /* PreferencesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4477FE29E3A103000DDEBE /* PreferencesService.swift */; };
 		6C87C10D272FDAE700DFBEFF /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C87C10C272FDAE700DFBEFF /* SongSpec.swift */; };
 		6CC71EAF272A5D650053CF13 /* INotificationCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC71EAE272A5D650053CF13 /* INotificationCenterService.swift */; };
 		6CC71EB1272A5DFC0053CF13 /* NotificationCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC71EB0272A5DFC0053CF13 /* NotificationCenterService.swift */; };
@@ -199,6 +201,8 @@
 		2FFF807F1F1718560086439B /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		2FFF80811F171C8C0086439B /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/Localizable.strings; sourceTree = "<group>"; };
 		625E81741BD664D000BE80B8 /* XmlParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserService.swift; sourceTree = "<group>"; };
+		6C4477FC29E399B3000DDEBE /* IPreferencesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPreferencesService.swift; sourceTree = "<group>"; };
+		6C4477FE29E3A103000DDEBE /* PreferencesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesService.swift; sourceTree = "<group>"; };
 		6C87C10C272FDAE700DFBEFF /* SongSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSpec.swift; sourceTree = "<group>"; };
 		6CC71EAE272A5D650053CF13 /* INotificationCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INotificationCenterService.swift; sourceTree = "<group>"; };
 		6CC71EB0272A5DFC0053CF13 /* NotificationCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterService.swift; sourceTree = "<group>"; };
@@ -503,6 +507,8 @@
 				2FB0ADC7221552D500EB305F /* MessageParser.swift */,
 				6CC71EAE272A5D650053CF13 /* INotificationCenterService.swift */,
 				6CC71EB0272A5DFC0053CF13 /* NotificationCenterService.swift */,
+				6C4477FC29E399B3000DDEBE /* IPreferencesService.swift */,
+				6C4477FE29E3A103000DDEBE /* PreferencesService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -839,6 +845,7 @@
 				2F06EE041EF8EBF8006B5E62 /* LanguageSettingViewController.swift in Sources */,
 				2FE840F01DDBEAA1002B3379 /* DatabaseHelper.swift in Sources */,
 				2FEDF61B1F72044D005D1B83 /* ManageFavoritesController.swift in Sources */,
+				6C4477FF29E3A103000DDEBE /* PreferencesService.swift in Sources */,
 				2F56417D1BCB3A9700064269 /* SongsTableViewController.swift in Sources */,
 				2F19EAFE1E5FBE4D00B989D8 /* Downloader.swift in Sources */,
 				2FDE48531DF140BD00948236 /* SettingsController.swift in Sources */,
@@ -855,6 +862,7 @@
 				2F16DED11E5A824000E3CA27 /* FavoritesSongsWithOrder.swift in Sources */,
 				2F0A5F601F7B35F00026EC48 /* AddFavoriteViewController.swift in Sources */,
 				2FB0ADC8221552D500EB305F /* MessageParser.swift in Sources */,
+				6C4477FD29E399B3000DDEBE /* IPreferencesService.swift in Sources */,
 				2F5D3D1E1BC788F8001C4B6F /* AppDelegate.swift in Sources */,
 				2FFF80801F1718560086439B /* ViewUtils.swift in Sources */,
 				2FD589951C1660A300668951 /* Author.swift in Sources */,

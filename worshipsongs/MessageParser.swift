@@ -10,7 +10,6 @@ import UIKit
 
 struct MessageParser {
     
-    fileprivate static let preferences = UserDefaults.standard
     fileprivate static let customTextSettingService:CustomTextSettingService = CustomTextSettingService()
     
     static func getMessageToShare(_ song: Song, _ verseOrderList: NSMutableArray, _ listDataDictionary : NSMutableDictionary) -> NSMutableAttributedString {

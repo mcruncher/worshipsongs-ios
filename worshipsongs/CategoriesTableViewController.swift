@@ -20,7 +20,6 @@ class CategoriesTableViewController: UITableViewController   {
     var searchBar: UISearchBar!
     var refresh = UIRefreshControl()
     fileprivate var songTabBarController: SongsTabBarViewController?
-    fileprivate let preferences = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()

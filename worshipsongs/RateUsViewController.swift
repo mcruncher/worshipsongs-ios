@@ -16,7 +16,6 @@ class RateUsViewController: UIViewController {
     @IBOutlet weak var rateUsLabel: UILabel!
     @IBOutlet weak var shareAppLabel: UILabel!
     @IBOutlet weak var remindMeLaterButton: UIButton!
-    fileprivate let preferences = UserDefaults.standard
     var remindMe = 0
     
     override func viewDidLoad() {
