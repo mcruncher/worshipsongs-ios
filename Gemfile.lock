@@ -202,6 +202,7 @@ GEM
     memoist (0.16.2)
     mini_magick (4.11.0)
     mini_mime (1.1.0)
+    mini_portile2 (2.5.3)
     minitest (5.14.4)
     molinillo (0.6.6)
     multi_json (1.15.0)
@@ -210,6 +211,9 @@ GEM
     nap (1.1.0)
     naturally (2.2.1)
     netrc (0.11.0)
+    nokogiri (1.11.5)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     nokogiri (1.11.5-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.11.5-x86_64-darwin)
@@ -225,7 +229,8 @@ GEM
       trailblazer-option (>= 0.1.1, < 0.2.0)
       uber (< 0.2.0)
     retriable (3.1.2)
-    rexml (3.2.5)
+    rexml (3.3.3)
+      strscan
     rgl (0.5.7)
       lazy_priority_queue (~> 0.1.0)
       stream (~> 0.5.3)
@@ -250,6 +255,7 @@ GEM
       xcodeproj (~> 1.7)
     stream (0.5.3)
       generator
+    strscan (3.1.0)
     terminal-notifier (2.0.0)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
@@ -284,6 +290,7 @@ GEM
 PLATFORMS
   universal-darwin-21
   x86_64-darwin-19
+  x86_64-linux
 
 DEPENDENCIES
   cocoapods
